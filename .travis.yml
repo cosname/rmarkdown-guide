@@ -1,0 +1,7 @@
+language: r
+cache: packages
+pandoc_version: 2.9.2.1
+
+script: true
+#  - make gitbook
+#  - ./_deploy.sh
