@@ -1,0 +1,9 @@
+book_filename: rmarkdown-guide
+clean: [packages.bib, bookdown.bib]
+language:
+  label:
+    fig: "图 "
+    tab: "表 "
+  ui:
+    edit: "编辑"
+    chapter_name: ["第 ", " 章"]

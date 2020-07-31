@@ -12,7 +12,7 @@ for (fmt in formats) {
 }
 unlink('rmarkdown-guide.log')
 
-r = '<body onload="window.location = \'https://bookdown.org/谁？\'+location.pathname">'
+r = '<body onload="window.location = \'https://bookdown.org/qiushi\'+location.pathname">'
 if (travis) for (f in list.files('_book', '[.]html$', full.names = TRUE)) {
   x = readLines(f)
   if (length(i <- grep('^\\s*<body>\\s*$', x)) == 0) next
@@ -22,7 +22,7 @@ if (travis) for (f in list.files('_book', '[.]html$', full.names = TRUE)) {
 }
 
 redirect = function(from, to) {
-  to = paste0('https://bookdown.org/谁？/rmarkdown-guide/', to)
+  to = paste0('https://bookdown.org/qiushi/rmarkdown-guide/', to)
   writeLines(sprintf(
     '<html><head><meta http-equiv="refresh" content="0; URL=\'%s\'" /></head><body><script>window.location = "%s";</script></html>', to, to
   ), paste0('_book/', from))
@@ -31,6 +31,6 @@ redirect = function(from, to) {
 # redirect('r-markdown-components.html', 'rmarkdown-process.html')
 
 # 只在一个人的电脑上发布到 bookdown.org
-if (length(formats) > 1 && Sys.getenv('USER') == '谁？') {
-  bookdown::publish_book(account = '谁？', server = 'bookdown.org')
+if (length(formats) > 1 && Sys.getenv('USER') == 'qiushi') {
+  bookdown::publish_book(account = 'qiushi', server = 'bookdown.org')
 }
