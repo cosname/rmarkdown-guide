@@ -7,3 +7,4 @@ language:
   ui:
     edit: "编辑"
     chapter_name: ["第 ", " 章"]
+delete_merged_file: true
