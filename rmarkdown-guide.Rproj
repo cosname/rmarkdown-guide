@@ -15,4 +15,4 @@ LaTeX: XeLaTeX
 AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
 
-BuildType: Makefile
+BuildType: Website
