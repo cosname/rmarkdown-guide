@@ -1,0 +1,43 @@
+# (PART) 第二部分：输出“万花筒” {-}
+
+# 从 Rmarkdown 到 HTML 网页 {#html-document}
+
+除了 html_document 还有其它类型的输出模板。
+
+html_document
+bookdown::html_document2
+
+
+## 网页中的元素
+
+https://bookdown.org/yihui/rmarkdown/html-document.html#tabbed-sections
+
+### 目录
+
+### 标题编号
+
+### 标题样式
+
+### 可选主题和样式
+
+### 设置图片的属性
+
+### 打印数据框
+
+### 代码折叠
+
+### 是否包含依赖的库文件
+
+### 是否保留 Markdown
+
+### 在输出中引入 HTML 代码
+
+### 使用自定义的 HTML 模板
+
+### 共用 YAML 配置文件
+
+### 网页中嵌入 Rmd 源文件
+
+## 
+
+
