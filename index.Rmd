@@ -20,6 +20,8 @@ github-repo: cosname/rmarkdown-guide
 
 # 前言 {-}
 
+一群Rmd爱好者来翻译谢大的 [**R Markdown Cookbook**](https://bookdown.org/yihui/rmarkdown-cookbook/)
+
 ```{r, setup, include=FALSE}
 if (knitr::is_html_output()) {
   # ignore percentage widths for HTML output, unless they are used for multiple
@@ -65,4 +67,13 @@ options(bookdown.post.latex = function(x) {
   x = x[-unlist(mapply(seq, i1, i2, SIMPLIFY = FALSE))]
   x
 })
+```
+
+## 致谢 {-}
+
+非常感谢谢大的帮助以及大家伙的共同努力
+
+```{block2, type='flushright', html.tag='p'}
+译者们  
+于全球各角落
 ```
