@@ -4,8 +4,34 @@
 `r if (knitr:::is_html_output()) '# 参考文献 {#references .unnumbered}'`
 
 ```{r include=FALSE}
+pkgs <- c(
+  .packages(), 
+  'bookdown', 
+  'knitr', 
+  'rmarkdown', 
+  'kableExtra',
+  'flextable',
+  'huxtable',
+  'gt',
+  'gtsummary',
+  'formattable',
+  'DT',
+  'reactable',
+  'rhandsontable',
+  'pixiedust',
+  'stargazer',
+  'xtable',
+  'tables',
+  'pander',
+  'tangram',
+  'ztable',
+  'condformat')
+# install packages if missing
+lapply(pkgs, function(pkg) {
+    if (system.file(package = pkg) != '') return()
+    install.packages(pkg, repos = "https://cloud.r-project.org/") 
+    }
+)
 # 自动生成 R 包的参考文献
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+knitr::write_bib(pkgs, 'packages.bib')
 ```
