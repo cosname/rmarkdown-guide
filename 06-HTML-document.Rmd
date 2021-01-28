@@ -1,26 +1,220 @@
-# (PART) 第二部分：输出“万花筒” {-}
+# (PART) 第二部分：输出"万花筒" {.unnumbered}
 
-# 从 Rmarkdown 到 HTML 网页 {#html-document}
+# 从 Rmarkdown 到 HTML 文档 {#html-document}
 
-除了 html_document 还有其它类型的输出模板。
+因为 Markdown 技术在设计之初的输出格式就是 HTML，所以 HTML 文档不仅仅是最常用 Rmarkdown 输出格式，同时也拥有最丰富的功能。
 
-html_document
-bookdown::html_document2
+值得一提的是，Rmarkdown 生成 HTML 文档的过程有一个中间步骤，就是 Markdown + HTML 模板。HTML 模板包括预定义的文档结构、 CSS 样式表和 JavaScript 动态网页功能等，所以最终渲染得到的 HTML 文档的一些功能可能依赖于特定 HTML 模板才能实现。
 
+默认情况下，Rmarkdown 的 HTML 文档使用 `rmarkdown::html_document` 模板。除此之外， `rmarkdown` 之外的其它软件包也提供了各种不同类型的 HTML 模板文件（如 `bookdown::html_document2`，`pagedown::html_paged` 等）。因此，在这一部分我们先从 Rmarkdown 到 `html_document` 文档开始。
 
-## 网页中的元素
+要创建一个 `html_document`，只需要在 Rmarkdown 的开头加入 YAML 格式的元数据。
 
-https://bookdown.org/yihui/rmarkdown/html-document.html#tabbed-sections
+```` {.yaml}
+```
+title: "文档标题"
+author: "作者"
+date: "创建时间"
+output: html_document
+```
+````
 
-### 目录
+在元数据中，还可以加入各种各样设置，从而改变文档的格式。
 
-### 标题编号
+## 显示目录
 
-### 标题样式
+在开头的元数据中，使用 `toc: true` 可以打开文档的目录。目录会从 HTML 的标题自动生成，目录的层级由 `toc_depth` 的值确定（默认为 3）。例如：
 
-### 可选主题和样式
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+```
 
-### 设置图片的属性
+在上面的例子中，目录中将包含 HTML 文档中的一级标题和二级标题。
+
+### 悬停目录
+
+当把 `toc_float` 设为 `true` 的时候，目录会在侧边栏悬停。这样你就可以随时借助目录在一篇比较长的文档中跳转了。
+
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+```
+
+通过改变 `toc_float` 的选项，可以控制侧边栏的折叠和动画。其中：
+
+-   `collapsed` （默认为 `true`）控制文档第一次打开时目录是否被折叠。如果为 `true` 则只显示高级别的标题（二级标题及以上元素）；
+-   `smooth_scroll` （默认为 `true`）控制页面滚动时，标题是否会随之变化。
+
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+```
+
+## 显示标题编号
+
+使用 `number_sections` 可以在标题开头加上编号。一级标题编号为 "1 一级标题"，二级标题为"1.1 二级标题"。
+
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+```
+
+## 使用标签页
+
+在 HTML 文档中使用标签页非常简单，只需要在标题后附加 `{.tabset}` 标签即可。
+
+``` {.markdown}
+## Quarterly Results {.tabset}
+
+### By Product
+
+(tab content)
+
+### By Region
+
+(tab content)
+```
+
+在此基础上，添加相关的额外标签还可以控制标签的样式和行为。其中：
+
+-   `.tabset-fade` 将为标签切换过程加入淡入淡出的动画效果；
+-   `.tabset-pills` 将为标签文字加上预设的 "pill"样式（图 \@ref(fig:html-tabset)）。
+
+```{r html-tabset, fig.cap="标签的默认样式及“pill”样式", echo = FALSE}
+knitr::include_graphics(xfun::magic_path("tabset.png"))
+```
+
+## 主题和样式
+
+### 可选主题
+
+```{r echo=FALSE}
+theme_link <- function(name = "", base_url = "https://bootswatch.com/3/"){
+  glue::glue('[{name}]({base_url}{name})', 
+  name = name, 
+  base_url = base_url)
+}
+```
+
+为了满足颜值党的差异化需求，`html_document` 自带了多个不同的主题。这些主题来自于 [Bootswatch](https://bootswatch.com/3/)。可用的主题名称包括 `r theme_link("default")`，`r theme_link("cerulean")`，`r theme_link("journal")`，`r theme_link("flatly")`，`r theme_link("darkly")`，`r theme_link("readable")`，`r theme_link("spacelab")`，`r theme_link("united")`，`r theme_link("cosmo")`，`r theme_link("lumen")`，`r theme_link("paper")`，`r theme_link("sandstone")`，`r theme_link("simplex")` 和 `r theme_link("yeti")` 等等。
+
+主题使用 `theme` 参数来指定，例如：
+
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    theme: united
+---
+```
+
+如果设置为 `theme: null`，那么将不会应用任何主题，此时你可以通过指定自定义的 CSS 样式表来进行格式化。
+
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    theme: null
+    css: style.css
+---
+```
+
+### 代码高亮
+
+代码高亮也有可选的多种样式，包括 `default`，`tango`，`pygments`，`kate`，`monchrome`，`espresso`，`zenburn`，`haddock`，`breezedark` 和 `textmate` 等。
+
+在元数据中，使用 `highlight` 参数指定代码高亮样式。
+
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    highlight: tango
+---
+```
+
+跟上面的 `theme` 属性一样，`highlight` 也可以设为 `null`，这样的话代码将不显示高亮。
+
+### 自定义样式表
+
+不论有没有应用主题和代码高亮，你都可以使用 `css` 参数可以指定附加样式表。附加样式表中的定义可以被应用到特定元素上去。
+
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    theme: null
+    highlight: null
+    css: styles.css
+---
+```
+
+在 `styley.css` 中，假设我们定义了两个新样式如下：
+
+``` {.css}
+#nextsteps {
+   color: blue;
+}
+
+.emphasized {
+   font-size: 1.2em;
+}
+```
+
+则可以通过下列方式应用这个样式：
+
+``` {.markdown}
+## 这里强调一下下一步 {#nextsteps .emphasized}
+```
+
+## 设置图片的属性
+
+下列参数可以调整生成 HTML 文档后，其中图片的属性：
+
+-   `fig_width`，`fig_height` 指定图片显示时的宽和高（默认为 7 × 5，单位英寸）。
+-   `fig_retina` 开启视网膜屏幕优化（默认为 2，设为 `null` 时关闭优化）。
+-   `fig_caption` 控制是否渲染图注。
+-   `dev` 设置图片输出设备，默认为 `png`。你可以设置多个图片输出设备。
+
+``` {.yaml}
+---
+title: "标题"
+output:
+  html_document:
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    dev: c("png","pdf")
+---
+```
+
 
 ### 打印数据框
 
@@ -38,6 +232,31 @@ https://bookdown.org/yihui/rmarkdown/html-document.html#tabbed-sections
 
 ### 网页中嵌入 Rmd 源文件
 
-## 
+在每一个代码块中，图片的宽和高还可以被 `fig.width`，`fig.height` 分别设定。
 
+```` {.md}
+```{r fig.width = 4, fig.height = 3}`r ''`
+plot(mtcars$hp, mtcars$disp)
+```
+````
+
+效果如下：
+
+```{r fig.width = 4, fig.height = 3, echo = FALSE}
+plot(mtcars$hp, mtcars$disp)
+```
+
+### 插入外源图片
+
+虽然在 Rmarkdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 `knitr::include_graphics()` 来插入外源图片。例如：
+
+```` {.md}
+```{r}`r ''`
+knitr::include_graphics("https://r-project.org/Rlogo.png")
+```
+````
+
+```{r echo = FALSE}
+knitr::include_graphics("https://r-project.org/Rlogo.png")
+```
 
