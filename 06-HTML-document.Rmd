@@ -216,9 +216,77 @@ output:
 ```
 
 
-### 打印数据框
+## 打印数据框
 
-### 代码折叠
+通过 `df_print` 参数，你可以调整数据框的输出格式。可用的参数如表 \@ref(tab:df-print) 所示。
+
+Table: (\#tab:df-print) `html_document` 可以被设置的 `df_print` 参数及其对应的含义。
+
+| 取值 | 说明         |
+|-------|--------------|
+|default|调用 `print.data.frame` 的通用方法|
+|kable  |使用 `knitr::kable` 函数          |
+| tibble| 使用 `tibble::print.tbl_df` 函数 |
+| paged | 使用 `rmarkdown::paged_table` 来创建一个分页的表格|
+
+### 分页打印数据框时的附加参数
+
+若把 `df_print` 参数设为 `paged`，数据框将支持行列的分页，效果如图 \@ref(fig:paged) 所示。
+
+````markdown
+---
+title: "Motor Trend Car Road Tests"
+output:
+  html_document:
+    df_print: paged
+---
+
+`r ''````{r}
+mtcars
+```
+````
+
+```{r paged, echo=FALSE, fig.cap='HTML文档中分页显示的数据框', out.width='100%'}
+knitr::include_graphics('images/paged.png', dpi = NA)
+```
+
+表 \@ref(tab:paged) 列出了这种情况下可以使用的附加参数。
+
+Table: (\#tab:paged) 分页 HTML 表格的附加可用参数。
+
+| 参数名          | 说明                                           |
+|-----------------|-------------------------------------------------------|
+| max.print       | 显示的总行数                          |
+| rows.print      | 一页显示的行数                        |
+| cols.print      | 一页显示的列数                     |
+| cols.min.print  | 最少显示几列             |
+| pages.print     | 下方显示几个页面导航的链接 |
+| paged.print     | 设为 `FALSE` 则不输出分页的表格          |
+| rownames.print  | 设为 `FALSE` 时不显示行的名称              |
+
+这些参数可以在代码块中使用。
+
+````markdown
+`r ''````{r cols.print=3, rows.print=3}
+mtcars
+```
+````
+
+## 代码折叠
+
+当 **Knitr** 的代码块参数 `echo = TRUE` 时，R 代码将会输出到最终生成的文档中。
+如果你不需要显示源代码，可以直接设为 `echo = FALSE` ，
+但是如果你想要保留代码但又让其默认不显示，
+则可以通过 `code_folding: hide` 参数来实现。 
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    code_folding: hide
+---
+````
 
 ### 是否包含依赖的库文件
 
