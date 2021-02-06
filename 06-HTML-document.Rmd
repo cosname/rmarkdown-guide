@@ -288,9 +288,117 @@ output:
 ---
 ````
 
-### 是否包含依赖的库文件
+## 了解 HTML 文档的依赖关系
+
+前面已经提过，Rmarkdown 输出的 HTML 文档时，依赖于软件包提供的 HTML 模板。
+实际上，HTML 文档的样式和功能很大程度上依赖于一些 CSS 样式和 JavaScript 库的支持。
+这里面包括 [Bootstrap](https://getbootstrap.com/)，[JQuery](https://jquery.com/) 等优秀的开源项目。
+
+默认情况下，Rmarkdown 输出的 HTML 文档是一个单一的 `.html` 文件。这是由 `self_contained: true` 控制的。`.html` 文件中，会使用 `data:` 存储包括 JavaScript、CSS、图片和视频在内的全部资料。这样的一个封装，使得用户可以像分享 PDF 或 Word 文档那样分享文件，同时享受超链接、动态效果等一系列 HTML 特性。
+
+如果你指定 `self_contained: false`，那么 HTML 文档将会将自身的依赖文件单独存放。
+
+
+```yaml
+---
+title: "Habits"
+output:
+  html_document:
+    self_contained: false
+---
+```
+
+默认情况下，在 `.html` 文件同一目录会生成同名的 `_files` 文件夹，存放相应的依赖文件（图 \@ref(fig:lib-dir)）。
+
+Figure: (\#fig:lib-dir) 默认情况下一份 HTML 文档所包含的依赖文件
+
+```
++---anchor-sections-1.0
++---bootstrap-3.3.5
+|   +---css
+|   |   \---fonts
+|   +---fonts
+|   +---js
+|   \---shim
++---header-attrs-2.5
++---highlightjs-9.12.0
++---jquery-1.11.3
+\---navigation-1.1
+```
+
+库文件夹的位置可以由 `lib_dir: xxx` 指定，例如：
+
+```yaml
+---
+title: "Habits"
+output:
+  html_document:
+    self_contained: false
+    lib_dir: libs
+---
+```
+
+依赖文件的内容会随配置变化，例如当在 YAML 配置中加入 `df_print: paged` 之后，依赖文件中会多一个 `pagedtable-1.1` 的子文件夹出来。
+
+显然，存放依赖的子文件夹依据 **库名** + **版本号** 的规则命名。要弄清楚库文件的全部特性，可能要对库本身有相当的理解才行。而 Rmarkdown 则是把最常用的功能整合提供给了我们。
+
+当文档的内容比较少，同时又有多个类似的文档的时候，库文件所占的存储空间可能比你自己编写的内容还要大得多。这种情况下，将库文件统一存储在指定的 `libs` 文件夹，可以实现库文件公用。
+
+另外，有些库文件不常用，或者文件太大，还可以通过库文件的服务器调用。例如下面要讲的 MathJax 库。
+
+### MathJax 库的配置
+
+HTML 文档需要 [MathJax](https://www.mathjax.org)\index{MathJax} 脚本来渲染 Latex 和 MathML 公式，调用  [MathJax](https://www.mathjax.org) 的方式则可以通过 `mathjax` 参数来调整。
+
+- `"default"`：默认配置，会通过 HTTPS 链接从 RStudio 的 CDN 网络服务器上调用；
+
+- `"local"`：与 `self_contained: false` 联合使用时，会将 MathJax 库文件保存在本地目录中；
+
+- 设置一个 URL 链接，指向可用的 MathJax 库文件地址；
+
+- `null`：完全不使用 MathJax。
+
+例如，使用 MathJax 的本地拷贝可以如下配置：
+
+
+```yaml
+---
+title: "Habits"
+output:
+  html_document:
+    mathjax: local
+    self_contained: false
+---
+```
+
+为 MathJax 配置一个新的可用来源。
+
+
+```yaml
+---
+title: "Habits"
+output:
+  html_document:
+    mathjax: "http://example.com/MathJax.js"
+---
+```
+
+不使用 MathJax。
+
+```yaml
+---
+title: "Habits"
+output:
+  html_document:
+    mathjax: null
+---
+```
+
+## 高级配置
 
 ### 是否保留 Markdown
+
+
 
 ### 在输出中引入 HTML 代码
 
