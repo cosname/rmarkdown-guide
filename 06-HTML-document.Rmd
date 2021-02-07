@@ -1,27 +1,38 @@
 # (PART) 第二部分：输出"万花筒" {.unnumbered}
 
-# 从 Rmarkdown 到 HTML 文档 {#html-document}
+# 常用文档格式 {#document}
 
-因为 Markdown 技术在设计之初的输出格式就是 HTML，所以 HTML 文档不仅仅是最常用 Rmarkdown 输出格式，同时也拥有最丰富的功能。
+Markdown 在发明之初的主要目的就是简化 HTML 内容的书写方式。例如要表示一个无序列表中的项，用 HTML 来写是 `<ul><li>text</li></ul>`，而用 Markdown 来写则只需要 `- text`；又如要表示一段引用文字，用 HTML 来写是 `<blockquote>text</blockquote>`，用 Markdown 来写则只需要 `> text`。
 
-值得一提的是，Rmarkdown 生成 HTML 文档的过程有一个中间步骤，就是 Markdown + HTML 模板。HTML 模板包括预定义的文档结构、 CSS 样式表和 JavaScript 动态网页功能等，所以最终渲染得到的 HTML 文档的一些功能可能依赖于特定 HTML 模板才能实现。
+Pandoc 大大扩展了 Markdown 的语法。更重要的是，Pandoc 使得将 Markdown 文档转换为多种输出格式成为可能。在本章中，我们将介绍各种文档输出格式的功能。在接下来的两章中，我们将分别介绍演示文稿格式和其他 R Markdown 扩展。
 
-默认情况下，Rmarkdown 的 HTML 文档使用 `rmarkdown::html_document` 模板。除此之外， `rmarkdown` 之外的其它软件包也提供了各种不同类型的 HTML 模板文件（如 `bookdown::html_document2`，`pagedown::html_paged` 等）。因此，在这一部分我们先从 Rmarkdown 到 `html_document` 文档开始。
+简单说来，要论从 R Markdown 到各种文档之间总共分几步？答案是 2 步。
 
-要创建一个 `html_document`，只需要在 Rmarkdown 的开头加入 YAML 格式的元数据。
+1. R Markdown --> Markdown，由 `knitr` 完成；
+2. Markdown  --> 文档，由 Pandoc 完成。
 
-```` {.yaml}
-```
+## 从 R Markdown 到 HTML 文档 {#html-document}
+
+因为 Markdown 技术在设计之初的输出格式就是 HTML，所以 HTML 文档不仅仅是最常用 R Markdown 输出格式，同时也拥有最丰富的功能。
+
+前面提过，R Markdown 生成 HTML 文档的过程有一个中间步骤，就是 Markdown + HTML 模板。HTML 模板包括预定义的文档结构、 CSS 样式表和 JavaScript 动态网页功能等，所以最终渲染得到的 HTML 文档的一些功能可能依赖于特定 HTML 模板才能实现。
+
+默认情况下，R Markdown 的 HTML 文档使用 `rmarkdown::html_document` 模板。除此之外， `rmarkdown` 之外的其它软件包也提供了各种不同类型的 HTML 模板文件（如 `bookdown::html_document2`，`pagedown::html_paged` 等）。因此，在这一部分我们先从 R Markdown 到 `html_document` 文档开始。
+
+要创建一个 `html_document`，只需要在 R Markdown 的开头加入 YAML 格式的元数据。
+
+``` {.yaml}
+---
 title: "文档标题"
 author: "作者"
 date: "创建时间"
 output: html_document
+---
 ```
-````
 
 在元数据中，还可以加入各种各样设置，从而改变文档的格式。
 
-## 显示目录
+### 显示目录
 
 在开头的元数据中，使用 `toc: true` 可以打开文档的目录。目录会从 HTML 的标题自动生成，目录的层级由 `toc_depth` 的值确定（默认为 3）。例如：
 
@@ -68,7 +79,7 @@ output:
 ---
 ```
 
-## 显示标题编号
+### 显示标题编号
 
 使用 `number_sections` 可以在标题开头加上编号。一级标题编号为 "1 一级标题"，二级标题为"1.1 二级标题"。
 
@@ -82,7 +93,7 @@ output:
 ---
 ```
 
-## 使用标签页
+### 使用标签页
 
 在 HTML 文档中使用标签页非常简单，只需要在标题后附加 `{.tabset}` 标签即可。
 
@@ -103,11 +114,10 @@ output:
 -   `.tabset-fade` 将为标签切换过程加入淡入淡出的动画效果；
 -   `.tabset-pills` 将为标签文字加上预设的 "pill"样式（图 \@ref(fig:html-tabset)）。
 
-```{r html-tabset, fig.cap="标签的默认样式及“pill”样式", echo = FALSE}
+```{r html-tabset, fig.cap="标签的默认样式及“pill”样式", echo = FALSE, out.width="50%", fig.align="center"}
 knitr::include_graphics(xfun::magic_path("tabset.png"))
 ```
 
-## 主题和样式
 
 ### 可选主题
 
@@ -161,7 +171,7 @@ output:
 
 跟上面的 `theme` 属性一样，`highlight` 也可以设为 `null`，这样的话代码将不显示高亮。
 
-### 自定义样式表
+### 自定义样式表 {#style-css}
 
 不论有没有应用主题和代码高亮，你都可以使用 `css` 参数可以指定附加样式表。附加样式表中的定义可以被应用到特定元素上去。
 
@@ -194,7 +204,40 @@ output:
 ## 这里强调一下下一步 {#nextsteps .emphasized}
 ```
 
-## 设置图片的属性
+
+如果要应用多个 CSS 配置文件，可以这样写：
+
+```yaml
+output:
+  html_document:
+    css: ["style-1.css", "style-2.css"]
+```
+
+### 通过 CSS 代码块定义样式
+
+除了像上面那样导入一个预定义的样式表，你还可以直接在 R Markdown 中添加新的 CSS 定义。这种方法非常适合于个别定义。如果你的 CSS 代码很多，或者想要在其它 R Markdown 中使用同样的定义，可能放在自定义的样式表文件中更加合适（参见 \@ref(style-css)）。
+
+`r import_example("chunk-custom.Rmd")`
+
+```{r chunk-border, echo = FALSE, fig.cap="一个具有浅红色背景和深红色边框的代码块", fig.width='70%', fig.align='center'}
+import_example_result("chunk-custom.Rmd", vheight = 300)
+```
+### 使用丰富多样的内置 CSS 样式
+
+大多数时候，你并不需要自己定义 CSS 样式，因为 HTML 内置的主题中已经包含了丰富且高级的内置样式。
+
+默认情况下，R Markdown 输出的 HTML 文档中，已经内嵌了 Bootstrap 框架\index{Bootstrap}，因此可以使用一系列预定义的 CSS 样式。其中，可用的背景样式就包括 `"bg-primary"`，`"bg-success"`，`"bg-info"`，`"bg-warning"` 和 `"bg-danger"` 等。 
+
+
+只需要像上面那样，在代码块属性中使用 `class.source` 标签，就可以应用这些预定义的 CSS 样式。
+
+`r import_example("chunk-style.Rmd")`
+
+```{r echo = FALSE, fig.cap="在代码块上应用内置 CSS 样式", fig.width='70%', fig.align='center'}
+import_example_result("chunk-style.Rmd", vheight = 400, vwidth = 600)
+```
+
+### 设置图片的属性
 
 下列参数可以调整生成 HTML 文档后，其中图片的属性：
 
@@ -215,8 +258,9 @@ output:
 ---
 ```
 
+在代码框属性中，你仍然可以通过 `fig.height`，`fig.width`，`fig.asp` 等参数来指定生成图片的高度、宽度和宽高比。
 
-## 打印数据框
+### 输出数据框
 
 通过 `df_print` 参数，你可以调整数据框的输出格式。可用的参数如表 \@ref(tab:df-print) 所示。
 
@@ -229,7 +273,7 @@ Table: (\#tab:df-print) `html_document` 可以被设置的 `df_print` 参数及�
 | tibble| 使用 `tibble::print.tbl_df` 函数 |
 | paged | 使用 `rmarkdown::paged_table` 来创建一个分页的表格|
 
-### 分页打印数据框时的附加参数
+#### 分页打印数据框时的附加参数
 
 若把 `df_print` 参数设为 `paged`，数据框将支持行列的分页，效果如图 \@ref(fig:paged) 所示。
 
@@ -272,7 +316,7 @@ mtcars
 ```
 ````
 
-## 代码折叠
+### 代码折叠
 
 当 **Knitr** 的代码块参数 `echo = TRUE` 时，R 代码将会输出到最终生成的文档中。
 如果你不需要显示源代码，可以直接设为 `echo = FALSE` ，
@@ -288,13 +332,13 @@ output:
 ---
 ````
 
-## 了解 HTML 文档的依赖关系
+### 了解 HTML 文档的依赖关系
 
-前面已经提过，Rmarkdown 输出的 HTML 文档时，依赖于软件包提供的 HTML 模板。
+前面已经提过，R Markdown 输出的 HTML 文档时，依赖于软件包提供的 HTML 模板。
 实际上，HTML 文档的样式和功能很大程度上依赖于一些 CSS 样式和 JavaScript 库的支持。
 这里面包括 [Bootstrap](https://getbootstrap.com/)，[JQuery](https://jquery.com/) 等优秀的开源项目。
 
-默认情况下，Rmarkdown 输出的 HTML 文档是一个单一的 `.html` 文件。这是由 `self_contained: true` 控制的。`.html` 文件中，会使用 `data:` 存储包括 JavaScript、CSS、图片和视频在内的全部资料。这样的一个封装，使得用户可以像分享 PDF 或 Word 文档那样分享文件，同时享受超链接、动态效果等一系列 HTML 特性。
+默认情况下，R Markdown 输出的 HTML 文档是一个单一的 `.html` 文件。这是由 `self_contained: true` 控制的。`.html` 文件中，会使用 `data:` 存储包括 JavaScript、CSS、图片和视频在内的全部资料。这样的一个封装，使得用户可以像分享 PDF 或 Word 文档那样分享文件，同时享受超链接、动态效果等一系列 HTML 特性。
 
 如果你指定 `self_contained: false`，那么 HTML 文档将会将自身的依赖文件单独存放。
 
@@ -340,13 +384,13 @@ output:
 
 依赖文件的内容会随配置变化，例如当在 YAML 配置中加入 `df_print: paged` 之后，依赖文件中会多一个 `pagedtable-1.1` 的子文件夹出来。
 
-显然，存放依赖的子文件夹依据 **库名** + **版本号** 的规则命名。要弄清楚库文件的全部特性，可能要对库本身有相当的理解才行。而 Rmarkdown 则是把最常用的功能整合提供给了我们。
+显然，存放依赖的子文件夹依据 **库名** + **版本号** 的规则命名。要弄清楚库文件的全部特性，可能要对库本身有相当的理解才行。而 R Markdown 则是把最常用的功能整合提供给了我们。
 
 当文档的内容比较少，同时又有多个类似的文档的时候，库文件所占的存储空间可能比你自己编写的内容还要大得多。这种情况下，将库文件统一存储在指定的 `libs` 文件夹，可以实现库文件公用。
 
 另外，有些库文件不常用，或者文件太大，还可以通过库文件的服务器调用。例如下面要讲的 MathJax 库。
 
-### MathJax 库的配置
+#### MathJax 库的配置
 
 HTML 文档需要 [MathJax](https://www.mathjax.org)\index{MathJax} 脚本来渲染 Latex 和 MathML 公式，调用  [MathJax](https://www.mathjax.org) 的方式则可以通过 `mathjax` 参数来调整。
 
@@ -394,19 +438,95 @@ output:
 ---
 ```
 
-## 高级配置
-
 ### 是否保留 Markdown
 
+**knitr** 处理 R Markdown 文件时，会先生成一个 Markdown 文件（`*.md`），随后再由 Pandoc 转换成 HTML 文档。如果需要保留这个 Markdown 文件，可以使用 `keep_md` 选项。
 
+```yaml
+---
+title: "Habits"
+output:
+  html_document:
+    keep_md: true
+---
+```
 
-### 在输出中引入 HTML 代码
 
 ### 使用自定义的 HTML 模板
 
+使用 `template` 选项，可以配置 Pandoc 转换时使用的模板\index{Pandoc template}。
+
+```yaml
+---
+title: "Habits"
+output:
+  html_document:
+    template: quarterly_report.html
+---
+```
+
+Pandoc 模板遵循特定的格式，有关的进一步信息可以在 [Pandoc 模板](http://pandoc.org/MANUAL.html#templates) 页面获得。
+
+
+### 包含其它文件 {#includes}
+
+使用 `includes` 选项，可以在 HTML 文档的不同位置嵌入其它的 HTML 格式内容。可选的位置包括在 HTML 文档的 `header`、`body` 前/后等。
+
+```yaml
+---
+title: "Habits"
+output:
+  html_document:
+    includes:
+      in_header: header.html
+      before_body: doc_prefix.html
+      after_body: doc_suffix.html
+---
+```
+
+这种方式可以很方便的为文档加入一些第三方功能，如加入导航栏、追踪链接、Disquz 评论模块等。
+
+### 生成 HTML 片段 {#html-fragments}
+
+HTML 片段是一个不完整的 HTML 文件，不含 `<header>` 部分的内容，而只有 `<body>` 部分的内容。这种片段适合用于嵌入其它的网页或者内容管理系统（如博客）中。HTML 片段也不自带主题和代码高亮，而通过继承的方式使用其嵌入文件或系统的设置。这样的 HTML 片段，也非常适合用于包含在其它文件中（参见 \@ref(includes)）。
+
+```yaml
+---
+output: html_fragment
+---
+```
+
+
 ### 共用 YAML 配置文件
 
+当前目录中的 `_output.yml` 文件是一个配置文件，其中的设置可以被目录下所有的 R Markdown 文档公用。需要注意的是，该文件中的内容不需要使用`---` 和 `output` 标签。
+
+如下所示：
+
+```yaml
+html_document:
+  self_contained: false
+  theme: united
+  highlight: textmate
+```
+
+而不应该写成下面这种样子：
+
+```yaml
+---
+output:
+  html_document:
+    self_contained: false
+    theme: united
+    highlight: textmate
+---
+```
+
+
 ### 网页中嵌入 Rmd 源文件
+
+
+
 
 在每一个代码块中，图片的宽和高还可以被 `fig.width`，`fig.height` 分别设定。
 
@@ -424,7 +544,7 @@ plot(mtcars$hp, mtcars$disp)
 
 ### 插入外源图片
 
-虽然在 Rmarkdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 `knitr::include_graphics()` 来插入外源图片。例如：
+虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 `knitr::include_graphics()` 来插入外源图片。例如：
 
 ```` {.md}
 ```{r}`r ''`

@@ -1,0 +1,21 @@
+---
+title: 对代码块使用自定义的 CSS 样式
+output: html_document
+---
+
+首先定义一个新样式 `watch-out`。
+
+```{css, echo=FALSE}
+.watch-out {
+  background-color: lightpink;
+  border: 3px solid red;
+  font-weight: bold;
+}
+```
+
+使用代码块属性 `class.source` 可以将新样式指定给这一区块。
+
+
+```{r class.source="watch-out"}
+mtcars[1:5, "mpg"]
+```
