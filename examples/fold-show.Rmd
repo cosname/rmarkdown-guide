@@ -1,0 +1,18 @@
+---
+title: "代码的折叠和显示"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r}
+1  # 折叠的
+```
+
+```{r class.source = 'fold-show'}
+2  # 显示的
+```
+
+```{r}
+3  # 还是折叠的
+```

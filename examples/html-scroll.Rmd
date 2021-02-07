@@ -1,0 +1,42 @@
+---
+title: 可以滚动的代码和输出
+output: html_document
+---
+
+```{css, echo=FALSE}
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+pre[class] {
+  max-height: 100px;
+}
+```
+
+我们首先定义了上述 CSS 规则，用来限制代码块的高度。
+
+```{r}
+# 假如这里有 N 多行的代码
+if (1 + 1 == 2) {
+  # 然后再打印一个非常长的数据
+  print(mtcars)
+  # 如果不够长的话，再加上这行注释可能就够了
+}
+```
+
+现在添加一个新的 CSS 类 `scroll-100`，以用来限制代码块的输出高度为 100 像素。
+然后，将这个类赋值给代码块中的 `class.output` 参数。
+
+
+```{css, echo=FALSE}
+.scroll-100 {
+  max-height: 100px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+```
+
+```{r, class.output="scroll-100"}
+print(mtcars)
+```

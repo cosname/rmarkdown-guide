@@ -1,5 +1,9 @@
 # (PART) 第二部分：输出"万花筒" {.unnumbered}
 
+```{r echo = FALSE}
+source("utils.R")
+```
+
 # 常用文档格式 {#document}
 
 Markdown 在发明之初的主要目的就是简化 HTML 内容的书写方式。例如要表示一个无序列表中的项，用 HTML 来写是 `<ul><li>text</li></ul>`，而用 Markdown 来写则只需要 `- text`；又如要表示一段引用文字，用 HTML 来写是 `<blockquote>text</blockquote>`，用 Markdown 来写则只需要 `> text`。
@@ -114,7 +118,7 @@ output:
 -   `.tabset-fade` 将为标签切换过程加入淡入淡出的动画效果；
 -   `.tabset-pills` 将为标签文字加上预设的 "pill"样式（图 \@ref(fig:html-tabset)）。
 
-```{r html-tabset, fig.cap="标签的默认样式及“pill”样式", echo = FALSE, out.width="50%", fig.align="center"}
+```{r html-tabset, fig.cap="标签的默认样式及“pill”样式", echo = FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics(xfun::magic_path("tabset.png"))
 ```
 
@@ -173,7 +177,7 @@ output:
 
 ### 自定义样式表 {#style-css}
 
-不论有没有应用主题和代码高亮，你都可以使用 `css` 参数可以指定附加样式表。附加样式表中的定义可以被应用到特定元素上去。
+不论有没有应用主题和代码高亮，你都可以使用 `css` 参数指定附加样式表。附加样式表中的定义可以被应用到特定元素上去。
 
 ``` {.yaml}
 ---
@@ -219,9 +223,10 @@ output:
 
 `r import_example("chunk-custom.Rmd")`
 
-```{r chunk-border, echo = FALSE, fig.cap="一个具有浅红色背景和深红色边框的代码块", fig.width='70%', fig.align='center'}
+```{r chunk-border, echo = FALSE, out.width="70%", fig.align="center",  fig.cap = "一个具有浅红色背景和深红色边框的代码块"}
 import_example_result("chunk-custom.Rmd", vheight = 300)
 ```
+
 ### 使用丰富多样的内置 CSS 样式
 
 大多数时候，你并不需要自己定义 CSS 样式，因为 HTML 内置的主题中已经包含了丰富且高级的内置样式。
@@ -233,13 +238,78 @@ import_example_result("chunk-custom.Rmd", vheight = 300)
 
 `r import_example("chunk-style.Rmd")`
 
-```{r echo = FALSE, fig.cap="在代码块上应用内置 CSS 样式", fig.width='70%', fig.align='center'}
+以上内容生成 HTML 文档后的样子如下图所示：
+
+```{r echo = FALSE, fig.cap="在代码块上应用内置 CSS 样式", out.width="70%", fig.align="center"}
 import_example_result("chunk-style.Rmd", vheight = 400, vwidth = 600)
 ```
 
+### 代码折叠
+
+当 **Knitr** 的代码块参数 `echo = TRUE` 时，R 代码将会输出到最终生成的文档中。
+如果你不需要显示源代码，可以直接设为 `echo = FALSE`。
+如果你既想要保留代码但又让其默认不显示，
+则可以通过 `code_folding: hide` 参数来实现。 
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    code_folding: hide
+---
+````
+
+`code_folding: hide` 将折叠所有的代码块，用户可以通过点击来查看折叠的代码。如果想让部分代码块在一开始就显示，则可以在代码块选项中使用 `class.source = 'fold-show'`。
+
+`r import_example("fold-show.Rmd")`
+
+```{r fold-show, fig.cap="代码块的折叠和显示",out.width="70%",fig.align="center", echo=FALSE}
+import_example_result("fold-show.Rmd", vwidth = 800)
+```
+
+
+这种操作也可以反向进行，如下配置即可：
+
+````md
+---
+output:
+  html_document:
+    code_folding: show
+---
+
+```{r}`r ''`
+1  # 代码默认是显示的
+```
+
+```{r class.source = 'fold-hide'}`r ''`
+2  # 这一块代码将被折叠
+```
+````
+
+如图 \@ref(fig:fold-show) 所示，在页面和每一个代码块的右上方有一个按钮。页面右上方的按钮可以控制全部代码块的显示和隐藏，代码块右上方的按钮则可以控制对应代码块的显示和隐藏。
+
+### 设置代码块内容可滚动 {#html-scroll}
+
+如果你想限制代码块的高度，特别是代码执行过程中输出内容的高度，还可以从相应内容的 CSS 样式上着手，即通过 `class-output` 和 `class-source` 来定义内容的高度。
+
+下面是一个例子：
+
+`r import_example("html-scroll.Rmd")`
+
+
+因为代码块是位于 `<pre class="sourcecode">` 标签内的，所以 `pre[class]` 操作符将限制代码块的高度为不超过 100 像素。 而将 `class.output ` 设为 `scroll-100` 则限制输出部分的高度为不超过 100 像素。 
+
+最终效果如下图所示：
+
+```{r out.width="70%", fig.align="center", fig.cap="可以滚动的代码块",echo=FALSE}
+import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
+```
+
+
 ### 设置图片的属性
 
-下列参数可以调整生成 HTML 文档后，其中图片的属性：
+下列参数可以调整生成的 HTML 文档中图片的属性：
 
 -   `fig_width`，`fig_height` 指定图片显示时的宽和高（默认为 7 × 5，单位英寸）。
 -   `fig_retina` 开启视网膜屏幕优化（默认为 2，设为 `null` 时关闭优化）。
@@ -273,7 +343,7 @@ Table: (\#tab:df-print) `html_document` 可以被设置的 `df_print` 参数及�
 | tibble| 使用 `tibble::print.tbl_df` 函数 |
 | paged | 使用 `rmarkdown::paged_table` 来创建一个分页的表格|
 
-#### 分页打印数据框时的附加参数
+### 分页打印数据框时的附加参数
 
 若把 `df_print` 参数设为 `paged`，数据框将支持行列的分页，效果如图 \@ref(fig:paged) 所示。
 
@@ -316,23 +386,25 @@ mtcars
 ```
 ````
 
-### 代码折叠
+### 插入外源图片
 
-当 **Knitr** 的代码块参数 `echo = TRUE` 时，R 代码将会输出到最终生成的文档中。
-如果你不需要显示源代码，可以直接设为 `echo = FALSE` ，
-但是如果你想要保留代码但又让其默认不显示，
-则可以通过 `code_folding: hide` 参数来实现。 
+虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 `knitr::include_graphics()` 来插入外源图片。例如：
 
-````markdown
----
-title: "Habits"
-output:
-  html_document:
-    code_folding: hide
----
+```` {.md}
+```{r}`r ''`
+knitr::include_graphics("https://r-project.org/Rlogo.png")
+```
 ````
 
-### 了解 HTML 文档的依赖关系
+使用这种方法插入外源图片，可以方便的添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性。
+
+```{r echo = FALSE, fig.cap="插入外源图片的推荐方式"}
+knitr::include_graphics("https://r-project.org/Rlogo.png")
+```
+
+
+
+### 理解 HTML 文档的依赖关系
 
 前面已经提过，R Markdown 输出的 HTML 文档时，依赖于软件包提供的 HTML 模板。
 实际上，HTML 文档的样式和功能很大程度上依赖于一些 CSS 样式和 JavaScript 库的支持。
@@ -352,9 +424,7 @@ output:
 ---
 ```
 
-默认情况下，在 `.html` 文件同一目录会生成同名的 `_files` 文件夹，存放相应的依赖文件（图 \@ref(fig:lib-dir)）。
-
-Figure: (\#fig:lib-dir) 默认情况下一份 HTML 文档所包含的依赖文件
+默认情况下，在 `.html` 文件同一目录会生成同名的 `_files` 文件夹，存放相应的依赖文件。下面是默认情况下一份 HTML 文档所包含的依赖文件。
 
 ```
 +---anchor-sections-1.0
@@ -390,7 +460,7 @@ output:
 
 另外，有些库文件不常用，或者文件太大，还可以通过库文件的服务器调用。例如下面要讲的 MathJax 库。
 
-#### MathJax 库的配置
+### MathJax 库的配置
 
 HTML 文档需要 [MathJax](https://www.mathjax.org)\index{MathJax} 脚本来渲染 Latex 和 MathML 公式，调用  [MathJax](https://www.mathjax.org) 的方式则可以通过 `mathjax` 参数来调整。
 
@@ -461,14 +531,74 @@ output:
 title: "Habits"
 output:
   html_document:
-    template: quarterly_report.html
+    template: another_template.html
 ---
 ```
 
 Pandoc 模板遵循特定的格式，有关的进一步信息可以在 [Pandoc 模板](http://pandoc.org/MANUAL.html#templates) 页面获得。
 
+下面是一个 HTML 模板的示例：
 
-### 包含其它文件 {#includes}
+```html
+<html>
+  <head>
+    <title>$title$</title>
+    $for(css)$
+    <link rel="stylesheet" href="$css$" type="text/css" />
+    $endfor$
+  </head>
+  <body>
+  $body$
+  </body>
+</html>
+```
+
+这其中包括一些变量，如 `$title$`，`$body$` 等。这些变量由 Pandoc 定义，完整的变量列表[参见这里](https://pandoc.org/MANUAL.html#templates)。
+
+这样的 HTML 模板使得高度定制化的输出成为可能。例如，你可以在 `<head>` 区域加入任意的 CSS 样式， JavaScript 代码，以及其它的开源库。 另外，还可以定义一些新变量来控制文档的格式化。例如，定义一个布尔值 `draft` 来确定文档是一个草稿还是最终版本。
+
+
+```html
+<head>
+<style type="text/css">
+.logo {
+  float: right;
+}
+</style>
+</head>
+
+<body>
+<div class="logo">
+$if(draft)$
+<!-- use draft.png to show that this is a draft -->
+<img src="images/draft.png" alt="Draft mode" />
+$else$
+<!-- insert the formal logo if this is final -->
+<img src="images/logo.png" alt="Final version" />
+$endif$
+</div>
+
+$body$
+</body>
+```
+
+`draft` 在 YAML 元数据中赋值。
+
+```yaml
+---
+title: "An Important Report"
+draft: true
+output: 
+  html_document:
+    template: my-template.html
+---
+```
+
+*说明*：**rmarkdown** 软件包默认使用自带的 HTML 模板，一些方面与 Pandoc 默认的模板存在差异。如果有 `template: null` 的话，则 Pandoc 的模板会被使用。 
+
+
+
+### 包含其它文件 {#include-html}
 
 使用 `includes` 选项，可以在 HTML 文档的不同位置嵌入其它的 HTML 格式内容。可选的位置包括在 HTML 文档的 `header`、`body` 前/后等。
 
@@ -484,11 +614,60 @@ output:
 ---
 ```
 
-这种方式可以很方便的为文档加入一些第三方功能，如加入导航栏、追踪链接、Disquz 评论模块等。
+这种方式可以很方便的为文档加入一些第三方功能和公用的元件。例如在 `in_header` 中导入预定义的 CSS 样式表和 Javascript 脚本，在 `before_body` 中加入导航栏，在 `after_body` 中加入一个底栏等。
+
+下面的例子中，即添加了一个简单的底栏。将其中内容保存到一个 HTML 文件中，放在 `after_body` 后面即可。
+
+
+```html
+<div class="footer">Copyright &copy; R Markdown 指南 2021</div>
+```
+
+除了以上几种常用的位置，你还可以在任意地方插入 HTML 内容。实现这一功能的途径至少有两种。
+
+一是使用 `htmltools::includeHTML()` 方法：
+
+````md
+```{r, echo=FALSE, results='asis'}`r ''`
+htmltools::includeHTML('file.html')
+```
+````
+
+二是使用 `xfun::file_string()` 方法：
+
+````md
+```{r, echo=FALSE, results='asis'}`r ''`
+xfun::file_string('file.html')
+```
+````
+
+
+需要注意的是，导入的 HTML 文件必须是 HTML 片段，而不能是一个完整的 HTML 文档。完整的 HTML 文件中有 `<html>` 标签，解析时会造成错误。比如下面就是一个无效的例子：
+
+
+```html
+<html>
+  <head>  </head>
+
+  <body>
+  Parent HTML file.
+  
+  <!-- htmltools::includeHTML() below -->
+    <html>
+      <head>  </head>
+      <body>
+      Child HTML file.
+      </body>
+    </html>
+  <!-- included above -->
+
+  </body>
+</html>
+```
 
 ### 生成 HTML 片段 {#html-fragments}
 
-HTML 片段是一个不完整的 HTML 文件，不含 `<header>` 部分的内容，而只有 `<body>` 部分的内容。这种片段适合用于嵌入其它的网页或者内容管理系统（如博客）中。HTML 片段也不自带主题和代码高亮，而通过继承的方式使用其嵌入文件或系统的设置。这样的 HTML 片段，也非常适合用于包含在其它文件中（参见 \@ref(includes)）。
+HTML 片段是一个不完整的 HTML 文件，这种片段适合用于嵌入其它的网页或者内容管理系统（如博客）中。HTML 片段也不自带主题和代码高亮，而通过继承的方式使用其嵌入文件或系统的设置。这样的 HTML 片段，也非常适合用于包含在其它文件中（参见 \@ref(include-html)）。
 
 ```yaml
 ---
@@ -496,6 +675,36 @@ output: html_fragment
 ---
 ```
 
+下面是一个 HTML 片段的例子：
+
+`r import_example("html-fragment.html")`
+
+将这些内容保存为一个 HTML 文件，导入此处，则效果如下所示：
+
+```{r echo=FALSE, results="asis"}
+htmltools::includeHTML("examples/html-fragment.html")
+```
+
+*HTML 片段的内容到此结束。*
+
+### 使用自定义的浏览器图标
+
+通过在 `in_header` 部位导入 HTML 内容，可以为 HTML 文档设定一个自定义的浏览器图标。
+
+将下面的内容保存到一个名为 `header.html` 的文档中。
+
+```html
+<link rel="shortcut icon" href="{path to favicon file}" />
+```
+
+然后通过 `includes` 导入文件的内容，则可以改变浏览当前文档时的浏览器图标。
+
+```yaml
+output:
+  html_document:
+    includes:
+      in_header: header.html
+```
 
 ### 共用 YAML 配置文件
 
@@ -523,36 +732,39 @@ output:
 ```
 
 
-### 网页中嵌入 Rmd 源文件
+### 嵌入 Rmd 源文件
 
 
+当你分享一个 R Markdown 生成的 HTML 文档给他人的时候，对方可能还想找你索取 `.Rmd` 源文件。在头文件中配置 `code_download` 参数可以在 HTML 文档中嵌入源文件。
 
-
-在每一个代码块中，图片的宽和高还可以被 `fig.width`，`fig.height` 分别设定。
-
-```` {.md}
-```{r fig.width = 4, fig.height = 3}`r ''`
-plot(mtcars$hp, mtcars$disp)
-```
-````
-
-效果如下：
-
-```{r fig.width = 4, fig.height = 3, echo = FALSE}
-plot(mtcars$hp, mtcars$disp)
+```yaml
+output:
+  html_document:
+    code_download: true
 ```
 
-### 插入外源图片
+打开 `code_download` 选项后，页面中会出现一个下载按钮，点击下载按钮即可获得源文件。
 
-虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 `knitr::include_graphics()` 来插入外源图片。例如：
+### 嵌入其它文件
 
-```` {.md}
-```{r}`r ''`
-knitr::include_graphics("https://r-project.org/Rlogo.png")
+嵌入 `.Rmd` 源文件可能还不足以重现 R Markdown 中结果，通常还会需要原始数据等其它内容。要将这些内容嵌入 HTML 文档中，也是很容易实现的。
+
+这一功能通过 **xfun** 软件包[@R-xfun] 实现，依赖于 `htmltools` 和 `mime` 软件包。要使用这一功能，首先确保这两个软件包可用。
+
+```{r, eval=FALSE}
+xfun::pkg_load2(c('htmltools', 'mime'))
 ```
-````
 
-```{r echo = FALSE}
-knitr::include_graphics("https://r-project.org/Rlogo.png")
+现在，就可以随意嵌入各种文件了。
+
+`r import_example("embed-file.Rmd")`
+
+不仅如此，你还可以编程技巧嵌入所需的文件。
+
+```{r eval=FALSE}
+# 嵌入当前目录下所有的 Rmd 和 csv 文件
+xfun::embed_files(list.files('.', '[.](Rmd|csv)$'))
 ```
+
+*说明*：当嵌入多个文件时，其工作原理是：首先将这些文件压缩成 Zip 格式，然后将 Zip 文件嵌入到 HTML 文档中。 
 
