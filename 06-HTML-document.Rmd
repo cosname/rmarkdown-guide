@@ -13,9 +13,9 @@ Pandoc 大大扩展了 Markdown 的语法。更重要的是，Pandoc 使得将 M
 简单说来，要论从 R Markdown 到各种文档之间总共分几步？答案是 2 步。
 
 1. R Markdown --> Markdown，由 `knitr` 完成；
-2. Markdown  --> 文档，由 Pandoc 完成。
+2. Markdown  --> 不同格式文档，由 Pandoc 完成。
 
-## 从 R Markdown 到 HTML 文档 {#html-document}
+# 从 R Markdown 到 HTML 文档 {#html-document}
 
 因为 Markdown 技术在设计之初的输出格式就是 HTML，所以 HTML 文档不仅仅是最常用 R Markdown 输出格式，同时也拥有最丰富的功能。
 
@@ -35,6 +35,8 @@ output: html_document
 ```
 
 在元数据中，还可以加入各种各样设置，从而改变文档的格式。
+
+## 目录和标题
 
 ### 显示目录
 
@@ -122,6 +124,7 @@ output:
 knitr::include_graphics(xfun::magic_path("tabset.png"))
 ```
 
+## 主题和样式
 
 ### 可选主题
 
@@ -305,7 +308,7 @@ output:
 ```{r out.width="70%", fig.align="center", fig.cap="可以滚动的代码块",echo=FALSE}
 import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
 ```
-
+## 图片和数据框
 
 ### 设置图片的属性
 
@@ -329,6 +332,24 @@ output:
 ```
 
 在代码框属性中，你仍然可以通过 `fig.height`，`fig.width`，`fig.asp` 等参数来指定生成图片的高度、宽度和宽高比。
+
+### 插入外源图片
+
+虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 `knitr::include_graphics()` 来插入外源图片。例如：
+
+```` {.md}
+```{r}`r ''`
+knitr::include_graphics("https://r-project.org/Rlogo.png")
+```
+````
+
+使用这种方法插入外源图片，可以方便的添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性。
+
+```{r echo = FALSE, fig.cap="插入外源图片的推荐方式"}
+knitr::include_graphics("https://r-project.org/Rlogo.png")
+```
+
+
 
 ### 输出数据框
 
@@ -386,23 +407,7 @@ mtcars
 ```
 ````
 
-### 插入外源图片
-
-虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 `knitr::include_graphics()` 来插入外源图片。例如：
-
-```` {.md}
-```{r}`r ''`
-knitr::include_graphics("https://r-project.org/Rlogo.png")
-```
-````
-
-使用这种方法插入外源图片，可以方便的添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性。
-
-```{r echo = FALSE, fig.cap="插入外源图片的推荐方式"}
-knitr::include_graphics("https://r-project.org/Rlogo.png")
-```
-
-
+## 组件和内容
 
 ### 理解 HTML 文档的依赖关系
 
