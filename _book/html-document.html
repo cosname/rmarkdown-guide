@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 2 章 从 R Markdown 到 HTML 文档 | R Markdown 指南</title>
+  <meta name="description" content="第 2 章 从 R Markdown 到 HTML 文档 | R Markdown 指南" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 2 章 从 R Markdown 到 HTML 文档 | R Markdown 指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="第 2 章 从 R Markdown 到 HTML 文档 | R Markdown 指南" />
+  <meta name="github-repo" content="cosname/rmarkdown-guide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 2 章 从 R Markdown 到 HTML 文档 | R Markdown 指南" />
+  
+  <meta name="twitter:description" content="第 2 章 从 R Markdown 到 HTML 文档 | R Markdown 指南" />
+  
+
+<meta name="author" content="王祎帆" />
+<meta name="author" content="闫求识" />
+<meta name="author" content="高春辉" />
+
+
+<meta name="date" content="2021-02-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="document.html"/>
+<link rel="next" href="PDF-document.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Markdown 中文指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="part"><span><b>I 第二部分：输出“万花筒”</b></span></li>
+<li class="chapter" data-level="1" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>1</b> 常用文档格式</a></li>
+<li class="chapter" data-level="2" data-path="html-document.html"><a href="html-document.html"><i class="fa fa-check"></i><b>2</b> 从 R Markdown 到 HTML 文档</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="html-document.html"><a href="html-document.html#目录和标题"><i class="fa fa-check"></i><b>2.1</b> 目录和标题</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="html-document.html"><a href="html-document.html#显示目录"><i class="fa fa-check"></i><b>2.1.1</b> 显示目录</a></li>
+<li class="chapter" data-level="2.1.2" data-path="html-document.html"><a href="html-document.html#悬停目录"><i class="fa fa-check"></i><b>2.1.2</b> 悬停目录</a></li>
+<li class="chapter" data-level="2.1.3" data-path="html-document.html"><a href="html-document.html#显示标题编号"><i class="fa fa-check"></i><b>2.1.3</b> 显示标题编号</a></li>
+<li class="chapter" data-level="2.1.4" data-path="html-document.html"><a href="html-document.html#使用标签页"><i class="fa fa-check"></i><b>2.1.4</b> 使用标签页</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="html-document.html"><a href="html-document.html#主题和样式"><i class="fa fa-check"></i><b>2.2</b> 主题和样式</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="html-document.html"><a href="html-document.html#可选主题"><i class="fa fa-check"></i><b>2.2.1</b> 可选主题</a></li>
+<li class="chapter" data-level="2.2.2" data-path="html-document.html"><a href="html-document.html#代码高亮"><i class="fa fa-check"></i><b>2.2.2</b> 代码高亮</a></li>
+<li class="chapter" data-level="2.2.3" data-path="html-document.html"><a href="html-document.html#style-css"><i class="fa fa-check"></i><b>2.2.3</b> 自定义样式表</a></li>
+<li class="chapter" data-level="2.2.4" data-path="html-document.html"><a href="html-document.html#通过-css-代码块定义样式"><i class="fa fa-check"></i><b>2.2.4</b> 通过 CSS 代码块定义样式</a></li>
+<li class="chapter" data-level="2.2.5" data-path="html-document.html"><a href="html-document.html#使用丰富多样的内置-css-样式"><i class="fa fa-check"></i><b>2.2.5</b> 使用丰富多样的内置 CSS 样式</a></li>
+<li class="chapter" data-level="2.2.6" data-path="html-document.html"><a href="html-document.html#代码折叠"><i class="fa fa-check"></i><b>2.2.6</b> 代码折叠</a></li>
+<li class="chapter" data-level="2.2.7" data-path="html-document.html"><a href="html-document.html#html-scroll"><i class="fa fa-check"></i><b>2.2.7</b> 设置代码块内容可滚动</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="html-document.html"><a href="html-document.html#图片和数据框"><i class="fa fa-check"></i><b>2.3</b> 图片和数据框</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="html-document.html"><a href="html-document.html#设置图片的属性"><i class="fa fa-check"></i><b>2.3.1</b> 设置图片的属性</a></li>
+<li class="chapter" data-level="2.3.2" data-path="html-document.html"><a href="html-document.html#插入外源图片"><i class="fa fa-check"></i><b>2.3.2</b> 插入外源图片</a></li>
+<li class="chapter" data-level="2.3.3" data-path="html-document.html"><a href="html-document.html#输出数据框"><i class="fa fa-check"></i><b>2.3.3</b> 输出数据框</a></li>
+<li class="chapter" data-level="2.3.4" data-path="html-document.html"><a href="html-document.html#分页打印数据框时的附加参数"><i class="fa fa-check"></i><b>2.3.4</b> 分页打印数据框时的附加参数</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="html-document.html"><a href="html-document.html#组件和内容"><i class="fa fa-check"></i><b>2.4</b> 组件和内容</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="html-document.html"><a href="html-document.html#理解-html-文档的依赖关系"><i class="fa fa-check"></i><b>2.4.1</b> 理解 HTML 文档的依赖关系</a></li>
+<li class="chapter" data-level="2.4.2" data-path="html-document.html"><a href="html-document.html#mathjax-库的配置"><i class="fa fa-check"></i><b>2.4.2</b> MathJax 库的配置</a></li>
+<li class="chapter" data-level="2.4.3" data-path="html-document.html"><a href="html-document.html#是否保留-markdown"><i class="fa fa-check"></i><b>2.4.3</b> 是否保留 Markdown</a></li>
+<li class="chapter" data-level="2.4.4" data-path="html-document.html"><a href="html-document.html#使用自定义的-html-模板"><i class="fa fa-check"></i><b>2.4.4</b> 使用自定义的 HTML 模板</a></li>
+<li class="chapter" data-level="2.4.5" data-path="html-document.html"><a href="html-document.html#include-html"><i class="fa fa-check"></i><b>2.4.5</b> 包含其它文件</a></li>
+<li class="chapter" data-level="2.4.6" data-path="html-document.html"><a href="html-document.html#html-fragments"><i class="fa fa-check"></i><b>2.4.6</b> 生成 HTML 片段</a></li>
+<li class="chapter" data-level="2.4.7" data-path="html-document.html"><a href="html-document.html#使用自定义的浏览器图标"><i class="fa fa-check"></i><b>2.4.7</b> 使用自定义的浏览器图标</a></li>
+<li class="chapter" data-level="2.4.8" data-path="html-document.html"><a href="html-document.html#共用-yaml-配置文件"><i class="fa fa-check"></i><b>2.4.8</b> 共用 YAML 配置文件</a></li>
+<li class="chapter" data-level="2.4.9" data-path="html-document.html"><a href="html-document.html#嵌入-rmd-源文件"><i class="fa fa-check"></i><b>2.4.9</b> 嵌入 Rmd 源文件</a></li>
+<li class="chapter" data-level="2.4.10" data-path="html-document.html"><a href="html-document.html#嵌入其它文件"><i class="fa fa-check"></i><b>2.4.10</b> 嵌入其它文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="PDF-document.html"><a href="PDF-document.html"><i class="fa fa-check"></i><b>3</b> PDF 文档</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Markdown 指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="html-document" class="section level1" number="2">
+<h1><span class="header-section-number">第 2 章</span> 从 R Markdown 到 HTML 文档</h1>
+<p>因为 Markdown 技术在设计之初的输出格式就是 HTML，所以 HTML 文档不仅仅是最常用 R Markdown 输出格式，同时也拥有最丰富的功能。</p>
+<p>前面提过，R Markdown 生成 HTML 文档的过程有一个中间步骤，就是 Markdown + HTML 模板。HTML 模板包括预定义的文档结构、 CSS 样式表和 JavaScript 动态网页功能等，所以最终渲染得到的 HTML 文档的一些功能可能依赖于特定 HTML 模板才能实现。</p>
+<p>默认情况下，R Markdown 的 HTML 文档使用 <code>rmarkdown::html_document</code> 模板。除此之外， <code>rmarkdown</code> 之外的其它软件包也提供了各种不同类型的 HTML 模板文件（如 <code>bookdown::html_document2</code>，<code>pagedown::html_paged</code> 等）。因此，在这一部分我们先从 R Markdown 到 <code>html_document</code> 文档开始。</p>
+<p>要创建一个 <code>html_document</code>，只需要在 R Markdown 的开头加入 YAML 格式的元数据。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="html-document.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="html-document.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;文档标题&quot;</span></span>
+<span id="cb1-3"><a href="html-document.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;作者&quot;</span></span>
+<span id="cb1-4"><a href="html-document.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;创建时间&quot;</span></span>
+<span id="cb1-5"><a href="html-document.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span>
+<span id="cb1-6"><a href="html-document.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>在元数据中，还可以加入各种各样设置，从而改变文档的格式。</p>
+<div id="目录和标题" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> 目录和标题</h2>
+<div id="显示目录" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> 显示目录</h3>
+<p>在开头的元数据中，使用 <code>toc: true</code> 可以打开文档的目录。目录会从 HTML 的标题自动生成，目录的层级由 <code>toc_depth</code> 的值确定（默认为 3）。例如：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="html-document.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="html-document.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb2-3"><a href="html-document.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="html-document.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="html-document.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-6"><a href="html-document.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb2-7"><a href="html-document.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>在上面的例子中，目录中将包含 HTML 文档中的一级标题和二级标题。</p>
+</div>
+<div id="悬停目录" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> 悬停目录</h3>
+<p>当把 <code>toc_float</code> 设为 <code>true</code> 的时候，目录会在侧边栏悬停。这样你就可以随时借助目录在一篇比较长的文档中跳转了。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="html-document.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="html-document.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb3-3"><a href="html-document.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="html-document.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb3-5"><a href="html-document.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-6"><a href="html-document.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_float</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-7"><a href="html-document.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>通过改变 <code>toc_float</code> 的选项，可以控制侧边栏的折叠和动画。其中：</p>
+<ul>
+<li><code>collapsed</code> （默认为 <code>true</code>）控制文档第一次打开时目录是否被折叠。如果为 <code>true</code> 则只显示高级别的标题（二级标题及以上元素）；</li>
+<li><code>smooth_scroll</code> （默认为 <code>true</code>）控制页面滚动时，标题是否会随之变化。</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="html-document.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb4-2"><a href="html-document.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb4-3"><a href="html-document.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="html-document.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb4-5"><a href="html-document.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-6"><a href="html-document.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_float</span><span class="kw">:</span></span>
+<span id="cb4-7"><a href="html-document.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">collapsed</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-8"><a href="html-document.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">smooth_scroll</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-9"><a href="html-document.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="显示标题编号" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> 显示标题编号</h3>
+<p>使用 <code>number_sections</code> 可以在标题开头加上编号。一级标题编号为 “1 一级标题”，二级标题为“1.1 二级标题”。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="html-document.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb5-2"><a href="html-document.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb5-3"><a href="html-document.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="html-document.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="html-document.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb5-6"><a href="html-document.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">number_sections</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb5-7"><a href="html-document.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="使用标签页" class="section level3" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> 使用标签页</h3>
+<p>在 HTML 文档中使用标签页非常简单，只需要在标题后附加 <code>{.tabset}</code> 标签即可。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="html-document.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quarterly Results {.tabset}</span></span>
+<span id="cb6-2"><a href="html-document.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="html-document.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">### By Product</span></span>
+<span id="cb6-4"><a href="html-document.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="html-document.html#cb6-5" aria-hidden="true" tabindex="-1"></a>(tab content)</span>
+<span id="cb6-6"><a href="html-document.html#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="html-document.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### By Region</span></span>
+<span id="cb6-8"><a href="html-document.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="html-document.html#cb6-9" aria-hidden="true" tabindex="-1"></a>(tab content)</span></code></pre></div>
+<p>在此基础上，添加相关的额外标签还可以控制标签的样式和行为。其中：</p>
+<ul>
+<li><code>.tabset-fade</code> 将为标签切换过程加入淡入淡出的动画效果；</li>
+<li><code>.tabset-pills</code> 将为标签文字加上预设的 “pill”样式（图 <a href="html-document.html#fig:html-tabset">2.1</a>）。</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:html-tabset"></span>
+<img src="images/tabset.png" alt="标签的默认样式及“pill”样式" width="198" />
+<p class="caption">
+图 2.1: 标签的默认样式及“pill”样式
+</p>
+</div>
+</div>
+</div>
+<div id="主题和样式" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> 主题和样式</h2>
+<div id="可选主题" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 可选主题</h3>
+<p>为了满足颜值党的差异化需求，<code>html_document</code> 自带了多个不同的主题。这些主题来自于 <a href="https://bootswatch.com/3/">Bootswatch</a>。可用的主题名称包括 <a href="https://bootswatch.com/3/default">default</a>，<a href="https://bootswatch.com/3/cerulean">cerulean</a>，<a href="https://bootswatch.com/3/journal">journal</a>，<a href="https://bootswatch.com/3/flatly">flatly</a>，<a href="https://bootswatch.com/3/darkly">darkly</a>，<a href="https://bootswatch.com/3/readable">readable</a>，<a href="https://bootswatch.com/3/spacelab">spacelab</a>，<a href="https://bootswatch.com/3/united">united</a>，<a href="https://bootswatch.com/3/cosmo">cosmo</a>，<a href="https://bootswatch.com/3/lumen">lumen</a>，<a href="https://bootswatch.com/3/paper">paper</a>，<a href="https://bootswatch.com/3/sandstone">sandstone</a>，<a href="https://bootswatch.com/3/simplex">simplex</a> 和 <a href="https://bootswatch.com/3/yeti">yeti</a> 等等。</p>
+<p>主题使用 <code>theme</code> 参数来指定，例如：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="html-document.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb7-2"><a href="html-document.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb7-3"><a href="html-document.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="html-document.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb7-5"><a href="html-document.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> united</span></span>
+<span id="cb7-6"><a href="html-document.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>如果设置为 <code>theme: null</code>，那么将不会应用任何主题，此时你可以通过指定自定义的 CSS 样式表来进行格式化。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="html-document.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-2"><a href="html-document.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb8-3"><a href="html-document.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="html-document.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb8-5"><a href="html-document.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb8-6"><a href="html-document.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> style.css</span></span>
+<span id="cb8-7"><a href="html-document.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="代码高亮" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> 代码高亮</h3>
+<p>代码高亮也有可选的多种样式，包括 <code>default</code>，<code>tango</code>，<code>pygments</code>，<code>kate</code>，<code>monchrome</code>，<code>espresso</code>，<code>zenburn</code>，<code>haddock</code>，<code>breezedark</code> 和 <code>textmate</code> 等。</p>
+<p>在元数据中，使用 <code>highlight</code> 参数指定代码高亮样式。</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="html-document.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb9-2"><a href="html-document.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb9-3"><a href="html-document.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb9-4"><a href="html-document.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="html-document.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> tango</span></span>
+<span id="cb9-6"><a href="html-document.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>跟上面的 <code>theme</code> 属性一样，<code>highlight</code> 也可以设为 <code>null</code>，这样的话代码将不显示高亮。</p>
+</div>
+<div id="style-css" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> 自定义样式表</h3>
+<p>不论有没有应用主题和代码高亮，你都可以使用 <code>css</code> 参数指定附加样式表。附加样式表中的定义可以被应用到特定元素上去。</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="html-document.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb10-2"><a href="html-document.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb10-3"><a href="html-document.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb10-4"><a href="html-document.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb10-5"><a href="html-document.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb10-6"><a href="html-document.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb10-7"><a href="html-document.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span></span>
+<span id="cb10-8"><a href="html-document.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>在 <code>styley.css</code> 中，假设我们定义了两个新样式如下：</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb11-1"><a href="html-document.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#nextsteps</span> {</span>
+<span id="cb11-2"><a href="html-document.html#cb11-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="html-document.html#cb11-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-4"><a href="html-document.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="html-document.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">.emphasized</span> {</span>
+<span id="cb11-6"><a href="html-document.html#cb11-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">font-size</span>: <span class="dv">1.2</span><span class="dt">em</span><span class="op">;</span></span>
+<span id="cb11-7"><a href="html-document.html#cb11-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>则可以通过下列方式应用这个样式：</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb12-1"><a href="html-document.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 这里强调一下下一步 {#nextsteps .emphasized}</span></span></code></pre></div>
+<p>如果要应用多个 CSS 配置文件，可以这样写：</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="html-document.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb13-2"><a href="html-document.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb13-3"><a href="html-document.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;style-1.css&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;style-2.css&quot;</span><span class="kw">]</span></span></code></pre></div>
+</div>
+<div id="通过-css-代码块定义样式" class="section level3" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> 通过 CSS 代码块定义样式</h3>
+<p>除了像上面那样导入一个预定义的样式表，你还可以直接在 R Markdown 中添加新的 CSS 定义。这种方法非常适合于个别定义。如果你的 CSS 代码很多，或者想要在其它 R Markdown 中使用同样的定义，可能放在自定义的样式表文件中更加合适（参见 <a href="html-document.html#style-css">2.2.3</a>）。</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb14-1"><a href="html-document.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="html-document.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;对代码块使用自定义的 CSS 样式&quot;</span></span>
+<span id="cb14-3"><a href="html-document.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb14-4"><a href="html-document.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-5"><a href="html-document.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="html-document.html#cb14-6" aria-hidden="true" tabindex="-1"></a>首先定义一个新样式 <span class="in">`watch-out`</span>。</span>
+<span id="cb14-7"><a href="html-document.html#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="html-document.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{css, echo=FALSE}</span></span>
+<span id="cb14-9"><a href="html-document.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="in">.watch-out {</span></span>
+<span id="cb14-10"><a href="html-document.html#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: lightpink;</span></span>
+<span id="cb14-11"><a href="html-document.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="in">  border: 3px solid red;</span></span>
+<span id="cb14-12"><a href="html-document.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="in">  font-weight: bold;</span></span>
+<span id="cb14-13"><a href="html-document.html#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb14-14"><a href="html-document.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-15"><a href="html-document.html#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="html-document.html#cb14-16" aria-hidden="true" tabindex="-1"></a>使用代码块属性 <span class="in">`class.source`</span> 可以将新样式指定给这一区块。</span>
+<span id="cb14-17"><a href="html-document.html#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="html-document.html#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="html-document.html#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r class.source=&quot;watch-out&quot;}</span></span>
+<span id="cb14-20"><a href="html-document.html#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="in">mtcars[1:5, &quot;mpg&quot;]</span></span>
+<span id="cb14-21"><a href="html-document.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chunk-border"></span>
+<img src="examples/chunk-custom.png" alt="一个具有浅红色背景和深红色边框的代码块" width="300" />
+<p class="caption">
+图 2.2: 一个具有浅红色背景和深红色边框的代码块
+</p>
+</div>
+</div>
+<div id="使用丰富多样的内置-css-样式" class="section level3" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> 使用丰富多样的内置 CSS 样式</h3>
+<p>大多数时候，你并不需要自己定义 CSS 样式，因为 HTML 内置的主题中已经包含了丰富且高级的内置样式。</p>
+<p>默认情况下，R Markdown 输出的 HTML 文档中，已经内嵌了 Bootstrap 框架，因此可以使用一系列预定义的 CSS 样式。其中，可用的背景样式就包括 <code>"bg-primary"</code>，<code>"bg-success"</code>，<code>"bg-info"</code>，<code>"bg-warning"</code> 和 <code>"bg-danger"</code> 等。</p>
+<p>只需要像上面那样，在代码块属性中使用 <code>class.source</code> 标签，就可以应用这些预定义的 CSS 样式。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb15-1"><a href="html-document.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="html-document.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 改变代码块的样式</span></span>
+<span id="cb15-3"><a href="html-document.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb15-4"><a href="html-document.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-5"><a href="html-document.html#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="html-document.html#cb15-6" aria-hidden="true" tabindex="-1"></a>当你对一个数据框取子集的时候，其输出跟选取的列的数目有关。</span>
+<span id="cb15-7"><a href="html-document.html#cb15-7" aria-hidden="true" tabindex="-1"></a>如果选取了 2 个以上的列，则输出仍然是一个数据库；</span>
+<span id="cb15-8"><a href="html-document.html#cb15-8" aria-hidden="true" tabindex="-1"></a>如果选取了 1 个列，则输出的结果将会是一个向量。</span>
+<span id="cb15-9"><a href="html-document.html#cb15-9" aria-hidden="true" tabindex="-1"></a>因此，我们对这个操作应用了 <span class="in">`bg-danger`</span> 和 <span class="in">`bg-warning`</span> 的样式。</span>
+<span id="cb15-10"><a href="html-document.html#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="html-document.html#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="html-document.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r class.source=&quot;bg-danger&quot;, class.output=&quot;bg-warning&quot;}</span></span>
+<span id="cb15-13"><a href="html-document.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="in">mtcars[1:5, &quot;mpg&quot;]</span></span>
+<span id="cb15-14"><a href="html-document.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-15"><a href="html-document.html#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="html-document.html#cb15-16" aria-hidden="true" tabindex="-1"></a>为了确保始终能够得到数据框，则需要添加 <span class="in">`drop = FALSE`</span> 参数。</span>
+<span id="cb15-17"><a href="html-document.html#cb15-17" aria-hidden="true" tabindex="-1"></a>为了显示这个结果，我们应用了 <span class="in">`bg-success`</span> 样式。</span>
+<span id="cb15-18"><a href="html-document.html#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="html-document.html#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r df-drop-ok, class.source=&quot;bg-success&quot;}</span></span>
+<span id="cb15-20"><a href="html-document.html#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="in">mtcars[1:5, &quot;mpg&quot;, drop = FALSE]</span></span>
+<span id="cb15-21"><a href="html-document.html#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>以上内容生成 HTML 文档后的样子如下图所示：</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="examples/chunk-style.png" alt="在代码块上应用内置 CSS 样式" width="300" />
+<p class="caption">
+图 2.3: 在代码块上应用内置 CSS 样式
+</p>
+</div>
+</div>
+<div id="代码折叠" class="section level3" number="2.2.6">
+<h3><span class="header-section-number">2.2.6</span> 代码折叠</h3>
+<p>当 <strong>Knitr</strong> 的代码块参数 <code>echo = TRUE</code> 时，R 代码将会输出到最终生成的文档中。
+如果你不需要显示源代码，可以直接设为 <code>echo = FALSE</code>。
+如果你既想要保留代码但又让其默认不显示，
+则可以通过 <code>code_folding: hide</code> 参数来实现。</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb16-1"><a href="html-document.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="html-document.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Habits&quot;</span></span>
+<span id="cb16-3"><a href="html-document.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb16-4"><a href="html-document.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document:</span></span>
+<span id="cb16-5"><a href="html-document.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code_folding: hide</span></span>
+<span id="cb16-6"><a href="html-document.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<p><code>code_folding: hide</code> 将折叠所有的代码块，用户可以通过点击来查看折叠的代码。如果想让部分代码块在一开始就显示，则可以在代码块选项中使用 <code>class.source = 'fold-show'</code>。</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb17-1"><a href="html-document.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb17-2"><a href="html-document.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;代码的折叠和显示&quot;</span></span>
+<span id="cb17-3"><a href="html-document.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb17-4"><a href="html-document.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document:</span></span>
+<span id="cb17-5"><a href="html-document.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code_folding: hide</span></span>
+<span id="cb17-6"><a href="html-document.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb17-7"><a href="html-document.html#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="html-document.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-9"><a href="html-document.html#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="in">1  # 折叠的</span></span>
+<span id="cb17-10"><a href="html-document.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-11"><a href="html-document.html#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="html-document.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r class.source = &#39;fold-show&#39;}</span></span>
+<span id="cb17-13"><a href="html-document.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="in">2  # 显示的</span></span>
+<span id="cb17-14"><a href="html-document.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-15"><a href="html-document.html#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="html-document.html#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-17"><a href="html-document.html#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="in">3  # 还是折叠的</span></span>
+<span id="cb17-18"><a href="html-document.html#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fold-show"></span>
+<img src="examples/fold-show.png" alt="代码块的折叠和显示" width="400" />
+<p class="caption">
+图 2.4: 代码块的折叠和显示
+</p>
+</div>
+<p>这种操作也可以反向进行，如下配置即可：</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb18-1"><a href="html-document.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="html-document.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb18-3"><a href="html-document.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document:</span></span>
+<span id="cb18-4"><a href="html-document.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">    code_folding: show</span></span>
+<span id="cb18-5"><a href="html-document.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-6"><a href="html-document.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="html-document.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-8"><a href="html-document.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="in">1  # 代码默认是显示的</span></span>
+<span id="cb18-9"><a href="html-document.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-10"><a href="html-document.html#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="html-document.html#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r class.source = &#39;fold-hide&#39;}</span></span>
+<span id="cb18-12"><a href="html-document.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="in">2  # 这一块代码将被折叠</span></span>
+<span id="cb18-13"><a href="html-document.html#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>如图 <a href="html-document.html#fig:fold-show">2.4</a> 所示，在页面和每一个代码块的右上方有一个按钮。页面右上方的按钮可以控制全部代码块的显示和隐藏，代码块右上方的按钮则可以控制对应代码块的显示和隐藏。</p>
+</div>
+<div id="html-scroll" class="section level3" number="2.2.7">
+<h3><span class="header-section-number">2.2.7</span> 设置代码块内容可滚动</h3>
+<p>如果你想限制代码块的高度，特别是代码执行过程中输出内容的高度，还可以从相应内容的 CSS 样式上着手，即通过 <code>class-output</code> 和 <code>class-source</code> 来定义内容的高度。</p>
+<p>下面是一个例子：</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb19-1"><a href="html-document.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb19-2"><a href="html-document.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 可以滚动的代码和输出</span></span>
+<span id="cb19-3"><a href="html-document.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb19-4"><a href="html-document.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb19-5"><a href="html-document.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="html-document.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="in">```{css, echo=FALSE}</span></span>
+<span id="cb19-7"><a href="html-document.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="in">pre {</span></span>
+<span id="cb19-8"><a href="html-document.html#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="in">  max-height: 300px;</span></span>
+<span id="cb19-9"><a href="html-document.html#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="in">  overflow-y: auto;</span></span>
+<span id="cb19-10"><a href="html-document.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb19-11"><a href="html-document.html#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="html-document.html#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="in">pre[class] {</span></span>
+<span id="cb19-13"><a href="html-document.html#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="in">  max-height: 100px;</span></span>
+<span id="cb19-14"><a href="html-document.html#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb19-15"><a href="html-document.html#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-16"><a href="html-document.html#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="html-document.html#cb19-17" aria-hidden="true" tabindex="-1"></a>我们首先定义了上述 CSS 规则，用来限制代码块的高度。</span>
+<span id="cb19-18"><a href="html-document.html#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="html-document.html#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb19-20"><a href="html-document.html#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="in"># 假如这里有 N 多行的代码</span></span>
+<span id="cb19-21"><a href="html-document.html#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="in">if (1 + 1 == 2) {</span></span>
+<span id="cb19-22"><a href="html-document.html#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="in">  # 然后再打印一个非常长的数据</span></span>
+<span id="cb19-23"><a href="html-document.html#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="in">  print(mtcars)</span></span>
+<span id="cb19-24"><a href="html-document.html#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="in">  # 如果不够长的话，再加上这行注释可能就够了</span></span>
+<span id="cb19-25"><a href="html-document.html#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb19-26"><a href="html-document.html#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-27"><a href="html-document.html#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="html-document.html#cb19-28" aria-hidden="true" tabindex="-1"></a>现在添加一个新的 CSS 类 <span class="in">`scroll-100`</span>，以用来限制代码块的输出高度为 100 像素。</span>
+<span id="cb19-29"><a href="html-document.html#cb19-29" aria-hidden="true" tabindex="-1"></a>然后，将这个类赋值给代码块中的 <span class="in">`class.output`</span> 参数。</span>
+<span id="cb19-30"><a href="html-document.html#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-31"><a href="html-document.html#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-32"><a href="html-document.html#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{css, echo=FALSE}</span></span>
+<span id="cb19-33"><a href="html-document.html#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="in">.scroll-100 {</span></span>
+<span id="cb19-34"><a href="html-document.html#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="in">  max-height: 100px;</span></span>
+<span id="cb19-35"><a href="html-document.html#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="in">  overflow-y: auto;</span></span>
+<span id="cb19-36"><a href="html-document.html#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: inherit;</span></span>
+<span id="cb19-37"><a href="html-document.html#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb19-38"><a href="html-document.html#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-39"><a href="html-document.html#cb19-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-40"><a href="html-document.html#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output=&quot;scroll-100&quot;}</span></span>
+<span id="cb19-41"><a href="html-document.html#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="in">print(mtcars)</span></span>
+<span id="cb19-42"><a href="html-document.html#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>因为代码块是位于 <code>&lt;pre class="sourcecode"&gt;</code> 标签内的，所以 <code>pre[class]</code> 操作符将限制代码块的高度为不超过 100 像素。 而将 <code>class.output</code> 设为 <code>scroll-100</code> 则限制输出部分的高度为不超过 100 像素。</p>
+<p>最终效果如下图所示：</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="examples/html-scroll.png" alt="可以滚动的代码块" width="400" />
+<p class="caption">
+图 2.5: 可以滚动的代码块
+</p>
+</div>
+</div>
+</div>
+<div id="图片和数据框" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> 图片和数据框</h2>
+<div id="设置图片的属性" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> 设置图片的属性</h3>
+<p>下列参数可以调整生成的 HTML 文档中图片的属性：</p>
+<ul>
+<li><code>fig_width</code>，<code>fig_height</code> 指定图片显示时的宽和高（默认为 7 × 5，单位英寸）。</li>
+<li><code>fig_retina</code> 开启视网膜屏幕优化（默认为 2，设为 <code>null</code> 时关闭优化）。</li>
+<li><code>fig_caption</code> 控制是否渲染图注。</li>
+<li><code>dev</code> 设置图片输出设备，默认为 <code>png</code>。你可以设置多个图片输出设备。</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb20-1"><a href="html-document.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb20-2"><a href="html-document.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
+<span id="cb20-3"><a href="html-document.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb20-4"><a href="html-document.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb20-5"><a href="html-document.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fig_width</span><span class="kw">:</span><span class="at"> </span><span class="dv">7</span></span>
+<span id="cb20-6"><a href="html-document.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fig_height</span><span class="kw">:</span><span class="at"> </span><span class="dv">6</span></span>
+<span id="cb20-7"><a href="html-document.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fig_caption</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb20-8"><a href="html-document.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">dev</span><span class="kw">:</span><span class="at"> c(&quot;png&quot;,&quot;pdf&quot;)</span></span>
+<span id="cb20-9"><a href="html-document.html#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>在代码框属性中，你仍然可以通过 <code>fig.height</code>，<code>fig.width</code>，<code>fig.asp</code> 等参数来指定生成图片的高度、宽度和宽高比。</p>
+</div>
+<div id="插入外源图片" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> 插入外源图片</h3>
+<p>虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 <code>knitr::include_graphics()</code> 来插入外源图片。例如：</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb21-1"><a href="html-document.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-2"><a href="html-document.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::include_graphics(&quot;https://r-project.org/Rlogo.png&quot;)</span></span>
+<span id="cb21-3"><a href="html-document.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>使用这种方法插入外源图片，可以方便的添加图注（使用 <code>fig.cap</code> 参数），以及设置图片的宽高等属性。</p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="https://r-project.org/Rlogo.png" alt="插入外源图片的推荐方式"  />
+<p class="caption">
+图 2.6: 插入外源图片的推荐方式
+</p>
+</div>
+</div>
+<div id="输出数据框" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> 输出数据框</h3>
+<p>通过 <code>df_print</code> 参数，你可以调整数据框的输出格式。可用的参数如表 <a href="html-document.html#tab:df-print">2.1</a> 所示。</p>
+<table>
+<caption><span id="tab:df-print">表 2.1: </span> <code>html_document</code> 可以被设置的 <code>df_print</code> 参数及其对应的含义。</caption>
+<thead>
+<tr class="header">
+<th>取值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>default</td>
+<td>调用 <code>print.data.frame</code> 的通用方法</td>
+</tr>
+<tr class="even">
+<td>kable</td>
+<td>使用 <code>knitr::kable</code> 函数</td>
+</tr>
+<tr class="odd">
+<td>tibble</td>
+<td>使用 <code>tibble::print.tbl_df</code> 函数</td>
+</tr>
+<tr class="even">
+<td>paged</td>
+<td>使用 <code>rmarkdown::paged_table</code> 来创建一个分页的表格</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="分页打印数据框时的附加参数" class="section level3" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> 分页打印数据框时的附加参数</h3>
+<p>若把 <code>df_print</code> 参数设为 <code>paged</code>，数据框将支持行列的分页，效果如图 <a href="html-document.html#fig:paged">2.7</a> 所示。</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb22-1"><a href="html-document.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-2"><a href="html-document.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Motor Trend Car Road Tests&quot;</span></span>
+<span id="cb22-3"><a href="html-document.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb22-4"><a href="html-document.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document:</span></span>
+<span id="cb22-5"><a href="html-document.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">    df_print: paged</span></span>
+<span id="cb22-6"><a href="html-document.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-7"><a href="html-document.html#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="html-document.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-9"><a href="html-document.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="in">mtcars</span></span>
+<span id="cb22-10"><a href="html-document.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="figure"><span id="fig:paged"></span>
+<img src="images/paged.png" alt="HTML文档中分页显示的数据框"  />
+<p class="caption">
+图 2.7: HTML文档中分页显示的数据框
+</p>
+</div>
+<p>表 <a href="html-document.html#tab:paged">2.2</a> 列出了这种情况下可以使用的附加参数。</p>
+<table>
+<caption><span id="tab:paged">表 2.2: </span> 分页 HTML 表格的附加可用参数。</caption>
+<thead>
+<tr class="header">
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>max.print</td>
+<td>显示的总行数</td>
+</tr>
+<tr class="even">
+<td>rows.print</td>
+<td>一页显示的行数</td>
+</tr>
+<tr class="odd">
+<td>cols.print</td>
+<td>一页显示的列数</td>
+</tr>
+<tr class="even">
+<td>cols.min.print</td>
+<td>最少显示几列</td>
+</tr>
+<tr class="odd">
+<td>pages.print</td>
+<td>下方显示几个页面导航的链接</td>
+</tr>
+<tr class="even">
+<td>paged.print</td>
+<td>设为 <code>FALSE</code> 则不输出分页的表格</td>
+</tr>
+<tr class="odd">
+<td>rownames.print</td>
+<td>设为 <code>FALSE</code> 时不显示行的名称</td>
+</tr>
+</tbody>
+</table>
+<p>这些参数可以在代码块中使用。</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb23-1"><a href="html-document.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cols.print=3, rows.print=3}</span></span>
+<span id="cb23-2"><a href="html-document.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="in">mtcars</span></span>
+<span id="cb23-3"><a href="html-document.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+</div>
+</div>
+<div id="组件和内容" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> 组件和内容</h2>
+<div id="理解-html-文档的依赖关系" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> 理解 HTML 文档的依赖关系</h3>
+<p>前面已经提过，R Markdown 输出的 HTML 文档时，依赖于软件包提供的 HTML 模板。
+实际上，HTML 文档的样式和功能很大程度上依赖于一些 CSS 样式和 JavaScript 库的支持。
+这里面包括 <a href="https://getbootstrap.com/">Bootstrap</a>，<a href="https://jquery.com/">JQuery</a> 等优秀的开源项目。</p>
+<p>默认情况下，R Markdown 输出的 HTML 文档是一个单一的 <code>.html</code> 文件。这是由 <code>self_contained: true</code> 控制的。<code>.html</code> 文件中，会使用 <code>data:</code> 存储包括 JavaScript、CSS、图片和视频在内的全部资料。这样的一个封装，使得用户可以像分享 PDF 或 Word 文档那样分享文件，同时享受超链接、动态效果等一系列 HTML 特性。</p>
+<p>如果你指定 <code>self_contained: false</code>，那么 HTML 文档将会将自身的依赖文件单独存放。</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb24-1"><a href="html-document.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb24-2"><a href="html-document.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Habits&quot;</span></span>
+<span id="cb24-3"><a href="html-document.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb24-4"><a href="html-document.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb24-5"><a href="html-document.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb24-6"><a href="html-document.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>默认情况下，在 <code>.html</code> 文件同一目录会生成同名的 <code>_files</code> 文件夹，存放相应的依赖文件。下面是默认情况下一份 HTML 文档所包含的依赖文件。</p>
+<pre><code>+---anchor-sections-1.0
++---bootstrap-3.3.5
+|   +---css
+|   |   \---fonts
+|   +---fonts
+|   +---js
+|   \---shim
++---header-attrs-2.5
++---highlightjs-9.12.0
++---jquery-1.11.3
+\---navigation-1.1</code></pre>
+<p>库文件夹的位置可以由 <code>lib_dir: xxx</code> 指定，例如：</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb26-1"><a href="html-document.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb26-2"><a href="html-document.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Habits&quot;</span></span>
+<span id="cb26-3"><a href="html-document.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb26-4"><a href="html-document.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb26-5"><a href="html-document.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb26-6"><a href="html-document.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> libs</span></span>
+<span id="cb26-7"><a href="html-document.html#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>依赖文件的内容会随配置变化，例如当在 YAML 配置中加入 <code>df_print: paged</code> 之后，依赖文件中会多一个 <code>pagedtable-1.1</code> 的子文件夹出来。</p>
+<p>显然，存放依赖的子文件夹依据 <strong>库名</strong> + <strong>版本号</strong> 的规则命名。要弄清楚库文件的全部特性，可能要对库本身有相当的理解才行。而 R Markdown 则是把最常用的功能整合提供给了我们。</p>
+<p>当文档的内容比较少，同时又有多个类似的文档的时候，库文件所占的存储空间可能比你自己编写的内容还要大得多。这种情况下，将库文件统一存储在指定的 <code>libs</code> 文件夹，可以实现库文件公用。</p>
+<p>另外，有些库文件不常用，或者文件太大，还可以通过库文件的服务器调用。例如下面要讲的 MathJax 库。</p>
+</div>
+<div id="mathjax-库的配置" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> MathJax 库的配置</h3>
+<p>HTML 文档需要 <a href="https://www.mathjax.org">MathJax</a> 脚本来渲染 Latex 和 MathML 公式，调用 <a href="https://www.mathjax.org">MathJax</a> 的方式则可以通过 <code>mathjax</code> 参数来调整。</p>
+<ul>
+<li><p><code>"default"</code>：默认配置，会通过 HTTPS 链接从 RStudio 的 CDN 网络服务器上调用；</p></li>
+<li><p><code>"local"</code>：与 <code>self_contained: false</code> 联合使用时，会将 MathJax 库文件保存在本地目录中；</p></li>
+<li><p>设置一个 URL 链接，指向可用的 MathJax 库文件地址；</p></li>
+<li><p><code>null</code>：完全不使用 MathJax。</p></li>
+</ul>
+<p>例如，使用 MathJax 的本地拷贝可以如下配置：</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb27-1"><a href="html-document.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb27-2"><a href="html-document.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Habits&quot;</span></span>
+<span id="cb27-3"><a href="html-document.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb27-4"><a href="html-document.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb27-5"><a href="html-document.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">mathjax</span><span class="kw">:</span><span class="at"> local</span></span>
+<span id="cb27-6"><a href="html-document.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb27-7"><a href="html-document.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>为 MathJax 配置一个新的可用来源。</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb28-1"><a href="html-document.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb28-2"><a href="html-document.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Habits&quot;</span></span>
+<span id="cb28-3"><a href="html-document.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb28-4"><a href="html-document.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb28-5"><a href="html-document.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">mathjax</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;http://example.com/MathJax.js&quot;</span></span>
+<span id="cb28-6"><a href="html-document.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>不使用 MathJax。</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb29-1"><a href="html-document.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb29-2"><a href="html-document.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Habits&quot;</span></span>
+<span id="cb29-3"><a href="html-document.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb29-4"><a href="html-document.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb29-5"><a href="html-document.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">mathjax</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb29-6"><a href="html-document.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="是否保留-markdown" class="section level3" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> 是否保留 Markdown</h3>
+<p><strong>knitr</strong> 处理 R Markdown 文件时，会先生成一个 Markdown 文件（<code>*.md</code>），随后再由 Pandoc 转换成 HTML 文档。如果需要保留这个 Markdown 文件，可以使用 <code>keep_md</code> 选项。</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb30-1"><a href="html-document.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb30-2"><a href="html-document.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Habits&quot;</span></span>
+<span id="cb30-3"><a href="html-document.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb30-4"><a href="html-document.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb30-5"><a href="html-document.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">keep_md</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb30-6"><a href="html-document.html#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="使用自定义的-html-模板" class="section level3" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> 使用自定义的 HTML 模板</h3>
+<p>使用 <code>template</code> 选项，可以配置 Pandoc 转换时使用的模板。</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb31-1"><a href="html-document.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb31-2"><a href="html-document.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Habits&quot;</span></span>
+<span id="cb31-3"><a href="html-document.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb31-4"><a href="html-document.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb31-5"><a href="html-document.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">template</span><span class="kw">:</span><span class="at"> another_template.html</span></span>
+<span id="cb31-6"><a href="html-document.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>Pandoc 模板遵循特定的格式，有关的进一步信息可以在 <a href="http://pandoc.org/MANUAL.html#templates">Pandoc 模板</a> 页面获得。</p>
+<p>下面是一个 HTML 模板的示例：</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb32-1"><a href="html-document.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb32-2"><a href="html-document.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;head&gt;</span></span>
+<span id="cb32-3"><a href="html-document.html#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;title&gt;</span>$title$<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb32-4"><a href="html-document.html#cb32-4" aria-hidden="true" tabindex="-1"></a>    $for(css)$</span>
+<span id="cb32-5"><a href="html-document.html#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;$css$&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/css&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb32-6"><a href="html-document.html#cb32-6" aria-hidden="true" tabindex="-1"></a>    $endfor$</span>
+<span id="cb32-7"><a href="html-document.html#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb32-8"><a href="html-document.html#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb32-9"><a href="html-document.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  $body$</span>
+<span id="cb32-10"><a href="html-document.html#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb32-11"><a href="html-document.html#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<p>这其中包括一些变量，如 <code>$title$</code>，<code>$body$</code> 等。这些变量由 Pandoc 定义，完整的变量列表<a href="https://pandoc.org/MANUAL.html#templates">参见这里</a>。</p>
+<p>这样的 HTML 模板使得高度定制化的输出成为可能。例如，你可以在 <code>&lt;head&gt;</code> 区域加入任意的 CSS 样式， JavaScript 代码，以及其它的开源库。 另外，还可以定义一些新变量来控制文档的格式化。例如，定义一个布尔值 <code>draft</code> 来确定文档是一个草稿还是最终版本。</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb33-1"><a href="html-document.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
+<span id="cb33-2"><a href="html-document.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style</span><span class="ot"> type=</span><span class="st">&quot;text/css&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb33-3"><a href="html-document.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">.logo</span> {</span>
+<span id="cb33-4"><a href="html-document.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">float</span>: <span class="dv">right</span><span class="op">;</span></span>
+<span id="cb33-5"><a href="html-document.html#cb33-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-6"><a href="html-document.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/style&gt;</span></span>
+<span id="cb33-7"><a href="html-document.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
+<span id="cb33-8"><a href="html-document.html#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="html-document.html#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb33-10"><a href="html-document.html#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;logo&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb33-11"><a href="html-document.html#cb33-11" aria-hidden="true" tabindex="-1"></a>$if(draft)$</span>
+<span id="cb33-12"><a href="html-document.html#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- use draft.png to show that this is a draft --&gt;</span></span>
+<span id="cb33-13"><a href="html-document.html#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;images/draft.png&quot;</span><span class="ot"> alt=</span><span class="st">&quot;Draft mode&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb33-14"><a href="html-document.html#cb33-14" aria-hidden="true" tabindex="-1"></a>$else$</span>
+<span id="cb33-15"><a href="html-document.html#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- insert the formal logo if this is final --&gt;</span></span>
+<span id="cb33-16"><a href="html-document.html#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;images/logo.png&quot;</span><span class="ot"> alt=</span><span class="st">&quot;Final version&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb33-17"><a href="html-document.html#cb33-17" aria-hidden="true" tabindex="-1"></a>$endif$</span>
+<span id="cb33-18"><a href="html-document.html#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb33-19"><a href="html-document.html#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-20"><a href="html-document.html#cb33-20" aria-hidden="true" tabindex="-1"></a>$body$</span>
+<span id="cb33-21"><a href="html-document.html#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span></code></pre></div>
+<p><code>draft</code> 在 YAML 元数据中赋值。</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb34-1"><a href="html-document.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb34-2"><a href="html-document.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;An Important Report&quot;</span></span>
+<span id="cb34-3"><a href="html-document.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb34-4"><a href="html-document.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb34-5"><a href="html-document.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb34-6"><a href="html-document.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">template</span><span class="kw">:</span><span class="at"> my-template.html</span></span>
+<span id="cb34-7"><a href="html-document.html#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p><em>说明</em>：<strong>rmarkdown</strong> 软件包默认使用自带的 HTML 模板，一些方面与 Pandoc 默认的模板存在差异。如果有 <code>template: null</code> 的话，则 Pandoc 的模板会被使用。</p>
+</div>
+<div id="include-html" class="section level3" number="2.4.5">
+<h3><span class="header-section-number">2.4.5</span> 包含其它文件</h3>
+<p>使用 <code>includes</code> 选项，可以在 HTML 文档的不同位置嵌入其它的 HTML 格式内容。可选的位置包括在 HTML 文档的 <code>header</code>、<code>body</code> 前/后等。</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb35-1"><a href="html-document.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb35-2"><a href="html-document.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Habits&quot;</span></span>
+<span id="cb35-3"><a href="html-document.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb35-4"><a href="html-document.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb35-5"><a href="html-document.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span></span>
+<span id="cb35-6"><a href="html-document.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">in_header</span><span class="kw">:</span><span class="at"> header.html</span></span>
+<span id="cb35-7"><a href="html-document.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">before_body</span><span class="kw">:</span><span class="at"> doc_prefix.html</span></span>
+<span id="cb35-8"><a href="html-document.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">after_body</span><span class="kw">:</span><span class="at"> doc_suffix.html</span></span>
+<span id="cb35-9"><a href="html-document.html#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>这种方式可以很方便的为文档加入一些第三方功能和公用的元件。例如在 <code>in_header</code> 中导入预定义的 CSS 样式表和 Javascript 脚本，在 <code>before_body</code> 中加入导航栏，在 <code>after_body</code> 中加入一个底栏等。</p>
+<p>下面的例子中，即添加了一个简单的底栏。将其中内容保存到一个 HTML 文件中，放在 <code>after_body</code> 后面即可。</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb36-1"><a href="html-document.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;footer&quot;</span><span class="kw">&gt;</span>Copyright <span class="dv">&amp;copy;</span> R Markdown 指南 2021<span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>除了以上几种常用的位置，你还可以在任意地方插入 HTML 内容。实现这一功能的途径至少有两种。</p>
+<p>一是使用 <code>htmltools::includeHTML()</code> 方法：</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb37-1"><a href="html-document.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, results=&#39;asis&#39;}</span></span>
+<span id="cb37-2"><a href="html-document.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="in">htmltools::includeHTML(&#39;file.html&#39;)</span></span>
+<span id="cb37-3"><a href="html-document.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>二是使用 <code>xfun::file_string()</code> 方法：</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb38-1"><a href="html-document.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, results=&#39;asis&#39;}</span></span>
+<span id="cb38-2"><a href="html-document.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="in">xfun::file_string(&#39;file.html&#39;)</span></span>
+<span id="cb38-3"><a href="html-document.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>需要注意的是，导入的 HTML 文件必须是 HTML 片段，而不能是一个完整的 HTML 文档。完整的 HTML 文件中有 <code>&lt;html&gt;</code> 标签，解析时会造成错误。比如下面就是一个无效的例子：</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb39-1"><a href="html-document.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb39-2"><a href="html-document.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;head&gt;</span>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb39-3"><a href="html-document.html#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="html-document.html#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb39-5"><a href="html-document.html#cb39-5" aria-hidden="true" tabindex="-1"></a>  Parent HTML file.</span>
+<span id="cb39-6"><a href="html-document.html#cb39-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-7"><a href="html-document.html#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- htmltools::includeHTML() below --&gt;</span></span>
+<span id="cb39-8"><a href="html-document.html#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;html&gt;</span></span>
+<span id="cb39-9"><a href="html-document.html#cb39-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;head&gt;</span>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb39-10"><a href="html-document.html#cb39-10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;body&gt;</span></span>
+<span id="cb39-11"><a href="html-document.html#cb39-11" aria-hidden="true" tabindex="-1"></a>      Child HTML file.</span>
+<span id="cb39-12"><a href="html-document.html#cb39-12" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb39-13"><a href="html-document.html#cb39-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/html&gt;</span></span>
+<span id="cb39-14"><a href="html-document.html#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- included above --&gt;</span></span>
+<span id="cb39-15"><a href="html-document.html#cb39-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-16"><a href="html-document.html#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb39-17"><a href="html-document.html#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+</div>
+<div id="html-fragments" class="section level3" number="2.4.6">
+<h3><span class="header-section-number">2.4.6</span> 生成 HTML 片段</h3>
+<p>HTML 片段是一个不完整的 HTML 文件，这种片段适合用于嵌入其它的网页或者内容管理系统（如博客）中。HTML 片段也不自带主题和代码高亮，而通过继承的方式使用其嵌入文件或系统的设置。这样的 HTML 片段，也非常适合用于包含在其它文件中（参见 <a href="html-document.html#include-html">2.4.5</a>）。</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb40-1"><a href="html-document.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb40-2"><a href="html-document.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_fragment</span></span>
+<span id="cb40-3"><a href="html-document.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>下面是一个 HTML 片段的例子：</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb41-1"><a href="html-document.html#cb41-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-2"><a href="html-document.html#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="html-document.html#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="html-document.html#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>HTML 片段可以有标题和代码区域，但是不包含任何 CSS 定义。<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb41-5"><a href="html-document.html#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre</span><span class="ot"> class=</span><span class="st">&quot;r&quot;</span><span class="kw">&gt;&lt;code&gt;</span>head(mtcars)<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb41-6"><a href="html-document.html#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre&gt;&lt;code&gt;</span>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
+<span id="cb41-7"><a href="html-document.html#cb41-7" aria-hidden="true" tabindex="-1"></a>## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span>
+<span id="cb41-8"><a href="html-document.html#cb41-8" aria-hidden="true" tabindex="-1"></a>## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span>
+<span id="cb41-9"><a href="html-document.html#cb41-9" aria-hidden="true" tabindex="-1"></a>## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span>
+<span id="cb41-10"><a href="html-document.html#cb41-10" aria-hidden="true" tabindex="-1"></a>## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span>
+<span id="cb41-11"><a href="html-document.html#cb41-11" aria-hidden="true" tabindex="-1"></a>## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span>
+<span id="cb41-12"><a href="html-document.html#cb41-12" aria-hidden="true" tabindex="-1"></a>## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span></code></pre></div>
+<p>将这些内容保存为一个 HTML 文件，导入此处，则效果如下所示：</p>
+
+
+
+<p>HTML 片段可以有标题和代码区域，但是不包含任何 CSS 定义。</p>
+<pre class="r"><code>head(mtcars)</code></pre>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<p><em>HTML 片段的内容到此结束。</em></p>
+</div>
+<div id="使用自定义的浏览器图标" class="section level3" number="2.4.7">
+<h3><span class="header-section-number">2.4.7</span> 使用自定义的浏览器图标</h3>
+<p>通过在 <code>in_header</code> 部位导入 HTML 内容，可以为 HTML 文档设定一个自定义的浏览器图标。</p>
+<p>将下面的内容保存到一个名为 <code>header.html</code> 的文档中。</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb42-1"><a href="html-document.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> href=</span><span class="st">&quot;{path to favicon file}&quot;</span> <span class="kw">/&gt;</span></span></code></pre></div>
+<p>然后通过 <code>includes</code> 导入文件的内容，则可以改变浏览当前文档时的浏览器图标。</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb43-1"><a href="html-document.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb43-2"><a href="html-document.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb43-3"><a href="html-document.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span></span>
+<span id="cb43-4"><a href="html-document.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">in_header</span><span class="kw">:</span><span class="at"> header.html</span></span></code></pre></div>
+</div>
+<div id="共用-yaml-配置文件" class="section level3" number="2.4.8">
+<h3><span class="header-section-number">2.4.8</span> 共用 YAML 配置文件</h3>
+<p>当前目录中的 <code>_output.yml</code> 文件是一个配置文件，其中的设置可以被目录下所有的 R Markdown 文档公用。需要注意的是，该文件中的内容不需要使用<code>---</code> 和 <code>output</code> 标签。</p>
+<p>如下所示：</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb44-1"><a href="html-document.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb44-2"><a href="html-document.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb44-3"><a href="html-document.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> united</span></span>
+<span id="cb44-4"><a href="html-document.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> textmate</span></span></code></pre></div>
+<p>而不应该写成下面这种样子：</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb45-1"><a href="html-document.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb45-2"><a href="html-document.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb45-3"><a href="html-document.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb45-4"><a href="html-document.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb45-5"><a href="html-document.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> united</span></span>
+<span id="cb45-6"><a href="html-document.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> textmate</span></span>
+<span id="cb45-7"><a href="html-document.html#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="嵌入-rmd-源文件" class="section level3" number="2.4.9">
+<h3><span class="header-section-number">2.4.9</span> 嵌入 Rmd 源文件</h3>
+<p>当你分享一个 R Markdown 生成的 HTML 文档给他人的时候，对方可能还想找你索取 <code>.Rmd</code> 源文件。在头文件中配置 <code>code_download</code> 参数可以在 HTML 文档中嵌入源文件。</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb46-1"><a href="html-document.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb46-2"><a href="html-document.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb46-3"><a href="html-document.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code_download</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<p>打开 <code>code_download</code> 选项后，页面中会出现一个下载按钮，点击下载按钮即可获得源文件。</p>
+</div>
+<div id="嵌入其它文件" class="section level3" number="2.4.10">
+<h3><span class="header-section-number">2.4.10</span> 嵌入其它文件</h3>
+<p>嵌入 <code>.Rmd</code> 源文件可能还不足以重现 R Markdown 中结果，通常还会需要原始数据等其它内容。要将这些内容嵌入 HTML 文档中，也是很容易实现的。</p>
+<p>这一功能通过 <strong>xfun</strong> 软件包<span class="citation">(<a href="#ref-R-xfun" role="doc-biblioref"><strong>R-xfun?</strong></a>)</span> 实现，依赖于 <code>htmltools</code> 和 <code>mime</code> 软件包。要使用这一功能，首先确保这两个软件包可用。</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="html-document.html#cb47-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">pkg_load2</span>(<span class="fu">c</span>(<span class="st">&#39;htmltools&#39;</span>, <span class="st">&#39;mime&#39;</span>))</span></code></pre></div>
+<p>现在，就可以随意嵌入各种文件了。</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb48-1"><a href="html-document.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb48-2"><a href="html-document.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 不但可以嵌入一个文件</span></span>
+<span id="cb48-3"><a href="html-document.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="in">xfun::embed_file(&#39;source.Rmd&#39;)</span></span>
+<span id="cb48-4"><a href="html-document.html#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="html-document.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="in"># 还可以嵌入多个文件</span></span>
+<span id="cb48-6"><a href="html-document.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="in">xfun::embed_files(c(&#39;source.Rmd&#39;, &#39;data.csv&#39;))</span></span>
+<span id="cb48-7"><a href="html-document.html#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="html-document.html#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="in"># 甚至一个目录也不在话下</span></span>
+<span id="cb48-9"><a href="html-document.html#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="in">xfun::embed_dir(&#39;data/&#39;, text = &#39;Download full data&#39;)</span></span>
+<span id="cb48-10"><a href="html-document.html#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>不仅如此，你还可以编程技巧嵌入所需的文件。</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="html-document.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 嵌入当前目录下所有的 Rmd 和 csv 文件</span></span>
+<span id="cb49-2"><a href="html-document.html#cb49-2" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">embed_files</span>(<span class="fu">list.files</span>(<span class="st">&#39;.&#39;</span>, <span class="st">&#39;[.](Rmd|csv)$&#39;</span>))</span></code></pre></div>
+<p><em>说明</em>：当嵌入多个文件时，其工作原理是：首先将这些文件压缩成 Zip 格式，然后将 Zip 文件嵌入到 HTML 文档中。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="document.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="PDF-document.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cosname/rmarkdown-guide/edit/master/06-HTML-document.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
