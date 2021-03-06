@@ -1,0 +1,8 @@
+```{r, tidy=TRUE, tidy.opts=list(arrow=TRUE, indent=2)}
+# 混乱的 R 代码...
+1+            1
+x=1:10#有些使用者更喜欢用 '<-' 来作为赋值操作符
+if(TRUE){
+print('Hello world!') # 缩进 2 个空格
+}
+```
