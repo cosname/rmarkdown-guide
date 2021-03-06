@@ -25,7 +25,12 @@ pkgs <- c(
   'pander',
   'tangram',
   'ztable',
-  'condformat')
+  'condformat',
+  'magick',
+  'cairoDevice',
+  'svglite',
+  'tikzDevice',
+  'printr')
 # install packages if missing
 lapply(pkgs, function(pkg) {
     if (system.file(package = pkg) != '') return()
