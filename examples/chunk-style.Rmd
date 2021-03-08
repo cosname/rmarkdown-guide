@@ -1,0 +1,22 @@
+---
+title: 改变代码块的样式
+output: html_document
+---
+
+当你对一个数据框取子集的时候，其输出跟选取的列的数目有关。
+如果选取了 2 个以上的列，则输出仍然是一个数据库；
+如果选取了 1 个列，则输出的结果将会是一个向量。
+因此，我们对这个操作应用了 `bg-danger` 和 `bg-warning` 的样式。
+
+
+```{r class.source="bg-danger", class.output="bg-warning"}
+mtcars[1:5, "mpg"]
+```
+
+为了确保始终能够得到数据框，则需要添加 `drop = FALSE` 参数。
+为了显示这个结果，我们应用了 `bg-success` 样式。
+
+```{r df-drop-ok, class.source="bg-success"}
+mtcars[1:5, "mpg", drop = FALSE]
+```
+

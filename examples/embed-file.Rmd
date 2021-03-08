@@ -1,0 +1,10 @@
+```{r echo=FALSE}
+# 不但可以嵌入一个文件
+xfun::embed_file('source.Rmd')
+
+# 还可以嵌入多个文件
+xfun::embed_files(c('source.Rmd', 'data.csv'))
+
+# 甚至一个目录也不在话下
+xfun::embed_dir('data/', text = 'Download full data')
+```
