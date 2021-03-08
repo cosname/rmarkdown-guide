@@ -417,6 +417,10 @@ if (TRUE) {
 
 下面我们展示了一个使用功能强大的**magick**包 [@R-magick]\index{R package!magick}来在图像中添加R logo的例子。如果你不熟悉这个包，可以阅读它的在线文档或包简介，其中包含许多示例。首先，我们定义一个函数`add_logo()`：
 
+```{r, eval = FALSE}
+install.packages("magick")
+```
+
 ```{r}
 add_logo = function(path, options) {
   # 代码块中创建的图像
