@@ -1,0 +1,4 @@
+# PDF 文档 {#PDF-document}
+
+这一章讲述将 rmarkdown 输出为 PDF 的一些技巧。
+

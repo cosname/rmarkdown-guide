@@ -1,0 +1,11 @@
+---
+title: "输出一个 HTML 片段"
+output: html_fragment
+---
+
+HTML 片段可以有标题和代码区域，但是不包含任何 CSS 定义。
+
+```{r}
+head(mtcars)
+```
+
