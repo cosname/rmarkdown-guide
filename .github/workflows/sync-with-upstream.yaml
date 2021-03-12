@@ -2,7 +2,7 @@ name: Sync to Upstream
 
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
@@ -11,18 +11,19 @@ jobs:
     name: Sync HEAD with upstream latest
 
     steps:
-    # Step 1: run a standard checkout action, provided by github
-    - name: Checkout HEAD
-      uses: actions/checkout@v2
-      with:
-        ref: master
+      # Step 1: run a standard checkout action, provided by github
+      - name: Checkout HEAD
+        uses: actions/checkout@v2
+        with:
+          ref: master
 
-    # Step 2: run this sync action - specify the upstream repo, upstream branch to sync with, and target sync branch
-    - name: Pull upstream changes
-      id: sync
-      uses: bdougie/Fork-Sync-With-Upstream-action@fork
-      with:
-        upstream_repository: cosname/rmarkdown-guide
-        upstream_branch: master
-        target_branch: master
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      # Step 2: run this sync action - specify the upstream repo, upstream branch to sync with, and target sync branch
+      - name: Pull upstream changes
+        id: sync
+        uses: aormsby/Fork-Sync-With-Upstream-action@v2.1
+        with:
+          upstream_repository: cosname/rmarkdown-guide
+          upstream_branch: master
+          target_branch: master
+          git_pull_args: --ff-only # optional arg use, defaults to simple 'pull'
+          github_token: ${{ secrets.SYNC_UPSTREAM }}
