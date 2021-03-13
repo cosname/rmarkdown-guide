@@ -25,5 +25,5 @@ jobs:
           upstream_repository: cosname/rmarkdown-guide
           upstream_branch: master
           target_branch: master
-          git_pull_args: --ff-only # optional arg use, defaults to simple 'pull'
+          git_pull_args: '--allow-unrelated-histories' # optional arg use, defaults to simple 'pull'
           github_token: ${{ secrets.SYNC_UPSTREAM }}
