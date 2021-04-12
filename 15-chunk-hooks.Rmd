@@ -1,0 +1,212 @@
+# 块钩子 (\*) {#chunk-hooks}
+
+块钩子\index{chunk hook}是一个由非`NULL`的块选项触发的函数，块钩子提供了一种除在代码块中运行代码外执行额外任务的方法。例如，对图像进行后期处理（参见\@ref(crop-plot)节和\@ref(optipng)节），或记录运行某个代码块所需的时间（参见\@ref(time-chunk)节）。这些任务虽然对于报告中的计算或分析可能不是必要的，但可用于一些其它的目的，如增强图像或识别最耗时的代码块等。
+
+使用块钩子的目的为获得其副作用，如只打印某些信息到控制台，或者是为了它们的返回值，如果值是字符值，返回值将被写入输出文档。
+
+You can use chunk hooks purely for their side effects (e.g., only printing out certain information to the console), or for their returned values, which will be written to the output document if the value is a character value.
+
+就像输出钩子（参见\@ref(output-hooks)章）一样，块钩子也是通过对象`knitr::knit_hooks`\index{knitr!knit\_hooks}来注册的。需要注意的是，输出钩子的名称是由**knitr**保留的，所以不能在自定义的块钩子上使用这些名称：
+
+```{r}
+names(knitr:::.default.hooks)
+```
+
+一个块钩子与一个同名的块选项相关联\index{chunk option!chunk hook|see {chunk hook}}。例如，可以注册一个名为`greet`的块钩子：
+
+```{r}
+knitr::knit_hooks$set(greet = function(before) {
+  if (before) "Hello!" else "Bye!"
+})
+```
+
+我们稍后会解释钩子函数的参数。现在我们为下面的块设置块选项`greet = TRUE`：
+
+````md
+```{r, greet=TRUE}`r ''`
+1 + 1
+```
+````
+
+在下面的输出中，可以看到"Hello!"出现在块之前，而"Bye!"出现在块之后（因为其为字符值）：
+
+> ```{r, greet=TRUE}
+> 1 + 1
+> ```
+
+块钩子函数可能有四个以下参数：`before`、`options`、`envir`以及`name`。换句话说，它可以是这样的形式：
+
+```r
+function(before, options, envir, name) {
+
+}
+```
+
+四个参数都是可选的，可以设定4个、3个、2个、1个，甚至没有参数。在上面的例子中，我们仅使用了一个参数（即`before`）。这些参数的含义是：
+
+- `before`：块钩子是在代码块运行之前还是之后运行。需要注意的是，块钩子会对每个代码块运行两次，若设定`hook(before = TRUE)`则只在代码块之前运行一次，同样若设定`hook(before = FALSE)`则只在代码块之后运行一次；
+
+- `options`：当前代码块的块选项列表，如：`list(fig.width = 5, echo = FALSE, ...)`；
+
+- `envir`：块钩子所在的环境；The environment in which the chunk hook is evaluated.
+
+- `name`：触发块钩子的块选项的名称。
+
+正如我们在本章开头提到的那样，块钩子返回的非字符值将被忽略，只有字符值会被写入输出文档。
+
+## 裁剪图像 {#crop-plot}
+
+块钩子`knitr::hook_pdfcrop()`\index{knitr!hook\_pdfcrop()}\index{chunk hook!crop plot}可以用于裁剪PDF和其他类型的图像文件，即删除额外的边距。使用它的时候需要通过`knit_hooks$set()`\index{knitr!knit\_hooks}在代码块中编译，并开启相应的块选项，例如：
+
+```{r}
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+```
+
+之后就可以使用块选项`crop = TRUE`\index{chunk option!crop}来在代码块中裁剪图像了。
+
+钩子`hook_pdfcrop()`会自动调用外部程序`pdfcrop`来裁剪PDF文件。这个程序通常附带一个LaTeX发行版（例如TeX Live或MiKTeX），可以通过以下方式来检查系统中是否有可用的文件：
+
+```{r}
+# 如果返回值非空，则代表系统中有可用的文件
+Sys.which('pdfcrop')
+```
+
+如果你正在使用LaTeX发行版TinyTeX（参见\@ref(install-latex)节），并且`pdfcrop`在你的系统中不可用，则可以通过`tinytex::tlmgr_install('pdfcrop')`\index{tinytex!tlmgr\_install()}来安装它。
+
+```{r include = FALSE, eval=!tinytex:::check_installed("pdfcrop")}
+tinytex::tlmgr_install('pdfcrop')
+```
+
+对于非PDF的图像文件，如PNG或JPEG文件，上述钩子函数会调用R包**magick** [@R-magick]\index{R package!magick}来进行裁剪工作，需要确保这个R包已经被安装。图 \@ref(fig:crop-no)显示的是一个未被裁剪的图像，Figure \@ref(fig:crop-yes)显示的是相同的但已被裁剪的图像：
+
+```{r, crop-no, crop=NULL, echo=FALSE, fig.height=4, fig.cap='没有被裁剪的图像', out.extra=if (knitr::is_latex_output()) '', resize.command='framebox'}
+if (!knitr::is_latex_output()) par(bg = 'gray', fg = 'yellow')
+plot(cars)
+```
+
+```{r, crop-yes, crop=TRUE, echo=FALSE, fig.height=4, fig.cap='被裁剪的图像', ref.label='crop-no', out.extra=if (knitr::is_latex_output()) '', resize.command='framebox'}
+```
+
+## 优化 PNG 图像 {#optipng}
+
+如果你已经安装了OptiPNG (<http://optipng.sourceforge.net>)\index{OptiPNG}程序，则可以使用钩子`knitr::hook_optipng()`\index{knitr!hook\_optipng()}来优化PNG图像文件到更小的大小而不降低图像质量\index{chunk hook!optimize PNG}\index{figure!optimize PNG}：
+
+```{r, eval=FALSE}
+knitr::knit_hooks$set(optipng = knitr::hook_optipng)
+```
+
+在设置了这个钩子之后，可以使用块选项`optipng`\index{chunk option!optipng}来将命令行参数传递给OptiPNG，例如`optipng = '-o7'`。这些命令行参数是可选的，这意味着可以使用`optipng = ''`来为代码块启用钩子。更多可能参数请参阅OptiPNG网站上的用户手册。
+
+需要注意的是，macOS用户可以很容易地使用Homebrew (https://brew.sh) 来安装OptiPNG：`brew install optipng`。
+
+## 报告每个块运行所需的时间 {#time-chunk}
+
+在默认情况下，**knitr**提供了一个文本进度条来显示编译进度。如果需要关于块更精确的计时信息，可以创建一个自定义的块挂钩来记录每个块的时间，例如：
+
+```{r, eval=FALSE}
+knitr::knit_hooks$set(time_it = local({
+  now <- NULL
+  function(before, options) {
+    if (before) {
+      # 在每个块运行之前记录当前时间
+      now <<- Sys.time()
+    } else {
+      # 在块运行后计算时间差
+      res <- difftime(Sys.time(), now)
+      # 返回一个字符串来显示时间
+      paste('Time for this code chunk to run:', res)
+    }
+  }})
+)
+```
+
+从而可以使用块选项`time_it`为一个块来计时，例如：
+
+````
+```{r, time_it = TRUE}`r ''`
+Sys.sleep(2)
+```
+````
+
+如果想计算所有代码块运行所需的时间，可以设置全局选项：`knitr::opts_chunk$set(time_it = TRUE)`。
+
+在上述钩子函数中，还可以从块选项中输出更多的信息（设定函数的`options`参数）。例如，可以打印出返回值中的块标签：
+
+```{r, eval=FALSE}
+paste('Time for the chunk', options$label, 'to run:', res)
+```
+
+或者也可以记录时间而不打印出来：
+
+```{r, eval=FALSE}
+all_times <- list()  # 存储每个块运行所需的时间
+knitr::knit_hooks$set(time_it = local({
+  now <- NULL
+  function(before, options) {
+    if (before) {
+      now <<- Sys.time()
+    } else {
+      res <- difftime(Sys.time(), now)
+      all_times[[options$label]] <<- res
+    }
+  }})
+)
+```
+
+之后可以访问对象`all_times`中所有的时间信息。这个对象是一个命名列表，名称为块标签，元素值是每个块的运行时间。
+
+最后，作为一个技术性注释，我们想解释一下在前面钩子中`local()`函数的用法，因为有些读者可能不熟悉它：
+
+- 这个函数允许你在"local"环境中运行代码，其主要的好处在于代码中创建的变量是该环境的局部变量，因此它们不会污染外部环境（通常是全局环境）；
+
+- 例如，我们在`local()`中创建了一个变量`now`，并在`time_it`钩子函数中使用了它。在钩子函数中，我们通过双箭头`<<-`来更新`now`的值，而不是普通的赋值操作符`<-`。这是因为`<<-`可以为母环境中的变量赋值（在本例中是`local()`中的环境），而`<-`只能为当前环境中的变量赋值；
+
+- 在每个代码块运行之前，局部变量`now`会记录当前时间，从而在运行每个代码块之后，我们可以计算当前时间和`now`之间的时间差，来计算改代码块的运行时间。需要注意的是，`local()`会返回传递给它的表达式中的最后一个值，在本例中是一个钩子函数。
+
+简而言之，`local()`可以通过仅在局部使用变量来使工作空间更干净，而如果可以接受在全局环境中创建变量`now`的话，也可以选择不使用`local()`。
+
+
+
+## 在输出中显示块的头部 {#show-header}
+
+有时，你可能希望向读者展示原始代码块的头部。例如，在编写一个R Markdown教程时，你可能希望同时显示块的输出结果和用于生成输出的块选项，以便读者可以学习如何自己完成。
+
+原始的块选项实际上是以字符串的形式存储在块选项`params.src`中的，所以可以写一个块钩子来将`params.src`添加到输出中，下面是一个完整的例子:
+
+`r import_example('chunk-wrapper.Rmd')`
+
+大体上，我们从`options$params.src`中得到了块的标题，并将其放入```` ```{r, }````中。进一步，我们把这一行用前后各四个反引号括起来，以便在输出中逐字显示。需要注意的是，原始代码块可能是被缩进的（例如，当其嵌套在一个列表中时），所以我们还需要从`options$indent`中提取并添加适当的缩进。
+
+上述例子最后，带有项目列表的输出如下所示：
+
+> - 文本1
+> 
+>   ````
+>   ```{r, eval=TRUE}`r ''`
+>   ````
+>   ```r
+>   2 + 2
+>   ```
+>   ```
+>   ## [1] 4
+>   ```
+>   ````
+>   ```
+>   ````
+> 
+> - 文本2
+
+可以看到代码块已被运行，并且块的头部（```` ```{r, eval=TRUE}````）和尾部（```` ``` ````)也已被添加到输出结果中。
+
+
+## 使用**rgl**嵌入交互式的3D图像 {#rgl-3d}
+
+**rgl**包[@R-rgl]\index{R package!rgl}可以用来生成交互式的3D图像。如果这些图像被保存为WebGL格式\index{WebGL}，那么它们仍然可以交互，这可以通过钩子函数`rgl::hook_webgl()`\index{chunk hook!WebGL plot}\index{figure!WebGL}来实现。下面是一个例子，展现了如何设置**rgl**和**knitr**，从而可以保存3D图像，同时保持交互性：
+
+`r import_example('rgl-3d.Rmd')`
+
+编译完上面的例子后，应该得到一个交互式的3D散点图，如图 \@ref(fig:rgl-3d)所示。需要注意的是，交互式的图像只有在输出格式为HTML时才有效。
+
+```{r, rgl-3d, echo=FALSE, fig.cap='从 rgl 包生成的一张 3D 散点图', fig.align='center'}
+knitr::include_graphics('images/rgl-3d.png', dpi = NA)
+```

@@ -15,7 +15,7 @@
 在 **knitr** 中，函数 `kable()`\index{knitr!kable()} 是一个非常简单的表格生成器，并且设计简单。它仅为严格的“矩形数据”（如矩阵和数据框）生成表格，不能自由地设计单元格或合并单元格。然而，这个函数有大量的参数供你自定义表格的外观:
 
 
-```{r code=formatR::usage(knitr::kable, output=FALSE), eval=FALSE}
+```{r code=formatR::usage(knitr::kable, output=FALSE), tidy=TRUE, tidy.opts=list(width.cutoff=45), eval=FALSE}
 ```
 
 ### 已支持的表的格式 {#kable-formats}
@@ -203,7 +203,7 @@ knitr::kables(
     knitr::kable(
       d1, col.names = c('SPEED', 'DISTANCE'), valign = 't'
     ),
-    # 第一个 kable()：设置 digits 选项
+    # 第二个 kable()：设置 digits 选项
     knitr::kable(d2, digits = 0, valign = 't')
   ),
   caption = '由 knitr::kables() 生成的两张表'

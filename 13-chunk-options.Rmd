@@ -105,7 +105,7 @@ d <- read.csv('my-precious.csv')
 
 你必须要让**knitr**知道数据文件是否已被更改。一种方法是添加另一个块选项`cache.extra = file.mtime('my-precious.csv')`\index{chunk option!cache.extra}，或者更严格的方式：`cache.extra = tools::md5sum('my-precious.csv')`。前者意味着如果文件的修改时间发生了变化，我们就需要使缓存失效；而后者的意思是，如果文件的内容被修改，我们就更新缓存。需要注意的是，`cache.extra`不是一个内置的**knitr** 代码选项，你可以为该选项使用任何其他名称，只要它不与内置选项名称冲突。
 
-类似地，你可以将缓存与其他信息相关联，比如R的版本（`cache.extra = getRversion()`）、时间（`cache.extra = Sys.Date()`）或是你的操作系统（`cache.extra = Sys.info()[['sysname']]`）， 当这些条件改变时，缓存可以正确地失效。
+类似地，你可以将缓存与其他信息相关联，比如R的版本（`cache.extra = getRversion()`）、时间（`cache.extra = Sys.Date()`）或是你的操作系统（`cache.extra = Sys.info()[['sysname']]`）， 当这些条件改变时，可以使缓存正确地失效。
 
 我们不建议在文档中设置全局块选项`cache = TRUE`，因为缓存可能相当棘手。相反的，我们建议您只在个别耗时很久的代码块上启用缓存，这样并不会产生副作用。
 
@@ -120,7 +120,7 @@ if (file.exists('results.rds')) {
 }
 ```
 
-在这一例子中，使缓存无效的唯一（也是简单的）方法就是删除文件`results.rds`。如果你喜欢这个简单的缓存机制，你可以使用在\@ref(cache-rds)节中介绍的函数`xfun::cache_rds()`\index{xfun!cache\_rds()}。
+在这一例子中，使缓存失效的唯一（也是简单的）方法就是删除文件`results.rds`。如果你喜欢这个简单的缓存机制，可以使用在\@ref(cache-rds)节中介绍的函数`xfun::cache_rds()`\index{xfun!cache\_rds()}。
 
 ## 为多种输出格式缓存代码块 {#cache-path}
 
