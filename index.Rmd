@@ -35,7 +35,8 @@ if (knitr::is_html_output()) {
 }
 
 # 安装需要的包
-xfun::pkg_load2(c('formatR', 'kableExtra', 'magick','tikizDevice'))
+# 加了会报错：'tikizDevice','rgl'
+xfun::pkg_load2(c('formatR', 'kableExtra', 'magick', 'knitr', 'tinytex', 'codetools', 'remotes', 'rmarkdown', 'pander'))
 
 import_example <- function(file, lang = xfun::file_ext(file)) {
   x = xfun::read_utf8(file.path("examples", file))
