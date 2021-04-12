@@ -1,0 +1,40 @@
+---
+title: 在输出中显示块标题
+---
+
+首先，设置一个名为`wrapper`的块钩子，将块输出包含在原始块的头部（header）和尾部（footer）之中。
+
+```{r, setup, include=FALSE}
+knitr::knit_hooks$set(wrapper = function(before, options) {
+  # 原始数据块可能需要缩进
+  if (is.null(indent <- options$indent)) indent <- ''
+  
+  # 隐藏 wrapper=TRUE 选项
+  opts <- gsub(', wrapper=TRUE', '', options$params.src)
+  
+  if (before) {
+    # 添加 header
+    sprintf('\n\n%s````\n```{r,%s}\n````\n', indent, opts)
+  } else {
+    # 添加 footer
+    sprintf('\n\n%s````\n```\n````\n', indent)
+  }
+})
+```
+
+现在我们通过代码块选项`wrapper=TRUE`来启用上述钩子。需要注意的是，应该严格按照钩子函数里`gsub()`中的写法来定义，即把`wrapper=TRUE`放在代码块头部的末尾，需要拼写完整，即不能写成`wrapper=T`，并且需要跟在逗号和空格后面：
+
+```{r, test-label, collapse=TRUE, wrapper=TRUE}
+1 + 1
+plot(cars)
+```
+
+在输出中可以看到原始代码块的头部和尾部。当块被缩进时，钩子函数可以正常运行工作，例如：
+
+- 文本1
+
+  ```{r, eval=TRUE, wrapper=TRUE}
+  2 + 2
+  ```
+
+- 文本2

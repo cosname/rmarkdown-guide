@@ -1,0 +1,35 @@
+---
+title: "使用全局图像设备记录图像"
+---
+
+首先，开启全局图像设备：
+
+```{r, include=FALSE}
+knitr::opts_knit$set(global.device = TRUE)
+```
+
+画一张图：
+
+```{r}
+par(mar = c(4, 4, 0.1, 0.1))
+plot(cars)
+```
+
+给之前代码块生成的图添加一条线：
+
+```{r}
+fit <- lm(dist ~ speed, data = cars)
+abline(fit)
+```
+
+不再使用全局图像设备了：
+
+```{r, include=FALSE}
+knitr::opts_knit$set(global.device = FALSE)
+```
+
+画另一张图：
+
+```{r}
+plot(pressure, type = 'b')
+```

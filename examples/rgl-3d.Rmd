@@ -1,0 +1,20 @@
+---
+title: 使用 **rgl** 嵌入 3D 图像 
+output: html_document
+---
+
+设置一个钩子来保存 **rgl** 图像：
+
+```{r, setup}
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+在我们通过块选项`webgl = TRUE`启用钩子后，可以看看它是否适用于这个 3D 图像：
+
+```{r, test-rgl, webgl=TRUE}
+x <- sort(rnorm(1000))
+y <- rnorm(1000)
+z <- rnorm(1000) + atan2(x,y)
+plot3d(x, y, z, col = rainbow(1000))
+```
