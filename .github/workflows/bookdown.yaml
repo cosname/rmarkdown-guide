@@ -3,6 +3,7 @@ on:
     branches:
       - main
       - master
+      - use-github-actions
 
 name: bookdown
 
