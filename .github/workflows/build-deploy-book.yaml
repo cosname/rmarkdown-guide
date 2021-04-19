@@ -47,6 +47,6 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           ls -al
-          deploy.sh
+          ./_deploy.sh
         env:
           REPO: ${{ github.repository }}
