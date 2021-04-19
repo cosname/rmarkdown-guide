@@ -1,0 +1,52 @@
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+      - master
+
+name: build-deploy-book
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+
+      - name: Install pandoc
+        run: |
+          brew install pandoc
+
+      - name: Cache renv packages
+        uses: actions/cache@v2
+        with:
+          path: $HOME/.local/share/renv
+          key: r-${{ hashFiles('renv.lock') }}
+          restore-keys: r-
+
+      - name: Cache bookdown results
+        uses: actions/cache@v2
+        with:
+          path: _bookdown_files
+          key: bookdown-${{ hashFiles('**/*Rmd') }}
+          restore-keys: bookdown-
+
+      - name: Install packages
+        run: |
+          R -e 'install.packages("renv")'
+          R -e 'renv::restore()'
+
+      - name: Build book
+        run: make gitbook
+
+      - name: Deploy book
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          ls -al
+          deploy.sh
+        env:
+          REPO: ${{ github.repository }}
