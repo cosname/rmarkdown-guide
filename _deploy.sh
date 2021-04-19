@@ -2,8 +2,6 @@
 
 set -e
 
-[ "${BRANCH}" != "master" ] && exit 0
-
 git config --global user.email "xie@yihui.name"
 git config --global user.name "Yihui Xie"
 

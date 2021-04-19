@@ -44,7 +44,9 @@ jobs:
         run: make gitbook
 
       - name: Deploy book
-        run: ./deploy.sh
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          ls -al
+          deploy.sh
         env:
           REPO: ${{ github.repository }}
-          BRANCH: ${{ github.head_ref }}
