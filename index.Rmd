@@ -1,6 +1,6 @@
---- 
+---
 title: "R Markdown 指南"
-author: 
+author:
   - 王祎帆
   - 闫求识
   - 高春辉
@@ -31,9 +31,6 @@ if (knitr::is_html_output()) {
     options
   })
 }
-
-# 安装需要的包
-xfun::pkg_load2(c('formatR', 'kableExtra', 'magick'))
 
 import_example <- function(file, lang = xfun::file_ext(file)) {
   x = xfun::read_utf8(file.path("examples", file))
