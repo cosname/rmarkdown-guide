@@ -78,7 +78,7 @@ renv::restore()
 
 `renv::restore()` 根据 `renv.lock` 中的内容在项目根目录中的 `renv/library/` 下安装本书当下依赖的特定版本的 R 包，这样可以保证所有作者使用的 R 包版本相同。安装完成后下次启动项目，`.Rprofile` 文件中的脚本会自动加载这些包的环境。
 
-作者在写作过程中可以正常使用 `install.packages()` 或者 `renv::install()` 安装 `renv.lock` 中没有的 R 包，建议使用后者，可以避免重复下载已经全局安装过的包。
+作者在写作过程中可以正常使用 `install.packages()` 或者 `renv::install()` 安装 `renv.lock` 自己所需的其他 R 包并在 R Markdown 文件中引用，建议使用后者，可以避免重复下载已经全局安装过的包。
 
 写作完成准备提交时，我们需要将新的 R 包环境更新到 `renv.lock` 中。这样，其他作者后续写作中也可以使用这些包。运行
 

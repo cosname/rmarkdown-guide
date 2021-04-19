@@ -86,10 +86,10 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.31",
+      "Version": "1.32",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c3994c036d19fc22c5e2a209c8298bfb"
+      "Hash": "c9e3c0fffd678c847d9b274c068ca46b"
     },
     "magrittr": {
       "Package": "magrittr",
