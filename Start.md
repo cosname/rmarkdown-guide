@@ -20,6 +20,7 @@
 # run git in your local computer
 git clone https://github.com/gaospecial/rmarkdown-guide
 ```
+
 此时可以尝试一下 `git push` 命令，如果提示登录，则可以进行下列设置
 
 ```
@@ -34,7 +35,7 @@ git remote set-url origin git+ssh://git@github.com/gaospecial/rmarkdown-guide.gi
 
 SSH 密钥是成对的，包括公钥和私钥，公钥登记到 GitHub 网站，私钥存储在本地计算机（私有）。
 
-密钥在本地生成。点击鼠标右键，选择“Git Bash here”，输入下列命令将生成一对SSH密钥。
+密钥在本地生成。点击鼠标右键，选择“Git Bash here”，输入下列命令将生成一对 SSH 密钥。
 默认情况下，私钥保存在 “`~/.ssh/id_rsa`” 文件中，公钥保存在 “`~/.ssh/id_rsa.pub`"文件中
 （没错，在 Windows 下的 Git bash 下面也可以使用 `~` 代表家目录）。
 
@@ -43,7 +44,7 @@ ssh-keygen
 cat ./.ssh/id_rsa.pub
 ```
 
-复制这个公钥的全部内容，进入GitHub - Setting - SSH and GPG keys，选择“New SSH key”，将公钥粘贴进去，点击 “Add SSH key”，即可完成公钥添加。
+复制这个公钥的全部内容，进入 GitHub - Setting - SSH and GPG keys，选择“New SSH key”，将公钥粘贴进去，点击 “Add SSH key”，即可完成公钥添加。
 
 这样，以后就调用 “Git bash shell” 时，便会自动提供私钥认证，不需要输入用户名和密码了。
 
@@ -64,6 +65,30 @@ git merge upstream/master
 
 同步的过程中，本地仓库会先与主仓库同步，commit change 之后，再通过 git push 命令将主仓库的修改同步到自己在 GitHub 上的分支中去。
 
+## 安装所需 R 包
+
+项目采用 (renv)[https://rstudio.github.io/renv/articles/renv.html] 管理 R 包依赖，它可以基于单个项目创建 R 包的管理环境，而不是依赖全局的 R Library。克隆项目后，在 R 中运行
+
+```r
+# 本地安装 renv 包
+install.packages("renv")
+# 安装本书依赖的 R 包
+renv::restore()
+```
+
+`renv::restore()` 根据 `renv.lock` 中的内容在项目根目录中的 `renv/library/` 下安装本书当下依赖的特定版本的 R 包，这样可以保证所有作者使用的 R 包版本相同。安装完成后下次启动项目，`.Rprofile` 文件中的脚本会自动加载这些包的环境。
+
+作者在写作过程中可以正常使用 `install.packages()` 或者 `renv::install()` 安装 `renv.lock` 中没有的 R 包，建议使用后者，可以避免重复下载已经全局安装过的包。
+
+写作完成准备提交时，我们需要将新的 R 包环境更新到 `renv.lock` 中。这样，其他作者后续写作中也可以使用这些包。运行
+
+```r
+# 更新 renv.lock
+renv::snapshot()
+```
+
+这样，在我们提交新的 `renv.lock` 至主仓库后，其他作者再次运行 `renv::restore()` 便可以添加这些 R 包至自己的项目环境。
+
 ## 提交创作好的章节
 
 在 GitHub 上面发起一个 Pull Request 即可将自己的仓库中的内容同步到 `cosname/rmarkdown-guide`。待管理员审核通过后，即完成创作。
@@ -71,4 +96,3 @@ git merge upstream/master
 ## 建议
 
 - 建议每一章节单独创建一个 branch 来进行创作，以最大可能避免版本间的冲突（让冲突处理起来比较简单）。
-
