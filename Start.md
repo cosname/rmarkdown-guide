@@ -65,7 +65,7 @@ git merge upstream/master
 
 同步的过程中，本地仓库会先与主仓库同步，commit change 之后，再通过 git push 命令将主仓库的修改同步到自己在 GitHub 上的分支中去。
 
-## 安装所需 R 包
+## 管理 R 包
 
 项目采用 (renv)[https://rstudio.github.io/renv/articles/renv.html] 管理 R 包依赖，它可以基于单个项目创建 R 包的管理环境，而不是依赖全局的 R Library。克隆项目后，在 R 中运行
 
