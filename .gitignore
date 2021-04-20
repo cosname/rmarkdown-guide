@@ -22,3 +22,7 @@ examples/*.html
 examples/*/*.pdf
 examples/*/*.html
 examples/listings-settings.tex
+
+# renv files
+renv/*
+!renv/activate.R
