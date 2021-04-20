@@ -48,3 +48,4 @@ jobs:
         run: ./_deploy.sh
         env:
           REPO: ${{ github.repository }}
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
