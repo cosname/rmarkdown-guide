@@ -64,6 +64,31 @@ git merge upstream/master
 
 同步的过程中，本地仓库会先与主仓库同步，commit change 之后，再通过 git push 命令将主仓库的修改同步到自己在 GitHub 上的分支中去。
 
+## 管理 R 包
+
+项目采用 (renv)[https://rstudio.github.io/renv/articles/renv.html] 管理 R 包依赖，它可以基于单个项目创建 R 包的管理环境，而不是依赖全局的 R Library。克隆项目后，在 R 中运行
+
+```r
+# 本地安装 renv 包
+install.packages("renv")
+# 安装本书依赖的 R 包
+renv::restore()
+```
+
+`renv::restore()` 根据 `renv.lock` 中的内容在项目根目录中的 `renv/library/` 下安装本书当下依赖的特定版本的 R 包，这样可以保证所有作者使用的 R 包版本相同。安装完成后下次启动项目，`.Rprofile` 文件中的脚本会自动加载这些包的环境。
+
+作者在写作过程中可以正常使用 `install.packages()` 或者 `renv::install()` 安装自己所需的其他 R 包并在 R Markdown 文件中引用，建议使用后者，可以避免重复下载已经全局安装过的包。
+
+写作完成准备提交时，我们需要将这些新引入 R 包环境更新到 `renv.lock` 中，让其他作者后续写作中也可以使用这些包。在 R 中运行
+
+```r
+# 更新 renv.lock
+renv::snapshot()
+```
+
+这样，在我们提交新的 `renv.lock` 至主仓库后，其他作者再次运行 `renv::restore()` 便可以添加这些 R 包至自己的项目环境。
+
+
 ## 提交创作好的章节
 
 在 GitHub 上面发起一个 Pull Request 即可将自己的仓库中的内容同步到 `cosname/rmarkdown-guide`。待管理员审核通过后，即完成创作。
