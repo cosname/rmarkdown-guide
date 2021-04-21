@@ -43,9 +43,12 @@ jobs:
       - name: Build book
         run: make gitbook
 
+      - name: Checkout the gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          path: book-output
+
       - name: Deploy book
         if: ${{ github.ref == 'refs/heads/master' }}
         run: ./_deploy.sh
-        env:
-          REPO: ${{ github.repository }}
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

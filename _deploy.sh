@@ -2,7 +2,6 @@
 
 set -e
 
-git clone -b gh-pages https://${GITHUB_PAT}@github.com/${REPO}.git book-output
 cd book-output
 
 ls | xargs rm -rf
