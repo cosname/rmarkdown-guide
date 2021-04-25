@@ -1,4 +1,4 @@
-# (PART) 第二部分：输出"万花筒" {.unnumbered}
+# (PART) 输出"万花筒" {.unnumbered}
 
 ```{r echo = FALSE}
 source("utils.R")
