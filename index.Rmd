@@ -4,6 +4,7 @@ author:
   - 王祎帆
   - 闫求识
   - 高春辉
+  - 庄闪闪
 date: "`r Sys.Date()`"
 documentclass: ctexbook
 bibliography: [book.bib, packages.bib]
