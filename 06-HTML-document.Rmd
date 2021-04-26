@@ -121,7 +121,7 @@ output:
 -   `.tabset-pills` 将为标签文字加上预设的 "pill"样式（图 \@ref(fig:html-tabset)）。
 
 ```{r html-tabset, fig.cap="标签的默认样式及“pill”样式", echo = FALSE, out.width="70%", fig.align="center"}
-knitr::include_graphics(xfun::magic_path("tabset.png"))
+knitr::include_graphics(xfun::magic_path("images/tabset.png"))
 ```
 
 ## 主题和样式
