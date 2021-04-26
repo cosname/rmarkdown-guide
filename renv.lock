@@ -156,10 +156,19 @@
       "Repository": "CRAN",
       "Hash": "77bd60a6157420d4ffa93b27cf6a58b8"
     },
+    "filehash": {
+      "Package": "filehash",
+      "Version": "2.4-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "417af4bf86b11fdc8737a28905a35136"
+    },
     "formatR": {
       "Package": "formatR",
       "Version": "1.9",
-      "Source": "Repository"
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a24bdfd63932fc5616ae5839fa8e399b"
     },
     "fs": {
       "Package": "fs",
@@ -327,6 +336,13 @@
       "Repository": "CRAN",
       "Hash": "a399e4773075fc2375b71f45fca186c4"
     },
+    "png": {
+      "Package": "png",
+      "Version": "0.1-7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "03b7076c234cb3331288919983326c55"
+    },
     "processx": {
       "Package": "processx",
       "Version": "3.5.0",
@@ -452,6 +468,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "b227d13e29222b4574486cfcbde077fa"
+    },
+    "tikzDevice": {
+      "Package": "tikzDevice",
+      "Version": "0.12.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "78009f10e5ea26a71103c5ad22632fc8"
     },
     "tinytex": {
       "Package": "tinytex",
