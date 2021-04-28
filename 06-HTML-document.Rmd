@@ -124,7 +124,7 @@ output:
 knitr::include_graphics(xfun::magic_path("tabset.png"))
 ```
 
-## 主题和样式
+## 主题和样式  {#appearance-and-style}
 
 ### 可选主题
 
