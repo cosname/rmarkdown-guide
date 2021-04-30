@@ -1,0 +1,19 @@
+---
+title: "这是一个 R Markdown 生成的 PDF 文档"
+author: "张三"
+date: "2021年5月1日"
+output: 
+  pdf_document:
+    latex_engine: xelatex
+header-includes: 
+  - \usepackage{ctex}
+---
+
+既然你在看这本书，想必你想制作的 PDF 文档难免会包括中文。
+
+要想让 PDF 更好的支持中文，需要做一些额外的设置。
+
+包括设置一个对 Unicode 支持更好的 `xelatex` 引擎，以及在 PDF 文档开始的配置部分
+使用中文语言支持软件包 `ctex`。
+
+我们接下来将会分别介绍这些功能。

@@ -1,0 +1,70 @@
+---
+output: 
+  ioslides_presentation
+---
+
+# ioslides 幻灯片 {data-background=ioslides-presentation.png data-background-size=cover}
+
+一级标题产生了一个背景为灰色的幻灯片，我们为它加入了背景图片。
+
+## 列表项的内容 | 这里加入了一个副标题
+
+默认情况下，整个幻灯片将会同时显示。
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+
+
+## 列表项的内容 {.smaller}
+
+但是 `>` 可以作用于列表，这样以下内容将会在播放时依次出现（点击鼠标或者使用键盘）。
+
+> - Bullet 1
+> - Bullet 2
+> - Bullet 3
+
+## 下面的内容将会依次显示 {.build}
+
+幻灯片标题后面的 `{.build}` 将会为这张幻灯片添加一个效果。首先显示这一段话，然后才显示下面的列表。
+
+- 这个列表中的项目并不会依次显示
+- 而是会作为一个整体出现
+
+接下来的列表，因为使用了 `>` 方法，其中的项目则可以依次出现。
+
+> - 先出现这个
+> - 然后才是这个
+
+## Future Steps {#future-steps .emphasized}
+
+
+在 `style.css` 中，添加下列定义。
+
+```{css}
+#future-steps {
+  color: blue;
+}
+
+.emphasized {
+  font-size: 1.5em;
+}
+```
+
+这几个字特别重要。 
+
+
+## 代码高亮
+
+大家看，这两步运算非常关键。
+
+```{r}
+cat('接下来进入计算过程')
+### <b>
+x <- 10
+y <- x * 2
+### </b>
+cat('计算完毕')
+```
+
