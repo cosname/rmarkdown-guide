@@ -346,7 +346,7 @@ knitr::include_graphics("https://r-project.org/Rlogo.png")
 使用这种方法插入外源图片，可以方便的添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性。
 
 ```{r echo = FALSE, fig.cap="插入外源图片的推荐方式"}
-knitr::include_graphics("https://r-project.org/Rlogo.png")
+knitr::include_graphics("images/Rlogo.png")
 ```
 
 

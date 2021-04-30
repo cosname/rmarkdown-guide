@@ -1,4 +1,4 @@
-## 演示文稿 {#presentation}
+# 演示文稿 {#presentation}
 
 本章讲述使用 R Markdown 生成演示文稿（俗称“PPT”）的技巧。
 
@@ -8,7 +8,7 @@ R Markdown 文档可以直接输出为 HTML 或者 PDF 格式的幻灯片，并�
 `xaringan` 创建的更加精美的幻灯片。
 
 
-### R Markdown 基础幻灯片 {#rmarkdown-basic-presentation}
+## R Markdown 基础幻灯片 {#rmarkdown-basic-presentation}
 
 使用基础幻灯片不需要安装额外的包。
 
@@ -19,7 +19,7 @@ R Markdown 支持 4 种不同样式的幻灯片，分别是 `ioslides`，`Slidy`
 knitr::include_graphics("images/rmd-presentation-popup.png")
 ```
 
-#### ioslides 幻灯片 {#ioslides-presentation}
+### ioslides 幻灯片 {#ioslides-presentation}
 
 我们首先看 ioslides 幻灯片。新建的幻灯片，也是一个 R Markdown 文档，在它的头部 YAML 中，
 `output: ioslides_presentation` 设定了其输出格式。
@@ -46,7 +46,7 @@ knitr::include_graphics("examples/ioslides-presentation-screenshot.png")
 ## Getting up | What I like to do first thing
 ```
 
-##### 使用快捷键控制显示模式
+#### 使用快捷键控制显示模式
 
 ioslides 幻灯片支持以下快捷键更改播放时的模式：
 
@@ -58,7 +58,7 @@ ioslides 幻灯片支持以下快捷键更改播放时的模式：
 
 按下 `'Esc'` 键将会退出以上所有模式。
 
-##### 依次显示列表中的项目
+#### 依次显示列表中的项目
 
 使用 `incremental` 选项可以控制列表项目依次出现，相当于添加了简单的播放动画。
 
@@ -74,9 +74,8 @@ import_example("examples/ioslides-presentation-increment-bullets.Rmd")
 > - Bullet 2
 ```
 
-##### 可应用的视觉样式
 
-- **幻灯片的大小**
+####  幻灯片的大小
 
 在配置中使用 `widescreen` 可以将幻灯片样式改为宽屏。
 
@@ -99,7 +98,7 @@ output:
 其中的 `.smaller` 实际上是预定义的 CSS class。
 -->
 
-- **幻灯片播放速度**
+#### 幻灯片播放速度
 
 ioslides 幻灯片翻页时会有淡入淡出的效果，使用 `transition` 可以控制效果的时长。
 `transition` 设置为 `"default"`，`"slower"`，`"faster"`，或者一个以秒为单位的数字（如`0.5`）均可。如下所示：
@@ -112,7 +111,7 @@ output:
 ---
 ```
 
-- **依次显示幻灯片元素**
+#### 依次显示幻灯片元素
 
 每一张幻灯片的标题都可以加上 `.build` 属性，这样幻灯片的内容在播放的时候将会一块块的依次显示出来。
 这一点与 `incremental` 属性有些类似，不过后者针对的是列表中的项目，而前者针对的是
@@ -132,7 +131,7 @@ output:
 > - 然后才是这个
 ```
 
-- **设置幻灯片的背景图像**
+#### 设置幻灯片的背景图像
 
 幻灯片中可以使用 `data-background` 添加背景图片，并使用其它的相关属性来
 配置背景图片的行为，如 `data-background-size`， `data-background-position`，
@@ -146,7 +145,7 @@ output:
 这些配置来自于 CSS 中图片的属性，`background`，`background-size`，`background-position`，
 以及 `background-repeat` 等。你可能需要对 CSS 有所了解，才能准确把握这些属性的用途。
 
-##### 自定义 CSS
+#### 自定义 CSS
 
 ioslides 幻灯片本质是一个 HTML 文档，可以通过自定义 CSS 来设定幻灯片中不同元素的样式。
 
@@ -183,7 +182,7 @@ output:
 这种方式并不会影响幻灯片的标题，而是会影响这一张幻灯片中其它内容。
 最终，这张幻灯片中所有的文字都会显示为蓝色、120% 的大字号。
 
-##### 突出显示部分代码
+#### 突出显示部分代码
 
 为了强调关键代码的作用，可以使用特定的注释来高亮它们。例如：
 
@@ -197,7 +196,7 @@ y <- x * 2
 在播放时，当按下键盘上的快捷键 `'h'` 时，高亮的代码将会突出显示，其它部分的代码则会变淡。
 
 
-##### 添加 LOGO
+#### 添加 LOGO
 
 使用 `logo` 可以为幻灯片添加一个 LOGO 图片。默认情况下，这个 LOGO 将会以 85 x 85
 像素显示在标题幻灯片上，并且缩小后显示在后面每一张幻灯片的左下角。
@@ -236,7 +235,7 @@ slides > slide:not(.nobackground):before {
 }
 ```
 
-##### 幻灯片的布局
+#### 幻灯片的布局
 
 如果想居中显示幻灯片的内容，可以在标题后面加入 `.flexbox` 和 `.vcenter` 的属性。
 
@@ -269,7 +268,7 @@ This text is centered.
 
 [^note-column-2]: 在这里，左边图片的大小要合适，才能把列表项挤到右边去。
 
-##### 文字颜色
+#### 文字颜色
 
 使用 HTML 语法还可以修改其它的属性，比如文字的颜色。只需要将颜色以 CSS 类的形式赋值给元素即可。例如：
 
@@ -284,11 +283,11 @@ This text is red
 
 
 <!--- 不可用
-##### 放映模式
+#### 放映模式
 ----->
 
 
-##### 打印幻灯片
+#### 打印幻灯片
 
 打印幻灯片可以在浏览器中进行，目前保真度最高的浏览器可能是 Google Chrome。
 此外，使用 Chrome 中 “另存为 PDF” 的功能，还可以将幻灯片保存为一份 PDF 文档。
@@ -296,13 +295,13 @@ This text is red
 在 R 语言终端，使用 `pagedown::chrome_print()` 函数也可以完成这一操作（便于自动化和批处理）。
 不过需要事先安装 **`pagendown`** 软件包[@R-pagedown]。
 
-##### 其它功能
+#### 其它功能
 
 ioslides 幻灯片中，通用的 R Markdown 语法通常可用，包括 HTML 文档输出中的配置，
 图片的属性设置，数学公式，数据库的打印，中间文件的保留，外部文档的引入等等。
 
 
-#### Slidy 幻灯片 {#slidy-presentation}
+### Slidy 幻灯片 {#slidy-presentation}
 
 [Slidy](https://www.w3.org/Talks/Tools/Slidy2/) 是 HTML 幻灯片的另一个规范。
 要通过 R Markdown 创建一个 Slidy 幻灯片，只需要将文档输出设为 `slidy_presentation` 即可。
@@ -320,7 +319,7 @@ knitr::include_graphics("examples/slidy-presentation-screenshot.png")
 ```
 
 
-##### 使用快捷键控制显示模式
+#### 使用快捷键控制显示模式
 
 Slidy 中也可以通过快捷键控制显示模式，不过其按键定义与 ioslides 不同。
 
@@ -332,7 +331,7 @@ Slidy 中也可以通过快捷键控制显示模式，不过其按键定义与 i
 
 <!--- Text Size 部分的功能已经不可用 --->
 
-##### 设置页脚内容
+#### 设置页脚内容
 
 在 YAML 配置中使用 `footer` 可以为幻灯片设置页脚显示的内容。
 
@@ -354,14 +353,14 @@ output:
 ---
 ```
 
-##### 其它功能
+#### 其它功能
 
 Slidy 幻灯片继承了 HTML 文档中的多数功能，以及 ioslides 中的列表内容依次显示等功能。
 
 <!-- 此处需要添加锚点链接 -->
 
 
-#### Beamer 演示文稿 {#beamer-presentation}
+### Beamer 演示文稿 {#beamer-presentation}
 
 [Beamer](https://www.overleaf.com/learn/latex/beamer) 是一个功能强大且灵活的 LaTeX 类，用于创建美观的演示文稿。
 
@@ -379,12 +378,12 @@ knitr::include_graphics("examples/beamer-presentation-screenshot.png")
 ```
 
 
-##### Beamer 演示文稿的中文支持
+#### Beamer 演示文稿的中文支持
 
 如果要生成中文的 Beamer 演示文稿，参考 \@ref(PDF-document) 中的设置。
 
 
-##### Beamer 演示文稿的主题
+#### Beamer 演示文稿的主题
 
 Beamer 支持多个幻灯片主题，在 R Markdown 中使用 `theme`，`colortheme` 和 `fonttheme` 设定。
 例如：
@@ -410,7 +409,7 @@ import_example_result("examples/beamer-presentation-theme.Rmd")
 Beamer 支持数十个主题和颜色样式，在 [这里](https://hartwork.org/beamer-theme-matrix/) 可以查看可用的选项。
 
 
-##### Beamer 幻灯片的边界
+#### Beamer 幻灯片的边界
 
 `slide_level` 参数用来指定一张幻灯片开始的位置。默认情况下，二级标题会被识别为一张幻灯片的开始，但是你可以将它改为其它的大纲等级。
 
@@ -422,7 +421,7 @@ output:
 ---
 ```
 
-##### 其它功能
+#### 其它功能
 
 Beamer 演示文稿从 HTML 文档中继承了目录内容、图片属性、样式、数据框打印、组件、
 模板、Pandoc 参数和分享等功能（参加 \@ref(html-document)），从 PDF 文档和
@@ -430,7 +429,7 @@ ioslides 演示文稿中继承了列表动画、保留 TeX 文件等功能（参
 
 
 
-#### PowerPoint 演示文稿 {#powerpoint-presentation}
+### PowerPoint 演示文稿 {#powerpoint-presentation}
 
 <!-- 注：为避免混淆，把 presentation 称为“演示文稿”，把 slide 称为“幻灯片”。-->
 
@@ -448,7 +447,7 @@ import_example("examples/powerpoint-presentation.Rmd")
 R Markdown 生成的 PowerPoint 演示文稿大概长这个样子（图 \@ref(fig:powerpoint-presentation-screenshot)）：
 
 ```{r powerpoint-presentation-screenshot, fig.cap="PowerPoint 演示文稿"}
-knitr::include_graphics("examples/powerpoint-presentation.png")
+knitr::include_graphics("examples/powerpoint-presentation-screenshot.png")
 ```
 
 PowerPoint 演示文稿采用的幻灯片标记与 Beamer 相同，默认为 3 级标题。
@@ -467,7 +466,7 @@ PowerPoint 幻灯片中可以使用的 Markdown 标记（参见 \@ref(markdown-s
 图片，表格等。
 
 
-##### 两栏布局
+#### 两栏布局
 
 正如 Beamer 演示文稿的高级应用需要借助于 LaTeX 语法一样，
 PowerPoint 演示文稿的高级应用需要借助于对 Pandoc 的深入了解。
@@ -485,7 +484,7 @@ Content of the right column.
 ::::::
 ```
 
-##### 自定义模板
+#### 自定义模板
 
 PowerPoint 演示文稿的模板可以用 `reference_doc` 来设置。
 模板中的样式将会被应用到 R Markdown 生成的 PowerPoint 演示文稿中。
@@ -500,14 +499,14 @@ output:
 ```
 
 
-##### 其它功能
+#### 其它功能
 
 PowerPoint 演示文稿从 HTML 文档中继承了目录内容、图片属性、样式、数据框打印、组件、
 模板、Pandoc 参数和分享等功能（参加 \@ref(html-document)）。
 目前并不支持列表中各个项目的播放效果。
 
 
-### Xaringan 幻灯片 {#xaringan-presentation}
+## Xaringan 幻灯片 {#xaringan-presentation}
 
 虽然 R Markdown 提供的基础幻灯片已经能够实现了基本的幻灯片功能，而且没有额外的学习成本，
 但是，善于制作精良幻灯片的“忍者”通常使用一个额外的包来创建幻灯片，这个包的名字叫做 `xaringan`。

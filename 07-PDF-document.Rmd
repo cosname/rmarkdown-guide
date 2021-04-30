@@ -23,7 +23,7 @@ LaTex 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，我们建议 R 
 TinyTeX。TinyTex 的开发者与 R Markdown 都是谢益辉，因而是最佳拍档。它占用空间小，配置灵活。
 
 ```{r}
-knitr::include_graphics("https://yihui.org/images/logo-tinytex.png")
+knitr::include_graphics("images/logo-tinytex.png")
 ```
 
 要安装 `TinyTex`，只需要在 R 语言终端输入两条命令即可[^TinyTex-vs-tinytex]。
@@ -35,7 +35,7 @@ tinytex::install_tinytex()
 ```
 
 
-[^TinyTex-tinytex]: `TinyTex` 与 `tinytex` 并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护
+[^TinyTex-vs-tinytex]: `TinyTex` 与 `tinytex` 并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护
 前者的 R 语言软件包。
 
 
