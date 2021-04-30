@@ -74,12 +74,31 @@ tinytex::parse_install(log = "tex.log")
 
 ``` yaml
 ---
-title: "五一劳动节加班三倍工资"
-author: "张三"
-date: "2021年5月1日"
 output: pdf_document
 ---
 ```
+
+只需要这样一个改动，你就可以得到一份 PDF 文档。
+
+## 在 PDF 文档中使用中文的注意事项
+
+如果这份 PDF 中仅含有英文，那么不需要做额外的设置。
+但是对于中文用户而言，可能会出现错误。这是因为，PDF 所依赖的 LaTeX 系统对中文的支持与 HTML 不同，需要做一些合适的设置。
+
+下面就是一份中文 PDF 文档的示例。
+
+```{r}
+import_example("examples/PDF-document-in-chinese.Rmd")
+```
+
+将这份 R Markdown 编译后，将会生成一份 PDF 文档。
+
+```{r}
+import_example_result("examples/PDF-document-in-chinese.Rmd")
+```
+
+
+这个配置中的内容将会在后面解释。
 
 ### 显示目录
 
@@ -297,7 +316,7 @@ output:
 ### LaTeX 的渲染引擎
 
 PDF 文档默认通过 `pdflatex` 渲染。其它可用的引擎还包括 `pdflatex`，`xelatex`和`lualatex`等。
-不同的引擎会有一些特殊的功能，如果你了解它们，可通过 `latex_engine` 来选择。
+不同的引擎可通过 `latex_engine` 来选择。
 一般情况下，使用 `xelatex` 或者 `lualatex` 的主要理由是它们对 Unicode 的支持更加优秀，
 以及它们更容易使用系统中已有的字体[^select-latex-engine]。
 
