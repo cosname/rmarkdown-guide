@@ -1,5 +1,6 @@
 import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 400, ...){
   file <- xfun::magic_path(file)
+  out <- names(yaml::read_yaml(file)$output)
   webshot <- paste0(xfun::with_ext(file, "png"))
   if (xfun::file_exists(webshot)){
     fail <- tryCatch(png::readPNG(file), error = function(x) TRUE)
@@ -9,7 +10,14 @@ import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 40
     redo <- TRUE
   }
   if (redo){
-    webshot::rmdshot(file, webshot, vwidth = vwidth, vheight = vheight, ...)
+    if (out %in% c("pdf_document","beamer_presentation"))
+      pdf = xfun::with_ext(file, "pdf")
+      content = magick::image_read_pdf(pdf)
+      magick::image_write(content, webshot)
+
+    if (out %in% c("html_document","ioslides_presentation","slidy_presentation"))
+      webshot::rmdshot(file, webshot, vwidth = vwidth, vheight = vheight, ...)
+
   }
   knitr::include_graphics(webshot)
 }
