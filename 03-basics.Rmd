@@ -1,0 +1,16 @@
+# 基础知识 {#rmarkdown-basics}
+
+本章介绍读者使用 R Markdown 写作的必要基础知识，包括使用 Markdown 语法为文本赋予格式，用代码段和行内代码两种方式在文档中嵌入 R 代码，如何在 R Markdown 中设置输出格式和它们的细节选项。最后，我们介绍了 R Markdown 的底层的编译机制，说明了 knitr, R Markdown, Pandoc, TinyTeX 等工具是如何协作编译出输出结果的。
+
+## Markdown 语法
+
+
+
+## 使用 R 代码
+
+## 输出格式
+
+
+## R Markdown 的编译过程
+
+

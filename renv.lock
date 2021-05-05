@@ -233,6 +233,13 @@
       "Repository": "CRAN",
       "Hash": "26fa77e707223e1ce042b2b5d09993dc"
     },
+    "png": {
+      "Package": "png",
+      "Version": "0.1-7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "03b7076c234cb3331288919983326c55"
+    },
     "processx": {
       "Package": "processx",
       "Version": "3.5.1",
@@ -270,10 +277,10 @@
     },
     "reticulate": {
       "Package": "reticulate",
-      "Version": "1.18",
+      "Version": "1.20",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fbd35cac6ae7554d0e4f440bca1adf3a"
+      "Hash": "30ab0ea8c8d3dd16a3fa06903449bbfb"
     },
     "rlang": {
       "Package": "rlang",
@@ -286,8 +293,8 @@
       "Package": "rmarkdown",
       "Version": "2.7.10",
       "Source": "GitHub",
-      "Remotes": "yihui/tinytex",
       "RemoteType": "github",
+      "Remotes": "yihui/tinytex",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "rmarkdown",
       "RemoteUsername": "rstudio",
