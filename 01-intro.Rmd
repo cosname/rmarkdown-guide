@@ -27,13 +27,13 @@ knitr::include_graphics(paste0("images/", c("01-html-output.png", "01-pdf-output
 
 同时，R Markdown 还为 R 语言之外的几十种编程语言提供了一定程度的支持，例如 Python，C++，Julia，Bash，SQL 等，这意味着我们可以在一篇报告中混用多个工具。Python 作为数据分析师的另一大利器，在 **reticulate** 包 [@R-reticulate] 的帮助下可以流畅地与 R 代码在 R Markdown 文档中并用。下面的例子中，我们先用 R 导入数据并作数据预处理，随后将 R 中的数据传递框到 Python 环境中，生成 **pandas** 格式的 DataFrame, 并用 **seaborn** 包作可视化。
 
-```{r}
+```r
 # R 部分: 导入和预处理美国各州犯罪数据
 arrests <- datasets::USArrests
 arrests$State <- rownames(arrests)
 ```
 
-```{python}
+```python
 # Python 部分，导入 R 数据，提取谋杀率最高的 10 个州，并用 seaborn 包作柱形
 import pandas as pd 
 import seaborn as sns 
@@ -43,6 +43,10 @@ top_states = r.arrests\
   .head(10)
   
 sns.barplot(x = "Murder", y = "State",  data = top_states)
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("images/01-seaborn-plot.png")
 ```
 
 
