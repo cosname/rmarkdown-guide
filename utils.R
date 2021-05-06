@@ -1,4 +1,4 @@
-import_example_result <- function(file, redo = TRUE, vwidth = 700, vheight = 400, ...){
+import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 400, ...){
   file <- xfun::magic_path(file)
   out <- rmarkdown::all_output_formats(file)
   if (is.null(out)) out = "html_document"
