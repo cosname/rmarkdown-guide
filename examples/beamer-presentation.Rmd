@@ -1,0 +1,39 @@
+---
+title: "Beamer Presentation"
+author: "张三"
+date: "2021/4/28"
+output: 
+  beamer_presentation:
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{ctex}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Beamer 幻灯片中的中文支持
+
+要使用中文，需要做适当的配置，包括应用 `ctex` 包（支持中文的 LaTeX 包）和使用 `xelatex` 引擎。
+
+与 HTML 格式的幻灯片相比，这可能是制作 Beamer 演示文稿时唯一需要额外做出配置的地方了。
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
