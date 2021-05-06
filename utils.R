@@ -22,14 +22,16 @@ import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 40
       outfile = webshot[[i]]
 
       if (fmt %in% c("pdf_document","beamer_presentation"))
-        rmd_pdf_screenshot(file, fmt, outfile)
+        tryCatch(rmd_pdf_screenshot(file, fmt, outfile),
+                 error = function(e)paste0("Failed to process ", file))
 
       if (fmt %in% c("html_document","ioslides_presentation","slidy_presentation"))
-        rmd_html_screenshot(file, fmt, outfile)
+        tryCatch(rmd_html_screenshot(file, fmt, outfile, vwidth=vwidth, vheight=vheight),
+                 error = function(e)paste0("Failed to process ", file))
 
     }
   }
-  tryCatch(knitr::include_graphics(webshot), error = function(x) paste0("unable to load png: ", webshot))
+  tryCatch(knitr::include_graphics(webshot), error = function(e) paste0("unable to load png: ", webshot))
 }
 
 rmd_html_screenshot <- function(file, fmt = "html_document", outfile = xfun::with_ext(file, "png"), ...){
