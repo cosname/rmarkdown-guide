@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.3",
+    "Version": "4.0.4",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -71,6 +71,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "25da2c6fba6a13b5da94e37acdb3f532"
+    },
+    "curl": {
+      "Package": "curl",
+      "Version": "4.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2b7d10581cc730804e9ed178c8374bd6"
     },
     "commonmark": {
       "Package": "commonmark",
@@ -177,6 +184,13 @@
       "Repository": "CRAN",
       "Hash": "5ff50b36f7f0832f8421745af333e73c"
     },
+    "httpuv": {
+      "Package": "httpuv",
+      "Version": "1.6.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "781248b864d00c390830504937fe5c29"
+    },
     "jsonlite": {
       "Package": "jsonlite",
       "Version": "1.7.2",
@@ -212,6 +226,20 @@
       "Repository": "CRAN",
       "Hash": "3471fb65971f1a7b2d4ae7848cf2db8d"
     },
+    "later": {
+      "Package": "later",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b61890ae77fea19fc8acadd25db70aa4"
+    },
+    "magick": {
+      "Package": "magick",
+      "Version": "2.7.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0a4b19d639b5b177a4179fbc8a1d7fee"
+    },
     "magrittr": {
       "Package": "magrittr",
       "Version": "2.0.1",
@@ -246,6 +274,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "5ee87b05936a4aa9d8d026eb1a51314b"
+    },
+    "promises": {
+      "Package": "promises",
+      "Version": "1.2.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4ab2c43adb4d4699cf3690acd378d75d"
     },
     "promises": {
       "Package": "promises",
@@ -323,6 +358,13 @@
       "Repository": "CRAN",
       "Hash": "947e4e02a79effa5d512473e10f41797"
     },
+    "servr": {
+      "Package": "servr",
+      "Version": "0.22",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8cfe5c1d3a8c8304496ba3034e080405"
+    },
     "stringi": {
       "Package": "stringi",
       "Version": "1.5.3",
@@ -350,6 +392,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e99d80ad34457a4853674e89d5e806de"
+    },
+    "xaringan": {
+      "Package": "xaringan",
+      "Version": "0.20",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ed315d71e31ce90d6369162cde071be9"
     },
     "withr": {
       "Package": "withr",

@@ -12,17 +12,17 @@ for (fmt in formats) {
 }
 unlink('rmarkdown-guide.log')
 
-r = '<body onload="window.location = \'https://bookdown.org/qiushi\'+location.pathname">'
+r = '<body onload="window.location = \'https://cosname.github.io\'+location.pathname">'
 if (travis) for (f in list.files('_book', '[.]html$', full.names = TRUE)) {
   x = readLines(f)
   if (length(i <- grep('^\\s*<body>\\s*$', x)) == 0) next
-  # patch HTML files in gh-pages if built on Travis, to redirect to bookdown.org
+  # patch HTML files in gh-pages if built on Travis, to redirect to official site
   x[i[1]] = r
   writeLines(x, f)
 }
 
 redirect = function(from, to) {
-  to = paste0('https://bookdown.org/qiushi/rmarkdown-guide/', to)
+  to = paste0('https://cosname.github.io', to)
   writeLines(sprintf(
     '<html><head><meta http-equiv="refresh" content="0; URL=\'%s\'" /></head><body><script>window.location = "%s";</script></html>', to, to
   ), paste0('_book/', from))

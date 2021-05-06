@@ -154,8 +154,12 @@ a **true** random number!
 
 你可以根据你的喜好，使用 `bash`、 `sh` 或 `zsh` 任何一种引擎\index{language engine!bash}\index{language engine!sh}\index{language engine!zsh}运行Shell脚本。下面是一个带有 chunk 头 ```` ```{bash}```` 的 bash 示例：
 
-```{bash}
+```{bash eval=FALSE}
 ls *.Rmd | head -n 5
+```
+
+```{r echo = FALSE}
+head(list.files(pattern = "*.Rmd"), n=5)
 ```
 
 注意，bash是用 R 函数 `system2()` 调用的。它将忽略配置文件，例如 `~/.bash_profile` 和 `~/.bash_login`，其中可能定义了命令别名或修改过的环境变量(如 `PATH` 变量)。如果你想要这些配置文件像你使用终端时一样被执行，你可以通过引擎将参数 `-l` 传递给 `bash`。例如：
