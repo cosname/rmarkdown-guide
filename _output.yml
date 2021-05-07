@@ -1,5 +1,5 @@
 bookdown::gitbook:
-  css: css/style.css
+  css: css/styles.css
   config:
     toc:
       collapse: section

@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.4",
+    "Version": "4.0.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -72,13 +72,6 @@
       "Repository": "CRAN",
       "Hash": "25da2c6fba6a13b5da94e37acdb3f532"
     },
-    "curl": {
-      "Package": "curl",
-      "Version": "4.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "2b7d10581cc730804e9ed178c8374bd6"
-    },
     "commonmark": {
       "Package": "commonmark",
       "Version": "1.7",
@@ -92,6 +85,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e75525c55c70e5f4f78c9960a4b402e9"
+    },
+    "curl": {
+      "Package": "curl",
+      "Version": "4.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2b7d10581cc730804e9ed178c8374bd6"
     },
     "digest": {
       "Package": "digest",
@@ -184,13 +184,6 @@
       "Repository": "CRAN",
       "Hash": "5ff50b36f7f0832f8421745af333e73c"
     },
-    "httpuv": {
-      "Package": "httpuv",
-      "Version": "1.6.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "781248b864d00c390830504937fe5c29"
-    },
     "jsonlite": {
       "Package": "jsonlite",
       "Version": "1.7.2",
@@ -225,13 +218,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "3471fb65971f1a7b2d4ae7848cf2db8d"
-    },
-    "later": {
-      "Package": "later",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "b61890ae77fea19fc8acadd25db70aa4"
     },
     "magick": {
       "Package": "magick",
@@ -282,13 +268,6 @@
       "Repository": "CRAN",
       "Hash": "4ab2c43adb4d4699cf3690acd378d75d"
     },
-    "promises": {
-      "Package": "promises",
-      "Version": "1.2.0.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "4ab2c43adb4d4699cf3690acd378d75d"
-    },
     "ps": {
       "Package": "ps",
       "Version": "1.6.0",
@@ -328,8 +307,8 @@
       "Package": "rmarkdown",
       "Version": "2.7.10",
       "Source": "GitHub",
-      "Remotes": "yihui/tinytex",
       "RemoteType": "github",
+      "Remotes": "yihui/tinytex",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "rmarkdown",
       "RemoteUsername": "rstudio",
@@ -344,6 +323,13 @@
       "Repository": "CRAN",
       "Hash": "3ef1adfe46b7b144b970d74ce33ab0d6"
     },
+    "servr": {
+      "Package": "servr",
+      "Version": "0.22",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8cfe5c1d3a8c8304496ba3034e080405"
+    },
     "shiny": {
       "Package": "shiny",
       "Version": "1.6.0",
@@ -357,13 +343,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "947e4e02a79effa5d512473e10f41797"
-    },
-    "servr": {
-      "Package": "servr",
-      "Version": "0.22",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "8cfe5c1d3a8c8304496ba3034e080405"
     },
     "stringi": {
       "Package": "stringi",
@@ -393,19 +372,19 @@
       "Repository": "CRAN",
       "Hash": "e99d80ad34457a4853674e89d5e806de"
     },
-    "xaringan": {
-      "Package": "xaringan",
-      "Version": "0.20",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "ed315d71e31ce90d6369162cde071be9"
-    },
     "withr": {
       "Package": "withr",
       "Version": "2.4.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "ad03909b44677f930fa156d47d7a3aeb"
+    },
+    "xaringan": {
+      "Package": "xaringan",
+      "Version": "0.20",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ed315d71e31ce90d6369162cde071be9"
     },
     "xfun": {
       "Package": "xfun",
