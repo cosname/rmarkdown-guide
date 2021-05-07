@@ -37,7 +37,7 @@ learn-rmarkdown.Rproj
 install.packages("rmarkdown")
 ```
 
-中国大陆的读者有可能遇到网络问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.pckages` 中设置 `repos` 参数
+中国大陆的读者有可能遇到网络问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.packages` 中设置 `repos` 参数
 
 ```{r, eval = FALSE}
 install.packages("rmarkdown", repos = <某镜像>)
