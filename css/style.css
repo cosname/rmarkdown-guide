@@ -21,3 +21,9 @@ blockquote > p:last-child {
 blockquote > p:first-child {
   text-align: inherit;
 }
+
+.no-h-scroll  pre > code > span {
+  display: block;
+  line-height: 1.25;
+  white-space: normal;
+}
