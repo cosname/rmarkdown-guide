@@ -1,0 +1,295 @@
+# 输出钩子 (\*) {#output-hooks}
+
+通过使用**knitr**包，您可以控制代码块的每一段输出，如源代码、文本输出、图像输出以及message等，这一控制是通过“输出钩子”（Output Hook\index{output hooks}）实现的。输出钩子是一系列函数，它们的输入为一段输出（通常是一个字符向量），并返回一个要写入输出文档的字符向量。到目前为止这个说法可能不容易理解，但希望你可以通过下面的一个例子来更清楚地理解这个想法，这个小例子解释了一个简单代码块的输出是如何通过**knitr**的输出钩子呈现的，这里我们考虑一个由一行代码组成的代码块：
+
+````md
+```{r}`r ''`
+1 + 1
+```
+````
+
+在**knitr**对代码块进行处理后，它会得到两个输出元素，它们都存储为字符串：源代码`"1 + 1"`和文本输出`"[1] 2"`。这些字符串将由块挂钩（chunk hooks）进一步处理，以获得所需的输出格式。例如，对于Markdown文档，**knitr**将把源代码包装在带有编程语言名称的代码块中。这是通过`source`钩子完成的，它看起来像这个函数：
+
+
+```{r, eval=FALSE}
+# 对于上面的例子， `x` 为字符串 "1 + 1"
+function(x, options) {
+  # 小写的 "r" 在这里表示编程语言的名称
+  paste(c('```r', x, '```'), collapse = '\n')
+}
+```
+
+类似的，由输出钩子处理的文本输出类似于下面这个函数；
+
+```{r, eval=FALSE}
+function(x, options) {
+  paste(c('```', x, '```'), collapse = '\n')
+}
+```
+
+所以上述代码块的最终输出为：
+
+````md
+```r
+1 + 1
+```
+
+```
+[1] 2
+```
+````
+
+实际的钩子比上面的两个函数更复杂，但背后的思想是一样的。你可以通过`get()`方法从`knit_hooks`\index{knitr!knit\_hooks}获得实际的钩子，例如：
+
+```{r, eval=FALSE}
+# 为了得到有意义的输出，以下代码应在一个 knitr 文档的代码块内部执行 
+knitr::knit_hooks$get('source')
+knitr::knit_hooks$get('output')
+# 或者 knitr::knit_hooks$get(c('source', 'output'))
+```
+
+除非你真的有兴趣为**knitr**包做贡献，否则我们不建议你阅读这些内置钩子的源代码。如果你感兴趣，可以在 https://github.com/yihui/knitr/tree/master/R 里以`hooks-*.R`形式命名的脚本中找到这些代码（例如，`hooks-md.R`包含R Markdown文档的钩子）。作为**knitr**用户，如果你知道如何利用内置钩子创建自定义输出钩子，通常就足够了。你将在本章的几个例子中学习到这一点，我们将在下面展示基本的思想。
+
+一个自定义的输出钩子是通过`knit_hooks`的`set()`方法注册的。由于该方法将覆盖现有的默认钩子，我们建议先保存默认钩子的副本，以自己的方式处理输出元素，并将结果传递给默认钩子。常见的语法为：
+
+```{r, eval=FALSE}
+# 在这里使用 local() 是可选的，我们只是想避免创建不必要的全局变量，如 `hook_old`）
+local({
+  hook_old = knitr::knit_hooks$get('NAME')  # 保存现有的钩子
+  knitr::knit_hooks$set(NAME = function(x, options) {
+    # 现在可以对 x 做任何处理，并将 x 传递给现有的钩子
+    hook_old(x, options)
+  })
+})
+```
+
+这里，`NAME`是钩子的名称，它可以是以下值之一：
+
+- `source`： 处理源代码；
+
+- `output`： 处理文本输出；
+
+- `warning`： 处理 warning （通常来自 `warning()`）；
+
+- `message`： 处理 message （通常来自 `message()`）；
+
+- `error`： 处理 error message （通常来自 `stop()`）；
+
+- `plot`： 处理图像输出路径；
+
+- `inline`： 处理行内 R 表达式的输出；
+
+- `chunk`： 处理整个块的输出；
+
+- `document`： 处理整个文档的输出。
+
+钩子函数中的参数`x`的含义在上面的列表中解释。对于钩子的`options` 参数，它表示当前代码块的块选项（以列表形式给出）。例如，如果你在一个块上设置`foo = TRUE`，你可以通过钩子中的`options$foo`获取它的值。但需要注意的是，参数`options`对`inline`和`document` 钩子不可用。
+
+输出钩子可以让你能够最终控制块和文档输出的每个单独部分。与块选项（通常具有预定义的用途）相比，输出钩子可能要强大得多，因为它们是用户自定义的函数，而且你可以在函数中做任何你想做的事情。
+
+## 编辑源代码 {#hook-hide}
+
+有时我们可能不希望在报告中完全展示我们的源代码。例如，你可能在某一行代码中需要写一个密码（如爬虫代码等）。我们在\@ref(hide-one)节中提到，你可以使用块选项`echo`来选择显示哪个表达式（例如，通过`echo = 2`可以显示第二个表达式）。在本节中，我们提供了一种更加灵活的方法，它不需要指定表达式的位置或索引。
+
+它的基本思想是在代码中添加一个特殊的注释（例如，`# SECRET!!`）。当在代码中检测到该注释时，将自动忽略该行。下面是使用`source`钩子的完整示例:
+
+`r import_example('hook-secret.Rmd')`
+
+上述`source`钩子的关键部分为下面这一行，它会通过`grepl()`来匹配源代码向量`x`中末尾处包含注释`# SECRET!!`的代码行，并隐藏（排除）它们：
+
+```{r, eval=FALSE}
+x <- x[!grepl('# SECRET!!$', x)]
+```
+
+准确地说，上述的钩子将隐藏（排除）所有末尾处包含注释`# SECRET!!`的 *表达式*，而非单独的行，因为`x` 实际上是一个由R中表达式组成的向量。例如，对于下面的代码块：
+
+```{r, source-hook-x, eval=FALSE}
+1 + 1
+if (TRUE) { # SECRET!!
+  1:10
+}
+```
+
+在`source`钩子中，`x`的值为：
+
+```{r, eval=FALSE}
+c("1 + 1", "if (TRUE) { # SECRET!!\n  1:10\n}")
+```
+
+如果你想隐藏某些特定行而非R代码中完整的表达式，你必须将`x`分割成单独的行。你可以考虑使用函数`xfun::split_lines()`\index{xfun!split\_lines()}，这样的话钩子函数会变成：
+
+```{r, eval=FALSE}
+x <- xfun::split_lines(x)  # 分为单独的行
+x <- x[!grepl('# SECRET!!$', x)]
+x <- paste(x, collapse = '\n')  # 组合成单个字符串
+hook_source(x, options)
+```
+
+这个示例向你展示了如何操作源代码字符串，而`grepl()`当然不是字符串操作的唯一选择。在\@ref(hook-number)节中，我们将展示其它可能的选择。
+
+## 向源代码中添加行号 {#hook-number}
+
+在本节中，我们将展示一个定义`source`钩子的例子，该钩子会将行号作为注释添加到源代码中。例如，对于下面这个代码块：
+
+````md
+```{r}`r ''`
+if (TRUE) {
+  x <- 1:10
+  x + 1
+}
+```
+````
+
+我们想要得到如下的输出：
+
+```{r, eval=FALSE, tidy=FALSE}
+if (TRUE) {    # 1
+  x <- 1:10    # 2
+  x + 1        # 3
+}              # 4
+```
+
+完整的例子如下：
+
+`r import_example('hook-number.Rmd')`
+
+上面这个例子中使用的主要技巧是确定每行注释之前需要的空格数，以便注释可以在右边对齐。该空格数取决于每行代码的宽度，我们将钩子函数中的代码留给读者来理解。需要注意的是，函数`knitr:::v_spaces()`\index{knitr!v\_spaces()}用于生成指定长度的空格，例如：
+
+```{r}
+knitr:::v_spaces(c(1, 3, 6, 0))
+```
+
+在实际中，如果想要在源代码中添加行号的话，\@ref(number-lines)节中介绍的方法更好，它的语法更简洁，并且适用于源代码和文本输出块。本节中介绍`source`钩子的主要目的是展示一种使用自定义函数操作源代码的可能性。
+
+## 可滚动的文本输出 {#hook-scroll}
+
+在\@ref(html-scroll)节中，我们展示了如何通过CSS来限制代码块和文本输出块的高度。实际上，有一个更简单的方法，可以使用块选项的`attr.source`和`attr.output`来将`style`属性添加到Markdown输出中的分离代码块中（有关这些选项的更多信息，请参阅\@ref(attr-output)节）。例如，对于这个带有`attr.output`选项的代码块：
+
+````md
+```{r, attr.output='style="max-height: 100px;"'}`r ''`
+1:300
+```
+````
+
+它的Markdown输出为：
+
+````md
+```r
+1:300
+```
+
+```{style="max-height: 100px;"}
+##   [1]   1   2   3   4   5   6   7   8   9  10
+##  [11]  11  12  13  14  15  16  17  18  19  20
+##  ... ...
+```
+````
+随后文本输出块将被Pandoc转换为HTML：
+
+```html
+<pre style="max-height: 100px;">
+<code>##   [1]   1   2   3   4   5   6   7   8   9  10
+##  [11]  11  12  13  14  15  16  17  18  19  20
+##  ... ...</code>
+</pre>
+```
+
+更多有关Pandoc中分离代码块的信息，可参阅其阅读手册：https://pandoc.org/MANUAL.html#fenced-code-blocks.
+
+`attr.source`和`attr.output`选项使我们能够指定每个代码块的最大高度，但是对应的语法有点笨拙，需要我们更好地理解CSS和Pandoc的Markdown语法。下面我们展示了一个使用自定义块选项`max.height`来自定义输出钩子的例子，这样你只需要设置块选项，如`max.height = "100px"`而非`attr.output = 'style="max-height: 100px;"'`。在本例中，我们只操作`options`参数，而不操作`x`参数：
+
+`r import_example('hook-scroll.Rmd')`
+
+图\@ref(fig:hook-scroll)展示了代码的输出结果。需要注意的是，在最后一个代码块中使用块选项`attr.output`时，该选项将不会被`max.height`覆盖，因为我们将现有的属性与`max.height`生成的`style`属性组合在了一起：
+
+```{r, eval=FALSE, tidy=FALSE}
+options$attr.output <- c(
+  options$attr.output,
+  sprintf('style="max-height: %s;"', options$max.height)
+)
+```
+
+```{r, hook-scroll, echo=FALSE, fig.cap='一个可滚动文本输出的例子，其高度通过块选项`max.height`来给定'}
+knitr::include_graphics('images/hook-scroll.png', dpi = NA)
+```
+
+同样地，`source` 钩子中也可以使用相似的技巧来限制源代码块的高度。
+
+## 截断文本输出 {#hook-truncate}
+
+当代码块的文本输出很长时，你可能希望只显示前几行。例如，当输出一个几千行数据框时，显示完整的数据可能没有什么帮助，仅显示前几行可能就足够了。下面我们会重新定义输出钩子，以便我们可以通过自定义块选项`out.lines`来控制最大行数：
+
+```{r}
+# 保存内置的 output 钩子
+hook_output = knitr::knit_hooks$get("output")
+
+# 设置一个新的 output 钩子来截断文本输出
+knitr::knit_hooks$set(output = function(x, options) {
+  if (!is.null(n <- options$out.lines)) {
+    x = xfun::split_lines(x)
+    if (length(x) > n) {
+      # 截断文本输出
+      x = c(head(x, n), '....\n')
+    }
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+```
+
+上述钩子函数的基本思想是，如果文本输出的行数大于块选项`out.lines`\index{chunk option!out.lines}设置的阈值（存储在变量`n`中），我们只保留前`n`行，并添加省略号（`....`）来表示输出被截断。
+
+现在我们可以通过设置块选项`out.lines = 4`来测试新的输出钩子，你将看到四行输出：
+
+```{r, out.lines=4}
+print(cars)
+```
+
+由于我们已经将原始的输出钩子存储在`output`中，我们可以通过再次调用`set()`来恢复它\index{knitr!knit\_hooks}：
+
+```{r}
+knitr::knit_hooks$set(output = hook_output)
+```
+
+作为进一步的练习，你可以尝试以不同的方式截断输出：给定块选项' `out.lines`\index{chunk option!out.lines}来确定最大行数，你能在中间而不是末尾截断输出吗？例如，如果设定`out.lines = 10`，提取前5行和后5行，并在中间添加`....`的输出是这样的：
+
+As an exercise for readers, you may try to truncate the output in a different way: given the chunk option `out.lines`\index{chunk option!out.lines} to determine the maximum number of lines, can you truncate the output in the middle instead of the end? For example, if `out.lines = 10`, you extract the first and last five lines, and add `....` in the middle like this:
+
+```text
+##    speed dist
+## 1      4    2
+## 2      4   10
+## 3      7    4
+## 4      7   22
+....
+## 46    24   70
+## 47    24   92
+## 48    24   93
+## 49    24  120
+## 50    25   85
+```
+
+需要注意的是，输出的最后一行（即钩子函数的参数`x`）可能是空行，所以可能需要设定`c(head(x, n/2), '....', tail(x, n/2 + 1))`，其中`+ 1`将最后的空行也纳入考虑。
+
+## 以HTML5格式输出图像 {#hook-html5}
+
+默认情况下，R Markdown的HTML输出中的图包含在标签`<p>`或`<div>`下的`<img src="..." />`中。下面的例子展示了如何使用HTML5的标签`<figure>`\index{HTML!figure tag}\index{figure!HTML tag}来显示图像。
+
+`r import_example('hook-html5.Rmd')`
+
+图像的输出如图figure \@ref(fig:hook-html5)所示。注意，在这个例子中我们实际上覆盖了默认的`plot`钩子，而本章的大多数其他例子都是在默认钩子的基础上构建自定义钩子。只有当你确定要忽略默认钩子的一些内置特性时，你才应该完全覆盖默认钩子。例如，在本例中，`plot`钩子函数没有考虑像`out.width = '100%'`或`fig.show = 'animate'`这样的块选项。
+
+```{r hook-html5, echo=FALSE, fig.cap="一个在HTML5 `figure` 标签中的图像"}
+knitr::include_graphics("images/hook-html5.png", dpi = NA)
+```
+
+上例展示了在`plot`钩子\index{output hook!plot}中使用图像文件路径`x`可以进行的操作。如果你所需要的只是自定义图像的样式，则不必使用HTML5标签。通常情况下，默认的`plot`钩子会以如下的HTML代码输出图像：
+
+```html
+<div class="figure">
+  <img src="PATH" />
+  <p class="caption">CAPTION</p>
+</div>
+```
+
+所以你可以仅为`div.figure`和`p.caption`定义css规则。
