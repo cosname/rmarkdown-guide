@@ -365,6 +365,13 @@
       "Repository": "CRAN",
       "Hash": "0759e6b6c0957edb1311028a49a35e76"
     },
+    "tikzDevice": {
+      "Package": "tikzDevice",
+      "Version": "0.12.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "78009f10e5ea26a71103c5ad22632fc8"
+    },
     "tinytex": {
       "Package": "tinytex",
       "Version": "0.31",
