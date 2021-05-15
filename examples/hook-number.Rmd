@@ -1,0 +1,29 @@
+---
+title: 向源代码中添加行号
+---
+
+我们设置了一个`source`钩子来向源代码中添加行号，行号会出现在每行末尾的注释中。
+
+```{r, include=FALSE}
+local({
+  hook_source <- knitr::knit_hooks$get('source')
+  knitr::knit_hooks$set(source = function(x, options) {
+    x <- xfun::split_lines(x)
+    n <- nchar(x, 'width')
+    i <- seq_along(x)  # 行号
+    n <- n + nchar(i)
+    s <- knitr:::v_spaces(max(n) - n)
+    x <- paste(x, s, '  # ', i, sep = '', collapse = '\n')
+    hook_source(x, options)
+  })
+})
+```
+
+现在我们可以测试这个新钩子了。编译此文档时，你将在每行末尾的注释中看到行号：
+
+```{r}
+if (TRUE) {
+  x <- 1:10
+  x + 1
+}
+```

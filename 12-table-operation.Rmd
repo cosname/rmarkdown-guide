@@ -1,0 +1,496 @@
+# (PART) 操作技巧 {-}
+
+```{r echo=FALSE}
+library(formatR)
+library(tikzDevice)
+```
+
+# 表格操作 {#table}
+
+在日常报告中，表格是我们展示结果的主要方式之一。为了满足你的特定需求，你可能经常需要调整各个表格的外观。在本章中，我们将介绍如何个性化制作表格。本章主要目的如下:
+
+- 展现表格生成函数 `knitr::kable()` 的所有特征；
+
+- 使用 **kableExtra** 包 [@R-kableExtra] 来展现更高级的个性化制作方法；
+
+- 提供其它生成表格的R包。
+
+## 表格生成函数 `knitr::kable()` {#kable}
+
+在 **knitr** 中，函数 `kable()`\index{knitr!kable()} 是一个非常简单的表格生成器，并且设计简单。它仅为严格的“矩形数据”（如矩阵和数据框）生成表格，不能自由地设计单元格或合并单元格。然而，这个函数有大量的参数供你自定义表格的外观:
+
+
+```{r code=formatR::usage(knitr::kable, output=FALSE), tidy=TRUE, tidy.opts=list(width.cutoff=45), eval=FALSE}
+```
+
+### 已支持的表的格式 {#kable-formats}
+
+在大多数情况下，如果你只需要数据对象 `x` 的一个简单表格，`knitr::kable(x)` 就足够了，`format` 参数会根据 **knitr** 源文档自动设置。它可能的取值是 `pipe` （列与列之间由短的竖线分隔的表），`simple` （Pandoc 的简单表格），`latex` （LaTex 表格），`html` （HTML 表格），和 `rst` （reStructuredText 表格）。对于 R Markdown 文档，`kable()` 默认使用' `pipe` 格式的表格，如下所示:
+
+```{r, echo=FALSE}
+# 以文本而非实际表格的形式打印 kable() 结果 
+kat = function(x, ...) {
+  if (length(x) > 0) x[1] = gsub('^\n+', '', x[1])
+  x = gsub('\n\n+', '\n', x)
+  cat(x, sep = '\n')
+}
+```
+```{r comment='', render=kat, class.output='md'}
+knitr::kable(head(mtcars[, 1:4]), 'pipe')
+```
+
+你也可以生成基于 Pandoc 的简单表格，或 HMTL、LaTex以及 reStructuredText 格式的表格：
+
+```{r comment='', render=kat, class.output='md'}
+knitr::kable(head(mtcars[, 1:4]), 'simple')
+```
+```{r comment='', render=kat, class.output='html'}
+knitr::kable(mtcars[1:2, 1:2], 'html')
+```
+```{r comment='', render=kat, class.output='tex'}
+knitr::kable(head(mtcars[, 1:4]), 'latex')
+```
+```{r comment='', render=kat, class.output='rst'}
+knitr::kable(head(mtcars[, 1:4]), 'rst')
+```
+
+需要注意的是，只有 `pipe` 和 `simple` 格式是可移植的，也就是说，它们适用于任何输出文档的格式，而其他格式则只适用于特定的输出格式，例如，`format = 'latex'` 只适用于 LaTex 输出文档。使用特定的表格格式可以带给你更多的自主控制能力，但代价是牺牲了可移植性。
+
+如果你只需要一种非默认的表格格式，你可以直接设置全局的 R 选项 `knitr.table.format`，例如,
+
+```{r, eval=FALSE}
+options(knitr.table.format = 'latex')
+```
+
+这一选项也可以是一个返回格式字符串或 `NULL` 的函数，在 `NULL` 的情况下，**knitr** 将自动决定适当的格式。例如，我们只能在输出格式为 LaTeX 时使用 `latex` 格式:
+
+```{r, eval=FALSE}
+options(knitr.table.format = function() {
+  if (knitr::is_latex_output()) 'latex' else 'pipe'
+})
+```
+
+### 修改列名
+
+<!-- https://stackoverflow.com/questions/51432502/replace-column-names-in-kable-r-markdown/51444998#51444998 -->
+
+数据框中我们定义的列的名称可能与我们想要显示给读者的内容不同，在 R 中，数据的列名通常不使用空格来分隔单词，而是使用点、下划线以及大小写来进行分隔。而当我们在制作表格时，这样子的变量名会显得有些不自然。在这种情况下，我们可以使用 `col.names` 参数将列名替换为一个包含新名称的向量。例如，我们可以在 `iris` 数据的列名中用空格代替点:
+
+```{r}
+iris2 = head(iris)
+knitr::kable(iris2, col.names = gsub('[.]', ' ', names(iris)))
+```
+
+`col.names` 参数可以接受任意字符向量（不一定是通过 `gsub()` 等函数修改的列名），只要向量的长度等于数据对象的列数即可，例如：
+
+```{r, eval=FALSE, tidy=FALSE}
+knitr::kable(
+  iris,
+  col.names = c('We', 'Need', 'Five', 'Names', 'Here')
+)
+```
+
+### 指定列的对齐方式
+
+要改变表格中列的对齐方式，可以使用由字符 `l` （左对齐）、`c` （居中）以及 `r` （右对齐）组成的值向量或一个多字符的字符串来进行对齐，例如可以将 `kable(..., align = c('c', 'l'))` 缩写为 `kable(..., align = 'cl')` 。在默认情况下，数字列是右对齐的，其他列是左对齐的。下面是一个例子:
+
+```{r}
+# 左对齐，居中，居中，右对齐，右对齐
+knitr::kable(iris2, align = 'lccrr')
+```
+
+
+### 添加表格标题 {#kable-caption}
+
+你可以通过 `caption` 参数来给表格添加一个标题，如表\@ref(tab:kable-cap)：
+
+```{r kable-cap}
+knitr::kable(iris2, caption = '一个简单的标题')
+```
+
+正如我们在本书\@ref(cross-ref)节所提到的那样，当一个表格有标题并且以 **bookdown** 来输出格式时，它可以被交叉引用。
+
+### 调整数字格式
+
+你可以通过`digits`参数（会被传递给`round()`函数）来设置最大的小数位数，以及通过`format.args`（会被传递给R中的`format()`函数）来设置其他格式化参数。首先，我们展示了几个简单的`round()`和`format()`的例子，从而帮助你在之后的`kable()`中理解这些参数是如何工作的:
+
+```{r, collapse=TRUE}
+round(1.234567, 0)
+round(1.234567, digits = 1)
+round(1.234567, digits = 3)
+format(1000, scientific = TRUE)
+format(10000.123, big.mark = ',')
+```
+
+然后我们将数字四舍五入并格式化成表格：
+
+```{r, R.options=list(digits = 7)}
+d = cbind(X1 = runif(3), X2 = 10^c(3, 5, 7), X3 = rnorm(3, 0, 1000))
+# 保留最多四位小数
+knitr::kable(d, digits = 4)
+# 每列分别设置
+knitr::kable(d, digits = c(5, 0, 2))
+# 不使用科学计数法
+knitr::kable(d, digits = 3, format.args = list(scientific = FALSE))
+# 给 big numbers 添加逗号
+knitr::kable(d, digits = 3, format.args = list(big.mark = ',', scientific = FALSE))
+```
+
+### 显示缺失值
+
+在默认情况下，缺失值（如`NA`）在表格中显示为字符串`NA`，你可以使用其他的值来替换它们，或者通过使用全局R选项 `knitr.kable.NA`来选择不显示任何东西（例如使`NA`对应的单元格为空），。例如，我们将在下面第二个表中的`NA`单元格设为空，然后在第三个表中显示`**`；
+
+```{r}
+d[rbind(c(1, 1), c(2, 3), c(3, 2))] = NA
+knitr::kable(d)  # 默认显示 NA
+# 用空值代替 NA
+opts = options(knitr.kable.NA = '')
+knitr::kable(d)
+# 用指定字符（**） 代替 NA
+options(knitr.kable.NA = '**')
+knitr::kable(d)
+options(opts)  # 恢复全局 R 选项
+```
+
+### 特殊字符的转义
+
+对于HTML或者LaTex，对应的编程语言之中包含了一些特殊的字符。为了使结果能够正常输出，`kable()`将默认通过参数`escape = TRUE`来转义这些特殊字符，这意味着所有的字符将逐字生成，特殊字符将失去其特殊含义。例如对于HTML格式的表格，`>`将被替换为`&gt;`；而对于LaTex格式的表格，`_`将转义为`\_`。如果你接触过这些字符，并且知道如何正确使用它们，那么可以通过`escape = FALSE`来禁用这个参数。在下面的第二个表中，我们介绍了一些包含特殊字符（`$`、`\`以及`_`）的LaTex数学表达式：
+
+```{r}
+m = lm(dist ~ speed, data = cars)
+d = coef(summary(m))
+knitr::kable(d)
+# 在行名和列名中添加数学表达式
+rownames(d) = c('$\\beta_0$', '$\\beta_1$')
+colnames(d)[4] = '$P(T > |t|)$'
+knitr::kable(d, escape = FALSE)
+```
+
+如果没有`escape = FALSE`，特殊字符将被转义或替换。例如，`$`会被转义为`\$`、`_`被转义为`\_`以及`\` '被替换为`\textbackslash{}`:
+
+```{r, render=kat, comment='', class.output='tex'}
+knitr::kable(d, format = 'latex', escape = TRUE)
+```
+
+其他LaTex中常见的特殊字符包括`#`、`%`、`&`、`{`以及 `}`；HTML中常见的特殊字符包括`&`、`<`、 `>`以及`"`。在生成带有`escape = FALSE`的表格时，需要格外小心并确保正确地使用了特殊字符。一个常见的错误是在使用`escape = FALSE`时，在LaTeX表格的列名或标题中包含`%`或`_`等字符，而没有意识到它们是特殊的字符。
+
+如果你不确定如何正确地转义特殊字符，在**knitr**中有两个内部辅助函数。下面是一些例子：\index{knitr!escape\_latex()}\index{knitr!escape\_html()}
+
+```{r}
+knitr:::escape_latex(c('100%', '# a comment', 'column_name'))
+knitr:::escape_html(c('<address>', 'x = "character"', 'a & b'))
+```
+
+### 多张表格并排
+
+你可以通过将数据框或矩阵的列表传递给`kable()`来并排生成很多张表。例如，表\@ref(tab:two-tables) 包含以下代码生成的两个表:
+
+
+```{r, two-tables, tidy=FALSE}
+d1 <- head(cars, 3)
+d2 <- head(mtcars[, 1:3], 5)
+knitr::kable(
+  list(d1, d2),
+  caption = '两张表并排放置',
+  booktabs = TRUE, valign = 't'
+)
+```
+
+需要注意的是，此功能仅适用于HTML和PDF格式的输出。
+
+如果你想在将每个表并排放置时能够分别自定义它们，你可以使用`kables()`\index{knitr!kables()}函数（`kable()`的复数形式），并将一个对象为`kable()`的列表传递给它。例如，在表 \@ref(tab:kables) 中，我们更改左表中的列名，并将右表中的小数点位数设置为零：
+
+```{r, kables, tidy=FALSE}
+# 数据对象 d1 和 d2 由之前的代码块生成
+knitr::kables(
+  list(
+    # 第一个 kable()：修改列名
+    knitr::kable(
+      d1, col.names = c('SPEED', 'DISTANCE'), valign = 't'
+    ),
+    # 第二个 kable()：设置 digits 选项
+    knitr::kable(d2, digits = 0, valign = 't')
+  ),
+  caption = '由 knitr::kables() 生成的两张表'
+)
+```
+
+### 利用`for`循环生成多个表 (\*)
+
+对于`kable()`，有一个常见的错误认识是它不能在`for`循环中工作。这个问题并不特定于`kable()`，同时也存在于许多其他的R包中。其背后原因有点复杂，如果你对技术细节感兴趣，可以在博文["The Ghost Printer behind Top-level R Expressions."](https://yihui.org/en/2017/06/top-level-r-expressions/) 中进行进一步的了解。
+
+你可能期望下面的代码块可以生成三个表，但事实上它并不会：
+
+````md
+```{r}`r ''`
+for (i in 1:3) {
+  knitr::kable(head(iris))
+}
+```
+````
+
+你必须显式打印`kable()`结果，并应用chunk选项`results = 'asis'`\index{chunk option!results}，例如：
+
+````md
+```{r, results='asis'}`r ''`
+for (i in 1:3) {
+  print(knitr::kable(head(iris)))
+}
+```
+````
+通常情况下，当你从`for`循环中输出结果时，我们建议你添加一些换行符（`\n`）或HTML注释（`<!-- -->`），以便清晰地分隔所有输出的元素，例如:
+
+````md
+```{r, results='asis'}`r ''`
+for (i in 1:3) {
+  print(knitr::kable(head(iris), caption = 'A caption.'))
+  cat('\n\n<!-- -->\n\n')
+}
+```
+````
+
+如果没有这些分隔符，Pandoc可能无法检测到单个元素。例如，当一个图片之后面紧跟着一个表格时，这个表格不会被识别：
+
+```md
+![](logo.png)
+                      mpg   cyl   disp    hp
+------------------  -----  ----  -----  ----
+Mazda RX4            21.0     6    160   110
+Mazda RX4 Wag        21.0     6    160   110
+```
+
+但如果像这样有一个清晰的分隔（注意，我们在图像下面添加了一个空行），它将变成：
+
+
+```md
+![](logo.png)
+
+                      mpg   cyl   disp    hp
+------------------  -----  ----  -----  ----
+Mazda RX4            21.0     6    160   110
+Mazda RX4 Wag        21.0     6    160   110
+```
+
+或者
+
+```md
+![](logo.png)
+
+<!-- -->
+
+                      mpg   cyl   disp    hp
+------------------  -----  ----  -----  ----
+Mazda RX4            21.0     6    160   110
+Mazda RX4 Wag        21.0     6    160   110
+```
+
+### 自定义 LaTex 表格 (\*)
+
+如果你只需要LaTex的输出格式，则可以在`kable()`中使用一些额外的选项。注意在其他类型的输出中（如HTML），这些选项将被忽略。除非你已经设置了全局的表格格式选项（见本书\@ref(kable-formats)节），否则必须像本节的例子那样使用`kable()`的`format`参数，例如：
+
+
+```{r, eval=FALSE}
+knitr::kable(iris2, format = 'latex', booktabs = TRUE)
+```
+
+当你给一个表格分配一个标题时（见本书\@ref(kable-caption)节）， `kable()`将使用`table`环境来纳入这个表，即：
+
+```latex
+\begin{table}
+% 表格 (通常为 tabular 环境)
+\end{table}
+```
+你可以通过`table.envir`参数来改变这个环境，即：
+
+```{r, render=kat, comment='', class.output='tex'}
+knitr::kable(cars[1:2, ], format = 'latex', table.envir = 'figure')
+```
+
+表格的位置由参数`position`来控制。例如，我们可以通过`position = "!b"`来强制将表格固定到页面的底部：
+
+```{r, render=kat, comment='', class.output='tex'}
+knitr::kable(cars[1:2, ], format = 'latex', table.envir = 'table', position = '!b')
+```
+
+当一个表格有一个标题时，你也可以通过`caption.short`参数给它分配一个短的标题，例如：
+
+```{r, eval=FALSE}
+knitr::kable(iris2, caption = '一个很长很长的标题！', caption.short = '短标题')
+```
+
+短标题进入LaTeX中的`\caption[]{}`命令的方括号中，经常在PDF输出文档的表格目录中使用（如果不提供短标题，那里则会显示完整的标题）。
+
+如果你熟悉用于生成可供发布的表格的LaTeX包[**booktabs**](https://ctan.org/pkg/booktabs){LaTeX package!booktabs}，您可以设置`booktabs = TRUE`，例如：
+
+```{r, render=if (!knitr::is_latex_output()) kat, comment='', class.output='tex'}
+iris3 = head(iris, 10)
+knitr::kable(iris3, format = 'latex', booktabs = TRUE)
+```
+
+需要注意的是，当你在R Markdown文档中需要额外的LaTeX包时（如**booktabs**），你必须在YAML中声明这些包（请参阅\@ref(latex-extra)一节了解如何声明）。
+
+参数`booktabs`取`TRUE`或`FALSE`(默认值)时，表的外观是不同的。对于`booktabs = FALSE`：
+
+- 表的列由垂直线分隔。你可以通过`vline`参数来删除垂直线，例如`knitr::kable(iris, vline = "")` （默认值是`vline = "|"`）。你可以将这个选项设置为一个全局的R选项，这样你就不需要为每个表设置它，例如，`options(knitr.table.vline = "")`。
+
+- 水平线可以通过参数`toprule`、`midrule`、`linesep`以及 `bottomrule`来定义，它们的默认值都是`\hline`。
+
+对于 `booktabs = TRUE`：
+
+- 表格中没有垂直线，但可以通过`vline`参数来添加。
+
+- 表格的只有标题和底部行有水平线。默认参数值是`toprule = "\\toprule"`、`midrule = "\\midrule"`以及`bottomrule = "\\bottomrule"`。默认情况下，每5行加一个行间距（`\addlinespace`），这是由参数`linesep`控制的，默认值为`c("", "", "", "", "\\addlinespace")`。如果你想每3行加一个`\addlinespace`，你可以这样做:
+
+  ```{r, render=if (!knitr::is_latex_output()) kat, comment='', class.output='tex'}
+  knitr::kable(iris3, format = 'latex', linesep = c('', '', '\\addlinespace'), booktabs = TRUE)
+  ```
+
+如果你想删除所有的行间距，你可以使用`linesep = ''`。
+
+有的时候，表可能比一页还长。在本例中，你可以使用参数`longtable = TRUE`，该参数使用LaTeX包[**longtable**](https://ctan.org/pkg/longtable)将表跨到多个页面。
+
+当表格被包含在`table`环境中时（例如，当表有标题时），表格默认居中对齐。如果你不想让表格居中，可以使用参数`centering = FALSE`。
+
+
+### 自定义 HTML 表格 (\*)
+
+<!-- https://stackoverflow.com/questions/24254552/knitr-style-table-with-css -->
+
+如果你想自定义通过`knitr::kable(format = "html")`生成的表，除了前面提到的常见参数外，只有一个额外的参数需要注意：`table.attr`。这个参数允许你向`<table>`标签添加任意属性。例如：
+
+```{r, render=kat, comment='', class.output='html'}
+knitr::kable(mtcars[1:2, 1:2], table.attr = 'class="striped"', format = "html")
+```
+
+我们向表格中添加了一个类`striped`。然而，类名不足以改变表的外观。你必须定义CSS\index{CSS!striped table}类的规则。例如，要制作奇数行和偶数行有不同颜色的条纹表，您可以为偶数行或奇数行添加浅灰色背景:
+
+```css
+.striped tr:nth-child(even) { background: #eee; }
+```
+
+上面的CSS规则意味着所有`striped`类的元素的子元素，且具有偶数行号（`:nth-child(even)`）的行（即`<tr>`标签），将它们的背景颜色设置为`#eee`。
+
+使用一点CSS可以使一个普通的HTML表看起来好看很多。图 \@ref(fig:striped-table)是一个HTML表格的截图，其中应用了以下CSS规则：
+
+```css
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+```
+
+```{r, striped-table, fig.cap='A striped table created with HTML and CSS.', echo=FALSE, fig.align='center', out.width='70%'}
+knitr::include_graphics('images/striped-table.png', dpi = NA)
+```
+
+## **kableExtra** 包 {#kableextra}
+
+**kableExtra** 包 [@R-kableExtra]\index{R package!kableExtra} 设计的目的为扩展`knitr::kable()`生成表格的基本功能（见\@ref(kable)节）。由于`knitr::kable()`的设计很简单，就像很多其他的R包一样，它肯定有很多缺失的功能，而**kableExtra**完美地填补了空白。最令人惊讶的是，**kableExtra**的大多数表格的特性都适用于HTML和PDF格式，例如，绘制如图\@ref(fig:striped-table))的条纹表。
+
+一般情况下，**kableExtra** 包可以通过CRAN安装，你也可以尝试GitHub上的开发版本 (https://github.com/haozhu233/kableExtra):
+
+```{r, eval=FALSE}
+# install from CRAN
+install.packages("kableExtra")
+# install the development version
+remotes::install_github("haozhu233/kableExtra")
+```
+
+https://haozhu233.github.io/kableExtra/ 提供了大量的文档，介绍了很多关于如何自定义`kable()`的HTML或LaTex输出结果的例子。本节只提供几个示例，如有兴趣我们建议您详细阅读该文档。
+
+**kableExtra**包支持使用管道操作符`%>%`，你可以将`kable()`的输出结果连到**kableExtra**的样式函数上，例如
+
+```{r, results='hide', tidy=FALSE, warning=F}
+library(knitr)
+library(kableExtra)
+kable(iris) %>%
+  kable_styling(latex_options = "striped")
+```
+
+### 设定字体尺寸
+
+**kableExtra**\index{kableExtra!kable\_styling()}包中的`kable_styling()`函数允许你对整个表进行样式化。例如，你可以指定页面上表格的对齐方式、表格的宽度和字体大小。下面是一个使用小字体的例子:
+
+```{r, tidy=FALSE}
+kable(head(iris, 5), booktabs = TRUE) %>%
+  kable_styling(font_size = 8)
+```
+
+### 特定的行或列的样式
+
+函数`row_spec()`\index{kableExtra!row\_spec()}和`column_spec()`\index{kableExtra!column\_spec()}可分别用于样式化单独的行和列。在下面的示例中，我们将第一行文字加粗并设为斜体，将第二行和第三行添加黑色背景，同时更改字体颜色为白色，给第四行文字加下划线并更改其字体，旋转第五行文字，并给第五列加删除线：
+
+```{r, tidy=FALSE}
+kable(head(iris, 5), align = 'c', booktabs = TRUE) %>%
+  row_spec(1, bold = TRUE, italic = TRUE) %>% 
+  row_spec(2:3, color = 'white', background = 'black') %>%
+  row_spec(4, underline = TRUE, monospace = TRUE) %>% 
+  row_spec(5, angle = 45) %>% 
+  column_spec(5, strikeout = TRUE)
+```
+
+类似地，你可以使用`cell_spec()`函数\index{kableExtra!cell\_spec()}来给单个单元格设定样式。
+
+### 给行或列分组
+
+行和列可以分别通过函数`pack_rows()`\index{kableExtra!pack\_rows()}和`add_header_above()`\index{kableExtra!add\_header\_above()}来进行分组。你也可以通过`collapse_rows()`\index{kableExtra!collapse\_rows()}来折叠行，这样一个单元格可以跨越多个行。下面是一个例子，展示了一个给标题列分组后的表格：
+
+```{r, tidy=FALSE}
+iris2 <- iris[1:5, c(1, 3, 2, 4, 5)]
+names(iris2) <- gsub('[.].+', '', names(iris2))
+kable(iris2, booktabs = TRUE) %>%
+  add_header_above(c("Length" = 2, "Width" = 2, " " = 1)) %>% 
+  add_header_above(c("Measurements" = 4, "More attributes" = 1))
+```
+
+对于`add_header_above()`中的命名向量，其名称是显示在表头中的文本，向量的整数值表示一个名称应该跨越多少列，例如，`"Length" = 2`表示`Length`应该跨越两列。
+
+下面是`pack_rows()`的示例，其中`index`参数的含义类似于我们之前解释过的`add_header_above()`参数。
+
+```{r, tidy=FALSE}
+iris3 <- iris[c(1:2, 51:54, 101:103), ]
+kable(iris3[, 1:4], booktabs = TRUE) %>% pack_rows(
+  index = c("setosa" = 2, "versicolor" = 4, "virginica" = 3)
+)
+```
+
+### 按比例缩小LaTex中的表格
+
+有一些特性是HTML或LaTeX输出格式特有的。例如，横向打印格式只在LaTeX中有意义，所以**kableExtra**中的'`landscape()`函数\index{kableExtra!landscape()}只对LaTeX格式的输出有效。下面的例子中，我们将表格按比例缩小以适应页面的宽度（否则该表格会太宽）:
+
+```{r, tidy=FALSE}
+tab <- kable(tail(mtcars, 5), booktabs = TRUE)
+tab  # original table (too wide)
+tab %>%
+  kable_styling(latex_options = "scale_down")
+```
+
+注意如果你在浏览HTML版本的话，上面两个表格是没有差异的。
+
+## 其它生成表格的包 {#table-other}
+
+还有很多其他的R包可以用来生成表格\index{R package!table packages}。我们引入`kable()` （见\@ref(kable)节）和**kableExtra** （见\@ref(kableextra)节）的主要原因不是它们比其他包更好，而是因为我们只熟悉它们。接下来将列出一些我们知道但不太熟悉的软件包。你可以自己看看，然后去决定哪一个最适合你。
+
+- **flextable** [@R-flextable] 和 **huxtable** [@R-huxtable]：如果您正在寻找一个支持最多种表格输出格式的包，**flextable**和**huxtable**可能是两个最好的选择。它们都支持HTML、LaTeX以及Office格式，并且包含最常见的表格特性（例如条件格式化）。更多关于**flextable**的信息可参见：https://davidgohel.github.io/flextable/，**huxtable**的说明文档则在：https://hughjonesd.github.io/huxtable/。
+
+- **gt** [@R-gt]：这个R包允许你将表格的不同部分组合在一起，例如表头（标题和副标题）、列标签、表格主体、行组标签以及表格的脚注，从而组成一个完整的表格，其中有些部分是可选择性添加的。你还可以格式化数字，并为单元格添加背景阴影。目前**gt**主要支持HTML输出。^[如果你需要支持其他输出格式，如LaTeX和Word，**gtsummary**包[@R-gtsummary]已经做了一些基于**gt**的扩展：https://github.com/ddsjoberg/gtsummary.]更多关于**gt**的信息可参见：https://gt.rstudio.com。
+
+- **formattable** [@R-formattable]：这个R包提供了一些格式化数字的工具函数（如`percent()`和`accounting()`），以及对列进行样式化的函数（如格式化文本，用背景阴影或颜色条注释数字，或在单元格中添加图标等等）。和**gt**相同，**formattable**包也主要支持HTML格式。更多信息可参见GitHub项目：https://github.com/renkun-ken/formattable/。
+
+- **DT** [@R-DT]：本书的作者之一（谢益辉）为这个包的作者，但我们没有单独介绍它，因为它只支持HTML格式。**DT**构建在JavaScript库**DataTables**之上，它可以将静态表转换为HTML页面上的交互式表。你可以对表进行排序、搜索和分页。**DT**还支持格式化单元格，与Shiny一起构建交互式应用程序，并包含了大量的**DataTables**扩展（例如，你可以将表格导出到Excel，或交互式重新排列表格的列）。更多信息可参见：https://github.com/rstudio/DT/。
+
+- **reactable** [@R-reactable]：与**DT**类似，这个包也基于JavaScript库创建交互式表。坦率地说，在我们看来，它在某些方面比**DT**更好（比如行分组和聚合操作，以及嵌入HTML小部件）。如果2015年有了**reactable**，我（谢益辉）可能就不会开发**DT**了。也就是说，**reactable**并不包含**DT**全部的特性，所以你可以阅读它的文档，看看哪个更适合你：https://glin.github.io/reactable/。
+
+- **rhandsontable**[@R-rhandsontable]：这个包也类似于**DT**，并且和Excel比较像（例如，你可以直接在表中编辑数据），更多信息可参见：https://jrowen.github.io/rhandsontable/。
+
+- **pixiedust** [@R-pixiedust]：这个包通过**broom**包[@R-broom]来为为模型结果（如线性模型）创建表格，它支持Markdown、HTML以及LaTeX输出格式。更多信息可参见：https://github.com/nutterb/pixiedust/。
+
+- **stargazer** [@R-stargazer]：格式化回归模型和汇总统计表。更多信息可参见：https://cran.r-project.org/package=stargazer/。
+
+- **xtable** [@R-xtable]；这个包可能是最早的创建表格的包，其第一次发布是在2000年。它同时支持LaTeX和HTML格式。该软件包可在CRAN上访问：https://cran.r-project.org/package=xtable/。
+
+还有一些其它生成表格的包，我们不打算再进一步介绍，只是在这里列出它们，以供感兴趣者参考：**tables** [@R-tables]、**pander** [@R-pander]、**tangram** [@R-tangram]、**ztable** [@R-ztable]以及**condformat** [@R-condformat]。

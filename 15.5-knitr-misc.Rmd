@@ -1,0 +1,541 @@
+# 其它使用 knitr 的小技巧 {#knitr-misc}
+
+除了块选项（参见第\@ref(chunk-options)章）、输出钩子（参见第\@ref(output-hooks)章）和块钩子（参见第\@ref(chunk-hooks)章）之外，在**knitr**\index{knitr}中还有很多有用的函数和技巧。我们将在本章中介绍这些技巧，例如重复使用代码块、提前退出编译、在自定义位置显示图像等等。
+
+## 重复使用代码块 {#reuse-chunks}
+
+哪怕不用复制黏贴，也可以在源文档中自由地重复使用代码块\index{code chunk}。这其中的关键点在于标记代码块，从而在其它地方用标签的形式引用它们。本节将介绍三种重复使用代码块的方法\index{code chunk!reuse}。
+
+### 将一个块嵌入到另一个块中 (\*) {#embed-chunk}
+
+将代码块的标签用`<<>>`括起来，则可以将该代码块嵌入到另一个代码块中\index{code chunk!embed}\index{code chunk!<<>>}。之后**knitr**将自动将其在实际代码中扩展为`<<label>>`。例如，可以这样创建一个R函数：
+
+
+````md
+我们定义了一个函数，可以将华氏度转为摄氏度。
+
+```{r, f2c}`r ''`
+F2C <- function(x) {
+  <<check-arg>>
+  <<convert>>
+}
+```
+
+首先，检查输入值是否为数字：
+
+```{r, check-arg, eval=FALSE}`r ''`
+  if (!is.numeric(x)) stop("The input must be numeric!")
+```
+
+然后进行转换：
+
+```{r, convert, eval=FALSE}`r ''`
+  (x - 32) * 5/ 9
+```
+````
+
+这是基于唐纳德·克努特（Donald Knuth）提出的[文学编程](https://en.wikipedia.org/wiki/Literate_programming)的主要思想之一。这种技术的优点在于，你可以将（复杂的）代码分割成更小的部分，将每个部分写入单独的代码块中，并使用文字叙述来解释它们。所有的部分都可以被放入要执行的主代码块中。
+
+在上面的例子中，第一个代码块（标签为`f2c`）将变成：
+
+````md
+```{r, f2c}`r ''`
+F2C <- function(x) {
+  if (!is.numeric(x)) stop("The input must be numeric!")
+  (x - 32) * 5/ 9
+}
+```
+````
+
+一个代码块中可以嵌入任意数量的其他代码块，并且嵌入也可以是递归的。例如，可以将块A嵌入到块B中，将块B嵌入到块C中，这样块C将借由块B包含块A中的代码。
+
+另外，标记符`<<label>>`不必单独写成一行，它可以嵌入到代码块的任何地方。
+
+### 在另一个块中使用相同的块标签 {#same-label}
+
+如果你想要重复多次使用完全相同的代码块，则可以用一个标签来定义块，并使用相同的标签创建更多的代码块，但需要保留块的内容为空，例如：
+
+````md
+
+下面是一个没有被运行的代码块：
+
+```{r, chunk-one, eval=FALSE}`r ''`
+1 + 1
+2 + 2
+```
+
+现在我们运行该代码块：
+
+```{r, chunk-one, eval=TRUE}`r ''`
+```
+````
+
+在上面的例子中，我们使用了两次块标签`chunk-one`，第二个块只是重复使用了第一个块的代码。
+
+我们建议你不要使用此方法多次（多于一次）运行代码块来生成图像或其他文件，因为从后面的块创建的图像文件可能会覆盖前一个块创建的文件。如果只有一个块使用块选项`eval = TRUE`，而所有其他块使用`eval = FALSE`的话是可以的。
+
+### 使用引用标签 (\*) {#ref-label}
+
+块选项`ref.label`\index{chunk option!ref.label}利用一个由块标签组成的向量来检索这些块的内容。例如在下例中，标签为`chunk-a`的代码块是`chunk-c`和`chunk-b`的组合:
+
+````md
+```{r chunk-a, ref.label=c('chunk-c', 'chunk-b')}`r ''`
+```
+
+```{r chunk-b}`r ''`
+# 这是块 b
+1 + 1
+```
+
+```{r chunk-c}`r ''`
+# 这是块 c
+2 + 2
+```
+````
+
+换句话说，`chunk-a`实际上是这样的：
+
+````md
+```{r chunk-a}`r ''`
+# 这是块 c
+2 + 2
+# 这是块 b
+1 + 1
+```
+````
+
+块选项`ref.label`提供了一种非常灵活的方式，可以在文档中重新组织代码块，而无需采用剪切粘贴的方式。需要注意的是，被引用的代码块在使用`ref.label`的代码块之前还是之后并不重要，前面的代码块可以引用后面的代码块。
+
+这个块选项的相关应用可参见\@ref(code-appendix)节。
+
+
+## 在创建对象之前使用它 (\*) {#load-cache}
+
+一个**knitr**文档中的所有代码，包括代码块和行内R表达式中的代码，从开始到结束都是按先后顺序执行的。从理论上讲，在给变量赋值之前不能使用它。但是，在某些情况下，我们可能想在文档前面提到一个变量的值。例如，通常在文章的摘要中需要显示结果，但结果实际上是在文档的后面计算的。下面的例子说明了这个想法，但无法编译：
+
+````md
+---
+题目：一个重要的报告
+摘要： >
+  在本文的分析中，`x` 的平均值是 `r knitr::inline_expr('mx')`...
+---
+
+我们在下面的块中创建对象`mx`：
+
+```{r}`r ''`
+x <- 1:100
+mx <- mean(x)
+```
+````
+
+要解决这个问题，对象的值必须先保存在某个地方，并在下一次编译文档时加载。需要注意的是，这一操作意味着文档至少需要被编译两次。下面的例子介绍了一章可能的解决方案，即使用`saveRDS()`函数：
+
+
+````md
+```{r, include=FALSE}`r ''`
+mx <- if (file.exists('mean.rds')) {
+  readRDS('mean.rds')
+} else {
+  "The value of `mx` is not available yet"
+}
+```
+
+---
+题目：一个重要的报告
+摘要： >
+  在本文的分析中，`x` 的平均值是
+  `r knitr::inline_expr('mx')`...
+---
+
+我们在下面的块中创建对象`mx`：
+
+```{r}`r ''`
+x <- 1:100
+mx <- mean(x)
+saveRDS(mx, 'mean.rds')
+```
+````
+
+第一次编译本文档时，你将在摘要中看到短语 “The value of `mx` is not available yet”。之后当你再次编译它时，你将会看到`mx`的值。
+
+函数`knitr::load_cache()`\index{knitr!load\_cache()}是一个替代的解决方案，它允许你在特定的代码块已经被缓存了\index{caching}之后从该代码块加载对象的值。这个想法与上面的例子类似，但它将减少手动保存和加载对象的工作，因为对象会自动保存到缓存数据库，只需要通过`load_cache()`加载它即可。下面是简化的例子：
+
+````md
+---
+题目：一个重要的报告
+摘要： >
+  在本文的分析中，`x` 的平均值是
+  `r knitr::inline_expr("knitr::load_cache('mean-x', 'mx')")`.
+---
+
+我们在下面的块中创建对象`mx`：
+
+```{r mean-x, cache=TRUE}`r ''`
+x <- 1:100
+mx <- mean(x)
+```
+````
+
+在这个例子中，我们给R代码块添加了一个块标签`mean-x`（被传递给`load_cache()`函数），并使用块选项`cache = TRUE`\index{chunk option!cache}来缓存它。此代码块中的所有对象都将被保存到缓存数据库中。同样的，你必须至少编译该文档两次，这样才能正确地从缓存数据库加载对象`mx`。如果`mx`的值今后不会被更改，则不需要再次编译该文档。
+
+如果在`load_cache()`的第二个参数中没有指定对象名，整个缓存数据库将被加载到当前环境中。然后，你可以从缓存数据库中调用这些本应在后续的文档中被创建的对象，例如：
+
+```{r, eval=FALSE}
+knitr::load_cache('mean-x')
+x   # 对象 `x`
+mx  # 对象 `mx`
+```
+
+## 提前退出编译 {#knit-exit}
+
+有时，我们可能希望提前退出编译，而不是在文档的末尾退出。例如，我们可能正在进行一些分析，并且只希望分享结果的前半部分，或者可能文档末尾的一些代码尚未完成。在这些情况下，我们可以考虑在一个代码块中使用`knit_exit()`\index{knitr!knit\_exit()}函数，它将在该代码块之后结束编译过程。
+
+下面是一个简单的例子，我们有一个非常简单的块，并紧跟着有一个更耗时的块：
+
+````md
+```{r}`r ''`
+1 + 1
+knitr::knit_exit()
+```
+
+在输出中你将只会看到上面的内容。
+
+```{r}`r ''`
+Sys.sleep(100)
+```
+````
+
+一般情况下，你需要等待100秒来编译整个文档，但由于我们调用了`knit_exit()`，文档的剩余部分将不会被编译。
+
+## 生成一个图像并在其他地方显示 {#fig-chunk}
+
+通常情况下，由代码块中生成的图像会显示在代码块下面，但其实可以选择在其他地方显示它们，还可以在代码块中隐藏它们，例如：
+
+````md
+我们在这个代码块中生成了一个图像，但是没有显示出来：
+
+```{r cars-plot, dev='png', fig.show='hide'}`r ''`
+plot(cars)
+```
+
+在另一段之后，我们介绍了该图像：
+
+![一张好看的图](`r knitr::inline_expr("knitr::fig_chunk('cars-plot', 'png')")`)
+````
+
+在代码块中，我们使用了块选项`fig.show='hide'`\index{chunk option!fig.show}来把图像暂时隐藏起来。然后在另一段中，我们调用函数`knitr::fig_chunk()`\index{knitr!fig\_chunk()}来检索得到绘图文件的路径，例如`test_files/figure-html/cars-plot-1.png`。你需要将块标签和图像设备名称传递给`fig_chunk()`，以便它更好地得到图像文件路径。
+
+在https://stackoverflow.com/a/46305297/559676上可以看到`fig_chunk()`在一个**blogdown**网站的应用。这个函数适用于任何R Markdown的输出格式，并且它对于在幻灯片上显示图像特别有用，因为幻灯片页上的屏幕空间通常是有限的，可以在一张幻灯片上展示代码，然后在另一张幻灯片上展示图像。
+
+## 修改前一个代码块中的图像 {#global-device}
+
+在默认情况的下，**knitr**会打开一个新的图像设备来记录每个新代码块产生的图像。这就带来了一个问题：不能轻易地修改之前代码块产生的图像，因为之前的图像设备已经关闭了。这对于基础的R图形通常是有问题的（但不会影响从**ggplot2** [@R-ggplot2]创建的网格图像，因为其可以被保存为R对象）。例如，如果我们在一个代码块中绘制一个图，并在后面的代码块中添加一条线，R将发出一个错误信号，表示还没有创建这个图，因此不能添加线。
+
+如果想让图像设备对所有代码块均保持打开的状态，可以在文档的开头设置一个**knitr**包的选项\index{knitr!opts\_knit}\index{knitr!global.device}\index{figure!global}：
+
+```{r, eval=FALSE}
+knitr::opts_knit$set(global.device = TRUE)
+```
+
+需要注意的是，这里使用的是`opts_knit`而非更常用的`opts_chunk`。相关例子可参见Stack Overflow的帖子https://stackoverflow.com/q/17502050。而当你不再需要这个全局的图像设备时，可以将该选项设置为`FALSE`。下面是一个完整的例子：
+
+`r import_example('global-device.Rmd')`
+
+## 保存一组块选项并重复使用它们 (\*) {#opts-template}
+
+如果你经常需要使用一些块选项，不妨把它们保存为一个组\index{chunk option!options template}\index{template!chunk options}，然后只使用组的名称来重复使用它们。这可以通过`knitr::opts_template$set(name = list(options))`\index{knitr!opts\_template}来实现，之后可以使用`opts.label`\index{chunk option!opts.label}来引用组名，从而实现重复使用。例如：
+
+````md
+```{r, setup, include=FALSE}`r ''`
+knitr::opts_template$set(fullwidth = list(
+  fig.width = 10, fig.height = 6,
+  fig.retina = 2, out.width = '100%'
+))
+```
+
+```{r, opts.label='fullwidth'}`r ''`
+plot(cars)
+```
+````
+
+在设定`opts.label = 'fullwidth'`时， **knitr**将从`knitr::opts_template`中读取块选项，并将它们应用到当前的块中，这样可以节省一些打字的工作量。如果一个块选项要在文档中全局使用，则应该考虑全局地设置它（参见第\@ref(chunk-options)章）。
+
+你还可以覆盖从`opts.label`中读取的选项，例如，如果你在下面的块中设置`fig.height = 7`，则实际的`fig.height`将变为`7`而非`6`，从而可以对单个块进行调整。
+
+````md
+```{r, opts.label='fullwidth', fig.height=7}`r ''`
+plot(cars)
+```
+````
+
+事实上，你可以保存任意数量的分组选项，例如`knitr::opts_template$set(group1 = list(...), group2 = list(...))`。
+
+## 使用 `knitr::knit_expand()` 来生成 Rmd 源代码 {#knit-expand}
+
+函数`knitr::knit_expand()`\index{knitr!knit\_expand()}可以将`{{ }}`中的表达式“扩展”为它的值（默认），例如，
+
+```{r, tidy=FALSE, collapse=TRUE}
+knitr::knit_expand(text = "The value of `pi` is {{pi}}.")
+knitr::knit_expand(
+  text = "The value of `a` is {{a}}, so `a + 1` is {{a+1}}.",
+  a = round(rnorm(1), 4)
+)
+```
+
+这意味着，如果你有一个Rmd文档，其中包含了`{{ }}`中的一些动态部分，那么可以在该文档上应用`knit_expand()`，然后调用`knit()`来编译它。例如，下面是一个名为`template.Rmd`的模板文档：
+
+````md
+# 在 {{i}} 上进行回归
+
+```{r lm-{{i}}}`r ''`
+lm(mpg ~ {{i}}, data = mtcars)
+```
+````
+
+我们可以用`mpg`来对`mtcars`数据集中的所有其他变量逐个建立线性回归模型：
+
+````md
+```{r, echo=FALSE, results='asis'}`r ''`
+src = lapply(setdiff(names(mtcars), 'mpg'), function(i) {
+  knitr::knit_expand('template.Rmd')
+})
+res = knitr::knit_child(text = unlist(src), quiet = TRUE)
+cat(res, sep = '\n')
+```
+````
+
+如果理解这个例子有难度，可参阅\@ref(results-asis)节，以了解块选项`results = 'asis'`\index{chunk option!results}，以及\@ref(child-document)节来了解`knitr::knit_child()`\index{knitr!knit\_child()}的用法。
+
+## 允许代码块中的标签重复 Allow duplicate labels in code chunks (\*) {#duplicate-label}
+
+<!-- https://stackoverflow.com/questions/36868287/purl-within-knit-duplicate-label-error/47065392#47065392 -->
+
+默认情况下，**knitr**不允许在文档中重复代码块标签。在编译文档时，重复的标签将导致错误。这种情况常见于在文档中复制和粘贴代码块的时候，会产生这样的错误信息：
+
+```text
+processing file: myfile.Rmd
+Error in parse_block(g[-1], g[1], params.src, markdown_mode) :
+  Duplicate chunk label 'cars'
+Calls: <Anonymous> ... process_file -> split_file -> lapply ->
+  FUN -> parse_block
+Execution halted
+```
+
+然而，在某些情况下，我们希望允许标签可以重复。例如，如果我们有一个母文档`parent.Rmd`，在其中我们会多次编译子文档，下面的代码会运行失败：
+
+```{r, eval = FALSE}
+# 设置
+settings = list(...)
+
+# 第一次运行
+knit_child('useful_analysis.Rmd')
+
+# 重新设置
+settings = list(...)
+
+# 再次运行
+knit_child('useful_analysis.Rmd')
+```
+
+在这个场景中，我们可以通过在编译子文档之前在R中设置这个全局选项来允许标签可重复\index{knitr!knitr.duplicate.label}：
+
+```{r, eval = FALSE}
+options(knitr.duplicate.label = 'allow')
+```
+
+如果你想在母文档而不是子文档中允许标签可重复，则必须在`knitr::knit()`被调用之前设置这个选项。一种可能的方法是在`~/.Rprofile`中设置这个选项（更多信息可参见帮助页面`?Rprofile`）。
+
+设置此选项时需要很谨慎，与大多数的报错一样，它们的存在是有原因的。允许重复的块可能会在图像和交叉引用方面产生静默问题（silent problem）。例如，理论上，如果两个代码块具有相同的标签，并且两个代码块都生成图像，那么它们的图像文件将互相覆盖（并不会产生错误或警告消息），因为图像的文件名是由块标签决定的。使用选项`knitr.duplicate.label = "allow"`时， **knitr**将通过添加数字后缀来静默地改变重复标签。例如，对于两个代码块：
+
+````md
+```{r, test}`r ''`
+plot(1:10)
+```
+
+```{r, test}`r ''`
+plot(10:1)
+```
+````
+
+第二个标签将被静默地更改为`test-1`，这将避免覆盖由标签`test`的块产生的图像，但这也使得块标签不可被预知，所以在交叉引用\index{crossreference}图像时可能会产生困难（参见 \@ref(cross-ref)节），因为交叉引用也是基于块标签的。
+
+## 一个更透明的缓存机制 {#cache-rds}
+
+如果你觉得在\@ref(cache)节中介绍的**knitr**的缓存机过于复杂（确实如此!），可以考虑使用基于函数`xfun::cache_rds()`\index{xfun!cache\_rds()}的一个更简单的缓存机制\index{caching}，例如：
+
+```{r, eval=FALSE}
+xfun::cache_rds({
+  # 在这里编写你的耗时代码
+})
+```
+
+关于**knitr**缓存，其棘手之处在于如何决定何时使缓存失效，而使用`xfun::cache_rds()`则要清楚得多：第一次将R表达式传递给这个函数时，它会计算表达式并将结果保存到`.rds`文件中；下次再次运行`cache_rds()`时，它会读取`.rds`的文件，并立即返回结果，而不再次计算表达式。使缓存无效的最明显的方法是删除`.rds`的文件。如果不想手动删除它，则可以用参数`rerun = TRUE`来调用`xfun::cache_rds()`。
+
+当`xfun::cache_rds()` 在**knitr**源文档的一个代码块中被调用时，`.rds`文件的路径由块选项`cache.path`\index{chunk option!cache.path}和块标签决定。例如，对于在Rmd文档`input.Rmd`中带有块标签`foo`的代码块：
+
+
+````md
+```{r, foo}`r ''`
+res <- xfun::cache_rds({
+  Sys.sleep(3)
+  1:10
+})
+```
+````
+
+`.rds`文件的路径格式为`input_cache/FORMAT/foo_HASH.rds`，其中`FORMAT`是Pandoc输出格式名称（例如`html`或`latex`）， `HASH`是一个MD5哈希，包含了32个十六进制数字（a-f[^1]和0-9），例如`input_cache/html/foo_7a3f22c4309d400eff95de0e8bddac71.rds`。
+
+[^1]: 原文为a-z。
+
+如帮助页面`?xfun::cache_rds`所述，通常在两种的情况下可能想要使缓存失效：1）待求值表达式中的代码发生了变化；2）代码使用了一个外部变量，并且该变量的值已经改变。接下来，我们将解释这两种情况下缓存是如何失效的，以及如何将缓存的多个副本保存到对应于不同版本的代码中。
+
+### 通过更改表达式中的代码使缓存失效
+
+当你改变`cache_rds()`中的代码时（例如，从`cache_rds({x + 1})`改为`cache_rds({x + 2})`），缓存将自动失效，表达式将被重新计算。但是，需要注意的是，空格或注释的变化并不重要，或者一般来说，只要更改不影响已解析的表达式，缓存就不会失效。例如，下面传递给`cache_rds()`的两个表达式在本质上是相同的：
+
+```r
+res <- xfun::cache_rds({
+  Sys.sleep(3);
+  x<-1:10;  # 分号不影响
+  x+1;
+})
+
+res <- xfun::cache_rds({
+  Sys.sleep(3)
+  x <- 1:10  # 一个注释
+  x +
+    1  # 可以随意修改空格部分
+})
+```
+
+因此，如果对第一个表达式执行`cache_rds()`，那么第二个表达式将能够调用缓存的结果。这一特性非常有用，因为其允许在代码中进行修饰性更改，而不会使缓存失效。
+
+如果不确定两个版本的代码是否相等，则可以尝试下面的`parse_code()`函数：
+
+```{r, tidy=FALSE}
+parse_code <- function(expr) {
+  deparse(substitute(expr))
+}
+# 空格或分号不影响
+parse_code({x+1})
+parse_code({ x   +    1; })
+# 左箭头和右箭头是等价的
+identical(parse_code({x <- 1}), parse_code({1 -> x}))
+```
+
+### 通过更改全局变量使缓存失效
+
+通常情况下，表达式中有两种类型的变量：全局变量和局部变量。全局变量是在表达式外部创建的，局部变量则是在表达式内部创建的。如果表达式中全局变量的值发生了变化，那么缓存的结果和再次运行的结果之间可能会产生差异。例如，在下面的表达式中，如果`y`发生了变化，你可能想要使缓存失效并重新运行表达式，否则你仍然会得到根据`y`之前的值计算得到的结果：
+
+```r
+y <- 2
+
+res <- xfun::cache_rds({
+  x <- 1:10
+  x + y
+})
+```
+
+如果要使缓存\index{caching!invalidation}当`y`发生变化时失效，你可以则需要通过`hash`参数，让`cache_rds()`在决定缓存是否应该失效时知道需要考虑`y`：
+
+```r
+res <- xfun::cache_rds({
+  x <- 1:10
+  x + y
+}, hash = list(y))
+```
+
+当`hash`参数的值改变时，缓存文件名中的32位哈希值（如前所述）会相应地改变，导致缓存失效。这提供了一种方法来指定缓存与其他R对象的依赖关系。例如，如果想要使缓存依赖于R的版本，可以这样指定依赖：
+
+```r
+res <- xfun::cache_rds({
+  x <- 1:10
+  x + y
+}, hash = list(y, getRversion()))
+```
+
+或者，如果你想让缓存依赖于数据文件最后一次修改的时间，则可这样做：
+
+```r
+res <- xfun::cache_rds({
+  x <- read.csv("data.csv")
+  x[[1]] + y
+}, hash = list(y, file.mtime("data.csv")))
+```
+
+如果你不想为`hash`参数提供全局变量的列表，则可以尝试`hash = "auto"`，它将使`cache_rds()`自动找出所有的全局变量，并将它们作为`hash`参数的值，例如：
+
+```r
+res <- xfun::cache_rds({
+  x <- 1:10
+  x + y + z  # y 和 z 是全局变量
+}, hash = "auto")
+```
+
+这等价于：
+
+```r
+res <- xfun::cache_rds({
+  x <- 1:10
+  x + y + z  # y and z are global variables
+}, hash = list(y = y, z = z))
+```
+
+当`hash = "auto"`时，全局变量由`codetools::findGlobals()`识别，这可能不是完全可靠的，所以如果你想要完全确定哪些变量可以使缓存失效，我们建议你在`hash`参数中亲自给定变量列表。
+
+### 保留缓存的多个副本
+
+由于缓存通常用于非常耗时的代码，在使其失效时应保守一些。你可能会因过早地或主动地使缓存失效而后悔，因为如果你再次需要一个旧版本的缓存，则将不得不等待很长的时间才能重新完成计算。
+
+若将`cache_rds()`中的`clean`参数设置为`FALSE`\index{caching!clean}，则其将允许你保留旧的缓存副本。你也可以设置全局R选项`options(xfun.cache_rds.clean = FALSE)`来使其成为文档的默认行为。在默认情况下，`clean = TRUE`和`cache_rds()`每次都会尝试删除旧的缓存。如果你还在进行代码测试，那么设置`clean = FALSE`会很有用。例如，可以缓存一个线性模型的两个版本：
+
+```{r, eval=FALSE}
+model <- xfun::cache_rds({
+  lm(dist ~ speed, data = cars)
+}, clean = FALSE)
+
+model <- xfun::cache_rds({
+  lm(dist ~ speed + I(speed^2), data = cars)
+}, clean = FALSE)
+```
+
+在决定使用哪个模型之后，你可以再次设置`clean = TRUE`，或者删除`clean`参数（默认为`TRUE`）。
+
+### 与**knitr**的缓存比较
+
+你可能想知道什么时候使用**knitr**的缓存（例如，设置块选项`cache = TRUE`），什么时候在**knitr**源文档中使用`xfun::cache_rds()`。后者最大的缺点是它不缓存副产物（而只缓存表达式的值），而**knitr**却可以。一些副产物可能是有用的，例如打印的输出或图像。例如，在下面的代码中，当使用`cache_rds()`加载缓存时，文本输出和图像将会丢失，只会返回`1:10`：
+
+```{r, eval=FALSE}
+xfun::cache_rds({
+  print("Hello world!")
+  plot(cars)
+  1:10
+})
+```
+
+相比之下，对于设定选项为`cache = TRUE`的代码块，所有的内容都将被缓存：
+
+````md
+```{r, cache=TRUE}`r ''`
+print("Hello world!")
+plot(cars)
+1:10
+```
+````
+
+**knitr**的缓存最大的缺点（同时也是用户最常抱怨的）是缓存可能会在不经意间失效，因为缓存由太多的因素所决定。例如，任何块选项的改变都会使缓存失效[^2]，但有些块选项可能与计算无关。在下面的代码块中，改变块选项`fig.width = 6`到`fig.width = 10`不应该使缓存失效，但事实上它会：
+
+[^2]: 这是默认的行为，你也可以进行调整。如果想了解如何使缓存更精细，而非所有块选项都会影响缓存，请参阅https://yihui.org/knitr/demo/cache/。
+
+````md
+```{r, cache=TRUE, fig.width=6}`r ''`
+# 这个块没有生成图像
+x <- rnorm(1000)
+mean(x)
+```
+````
+
+实际上，**knitr**的缓存非常强大且灵活，它的行为可以通过多种方式进行调整。它的作者也经常怀疑是否值得介绍这些不太为人所知的特性，因为可能会导致使用者花更多的时间来学习和理解缓存如何工作，而非运行实际的代码。
+
+在不清楚用哪个的情况下，`xfun::cache_rds()`是缓存计算结果的通用方法，它可以在任何地方使用，而**knitr**的缓存只能在**knitr**文档中使用。
+

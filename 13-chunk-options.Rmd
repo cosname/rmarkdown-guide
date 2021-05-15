@@ -1,0 +1,653 @@
+# 块选项 {#chunk-options}
+
+正如图\@ref(fig:rmdworkflow)所展示的那样，R包**knitr**在R Markdown中起着关键的作用。在本章和接下来的两章中，我们将展示一些与**knitr**相关的编程技巧。
+
+事实上，R Markdown的代码块中，有超过50个选项\index{chunk option}可以用来微调**knitr**处理基于R代码块的方式，选项的完整列表请参阅在线文档<https://yihui.org/knitr/options/>`r if (knitr::is_latex_output()) '，或本书附录\\@ref(full-options)'`。
+
+在接下来的几节中，我们只展示了将块选项应用到单个代码块的示例。然而需要注意的是，任何块选项也可以进行全局设置，应用于整个文档，不必在每个代码块中重复这些选项。如果要设置全局的块选项，需要在代码块（通常为文档中的第一个代码块）中调用`knitr::opts_chunk$set()`\index{chunk option!set globally}，例如：
+
+````md
+```{r, include=FALSE}`r ''`
+knitr::opts_chunk$set(
+  comment = "#>", echo = FALSE, fig.width = 6
+)
+```
+````
+
+## 在块选项中使用变量 {#chunk-variable}
+
+通常情况下，块选项中会使用常数（如：`fig.width = 6`），但实际上可以使用任意的R表达式，无论简单或复杂。一个特殊的情况是变量\index{chunk option!variable values}传递给一个块选项（注意变量本身也是一个R表达式）。例如，你可以在文档开始的部分定义图像宽度，然后在其他代码块中使用它，从而更方便地更改图像宽度：
+
+````md
+```{r}`r ''`
+my_width <- 7
+```
+
+```{r, fig.width=my_width}`r ''`
+plot(cars)
+```
+````
+
+块选项中也可以使用`if-else`语句\index{chunk option!with if else logic}，例如：
+
+
+````md
+```{r}`r ''`
+fig_small <- FALSE  # change to TRUE for larger figures
+width_small <- 4
+width_large <- 8
+```
+
+```{r, fig.width=if (fig_small) width_small else width_large}`r ''`
+plot(cars)
+```
+````
+
+不仅如此，我们还可以只在所需要的包可使用时才运行一个代码块：
+
+````md
+```{r, eval=require('leaflet')}`r ''`
+library(leaflet)
+leaflet() %>% addTiles()
+```
+````
+
+需要注意的是，`require('package')` 只有当这个包已安装且可使用时才会返回`TRUE`，否则会返回`FALSE`。
+
+## 如何在遇到 error 的时候继续编译 {#opts-error}
+
+有时你可能想要故意显示错误（例如，在关于R的教程中），然而，在默认情况下，R Markdown文档中代码块中的错误将使程序终止。如果你想在不终止R程序的情况下显示错误，你可以使用块选项`error = TRUE`\index{chunk option!error}，例如：
+
+````md
+```{r, error=TRUE}`r ''`
+1 + "a"
+```
+````
+这样在编译R Markdown文档后，你将在输出文档中看到如下的错误消息：
+
+```{r, error=TRUE, echo=FALSE, comment=''}
+1 + "a"
+```
+
+需要注意的是，在R Markdown中，默认设定为`error = FALSE`，这也导致了R在运行代码块时，出现错误就会终止。
+
+
+## 同一张图的多种图像输出格式 {#dev-vector}
+
+在大多数情况下，你可能只需要一种图像格式，例如`png`或`pdf`。图像格式由块选项`dev`\index{chunk option!dev}\index{figure!graphical device}控制，即渲染图像的图像设备，这个选项的取值可以为多种设备名（即输出格式）的向量，例如：
+
+````md
+```{r, dev=c('png', 'pdf', 'svg', 'tiff')}`r ''`
+plot(cars)
+```
+````
+
+输出文档中只会呈现第一种格式的图像，但也其它格式的图像也会被生成，当你需要另外提交不同格式的图像时（例如，你在报告中显示一个`png`格式的图像，但同时也需要`tiff`格式的图像），会起到很大的帮助。
+
+需要注意的是，在默认情况下，图像文件在输出文档呈现后即被删除，如要保存这些文件，请参见\@ref(keep-files)节。
+
+
+## 缓存耗时的代码块 {#cache}
+
+当一个代码块运行起来很费时间时，你可以考虑通过块选项`cache = TRUE`\index{chunk option!cache}\index{caching}来缓存它。当启用缓存时，如果一个代码块之前被执行过且之后没有任何变化时，**knitr**将跳过这个代码块的执行。当你修改代码块时（如修改代码或块选项），之前的缓存将自动失效，并且**knitr**将再次运行并缓存该代码块。
+
+对于一个被缓存了的代码块，它的输出以及变量对象将从上一次的运行中自动加载，就像该代码块再次执行了一样。当加载结果比计算结果快得多时，缓存操作通常是有用的。然而，天下没有免费的午餐，有的时候**knitr**经常会令缓存失效或是部分失效，为此你可能需要了解更多关于如何缓存，特别是缓存失效的相关知识：https://yihui.org/en/2018/06/cache-invalidation/。
+
+一个典型的缓存用例是保存和重新加载那些需要很长时间才能在代码块中计算的R对象。需要注意的是，代码需要没有任何副作用，否则我们建议您不要进行缓存（例如`options()`更改全局R选项，这样的更改不会被缓存）。
+
+正如我们前面简要提到的，缓存依赖于块选项。如果你改变了任何块选项（除了`include`选项），缓存将会失效。此特性可用于解决一个常见的问题，即当你读取外部数据文件时，你可能希望在更新数据文件时使缓存失效，这样的话像下面这样简单地使用`cache = TRUE`是不够的：
+
+````md
+```{r import-data, cache=TRUE}`r ''`
+d <- read.csv('my-precious.csv')
+```
+````
+
+你必须要让**knitr**知道数据文件是否已被更改。一种方法是添加另一个块选项`cache.extra = file.mtime('my-precious.csv')`\index{chunk option!cache.extra}，或者更严格的方式：`cache.extra = tools::md5sum('my-precious.csv')`。前者意味着如果文件的修改时间发生了变化，我们就需要使缓存失效；而后者的意思是，如果文件的内容被修改，我们就更新缓存。需要注意的是，`cache.extra`不是一个内置的**knitr** 代码选项，你可以为该选项使用任何其他名称，只要它不与内置选项名称冲突。
+
+类似地，你可以将缓存与其他信息相关联，比如R的版本（`cache.extra = getRversion()`）、时间（`cache.extra = Sys.Date()`）或是你的操作系统（`cache.extra = Sys.info()[['sysname']]`）， 当这些条件改变时，可以使缓存正确地失效。
+
+我们不建议在文档中设置全局块选项`cache = TRUE`，因为缓存可能相当棘手。相反的，我们建议您只在个别耗时很久的代码块上启用缓存，这样并不会产生副作用。
+
+如果你对**knitr**的缓存设计不满意，当然你可以选择自己缓存对象，下面是一个简单的例子：
+
+```{r, eval=FALSE}
+if (file.exists('results.rds')) {
+  res = readRDS('results.rds')
+} else {
+  res = compute_it()  # 一个很耗时的函数
+  saveRDS(res, 'results.rds')
+}
+```
+
+在这一例子中，使缓存失效的唯一（也是简单的）方法就是删除文件`results.rds`。如果你喜欢这个简单的缓存机制，可以使用在\@ref(cache-rds)节中介绍的函数`xfun::cache_rds()`\index{xfun!cache\_rds()}。
+
+## 为多种输出格式缓存代码块 {#cache-path}
+
+当通过块选项`cache = TRUE`\index{chunk option!cache}\index{caching}启用缓存时，**knitr**将把在代码块中生成的R对象写入缓存数据库，以便下次重新加载它们。缓存数据库的路径由块选项`cache.path`\index{chunk option!cache.path}决定。默认情况下，R Markdown对不同的输出格式会使用不同的缓存路径，这意味着对于每种输出格式都将完全执行一次这个（耗时的）代码块。这可能很不方便，但这种默认的行为是有原因的，即代码块的输出可能依赖于特定的输出格式。例如，当你生成一个图像时，当输出格式为`word_document`时，图像的输出可能是像 `![text](path/to/image.png)`这样的标记代码，而或者当输出格式为`html_document`时，输出的HTML代码则类似`<img src="path/to/image.png" />`。
+
+当代码块没有任何副产物（如图像）时，对所有输出格式使用相同的缓存数据库是安全的，这可以节省你的时间。例如，当你读取一个大型数据对象或运行一个比较耗时的模型时，若结果不依赖于输出格式，你就可以使用相同的缓存数据库。你可以通过块选项`cache.path`指定数据库的路径，例如：
+
+````md
+```{r important-computing, cache=TRUE, cache.path="cache/"}`r ''`
+```
+````
+
+在R Markdown中，`cache.path`的默认设置为`cache.path = "INPUT_cache/FORMAT/"`，其中`INPUT`代表输入的文件名，`FORMAT`为输出格式（如`html`、`latex`或`docx`）。
+
+## 缓存大型的对象 {#cache-lazy}
+
+当设定块选项`cache = TRUE`时，缓存的对象将被延迟加载到R中，这意味着对象将不会从缓存数据库中读取，直到它在代码\index{caching}中被实际使用。当不是所有对象都在文档中稍后被使用时，这一操作可以节省一些内存。例如，如果你读取了一个大型的数据对象，但在后续的分析中只使用了其中的一个子集，那么原始的数据对象将不会从缓存数据库中加载：
+
+````md
+```{r, read-data, cache=TRUE}`r ''`
+full <- read.csv("HUGE.csv")
+rows <- subset(full, price > 100)
+# 之后我们只用 `rows`
+```
+
+```{r}`r ''`
+plot(rows)
+```
+````
+
+然而，当一个对象太大时，你可能会遇到这样的报错：
+
+```r
+Error in lazyLoadDBinsertVariable(vars[i], ... 
+  long vectors not supported yet: ...
+Execution halted
+```
+
+如果出现这个问题，你可以尝试通过块选项`cache.lazy = FALSE`\index{chunk option!cache.lazy}来关闭延迟加载，这样该代码块中的所有对象都将立即被加载到内存中。
+
+
+## 隐藏源代码、message、warning、文本输出或图像输出 {#hide-one}
+
+默认情况下，**knitr**会显示代码块的所有可能输出，包括源代码、message、warning、文本输出和图像输出，你可以使用相应的块选项来单独隐藏它们。
+
+`r import_example('knitr-hide.Rmd')`
+
+关于**knitr**的一个常见问题是如何隐藏包的加载消息。例如，当你使用`library(tidyverse)`或`library(ggplot2)`时，你可能会看到一些正在加载的message。这类message也可以通过块选项`message = FALSE`来抑制。
+
+还可以通过索引来有选择地显示或隐藏这些元素。在下面的示例中，我们只输出了源代码的第四个和第五个表达式（注意，一个注释会被算作一个表达式）、前两个message以及第二个和第三个warning：
+
+````md
+```{r, echo=c(4, 5), message=c(1, 2), warning=2:3}`r ''`
+# 一种生成服从N(0,1)分布的随机数的方法（连续随机变量的分布函数服从U(0,1)分布）
+x <- qnorm(runif(10))
+# 在实践中我们还可以使用
+x <- rnorm(10)
+x
+
+for (i in 1:5) message('Here is the message ', i)
+
+for (i in 1:5) warning('Here is the warning ', i)
+```
+````
+
+你还可以使用负索引，例如，`echo = -2`\index{chunk option!echo}表示在输出中排除源代码的第二个表达式。
+
+类似地，你可以通过使用`fig.keep`选项\index{chunk option!fig.keep}来选择显示或隐藏哪些图。例如，`fig.keep = 1:2`意味着保留前两幅图。这个选项有一些快捷的方式，如`fig.keep = "first"`将只保留第一幅图、`fig.keep = "last"`只保留最后的图以及`fig.keep = "none"`将丢弃所有的图。注意`fig.keep = "none"`和`fig.show = "hide"`这两个选项是不同的，后者将生成图像文件，但只隐藏它们，而前者根本不会生成图像文件。
+
+对于`html_document`输出中的源代码块，如果你不想完全省略它们（`echo = FALSE`），你可以参考\@ref(fold-show)节，来学习如何在页面上折叠它们，并允许用户通过单击展开按钮来展开它们。
+
+## 隐藏代码块的所有输出 {#hide-all}
+
+有的时候，我们可能想要执行一个代码块而根本不显示任何输出。与使用\@ref(hide-one)节中提到的单独选项不同，我们可以使用一个选项'include = FALSE`\index{chunk option!include}来隐藏代码块所有的输出，例如：
+
+````md
+```{r, include=FALSE}`r ''`
+# 任意的R代码
+```
+````
+
+使用`include=FALSE`，代码块将被运行（除非`eval=FALSE`），但输出将被完全隐藏，你将看不到任何的源代码、message、warning、文本输出或图像输出。
+
+
+## 将文本输出压缩到源代码块中 {#opts-collapse}
+
+如果你觉得输出结果中的文本输出部分和源代码部分之间有太多的间隔，你可以考虑使用块选项`collapse = TRUE`\index{chunk option!collapse}将文本输出压缩到源代码块中。`collapse = TRUE`时的输出如下所示：
+
+```{r, test-collapse, collapse=TRUE}
+1 + 1
+1:10
+```
+
+若没有设定`collapse = TRUE`（默认为`FALSE`），则会变成：
+
+```{r, test-collapse}
+```
+
+## 重新格式化源代码 {#opts-tidy}
+
+当你设置块选项`tidy = TRUE`\index{chunk option!tidy}时， R的源代码将被**formatR**包\index{R package!formatR} [@R-formatR]的`tidy_source()`函数重新格式化。`tidy_source()`可以在几个方面重新格式化代码，比如在大多数操作符周围添加空格、适当缩进代码以及用`<-`替换赋值操作符`=` 。块选项`tidy.opts`\index{chunk option!tidy.opts}可以是传递给`formatR::tidy_source()`的一个参数列表，例如：
+
+`r import_example('tidy-opts.Rmd')`
+
+输出结果为：
+
+```{r, child='examples/tidy-opts.Rmd', results='hide'}
+```
+
+在\@ref(text-width)节中，我们提到了如何控制文本输出的宽度。如果你想控制源代码的宽度，你可以在设置`tidy = TRUE`时使用`width.cutoff`参数，例如：
+
+`r import_example('tidy-width.Rmd')`
+
+输出结果为：
+
+```{r, child='examples/tidy-width.Rmd', results='hide'}
+```
+
+更多可能的参数可以参见帮助页`?formatR::tidy_source`，也可以浏览 https://yihui.org/formatR/ 来了解这个函数的示例和局限性。
+
+另外，如果你设定块选项`tidy = 'styler'`，你也可以使用**styler**包[@R-styler]来重新格式化你的R代码\index{R package!styler}，其中的格式化函数为`styler::style_text()`。**styler**包比**formatR**具有更丰富的特性。例如，它可以对齐函数参数并使用管道操作符'`%>%`。块选项`tidy.opts`\index{chunk option!tidy.opts}同样可以用于将附加参数传递给`styler::style_text()`，例如：
+
+````md
+```{r, tidy='styler', tidy.opts=list(strict=FALSE)}`r ''`
+# 对齐赋值操作符
+a   <- 1#一个变量
+abc <- 2#另一个变量
+```
+````
+
+在默认情况下，`tidy = FALSE`并且你的R代码不会被重新格式化。
+
+## 将输出文本作为原始的Markdown的内容 (\*) {#results-asis}
+
+默认情况下，代码块的文本输出将逐字输出，并添加两个前导符号`##`（见\@ref(opts-comment)节）。由于**knitr**将文本放在隔离的代码块中，所以文本是逐字的。例如，对于代码`1:5`，**knitr**的原始输出为：
+
+
+````md
+```
+## [1] 1 2 3 4 5
+```
+````
+
+有时你可能不希望逐字输出文本，而是将文本输出视为Markdown的内容。例如，你可能想写一个类似`cat('# 这是一个标题')`的节标题，但原始的输出是：
+
+
+````md
+```
+## # 这是一个标题
+```
+````
+
+你不希望文本位于隔离的代码块（或开头的`##`）中，也就是说，你希望原始输出与传递给`cat()`的字符串完全一致：
+
+````md
+# 这是一个标题
+````
+
+这个问题的解决方案是块选项'`results = 'asis'`\index{chunk option!results}。这个选项告诉**knitr**不要将文本输出逐字包装成代码块，而是“原样”对待它。当你想要从R代码动态生成内容时，这一点特别有用。例如，你可以使用选项`results = 'asis'`从以下代码块生成`iris`数据的列名列表:
+
+
+```{r, iris-asis, results='asis'}
+cat(paste0('- `', names(iris), '`'), sep = '\n')
+```
+
+连字符（`-`）是Markdown中用于生成无序列表的语法，其中反引号是可选的。若没有设置`results = 'asis'`选项，则上述代码块的输出为：
+
+
+```{r, iris-asis, comment=''}
+```
+
+下面是一个完整的例子，展示了如何在`for`循环中为`mtcars`数据的所有列生成节标题、段落和图：
+
+
+`r import_example('generate-content.Rmd')`
+
+需要注意的是，我们在代码中添加了过多的换行符（`\n`），这是因为我们希望不同的元素在Markdown的内容中清晰地分开。在不同的元素之间使用过多的换行符是无害的，但是如果换行符不够，就会产生问题。例如，下面的Markdown文本就会产生很多的歧义：
+
+
+```md
+# 这是一个标题吗？
+这是一个段落还是标题的一部分呢？
+![这张图片呢？](foo.png)
+# 这行又是什么？
+```
+
+如果产生了更多的空行（可以由`cat('\n')`生成），则歧义就会消失：
+
+
+```md
+# 这是一个标题！
+
+这绝对是个段落。
+
+![这是一张图。](foo.png)
+
+# 这是另一个标题
+```
+
+`cat()`函数不是唯一可以生成文本输出的函数，另一个常用的函数是`print()`。需要注意的是，`print()`经常被 _隐式_ 调用来打印对象，这就是为什么你在R控制台（console）中输入一个对象或值后会看到输出。例如，当你在R控制台中输入`1:5`并按下`Enter`键时，你会看到输出，因为R实际上隐式地调用了`print(1:5)`。经常令人感到困惑的是，你不能在表达式（例如`for`循环）中直接生成输出，而如果在R控制台上输入对象或值，它们将被正确打印出来。这个主题非常技术性，具体细节可以参看博文["The Ghost Printer behind Top-level R Expressions"](https://yihui.org/en/2017/06/top-level-r-expressions/)。如果你对技术细节不感兴趣，只要记住这条规则即可：如果你没有看到`for`循环的输出，那么你可能应该使用`print()`函数来显式地打印对象。
+
+## 删除文本输出中的前导符号 {#opts-comment}
+
+<!-- https://stackoverflow.com/questions/15081212/remove-hashes-in-r-output-from-r-markdown-and-knitr -->
+
+默认情况下，R代码输出将在文本输出的前面插入两个符号`##`。我们可以通过块选项`comment`\index{chunk option!comment} 来改变这种输出。如果要删除`##`，可以使用空字符串，例如:
+
+````md
+```{r, comment=""}`r ''`
+1:100
+```
+````
+
+当然，你可以使用任何其他的字符值，例如，`comment = "#>"`。那么为什么`comment`选项默认为`##`呢？这是因为`#`表示R中的注释，当文本输出被注释掉时，从报告中的代码块中一次性复制所有代码并自己运行它将更容易，不需要担心运行文本输出（并非R代码）会报错。例如，在下面的代码块中，你可以复制所有四行文本，并将它们作为R代码正确地运行：
+
+```{r, comment-hash, collapse=TRUE}
+1 + 1
+2 + 2
+```
+
+而如果你通过`comment = ""`删除`##`，你通常会无法直接运行所有的代码。如下面的例子所展示的，如果你直接复制这四行，你将不得不手动删除第二和第四行：
+
+
+```{r, comment-hash, comment="", collapse=TRUE}
+```
+
+设置`comment = ""`的一个理由是，使用R控制台（console）的用户对其更为熟悉。在R控制台中，你不会在文本输出前面看到`##`。如果你想真正模仿R控制台的行为，你可以将`comment = ""`和`prompt = TRUE`\index{chunk option!prompt}结合在一起使用，例如：
+
+````md
+```{r, comment="", prompt=TRUE}`r ''`
+1 + 1
+if (TRUE) {
+  2 + 2
+}
+```
+````
+
+如果你曾经在R控制台中输入并运行过代码，那么输出结果看起来应该相当熟悉，因为源代码中包含提示字符（prompt character）`>`和延续字符（continuation character）`+`：
+
+```{r, comment="", prompt=TRUE, collapse=TRUE}
+1 + 1
+if (TRUE) {
+  2 + 2
+}
+```
+
+## 为文本输出块添加属性 (\*) {#attr-output}
+
+在\@ref(chunk-styling)节中，我们展示了一些基于块选项`class.source`\index{chunk option!class.source}和`class.output`\index{chunk option!class.output}样式化代码块和文本输出块的示例。实际上，在**knitr**中有更多类似的选项，如`class.message`\index{chunk option!class.message}、`class.warning`\index{chunk option!class.warning}以及`class.error`\index{chunk option!class.error}。这些选项可以用于将类名添加到相应的文本输出块中，例如`error = TRUE`\index{chunk option!error}（见\@ref(opts-error)节）。这些选项最常见的应用可能是使用根据类名定义的CSS规则\index{CSS}对输出块进行样式化，就像在\@ref(chunk-styling)节中演示的那样。
+
+通常情况下，文本输出块本质上是一个单独的代码块，它的Markdown源代码如下所示：
+
+````md
+```{.className}
+输出行
+```
+````
+
+当输出格式为HTML时，通常会转换为^[也可以转换为`<div class="className"></div>`，可以查看HTML输出文档的源代码来确定]:
+
+````html
+<pre class="className">
+<code>输出行</code>
+</pre>
+````
+
+`class.*`选项控制了`<pre>`元素中的`class`属性，而`<pre>`是我们上面提到的文本输出块的“容器”。
+
+事实上，这个类只是HTML中`<pre>`元素可能的属性之一。一个HTML元素可以有许多其他属性，比如宽度、高度和样式等。块选项`attr.*`,包括`attr.source`\index{chunk option!attr.source}、`attr.output`\index{chunk option!attr.output}、`attr.message`\index{chunk option!attr.message}、`attr.warning`\index{chunk option!attr.warning}以及`attr.error`\index{chunk option!attr.error}，允许你向文本输出块添加任意属性。例如，使用`attr.source = 'style="background: pink;"'`，你可以将源代码块的背景颜色更改为粉红色，相应的代码块将是
+
+````md
+```{style="background: pink;"}
+...
+```
+````
+
+以及HTML输出会是：
+
+````html
+<pre style="background: pink;">
+...
+</pre>
+````
+
+更多的例子可以参见\@ref(number-lines)节和\@ref(hook-scroll)节。
+
+作为一个技术说明，块选项`class.*`只是`attr.*`的特殊情况，例如，`class.source = 'numberLines'`等价于`attr.source = '.numberLines'`（注意这里的前导点），但`attr.source`可以取任意的属性值，例如`attr.source = c('.numberLines', 'startFrom="11"')`。
+
+这些选项对HTML输出非常有用。在某些情况下，这些属性可能对其他输出格式也有用，但这种情况相对较少。这些属性需要被Pandoc或第三方的包支持。例如Pandoc中，`.numberLines`属性适用于HTML和LaTeX输出；第三方的包则通常需要通过一个Lua过滤器，详情请参见\@ref(lua-filters)节。
+
+## 图像的后期加工 (\*) {#fig-process}
+
+代码块生成图像后，你可以通过块选项`fig.process`\index{chunk option!fig.process}\index{figure!post-processing}对图像文件进行后期加工。处理过程应该是一个输入文件路径，返回已处理图像文件路径的函数。该函数可以有第二个可选参数`options`，代表一个由当前块选项组成的列表。
+
+下面我们展示了一个使用功能强大的**magick**包 [@R-magick]\index{R package!magick}来在图像中添加R logo的例子。如果你不熟悉这个包，可以阅读它的在线文档或包简介，其中包含许多示例。首先，我们定义一个函数`add_logo()`：
+
+```{r, eval = FALSE}
+install.packages("magick")
+```
+
+```{r}
+add_logo = function(path, options) {
+  # 代码块中创建的图像
+  img = magick::image_read(path)
+  # R logo
+  logo = file.path(R.home("doc"), "html", "logo.jpg")
+  logo = magick::image_read(logo)
+  # 默认的重力方向为西北，用户可以通过代码块来改变它
+  # option magick.gravity
+  if (is.null(g <- options$magick.gravity)) g = 'northwest'
+  # 在图像中添加 logo
+  img = magick::image_composite(img, logo, gravity = g)
+  # 写入新的图像中 
+  magick::image_write(img, path)
+  path
+}
+```
+
+该函数会读取图像的路径，添加R logo，并将新图像保存到原路径。在默认情况下，logo会被添加到图像的左上角（西北方向），但用户可以通过自定义块选项`magick.gravity`（这个选项名可以是任意的）来自定义位置。
+
+现在我们将上面的处理函数应用到下面的代码块上，并使用块选项`fig.process = add_logo` 和 `magick.gravity = "northeast"`，所以logo会被添加到右上角。实际输出见图 \@ref(fig:magick-logo)。
+
+```{r, magick-logo, dev='png', fig.retina=1, fig.process=add_logo, magick.gravity = 'northeast', fig.cap='Add the R logo to a plot via the chunk option fig.process.'}
+par(mar = c(4, 4, .1, .1))
+hist(faithful$eruptions, breaks = 30, main = '', col = 'gray', border = 'white')
+```
+
+在你对**magick**包更加熟悉后，你就可以通过更有创意和有用的想法来后期加工你的图像。
+
+最后，我们展示了`fig.process`选项的另一个应用。下例中的`pdf2png()`函数可以将PDF图像转换成PNG格式。在\@ref(graphical-device)节中，我们有一个使用`tikz`图像设备来生成图的例子。但问题是，该设备生成的PDF图不适用于非LaTeX的输出文档。在设置块选项`dev = "tikz"` 和 `fig.process = pdf2png`后，我们可以显示PNG版本的图 \@ref(fig:dev-tikz)。
+
+```{r}
+pdf2png = function(path) {
+  # 只对非LaTeX的输出进行转换
+  if (knitr::is_latex_output()) return(path)
+  path2 = xfun::with_ext(path, "png")
+  img = magick::image_read_pdf(path)
+  magick::image_write(img, path2, format = "png")
+  path2
+}
+```
+
+## 高质量的图像 (\*) {#graphical-device}
+
+**rmarkdown**包为不同的输出格式设置了合理的默认图像设备。例如，HTML输出格式使用`png()`设备，所以**knitr**将生成png绘图文件；而PDF输出格式则使用`pdf()`设备。如果你对默认图像设备的输出质量不满意，你可以通过块选项`dev`\index{chunk option!dev}来更改它们。**knitr**支持的设备为：`r knitr::combine_words(names(knitr:::auto_exts), before = '\x60"', after = '"\x60', sep = "，", and = "以及")`。
+
+通常情况下，图像设备名也是函数名。更多关于设备\index{figure!device}的信息请参阅R的帮助页面。例如，你可以在R的控制台中输入`?svg`来了解关于`svg`设备的细节，它包含在R的基础包中，所以不需要额外安装。需要注意的是，`quartz_XXX`设备是基于`quartz()`函数的，并且它们仅在macOS上可用；`CairoXXX`设备来自附加的R包**cairoDevice**[@R-cairoDevice]；`svglite`设备来自**svglite** 包 [@R-svglite]；`tikz`设备在**tikzDevice** 包 [@R-tikzDevice]中。如果你想使用附加包中的设备，你必须先安装这个包。\index{R package!graphics devices}
+
+通常，矢量图比位图质量更高，并且你可以在不损失质量的情况下缩放矢量图。对于HTML输出，你可以使用`dev = "svg"`或`dev = "svglite"`来绘制SVG（可缩放矢量图，Scalable Vector Graphics）。需要注意的是，默认情况下`png`设备生成的图像为位图。
+
+对于PDF输出，如果你对图像中的字体非常挑剔，可以使用`dev = "tikz"`，因为它提供了对LaTeX的原生支持，这意味着图像中的所有元素，包括文本和符号，都可以通过LaTeX以高质量呈现。图 \@ref(fig:dev-tikz)展示了一个在R图像中用块选项'`dev = "tikz"`添加LaTeX数学表达式的例子。
+
+
+```{r, dev-tikz, dev='tikz', tidy=FALSE, fig.cap='通过 tikz  设备呈现的图像。', fig.dim=c(6, 4), fig.align='center', fig.process=pdf2png, cache=TRUE}
+par(mar = c(4, 4, 2, .1))
+curve(dnorm, -3, 3, xlab = '$x$', ylab = '$\\phi(x)$',
+      main = 'The density function of $N(0, 1)$')
+text(-1, .2, cex = 3, col = 'blue',
+  '$\\phi(x)=\\frac{1}{\\sqrt{2\\pi}}e^{\\frac{-x^2}{2}}$')
+```
+
+需要注意的是，R的基础包实际上支持数学表达式，但它们不是通过LaTeX呈现的（具体细节可参见`?plotmath`）。此外，有几个高级选项可以调整`tikz`设备的排版细节（参见`?tikzDevice::tikz`）。例如，如果你的图像中包含多字节字符，你可以设置选项：
+
+```{r, eval=FALSE}
+options(tikzDefaultEngine = 'xetex')
+```
+
+这是因为在处理LaTeX文档中的多字节字符时，`xetex`通常比默认引擎`pdftex`要好。
+
+`tikz`设备主要有两个缺点。首先，它需要安装LaTeX，但这其实并不会很麻烦（见\@ref(install-latex)节），你还需要几个LaTeX包，这些包可以通过TinyTeX很方便地安装：
+
+```{r, tikz-packages, eval=!tinytex:::check_installed(c('pgf', 'preview', 'xcolor')), message=FALSE}
+tinytex::tlmgr_install(c('pgf', 'preview', 'xcolor'))
+```
+
+其次，`tikz`设备渲染图的速度通常要慢得多，因为这个设备会生成LaTeX文件，并且必须将其编译成PDF。如果你觉得代码块很耗时，你可以通过块选项`cache = TRUE`来启用缓存（见\@ref(cache)节）。
+
+对于图 \@ref(fig:dev-tikz)，我们也使用了块选项`fig.process = pdf2png`\index{chunk option!fig.process}，其中当输出格式不是LaTeX时，`pdf2png`函数可以将PDF图转换为PNG，其定义见 \@ref(fig-process)节。如果没有这一转换，你可能无法在web浏览器中查看该书在线版本中的PDF图。
+
+## 带有低级绘图功能的逐步绘图 (\*) {#low-plots}
+
+在R中，有两种类型的绘图函数可以用来画图：高级的绘图函数用于创建新图，以及低级的绘图函数用于在现有的图中添加元素，更多信息请参见R手册《[_An Introduction to R_](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)》的第12章（“Graphical procedures”）。
+
+在默认的情况下，当使用一系列低级的绘图函数\index{figure!intermediate plots}来修改以前的图像时，**knitr**不显示中间的图，只显示所有函数执行后的最后一个图。
+
+然而有的时候，尤其是在教学过程中，展示中间的图像是很有用的。为此，你可以设置块选项`fig.keep = 'low'`\index{chunk option!fig.keep}来保留各低级函数更改后的图。例如，图\@ref(fig:low-plots-1)和图\@ref(fig:low-plots-2)来自一个带有块选项`fig.keep = 'low'`的单个代码块，尽管它们很像两个代码块的输出结果。不仅如此，我们还通过块选项`fig.cap=c('cars ...', '在现有的...')`\index{chunk option!fig.cap}给它们分配了不同的标题。
+
+
+```{r, low-plots, fig.cap=c('cars 数据的点图', '在现有的点图中添加一条回归线'), fig.keep='low'}
+par(mar = c(4, 4, .1, .1))
+plot(cars)
+fit = lm(dist ~ speed, data = cars)
+abline(fit)
+```
+
+如果你想在*不同的*代码块中继续修改这张图，请参阅\@ref(global-device)节。
+
+
+## 在代码块中自定义对象的打印格式 (\*) {#opts-render}
+
+在默认的情况下，代码块中的对象通过`knitr::knit_print()`\index{knitr!knit\_print()}函数来打印，基本上就是R中的`print()`。`knit_print()`函数是一个S3通用函数，这意味着你可以通过在其上注册S3方法来拓展输出方式。下面的例子展示了如何通过`knitr::kable()`来自动将数据框打印成表格：
+
+`r import_example('print-method.Rmd')`
+
+更多关于`knit_print()`函数的信息可参见**knitr**包的\index{R package!knitr}简介：
+
+```{r, eval=FALSE}
+vignette('knit_print', package = 'knitr')
+```
+
+**printr**包\index{R package!printr} [@R-printr]提供了一些S3方法来自动将R对象打印为表格。你只需要在R代码块中输入`library(printr)`，这一所有的方法都将自动注册。
+
+如果你觉得这个技术对你来说太高级了，一些R Markdown输出格式，如`html_document`'和`pdf_document`也提供了一个选项`df_print`，它允许你自定义数据框的打印行为。例如，如果你想通过`knitr::kable()`来将数据框打印为表格，你可以设置选项：
+
+```yaml
+---
+output:
+  html_document:
+    df_print: kable
+---
+```
+
+有关输出格式的更多细节可参阅输出格式的帮助页（如`?rmarkdown::html_document`），可以帮助你了解`df_print`选项支持哪些输出格式，以及对应的值是什么。
+
+事实上，你可以通过块选项`render`来完全代替打印函数`knit_print()`，`render`可以使用任何函数来打印对象。例如，如果你想使用**pander**包\index{R package!pander}来打印对象，你可以设置块选项`render`为函数`pander::pander()`：
+
+
+````md
+```{r, render=pander::pander}`r ''`
+iris
+```
+````
+
+`render`选项给了你完全的自由来打印你的R对象。
+
+
+## 选项钩子 (\*) {#option-hooks}
+
+有时候，你可能想要更具其他块选项的值，来动态地改变某个块选项\index{chunk option!option hooks}\index{option hooks} ，你可以使用对象`opts_hooks`来设置一个*选项钩子*（option hook）来实现这个功能。选项钩子是一个与该选项相关的函数，会在对应的块选项不是`NULL`时自动执行。这个函数将当前代码块的选项列表作为输入参数，并且会返回一个（可能是修改过的）列表。例如，我们可以调整`fig.width`选项，使它总是不小于`fig.height`：
+
+
+```{r, eval=FALSE}
+knitr::opts_hooks$set(fig.width = function(options) {
+  if (options$fig.width < options$fig.height) {
+    options$fig.width = options$fig.height
+  }
+  options
+})
+```
+
+因为`fig.width`永远不会是`NULL`，所以这个钩子函数总是在代码块之前执行，以更新它的块选项。对于下面的代码块，如果设置了上述的选项钩子，则`fig.width`的实际值将是6而不是最初的5：
+
+````md
+```{r fig.width = 5, fig.height = 6}`r ''`
+plot(1:10)
+```
+````
+
+作为另一个例子，我们重写了\@ref(opts-comment)节中的最后一个例子，这样我们就可以使用一个单独的块选项`console = TRUE`来代表`comment = ""`和`prompt = TRUE`。需要注意的是，`console`不是一个内置的**knitr** 块选项，而是一个自定义的任意的选项名，它的默认值是`NULL`。下面是一个完整的例子：
+
+````md
+```{r, include=FALSE}`r ''`
+knitr::opts_hooks$set(console = function(options) {
+  if (isTRUE(options$console)) {
+    options$comment <- ''; options$prompt <- TRUE
+  }
+  options
+})
+```
+
+默认输出为：
+
+```{r}`r ''`
+1 + 1
+if (TRUE) {
+  2 + 2
+}
+```
+
+设置 `console = TRUE` 时的输出为：
+
+```{r, console=TRUE}`r ''`
+1 + 1
+if (TRUE) {
+  2 + 2
+}
+```
+````
+
+第三个例子介绍了如何自动向输出块添加行号，输出块可以包括源代码块、文本输出、message、warning以及报错。我们在\@ref(number-lines)节中已经提到了如何使用块选项，如`attr.source` 和 `attr.output`来添加行号，这里我们想使用单个的块选项（本例中为`numberLines`）来控制我们想要添加行号的输出块。
+
+
+```{r, eval=FALSE, tidy=FALSE}
+knitr::opts_hooks$set(
+  numberLines = function(options) {
+    attrs <- paste0("attr.", options$numberLines)
+    options[attrs] <- lapply(options[attrs], c, ".numberLines")
+    options
+  }
+)
+
+knitr::opts_chunk$set(
+  numberLines = c(
+    "source", "output", "message", "warning", "error"
+  )
+)
+```
+
+基本上，选项挂钩`numberLines`将属性`.numberLines`附加到输出块上，并且通过`opts_chunk$set()`来设置块选项`numberLines`，从而确保选项挂钩会被执行。
+
+通过以上设置，你可以在代码块上使用选项`numberLines`来决定它的哪些输出块将具有行号，例如`numberLines = c('source', 'output')`；而设定`numberLines = NULL`则将完全删除行号。
+
+你可能想知道这种方法与直接设置块选项有何不同，例如，就像在\@ref(number-lines)节那样，我们可以仅设置`knitr::opts_chunk$set(attr.source = '.numberLines')`。本节介绍的选项钩子的优点是，它们只在块选项中*附加*属性`.numberLines`，这意味着它们不会*覆盖*现有的块选项值，例如，下面代码块中的源代码块将被编号（使用上面的设置），并且编号会从第二行开始:
+
+
+````md
+```{r, attr.source='startFrom="2"'}`r ''`
+# 这行注释不会被编号
+1 + 1
+```
+````
+
+这等价于：
+
+````md
+```{r, attr.source=c('startFrom="2"', '.numberLines'}`r ''`
+# 这行注释不会被编号
+1 + 1
+```
+````
