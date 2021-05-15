@@ -443,7 +443,7 @@ add_logo = function(path, options) {
 
 现在我们将上面的处理函数应用到下面的代码块上，并使用块选项`fig.process = add_logo` 和 `magick.gravity = "northeast"`，所以logo会被添加到右上角。实际输出见图 \@ref(fig:magick-logo)。
 
-```{r, magick-logo, dev='png', fig.retina=1, fig.process=add_logo, magick.gravity = 'northeast', fig.cap='Add the R logo to a plot via the chunk option fig.process.'}
+```{r, magick-logo, dev='png', fig.retina=1, fig.process=add_logo, magick.gravity = 'northeast', fig.cap='通过块选项 fig.process 来给一幅图添加 R logo。'}
 par(mar = c(4, 4, .1, .1))
 hist(faithful$eruptions, breaks = 30, main = '', col = 'gray', border = 'white')
 ```
@@ -473,13 +473,16 @@ pdf2png = function(path) {
 
 对于PDF输出，如果你对图像中的字体非常挑剔，可以使用`dev = "tikz"`，因为它提供了对LaTeX的原生支持，这意味着图像中的所有元素，包括文本和符号，都可以通过LaTeX以高质量呈现。图 \@ref(fig:dev-tikz)展示了一个在R图像中用块选项'`dev = "tikz"`添加LaTeX数学表达式的例子。
 
-
-```{r, dev-tikz, dev='tikz', tidy=FALSE, fig.cap='通过 tikz  设备呈现的图像。', fig.dim=c(6, 4), fig.align='center', fig.process=pdf2png, cache=TRUE}
+```{r, eval=FALSE}
 par(mar = c(4, 4, 2, .1))
 curve(dnorm, -3, 3, xlab = '$x$', ylab = '$\\phi(x)$',
       main = 'The density function of $N(0, 1)$')
 text(-1, .2, cex = 3, col = 'blue',
   '$\\phi(x)=\\frac{1}{\\sqrt{2\\pi}}e^{\\frac{-x^2}{2}}$')
+```
+
+```{r, dev-tikz, echo=FALSE, tidy=FALSE, fig.cap='通过 tikz  设备呈现的图像。', fig.dim=c(6, 4), fig.align='center', cache=TRUE}
+knitr::include_graphics('images/tikz-latex.png', dpi = NA)
 ```
 
 需要注意的是，R的基础包实际上支持数学表达式，但它们不是通过LaTeX呈现的（具体细节可参见`?plotmath`）。此外，有几个高级选项可以调整`tikz`设备的排版细节（参见`?tikzDevice::tikz`）。例如，如果你的图像中包含多字节字符，你可以设置选项：
