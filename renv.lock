@@ -135,6 +135,13 @@
       "Repository": "CRAN",
       "Hash": "a0534e167498732ac0137e7ba46364dc"
     },
+    "formatR": {
+      "Package": "formatR",
+      "Version": "1.9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a24bdfd63932fc5616ae5839fa8e399b"
+    },
     "fs": {
       "Package": "fs",
       "Version": "1.5.0",
