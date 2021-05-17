@@ -1,0 +1,52 @@
+---
+title: 在标签`<figure>`中输出图像
+output: html_document
+---
+
+在块选项`options$fig.cap`中给定图像文件路径`x`和图像标题（caption），我们想用如下形式把图像写入HTML5的标签之中：
+
+```html
+<figure>
+  <img src="PATH" alt="CAPTION" />
+  <figcaption>CAPTION</figcaption>
+</figure>
+```
+
+现在我们重新定义`plot`钩子（仅当输出格式为HTML时）:
+
+```{r}
+if (knitr::is_html_output()) knitr::knit_hooks$set(
+  plot = function(x, options) {
+    cap  <- options$fig.cap  # 图像标题
+    tags <- htmltools::tags
+    as.character(tags$figure(
+      tags$img(src = x, alt = cap),
+      tags$figcaption(cap)
+    ))
+  }
+)
+```
+
+代码块中的图像将被放置在`<figure>`标签之中：
+
+
+```{r, fig.cap='一个`cars`数据的散点图'}
+par(mar = c(4.5, 4.5, .2, .2))
+plot(cars, pch = 19, col = 'red')
+```
+
+我们可以进一步添加一些CSS样式来让`<figure>`和`<figcaption>`标签“看”起来更好一些（`figure`有虚线边框，图像标题有浅粉色背景）：
+
+```{css, echo=FALSE}
+figure {
+  border: 2px dashed red;
+  margin: 1em 0;
+}
+figcaption {
+  padding: .5em;
+  background: lightpink;
+  font-size: 1.3em;
+  font-variant: small-caps;
+}
+```
+

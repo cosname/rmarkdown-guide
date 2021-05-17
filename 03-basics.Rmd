@@ -1,0 +1,101 @@
+# 基础知识 {#rmarkdown-basics}
+
+本章介绍读者使用 R Markdown 写作的必要基础知识，包括使用 Markdown 语法为文本赋予格式，用代码段和行内代码两种方式在文档中嵌入 R 代码，如何在 R Markdown 中设置输出格式和它们的细节选项。最后，我们介绍了 R Markdown 的底层的编译机制，说明了 knitr, R Markdown, Pandoc, TinyTeX 等工具是如何协作编译出输出结果的。
+
+
+## 再看 HTML 输出文件
+
+在 \@ref(#create-first-rmd) 节中，我们编译了 `first-rmd.Rmd` 源文档，生成了同名的 `first-rmd.html` HTML 文件，效果如图 \@ref(fig:first-rmarkdown) 所示。本节中，我们进入该 HTML 文件内部，进一步了解 R Markdown 的输出机制。
+
+读者可以用任意文本编辑器打开`first-rmd.html`，略过一大段 `script` 脚本引用后，可以发现如下所示的代码片段，即为该 HTML 文件的文本主体。由于文件内代码较多，建议直接搜索 `This is an R Markdown document` 定位到相应片段。
+
+::: {.no-h-scroll}
+
+```html
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<pre class="r"><code>summary(cars)</code></pre>
+<pre><code>
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+</code></pre>
+</div>
+<div id="including-plots" class="section level2">
+<h2>Including Plots</h2>
+<p>You can also embed plots, for example:</p>
+<p><img src="某个很长的路径" width="672" /></p> 
+<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+</div>
+```
+
+:::
+
+不难发现，上面的代码段与源文档 `first-rmd.Rmd` 之间存在明确的文本对应关系。例如，在 R Markdown 文档 `## R Markdown` 后的前两个段落中，我们有
+
+::: {.no-h-scroll}
+
+```markdown
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```
+
+:::
+
+在 HTML 文件中对应的段落为
+
+::: {.no-h-scroll}
+
+```html
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+```
+
+:::
+
+我们还注意到，HTML 文件中的文本并不是照搬 R Markdown 文件，而是做了相应的替换。最显著的变化是，HTML 文件在两个段落的前后分别添加了 `<p>` 标签，这在 HTML 语法中表示一个单独的段落，而 R Markdown 文件中只在两个段落之间添加了空行，没有做其他的额外标识。再例如， R Markdown 中的 `**Knit**` 在 HTML 中变成了 `<strong>Knit</strong>`, `*` 号变为在 HTML 中标识粗体的 `<strong>` 标签。这说明，R Markdown 的编译机制中存在一种自动的格式上的转换过程，它能将 R Markdown 中的格式标记翻译为 HTML 中相应的格式表达方法。对 PDF 编译感兴趣的读者如果查看输出的 `.tex` 文件，会发现 `**Knit**` 被转换为了 `\textbf{Knit}`，即 TeX 中粗体的表示方法。我们发现，R Markdown 可以让我们使用同一套"源格式"导出至不同的输出格式。这种统一的源格式就是我们将在下一节学习的 Markdown 语法。这里，我们可以把 Markdown 看作一种中介格式，在源文档中告诉 R Markdown "这里需要一个粗体，这里添加下划线，这里是一段引用"，至于这些格式具体在未知的输出格式中如何表现，就由 R Markdown 在最终的编译中决定了。
+
+另外值得注意的是 R 代码的格式。以第一段代码 `summary(cars)` 为例，在 R Markdown 源文档中，该段代码的的格式为
+
+````
+```{r}`r ''`
+summary(cars)
+```
+````
+
+
+其中，开头的`` ```{r} `` 和末尾的三个 `` ``` `` 是特殊的标识符，让 R Markdown 在编译时能区分哪段是文本，哪段是需要运行的代码。读者可能在源文档中注意到 RStudio 为这样的代码段提供了高亮支持，这说明 ````{r}` 对 R Markdown 而言有特殊意义，不是一般的文本符号。当 R Markdown 发现了这样符号定义的代码之后，编译机制就能在适当时候调用相应编程语言的引擎（例如 R）并保存它们的输出结果，转换为相应的格式，最终在 HTML 中体现为
+
+```html
+<pre><code>
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+</code></pre>
+```
+
+同理，当下一个代码段 `plot(pressure)` 的输出结果是图片时，R Markdown 也能正确地使用 HTML 标准中对应的 `<img>` 标签。读者还可能发现该段代码没有出现在 HTML 网页中，只有生成的图片被留了下来。这是因为我们在 `` ```{r} `` 中制定了 `echo = FALSE` 选项，它告诉 R Markdown 仅保留该段代码的输出结果，而隐藏代码本身。本书的后续章节将介绍更多类似的代码段选项，进一步定制 R Markdown 文档的输出。
+
+## Markdown 语法
+
+
+
+## 使用 R 代码
+
+## 输出格式
+
+
+## R Markdown 的编译过程
+
+
