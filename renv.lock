@@ -305,10 +305,10 @@
     },
     "magick": {
       "Package": "magick",
-      "Version": "2.7.1",
+      "Version": "2.7.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0a4b19d639b5b177a4179fbc8a1d7fee"
+      "Hash": "db36bbb91bf293f0550c51ecbf6f1928"
     },
     "magrittr": {
       "Package": "magrittr",
