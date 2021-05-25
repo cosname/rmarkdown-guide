@@ -389,7 +389,7 @@ knitr::include_graphics('images/striped-table.png', dpi = NA)
 
 ## **kableExtra** 包 {#kableextra}
 
-**kableExtra** 包 [@R-kableExtra]\index{R package!kableExtra} 设计的目的为扩展`knitr::kable()`生成表格的基本功能（见\@ref(kable)节）。由于`knitr::kable()`的设计很简单，就像很多其他的R包一样，它肯定有很多缺失的功能，而**kableExtra**完美地填补了空白。最令人惊讶的是，**kableExtra**的大多数表格的特性都适用于HTML和PDF格式，例如，绘制如图\@ref(fig:striped-table))的条纹表。
+**kableExtra** 包 [@R-kableExtra]\index{R package!kableExtra} 设计的目的为扩展`knitr::kable()`生成表格的基本功能（见\@ref(kable)节）。由于`knitr::kable()`的设计很简单，就像很多其他的R包一样，它肯定有很多缺失的功能，而**kableExtra**完美地填补了空白。最令人惊讶的是，**kableExtra**的大多数表格的特性都适用于HTML和PDF格式，例如，绘制如图\@ref(fig:striped-table)的条纹表。
 
 一般情况下，**kableExtra** 包可以通过CRAN安装，你也可以尝试GitHub上的开发版本 (https://github.com/haozhu233/kableExtra):
 

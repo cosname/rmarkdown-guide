@@ -63,4 +63,6 @@ options(bookdown.post.latex = function(x) {
   x = x[-unlist(mapply(seq, i1, i2, SIMPLIFY = FALSE))]
   x
 })
+
+options(tinytex.verbose = TRUE)
 ```

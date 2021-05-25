@@ -14,6 +14,40 @@ knitr::write_bib(c(
   'r2d3',
   'yaml',
   'sass',
-  'flexdashboard'
+  'flexdashboard',
+  'kableExtra',
+  'flextable',
+  'huxtable',
+  'gt',
+  'gtsummary',
+  'formattable',
+  'DT',
+  'reactable',
+  'rhandsontable',
+  'pixiedust',
+  'stargazer',
+  'xtable',
+  'tables',
+  'pander',
+  'tangram',
+  'ztable',
+  'condformat',
+  'magick',
+  'cairoDevice',
+  'svglite',
+  'tikzDevice',
+  'printr',
+  'ggplot2',
+  'xfun',
+  'pagedown',
+  'broom',
+  'xaringan',
+  'styler'
 ), 'packages.bib')
+
+# lapply(pkgs, function(pkg) {
+#     if (system.file(package = pkg) != '') return()
+#     renv::install(pkg, repos = "https://cloud.r-project.org/") 
+#     }
+# )
 ```
