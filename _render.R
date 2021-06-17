@@ -12,14 +12,14 @@ for (fmt in formats) {
 }
 unlink('rmarkdown-guide.log')
 
-r = '<body onload="window.location = \'https://cosname.github.io\'+location.pathname">'
-if (travis) for (f in list.files('_book', '[.]html$', full.names = TRUE)) {
-  x = readLines(f)
-  if (length(i <- grep('^\\s*<body>\\s*$', x)) == 0) next
-  # patch HTML files in gh-pages if built on Travis, to redirect to official site
-  x[i[1]] = r
-  writeLines(x, f)
-}
+# r = '<body onload="window.location = \'https://cosname.github.io\'+location.pathname">'
+# if (travis) for (f in list.files('_book', '[.]html$', full.names = TRUE)) {
+#   x = readLines(f)
+#   if (length(i <- grep('^\\s*<body>\\s*$', x)) == 0) next
+#   # patch HTML files in gh-pages if built on Travis, to redirect to official site
+#   x[i[1]] = r
+#   writeLines(x, f)
+# }
 
 redirect = function(from, to) {
   to = paste0('https://cosname.github.io', to)
