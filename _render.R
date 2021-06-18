@@ -1,6 +1,5 @@
 quiet = "--quiet" %in% commandArgs(FALSE)
 formats = commandArgs(TRUE)
-travis = !is.na(Sys.getenv('CI', NA))
 
 # provide default formats if necessary
 if (length(formats) == 0) formats = c('bookdown::pdf_book', 'bookdown::gitbook')
@@ -12,14 +11,6 @@ for (fmt in formats) {
 }
 unlink('rmarkdown-guide.log')
 
-r = '<body onload="window.location = \'https://cosname.github.io\'+location.pathname">'
-if (travis) for (f in list.files('_book', '[.]html$', full.names = TRUE)) {
-  x = readLines(f)
-  if (length(i <- grep('^\\s*<body>\\s*$', x)) == 0) next
-  # patch HTML files in gh-pages if built on Travis, to redirect to official site
-  x[i[1]] = r
-  writeLines(x, f)
-}
 
 redirect = function(from, to) {
   to = paste0('https://cosname.github.io', to)
@@ -29,8 +20,3 @@ redirect = function(from, to) {
 }
 # 重定向更名的网页，如：
 # redirect('r-markdown-components.html', 'rmarkdown-process.html')
-
-# 只在一个人的电脑上发布到 bookdown.org
-if (length(formats) > 1 && Sys.getenv('USER') == 'qiushi') {
-  bookdown::publish_book(account = 'qiushi', server = 'bookdown.org')
-}
