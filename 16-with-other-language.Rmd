@@ -21,7 +21,7 @@ if (!is.na(i)) engs = head(engs, i - 1)
 engs
 ```
 
-目前，大多数非r语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录(通过 `cd` )不会跨不同的bash块持久存在。只有 R、Python 和 Julia 代码块在同一个会话中执行。请注意，所有的R代码块都在同一个R会话中执行，所有的Python代码块都在同一个Python会话中执行，等等。R会话和Python会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象(参见[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节)。
+目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录(通过 `cd` )不会跨不同的bash块持久存在。只有 R、Python 和 Julia 代码块在同一个会话中执行。请注意，所有的R代码块都在同一个R会话中执行，所有的Python代码块都在同一个Python会话中执行，等等。R会话和Python会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象(参见[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节)。
 
 *R Markdown权威指南* ([Xie, Allaire, and Grolemund 2018](https://bookdown.org/yihui/rmarkdown-cookbook/other-languages.html#ref-rmarkdown2018)) 的[2.7节](https://bookdown.org/yihui/rmarkdown/language-engines.html) 展示了如何在R Markdown中使用Python, Shell, SQL, Rcpp, Stan, JavaScript, CSS, Julia, C，和Fortran代码。在本章中，我们将展示更多的语言引擎，你可以在下面的库中找到更多的例子： https://github.com/yihui/knitr-examples （查找包含单词引擎的文件名）。
 

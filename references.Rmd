@@ -14,6 +14,7 @@ knitr::write_bib(c(
   'r2d3',
   'yaml',
   'sass',
+<<<<<<< HEAD
   'flexdashboard',
   'kableExtra',
   'flextable',
@@ -42,7 +43,14 @@ knitr::write_bib(c(
   'pagedown',
   'broom',
   'xaringan',
-  'styler'
+  'styler',
+  'xaringanthemer',
+  'showtext',
+  'xaringanExtra',
+  'officedown'
+=======
+  'flexdashboard'
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {
