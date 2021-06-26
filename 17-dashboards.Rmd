@@ -19,7 +19,7 @@
 
 ## 入门
 
-首先，安装`flexdashboard`包：
+首先，安装 `flexdashboard` 包：
 
 ```
 install.packages("flexdashboard")

@@ -21,9 +21,9 @@ if (!is.na(i)) engs = head(engs, i - 1)
 engs
 ```
 
-目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录(通过 `cd` )不会跨不同的bash块持久存在。只有 R、Python 和 Julia 代码块在同一个会话中执行。请注意，所有的R代码块都在同一个R会话中执行，所有的Python代码块都在同一个Python会话中执行，等等。R会话和Python会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象(参见[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节)。
+目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录(通过 `cd` )不会跨不同的 bash 块持久存在。只有 R、Python 和 Julia 代码块在同一个会话中执行。请注意，所有的R代码块都在同一个 R 会话中执行，所有的 Python 代码块都在同一个Python会话中执行，等等。R 会话和 Python 会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象(参见[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节)。
 
-*R Markdown权威指南* ([Xie, Allaire, and Grolemund 2018](https://bookdown.org/yihui/rmarkdown-cookbook/other-languages.html#ref-rmarkdown2018)) 的[2.7节](https://bookdown.org/yihui/rmarkdown/language-engines.html) 展示了如何在R Markdown中使用Python, Shell, SQL, Rcpp, Stan, JavaScript, CSS, Julia, C，和Fortran代码。在本章中，我们将展示更多的语言引擎，你可以在下面的库中找到更多的例子： https://github.com/yihui/knitr-examples （查找包含单词引擎的文件名）。
+*R Markdown权威指南* ([Xie, Allaire, and Grolemund 2018](https://bookdown.org/yihui/rmarkdown-cookbook/other-languages.html#ref-rmarkdown2018)) 的[2.7节](https://bookdown.org/yihui/rmarkdown/language-engines.html) 展示了如何在 R Markdown 中使用 Python, Shell, SQL, Rcpp, Stan, JavaScript, CSS, Julia, C，和 Fortran 代码。在本章中，我们将展示更多的语言引擎，你可以在下面的库中找到更多的例子： https://github.com/yihui/knitr-examples （查找包含单词引擎的文件名）。
 
 首先，让我们通过注册一个自定义语言引擎来揭示语言引擎是如何工作的。
 
@@ -33,8 +33,8 @@ engs
 
 ```{r echo=FALSE}
 knitr::knit_engines$set(foo = function(options) {
-  # the source code is in options$code;
-  # just do whatever you want with it
+  # 源代码在optio ns$code
+  # 你想怎么做就怎么做
 })
 ```
 
@@ -49,9 +49,7 @@ knitr::knit_engines$set(foo = function(options) {
 ```
 ````
 
-`options`的代码元素是一个字符向量 `c('1 + 1', '2 + 2')`。
-
-语言引擎实际上不必处理计算机语言，但可以处理代码块中的任何文本。首先，我们展示一个简单的引擎示例，该引擎将代码块的内容转换为大写：
+`options` 的代码元素是一个字符向量 `c('1 + 1', '2 + 2')`。语言引擎实际上不必处理计算机语言，但可以处理代码块中的任何文本。首先，我们展示一个简单的引擎示例，该引擎将代码块的内容转换为大写：
 
 ```{r}
 knitr::knit_engines$set(upper = function(options) {
@@ -60,7 +58,7 @@ knitr::knit_engines$set(upper = function(options) {
 })
 ```
 
-关键是我们将 `toupper` 函数应用于代码，并以单个字符串的形式返回结果(通过`\n`连接所有代码行)。注意`toupper()`仅在chunk选项 `eval = TRUE`\index{chunk option!eval} 时才应用，否则返回原始字符串。这向您展示了如何在引擎函数中使用 `eval` 之类的块选项。类似地，你可以考虑在函数体中添加 `if (options$results == 'hide') return()` 来隐藏chunk选项时的输出 `results = 'hide'`\index{chunk option!results} 。下面是一个使用 `upper` 引擎及其输出的示例块
+关键是我们将 `toupper` 函数应用于代码，并以单个字符串的形式返回结果(通过`\n`连接所有代码行)。注意 `toupper()` 仅在 chunk 选项 `eval = TRUE`\index{chunk option!eval} 时才应用，否则返回原始字符串。这向您展示了如何在引擎函数中使用 `eval` 之类的块选项。类似地，你可以考虑在函数体中添加 `if (options$results == 'hide') return()` 来隐藏 chunk 选项时的输出 `results = 'hide'`\index{chunk option!results} 。下面是一个使用 `upper` 引擎及其输出的示例块
 
 > ````md
 > ```{upper}`r ''`
@@ -72,7 +70,7 @@ knitr::knit_engines$set(upper = function(options) {
 > Hello, **knitr** engines!
 > ```
 
-接下来，我们展示一个名为 `py` 的另一种 `python` 引擎的示例^[实际上，你应该改用内置的python引擎，该引擎基于 **reticulate** 软件包，并且更好地支持Python代码块(见15.2节）]。这个引擎是通过R函数 `system2()` 调用 `python` 命令来实现的：
+接下来，我们展示一个名为 `py` 的另一种 `python` 引擎的示例^[实际上，你应该改用内置的 python 引擎，该引擎基于 **reticulate** 软件包，并且更好地支持 Python 代码块]。这个引擎是通过 R 函数 `system2()` 调用 `python` 命令来实现的：
 
 ```{r, tidy=FALSE}
 knitr::knit_engines$set(py = function(options) {
@@ -114,7 +112,7 @@ knitr::knit_engines$set(py = function(options) {
 我们知道你喜欢 Python，所以让我们把它说清楚： R Markdown 和 **knitr** 确实支持 Python\index{language engine!python}\index{Python}。
 
 
-要将 Python 代码块添加到R Markdown文档中，可以在块的头部变为```` ```{python}````，例如：
+要将 Python 代码块添加到 R Markdown 文档中，可以在块的头部变为```` ```{python}````，例如：
 
 ````md
 ```{python}`r ''`
@@ -122,9 +120,9 @@ print("Hello Python!")
 ```
 ````
 
-你可以像往常一样在chunk头中添加chunk选项，比如 `echo = FALSE` 或 `eval = FALSE` ，并且也支持使用Python中的 **matplotlib** 包绘图。
+你可以像往常一样在 chunk 头中添加 chunk 选项，比如 `echo = FALSE` 或 `eval = FALSE` ，并且也支持使用Python中的 **matplotlib** 包绘图。
 
-R Markdown 和 **knitr** 中的Python支持是 **reticulate** 包\index{R package!reticulate} [@R-reticulate]，这个包的一个重要特性是它允许Python和R之间的双向通信。例如，你可以在R会话中通过**reticulate**包中的py对象访问或创建Python变量：
+R Markdown 和 **knitr** 中的 Python 支持是 **reticulate** 包\index{R package!reticulate} [@R-reticulate]，这个包的一个重要特性是它允许 Python 和 R 之间的双向通信。例如，你可以在 R 会话中通过**reticulate**包中的 py 对象访问或创建 Python 变量：
 
 `r import_example('python.Rmd')`
 
@@ -143,8 +141,7 @@ getRandomNumber <- function() {
 ```
 
 ```{asis, echo = getRandomNumber() == 4}`r ''`
-According to https://xkcd.com/221/, we just generated
-a **true** random number!
+根据 https://xkcd.com/221/,  我们刚生成的是一个**真**随机数!
 ```
 ````
 
@@ -152,7 +149,7 @@ a **true** random number!
 
 ## 执行 Shell 脚本 {#eng-bash}
 
-你可以根据你的喜好，使用 `bash`、 `sh` 或 `zsh` 任何一种引擎\index{language engine!bash}\index{language engine!sh}\index{language engine!zsh}运行Shell脚本。下面是一个带有 chunk 头 ```` ```{bash}```` 的 bash 示例：
+你可以根据你的喜好，使用 `bash`、 `sh` 或 `zsh` 任何一种引擎\index{language engine!bash}\index{language engine!sh}\index{language engine!zsh}运行 Shell 脚本。下面是一个带有 chunk 头 ```` ```{bash}```` 的 bash 示例：
 
 ```{bash eval=FALSE}
 ls *.Rmd | head -n 5
@@ -170,24 +167,24 @@ echo $PATH
 ```
 ````
 
-如果你想对所有 `bash` 块全局启用 `-l` 参数，你可以在文档开头的global chunk选项中设置为：
+如果你想对所有 `bash` 块全局启用 `-l` 参数，你可以在文档开头的 global chunk 选项中设置为：
 
 ```{r, eval=FALSE}
 knitr::opts_chunk$set(engine.opts = list(bash = '-l'))
 ```
 
-还可以将其他参数作为字符向量提供给chunk选项`engine.opts`\index{chunk option!engine.opts}，从而传递给`bash`。
+还可以将其他参数作为字符向量提供给 chunk 选项`engine.opts`\index{chunk option!engine.opts}，从而传递给 `bash`。
 
 
 ## 用 D3 可视化{#d3}
 
-**r2d3**包 [@R-r2d3]\index{R package!r2d3} (Luraschi和Allaire 2018)是 D3 可视化的接口。这个包可以用于 R Markdown 文档以及其他应用程序(如 Shiny)。要在 R Markdown 中使用它，您可以在代码块中调用它的函数 `r2d3()`，或者使用它的 `d3` 引擎\index{language engine!D3}\index{D3}\index{figure!D3}。后者要求你理解 D3 库和 JavaScript，这超出了本书的范围，我们将把它们留给读者去学习。下面是一个使用 `d3` 引擎绘制柱状图的例子：
+**r2d3**包 [@R-r2d3]\index{R package!r2d3} (Luraschi和Allaire 2018)是 D3 可视化的接口。这个包可以用于 R Markdown 文档以及其他应用程序(如 Shiny)。要在 R Markdown 中使用它，你可以在代码块中调用它的函数 `r2d3()`，或者使用它的 `d3` 引擎\index{language engine!D3}\index{D3}\index{figure!D3}。后者要求你理解 D3 库和 JavaScript，这超出了本书的范围，我们将把它们留给读者去学习。下面是一个使用 `d3` 引擎绘制柱状图的例子：
 
 `r import_example('d3.Rmd')`
 
 ## 通过 `cat` 引擎将块内容写入文件 {#eng-cat}
 
-有时将代码块的内容写入外部文件，然后在其他代码块中使用此文件可能会很有用。当然，您可以通过 `writeLines()` 等 R 函数来实现这一点，但问题是，当内容相对较长或包含特殊字符时，传递给 `writeLines()` 的字符串可能看起来很笨拙。下面是将长字符串写入文件 `my-file.txt` 的示例：
+有时将代码块的内容写入外部文件，然后在其他代码块中使用此文件可能会很有用。当然，你可以通过 `writeLines()` 等 R 函数来实现这一点，但问题是，当内容相对较长或包含特殊字符时，传递给 `writeLines()` 的字符串可能看起来很笨拙。下面是将长字符串写入文件 `my-file.txt` 的示例：
 
 ```{r, eval=FALSE}
 writeLines("This is a long character string.
@@ -199,9 +196,9 @@ about how many backslashes you need, e.g., is it
 con = "my-file.txt")
 ```
 
-自R 4.0.0以来，这个问题已经大大缓解了，因为R开始支持 `r"( )"` 中的原始字符串(参见帮助页面 `?Quotes`)，而且你不需要记住所有关于特殊字符的规则。即使使用原始字符串，在代码块中显式地将长字符串写入文件仍然会让读者分心。
+自 R 4.0.0 以来，这个问题已经大大缓解了，因为 R 开始支持 `r"( )"` 中的原始字符串(参见帮助页面 `?Quotes`)，而且你不需要记住所有关于特殊字符的规则。即使使用原始字符串，在代码块中显式地将长字符串写入文件仍然会让读者分心。
 
-**knitr** 中的 `cat` 引擎\index{language engine!cat}为你提供了一种在代码块中呈现文本内容或将其写入外部文件的方法，而无需考虑有关R字符串的所有规则（例如，当需要字面上的反斜杠时，你需要双反斜杠）。
+**knitr** 中的 `cat` 引擎\index{language engine!cat}为你提供了一种在代码块中呈现文本内容或将其写入外部文件的方法，而无需考虑有关 R 字符串的所有规则（例如，当需要字面上的反斜杠时，你需要双反斜杠）。
 
 要将块内容写入文件，请在块选项 `engine.opts`\index{chunk option!engine.opts} 中指定文件路径，例如 `engine.opts = list(file = 'path/to/file')`。在引擎盖下，在 `engine.opts`\index{chunk option!engine.opts} 中指定的值列表将传递给该函数
 
@@ -231,7 +228,7 @@ con = "my-file.txt")
 
 `r import_example("cat-latex.Rmd")`
 
-在上面的 `cat` 代码块中的 LaTeX 代码中，我们定义了 PDF 文档的页眉和页脚。如果我们还想在页脚中显示作者姓名，我们可以用选项`engine.opts = list(file = 'preamble.tex', append = TRUE)` 和 `code = sprintf('\\fancyfoot[LO,RE]{%s}', rmarkdown::metadata$author)`将作者信息附加到另一个 `cat` 代码块中的 `preamble.tex` 中。要理解这是如何工作的，请回忆一下我们在本节前面提到的：`engine.opts` 被传递给 `base::cat()`。(因此 `append = TRUE` 被传递给 `cat()`)，你可以通过阅读16.2节来理解chunk选项代码。
+在上面的 `cat` 代码块中的 LaTeX 代码中，我们定义了 PDF 文档的页眉和页脚。如果我们还想在页脚中显示作者姓名，我们可以用选项`engine.opts = list(file = 'preamble.tex', append = TRUE)` 和 `code = sprintf('\\fancyfoot[LO,RE]{%s}', rmarkdown::metadata$author)`将作者信息附加到另一个 `cat` 代码块中的 `preamble.tex` 中。要理解这是如何工作的，请回忆一下我们在本节前面提到的：`engine.opts` 被传递给 `base::cat()`。(因此 `append = TRUE` 被传递给 `cat()`)，你可以通过阅读 16.2 节来理解 chunk 选项代码。
 <!-- \@ref(option-code) -->
 
 
@@ -261,7 +258,7 @@ b:
   bb: 2
 ```
 
-为了显示文件 `demo.yml`确实已经生成，我们可以尝试使用 **yaml** 包[@R-yaml]将其读入 R。
+为了显示文件 `demo.yml` 确实已经生成，我们可以尝试使用 **yaml** 包[@R-yaml]将其读入 R。
 
 ```{r}
 xfun::tree(yaml::read_yaml('demo.yml'))
@@ -334,7 +331,7 @@ draw(s,lightgray+opacity(0.7));
 grid3(XYZgrid);
 ```
 
-注意，对于PDF输出，可能需要一些额外的 LaTeX 包，否则可能会出现如下错误：
+注意，对于 PDF 输出，可能需要一些额外的 LaTeX 包，否则可能会出现如下错误：
 
 
 ```
@@ -347,7 +344,7 @@ grid3(XYZgrid);
 
 
 
-### 在R中生成数据并通过 Asymptote 读取
+### 在 R 中生成数据并通过 Asymptote 读取
 
 现在我们展示一个示例，其中我们首先将在 R 中生成的数据保存到 CSV 文件中(下面是一个 R 代码块)：
 
@@ -392,7 +389,7 @@ unlink('sine.csv')
 
 Sass (https://sass-lang.com) 是一种 CSS 扩展语言，它允许你以比普通 CSS 更灵活的方式创建 CSS 规则\index{CSS!Sass}\index{Sass}。如果你有兴趣学习它，请查看它的官方文档。
 
-**sass** [@R-sass] \index{R package!sass} (Cheng et al. 2020)包可以用来编译 Sass 到 CSS。基于 **sass** 包，**knitr** 包含两个语言引擎： `sass`\index{language engine!sass}和 `scss`\index{language engine!scss} (分别对应于Sass和SCSS语法)，将代码块编译为CSS。下面是一个 `scss` 代码块，头部块为```` ```{scss}````：
+**sass** [@R-sass] \index{R package!sass} (Cheng et al. 2020)包可以用来编译 Sass 到 CSS。基于 **sass** 包，**knitr** 包含两个语言引擎： `sass`\index{language engine!sass}和 `scss`\index{language engine!scss} (分别对应于 Sass 和 SCSS 语法)，将代码块编译为 CSS。下面是一个 `scss` 代码块，头部块为```` ```{scss}````：
 
 ```{scss}
 $font-stack: "Comic Sans MS", cursive, sans-serif;

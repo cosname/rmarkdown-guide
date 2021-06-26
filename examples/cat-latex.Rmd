@@ -1,9 +1,5 @@
 ---
-<<<<<<< HEAD
 title: "从代码块中创建一个 .tex 文件"
-=======
-title: "Create a .tex file from a chunk"
->>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 author: "Jane Doe"
 classoption: twoside
 output: 
@@ -12,16 +8,9 @@ output:
       in_header: preamble.tex
 ---
 
-<<<<<<< HEAD
 # 它是如何运作的
 
 将代码块写入文件 `preamble.tex` 以定义 PDF 输出文档的页眉和页脚：
-=======
-# How it works
-
-Write a code chunk to a file `preamble.tex` to define
-the header and footer of the PDF output document:
->>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 ```{cat, engine.opts=list(file = 'preamble.tex')}
 \usepackage{fancyhdr}
@@ -35,10 +24,6 @@ the header and footer of the PDF output document:
 
 \lipsum[1-15]
 
-<<<<<<< HEAD
 # 更多随机内容
-=======
-# More random content
->>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 \lipsum[16-30]
