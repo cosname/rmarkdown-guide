@@ -5,8 +5,12 @@ runtime: shiny
 ---
 
 ```{r global, include=FALSE}
+<<<<<<< HEAD
+# 在全局块中加载数据，以便仪表盘的所有用户可以共享
+=======
 # load data in 'global' chunk so it can be shared
 # by all users of the dashboard
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 library(datasets)
 data(faithful)
 ```

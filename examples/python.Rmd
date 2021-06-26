@@ -2,26 +2,43 @@
 library(reticulate)
 ```
 
+<<<<<<< HEAD
+在 Python 会话中创建一个变量 `x`:
+
+=======
 Create a variable `x` in the Python session:
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 ```{python}
 x = [1, 2, 3]
 ```
 
+<<<<<<< HEAD
+在 R 代码块中访问 Python 变量 `x`:
+=======
 Access the Python variable `x` in an R code chunk:
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 ```{r}
 py$x
 ```
 
+<<<<<<< HEAD
+在 Python 会话中使用 R 创建一个新变量 `y`， 并传递一个数据帧给 `y`:
+=======
 Create a new variable `y` in the Python session using R,
 and pass a data frame to `y`:
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 ```{r}
 py$y <- head(cars)
 ```
 
+<<<<<<< HEAD
+在 Python 中输出变量 `y`：
+=======
 Print the variable `y` in Python:
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 ```{python}
 print(y)

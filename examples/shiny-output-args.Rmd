@@ -1,9 +1,19 @@
 ---
+<<<<<<< HEAD
+title: 通过呈现函数来设置输出参数
+=======
 title: Setting output args via render functions
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 runtime: shiny
 output: html_document
 ---
 
+<<<<<<< HEAD
+这个交互式 Rmd 文档使用了 `outputArgs`
+参数，并且现在可用于所有 Shiny `render` 函数。 举个例子，这可以让你通过 `renderImage` 设置 `imageOutput` 的参数。 意味着你不必为了刷过图像而创建 `ui` 对象。 注意，这仅适用于交互式  Rmd 期间的 Shiny 代码片段（不适用于嵌入式完整应用程序——你需要调用 `shinyApp` 才能运行的应用程序）。 
+
+## 刷过图像(并存储数据)
+=======
 This interactive Rmd document makes use of the `outputArgs`
 argument now available to all Shiny `render` functions. To
 give an example, this allows you to set arguments to
@@ -14,6 +24,7 @@ Shiny code during an interactive Rmd (and not to embedded
 full apps -- the ones you need to call `shinyApp` to run).
 
 ## Brushing over an image (and storing the data)
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 ```{r setup, echo=FALSE}
 library(datasets)
@@ -39,8 +50,12 @@ renderImage({
 )
 ```
 
+<<<<<<< HEAD
+以下是发送到服务器的一些信息: (刷过图像以更改数据)
+=======
 Here is some of the brushing info sent to the server:
 (brush over the image to change the data)
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 ```{r brush info}
 renderText({ 
@@ -55,7 +70,11 @@ renderText({
 
 ---
 
+<<<<<<< HEAD
+###  调整图片
+=======
 ### Resizing a plot
+>>>>>>> ae2b8c0583b3a1b23c603faa430216390c798072
 
 ```{r plot}
 renderPlot({ 
