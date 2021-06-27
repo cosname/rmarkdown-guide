@@ -46,7 +46,7 @@ knitr::write_bib(c(
   'xaringanthemer',
   'showtext',
   'xaringanExtra',
-  'officedown'
+  'officedown',
   'flexdashboard'
 ), 'packages.bib')
 
