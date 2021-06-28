@@ -1,0 +1,9 @@
+---
+title: My Document
+output: html_document
+params:
+  year: 2021
+  region: China
+  printcode: TRUE
+  data: file.csv
+---

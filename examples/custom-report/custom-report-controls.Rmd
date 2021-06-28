@@ -1,0 +1,26 @@
+---
+title: My Document
+output: html_document
+params:
+  year:
+    label: "年份"
+    value: 2020
+    input: slider
+    min: 2020
+    max: 2030
+    step: 1
+    sep: ""
+  region:
+    label: "区域："
+    value: 欧洲
+    input: select
+    choices: [北美, 欧洲, 亚洲, 非洲]
+  printcode:
+    label: "是否显示源代码"
+    value: TRUE
+  data:
+    label: "数据源："
+    value: results.csv
+    input: file
+---
+

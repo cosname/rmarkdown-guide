@@ -1,0 +1,351 @@
+# 自定义排版 {#custom-output}
+
+本部分主要分为三个部分，第一部分介绍在 R Markdown 中配置文档参数，第二部分介绍
+使用 R Markdown 模板创建文档，第三部分介绍如何自定义一个 R Markdown 模板。
+
+## 有参数的 R Markdown 报告{#parameterized-report}
+
+这部分内容主要介绍使用参数来对 R  Markdown 文档进行更多的定制，这个技巧适合于
+周期性、区域性的自动化报告。
+
+对于 R Markdown 文档来说，只需要一个命令就可以生成一份报告。不过在日常应用过程中，
+一份报告可能会有不同的应用背景。比如日报、周报、月报、年报等这一类的周期性报告，
+可能需要制定相应的时间，而中国、美国等这一类的区域性报告中，则需要经常变动相应的区域。
+
+这些变量可以被视为报告运行的参数，这样的一份报告不妨成为“有参报告”。
+
+### 声明参数 {#params-declare}
+
+有参报告中的参数在 YAML 区块使用 `params` 来指定，每行一个参数。例如：
+
+```yaml
+---
+title: My Document
+output: html_document
+params:
+  year: 2018
+  region: Europe
+  printcode: TRUE
+  data: file.csv
+---
+```
+
+R Markdown 在编译过程中使用 `yaml::yaml.load()` 函数处理参数，可以识别 `character`，
+`numeric`，`integer` 和 `logical` 等不同类型的 R 标准类。此外，我们可以通过 `!r` 前缀
+执行 R 语言表达式，获取参数的值。例如，在报告中使用当前日期可以这样操作：
+
+```yaml
+---
+title: My Document
+output: html_document
+params:
+  date: !r Sys.Date()
+---
+```
+
+YAML 区块中的 R 语言表达式在编译时会先于文档中的其它 R 语言代码执行，因此需要在这里
+使用 `package::function` 的写法来调用不同软件包中的函数（因为即便你在 R Markdown 文档
+中已经使用 `library("package")` 命令，该包在这一阶段仍然没有被载入）。例如：
+
+```yaml
+---
+title: My Document
+output: html_document
+params:
+  date: !r lubridate::today()
+---
+```
+
+
+### 使用参数 {#params-use}
+
+YAML 区块中声明的参数在 R Markdown 中会被保存在一个名为 `params` 的只读列表中，
+可以通过下面的方式来访问它们：
+
+```r
+params$year
+params$region
+```
+
+这些参数可以用来设置 **knitr** 的在编译时的行为。例如通过赋值给 **knitr** 的区块参数 `echo`，
+来改变编译结果中是否显示源代码：
+
+```{r}
+import_example(file = "examples/custom-report/change-echo-value.Rmd")
+```
+
+
+
+### 有参编译 {#params-knit}
+
+除了像上面介绍的在 YAML 区块中声明参数，还有另外两种使用参数的方式：
+
+1. 通过向 `rmarkdown::render()` 函数的 `params` 参数赋值来设置编译的参数；
+2. 通过一个交互性的可视化界面来设置编译参数的值。
+
+例如，下面的例子将起到与 [前文](#params-declare) 一样的效果。
+
+```{r, eval=FALSE, tidy=FALSE}
+rmarkdown::render("MyDocument.Rmd", params = list(
+  year = 2017,
+  region = "Asia",
+  printcode = FALSE,
+  file = "file2.csv"
+))
+```
+
+这两种方法并不冲突，为了方便理解，你不妨将 YAML 区块中的设置视为默认配置。
+当运行 `rmarkdown::render()` 进行有参编译时，如果在 `params` 下有新的设置，
+那么将应用新的设置，否则使用原有的默认配置。
+
+不过，`rmarkdown::render()` 执行有参编译时，也有其配置灵活的优势。
+在下面的例子中，我们可以通过一个自定义函数来指定文档输出的位置。
+
+```{r, eval=FALSE, tidy=FALSE}
+render_report = function(region, year) {
+  rmarkdown::render(
+    "MyDocument.Rmd", params = list(
+      region = region,
+      year = year
+    ),
+    output_file = paste0("Report-", region, "-", year, ".pdf")
+  )
+}
+```
+
+
+使用可视化界面来进行带参编译的方法有两种，一是直接在 RStudio 用户界面中的 `Knit`
+按钮处的下拉菜单中选择 `Knit with Parameters` 命令，二是在 `rmarkdown::render()`
+中将 `params` 的值设为 `"ask"`，即 `rmarkdown::render("MyDocument.Rmd", params="ask")`。
+
+图 \@ref(fig:params-input) 显示了通过可视化界面配置编译参数时的情形。
+
+```{r params-input, echo=FALSE, fig.cap="使用图形界面配置编译参数", out.width="100%"}
+knitr::include_graphics("images/custom-report/knit-with-parameters.png", dpi = NA)
+```
+
+通过可视化界面可以直观的设置编译时所需的参数。而且，除了上图中所列出的样式，
+我们还可以通过 YAML 区块来详细配置编译参数的可用数值范围及显示的模式，从而通过
+滑块、复选框、文本框和下拉菜单来设置参数（图 \@ref(fig:params-controls)）。
+
+```{r params-controls, echo=FALSE, fig.cap="设置对话框的呈现形式", out.width="100%"}
+knitr::include_graphics("images/custom-report/params-knit-interface.png", dpi = NA)
+```
+
+上图对话框的呈现形式通过下面的配置来实现的：
+
+```{r}
+import_example("examples/custom-report/custom-report-controls.Rmd")
+```
+
+在这里，给定了年份、区域等参数的范围，并分别通过滑块和下拉菜单时间实现了便捷赋值。
+除了上面演示的例子，其它一些可用的控件可以参见表格 \@ref(tab:params-types) 。 
+
+```{r, params-types, echo=FALSE}
+knitr::kable(
+  read.table(
+    text = "checkbox	checkboxInput
+            numeric	numericInput
+            slider	sliderInput
+            date	dateInput
+            text	textInput
+            file	fileInput
+            radio	radioButtons
+            select	selectInput
+            password	passwordInput",
+    col.names = c("Input Type", "Shiny Function"),
+    check.names = FALSE
+  ),
+  caption = "有参编译用户界面中可用的 Shiny 控件",
+  booktabs = TRUE
+)
+```
+
+值得一提的是，该处用户界面的生成是基于 **Shiny** 技术的，其本质是一个动态网页。
+因此，欲了解控件的详细配置（包括可用的参数名称）攻略，可以查看相应函数的文档。
+例如 `?shiny::checkboxInput`，`?shiny::radioButtons` 等等。
+
+### 发布文档 {#params-publish}
+
+有参数的 R Markdown 报告也可以发布到包括 RStudio Connect（https://www.rstudio.com/products/connect/）在内的网络服务器上。
+发布后的 R Markdown 报告在运行时相当于一个动态网页，用户可以使用交互性空间设置
+编译的参数，并得到相应的文档。
+
+## 文档模板 {#document-template}
+
+前面已经多次提过，R Markdown 使用文档模板来定义输出的格式。不管是标准的 HTML 文档，
+还是 PDF 文档，亦或是演示文稿等输出格式，都有相应的模板。不同的模板提供不同的功能和
+样式。例如 HTML 文档通常使用 `output: html_document` 作为配置参数，PDF 文档通常使用
+`output: pdf_document` 作为配置参数。
+
+在 RStudio 中新建 R Markdown 文件时，有一项 `"From Template"` 的选项，这里列出了
+当前可用的所有 R Markdown 文档模板。在前面我们讲述如何创建“写轮眼”幻灯片的部分，
+我们曾经使用了这里的功能。
+
+实际上，这些文档模板是拓展 R Markdown 功能的重要途径之一。通过创作自己的
+R Markdown 模板，可以便利很多日常的工作任务。例如：
+
+- 创建一个带有自己组织机构 LOGO、商标和视觉方案的模板，可在文档中充分体现组织特色；
+
+- 在一个模板中指定 `title`，`author`，`date` 等参数的默认值，免得每一次都需要
+重新设置；
+
+- 指定输出文档的布局，并引入 YAML 区块中新的可用参数等。例如，你可以添加一个
+`department` 参数来指定部门的名称；
+
+新的 R Markdown 模板被创建后，可以非常便捷的在 RStudio 中使用（见图 \@ref(fig:templates-select)）。
+
+```{r templates-select, echo=FALSE, fig.cap="在 RStudio 中选择模板", out.width='100%'}
+knitr::include_graphics("images/custom-report/templates-select.png", dpi = NA)
+```
+
+RStudio 中可选的 R Markdown 模板会因为用户安装的软件包差异而有所不同。
+在这一部分的内容中，我们将介绍如何创建一个新的模板。在此之外，你还可以通过参阅一些
+软件包的源代码研究模板的创建。例如 **rticles**（https://github.com/rstudio/rticles）
+软件包中定义了多个学术期刊的文档格式，而 `rmarkdown::html_vignette` 模板则是另一个
+相对简单的实例。
+
+### 模板的结构 {#template-structure}
+
+R Markdown 模板仅可以通过一个新的 R 语言软件包来实现。本文不打算介绍软件包的
+开发，而仅仅涉及模板的制作。对于没有经验的普通用户而言，不妨将这一途径视为 R Markdown
+模板的分发策略。
+
+简单来说，要创建一个新模板，首先需要创建一个 R 语言软件包项目。
+这一步可以在 RStudio 中通过菜单 `File -> New Project` 中选择 “R Package” 来完成。
+
+R Markdown 模板位于软件包项目中的 `inst/rmarkdown/templates` 目录中。
+这一位置是明确指定的，文件夹的名称和结构要确保正确。
+假设我们要新建一个名为 `my_template` 的 R Markdown 模板，则需要在这一目录下再
+新建一个子文件夹，并命名为 `my_template`。则该子文件夹下，至少需要以下两个文件：
+
+```markdown
+template.yaml
+skeleton/skeleton.Rmd
+```
+
+在 **usethis** 软件包中，提供了 `use_rmarkdown_template()` 函数来便捷化这一操作步骤
+（参见`?usethis::use_rmarkdown_template`）。
+
+其中，`template.yaml` 文件被用来指定在 RStudio 的 “From Template” 对话框中显示的
+模板名称和描述。因此，这个 YAML 文件必须要指定 `name` 和 `description` 的值。
+此外，通过设置可选参数 `create_dir: true` 在使用该模板时新建一个文件夹。如下所示：
+
+```yaml
+name: My Template
+description: This is my template
+```
+
+在 `skeleton.Rmd` 文件中，你可以创建一个 R Markdown 文档的默认框架，这里面指定了
+应用该模板新建 R Markdown 文档后其中包括的默认内容。在下面的例子中，我们指定了
+文档的标题、作者、输出格式和主要结构等。
+
+```{r}
+import_example("examples/custom-report/template-skeleton.Rmd")
+```
+
+
+### 模板支持文件 {#template-support}
+
+为了丰富 R Markdown 模板的内容、样式和功能，我们还需要在其中添加其它的支持文件。
+这些文件都需要放置在 `skeleton` 文件夹中，当使用该模板创建的文档被编译时，相关的
+支持文件会自动被拷贝到新文档生成的位置上，从而可以被新文档访问和使用。
+
+如果我们想在模板中加入一个 LOGO 图片和 CSS 样式等内容，则可以在模板文件夹中
+添加 `logo.png` 和 `style.css` 等文件。
+
+```markdown
+template.yaml
+skeleton/skeleton.Rmd
+skeleton/logo.png
+skeleton/styles.css
+```
+
+为了应用新的样式，则需要在 `skeleton.Rmd` 中做下列修改：
+
+```{r}
+import_example("examples/custom-report/template-skeleton-extra.Rmd")
+```
+
+
+### 设置 Pandoc 模板 {#template-pandoc}
+
+前面的章节中已经提过，R Markdown 文档先由 **knitr** 编译为 Markdown，然后再通过
+Pandoc 转换为其它各种不同的输出格式。在 Pandoc 的转换过程是通过对应的 Pandoc 模板
+来实现的。Pandoc 模板的功能是将 YAML 区块的设置应用到文档转换的过程中，对诸如 HTML 
+文档的标题、作者等信息进行设置。
+
+Pandoc 模板是一个标记文档，其中使用美元符号来标记变量和代码，实现文档内容的变化；
+与此同时使用美元符号以外的部分来指定文档的静态内容。在下面的极简 HTML 文档模板中，
+只有两个变量 `$title$` 和 `$body$`，分别指定 HTML 文档的标题和页面内容。
+
+```html
+<html>
+  <head>
+    <title>$title$</title>
+  </head>
+
+  <body>
+  $body$
+  </body>
+</html>
+```
+
+
+创建一个新的 Pandoc 文档模板后，可以在最终生成文档时使用新的变量\index{Pandoc 模板}。
+比如，下面的例子将 [前面](#document-template) 提到的 `department` 的内容写到 HTML 的 `<head></head>` 区域中去。这里使用 `if` 语句来检测是否存在 `department` 的赋值，
+如果存在的话，则将其加入网页的 `<meta />` 区域中。 
+
+```html
+<html>
+  <head>
+    <title>$title$</title>
+    $if(department)$<meta name="department" content="$department$" />$endif$
+  </head>
+
+  <body>
+  $body$
+  </body>
+</html>
+```
+
+值得一提的是，要应用上述 Pandoc 模板，还需要在 R Markdown 的 YAML 区块中进行配置。
+
+
+```yaml
+output:
+  html_document:
+    template: template.html
+```
+
+除此之外，Pandoc 模板还有自己的一套语法来定义文档中的不同元素，包括条件判断、循环、
+列表等的实现方法。其语法定义形式上比较简单，但是可读性较差。
+在其 [官方文档](https://pandoc.org/MANUAL.html#templates) 中可查。
+这部分内容虽然通常不会用到，但是了解这一部分的内容有利于进一步理解 R Markdown 
+动态文档的工作原理。
+
+
+
+### 分享模板 {#template-share}
+
+因为 R Markdown 的文档模板保存在 R 软件包中，所以模板的共享可以通过安装软件包来实现。
+只要把 R Markdown 文档模板的软件包发布在 CRAN 或者 GitHub 网站，就可以通过安装软件包
+的方式来使用该模板。
+
+很多基于 R Markdown 软件包都携带了相应的 R Markdown 模板，包括 **bookdown**，
+**xaringan**，**rticles** 等。如果要深入了解这方面的内容，不妨去参考其源代码。
+
+
+## 创建新的文档格式 {#creating-new-format}
+
+
+
+### {#derived-format}
+
+
+### {#fully-custom-format}
+
+
+### {#using-a-new-format}
+
+
