@@ -15,21 +15,21 @@ output:
 
 1. 如何将自定义 Word 模板应用于文档？
 
-2. 如何在原始 R markdown 文件中纳入单词中所做的更改？
+2. 如何在原始 R markdown 文件中纳入 Word 中所做的更改？
 
-3. 如何样式单个文档元素？
+3. 如何更改单个文档元素的样式？
 
-我们将在本章中解决这些问题。
+本章我们将对以上问题进行一一解答。
 
 ## 创建 word 模板  {#word-new-template}
 
 在 Rstudio 中打开一个新的 R 脚本并选择 Ducument 中的 Word（图 \@ref(fig:word-new1)）。
 
-```{r word-new1, fig.width=6, fig.cap="新建 R Markdown 时可选的 word 格式"}
+```{r word-new1, fig.width=6, echo=FALSE, fig.cap="新建 R Markdown 时可选的 word 格式"}
 knitr::include_graphics("images/word-new1.png")
 ```
 
-这是对应的 rmd 文档 YAML 文件为：
+这时对应的 rmd 文档 YAML 文件为：
 
 ```yaml
 ---
@@ -39,11 +39,14 @@ date: "6/26/2021"
 output: word_document
 ---
 ```
-之后你就可以在这个模板下，将正文部分进行修改，并通过 Knit 进行编译。之后会跳出编译好的结果，通过你的系统默认应用打开。这就是基于 word 模板的工作流程。
+
+之后你就可以在这个模板下，将正文部分进行修改，并通过 **Knit** 进行编译。之后会跳出编译好的结果，通过你的系统默认应用打开。这就是基于 word 模板的工作流程。
 
 ## 自定义 Word 模板 {#word-template}
 
-你可以将 Word 模板\index{template!Word} 文档中定义的样式应用于从 R Markdown 生成的新 Word 文档。 这种模板文档也称为“样式参考文档”。 关键是你必须先从 Pandoc 创建此模板文档，然后再更改其中的样式定义。 然后将此模板的路径传递给 `word_document`\index{output option!reference\_docx} 的 `reference_docx` 选项，例如，
+你可以将 Word 模板\index{template!Word} 文档中定义的样式应用到从 R Markdown 生成的新 Word 文档。 这种模板文档也称为“参考样式文档”。 
+
+> **关键之处**：你必须先通过 Pandoc 创建此模板文档，再更改其中的样式定义。 然后将此模板的路径传递给 `word_document`\index{output option!reference\_docx} 的 `reference_docx` 选项，例如：
 
 
 ```yaml
@@ -54,24 +57,24 @@ output:
 ---
 ```
 
-正如我们刚刚所说的，文档 `template.docx` 必须从 Pandoc 生成。 你可以从具有 `word_document` 输出格式的任意 R Markdown 文档创建此模板（该文档的实际内容无关紧要，但它应该包含你想要设置样式的元素类型）。 然后打开`.docx` 文件，并编辑样式。
+正如我们刚刚所说的， `template.docx` 文档必须从 Pandoc 生成。 你可以从具有 `word_document` 输出格式的任意 R Markdown 文档创建此模板（该文档的实际内容无关紧要，但它应该包含你想要设置样式的元素类型）。 然后打开`.docx` 文件，并编辑样式。
 
 ```{r, word-template-1, echo=FALSE, fig.cap='查找特定文档元素的样式。', out.width='100%'}
 knitr::include_graphics('images/word-template-1.png', dpi = NA)
 ```
 
-图 \@ref(fig:word-template-1) 显示你可以从 Word 中的“主页”选项卡打开“样式”窗口。当你将光标移动到文档中的特定元素时，样式列表中的项目将被突出显示。 如果要修改任何类型元素的样式，可以单击突出显示项上的下拉菜单，你将看到如图 \@ref(fig:word-template-2)  的对话框。
+图 \@ref(fig:word-template-1) 说明了你可以通过 Word 中的“主页”选项卡打开“样式”窗口。当你将光标移动到文档中的特定元素时，样式列表中的项目将被突出显示。如果你想修改任何类型元素的样式，可以单击突出显示项的下拉菜单，你将看到如图 \@ref(fig:word-template-2)  的对话框。
 
 
 ```{r, word-template-2, echo=FALSE, fig.cap=' 修改 Word 文档中元素的样式。', out.width='100%'}
 knitr::include_graphics('images/word-template-2.png', dpi = NA)
 ```
 
-修改完样式后，你可以保存文档（使用一个不会被意外覆盖的文件名），并将其用作以后 Word 文档的模板。 当 Pandoc 使用参考文档（模板）呈现新的 Word 文档时，它会读取模板中的样式并将它们应用到新文档中。
+修改完样式后，你可以保存文档（使用一个不会被意外覆盖的文件名），并将其作为以后 Word 文档的模板。 当 Pandoc 使用该参考模板，并渲染出新的 Word 文档时，它会读取模板中的样式并将它们应用到新文档中。
 
-你可以在 <https://vimeo.com/110804387> 上观看一段短视频，或者在 <https://rmarkdown.rstudio.com/articles_docx.html> 上阅读这篇文章，了解更多关于如何创建自定义样式的 Word 模板的详细说明。
+如果你想了解更多关于如何创建自定义样式 Word 模板的详细教程的话。你可以观看一段短视频 <https://vimeo.com/110804387>，或者阅读这篇文章 <https://rmarkdown.rstudio.com/articles_docx.html>。
 
-有时，查找元素的样式名称可能并不简单。可能有多种样式应用于同一个元素，并且你只会在样式列表中看到其中一个突出显示。 可能需要一些猜测和在线搜索才能确定你要修改的实际样式。 比如你要点击“管理样式”按钮 （图\@ref(fig:word-template-1) 中样式列表底部从左到右的第三个按钮），滚动一个大数字 在找到“表格”样式之前的样式名称 （参见图 \@ref(fig:word-table)）。 然后你可以为你的表格修改此样式（例如，添加边框）。
+有时，查找元素的样式名称并不简单。可能有多种样式应用于同一个元素，并且你只会在样式列表中看到其中一个突出显示。可能需要一些猜测和在线搜索才能确定你要修改的实际样式。 比如你要点击“管理样式”按钮 （图\@ref(fig:word-template-1) 中样式列表底部从左到右的第三个按钮），滚动一个大数字 在找到“表格”样式之前的样式名称 （参见图 \@ref(fig:word-table)）。 然后你可以为你的表格修改此样式（例如，添加边框）。
 
 ```{r, word-table, echo=FALSE, fig.cap=' 修改 Word 文档中表格的样式。', out.width='100%'}
 knitr::include_graphics('images/word-table.png', dpi = NA)
