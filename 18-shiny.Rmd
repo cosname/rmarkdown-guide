@@ -26,7 +26,7 @@ runtime: shiny
 
 你也通过 RStudio 构建一个新的 Shiny 文档。步骤如下：File -> new File -> R Markdown 并选择 Shiny，具体见图 \@ref(fig:shiny-new-document)。
 
-```{r shiny-new-document, echo=FALSE, fig.cap=' 在 RStudio 中创建一个新的 Shiny 文档。', out.width='100%'}
+```{r shiny-new-document, echo=FALSE, fig.width=6,fig.align='center',fig.cap=' 在 RStudio 中创建一个新的 Shiny 文档。'}
 knitr::include_graphics('images/shiny-new-document.png', dpi = NA)
 ```
 
@@ -44,7 +44,7 @@ renderTable({
 ```
 ````
 
-```{r shiny-table, echo=FALSE, fig.cap='增加 Shiny 文档中表中的行数。', out.width='100%'}
+```{r shiny-table, echo=FALSE, fig.width=6,fig.align='center',fig.cap='增加 Shiny 文档中表中的行数。'}
 knitr::include_graphics('images/shiny-table.png', dpi = NA)
 ```
 
@@ -64,7 +64,7 @@ renderPlot({
 ```
 ````
 
-```{r shiny-plot, echo=FALSE, fig.cap='改变一个 Shiny 文档的直方图的箱子数。', out.width='100%'}
+```{r shiny-plot, echo=FALSE,fig.width=6,fig.align='center', fig.cap='改变一个 Shiny 文档的直方图的箱子数。'}
 knitr::include_graphics('images/shiny-plot.png', dpi = NA)
 ```
 
@@ -98,9 +98,9 @@ install.packages("rsconnect")
 rsconnect::deployApp()
 ```
 
-如果你使用的是 RStudio，那么在运行一个 Shiny 文档时，还可以使用窗口右上角的 `Publish` 按钮(参见图 \@ref(fig:shiny-deploy))。
+如果你使用的是 RStudio，那么在运行一个 Shiny 文档时，还可以使用窗口右上角的 `Publish` 按钮(图 \@ref(fig:shiny-deploy))。
 
-```{r shiny-deploy, echo=FALSE, fig.cap='部署一个 Shiny 文档到 ShinyApps.io.', out.width='100%'}
+```{r shiny-deploy, echo=FALSE, fig.width=6,fig.align='center',fig.cap='部署一个 Shiny 文档到 ShinyApps.io.。'}
 knitr::include_graphics('images/shiny-deploy.png', dpi = NA)
 ```
 
@@ -192,7 +192,7 @@ kmeans_cluster(iris)
 图 \@ref(fig:shiny-widget-kmeans)  显示了在运行文档时小部件的样子。
 
 
-```{r shiny-widget-kmeans, echo=FALSE, fig.cap=' 一个在数据集上应用 k-Means 聚类的 Shiny 小部件。', out.width='100%'}
+```{r shiny-widget-kmeans, echo=FALSE,fig.width=6,fig.align='center', fig.cap=' 一个在数据集上应用 k-Means 聚类的 Shiny 小部件。'}
 knitr::include_graphics('images/shiny-widget-kmeans.png', dpi = NA)
 ```
 
@@ -240,9 +240,7 @@ kmeans_cluster = function(dataset) {
 
 ### 小部件的大小和布局
 
-Shiny 小部件可以嵌入在不同的地方，包括标准的全宽页面、页面内的小列，甚至在 HTML5 幻灯片中。为了让小部件的大小和布局在所有这些上下文中都能很好地工作，我们建议小部件的总高度不大于 500 像素。这并不是一个硬性的规则，但是在 HTML5 幻灯片中，通常只能显示低于 500px 的内容，所以如果你想让你的小部件在演示中可用，这是一个很好的建议。
-
-当然，你还可以在创建小部件的函数中添加一个显式的 height 参数（默认值为500）。
+Shiny 小部件可以嵌入在不同的地方，包括标准的全宽页面、页面内的小列，甚至在 HTML5 幻灯片中。为了让小部件的大小和布局在所有这些上下文中都能很好地工作，我们建议小部件的总高度不大于 500 像素。这并不是一个硬性的规则，但是在 HTML5 幻灯片中，通常只能显示低于 500px 的内容，所以如果你想让你的小部件在演示中可用，这是一个很好的建议。当然，你还可以在创建小部件的函数中添加一个显式的 height 参数（默认值为500）。
 
 
 ## 多页 {#shiny-multiple}
@@ -280,7 +278,7 @@ rmarkdown::render_delayed({
 
 相比之下，在一个 Shiny 文档中，UI 元素通常是在调用 `renderXXX()` 函数时隐式和自动创建的。例如，你可能希望使用 `renderPlot()` 函数，而预先没有创建对应的 `plotOutput()`。在这种情况下，Shiny 将相应的输出对象与每个 `renderXXX()` 函数关联起来，让你可以在一个完整的 Shiny 应用程序之外使用 Shiny 代码。但是，在这个过程中可能会丢失一些功能。特别地，`plotOutput()` 可以接受一些可选参数来设置宽度和高度等内容，或者允许你单击或刷过绘图(并存储该信息)。
 
-要将选项从 `renderXXX()` 传递到 `xxxOutput()`，可以使用 `outputArgs` 参数（如果特定的 `renderXXX()` 函数可用）。 例如：假设你要绘制一张宽度为200px，高度为100px的图形时。 你可以设定为如下形式：
+要将选项从 `renderXXX()` 传递到 `xxxOutput()`，可以使用 `outputArgs` 参数（如果特定的 `renderXXX()` 函数可用）。 例如：假设你要绘制一张宽度为 200px，高度为 100px 的图形时。 你可以设定为如下形式：
 
 ````markdown
 ```{r, echo = FALSE} `r ''`
@@ -299,8 +297,6 @@ is not an valid argument for the output function
 ```
 
 要查看运行中的 `outputArgs`，请运行下面的 R Markdown 文档或访问在线版 <https://gallery.shinyapps.io/output-args/>。文档是交互式的：在图像上刷新一下，看到 `xmin`,  `xmax`,  `ymin` 和 `ymax` 值的变化(正好印在图片下方)。
-
-
 
 ````markdown
 `r xfun::file_string('examples/shiny-output-args.Rmd')`

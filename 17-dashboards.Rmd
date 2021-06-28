@@ -27,7 +27,7 @@ install.packages("flexdashboard")
 
 其次，通过点击  `File -> New File -> R Markdown` 对话框在 RStudio 中创建文档，并选择 "Flex Dashboard" 模板。这是我们就已经创建了一个新的 dashboard 文件了。操作界面如图 \@ref(fig:dashboard-new) 所示：
 
-```{r dashboard-new, echo=FALSE, fig.cap='创建新的dashboard文件', out.width='100%'}
+```{r dashboard-new, echo=FALSE,fig.width=6,fig.align='center', fig.cap='创建新的dashboard文件。'}
 knitr::include_graphics('images/dashboard-new.png', dpi = NA)
 ```
 
@@ -89,7 +89,7 @@ Column 1
 > **注**：在这个例子中，我们没有在代码块中加入任何 R 代码，所以所有的框都是空的。当然在实际使用中，你可以编写任意的 R 代码来生成 R 图、HTML 小部件或 \@ref(dashboard-components) 节中介绍的各种其他组件，并将其加入到这些“盒子”中。
 
 
-```{r dashboard-start, echo=FALSE, fig.cap='简单仪表盘布局示例', out.width='100%'}
+```{r dashboard-start, echo=FALSE,fig.width=6,fig.align='center', fig.cap='简单仪表盘布局示例。'}
 knitr::include_graphics('images/dashboard-start.png', dpi = NA)
 ```
 
@@ -105,7 +105,7 @@ output:
 
 这时二级结构中将会按照行进行排列，三级结构中会按照行中的列进行堆叠。我们将上述例子修改后，输出结果如图 \@ref(fig:dashboard-rows) 所示：
 
-```{r dashboard-rows, echo=FALSE, fig.cap='基于行布局的结果', out.width='100%'}
+```{r dashboard-rows, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于行布局的结果。'}
 knitr::include_graphics('images/dashboard-rows.png', dpi = NA)
 ```
 
@@ -132,7 +132,7 @@ Two tabs {.tabset}
 
 所得结果如图 \@ref(fig:dashboard-tab) 所示：
 
-```{r dashboard-tab, echo=FALSE, fig.cap='以制表符的形式排列所得到的结果', out.width='100%'}
+```{r dashboard-tab, echo=FALSE,fig.width=6,fig.align='center', fig.cap='以制表符的形式排列所得到的结果。', out.width='100%'}
 knitr::include_graphics('images/dashboard-tab.png', dpi = NA)
 ```
 
@@ -146,7 +146,7 @@ knitr::include_graphics('images/dashboard-tab.png', dpi = NA)
 `r xfun::file_string('examples/dashboard/02-pages.Rmd')`
 ````
 
-```{r dashboard-pages, echo=FALSE, fig.cap='仪表盘上的多个页面情况', out.width='100%'}
+```{r dashboard-pages, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的多个页面情况。'}
 knitr::include_graphics('images/dashboard-pages.png', dpi = NA)
 ```
 
@@ -160,15 +160,13 @@ knitr::include_graphics('images/dashboard-pages.png', dpi = NA)
 
 ### 故事板
 
-除了基于列或行布局外，你还可以通过故事板（"storyboard"）进行布局，呈现一些可视化图形或其他说明。
-
-下面给出一个简单的例子：
+除了基于列或行布局外，你还可以通过故事板（"storyboard"）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：
 
 ````markdown
 `r xfun::file_string('examples/dashboard/03-storyboard.Rmd')`
 ````
 
-```{r dashboard-story, echo=FALSE, fig.cap='基于故事板布局的结果', out.width='100%'}
+```{r dashboard-story, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于故事板布局的结果。'}
 knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 ```
 
@@ -204,7 +202,7 @@ knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 `r xfun::file_string('examples/dashboard/04-valueboxes.Rmd')`
 ````
 
-```{r dashboard-valueboxes, echo=FALSE, fig.cap='仪表盘上并排的三个值', out.width='100%'}
+```{r dashboard-valueboxes, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上并排的三个值。'}
 knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 ```
 
@@ -219,7 +217,7 @@ knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 `r xfun::file_string('examples/dashboard/05-gauges.Rmd')`
 ````
 
-```{r dashboard-gauges, echo=FALSE, fig.cap='三个仪表并排放在仪表盘上', out.width='100%'}
+```{r dashboard-gauges, echo=FALSE,fig.width=6,fig.align='center', fig.cap='三个仪表并排放在仪表盘上。'}
 knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 ```
 
@@ -246,7 +244,7 @@ knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 `r xfun::file_string('examples/dashboard/06-text.Rmd')`
 ````
 
-```{r dashboard-text, echo=FALSE, fig.cap='仪表盘上的文本注释', out.width='100%'}
+```{r dashboard-text, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的文本注释。'}
 knitr::include_graphics('images/dashboard-text.png', dpi = NA)
 ```
 
@@ -273,7 +271,7 @@ output:
 
 这时得到的界面如图 \@ref(fig:dashboard-about) 所示：
 
-```{r dashboard-about, echo=FALSE, fig.cap='导航栏中添加自定义链接', out.width='100%'}
+```{r dashboard-about, echo=FALSE,fig.width=6,fig.align='center', fig.cap='导航栏中添加自定义链接。'}
 knitr::include_graphics('images/dashboard-about.png', dpi = NA)
 ```
 
@@ -293,7 +291,7 @@ output:
 
 这时得到的界面如图\@ref(fig:dashboard-social)下所示：
 
-```{r dashboard-social, echo=FALSE, fig.cap='导航栏中添加社交选项', out.width='100%'}
+```{r dashboard-social, echo=FALSE,fig.width=6,fig.align='center', fig.cap='导航栏中添加社交选项。'}
 knitr::include_graphics('images/dashboard-social.png', dpi = NA)
 ```
 
@@ -330,7 +328,7 @@ knitr::include_graphics('images/dashboard-social.png', dpi = NA)
 `r xfun::file_string('examples/dashboard/07-shiny.Rmd')`
 ````
 
-```{r dashboard-shiny, echo=FALSE, fig.cap='基于 Shiny 的交互式仪表盘。', out.width='100%'}
+```{r dashboard-shiny, echo=FALSE, fig.width=6,fig.align='center',fig.cap='基于 Shiny 的交互式仪表盘。'}
 knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 ```
 
