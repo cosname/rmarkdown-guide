@@ -332,20 +332,134 @@ output:
 只要把 R Markdown 文档模板的软件包发布在 CRAN 或者 GitHub 网站，就可以通过安装软件包
 的方式来使用该模板。
 
+```{r eval=FALSE, tidy=FALSE}
+# 安装一个 CRAN 上的软件包
+install.packages("packageName")
+
+# 安装一个 GitHub 上的软件包
+remotes::install_github("github_username/packageName")
+```
+
+
 很多基于 R Markdown 软件包都携带了相应的 R Markdown 模板，包括 **bookdown**，
 **xaringan**，**rticles** 等。如果要深入了解这方面的内容，不妨去参考其源代码。
 
 
-## 创建新的文档格式 {#creating-new-format}
+## 创建新的文档格式 {#new-formats}
+
+作为实现 R Markdown 技术最重要的软件包之一，**rmarkdown** 软件包中已经包括了很多
+文档和演示文稿的输出格式。这些文档格式的背后，本质上仍然是一些 R 语言的函数。当你
+在 YAML 区块中指定输出格式的时候，实际上是在调用相应的函数并将函数的参数传递给它。
+
+因此，我们也可以通过自定义一个新的函数来创建新的文档格式。新文档格式的函数通常需要
+整合到新的 R Markdown 文档模板中去（参见第 \@ref(document-templates) 章）。这是因为
+文档模板是通过 R 语言软件包创建的，原本就可以加入新的函数。于是，通过 R 语言的软件包，
+就实现了文档格式和模板的分发。这也是现有的 R Markdown 文档格式、模板的一贯做法。
+
+
+### 从现有文档格式衍生新格式 {#format-derive}
+
+创建新的文档格式最简单的办法就是基于现有的文档格式衍生出新的文档格式。**rmarkdown**
+内嵌的文档格式都是高度可定制的，包含众多可用参数。只需要为这些参数赋值，就可以创建
+出一个新的文档格式出来。
+
+在下面的例子中，我们创建了一个新的文档格式函数 `quarterly_report` 以进行季度报告。
+这个函数是基于 **rmarkdown** 的内嵌函数 `html_document` 工作的。
+
+```{r, eval=FALSE, tidy=FALSE}
+quarterly_report = function(toc = TRUE) {
+  # 查找软件包的安装位置
+  pkg_resource = function(...) {
+    system.file(..., package = "mypackage")
+  }
+
+  # 在软件包的子目录中找到新文档格式依赖的文档模板
+  css    = pkg_resource("reports/styles.css")
+  header = pkg_resource("reports/quarterly/header.html")
+
+  # 调用 html_document 函数并指定其参数
+  rmarkdown::html_document(
+    toc = toc, fig_width = 6.5, fig_height = 4,
+    theme = NULL, css = css,
+    includes = rmarkdown::includes(before_body = header)
+  )
+}
+```
+
+这个新的输出格式实现了下列几项功能：
+
+1. 提供了一个参数 `toc` 来决定是否显示文档目录（参数最后被传递给了 `html_document`）；
+
+2. 指定了图片默认的长度和高度（这可以避免文档中的图片出现大小参差不齐的现象）；
+
+3. 指定了一个新的 CSS 样式表，同时也禁用了默认的 Bootstrap 主题样式表；
+
+4. 在每一份文档中都添加了一个标准的头文件。
+
+值得一提的是，第 3 项和第 4 项功能依赖于软件包提供的外部文件。也就是说，
+在 `quarterly_report` 函数中，分别获取了 `"mypackage"` 的软件包中携带的 CSS 文件和
+一个 HTML 文档，然后分别将 CSS 定义传递给了 `html_document` 函数的 `css` 和 `includes`
+参数。在这里，后者使用了一个 `rmarkdown::includes()` 函数，从而将这个 HTML 文档（片段）
+作为文档 `before_body` 的内容嵌入到使用该格式的文档中去。
 
 
 
-### {#derived-format}
+### 完全的自定义输出格式 {#fully-custom-format}
 
+在基于现有格式衍生新输出格式之外，我们也可以从底层出发创建出一个完全的新格式。
+为此我们需要了解文档格式的底层工作原理，简单来说 R Markdown 的输出格式
+由下列几个部分构成：
 
-### {#fully-custom-format}
+1. 一系列的参数来确保 **knitr** 将 Rmd 文件正确的编译为 Markdown 格式的文档；
 
+2. 另外的一些参数来指导 Pandoc 将 Markdown 文档转换为其它输出格式（如 HTML）；
 
-### {#using-a-new-format}
+3. 其它的一些标记或过滤器（通常用于处理输出格式的支持文件）。
 
+你可以使用 **rmarkdown** 软件包中的函数 `output_format()` 来创建一个新的输出格式。
+下面是一个例子：
 
+```{r, eval=FALSE, tidy=FALSE}
+simple_html_format = function() {
+  # 这里使用了完整的引用方式来使用 output_format、knitr_options 和
+  # pandoc_options 等 3 个函数。
+  rmarkdown::output_format(
+    knitr = rmarkdown::knitr_options(opts_chunk = list(dev = 'png')),
+    pandoc = rmarkdown::pandoc_options(to = "html"),
+    clean_supporting = FALSE
+  )
+}
+```
+
+在这个函数中，**knitr** 和 Pandoc 的参数分别由两个参数指定，其内容可以相当的复杂
+（参见 `?rmarkdown::knitr_options` 和 `?rmarkdown::pandoc_options` 了解更多）。
+而 `clean_supporting` 则控制是否清理文档编译过程中使用的临时文件。
+
+`output_format()` 函数中还有一个 `base_format` 参数用来指定一个原有的输出格式，
+并在此基础上进行配置（相当于衍生格式）。
+
+如果你有其它的一些支持文件无法通过 `includes` 参数指定，那么还需要使用 `output_format()`
+中的其它参数来帮助你处理这些文件（例如，使用 `intermediates_generator` 来讲它们拷贝
+到文档的输出目录中去）。
+
+学习创建一个新的文档输出格式最好的方法可能是阅读原有格式的源代码。从 **rmarkdown**
+的 `html_document` 和 `pdf_document` 开始是个不错的主意，其源代码的位置在
+https://github.com/rstudio/rmarkdown/tree/master/R。如果你的新格式需要用到 Pandoc
+模板，则请参见 \@ref(template-pandoc) 及 Pandoc 的使用手册。
+
+### 使用新的文档输出格式 {#using-a-new-format}
+
+新的文档格式在创建完成后，需要安装到你的本地环境中去（参见 \@ref(template-share)）。
+这样新的输出格式便可以通过 YAML 区块来应用。加入我们的 `quarterly_report` 位于一个
+名为 **mypackage** 的软件包中且该软件包已经安装成功，那么：
+
+```markdown
+---
+title: "文档标题"
+output:
+  mypackage::quarterly_report:
+    toc: true
+---
+```
+
+这里面就设置了新的输出格式，并且将 `toc` 参数传递给了 `quarterly_report()` 函数。
