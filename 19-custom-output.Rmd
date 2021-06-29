@@ -1,18 +1,18 @@
 # 自定义排版 {#custom-output}
 
-本部分主要分为三个部分，第一部分介绍在 R Markdown 中配置文档参数，第二部分介绍
-使用 R Markdown 模板创建文档，第三部分介绍如何自定义一个 R Markdown 模板。
+本部分主要分为三个部分，第一部分介绍有参数的 R Markdown 报告，
+第二部分介绍 R Markdown 模板并基于新模板创建文档，
+第三部分介绍如何自定义一个 R Markdown 输出格式。
 
 ## 有参数的 R Markdown 报告{#parameterized-report}
-
-这部分内容主要介绍使用参数来对 R  Markdown 文档进行更多的定制，这个技巧适合于
-周期性、区域性的自动化报告。
 
 对于 R Markdown 文档来说，只需要一个命令就可以生成一份报告。不过在日常应用过程中，
 一份报告可能会有不同的应用背景。比如日报、周报、月报、年报等这一类的周期性报告，
 可能需要制定相应的时间，而中国、美国等这一类的区域性报告中，则需要经常变动相应的区域。
 
-这些变量可以被视为报告运行的参数，这样的一份报告不妨成为“有参报告”。
+因此，这部分内容主要介绍使用参数来对 R  Markdown 文档进行更多的定制，
+这个技巧适合于周期性、区域性的自动化报告。这些变量可以被视为报告运行的参数，
+这样的一份报告不妨称为“有参报告”。
 
 ### 声明参数 {#params-declare}
 
@@ -20,11 +20,11 @@
 
 ```yaml
 ---
-title: My Document
+title: "文档标题"
 output: html_document
 params:
   year: 2018
-  region: Europe
+  region: 欧洲
   printcode: TRUE
   data: file.csv
 ---
@@ -36,7 +36,7 @@ R Markdown 在编译过程中使用 `yaml::yaml.load()` 函数处理参数，可
 
 ```yaml
 ---
-title: My Document
+title: "文档标题"
 output: html_document
 params:
   date: !r Sys.Date()
@@ -67,8 +67,8 @@ params$year
 params$region
 ```
 
-这些参数可以用来设置 **knitr** 的在编译时的行为。例如通过赋值给 **knitr** 的区块参数 `echo`，
-来改变编译结果中是否显示源代码：
+这些参数可以用来设置 **knitr** 的在编译时的行为。
+例如通过赋值给 **knitr** 的区块参数 `echo` 来改变编译结果中是否显示源代码：
 
 ```{r}
 import_example(file = "examples/custom-report/change-echo-value.Rmd")
@@ -81,6 +81,7 @@ import_example(file = "examples/custom-report/change-echo-value.Rmd")
 除了像上面介绍的在 YAML 区块中声明参数，还有另外两种使用参数的方式：
 
 1. 通过向 `rmarkdown::render()` 函数的 `params` 参数赋值来设置编译的参数；
+
 2. 通过一个交互性的可视化界面来设置编译参数的值。
 
 例如，下面的例子将起到与 [前文](#params-declare) 一样的效果。
@@ -88,7 +89,7 @@ import_example(file = "examples/custom-report/change-echo-value.Rmd")
 ```{r, eval=FALSE, tidy=FALSE}
 rmarkdown::render("MyDocument.Rmd", params = list(
   year = 2017,
-  region = "Asia",
+  region = "亚洲",
   printcode = FALSE,
   file = "file2.csv"
 ))
@@ -153,7 +154,7 @@ knitr::kable(
             radio	radioButtons
             select	selectInput
             password	passwordInput",
-    col.names = c("Input Type", "Shiny Function"),
+    col.names = c("控件类型", "对应的 Shiny 函数"),
     check.names = FALSE
   ),
   caption = "有参编译用户界面中可用的 Shiny 控件",
@@ -179,7 +180,7 @@ knitr::kable(
 `output: pdf_document` 作为配置参数。
 
 在 RStudio 中新建 R Markdown 文件时，有一项 `"From Template"` 的选项，这里列出了
-当前可用的所有 R Markdown 文档模板。在前面我们讲述如何创建“写轮眼”幻灯片的部分，
+当前可用的所有 R Markdown 文档模板。第 \@ref(xaringan-presentation) 章我们讲述如何创建“写轮眼”幻灯片的部分，
 我们曾经使用了这里的功能。
 
 实际上，这些文档模板是拓展 R Markdown 功能的重要途径之一。通过创作自己的
@@ -207,7 +208,7 @@ RStudio 中可选的 R Markdown 模板会因为用户安装的软件包差异而
 
 ### 模板的结构 {#template-structure}
 
-R Markdown 模板仅可以通过一个新的 R 语言软件包来实现。本文不打算介绍软件包的
+R Markdown 模板仅可以通过创建一个新的 R 语言软件包来实现。本文不打算介绍软件包的
 开发，而仅仅涉及模板的制作。对于没有经验的普通用户而言，不妨将这一途径视为 R Markdown
 模板的分发策略。
 
@@ -321,7 +322,7 @@ output:
 除此之外，Pandoc 模板还有自己的一套语法来定义文档中的不同元素，包括条件判断、循环、
 列表等的实现方法。其语法定义形式上比较简单，但是可读性较差。
 在其 [官方文档](https://pandoc.org/MANUAL.html#templates) 中可查。
-这部分内容虽然通常不会用到，但是了解这一部分的内容有利于进一步理解 R Markdown 
+虽然这部分内容虽然通常不会用到，但是了解这一部分的内容有利于进一步理解 R Markdown 
 动态文档的工作原理。
 
 
