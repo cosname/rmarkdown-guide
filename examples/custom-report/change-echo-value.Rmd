@@ -1,0 +1,9 @@
+---
+params:
+  printcode: false  # or set it to true
+---
+
+`r ''````{r, setup, include=FALSE}
+# 在这里将 echo 的值设为 false
+knitr::opts_chunk$set(echo = params$printcode)
+```
