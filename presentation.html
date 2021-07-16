@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 7 章 演示文稿 | R Markdown 指南</title>
+  <meta name="description" content="第 7 章 演示文稿 | R Markdown 指南" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 7 章 演示文稿 | R Markdown 指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="第 7 章 演示文稿 | R Markdown 指南" />
+  <meta name="github-repo" content="cosname/rmarkdown-guide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 7 章 演示文稿 | R Markdown 指南" />
+  
+  <meta name="twitter:description" content="第 7 章 演示文稿 | R Markdown 指南" />
+  
+
+<meta name="author" content="王祎帆" />
+<meta name="author" content="闫求识" />
+<meta name="author" content="高春辉" />
+<meta name="author" content="庄亮亮" />
+
+
+<meta name="date" content="2021-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="PDF-document.html"/>
+<link rel="next" href="word.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Markdown 中文指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="part"><span><b>I 基础</b></span></li>
+<li class="chapter" data-level="1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html"><i class="fa fa-check"></i><b>1</b> 认识 R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#数据分析报告和文档"><i class="fa fa-check"></i><b>1.1</b> 数据分析报告和文档</a></li>
+<li class="chapter" data-level="1.2" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#个人简历"><i class="fa fa-check"></i><b>1.2</b> 个人简历</a></li>
+<li class="chapter" data-level="1.3" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#网站"><i class="fa fa-check"></i><b>1.3</b> 网站</a></li>
+<li class="chapter" data-level="1.4" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#幻灯片"><i class="fa fa-check"></i><b>1.4</b> 幻灯片</a></li>
+<li class="chapter" data-level="1.5" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#交互报表"><i class="fa fa-check"></i><b>1.5</b> 交互报表</a></li>
+<li class="chapter" data-level="1.6" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#r-markdown-的渊源与历史"><i class="fa fa-check"></i><b>1.6</b> R Markdown 的渊源与历史</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> 安装</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#安装-r-markdown"><i class="fa fa-check"></i><b>2.1</b> 安装 R Markdown</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#create-first-rmd"><i class="fa fa-check"></i><b>2.2</b> 创建第一个 R Markdown 文档</a></li>
+<li class="chapter" data-level="2.3" data-path="installation.html"><a href="installation.html#安装-tinytex"><i class="fa fa-check"></i><b>2.3</b> 安装 Tinytex</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html"><i class="fa fa-check"></i><b>3</b> 基础知识</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#再看-html-输出文件"><i class="fa fa-check"></i><b>3.1</b> 再看 HTML 输出文件</a></li>
+<li class="chapter" data-level="3.2" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#markdown-语法"><i class="fa fa-check"></i><b>3.2</b> Markdown 语法</a></li>
+<li class="chapter" data-level="3.3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#使用-r-代码"><i class="fa fa-check"></i><b>3.3</b> 使用 R 代码</a></li>
+<li class="chapter" data-level="3.4" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#输出格式"><i class="fa fa-check"></i><b>3.4</b> 输出格式</a></li>
+<li class="chapter" data-level="3.5" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#r-markdown-的编译过程"><i class="fa fa-check"></i><b>3.5</b> R Markdown 的编译过程</a></li>
+</ul></li>
+<li class="part"><span><b>II 输出”万花筒”</b></span></li>
+<li class="chapter" data-level="4" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>4</b> 常用文档格式</a></li>
+<li class="chapter" data-level="5" data-path="html-document.html"><a href="html-document.html"><i class="fa fa-check"></i><b>5</b> 从 R Markdown 到 HTML 文档</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="html-document.html"><a href="html-document.html#目录和标题"><i class="fa fa-check"></i><b>5.1</b> 目录和标题</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="html-document.html"><a href="html-document.html#显示目录"><i class="fa fa-check"></i><b>5.1.1</b> 显示目录</a></li>
+<li class="chapter" data-level="5.1.2" data-path="html-document.html"><a href="html-document.html#悬停目录"><i class="fa fa-check"></i><b>5.1.2</b> 悬停目录</a></li>
+<li class="chapter" data-level="5.1.3" data-path="html-document.html"><a href="html-document.html#显示标题编号"><i class="fa fa-check"></i><b>5.1.3</b> 显示标题编号</a></li>
+<li class="chapter" data-level="5.1.4" data-path="html-document.html"><a href="html-document.html#使用标签页"><i class="fa fa-check"></i><b>5.1.4</b> 使用标签页</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="html-document.html"><a href="html-document.html#appearance-and-style"><i class="fa fa-check"></i><b>5.2</b> 主题和样式</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="html-document.html"><a href="html-document.html#可选主题"><i class="fa fa-check"></i><b>5.2.1</b> 可选主题</a></li>
+<li class="chapter" data-level="5.2.2" data-path="html-document.html"><a href="html-document.html#代码高亮"><i class="fa fa-check"></i><b>5.2.2</b> 代码高亮</a></li>
+<li class="chapter" data-level="5.2.3" data-path="html-document.html"><a href="html-document.html#style-css"><i class="fa fa-check"></i><b>5.2.3</b> 自定义样式表</a></li>
+<li class="chapter" data-level="5.2.4" data-path="html-document.html"><a href="html-document.html#通过-css-代码块定义样式"><i class="fa fa-check"></i><b>5.2.4</b> 通过 CSS 代码块定义样式</a></li>
+<li class="chapter" data-level="5.2.5" data-path="html-document.html"><a href="html-document.html#使用丰富多样的内置-css-样式"><i class="fa fa-check"></i><b>5.2.5</b> 使用丰富多样的内置 CSS 样式</a></li>
+<li class="chapter" data-level="5.2.6" data-path="html-document.html"><a href="html-document.html#代码折叠"><i class="fa fa-check"></i><b>5.2.6</b> 代码折叠</a></li>
+<li class="chapter" data-level="5.2.7" data-path="html-document.html"><a href="html-document.html#html-scroll"><i class="fa fa-check"></i><b>5.2.7</b> 设置代码块内容可滚动</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="html-document.html"><a href="html-document.html#图片和数据框"><i class="fa fa-check"></i><b>5.3</b> 图片和数据框</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="html-document.html"><a href="html-document.html#设置图片的属性"><i class="fa fa-check"></i><b>5.3.1</b> 设置图片的属性</a></li>
+<li class="chapter" data-level="5.3.2" data-path="html-document.html"><a href="html-document.html#插入外源图片"><i class="fa fa-check"></i><b>5.3.2</b> 插入外源图片</a></li>
+<li class="chapter" data-level="5.3.3" data-path="html-document.html"><a href="html-document.html#输出数据框"><i class="fa fa-check"></i><b>5.3.3</b> 输出数据框</a></li>
+<li class="chapter" data-level="5.3.4" data-path="html-document.html"><a href="html-document.html#分页打印数据框时的附加参数"><i class="fa fa-check"></i><b>5.3.4</b> 分页打印数据框时的附加参数</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="html-document.html"><a href="html-document.html#组件和内容"><i class="fa fa-check"></i><b>5.4</b> 组件和内容</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="html-document.html"><a href="html-document.html#理解-html-文档的依赖关系"><i class="fa fa-check"></i><b>5.4.1</b> 理解 HTML 文档的依赖关系</a></li>
+<li class="chapter" data-level="5.4.2" data-path="html-document.html"><a href="html-document.html#mathjax-库的配置"><i class="fa fa-check"></i><b>5.4.2</b> MathJax 库的配置</a></li>
+<li class="chapter" data-level="5.4.3" data-path="html-document.html"><a href="html-document.html#是否保留-markdown"><i class="fa fa-check"></i><b>5.4.3</b> 是否保留 Markdown</a></li>
+<li class="chapter" data-level="5.4.4" data-path="html-document.html"><a href="html-document.html#使用自定义的-html-模板"><i class="fa fa-check"></i><b>5.4.4</b> 使用自定义的 HTML 模板</a></li>
+<li class="chapter" data-level="5.4.5" data-path="html-document.html"><a href="html-document.html#include-html"><i class="fa fa-check"></i><b>5.4.5</b> 包含其它文件</a></li>
+<li class="chapter" data-level="5.4.6" data-path="html-document.html"><a href="html-document.html#html-fragments"><i class="fa fa-check"></i><b>5.4.6</b> 生成 HTML 片段</a></li>
+<li class="chapter" data-level="5.4.7" data-path="html-document.html"><a href="html-document.html#使用自定义的浏览器图标"><i class="fa fa-check"></i><b>5.4.7</b> 使用自定义的浏览器图标</a></li>
+<li class="chapter" data-level="5.4.8" data-path="html-document.html"><a href="html-document.html#共用-yaml-配置文件"><i class="fa fa-check"></i><b>5.4.8</b> 共用 YAML 配置文件</a></li>
+<li class="chapter" data-level="5.4.9" data-path="html-document.html"><a href="html-document.html#嵌入-rmd-源文件"><i class="fa fa-check"></i><b>5.4.9</b> 嵌入 Rmd 源文件</a></li>
+<li class="chapter" data-level="5.4.10" data-path="html-document.html"><a href="html-document.html#嵌入其它文件"><i class="fa fa-check"></i><b>5.4.10</b> 嵌入其它文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="PDF-document.html"><a href="PDF-document.html"><i class="fa fa-check"></i><b>6</b> PDF 文档</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-tinytex-1"><i class="fa fa-check"></i><b>6.1</b> 安装 <code>TinyTex</code></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-latex-组件"><i class="fa fa-check"></i><b>6.1.1</b> 安装 LaTeX 组件</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="PDF-document.html"><a href="PDF-document.html#从-r-markdown-到-pdf-文档"><i class="fa fa-check"></i><b>6.2</b> 从 R Markdown 到 PDF 文档</a></li>
+<li class="chapter" data-level="6.3" data-path="PDF-document.html"><a href="PDF-document.html#在-pdf-文档中使用中文的注意事项"><i class="fa fa-check"></i><b>6.3</b> 在 PDF 文档中使用中文的注意事项</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="PDF-document.html"><a href="PDF-document.html#显示目录-1"><i class="fa fa-check"></i><b>6.3.1</b> 显示目录</a></li>
+<li class="chapter" data-level="6.3.2" data-path="PDF-document.html"><a href="PDF-document.html#图片相关的配置"><i class="fa fa-check"></i><b>6.3.2</b> 图片相关的配置</a></li>
+<li class="chapter" data-level="6.3.3" data-path="PDF-document.html"><a href="PDF-document.html#打印数据框"><i class="fa fa-check"></i><b>6.3.3</b> 打印数据框</a></li>
+<li class="chapter" data-level="6.3.4" data-path="PDF-document.html"><a href="PDF-document.html#代码高亮-1"><i class="fa fa-check"></i><b>6.3.4</b> 代码高亮</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="PDF-document.html"><a href="PDF-document.html#latex-选项"><i class="fa fa-check"></i><b>6.4</b> LaTeX 选项</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="PDF-document.html"><a href="PDF-document.html#通用文档部件"><i class="fa fa-check"></i><b>6.4.1</b> 通用文档部件</a></li>
+<li class="chapter" data-level="6.4.2" data-path="PDF-document.html"><a href="PDF-document.html#选择-latex-模板"><i class="fa fa-check"></i><b>6.4.2</b> 选择 LaTeX 模板</a></li>
+<li class="chapter" data-level="6.4.3" data-path="PDF-document.html"><a href="PDF-document.html#配置-latex-模板的参数"><i class="fa fa-check"></i><b>6.4.3</b> 配置 LaTeX 模板的参数</a></li>
+<li class="chapter" data-level="6.4.4" data-path="PDF-document.html"><a href="PDF-document.html#使用-latex-包处理引用"><i class="fa fa-check"></i><b>6.4.4</b> 使用 LaTeX 包处理引用</a></li>
+<li class="chapter" data-level="6.4.5" data-path="PDF-document.html"><a href="PDF-document.html#latex-的渲染引擎"><i class="fa fa-check"></i><b>6.4.5</b> LaTeX 的渲染引擎</a></li>
+<li class="chapter" data-level="6.4.6" data-path="PDF-document.html"><a href="PDF-document.html#保留生成的-tex-中间文件"><i class="fa fa-check"></i><b>6.4.6</b> 保留生成的 TeX 中间文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>7</b> 演示文稿</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="presentation.html"><a href="presentation.html#rmarkdown-basic-presentation"><i class="fa fa-check"></i><b>7.1</b> R Markdown 基础幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="presentation.html"><a href="presentation.html#ioslides-presentation"><i class="fa fa-check"></i><b>7.1.1</b> ioslides 幻灯片</a></li>
+<li class="chapter" data-level="7.1.2" data-path="presentation.html"><a href="presentation.html#slidy-presentation"><i class="fa fa-check"></i><b>7.1.2</b> Slidy 幻灯片</a></li>
+<li class="chapter" data-level="7.1.3" data-path="presentation.html"><a href="presentation.html#beamer-presentation"><i class="fa fa-check"></i><b>7.1.3</b> Beamer 演示文稿</a></li>
+<li class="chapter" data-level="7.1.4" data-path="presentation.html"><a href="presentation.html#powerpoint-presentation"><i class="fa fa-check"></i><b>7.1.4</b> PowerPoint 演示文稿</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="presentation.html"><a href="presentation.html#xaringan-presentation"><i class="fa fa-check"></i><b>7.2</b> Xaringan 幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="presentation.html"><a href="presentation.html#简介"><i class="fa fa-check"></i><b>7.2.1</b> 简介</a></li>
+<li class="chapter" data-level="7.2.2" data-path="presentation.html"><a href="presentation.html#入门"><i class="fa fa-check"></i><b>7.2.2</b> 入门</a></li>
+<li class="chapter" data-level="7.2.3" data-path="presentation.html"><a href="presentation.html#使用其他主题"><i class="fa fa-check"></i><b>7.2.3</b> 使用其他主题</a></li>
+<li class="chapter" data-level="7.2.4" data-path="presentation.html"><a href="presentation.html#提升-xaringan-幻灯片的-b-格"><i class="fa fa-check"></i><b>7.2.4</b> 提升 xaringan 幻灯片的 B 格</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="word.html"><a href="word.html"><i class="fa fa-check"></i><b>8</b> Word</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="word.html"><a href="word.html#word-new-template"><i class="fa fa-check"></i><b>8.1</b> 创建 word 模板</a></li>
+<li class="chapter" data-level="8.2" data-path="word.html"><a href="word.html#word-template"><i class="fa fa-check"></i><b>8.2</b> 自定义 Word 模板</a></li>
+<li class="chapter" data-level="8.3" data-path="word.html"><a href="word.html#word-redoc"><i class="fa fa-check"></i><b>8.3</b> R Markdown 和 Word 之间的双向工作流程</a></li>
+<li class="chapter" data-level="8.4" data-path="word.html"><a href="word.html#word-officedown"><i class="fa fa-check"></i><b>8.4</b> 个人风格元素</a></li>
+</ul></li>
+<li class="part"><span><b>III 操作技巧</b></span></li>
+<li class="chapter" data-level="9" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>9</b> 表格操作</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="table.html"><a href="table.html#kable"><i class="fa fa-check"></i><b>9.1</b> 表格生成函数 <code>knitr::kable()</code></a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="table.html"><a href="table.html#kable-formats"><i class="fa fa-check"></i><b>9.1.1</b> 已支持的表的格式</a></li>
+<li class="chapter" data-level="9.1.2" data-path="table.html"><a href="table.html#修改列名"><i class="fa fa-check"></i><b>9.1.2</b> 修改列名</a></li>
+<li class="chapter" data-level="9.1.3" data-path="table.html"><a href="table.html#指定列的对齐方式"><i class="fa fa-check"></i><b>9.1.3</b> 指定列的对齐方式</a></li>
+<li class="chapter" data-level="9.1.4" data-path="table.html"><a href="table.html#kable-caption"><i class="fa fa-check"></i><b>9.1.4</b> 添加表格标题</a></li>
+<li class="chapter" data-level="9.1.5" data-path="table.html"><a href="table.html#调整数字格式"><i class="fa fa-check"></i><b>9.1.5</b> 调整数字格式</a></li>
+<li class="chapter" data-level="9.1.6" data-path="table.html"><a href="table.html#显示缺失值"><i class="fa fa-check"></i><b>9.1.6</b> 显示缺失值</a></li>
+<li class="chapter" data-level="9.1.7" data-path="table.html"><a href="table.html#特殊字符的转义"><i class="fa fa-check"></i><b>9.1.7</b> 特殊字符的转义</a></li>
+<li class="chapter" data-level="9.1.8" data-path="table.html"><a href="table.html#多张表格并排"><i class="fa fa-check"></i><b>9.1.8</b> 多张表格并排</a></li>
+<li class="chapter" data-level="9.1.9" data-path="table.html"><a href="table.html#利用for循环生成多个表"><i class="fa fa-check"></i><b>9.1.9</b> 利用<code>for</code>循环生成多个表 (*)</a></li>
+<li class="chapter" data-level="9.1.10" data-path="table.html"><a href="table.html#自定义-latex-表格"><i class="fa fa-check"></i><b>9.1.10</b> 自定义 LaTex 表格 (*)</a></li>
+<li class="chapter" data-level="9.1.11" data-path="table.html"><a href="table.html#自定义-html-表格"><i class="fa fa-check"></i><b>9.1.11</b> 自定义 HTML 表格 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="table.html"><a href="table.html#kableextra"><i class="fa fa-check"></i><b>9.2</b> <strong>kableExtra</strong> 包</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="table.html"><a href="table.html#设定字体尺寸"><i class="fa fa-check"></i><b>9.2.1</b> 设定字体尺寸</a></li>
+<li class="chapter" data-level="9.2.2" data-path="table.html"><a href="table.html#特定的行或列的样式"><i class="fa fa-check"></i><b>9.2.2</b> 特定的行或列的样式</a></li>
+<li class="chapter" data-level="9.2.3" data-path="table.html"><a href="table.html#给行或列分组"><i class="fa fa-check"></i><b>9.2.3</b> 给行或列分组</a></li>
+<li class="chapter" data-level="9.2.4" data-path="table.html"><a href="table.html#按比例缩小latex中的表格"><i class="fa fa-check"></i><b>9.2.4</b> 按比例缩小LaTex中的表格</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="table.html"><a href="table.html#table-other"><i class="fa fa-check"></i><b>9.3</b> 其它生成表格的包</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chunk-options.html"><a href="chunk-options.html"><i class="fa fa-check"></i><b>10</b> 块选项</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chunk-options.html"><a href="chunk-options.html#chunk-variable"><i class="fa fa-check"></i><b>10.1</b> 在块选项中使用变量</a></li>
+<li class="chapter" data-level="10.2" data-path="chunk-options.html"><a href="chunk-options.html#opts-error"><i class="fa fa-check"></i><b>10.2</b> 如何在遇到 error 的时候继续编译</a></li>
+<li class="chapter" data-level="10.3" data-path="chunk-options.html"><a href="chunk-options.html#dev-vector"><i class="fa fa-check"></i><b>10.3</b> 同一张图的多种图像输出格式</a></li>
+<li class="chapter" data-level="10.4" data-path="chunk-options.html"><a href="chunk-options.html#cache"><i class="fa fa-check"></i><b>10.4</b> 缓存耗时的代码块</a></li>
+<li class="chapter" data-level="10.5" data-path="chunk-options.html"><a href="chunk-options.html#cache-path"><i class="fa fa-check"></i><b>10.5</b> 为多种输出格式缓存代码块</a></li>
+<li class="chapter" data-level="10.6" data-path="chunk-options.html"><a href="chunk-options.html#cache-lazy"><i class="fa fa-check"></i><b>10.6</b> 缓存大型的对象</a></li>
+<li class="chapter" data-level="10.7" data-path="chunk-options.html"><a href="chunk-options.html#hide-one"><i class="fa fa-check"></i><b>10.7</b> 隐藏源代码、message、warning、文本输出或图像输出</a></li>
+<li class="chapter" data-level="10.8" data-path="chunk-options.html"><a href="chunk-options.html#hide-all"><i class="fa fa-check"></i><b>10.8</b> 隐藏代码块的所有输出</a></li>
+<li class="chapter" data-level="10.9" data-path="chunk-options.html"><a href="chunk-options.html#opts-collapse"><i class="fa fa-check"></i><b>10.9</b> 将文本输出压缩到源代码块中</a></li>
+<li class="chapter" data-level="10.10" data-path="chunk-options.html"><a href="chunk-options.html#opts-tidy"><i class="fa fa-check"></i><b>10.10</b> 重新格式化源代码</a></li>
+<li class="chapter" data-level="10.11" data-path="chunk-options.html"><a href="chunk-options.html#results-asis"><i class="fa fa-check"></i><b>10.11</b> 将输出文本作为原始的Markdown的内容 (*)</a></li>
+<li class="chapter" data-level="10.12" data-path="chunk-options.html"><a href="chunk-options.html#opts-comment"><i class="fa fa-check"></i><b>10.12</b> 删除文本输出中的前导符号</a></li>
+<li class="chapter" data-level="10.13" data-path="chunk-options.html"><a href="chunk-options.html#attr-output"><i class="fa fa-check"></i><b>10.13</b> 为文本输出块添加属性 (*)</a></li>
+<li class="chapter" data-level="10.14" data-path="chunk-options.html"><a href="chunk-options.html#fig-process"><i class="fa fa-check"></i><b>10.14</b> 图像的后期加工 (*)</a></li>
+<li class="chapter" data-level="10.15" data-path="chunk-options.html"><a href="chunk-options.html#graphical-device"><i class="fa fa-check"></i><b>10.15</b> 高质量的图像 (*)</a></li>
+<li class="chapter" data-level="10.16" data-path="chunk-options.html"><a href="chunk-options.html#low-plots"><i class="fa fa-check"></i><b>10.16</b> 带有低级绘图功能的逐步绘图 (*)</a></li>
+<li class="chapter" data-level="10.17" data-path="chunk-options.html"><a href="chunk-options.html#opts-render"><i class="fa fa-check"></i><b>10.17</b> 在代码块中自定义对象的打印格式 (*)</a></li>
+<li class="chapter" data-level="10.18" data-path="chunk-options.html"><a href="chunk-options.html#option-hooks"><i class="fa fa-check"></i><b>10.18</b> 选项钩子 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="output-hooks.html"><a href="output-hooks.html"><i class="fa fa-check"></i><b>11</b> 输出钩子 (*)</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="output-hooks.html"><a href="output-hooks.html#hook-hide"><i class="fa fa-check"></i><b>11.1</b> 编辑源代码</a></li>
+<li class="chapter" data-level="11.2" data-path="output-hooks.html"><a href="output-hooks.html#hook-number"><i class="fa fa-check"></i><b>11.2</b> 向源代码中添加行号</a></li>
+<li class="chapter" data-level="11.3" data-path="output-hooks.html"><a href="output-hooks.html#hook-scroll"><i class="fa fa-check"></i><b>11.3</b> 可滚动的文本输出</a></li>
+<li class="chapter" data-level="11.4" data-path="output-hooks.html"><a href="output-hooks.html#hook-truncate"><i class="fa fa-check"></i><b>11.4</b> 截断文本输出</a></li>
+<li class="chapter" data-level="11.5" data-path="output-hooks.html"><a href="output-hooks.html#hook-html5"><i class="fa fa-check"></i><b>11.5</b> 以HTML5格式输出图像</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="knitr-misc.html"><a href="knitr-misc.html"><i class="fa fa-check"></i><b>12</b> 其它使用 knitr 的小技巧</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="knitr-misc.html"><a href="knitr-misc.html#reuse-chunks"><i class="fa fa-check"></i><b>12.1</b> 重复使用代码块</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="knitr-misc.html"><a href="knitr-misc.html#embed-chunk"><i class="fa fa-check"></i><b>12.1.1</b> 将一个块嵌入到另一个块中 (*)</a></li>
+<li class="chapter" data-level="12.1.2" data-path="knitr-misc.html"><a href="knitr-misc.html#same-label"><i class="fa fa-check"></i><b>12.1.2</b> 在另一个块中使用相同的块标签</a></li>
+<li class="chapter" data-level="12.1.3" data-path="knitr-misc.html"><a href="knitr-misc.html#ref-label"><i class="fa fa-check"></i><b>12.1.3</b> 使用引用标签 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="knitr-misc.html"><a href="knitr-misc.html#load-cache"><i class="fa fa-check"></i><b>12.2</b> 在创建对象之前使用它 (*)</a></li>
+<li class="chapter" data-level="12.3" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-exit"><i class="fa fa-check"></i><b>12.3</b> 提前退出编译</a></li>
+<li class="chapter" data-level="12.4" data-path="knitr-misc.html"><a href="knitr-misc.html#fig-chunk"><i class="fa fa-check"></i><b>12.4</b> 生成一个图像并在其他地方显示</a></li>
+<li class="chapter" data-level="12.5" data-path="knitr-misc.html"><a href="knitr-misc.html#global-device"><i class="fa fa-check"></i><b>12.5</b> 修改前一个代码块中的图像</a></li>
+<li class="chapter" data-level="12.6" data-path="knitr-misc.html"><a href="knitr-misc.html#opts-template"><i class="fa fa-check"></i><b>12.6</b> 保存一组块选项并重复使用它们 (*)</a></li>
+<li class="chapter" data-level="12.7" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-expand"><i class="fa fa-check"></i><b>12.7</b> 使用 <code>knitr::knit_expand()</code> 来生成 Rmd 源代码</a></li>
+<li class="chapter" data-level="12.8" data-path="knitr-misc.html"><a href="knitr-misc.html#duplicate-label"><i class="fa fa-check"></i><b>12.8</b> 允许代码块中的标签重复 Allow duplicate labels in code chunks (*)</a></li>
+<li class="chapter" data-level="12.9" data-path="knitr-misc.html"><a href="knitr-misc.html#cache-rds"><i class="fa fa-check"></i><b>12.9</b> 一个更透明的缓存机制</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改表达式中的代码使缓存失效"><i class="fa fa-check"></i><b>12.9.1</b> 通过更改表达式中的代码使缓存失效</a></li>
+<li class="chapter" data-level="12.9.2" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改全局变量使缓存失效"><i class="fa fa-check"></i><b>12.9.2</b> 通过更改全局变量使缓存失效</a></li>
+<li class="chapter" data-level="12.9.3" data-path="knitr-misc.html"><a href="knitr-misc.html#保留缓存的多个副本"><i class="fa fa-check"></i><b>12.9.3</b> 保留缓存的多个副本</a></li>
+<li class="chapter" data-level="12.9.4" data-path="knitr-misc.html"><a href="knitr-misc.html#与knitr的缓存比较"><i class="fa fa-check"></i><b>12.9.4</b> 与<strong>knitr</strong>的缓存比较</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV 第四部分：进阶操作</b></span></li>
+<li class="chapter" data-level="13" data-path="other-languages.html"><a href="other-languages.html"><i class="fa fa-check"></i><b>13</b> 与其他语言的结合</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="other-languages.html"><a href="other-languages.html#custom-engine"><i class="fa fa-check"></i><b>13.1</b> 注册自定义语言引擎（*）</a></li>
+<li class="chapter" data-level="13.2" data-path="other-languages.html"><a href="other-languages.html#eng-python"><i class="fa fa-check"></i><b>13.2</b> 运行 Python 代码并与 Python 交互</a></li>
+<li class="chapter" data-level="13.3" data-path="other-languages.html"><a href="other-languages.html#eng-asis"><i class="fa fa-check"></i><b>13.3</b> 通过 <code>asis</code> 引擎有条件地执行内容</a></li>
+<li class="chapter" data-level="13.4" data-path="other-languages.html"><a href="other-languages.html#eng-bash"><i class="fa fa-check"></i><b>13.4</b> 执行 Shell 脚本</a></li>
+<li class="chapter" data-level="13.5" data-path="other-languages.html"><a href="other-languages.html#d3"><i class="fa fa-check"></i><b>13.5</b> 用 D3 可视化</a></li>
+<li class="chapter" data-level="13.6" data-path="other-languages.html"><a href="other-languages.html#eng-cat"><i class="fa fa-check"></i><b>13.6</b> 通过 <code>cat</code> 引擎将块内容写入文件</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="other-languages.html"><a href="other-languages.html#写入-css-文件"><i class="fa fa-check"></i><b>13.6.1</b> 写入 CSS 文件</a></li>
+<li class="chapter" data-level="13.6.2" data-path="other-languages.html"><a href="other-languages.html#在序言中包含-latex-代码"><i class="fa fa-check"></i><b>13.6.2</b> 在序言中包含 LaTeX 代码</a></li>
+<li class="chapter" data-level="13.6.3" data-path="other-languages.html"><a href="other-languages.html#将-yaml-数据写入文件并显示它"><i class="fa fa-check"></i><b>13.6.3</b> 将 YAML 数据写入文件并显示它</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="other-languages.html"><a href="other-languages.html#eng-sas"><i class="fa fa-check"></i><b>13.7</b> 运行 SAS 代码</a></li>
+<li class="chapter" data-level="13.8" data-path="other-languages.html"><a href="other-languages.html#eng-stata"><i class="fa fa-check"></i><b>13.8</b> 运行 Stata 代码</a></li>
+<li class="chapter" data-level="13.9" data-path="other-languages.html"><a href="other-languages.html#eng-asy"><i class="fa fa-check"></i><b>13.9</b> 用渐近线 Asymptote 创建图形</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="other-languages.html"><a href="other-languages.html#在-r-中生成数据并通过-asymptote-读取"><i class="fa fa-check"></i><b>13.9.1</b> 在 R 中生成数据并通过 Asymptote 读取</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="other-languages.html"><a href="other-languages.html#eng-sass"><i class="fa fa-check"></i><b>13.10</b> 使用 Sass/SCSS 构建 HTML 页面风格</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Dashboards.html"><a href="Dashboards.html"><i class="fa fa-check"></i><b>14</b> Dashboards</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Dashboards.html"><a href="Dashboards.html#入门-1"><i class="fa fa-check"></i><b>14.1</b> 入门</a></li>
+<li class="chapter" data-level="14.2" data-path="Dashboards.html"><a href="Dashboards.html#排版"><i class="fa fa-check"></i><b>14.2</b> 排版</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="Dashboards.html"><a href="Dashboards.html#基于行的布局"><i class="fa fa-check"></i><b>14.2.1</b> 基于行的布局</a></li>
+<li class="chapter" data-level="14.2.2" data-path="Dashboards.html"><a href="Dashboards.html#节属性"><i class="fa fa-check"></i><b>14.2.2</b> 节属性</a></li>
+<li class="chapter" data-level="14.2.3" data-path="Dashboards.html"><a href="Dashboards.html#多页"><i class="fa fa-check"></i><b>14.2.3</b> 多页</a></li>
+<li class="chapter" data-level="14.2.4" data-path="Dashboards.html"><a href="Dashboards.html#故事板"><i class="fa fa-check"></i><b>14.2.4</b> 故事板</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="Dashboards.html"><a href="Dashboards.html#dashboard-components"><i class="fa fa-check"></i><b>14.3</b> 组件</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="Dashboards.html"><a href="Dashboards.html#数值框"><i class="fa fa-check"></i><b>14.3.1</b> 数值框</a></li>
+<li class="chapter" data-level="14.3.2" data-path="Dashboards.html"><a href="Dashboards.html#仪表"><i class="fa fa-check"></i><b>14.3.2</b> 仪表</a></li>
+<li class="chapter" data-level="14.3.3" data-path="Dashboards.html"><a href="Dashboards.html#文本注释"><i class="fa fa-check"></i><b>14.3.3</b> 文本注释</a></li>
+<li class="chapter" data-level="14.3.4" data-path="Dashboards.html"><a href="Dashboards.html#导航栏"><i class="fa fa-check"></i><b>14.3.4</b> 导航栏</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="Dashboards.html"><a href="Dashboards.html#shiny"><i class="fa fa-check"></i><b>14.4</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="Dashboards.html"><a href="Dashboards.html#入门指南"><i class="fa fa-check"></i><b>14.4.1</b> 入门指南</a></li>
+<li class="chapter" data-level="14.4.2" data-path="Dashboards.html"><a href="Dashboards.html#shiny-仪表盘的一个示例"><i class="fa fa-check"></i><b>14.4.2</b> Shiny 仪表盘的一个示例</a></li>
+<li class="chapter" data-level="14.4.3" data-path="Dashboards.html"><a href="Dashboards.html#输入栏"><i class="fa fa-check"></i><b>14.4.3</b> 输入栏</a></li>
+<li class="chapter" data-level="14.4.4" data-path="Dashboards.html"><a href="Dashboards.html#拓展"><i class="fa fa-check"></i><b>14.4.4</b> 拓展</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="shiny-started.html"><a href="shiny-started.html"><i class="fa fa-check"></i><b>15</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-start"><i class="fa fa-check"></i><b>15.1</b> 入门指南</a></li>
+<li class="chapter" data-level="15.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-deploy"><i class="fa fa-check"></i><b>15.2</b> 部署</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapps.io"><i class="fa fa-check"></i><b>15.2.1</b> ShinyApps.io</a></li>
+<li class="chapter" data-level="15.2.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-server-rstudio-connect"><i class="fa fa-check"></i><b>15.2.2</b> Shiny Server / RStudio Connect</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embedded"><i class="fa fa-check"></i><b>15.3</b> 嵌入 Shiny 应用程序</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embed-inline"><i class="fa fa-check"></i><b>15.3.1</b> 内联应用程序</a></li>
+<li class="chapter" data-level="15.3.2" data-path="shiny-started.html"><a href="shiny-started.html#外联应用程序"><i class="fa fa-check"></i><b>15.3.2</b> 外联应用程序</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="shiny-started.html"><a href="shiny-started.html#shiny-widgets"><i class="fa fa-check"></i><b>15.4</b> Shiny 小部件</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapp-函数"><i class="fa fa-check"></i><b>15.4.1</b> <code>shinyApp()</code> 函数</a></li>
+<li class="chapter" data-level="15.4.2" data-path="shiny-started.html"><a href="shiny-started.html#例子k---means-聚类"><i class="fa fa-check"></i><b>15.4.2</b> 例子：k - means 聚类</a></li>
+<li class="chapter" data-level="15.4.3" data-path="shiny-started.html"><a href="shiny-started.html#小部件的大小和布局"><i class="fa fa-check"></i><b>15.4.3</b> 小部件的大小和布局</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="shiny-started.html"><a href="shiny-started.html#shiny-multiple"><i class="fa fa-check"></i><b>15.5</b> 多页</a></li>
+<li class="chapter" data-level="15.6" data-path="shiny-started.html"><a href="shiny-started.html#shiny-delay"><i class="fa fa-check"></i><b>15.6</b> 延迟渲染</a></li>
+<li class="chapter" data-level="15.7" data-path="shiny-started.html"><a href="shiny-started.html#shiny-args"><i class="fa fa-check"></i><b>15.7</b> 渲染函数的输出参数</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="shiny-started.html"><a href="shiny-started.html#附加说明"><i class="fa fa-check"></i><b>15.7.1</b> 附加说明</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="custom-output.html"><a href="custom-output.html"><i class="fa fa-check"></i><b>16</b> 自定义排版</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="custom-output.html"><a href="custom-output.html#parameterized-report"><i class="fa fa-check"></i><b>16.1</b> 有参数的 R Markdown 报告</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="custom-output.html"><a href="custom-output.html#params-declare"><i class="fa fa-check"></i><b>16.1.1</b> 声明参数</a></li>
+<li class="chapter" data-level="16.1.2" data-path="custom-output.html"><a href="custom-output.html#params-use"><i class="fa fa-check"></i><b>16.1.2</b> 使用参数</a></li>
+<li class="chapter" data-level="16.1.3" data-path="custom-output.html"><a href="custom-output.html#params-knit"><i class="fa fa-check"></i><b>16.1.3</b> 有参编译</a></li>
+<li class="chapter" data-level="16.1.4" data-path="custom-output.html"><a href="custom-output.html#params-publish"><i class="fa fa-check"></i><b>16.1.4</b> 发布文档</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="custom-output.html"><a href="custom-output.html#document-template"><i class="fa fa-check"></i><b>16.2</b> 文档模板</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="custom-output.html"><a href="custom-output.html#template-structure"><i class="fa fa-check"></i><b>16.2.1</b> 模板的结构</a></li>
+<li class="chapter" data-level="16.2.2" data-path="custom-output.html"><a href="custom-output.html#template-support"><i class="fa fa-check"></i><b>16.2.2</b> 模板支持文件</a></li>
+<li class="chapter" data-level="16.2.3" data-path="custom-output.html"><a href="custom-output.html#template-pandoc"><i class="fa fa-check"></i><b>16.2.3</b> 设置 Pandoc 模板</a></li>
+<li class="chapter" data-level="16.2.4" data-path="custom-output.html"><a href="custom-output.html#template-share"><i class="fa fa-check"></i><b>16.2.4</b> 分享模板</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="custom-output.html"><a href="custom-output.html#new-formats"><i class="fa fa-check"></i><b>16.3</b> 创建新的文档格式</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="custom-output.html"><a href="custom-output.html#format-derive"><i class="fa fa-check"></i><b>16.3.1</b> 从现有文档格式衍生新格式</a></li>
+<li class="chapter" data-level="16.3.2" data-path="custom-output.html"><a href="custom-output.html#fully-custom-format"><i class="fa fa-check"></i><b>16.3.2</b> 完全的自定义输出格式</a></li>
+<li class="chapter" data-level="16.3.3" data-path="custom-output.html"><a href="custom-output.html#using-a-new-format"><i class="fa fa-check"></i><b>16.3.3</b> 使用新的文档输出格式</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Markdown 指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="presentation" class="section level1" number="7">
+<h1><span class="header-section-number">第 7 章</span> 演示文稿</h1>
+<p>本章讲述使用 R Markdown 生成演示文稿（俗称“PPT”）的技巧。</p>
+<p>幻灯片可以被看做一个精简的文档，它的基本单位是单独的一页，每页含有标题、内容和其它元素。
+R Markdown 文档可以直接输出为 HTML 或者 PDF 格式的幻灯片，并且可以通过额外的软件包丰富
+幻灯片的具体样式。在这一部分，我们首先介绍 R Markdown 基础幻灯片的使用，然后介绍使用
+<code>xaringan</code> 创建的更加精美的幻灯片。</p>
+<div id="rmarkdown-basic-presentation" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> R Markdown 基础幻灯片</h2>
+<p>使用基础幻灯片不需要安装额外的包。</p>
+<p>R Markdown 支持 4 种不同样式的幻灯片，分别是 <code>ioslides</code>，<code>Slidy</code>，<code>Beamer</code> 和 PowerPoint。
+在 RStudio 中，你可以通过菜单中的 “New File -&gt; R Markdown…” 打开如下一个窗口（图 <a href="presentation.html#fig:rmd-presentation-popup">7.1</a>），然后选择 “OK” 后即可新建一个幻灯片。</p>
+<div class="figure" style="text-align: center"><span id="fig:rmd-presentation-popup"></span>
+<img src="images/rmd-presentation-popup.png" alt="新建 R Markdown 时可选的幻灯片格式" width="529" />
+<p class="caption">
+图 7.1: 新建 R Markdown 时可选的幻灯片格式
+</p>
+</div>
+<div id="ioslides-presentation" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> ioslides 幻灯片</h3>
+<p>我们首先看 ioslides 幻灯片。新建的幻灯片，也是一个 R Markdown 文档，在它的头部 YAML 中，
+<code>output: ioslides_presentation</code> 设定了其输出格式。</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="presentation.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/ioslides-presentation.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb92-1"><a href="presentation.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb92-2"><a href="presentation.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Ioslides Presentation&quot;</span></span>
+<span id="cb92-3"><a href="presentation.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;张三&quot;</span></span>
+<span id="cb92-4"><a href="presentation.html#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2021/4/28&quot;</span></span>
+<span id="cb92-5"><a href="presentation.html#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> ioslides_presentation</span></span>
+<span id="cb92-6"><a href="presentation.html#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb92-7"><a href="presentation.html#cb92-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-8"><a href="presentation.html#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb92-9"><a href="presentation.html#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = FALSE)</span></span>
+<span id="cb92-10"><a href="presentation.html#cb92-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb92-11"><a href="presentation.html#cb92-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-12"><a href="presentation.html#cb92-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## R Markdown</span></span>
+<span id="cb92-13"><a href="presentation.html#cb92-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-14"><a href="presentation.html#cb92-14" aria-hidden="true" tabindex="-1"></a>This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <span class="ot">&lt;http://rmarkdown.rstudio.com&gt;</span>.</span>
+<span id="cb92-15"><a href="presentation.html#cb92-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-16"><a href="presentation.html#cb92-16" aria-hidden="true" tabindex="-1"></a>When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.</span>
+<span id="cb92-17"><a href="presentation.html#cb92-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-18"><a href="presentation.html#cb92-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with Bullets</span></span>
+<span id="cb92-19"><a href="presentation.html#cb92-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-20"><a href="presentation.html#cb92-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 1</span>
+<span id="cb92-21"><a href="presentation.html#cb92-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 2</span>
+<span id="cb92-22"><a href="presentation.html#cb92-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 3</span>
+<span id="cb92-23"><a href="presentation.html#cb92-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-24"><a href="presentation.html#cb92-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with R Output</span></span>
+<span id="cb92-25"><a href="presentation.html#cb92-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-26"><a href="presentation.html#cb92-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cars, echo = TRUE}</span></span>
+<span id="cb92-27"><a href="presentation.html#cb92-27" aria-hidden="true" tabindex="-1"></a><span class="in">summary(cars)</span></span>
+<span id="cb92-28"><a href="presentation.html#cb92-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb92-29"><a href="presentation.html#cb92-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-30"><a href="presentation.html#cb92-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with Plot</span></span>
+<span id="cb92-31"><a href="presentation.html#cb92-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-32"><a href="presentation.html#cb92-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pressure}</span></span>
+<span id="cb92-33"><a href="presentation.html#cb92-33" aria-hidden="true" tabindex="-1"></a><span class="in">plot(pressure)</span></span>
+<span id="cb92-34"><a href="presentation.html#cb92-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>这个文档经过编译后，得到的幻灯片如图 <a href="presentation.html#fig:ioslides-presentation-screenshot">7.2</a> 所示。
+由此可见，在 R Markdown 幻灯片中，源文件中的 <code>##</code> 代表一张幻灯片的开头和标题，
+<code>##</code> 后面的内容是这一张幻灯片中的内容。R Markdown 会自动将命令和输出的内容添加到幻灯片中。</p>
+<div class="figure" style="text-align: center"><span id="fig:ioslides-presentation-screenshot"></span>
+<img src="examples/ioslides-presentation-screenshot.png" alt="新建文件编译后生成的 ioslides 幻灯片" width="552" />
+<p class="caption">
+图 7.2: 新建文件编译后生成的 ioslides 幻灯片
+</p>
+</div>
+<p>除了 <code>##</code>，使用 <code>---</code> 也能开始一张新的幻灯片，并最终生成一个不带标题的幻灯片。</p>
+<p>另外，还可以通过 “|” 来为幻灯片添加副标题。例如下面的例子：</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb93-1"><a href="presentation.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Getting up | What I like to do first thing</span></span></code></pre></div>
+<div id="使用快捷键控制显示模式" class="section level4" number="7.1.1.1">
+<h4><span class="header-section-number">7.1.1.1</span> 使用快捷键控制显示模式</h4>
+<p>ioslides 幻灯片支持以下快捷键更改播放时的模式：</p>
+<ul>
+<li><code>'f'</code>：全屏模式，幻灯片将会占满屏幕。</li>
+<li><code>'w'</code>：宽屏模式，幻灯片将会以宽屏模式显示。</li>
+<li><code>'o'</code>：预览模式，幻灯片将会缩小并同时显示多个。</li>
+<li><code>'h'</code>：启用代码高亮模式，突出显示指定的几行代码。具体使用方法下面介绍。</li>
+<li><code>'p'</code>：显示演讲者备注，演讲者备注需要以指定的方式添加。具体使用方法下面介绍。</li>
+</ul>
+<p>按下 <code>'Esc'</code> 键将会退出以上所有模式。</p>
+</div>
+<div id="依次显示列表中的项目" class="section level4" number="7.1.1.2">
+<h4><span class="header-section-number">7.1.1.2</span> 依次显示列表中的项目</h4>
+<p>使用 <code>incremental</code> 选项可以控制列表项目依次出现，相当于添加了简单的播放动画。</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="presentation.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/ioslides-presentation-increment-bullets.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb95-1"><a href="presentation.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb95-2"><a href="presentation.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb95-3"><a href="presentation.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="co">  ioslides_presentation</span></span>
+<span id="cb95-4"><a href="presentation.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb95-5"><a href="presentation.html#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="presentation.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># ioslides 幻灯片 {data-background=ioslides-presentation.png data-background-size=cover}</span></span>
+<span id="cb95-7"><a href="presentation.html#cb95-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-8"><a href="presentation.html#cb95-8" aria-hidden="true" tabindex="-1"></a>一级标题产生了一个背景为灰色的幻灯片，我们为它加入了背景图片。</span>
+<span id="cb95-9"><a href="presentation.html#cb95-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-10"><a href="presentation.html#cb95-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 列表项的内容 | 这里加入了一个副标题</span></span>
+<span id="cb95-11"><a href="presentation.html#cb95-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-12"><a href="presentation.html#cb95-12" aria-hidden="true" tabindex="-1"></a>默认情况下，整个幻灯片将会同时显示。</span>
+<span id="cb95-13"><a href="presentation.html#cb95-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-14"><a href="presentation.html#cb95-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 1</span>
+<span id="cb95-15"><a href="presentation.html#cb95-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 2</span>
+<span id="cb95-16"><a href="presentation.html#cb95-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 3</span>
+<span id="cb95-17"><a href="presentation.html#cb95-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-18"><a href="presentation.html#cb95-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-19"><a href="presentation.html#cb95-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-20"><a href="presentation.html#cb95-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 列表项的内容 {.smaller}</span></span>
+<span id="cb95-21"><a href="presentation.html#cb95-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-22"><a href="presentation.html#cb95-22" aria-hidden="true" tabindex="-1"></a>但是 <span class="in">`&gt;`</span> 可以作用于列表，这样以下内容将会在播放时依次出现（点击鼠标或者使用键盘）。</span>
+<span id="cb95-23"><a href="presentation.html#cb95-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-24"><a href="presentation.html#cb95-24" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - Bullet 1</span></span>
+<span id="cb95-25"><a href="presentation.html#cb95-25" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - Bullet 2</span></span>
+<span id="cb95-26"><a href="presentation.html#cb95-26" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - Bullet 3</span></span>
+<span id="cb95-27"><a href="presentation.html#cb95-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-28"><a href="presentation.html#cb95-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下面的内容将会依次显示 {.build}</span></span>
+<span id="cb95-29"><a href="presentation.html#cb95-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-30"><a href="presentation.html#cb95-30" aria-hidden="true" tabindex="-1"></a>幻灯片标题后面的 <span class="in">`{.build}`</span> 将会为这张幻灯片添加一个效果。首先显示这一段话，然后才显示下面的列表。</span>
+<span id="cb95-31"><a href="presentation.html#cb95-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-32"><a href="presentation.html#cb95-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>这个列表中的项目并不会依次显示</span>
+<span id="cb95-33"><a href="presentation.html#cb95-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>而是会作为一个整体出现</span>
+<span id="cb95-34"><a href="presentation.html#cb95-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-35"><a href="presentation.html#cb95-35" aria-hidden="true" tabindex="-1"></a>接下来的列表，因为使用了 <span class="in">`&gt;`</span> 方法，其中的项目则可以依次出现。</span>
+<span id="cb95-36"><a href="presentation.html#cb95-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-37"><a href="presentation.html#cb95-37" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - 先出现这个</span></span>
+<span id="cb95-38"><a href="presentation.html#cb95-38" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - 然后才是这个</span></span>
+<span id="cb95-39"><a href="presentation.html#cb95-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-40"><a href="presentation.html#cb95-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Future Steps {#future-steps .emphasized}</span></span>
+<span id="cb95-41"><a href="presentation.html#cb95-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-42"><a href="presentation.html#cb95-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-43"><a href="presentation.html#cb95-43" aria-hidden="true" tabindex="-1"></a>在 <span class="in">`style.css`</span> 中，添加下列定义。</span>
+<span id="cb95-44"><a href="presentation.html#cb95-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-45"><a href="presentation.html#cb95-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{css}</span></span>
+<span id="cb95-46"><a href="presentation.html#cb95-46" aria-hidden="true" tabindex="-1"></a><span class="in">#future-steps {</span></span>
+<span id="cb95-47"><a href="presentation.html#cb95-47" aria-hidden="true" tabindex="-1"></a><span class="in">  color: blue;</span></span>
+<span id="cb95-48"><a href="presentation.html#cb95-48" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb95-49"><a href="presentation.html#cb95-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-50"><a href="presentation.html#cb95-50" aria-hidden="true" tabindex="-1"></a><span class="in">.emphasized {</span></span>
+<span id="cb95-51"><a href="presentation.html#cb95-51" aria-hidden="true" tabindex="-1"></a><span class="in">  font-size: 1.5em;</span></span>
+<span id="cb95-52"><a href="presentation.html#cb95-52" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb95-53"><a href="presentation.html#cb95-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb95-54"><a href="presentation.html#cb95-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-55"><a href="presentation.html#cb95-55" aria-hidden="true" tabindex="-1"></a>这几个字特别重要。 </span>
+<span id="cb95-56"><a href="presentation.html#cb95-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-57"><a href="presentation.html#cb95-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-58"><a href="presentation.html#cb95-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## 代码高亮</span></span>
+<span id="cb95-59"><a href="presentation.html#cb95-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-60"><a href="presentation.html#cb95-60" aria-hidden="true" tabindex="-1"></a>大家看，这两步运算非常关键。</span>
+<span id="cb95-61"><a href="presentation.html#cb95-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-62"><a href="presentation.html#cb95-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb95-63"><a href="presentation.html#cb95-63" aria-hidden="true" tabindex="-1"></a><span class="in">cat(&#39;接下来进入计算过程&#39;)</span></span>
+<span id="cb95-64"><a href="presentation.html#cb95-64" aria-hidden="true" tabindex="-1"></a><span class="in">### &lt;b&gt;</span></span>
+<span id="cb95-65"><a href="presentation.html#cb95-65" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- 10</span></span>
+<span id="cb95-66"><a href="presentation.html#cb95-66" aria-hidden="true" tabindex="-1"></a><span class="in">y &lt;- x * 2</span></span>
+<span id="cb95-67"><a href="presentation.html#cb95-67" aria-hidden="true" tabindex="-1"></a><span class="in">### &lt;/b&gt;</span></span>
+<span id="cb95-68"><a href="presentation.html#cb95-68" aria-hidden="true" tabindex="-1"></a><span class="in">cat(&#39;计算完毕&#39;)</span></span>
+<span id="cb95-69"><a href="presentation.html#cb95-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>为所有幻灯片添加这样的效果有时候显得有点过分，所以 R Markdown 还提供了针对个别幻灯片
+添加依次呈现效果的方法，即在前面加上一个 <code>&gt;</code> 号。</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb96-1"><a href="presentation.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - Bullet 1</span></span>
+<span id="cb96-2"><a href="presentation.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - Bullet 2</span></span></code></pre></div>
+</div>
+<div id="幻灯片的大小" class="section level4" number="7.1.1.3">
+<h4><span class="header-section-number">7.1.1.3</span> 幻灯片的大小</h4>
+<p>在配置中使用 <code>widescreen</code> 可以将幻灯片样式改为宽屏。</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb97-1"><a href="presentation.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb97-2"><a href="presentation.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb97-3"><a href="presentation.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ioslides_presentation</span><span class="kw">:</span></span>
+<span id="cb97-4"><a href="presentation.html#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">widescreen</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb97-5"><a href="presentation.html#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<!--- 
+如果需要缩小部分文字，则可以使用下面的方法。
+
+```markdown
+## 这个标题将会小一点 {.smaller}
+```
+
+这种以大括号的形式在 R Markdown 标题上附加额外属性的方法是一种通用的方法。
+其中的 `.smaller` 实际上是预定义的 CSS class。
+-->
+</div>
+<div id="幻灯片播放速度" class="section level4" number="7.1.1.4">
+<h4><span class="header-section-number">7.1.1.4</span> 幻灯片播放速度</h4>
+<p>ioslides 幻灯片翻页时会有淡入淡出的效果，使用 <code>transition</code> 可以控制效果的时长。
+<code>transition</code> 设置为 <code>"default"</code>，<code>"slower"</code>，<code>"faster"</code>，或者一个以秒为单位的数字（如<code>0.5</code>）均可。如下所示：</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb98-1"><a href="presentation.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb98-2"><a href="presentation.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb98-3"><a href="presentation.html#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ioslides_presentation</span><span class="kw">:</span></span>
+<span id="cb98-4"><a href="presentation.html#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">transition</span><span class="kw">:</span><span class="at"> slower</span></span>
+<span id="cb98-5"><a href="presentation.html#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="依次显示幻灯片元素" class="section level4" number="7.1.1.5">
+<h4><span class="header-section-number">7.1.1.5</span> 依次显示幻灯片元素</h4>
+<p>每一张幻灯片的标题都可以加上 <code>.build</code> 属性，这样幻灯片的内容在播放的时候将会一块块的依次显示出来。
+这一点与 <code>incremental</code> 属性有些类似，不过后者针对的是列表中的项目，而前者针对的是
+一段话，一整个列表。</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb99-1"><a href="presentation.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下面的内容将会依次显示 {.build}</span></span>
+<span id="cb99-2"><a href="presentation.html#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="presentation.html#cb99-3" aria-hidden="true" tabindex="-1"></a>首先显示这一段话，然后才显示下面的列表。</span>
+<span id="cb99-4"><a href="presentation.html#cb99-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-5"><a href="presentation.html#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>这个列表中的项目并不会依次显示</span>
+<span id="cb99-6"><a href="presentation.html#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>而是会作为一个整体出现</span>
+<span id="cb99-7"><a href="presentation.html#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-8"><a href="presentation.html#cb99-8" aria-hidden="true" tabindex="-1"></a>接下来的列表，因为使用了 <span class="in">`&gt;`</span> 方法，其中的项目则可以依次出现。</span>
+<span id="cb99-9"><a href="presentation.html#cb99-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-10"><a href="presentation.html#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - 先出现这个</span></span>
+<span id="cb99-11"><a href="presentation.html#cb99-11" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - 然后才是这个</span></span></code></pre></div>
+</div>
+<div id="设置幻灯片的背景图像" class="section level4" number="7.1.1.6">
+<h4><span class="header-section-number">7.1.1.6</span> 设置幻灯片的背景图像</h4>
+<p>幻灯片中可以使用 <code>data-background</code> 添加背景图片，并使用其它的相关属性来
+配置背景图片的行为，如 <code>data-background-size</code>， <code>data-background-position</code>，
+<code>data-background-repeat</code> 等等。</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb100-1"><a href="presentation.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 添加背景图像 {data-background=foo.png data-background-size=cover}</span></span></code></pre></div>
+<p>这些配置来自于 CSS 中图片的属性，<code>background</code>，<code>background-size</code>，<code>background-position</code>，
+以及 <code>background-repeat</code> 等。你可能需要对 CSS 有所了解，才能准确把握这些属性的用途。</p>
+</div>
+<div id="自定义-css" class="section level4" number="7.1.1.7">
+<h4><span class="header-section-number">7.1.1.7</span> 自定义 CSS</h4>
+<p>ioslides 幻灯片本质是一个 HTML 文档，可以通过自定义 CSS 来设定幻灯片中不同元素的样式。</p>
+<p>要在幻灯片中附加一个自定义样式表，可以使用 <code>css</code> 属性。</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb101-1"><a href="presentation.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb101-2"><a href="presentation.html#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb101-3"><a href="presentation.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ioslides_presentation</span><span class="kw">:</span></span>
+<span id="cb101-4"><a href="presentation.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span></span>
+<span id="cb101-5"><a href="presentation.html#cb101-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>为某一张幻灯片中添加样式的方式，也是通过大括号语法完成的。</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb102-1"><a href="presentation.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Future Steps {#future-steps .emphasized}</span></span>
+<span id="cb102-2"><a href="presentation.html#cb102-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-3"><a href="presentation.html#cb102-3" aria-hidden="true" tabindex="-1"></a>这张幻灯片中的所有元素将会应用 CSS 定义的样式。</span></code></pre></div>
+<p>在 <code>style.css</code> 中，添加下列定义。</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb103-1"><a href="presentation.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#future-steps</span> {</span>
+<span id="cb103-2"><a href="presentation.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span></span>
+<span id="cb103-3"><a href="presentation.html#cb103-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb103-4"><a href="presentation.html#cb103-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-5"><a href="presentation.html#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">.emphasized</span> {</span>
+<span id="cb103-6"><a href="presentation.html#cb103-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-size</span>: <span class="dv">1.2</span><span class="dt">em</span><span class="op">;</span></span>
+<span id="cb103-7"><a href="presentation.html#cb103-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>这种方式并不会影响幻灯片的标题，而是会影响这一张幻灯片中其它内容。
+最终，这张幻灯片中所有的文字都会显示为蓝色、120% 的大字号。</p>
+</div>
+<div id="突出显示部分代码" class="section level4" number="7.1.1.8">
+<h4><span class="header-section-number">7.1.1.8</span> 突出显示部分代码</h4>
+<p>为了强调关键代码的作用，可以使用特定的注释来高亮它们。例如：</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="presentation.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="do">### &lt;b&gt;</span></span>
+<span id="cb104-2"><a href="presentation.html#cb104-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb104-3"><a href="presentation.html#cb104-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb104-4"><a href="presentation.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="do">### &lt;/b&gt;</span></span></code></pre></div>
+<p>在播放时，当按下键盘上的快捷键 <code>'h'</code> 时，高亮的代码将会突出显示，其它部分的代码则会变淡。</p>
+</div>
+<div id="添加-logo" class="section level4" number="7.1.1.9">
+<h4><span class="header-section-number">7.1.1.9</span> 添加 LOGO</h4>
+<p>使用 <code>logo</code> 可以为幻灯片添加一个 LOGO 图片。默认情况下，这个 LOGO 将会以 85 x 85
+像素显示在标题幻灯片上，并且缩小后显示在后面每一张幻灯片的左下角。</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb105-1"><a href="presentation.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb105-2"><a href="presentation.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb105-3"><a href="presentation.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ioslides_presentation</span><span class="kw">:</span></span>
+<span id="cb105-4"><a href="presentation.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">logo</span><span class="kw">:</span><span class="at"> logo.png</span></span>
+<span id="cb105-5"><a href="presentation.html#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>使用自定义的 CSS 可以修改首页 LOGO 的显示效果。例如：</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb106-1"><a href="presentation.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.gdbar</span> img {</span>
+<span id="cb106-2"><a href="presentation.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span>: <span class="dv">300</span><span class="dt">px</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb106-3"><a href="presentation.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span>: <span class="dv">150</span><span class="dt">px</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb106-4"><a href="presentation.html#cb106-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin</span>: <span class="dv">8</span><span class="dt">px</span> <span class="dv">8</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb106-5"><a href="presentation.html#cb106-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb106-6"><a href="presentation.html#cb106-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-7"><a href="presentation.html#cb106-7" aria-hidden="true" tabindex="-1"></a><span class="fu">.gdbar</span> {</span>
+<span id="cb106-8"><a href="presentation.html#cb106-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span>: <span class="dv">400</span><span class="dt">px</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb106-9"><a href="presentation.html#cb106-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span>: <span class="dv">170</span><span class="dt">px</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb106-10"><a href="presentation.html#cb106-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>左下角的 LOGO 显示样式同样可以使用 CSS 定义。例如：</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb107-1"><a href="presentation.html#cb107-1" aria-hidden="true" tabindex="-1"></a>slides <span class="op">&gt;</span> slide<span class="in">:not(</span><span class="fu">.nobackground</span><span class="in">):before</span> {</span>
+<span id="cb107-2"><a href="presentation.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span>: <span class="dv">150</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb107-3"><a href="presentation.html#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span>: <span class="dv">75</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb107-4"><a href="presentation.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-size</span>: <span class="dv">150</span><span class="dt">px</span> <span class="dv">75</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb107-5"><a href="presentation.html#cb107-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="幻灯片的布局" class="section level4" number="7.1.1.10">
+<h4><span class="header-section-number">7.1.1.10</span> 幻灯片的布局</h4>
+<p>如果想居中显示幻灯片的内容，可以在标题后面加入 <code>.flexbox</code> 和 <code>.vcenter</code> 的属性。</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb108-1"><a href="presentation.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 统统居中显示 {.flexbox .vcenter}</span></span></code></pre></div>
+<p>使用 CSS class 的方法为美化幻灯片非常灵活。但是在标题中应用样式不能精确到一张
+幻灯片中的某个具体元素。因此要实现幻灯片的复杂布局，只能使用类似 HTML 的语法。</p>
+<p>居中显示某一段文字，可以采用下面的语法。</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb109-1"><a href="presentation.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;centered&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb109-2"><a href="presentation.html#cb109-2" aria-hidden="true" tabindex="-1"></a>This text is centered.</span>
+<span id="cb109-3"><a href="presentation.html#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>如果要以左右两栏的形式展示某一张幻灯片中的内容，可以使用下面的语法<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>。</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb110-1"><a href="presentation.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;columns-2&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb110-2"><a href="presentation.html#cb110-2" aria-hidden="true" tabindex="-1"></a>  ![](image.png)</span>
+<span id="cb110-3"><a href="presentation.html#cb110-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-4"><a href="presentation.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  - Bullet 1</span>
+<span id="cb110-5"><a href="presentation.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  - Bullet 2</span>
+<span id="cb110-6"><a href="presentation.html#cb110-6" aria-hidden="true" tabindex="-1"></a>  - Bullet 3</span>
+<span id="cb110-7"><a href="presentation.html#cb110-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+</div>
+<div id="文字颜色" class="section level4" number="7.1.1.11">
+<h4><span class="header-section-number">7.1.1.11</span> 文字颜色</h4>
+<p>使用 HTML 语法还可以修改其它的属性，比如文字的颜色。只需要将颜色以 CSS 类的形式赋值给元素即可。例如：</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb111-1"><a href="presentation.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;red2&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb111-2"><a href="presentation.html#cb111-2" aria-hidden="true" tabindex="-1"></a>This text is red</span>
+<span id="cb111-3"><a href="presentation.html#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>可用的颜色包括 <code>red</code>，<code>blue</code>，<code>green</code>，<code>yellow</code>，<code>grey</code>等，以及它们的变体如
+<code>red2</code>，<code>blue3</code>，<code>green4</code>等等</p>
+<!--- 不可用
+#### 放映模式
+----->
+</div>
+<div id="打印幻灯片" class="section level4" number="7.1.1.12">
+<h4><span class="header-section-number">7.1.1.12</span> 打印幻灯片</h4>
+<p>打印幻灯片可以在浏览器中进行，目前保真度最高的浏览器可能是 Google Chrome。
+此外，使用 Chrome 中 “另存为 PDF” 的功能，还可以将幻灯片保存为一份 PDF 文档。</p>
+<p>在 R 语言终端，使用 <code>pagedown::chrome_print()</code> 函数也可以完成这一操作（便于自动化和批处理）。
+不过需要事先安装 <strong><code>pagendown</code></strong> 软件包<span class="citation">(<a href="#ref-R-pagedown" role="doc-biblioref"><strong>R-pagedown?</strong></a>)</span>。</p>
+</div>
+<div id="其它功能" class="section level4" number="7.1.1.13">
+<h4><span class="header-section-number">7.1.1.13</span> 其它功能</h4>
+<p>ioslides 幻灯片中，通用的 R Markdown 语法通常可用，包括 HTML 文档输出中的配置，
+图片的属性设置，数学公式，数据库的打印，中间文件的保留，外部文档的引入等等。</p>
+</div>
+</div>
+<div id="slidy-presentation" class="section level3" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Slidy 幻灯片</h3>
+<p><a href="https://www.w3.org/Talks/Tools/Slidy2/">Slidy</a> 是 HTML 幻灯片的另一个规范。
+要通过 R Markdown 创建一个 Slidy 幻灯片，只需要将文档输出设为 <code>slidy_presentation</code> 即可。</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="presentation.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/slidy-presentation.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb113-1"><a href="presentation.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb113-2"><a href="presentation.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Slidy Presentation&quot;</span></span>
+<span id="cb113-3"><a href="presentation.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;张三&quot;</span></span>
+<span id="cb113-4"><a href="presentation.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2021/4/28&quot;</span></span>
+<span id="cb113-5"><a href="presentation.html#cb113-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb113-6"><a href="presentation.html#cb113-6" aria-hidden="true" tabindex="-1"></a><span class="co">  slidy_presentation:</span></span>
+<span id="cb113-7"><a href="presentation.html#cb113-7" aria-hidden="true" tabindex="-1"></a><span class="co">    font_adjustment: +1</span></span>
+<span id="cb113-8"><a href="presentation.html#cb113-8" aria-hidden="true" tabindex="-1"></a><span class="co">    footer: &quot;Copyright (c) 2021, Cosname&quot;</span></span>
+<span id="cb113-9"><a href="presentation.html#cb113-9" aria-hidden="true" tabindex="-1"></a><span class="co">    duration: 45</span></span>
+<span id="cb113-10"><a href="presentation.html#cb113-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb113-11"><a href="presentation.html#cb113-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-12"><a href="presentation.html#cb113-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb113-13"><a href="presentation.html#cb113-13" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = FALSE)</span></span>
+<span id="cb113-14"><a href="presentation.html#cb113-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb113-15"><a href="presentation.html#cb113-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-16"><a href="presentation.html#cb113-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## R Markdown {.smaller}</span></span>
+<span id="cb113-17"><a href="presentation.html#cb113-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-18"><a href="presentation.html#cb113-18" aria-hidden="true" tabindex="-1"></a>This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <span class="ot">&lt;http://rmarkdown.rstudio.com&gt;</span>.</span>
+<span id="cb113-19"><a href="presentation.html#cb113-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-20"><a href="presentation.html#cb113-20" aria-hidden="true" tabindex="-1"></a>When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.</span>
+<span id="cb113-21"><a href="presentation.html#cb113-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-22"><a href="presentation.html#cb113-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with Bullets {.bigger}</span></span>
+<span id="cb113-23"><a href="presentation.html#cb113-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-24"><a href="presentation.html#cb113-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 1</span>
+<span id="cb113-25"><a href="presentation.html#cb113-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 2</span>
+<span id="cb113-26"><a href="presentation.html#cb113-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 3</span>
+<span id="cb113-27"><a href="presentation.html#cb113-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-28"><a href="presentation.html#cb113-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with R Output</span></span>
+<span id="cb113-29"><a href="presentation.html#cb113-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-30"><a href="presentation.html#cb113-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cars, echo = TRUE}</span></span>
+<span id="cb113-31"><a href="presentation.html#cb113-31" aria-hidden="true" tabindex="-1"></a><span class="in">summary(cars)</span></span>
+<span id="cb113-32"><a href="presentation.html#cb113-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb113-33"><a href="presentation.html#cb113-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-34"><a href="presentation.html#cb113-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with Plot</span></span>
+<span id="cb113-35"><a href="presentation.html#cb113-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-36"><a href="presentation.html#cb113-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pressure}</span></span>
+<span id="cb113-37"><a href="presentation.html#cb113-37" aria-hidden="true" tabindex="-1"></a><span class="in">plot(pressure)</span></span>
+<span id="cb113-38"><a href="presentation.html#cb113-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Slidy 幻灯片的内容设置基本与 ioslides 幻灯片相似，不过其默认样式与之有异。
+一份 Slidy 幻灯片大体是这样的（图 <a href="presentation.html#fig:slidy-presentation-screen-shot">7.3</a>）。</p>
+<div class="figure" style="text-align: center"><span id="fig:slidy-presentation-screen-shot"></span>
+<img src="examples/slidy-presentation-screenshot.png" alt="Slidy 幻灯片" width="480" />
+<p class="caption">
+图 7.3: Slidy 幻灯片
+</p>
+</div>
+<div id="使用快捷键控制显示模式-1" class="section level4" number="7.1.2.1">
+<h4><span class="header-section-number">7.1.2.1</span> 使用快捷键控制显示模式</h4>
+<p>Slidy 中也可以通过快捷键控制显示模式，不过其按键定义与 ioslides 不同。</p>
+<ul>
+<li><code>'c'</code>：显示幻灯片目录。Slidy 会自动生成目录，默认可以通过点击页脚左下角的 “Contents” 访问。</li>
+<li><code>'f'</code>：是否显示页脚的开关。</li>
+<li><code>'a'</code>：显示全部幻灯片的开关。</li>
+<li><code>'s'</code>：缩小字体大小。</li>
+<li><code>'b'</code>：放大字体大小。</li>
+</ul>
+<!--- Text Size 部分的功能已经不可用 --->
+</div>
+<div id="设置页脚内容" class="section level4" number="7.1.2.2">
+<h4><span class="header-section-number">7.1.2.2</span> 设置页脚内容</h4>
+<p>在 YAML 配置中使用 <code>footer</code> 可以为幻灯片设置页脚显示的内容。</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb114-1"><a href="presentation.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb114-2"><a href="presentation.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb114-3"><a href="presentation.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">slidy_presentation</span><span class="kw">:</span></span>
+<span id="cb114-4"><a href="presentation.html#cb114-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">footer</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Copyright (c) 2021, Cosname&quot;</span></span>
+<span id="cb114-5"><a href="presentation.html#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>使用 <code>duration</code> 还可以方便的在页脚添加一个计时器（单位为分钟）。</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb115-1"><a href="presentation.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb115-2"><a href="presentation.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb115-3"><a href="presentation.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">slidy_presentation</span><span class="kw">:</span></span>
+<span id="cb115-4"><a href="presentation.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">duration</span><span class="kw">:</span><span class="at"> </span><span class="dv">45</span></span>
+<span id="cb115-5"><a href="presentation.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="其它功能-1" class="section level4" number="7.1.2.3">
+<h4><span class="header-section-number">7.1.2.3</span> 其它功能</h4>
+<p>Slidy 幻灯片继承了 HTML 文档中的多数功能，以及 ioslides 中的列表内容依次显示等功能。</p>
+<!-- 此处需要添加锚点链接 -->
+</div>
+</div>
+<div id="beamer-presentation" class="section level3" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Beamer 演示文稿</h3>
+<p><a href="https://www.overleaf.com/learn/latex/beamer">Beamer</a> 是一个功能强大且灵活的 LaTeX 类，用于创建美观的演示文稿。</p>
+<p>要从 R Markdown 创建 Beamer 演示文稿，只需要在 YAML 头文件中将输出格式设定为 <code>beamer_presentation</code> 即可。你可以使用一级标题 <code>#</code> 和二级标题 <code>##</code> 新建幻灯片
+（使用 <code>---</code> 也可以创建一张新的没有标题的幻灯片）。例如：</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="presentation.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/beamer-presentation.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb117-1"><a href="presentation.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb117-2"><a href="presentation.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Beamer Presentation&quot;</span></span>
+<span id="cb117-3"><a href="presentation.html#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;张三&quot;</span></span>
+<span id="cb117-4"><a href="presentation.html#cb117-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2021/4/28&quot;</span></span>
+<span id="cb117-5"><a href="presentation.html#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb117-6"><a href="presentation.html#cb117-6" aria-hidden="true" tabindex="-1"></a><span class="co">  beamer_presentation:</span></span>
+<span id="cb117-7"><a href="presentation.html#cb117-7" aria-hidden="true" tabindex="-1"></a><span class="co">    latex_engine: xelatex</span></span>
+<span id="cb117-8"><a href="presentation.html#cb117-8" aria-hidden="true" tabindex="-1"></a><span class="an">header-includes:</span></span>
+<span id="cb117-9"><a href="presentation.html#cb117-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - \usepackage{ctex}</span></span>
+<span id="cb117-10"><a href="presentation.html#cb117-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb117-11"><a href="presentation.html#cb117-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-12"><a href="presentation.html#cb117-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb117-13"><a href="presentation.html#cb117-13" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = FALSE)</span></span>
+<span id="cb117-14"><a href="presentation.html#cb117-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb117-15"><a href="presentation.html#cb117-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-16"><a href="presentation.html#cb117-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beamer 幻灯片中的中文支持</span></span>
+<span id="cb117-17"><a href="presentation.html#cb117-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-18"><a href="presentation.html#cb117-18" aria-hidden="true" tabindex="-1"></a>要使用中文，需要做适当的配置，包括应用 <span class="in">`ctex`</span> 包（支持中文的 LaTeX 包）和使用 <span class="in">`xelatex`</span> 引擎。</span>
+<span id="cb117-19"><a href="presentation.html#cb117-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-20"><a href="presentation.html#cb117-20" aria-hidden="true" tabindex="-1"></a>与 HTML 格式的幻灯片相比，这可能是制作 Beamer 演示文稿时唯一需要额外做出配置的地方了。</span>
+<span id="cb117-21"><a href="presentation.html#cb117-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-22"><a href="presentation.html#cb117-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with Bullets</span></span>
+<span id="cb117-23"><a href="presentation.html#cb117-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-24"><a href="presentation.html#cb117-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 1</span>
+<span id="cb117-25"><a href="presentation.html#cb117-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 2</span>
+<span id="cb117-26"><a href="presentation.html#cb117-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 3</span>
+<span id="cb117-27"><a href="presentation.html#cb117-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-28"><a href="presentation.html#cb117-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with R Output</span></span>
+<span id="cb117-29"><a href="presentation.html#cb117-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-30"><a href="presentation.html#cb117-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cars, echo = TRUE}</span></span>
+<span id="cb117-31"><a href="presentation.html#cb117-31" aria-hidden="true" tabindex="-1"></a><span class="in">summary(cars)</span></span>
+<span id="cb117-32"><a href="presentation.html#cb117-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb117-33"><a href="presentation.html#cb117-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-34"><a href="presentation.html#cb117-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with Plot</span></span>
+<span id="cb117-35"><a href="presentation.html#cb117-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-36"><a href="presentation.html#cb117-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pressure}</span></span>
+<span id="cb117-37"><a href="presentation.html#cb117-37" aria-hidden="true" tabindex="-1"></a><span class="in">plot(pressure)</span></span>
+<span id="cb117-38"><a href="presentation.html#cb117-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Beamer 演示文稿编译后的文件是一个 PDF 文档，大概像下面这个样子（图 <a href="presentation.html#fig:beamer-presentation-screenshot">7.4</a>）。</p>
+<div class="figure" style="text-align: center"><span id="fig:beamer-presentation-screenshot"></span>
+<img src="examples/beamer-presentation-screenshot.png" alt="Beamer 演示文稿示例" width="561" />
+<p class="caption">
+图 7.4: Beamer 演示文稿示例
+</p>
+</div>
+<div id="beamer-演示文稿的中文支持" class="section level4" number="7.1.3.1">
+<h4><span class="header-section-number">7.1.3.1</span> Beamer 演示文稿的中文支持</h4>
+<p>如果要生成中文的 Beamer 演示文稿，参考 <a href="PDF-document.html#PDF-document">6</a> 中的设置。</p>
+</div>
+<div id="beamer-演示文稿的主题" class="section level4" number="7.1.3.2">
+<h4><span class="header-section-number">7.1.3.2</span> Beamer 演示文稿的主题</h4>
+<p>Beamer 支持多个幻灯片主题，在 R Markdown 中使用 <code>theme</code>，<code>colortheme</code> 和 <code>fonttheme</code> 设定。
+例如：</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb118-1"><a href="presentation.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb118-2"><a href="presentation.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb118-3"><a href="presentation.html#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">beamer_presentation</span><span class="kw">:</span></span>
+<span id="cb118-4"><a href="presentation.html#cb118-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;AnnArbor&quot;</span></span>
+<span id="cb118-5"><a href="presentation.html#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">colortheme</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;dolphin&quot;</span></span>
+<span id="cb118-6"><a href="presentation.html#cb118-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fonttheme</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;structurebold&quot;</span></span>
+<span id="cb118-7"><a href="presentation.html#cb118-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>这样，上面的幻灯片就会变成下面这个样子（图 <a href="presentation.html#fig:beamer-presentation-theme">7.5</a>）。
+这个主题为标题幻灯片添加了页眉和页脚，显示作者、主题、日期和页码等信息。</p>
+<div class="figure" style="text-align: center"><span id="fig:beamer-presentation-theme"></span>
+<img src="examples/beamer-presentation-theme.png" alt="应用主题后的 Beamer 演示文稿" width="756" />
+<p class="caption">
+图 7.5: 应用主题后的 Beamer 演示文稿
+</p>
+</div>
+<p>Beamer 支持数十个主题和颜色样式，在 <a href="https://hartwork.org/beamer-theme-matrix/">这里</a> 可以查看可用的选项。</p>
+</div>
+<div id="beamer-幻灯片的边界" class="section level4" number="7.1.3.3">
+<h4><span class="header-section-number">7.1.3.3</span> Beamer 幻灯片的边界</h4>
+<p><code>slide_level</code> 参数用来指定一张幻灯片开始的位置。默认情况下，二级标题会被识别为一张幻灯片的开始，但是你可以将它改为其它的大纲等级。</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb119-1"><a href="presentation.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb119-2"><a href="presentation.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb119-3"><a href="presentation.html#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">beamer_presentation</span><span class="kw">:</span></span>
+<span id="cb119-4"><a href="presentation.html#cb119-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">slide_level</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb119-5"><a href="presentation.html#cb119-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="其它功能-2" class="section level4" number="7.1.3.4">
+<h4><span class="header-section-number">7.1.3.4</span> 其它功能</h4>
+<p>Beamer 演示文稿从 HTML 文档中继承了目录内容、图片属性、样式、数据框打印、组件、
+模板、Pandoc 参数和分享等功能（参加 <a href="html-document.html#html-document">5</a>），从 PDF 文档和
+ioslides 演示文稿中继承了列表动画、保留 TeX 文件等功能（参见 <a href="#pdf-document"><strong>??</strong></a>, <a href="presentation.html#ioslides-presentation">7.1.1</a>）。</p>
+</div>
+</div>
+<div id="powerpoint-presentation" class="section level3" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> PowerPoint 演示文稿</h3>
+<!-- 注：为避免混淆，把 presentation 称为“演示文稿”，把 slide 称为“幻灯片”。-->
+<p>要制作 PowerPoint 演示文稿，只需要将输出格式设置为 <code>powerpoint_presentation</code> 即可。
+这需要满足 <strong>rmarkdown</strong> 版本 ≥ v1.9，Pandoc 版本 ≥ 2.0.5 的条件<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>。</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="presentation.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/powerpoint-presentation.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb121-1"><a href="presentation.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb121-2"><a href="presentation.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;PowerPoint Presentation&quot;</span></span>
+<span id="cb121-3"><a href="presentation.html#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;张三&quot;</span></span>
+<span id="cb121-4"><a href="presentation.html#cb121-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2021/4/28&quot;</span></span>
+<span id="cb121-5"><a href="presentation.html#cb121-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> powerpoint_presentation</span></span>
+<span id="cb121-6"><a href="presentation.html#cb121-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb121-7"><a href="presentation.html#cb121-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-8"><a href="presentation.html#cb121-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb121-9"><a href="presentation.html#cb121-9" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = FALSE)</span></span>
+<span id="cb121-10"><a href="presentation.html#cb121-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb121-11"><a href="presentation.html#cb121-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-12"><a href="presentation.html#cb121-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## R Markdown</span></span>
+<span id="cb121-13"><a href="presentation.html#cb121-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-14"><a href="presentation.html#cb121-14" aria-hidden="true" tabindex="-1"></a>This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <span class="ot">&lt;http://rmarkdown.rstudio.com&gt;</span>.</span>
+<span id="cb121-15"><a href="presentation.html#cb121-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-16"><a href="presentation.html#cb121-16" aria-hidden="true" tabindex="-1"></a>When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.</span>
+<span id="cb121-17"><a href="presentation.html#cb121-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-18"><a href="presentation.html#cb121-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with Bullets</span></span>
+<span id="cb121-19"><a href="presentation.html#cb121-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-20"><a href="presentation.html#cb121-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 1</span>
+<span id="cb121-21"><a href="presentation.html#cb121-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 2</span>
+<span id="cb121-22"><a href="presentation.html#cb121-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet 3</span>
+<span id="cb121-23"><a href="presentation.html#cb121-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-24"><a href="presentation.html#cb121-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with R Output</span></span>
+<span id="cb121-25"><a href="presentation.html#cb121-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-26"><a href="presentation.html#cb121-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cars, echo = TRUE}</span></span>
+<span id="cb121-27"><a href="presentation.html#cb121-27" aria-hidden="true" tabindex="-1"></a><span class="in">summary(cars)</span></span>
+<span id="cb121-28"><a href="presentation.html#cb121-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb121-29"><a href="presentation.html#cb121-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-30"><a href="presentation.html#cb121-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slide with Plot</span></span>
+<span id="cb121-31"><a href="presentation.html#cb121-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-32"><a href="presentation.html#cb121-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pressure}</span></span>
+<span id="cb121-33"><a href="presentation.html#cb121-33" aria-hidden="true" tabindex="-1"></a><span class="in">plot(pressure)</span></span>
+<span id="cb121-34"><a href="presentation.html#cb121-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>R Markdown 生成的 PowerPoint 演示文稿大概长这个样子（图 <a href="presentation.html#fig:powerpoint-presentation-screenshot">7.6</a>）：</p>
+<div class="figure" style="text-align: center"><span id="fig:powerpoint-presentation-screenshot"></span>
+<img src="examples/powerpoint-presentation-screenshot.png" alt="PowerPoint 演示文稿" width="563" />
+<p class="caption">
+图 7.6: PowerPoint 演示文稿
+</p>
+</div>
+<p>PowerPoint 演示文稿采用的幻灯片标记与 Beamer 相同，默认为 3 级标题。
+使用 <code>slide_level</code> 可以控制新建一张幻灯片所需要的大纲等级。
+此外，使用 <code>---</code> 可以新建一张没有标题的幻灯片。
+另外，R Markdown 中包括的图片和表格都会自动的被 放到一张新的幻灯片中。
+也就是说，除了幻灯片的标题、图片/表格的标注之外，其它所有元素都不能与二者共存。
+这一点与其它格式演示文稿的行为有明显不同。</p>
+<p>一般情况下，PowerPoint 演示文稿中的图片会被自动缩放到适合幻灯片的大小。
+如果自动缩放无效，那么对于静态图片可以使用 <code>width</code> 和 <code>height</code> 来分别设置，
+例如：<code>![caption](foo.png){width=40%}</code>。
+对于 R 语言生成的动态图形，则可以使用代码块的参数 <code>fig.width</code> 和 <code>fig.height</code> 来定义宽和高。</p>
+<p>PowerPoint 幻灯片中可以使用的 Markdown 标记（参见 <a href="#markdown-syntax"><strong>??</strong></a>）包括粗体、斜体，脚注，列表，LaTeX 数学表达式，
+图片，表格等。</p>
+<div id="两栏布局" class="section level4" number="7.1.4.1">
+<h4><span class="header-section-number">7.1.4.1</span> 两栏布局</h4>
+<p>正如 Beamer 演示文稿的高级应用需要借助于 LaTeX 语法一样，
+PowerPoint 演示文稿的高级应用需要借助于对 Pandoc 的深入了解。
+使用 Pandoc 的语法，可以设置一个多栏的布局（请参见 Pandoc 的用户手册）：</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb122-1"><a href="presentation.html#cb122-1" aria-hidden="true" tabindex="-1"></a>:::::: {.columns}</span>
+<span id="cb122-2"><a href="presentation.html#cb122-2" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
+<span id="cb122-3"><a href="presentation.html#cb122-3" aria-hidden="true" tabindex="-1"></a>Content of the left column.</span>
+<span id="cb122-4"><a href="presentation.html#cb122-4" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb122-5"><a href="presentation.html#cb122-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-6"><a href="presentation.html#cb122-6" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
+<span id="cb122-7"><a href="presentation.html#cb122-7" aria-hidden="true" tabindex="-1"></a>Content of the right column.</span>
+<span id="cb122-8"><a href="presentation.html#cb122-8" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb122-9"><a href="presentation.html#cb122-9" aria-hidden="true" tabindex="-1"></a>::::::</span></code></pre></div>
+</div>
+<div id="自定义模板" class="section level4" number="7.1.4.2">
+<h4><span class="header-section-number">7.1.4.2</span> 自定义模板</h4>
+<p>PowerPoint 演示文稿的模板可以用 <code>reference_doc</code> 来设置。
+模板中的样式将会被应用到 R Markdown 生成的 PowerPoint 演示文稿中。</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb123-1"><a href="presentation.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb123-2"><a href="presentation.html#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;使用你喜欢的 PowerPoint 模板&quot;</span></span>
+<span id="cb123-3"><a href="presentation.html#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb123-4"><a href="presentation.html#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">powerpoint_presentation</span><span class="kw">:</span></span>
+<span id="cb123-5"><a href="presentation.html#cb123-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">reference_doc</span><span class="kw">:</span><span class="at"> my-styles.pptx</span></span>
+<span id="cb123-6"><a href="presentation.html#cb123-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="其它功能-3" class="section level4" number="7.1.4.3">
+<h4><span class="header-section-number">7.1.4.3</span> 其它功能</h4>
+<p>PowerPoint 演示文稿从 HTML 文档中继承了目录内容、图片属性、样式、数据框打印、组件、
+模板、Pandoc 参数和分享等功能（参加 <a href="html-document.html#html-document">5</a>）。
+目前并不支持列表中各个项目的播放效果。</p>
+</div>
+</div>
+</div>
+<div id="xaringan-presentation" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Xaringan 幻灯片</h2>
+<div id="简介" class="section level3" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> 简介</h3>
+<p>虽然 R Markdown 提供的基础幻灯片已经能够实现了基本的幻灯片功能，而且没有额外的学习成本，
+但是，善于制作精良幻灯片的“忍者”通常使用一个额外的包来创建幻灯片，这个包的名字叫做 <code>xaringan</code>。</p>
+<p><code>xaringan</code> 这个名字来源于火影忍者中的写轮眼 “Sharingan” （图 <a href="presentation.html#fig:sharingan-icon">7.7</a>）<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>。写轮眼有两大能力：</p>
+<ul>
+<li><p>洞察眼</p></li>
+<li><p>催眠眼</p></li>
+</ul>
+<p>其实做演示就是将自己的洞见传递给听众；好的演讲通常有催眠效果，因为它可以深度震撼人心<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>。</p>
+<div class="figure" style="text-align: center"><span id="fig:sharingan-icon"></span>
+<img src="images/xaringan-hex.png" alt="幻灯忍者：写轮眼" width="180" />
+<p class="caption">
+图 7.7: 幻灯忍者：写轮眼
+</p>
+</div>
+<p>与其它工具相比，<code>xaringan</code> 创建的幻灯片样式更加精美，功能更加丰富，且具有高度的可定制性（图 <a href="presentation.html#fig:xaringan-screenshot">7.8</a>）。</p>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-screenshot"></span>
+<img src="images/xaringan-scrennshot.png" alt="`xaringan` 幻灯片的实例" width="602" />
+<p class="caption">
+图 7.8: <code>xaringan</code> 幻灯片的实例
+</p>
+</div>
+</div>
+<div id="入门" class="section level3" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> 入门</h3>
+<p>要创建“写轮眼”幻灯片，需要先安装 <code>xaringan</code> 包<span class="citation">(<a href="#ref-R-xaringan" role="doc-biblioref">Xie 2021c</a>)</span>）。</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="presentation.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;xaringan&quot;</span>))</span>
+<span id="cb124-2"><a href="presentation.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;xaringan&quot;</span>)</span></code></pre></div>
+<p>安装完成之后，在 RStudio 中新建 R Markdown 文件，并在左侧选择 “From Template”，然后选择 Ninja Presentation (Simplified Chinese)。填写必要信息之后，即可创建一个新的“写轮眼”幻灯片模板（图 <a href="presentation.html#fig:xaringan-new">7.9</a>）。</p>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-new"></span>
+<img src="images/xaringan-new.png" alt="创建一个新文档" width="500" />
+<p class="caption">
+图 7.9: 创建一个新文档
+</p>
+</div>
+<p>然后点击 Knit 按钮编译文档，或者点击 RStudio 插件 “Infinite Moon Reader” 在 RStudio 里实时预览幻灯片（每次你保存文档的时候，它会自动重新编译）。</p>
+<blockquote>
+<p><strong>原理：</strong> xaringan 将 R Markdown 的查克拉注入了 remark.js。浏览器中的幻灯片是 remark.js 渲染出来的，而它的 Markdown 源文档是从 R Markdown 生成的（实际上主要是 knitr）。</p>
+</blockquote>
+<div id="一些技巧" class="section level4" number="7.2.2.1">
+<h4><span class="header-section-number">7.2.2.1</span> 一些技巧</h4>
+<ol style="list-style-type: decimal">
+<li>播放设置</li>
+</ol>
+<p><code>nature</code> 下面的 <code>autoplay</code> 选项可以用来自动播放幻灯片，它的取值是毫秒，例如：每 30 秒播放一张片子：</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb125-1"><a href="presentation.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co">  </span></span>
+<span id="cb125-2"><a href="presentation.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  xaringan::moon_reader:  </span>
+<span id="cb125-3"><a href="presentation.html#cb125-3" aria-hidden="true" tabindex="-1"></a>  nature:  </span>
+<span id="cb125-4"><a href="presentation.html#cb125-4" aria-hidden="true" tabindex="-1"></a>    autoplay: 30000  </span></code></pre></div>
+<p><code>nature</code> 下面的 <code>countdown</code> 选项可以为每一页幻灯片添加一个（倒数）计时器，取值同样为毫秒，例如每一页片子都用 60 秒倒计时：</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb126-1"><a href="presentation.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co">  </span></span>
+<span id="cb126-2"><a href="presentation.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  xaringan::moon_reader:  </span>
+<span id="cb126-3"><a href="presentation.html#cb126-3" aria-hidden="true" tabindex="-1"></a>    nature:  </span>
+<span id="cb126-4"><a href="presentation.html#cb126-4" aria-hidden="true" tabindex="-1"></a>      countdown: 60000  </span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>快捷键</li>
+</ol>
+<ul>
+<li>点击按键 <code>h</code> 或者 <code>?</code> 之后可以看到所有快捷键示意图（图 <a href="presentation.html#fig:xaringan-help">7.10</a>）</li>
+</ul>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="presentation.html#cb127-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/xaringan-help.png&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-help"></span>
+<img src="images/xaringan-help.png" alt="展示所有快捷键" width="500" />
+<p class="caption">
+图 7.10: 展示所有快捷键
+</p>
+</div>
+<ul>
+<li><code>p</code> 进入演讲者模式（可以看见自己写的注释，比如：提醒自己要讲的笑话，图 <a href="presentation.html#fig:xaringan-review">7.11</a>）。</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-review"></span>
+<img src="images/xaringan-review.png" alt="进入演讲者模式" width="367" />
+<p class="caption">
+图 7.11: 进入演讲者模式
+</p>
+</div>
+<ul>
+<li>点击按键 <code>c</code> 可以复制幻灯片到新窗口。演讲时可以在自己面前的屏幕上显示演讲者模式，把新窗口中正常的幻灯片拖到大屏幕投影上给观众看（见图 <a href="presentation.html#fig:xaringan-new-screan">7.12</a>）。</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-new-screan"></span>
+<img src="images/xaringan-new-screan.png" alt="复制幻灯片到新窗口" width="500" />
+<p class="caption">
+图 7.12: 复制幻灯片到新窗口
+</p>
+</div>
+</div>
+</div>
+<div id="使用其他主题" class="section level3" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> 使用其他主题</h3>
+<p>Aden-Buie 写了一个叫做 <strong>xaringanthemer</strong> 包<span class="citation">(<a href="#ref-R-xaringanthemer" role="doc-biblioref"><strong>R-xaringanthemer?</strong></a>)</span>的包，可以更改写轮眼的主题，使用起来也非常方便，接下来看教程。</p>
+<div id="安装" class="section level4" number="7.2.3.1">
+<h4><span class="header-section-number">7.2.3.1</span> 安装</h4>
+<p>你可以从 CRAN 或者 Github安装 <strong>xaringanthemer</strong> 包。</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb128-1"><a href="presentation.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 通过 CRAN 安装</span></span>
+<span id="cb128-2"><a href="presentation.html#cb128-2" aria-hidden="true" tabindex="-1"></a>install.packages(&quot;xaringanthemer&quot;)  </span>
+<span id="cb128-3"><a href="presentation.html#cb128-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-4"><a href="presentation.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="fu"># 通过 Github 安装</span></span>
+<span id="cb128-5"><a href="presentation.html#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># install.packages(&quot;remotes&quot;)  </span></span>
+<span id="cb128-6"><a href="presentation.html#cb128-6" aria-hidden="true" tabindex="-1"></a>remotes::install_github(&quot;gadenbuie/xaringanthemer&quot;) </span></code></pre></div>
+</div>
+<div id="快速入门" class="section level4" number="7.2.3.2">
+<h4><span class="header-section-number">7.2.3.2</span> 快速入门</h4>
+<ol style="list-style-type: decimal">
+<li>创建完新文档后，我们将 <code>xaringan-themer.css</code> 文件添加到 xaringan 幻灯片的 YAML 中。</li>
+</ol>
+<div class="sourceCode" id="cb129"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb129-1"><a href="presentation.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co">  </span></span>
+<span id="cb129-2"><a href="presentation.html#cb129-2" aria-hidden="true" tabindex="-1"></a>  xaringan::moon_reader:  </span>
+<span id="cb129-3"><a href="presentation.html#cb129-3" aria-hidden="true" tabindex="-1"></a>    css: xaringan-themer.css  </span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>然后，在 chunck 中加载 <strong>xaringanthemer</strong> 并<a href="https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html#themes">设置主题</a>。下面给出一个简单的例子，图 （<a href="presentation.html#fig:xaringan-themer-sample-view">7.13</a>） 展示了设置主题后的界面预览。当然该包还给出了很多其他主题，我们将在下面给出一些主题模板预览。</li>
+</ol>
+<div class="sourceCode" id="cb130"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb130-1"><a href="presentation.html#cb130-1" aria-hidden="true" tabindex="-1"></a>library(xaringanthemer)  </span>
+<span id="cb130-2"><a href="presentation.html#cb130-2" aria-hidden="true" tabindex="-1"></a>style_mono_accent(  </span>
+<span id="cb130-3"><a href="presentation.html#cb130-3" aria-hidden="true" tabindex="-1"></a>  base_color = &quot;#1c5253&quot;,  </span>
+<span id="cb130-4"><a href="presentation.html#cb130-4" aria-hidden="true" tabindex="-1"></a>  header_font_google = google_font(&quot;Josefin Sans&quot;),  </span>
+<span id="cb130-5"><a href="presentation.html#cb130-5" aria-hidden="true" tabindex="-1"></a>  text_font_google   = google_font(&quot;Montserrat&quot;, &quot;300&quot;, &quot;300i&quot;),  </span>
+<span id="cb130-6"><a href="presentation.html#cb130-6" aria-hidden="true" tabindex="-1"></a>  code_font_google   = google_font(&quot;Fira Mono&quot;)  </span>
+<span id="cb130-7"><a href="presentation.html#cb130-7" aria-hidden="true" tabindex="-1"></a>)  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-themer-sample-view"></span>
+<img src="images/xaringan-themer-sample-view.png" alt="主题设置后的界面预览" width="500" />
+<p class="caption">
+图 7.13: 主题设置后的界面预览
+</p>
+</div>
+<blockquote>
+<p><strong>注意</strong>：在 chunck 头部中设置 <code>include=FALSE, warning=FALSE</code> 可以隐藏代码。</p>
+</blockquote>
+</div>
+<div id="使用技巧" class="section level4" number="7.2.3.3">
+<h4><span class="header-section-number">7.2.3.3</span> 使用技巧</h4>
+<ol style="list-style-type: decimal">
+<li>匹配 ggplot 主题</li>
+</ol>
+<p><strong>xaringanthemer</strong> 包甚至提供带有 <code>theme_xaringan（）</code> 的 <code>ggplot2</code> 主题，可以直接使用幻灯片主题中的颜色和字体。建立在 <strong>showtext</strong> 包 <span class="citation">(<a href="#ref-R-showtext" role="doc-biblioref"><strong>R-showtext?</strong></a>)</span> 的基础上，旨在与 Google 字体无缝协作。有关更多详细信息，请参见 <code>?scale_xaringan</code> 和 <code>vignette(“ggplot2-themes”)</code>中找到（图 <a href="presentation.html#fig:xaringan-themer-ggplot">7.14</a>）。</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb131-1"><a href="presentation.html#cb131-1" aria-hidden="true" tabindex="-1"></a>library(ggplot2)  </span>
+<span id="cb131-2"><a href="presentation.html#cb131-2" aria-hidden="true" tabindex="-1"></a>ggplot(diamonds) +  </span>
+<span id="cb131-3"><a href="presentation.html#cb131-3" aria-hidden="true" tabindex="-1"></a>  aes(cut, fill = cut) +  </span>
+<span id="cb131-4"><a href="presentation.html#cb131-4" aria-hidden="true" tabindex="-1"></a>  geom_bar(show.legend = FALSE) +  </span>
+<span id="cb131-5"><a href="presentation.html#cb131-5" aria-hidden="true" tabindex="-1"></a>  labs(  </span>
+<span id="cb131-6"><a href="presentation.html#cb131-6" aria-hidden="true" tabindex="-1"></a>    x = &quot;Cut&quot;,  </span>
+<span id="cb131-7"><a href="presentation.html#cb131-7" aria-hidden="true" tabindex="-1"></a>    y = &quot;Count&quot;,  </span>
+<span id="cb131-8"><a href="presentation.html#cb131-8" aria-hidden="true" tabindex="-1"></a>    title = &quot;A Fancy diamonds Plot&quot;) +  </span>
+<span id="cb131-9"><a href="presentation.html#cb131-9" aria-hidden="true" tabindex="-1"></a>  theme_xaringan(background_color = &quot;#FFFFFF&quot;) +  </span>
+<span id="cb131-10"><a href="presentation.html#cb131-10" aria-hidden="true" tabindex="-1"></a>  scale_xaringan_fill_discrete()  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-themer-ggplot"></span>
+<img src="images/xaringan-themer-ggplot.png" alt="前面例子对应的 ggplot 配色" width="500" />
+<p class="caption">
+图 7.14: 前面例子对应的 ggplot 配色
+</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>自补全功能</li>
+</ol>
+<p><strong>xaringanthemer</strong> 包对 Tab 键十分友好，该功能可以在查找每个主题中调整模板的函数。对应的 gif 演示可见<a href="https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html">官网教程</a>。</p>
+<!-- #### 在 RStudio 中打开该模板 -->
+<!-- 你也可以跳过上述内容，仅从 RStudio 中的“新建 Rmarkdwon 文档”菜单创建一个“Ninja Themed Presentation”（图 \@ref(fig:xaringan-themer-new1)）。 -->
+<!-- ```{r xaringan-themer-new1, echo=FALSE,fig.width=6,fig.align='center', fig.cap="创建模板的另一种选择"} -->
+<!-- knitr::include_graphics("images/xaringan-themer-new1.png") -->
+<!-- ``` -->
+</div>
+<div id="其他主题设置" class="section level4" number="7.2.3.4">
+<h4><span class="header-section-number">7.2.3.4</span> 其他主题设置</h4>
+<p>该包提供各式各样的主题模板，你可以根据喜好选择自己想要的主题，在正文开头加入以下代码，就会得到相应的模板了！这里给出 6 个模板函数以及对应的界面预览图，更多模板可见<a href="https://pkg.garrickadenbuie.com/xaringanthemer/articles/themes.html" class="uri">https://pkg.garrickadenbuie.com/xaringanthemer/articles/themes.html</a>。</p>
+<blockquote>
+<p>记得在使用以下函数前，先加载 <strong>xaringanthemer</strong> 包。</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li>style_mono_light()</li>
+</ol>
+<div class="sourceCode" id="cb132"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb132-1"><a href="presentation.html#cb132-1" aria-hidden="true" tabindex="-1"></a>style_mono_light(base_color = &quot;#23395b&quot;)  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-themer-demo1"></span>
+<img src="images/xaringan-themer-demo1.png" alt="模板1" width="681" />
+<p class="caption">
+图 7.15: 模板1
+</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>style_mono_dark()</li>
+</ol>
+<div class="sourceCode" id="cb133"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb133-1"><a href="presentation.html#cb133-1" aria-hidden="true" tabindex="-1"></a>style_mono_dark(base_color = &quot;#cbf7ed&quot;)  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-themer-demo2"></span>
+<img src="images/xaringan-themer-demo2.png" alt="模板2" width="681" />
+<p class="caption">
+图 7.16: 模板2
+</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>style_mono_accent()</li>
+</ol>
+<div class="sourceCode" id="cb134"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb134-1"><a href="presentation.html#cb134-1" aria-hidden="true" tabindex="-1"></a>style_mono_accent(base_color = &quot;#43418A&quot;)  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-themer-demo3"></span>
+<img src="images/xaringan-themer-demo3.png" alt="模板3" width="681" />
+<p class="caption">
+图 7.17: 模板3
+</p>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>style_mono_accent_inverse()</li>
+</ol>
+<div class="sourceCode" id="cb135"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb135-1"><a href="presentation.html#cb135-1" aria-hidden="true" tabindex="-1"></a>style_mono_accent(base_color = &quot;#43418A&quot;)  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-themer-demo4"></span>
+<img src="images/xaringan-themer-demo4.png" alt="模板4" width="681" />
+<p class="caption">
+图 7.18: 模板4
+</p>
+</div>
+<ol start="5" style="list-style-type: decimal">
+<li>style_duo()</li>
+</ol>
+<div class="sourceCode" id="cb136"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb136-1"><a href="presentation.html#cb136-1" aria-hidden="true" tabindex="-1"></a>style_duo(primary_color = &quot;#1F4257&quot;, secondary_color = &quot;#F97B64&quot;)  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-themer-demo5"></span>
+<img src="images/xaringan-themer-demo5.png" alt="模板5" width="1022" />
+<p class="caption">
+图 7.19: 模板5
+</p>
+</div>
+<ol start="6" style="list-style-type: decimal">
+<li>style_solarized_light()</li>
+</ol>
+<div class="sourceCode" id="cb137"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb137-1"><a href="presentation.html#cb137-1" aria-hidden="true" tabindex="-1"></a>style_solarized_light()  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-themer-demo6"></span>
+<img src="images/xaringan-themer-demo6.png" alt="模板6" width="681" />
+<p class="caption">
+图 7.20: 模板6
+</p>
+</div>
+</div>
+</div>
+<div id="提升-xaringan-幻灯片的-b-格" class="section level3" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> 提升 xaringan 幻灯片的 B 格</h3>
+<p>如果你想提升 xaringan 幻灯片的 B 格，那你需要了解下与 xaringan 幻灯片息息有关的包： <strong>xaringanExtra</strong> 包<span class="citation">(<a href="#ref-R-xaringanExtra" role="doc-biblioref"><strong>R-xaringanExtra?</strong></a>)</span>。</p>
+<p>这个包涵盖了很多写轮眼的拓展功能，具体如下所示：</p>
+<ul>
+<li>并列方式展示演示文稿 ⭐</li>
+<li>在线编辑演示文稿 ⭐</li>
+<li>分享幻灯片样式</li>
+<li>通过广播向观众实时播放幻灯片</li>
+<li>在演示幻灯片上进行涂鸦 ⭐️</li>
+<li>幻灯片切换时有声音提示 ⭐️</li>
+<li>加入幻灯片切换动画 ⭐️</li>
+<li>将选项卡面板加入幻灯片中 ⭐️</li>
+<li>给幻灯片添加全局 logo ⭐️</li>
+<li>添加搜索框</li>
+<li>使用 Tachyons CSS 实用程序工具包</li>
+<li>添加网络摄像头进行实时视频 ⭐️</li>
+<li>使用剪贴板添加一键式代码复制</li>
+<li>从幻灯片开始就播放 GIF</li>
+<li>调整幻灯片的大小以填充浏览器窗口 ⭐️</li>
+<li>添加额外的 CSS 样式</li>
+</ul>
+<p>这里，作者不会对所有的拓展功能都介绍一遍。主要对一些平常我使用比较多的功能进行介绍（上面标 ⭐️的）。如果大家对其他没提到的功能感兴趣的话。可以看<a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/README?id=xaringanextra">官方的网站</a></p>
+<p>你可以从 GitHub 安装当前版本的 <code>xaringanExtra</code>，如果安装存在问题，可以尝试通过本地安装，这篇<a href="https://mp.weixin.qq.com/s/NMxhX-7SZEw4KRn8Jr9dVw">教程</a>可供大家参考。</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb138-1"><a href="presentation.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># install.packages(&quot;devtools&quot;)  </span></span>
+<span id="cb138-2"><a href="presentation.html#cb138-2" aria-hidden="true" tabindex="-1"></a>devtools::install_github(&quot;gadenbuie/xaringanExtra&quot;)  </span></code></pre></div>
+<p>安装好包后，我们可以 <strong>xaringan</strong> 或者 <strong>xaringanthemer</strong> 创建一个写轮眼模板(记得先安装！)。</p>
+<div id="并列方式展示演示文稿" class="section level4" number="7.2.4.1">
+<h4><span class="header-section-number">7.2.4.1</span> 并列方式展示演示文稿</h4>
+<p><strong>使用方法</strong>：将以下代码块添加到幻灯片 R Markdown 文件中，之后对该 rmd 文件进行重新渲染。</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb139-1"><a href="presentation.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-tile-view, echo=FALSE}  </span></span>
+<span id="cb139-2"><a href="presentation.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_tile_view()  </span></span>
+<span id="cb139-3"><a href="presentation.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+<blockquote>
+<p>位置随意，建议放在 YAML 的后面吧。</p>
+</blockquote>
+<p>渲染后，在演示的界面中（默认 Rstudio 的右下角跳出）按 <code>O</code> 键（ Overview 的第一个字母）即可得到以下界面，再按 <code>O</code> 键即可回到默认形式。</p>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-extra-1"></span>
+<img src="images/xaringan-extra-1.png" alt="并列方式展示演示文稿" width="500" />
+<p class="caption">
+图 7.21: 并列方式展示演示文稿
+</p>
+</div>
+<blockquote>
+<p>该功能类似 ppt 中的幻灯片浏览模式。黄色的框表示你当前所在的位置，你可以通过鼠标直接切换到你想要的位置。这个功能非常方便实用，而且操作简单，只要加入前面的代码就可以了。</p>
+</blockquote>
+</div>
+<div id="在线编辑演示文稿" class="section level4" number="7.2.4.2">
+<h4><span class="header-section-number">7.2.4.2</span> 在线编辑演示文稿</h4>
+<p>这个功能无敌！你可以在放映的幻灯片上直接书写内容，实时更新。主要是使用 <code>.can-edit [...]</code> 实现。</p>
+<p><strong>使用方法</strong>：你只需将下面代码加入你创建的 rmd 文档中：</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb140-1"><a href="presentation.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-editable, echo = FALSE}  </span></span>
+<span id="cb140-2"><a href="presentation.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_editable(expires = 1)  </span></span>
+<span id="cb140-3"><a href="presentation.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+<p>使用 <code>.can-edit[]</code> 使幻灯片组件可编辑。</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb141-1"><a href="presentation.html#cb141-1" aria-hidden="true" tabindex="-1"></a>##.can-edit<span class="co">[</span><span class="ot">You can edit this slide title</span><span class="co">]</span>  </span></code></pre></div>
+<p>每当将幻灯片重新加载到浏览器中时，<code>.can-edit</code> 类的可编辑字段将被重置。如果要存储已编辑并使它们在浏览器会话之间持久存在，请为每个可编辑字段提供一个 <code>.key- &lt;NAME&gt;</code> 类。例如：</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb142-1"><a href="presentation.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## .can-edit.key-firstSlideTitle[Change this title and then reload the page]  </span></span></code></pre></div>
+<p>对于更复杂的 HTML 元素，最好仅使一部分文本可编辑，例如</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb143-1"><a href="presentation.html#cb143-1" aria-hidden="true" tabindex="-1"></a>Hello, .can-edit<span class="co">[</span><span class="ot">world</span><span class="co">]</span>, and welcome to my talk!  </span></code></pre></div>
+<p>或者使用占位符文本。</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb144-1"><a href="presentation.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## A few of my favorite things  </span></span>
+<span id="cb144-2"><a href="presentation.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb144-3"><a href="presentation.html#cb144-3" aria-hidden="true" tabindex="-1"></a>.can-edit.key-likes[  </span>
+<span id="cb144-4"><a href="presentation.html#cb144-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>thing one  </span>
+<span id="cb144-5"><a href="presentation.html#cb144-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>thing two  </span>
+<span id="cb144-6"><a href="presentation.html#cb144-6" aria-hidden="true" tabindex="-1"></a>]  </span></code></pre></div>
+<p>官方给出了 gif 的<a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/editable">演示</a>。在教学的时候非常合适，可以增加与学生，观众的互动。</p>
+</div>
+<div id="在演示幻灯片上进行涂鸦" class="section level4" number="7.2.4.3">
+<h4><span class="header-section-number">7.2.4.3</span> 在演示幻灯片上进行涂鸦</h4>
+<p><strong>使用方法</strong>：只需在 rmd 文件中加入下面代码，重新编译即可得到这个效果。</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb145-1"><a href="presentation.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-scribble, echo=FALSE}  </span></span>
+<span id="cb145-2"><a href="presentation.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_scribble()  </span></span>
+<span id="cb145-3"><a href="presentation.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+<p>单击铅笔图标或按 <code>S</code> 键进行绘图。按 <code>S</code> 或启动绘图模式切换涂鸦工具箱。你也可以使用橡皮擦来删除线条或单击“清除（trash）”按钮清除当前幻灯片上的所有涂鸦。</p>
+<blockquote>
+<p><strong>注意</strong>，当你更改幻灯片时，图纸将保持在每张幻灯片上。在绘图模式下不能更改幻灯片。事实上，你可以使用 <code>←</code> 和<code>→</code> 键来撤消或重做您的图纸。</p>
+</blockquote>
+<p>如果想将幻灯片与涂鸦一起保存，最好的方法是从浏览器中打印演示文稿，官方给出了 gif <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/scribble">演示</a>。</p>
+</div>
+<div id="幻灯片切换时有声音提示" class="section level4" number="7.2.4.4">
+<h4><span class="header-section-number">7.2.4.4</span> 幻灯片切换时有声音提示</h4>
+<p><strong>使用方法</strong>：只需在 rmd 文件中加入下面代码，重新编译即可得到这个效果。当然，官方也给出了 gif <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/slide-tone">演示</a>。</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb146-1"><a href="presentation.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-slide-tone, echo=FALSE}    </span></span>
+<span id="cb146-2"><a href="presentation.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_slide_tone()  </span></span>
+<span id="cb146-3"><a href="presentation.html#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+</div>
+<div id="加入幻灯片切换动画" class="section level4" number="7.2.4.5">
+<h4><span class="header-section-number">7.2.4.5</span> 加入幻灯片切换动画</h4>
+<p><strong>使用方法</strong>：在 rmd 文件中加入下面代码</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb147-1"><a href="presentation.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-animate-css, echo=FALSE}   </span></span>
+<span id="cb147-2"><a href="presentation.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_animate_css()  </span></span>
+<span id="cb147-3"><a href="presentation.html#cb147-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+<p>然后将 <code>animated</code> 类和所需动画添加到对应的幻灯片中。下面给出一个代码的例子：</p>
+<blockquote>
+<p>注意：退出动画只应用于退出时的幻灯片。</p>
+</blockquote>
+<div class="sourceCode" id="cb148"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb148-1"><a href="presentation.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co">---  </span></span>
+<span id="cb148-2"><a href="presentation.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="an">class:</span><span class="co"> animated slideInRight fadeOutLeft  </span></span>
+<span id="cb148-3"><a href="presentation.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb148-4"><a href="presentation.html#cb148-4" aria-hidden="true" tabindex="-1"></a><span class="co">## This slide...  </span></span>
+<span id="cb148-5"><a href="presentation.html#cb148-5" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb148-6"><a href="presentation.html#cb148-6" aria-hidden="true" tabindex="-1"></a><span class="co">- slides in from the right  </span></span>
+<span id="cb148-7"><a href="presentation.html#cb148-7" aria-hidden="true" tabindex="-1"></a><span class="co">- and fades out to the left on exit  </span></span></code></pre></div>
+<p>这时，该张幻灯片将从右边滑入。如果你想使所有幻灯片使用同一个转化形式，可以使用：<code>use_animate_all()</code>，代码如下（建议加到正文前部）。除此之外，官方给出了 gif <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/animate-css">演示</a>。</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb149-1"><a href="presentation.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-animate-all, echo=FALSE}   </span></span>
+<span id="cb149-2"><a href="presentation.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_animate_all(&quot;slide_left&quot;)  </span></span>
+<span id="cb149-3"><a href="presentation.html#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+</div>
+<div id="将选项卡面板加入幻灯片中" class="section level4" number="7.2.4.6">
+<h4><span class="header-section-number">7.2.4.6</span> 将选项卡面板加入幻灯片中</h4>
+<p><strong>使用方法</strong>：在 rmd 文件中加入下面代码</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb150-1"><a href="presentation.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-panelset, echo=FALSE}    </span></span>
+<span id="cb150-2"><a href="presentation.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_panelset()  </span></span>
+<span id="cb150-3"><a href="presentation.html#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+<p>然后，创建一个包含若干个 <code>.panel[]</code> 的 <code>.panelset [...]</code>。每个 <code>.panel []</code> 应该具有 <code>.panel-name []</code> 和想写的内容，例如：</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb151-1"><a href="presentation.html#cb151-1" aria-hidden="true" tabindex="-1"></a>.panel<span class="co">[</span><span class="ot">.panel-name[NAME</span><span class="co">]</span>  </span>
+<span id="cb151-2"><a href="presentation.html#cb151-2" aria-hidden="true" tabindex="-1"></a>...content...  </span>
+<span id="cb151-3"><a href="presentation.html#cb151-3" aria-hidden="true" tabindex="-1"></a>]  </span></code></pre></div>
+<p>下面是演示幻灯片中使用的例子。</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb152-1"><a href="presentation.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co">---  </span></span>
+<span id="cb152-2"><a href="presentation.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="co">## 我是庄闪闪  </span></span>
+<span id="cb152-3"><a href="presentation.html#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb152-4"><a href="presentation.html#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="co">.panelset[  </span></span>
+<span id="cb152-5"><a href="presentation.html#cb152-5" aria-hidden="true" tabindex="-1"></a><span class="co">.panel[.panel-name[R Code]  </span></span>
+<span id="cb152-6"><a href="presentation.html#cb152-6" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb152-7"><a href="presentation.html#cb152-7" aria-hidden="true" tabindex="-1"></a><span class="co">欢迎关注[庄闪闪的R语言手册]呀！  </span></span>
+<span id="cb152-8"><a href="presentation.html#cb152-8" aria-hidden="true" tabindex="-1"></a><span class="co">```{r panel-chunk,fig.align=&#39;center&#39;,out.width=&quot;60%&quot;}    </span></span>
+<span id="cb152-9"><a href="presentation.html#cb152-9" aria-hidden="true" tabindex="-1"></a><span class="co">library(ggplot2)  </span></span>
+<span id="cb152-10"><a href="presentation.html#cb152-10" aria-hidden="true" tabindex="-1"></a><span class="co">(g &lt;- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())  </span></span>
+<span id="cb152-11"><a href="presentation.html#cb152-11" aria-hidden="true" tabindex="-1"></a><span class="co">```  </span></span>
+<span id="cb152-12"><a href="presentation.html#cb152-12" aria-hidden="true" tabindex="-1"></a><span class="co">]  </span></span>
+<span id="cb152-13"><a href="presentation.html#cb152-13" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb152-14"><a href="presentation.html#cb152-14" aria-hidden="true" tabindex="-1"></a><span class="co">.panel[.panel-name[Plot]  </span></span>
+<span id="cb152-15"><a href="presentation.html#cb152-15" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb152-16"><a href="presentation.html#cb152-16" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;center&gt;&lt;img src=&quot;https://octodex.github.com/images/labtocat.png&quot; height=&quot;300&quot; /&gt;&lt;/center&gt;  </span></span>
+<span id="cb152-17"><a href="presentation.html#cb152-17" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb152-18"><a href="presentation.html#cb152-18" aria-hidden="true" tabindex="-1"></a><span class="co">]  </span></span>
+<span id="cb152-19"><a href="presentation.html#cb152-19" aria-hidden="true" tabindex="-1"></a><span class="co">]  </span></span></code></pre></div>
+<p>图 <a href="presentation.html#fig:xaringan-extra-2">7.22</a> 给出了上面代码的结果。官网给出了 gif <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">演示</a>。</p>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-extra-2"></span>
+<img src="images/xaringan-extra-2.png" alt="将选项卡面板加入幻灯片中" width="500" />
+<p class="caption">
+图 7.22: 将选项卡面板加入幻灯片中
+</p>
+</div>
+<p>要定制面板的外观，可以使用直接在幻灯片的 R 块中调用 <code>style_panelset_tabs()</code>。将下面代码加到前面的代码块下，这时代码块的颜色发生了变化。</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb153-1"><a href="presentation.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}      </span></span>
+<span id="cb153-2"><a href="presentation.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::style_panelset_tabs(foreground = &quot;honeydew&quot;, background = &quot;seagreen&quot;)  </span></span>
+<span id="cb153-3"><a href="presentation.html#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+</div>
+<div id="给幻灯片添加全局-logo" class="section level4" number="7.2.4.7">
+<h4><span class="header-section-number">7.2.4.7</span> 给幻灯片添加全局 logo</h4>
+<p><strong>使用方法</strong>：在 rmd 文件中加入下面代码</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb154-1"><a href="presentation.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-logo, echo=FALSE}      </span></span>
+<span id="cb154-2"><a href="presentation.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_logo(  </span></span>
+<span id="cb154-3"><a href="presentation.html#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="in">  image_url = &quot;https://gitee.com/zhuang_liang_liang0825/other/raw/master/%E6%B8%A9%E5%B7%9E%E5%A4%A7%E5%AD%A6logo.png&quot;  </span></span>
+<span id="cb154-4"><a href="presentation.html#cb154-4" aria-hidden="true" tabindex="-1"></a><span class="in">)  </span></span>
+<span id="cb154-5"><a href="presentation.html#cb154-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+这时，所有幻灯片右上角都加上了对应的 logo 啦！如果想在某几张不显示 logo，可以使用 <code>hide_logo</code> 隐藏特定幻灯片的徽标，具体例子如下（图 <a href="presentation.html#fig:xaringan-extra-3">7.23</a>）：
+<div class="figure" style="text-align: center"><span id="fig:xaringan-extra-3"></span>
+<img src="images/xaringan-extra-3.png" alt="给幻灯片添加全局 logo" width="500" />
+<p class="caption">
+图 7.23: 给幻灯片添加全局 logo
+</p>
+</div>
+</div>
+<div id="添加网络摄像头进行实时视频" class="section level4" number="7.2.4.8">
+<h4><span class="header-section-number">7.2.4.8</span> 添加网络摄像头进行实时视频</h4>
+<p><strong>使用方法</strong>：在 rmd 文件中加入下面代码，然后重新渲染。</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb155-1"><a href="presentation.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-webcam, include = FALSE}     </span></span>
+<span id="cb155-2"><a href="presentation.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_webcam()  </span></span>
+<span id="cb155-3"><a href="presentation.html#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+<p>之后点击 <code>w</code> 键（记得用浏览器打开哦！）就会得到一下的界面了（写的有点晚，献丑了，懒得打码了，作者无精打采 ing）当然镜头的位置你可以手动任意拖拉（图 <a href="presentation.html#fig:xaringan-extra-4">7.24</a>）！</p>
+<div class="figure" style="text-align: center"><span id="fig:xaringan-extra-4"></span>
+<img src="images/xaringan-extra-3.png" alt="添加网络摄像头进行实时视频" width="500" />
+<p class="caption">
+图 7.24: 添加网络摄像头进行实时视频
+</p>
+</div>
+<blockquote>
+<p>当你通过视频会议进行陈述时，包括你的视频，或者当你在录制一节课或讲座时，这个真的非常好用！</p>
+</blockquote>
+</div>
+<div id="调整幻灯片的大小以填充浏览器窗口" class="section level4" number="7.2.4.9">
+<h4><span class="header-section-number">7.2.4.9</span> 调整幻灯片的大小以填充浏览器窗口</h4>
+<p><strong>使用方法</strong>：在 rmd 文件中加入下面代码，然后重新渲染。</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb156-1"><a href="presentation.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-fit-screen, echo=FALSE}    </span></span>
+<span id="cb156-2"><a href="presentation.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_fit_screen()  </span></span>
+<span id="cb156-3"><a href="presentation.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
+<p>使用快捷键 <code>Alt / Option + F</code> 使幻灯片适合屏幕，并忽略幻灯片比例（重新加载幻灯片以恢复正常）。官网给出了 gif 的<a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/fit-to-screen">演示</a>。</p>
+
+</div>
+</div>
+</div>
+</div>
+<h3>参考文献</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-xaringan" class="csl-entry">
+———. 2021c. <em>Xaringan: Presentation Ninja</em>. <a href="https://github.com/yihui/xaringan">https://github.com/yihui/xaringan</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>在这里，左边图片的大小要合适，才能把列表项挤到右边去。<a href="presentation.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>分别使用 <code>packageVersion('rmarkdown')</code> 和 <code>rmarkdown::pandoc_version()</code> 来查看 <strong>rmarkdown</strong> 和 Pandoc 的版本。<a href="presentation.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>把 “Sh” 换成了 “x” 是为了更易拼读。<a href="presentation.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>糟糕的演讲也可以催眠听众，但显然这两种催眠完全不同。<a href="presentation.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="PDF-document.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="word.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cosname/rmarkdown-guide/edit/master/08-presentations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

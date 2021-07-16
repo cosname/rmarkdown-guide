@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 16 章 自定义排版 | R Markdown 指南</title>
+  <meta name="description" content="第 16 章 自定义排版 | R Markdown 指南" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 16 章 自定义排版 | R Markdown 指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="第 16 章 自定义排版 | R Markdown 指南" />
+  <meta name="github-repo" content="cosname/rmarkdown-guide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 16 章 自定义排版 | R Markdown 指南" />
+  
+  <meta name="twitter:description" content="第 16 章 自定义排版 | R Markdown 指南" />
+  
+
+<meta name="author" content="王祎帆" />
+<meta name="author" content="闫求识" />
+<meta name="author" content="高春辉" />
+<meta name="author" content="庄亮亮" />
+
+
+<meta name="date" content="2021-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="shiny-started.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Markdown 中文指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="part"><span><b>I 基础</b></span></li>
+<li class="chapter" data-level="1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html"><i class="fa fa-check"></i><b>1</b> 认识 R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#数据分析报告和文档"><i class="fa fa-check"></i><b>1.1</b> 数据分析报告和文档</a></li>
+<li class="chapter" data-level="1.2" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#个人简历"><i class="fa fa-check"></i><b>1.2</b> 个人简历</a></li>
+<li class="chapter" data-level="1.3" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#网站"><i class="fa fa-check"></i><b>1.3</b> 网站</a></li>
+<li class="chapter" data-level="1.4" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#幻灯片"><i class="fa fa-check"></i><b>1.4</b> 幻灯片</a></li>
+<li class="chapter" data-level="1.5" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#交互报表"><i class="fa fa-check"></i><b>1.5</b> 交互报表</a></li>
+<li class="chapter" data-level="1.6" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#r-markdown-的渊源与历史"><i class="fa fa-check"></i><b>1.6</b> R Markdown 的渊源与历史</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> 安装</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#安装-r-markdown"><i class="fa fa-check"></i><b>2.1</b> 安装 R Markdown</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#create-first-rmd"><i class="fa fa-check"></i><b>2.2</b> 创建第一个 R Markdown 文档</a></li>
+<li class="chapter" data-level="2.3" data-path="installation.html"><a href="installation.html#安装-tinytex"><i class="fa fa-check"></i><b>2.3</b> 安装 Tinytex</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html"><i class="fa fa-check"></i><b>3</b> 基础知识</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#再看-html-输出文件"><i class="fa fa-check"></i><b>3.1</b> 再看 HTML 输出文件</a></li>
+<li class="chapter" data-level="3.2" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#markdown-语法"><i class="fa fa-check"></i><b>3.2</b> Markdown 语法</a></li>
+<li class="chapter" data-level="3.3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#使用-r-代码"><i class="fa fa-check"></i><b>3.3</b> 使用 R 代码</a></li>
+<li class="chapter" data-level="3.4" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#输出格式"><i class="fa fa-check"></i><b>3.4</b> 输出格式</a></li>
+<li class="chapter" data-level="3.5" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#r-markdown-的编译过程"><i class="fa fa-check"></i><b>3.5</b> R Markdown 的编译过程</a></li>
+</ul></li>
+<li class="part"><span><b>II 输出”万花筒”</b></span></li>
+<li class="chapter" data-level="4" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>4</b> 常用文档格式</a></li>
+<li class="chapter" data-level="5" data-path="html-document.html"><a href="html-document.html"><i class="fa fa-check"></i><b>5</b> 从 R Markdown 到 HTML 文档</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="html-document.html"><a href="html-document.html#目录和标题"><i class="fa fa-check"></i><b>5.1</b> 目录和标题</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="html-document.html"><a href="html-document.html#显示目录"><i class="fa fa-check"></i><b>5.1.1</b> 显示目录</a></li>
+<li class="chapter" data-level="5.1.2" data-path="html-document.html"><a href="html-document.html#悬停目录"><i class="fa fa-check"></i><b>5.1.2</b> 悬停目录</a></li>
+<li class="chapter" data-level="5.1.3" data-path="html-document.html"><a href="html-document.html#显示标题编号"><i class="fa fa-check"></i><b>5.1.3</b> 显示标题编号</a></li>
+<li class="chapter" data-level="5.1.4" data-path="html-document.html"><a href="html-document.html#使用标签页"><i class="fa fa-check"></i><b>5.1.4</b> 使用标签页</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="html-document.html"><a href="html-document.html#appearance-and-style"><i class="fa fa-check"></i><b>5.2</b> 主题和样式</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="html-document.html"><a href="html-document.html#可选主题"><i class="fa fa-check"></i><b>5.2.1</b> 可选主题</a></li>
+<li class="chapter" data-level="5.2.2" data-path="html-document.html"><a href="html-document.html#代码高亮"><i class="fa fa-check"></i><b>5.2.2</b> 代码高亮</a></li>
+<li class="chapter" data-level="5.2.3" data-path="html-document.html"><a href="html-document.html#style-css"><i class="fa fa-check"></i><b>5.2.3</b> 自定义样式表</a></li>
+<li class="chapter" data-level="5.2.4" data-path="html-document.html"><a href="html-document.html#通过-css-代码块定义样式"><i class="fa fa-check"></i><b>5.2.4</b> 通过 CSS 代码块定义样式</a></li>
+<li class="chapter" data-level="5.2.5" data-path="html-document.html"><a href="html-document.html#使用丰富多样的内置-css-样式"><i class="fa fa-check"></i><b>5.2.5</b> 使用丰富多样的内置 CSS 样式</a></li>
+<li class="chapter" data-level="5.2.6" data-path="html-document.html"><a href="html-document.html#代码折叠"><i class="fa fa-check"></i><b>5.2.6</b> 代码折叠</a></li>
+<li class="chapter" data-level="5.2.7" data-path="html-document.html"><a href="html-document.html#html-scroll"><i class="fa fa-check"></i><b>5.2.7</b> 设置代码块内容可滚动</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="html-document.html"><a href="html-document.html#图片和数据框"><i class="fa fa-check"></i><b>5.3</b> 图片和数据框</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="html-document.html"><a href="html-document.html#设置图片的属性"><i class="fa fa-check"></i><b>5.3.1</b> 设置图片的属性</a></li>
+<li class="chapter" data-level="5.3.2" data-path="html-document.html"><a href="html-document.html#插入外源图片"><i class="fa fa-check"></i><b>5.3.2</b> 插入外源图片</a></li>
+<li class="chapter" data-level="5.3.3" data-path="html-document.html"><a href="html-document.html#输出数据框"><i class="fa fa-check"></i><b>5.3.3</b> 输出数据框</a></li>
+<li class="chapter" data-level="5.3.4" data-path="html-document.html"><a href="html-document.html#分页打印数据框时的附加参数"><i class="fa fa-check"></i><b>5.3.4</b> 分页打印数据框时的附加参数</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="html-document.html"><a href="html-document.html#组件和内容"><i class="fa fa-check"></i><b>5.4</b> 组件和内容</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="html-document.html"><a href="html-document.html#理解-html-文档的依赖关系"><i class="fa fa-check"></i><b>5.4.1</b> 理解 HTML 文档的依赖关系</a></li>
+<li class="chapter" data-level="5.4.2" data-path="html-document.html"><a href="html-document.html#mathjax-库的配置"><i class="fa fa-check"></i><b>5.4.2</b> MathJax 库的配置</a></li>
+<li class="chapter" data-level="5.4.3" data-path="html-document.html"><a href="html-document.html#是否保留-markdown"><i class="fa fa-check"></i><b>5.4.3</b> 是否保留 Markdown</a></li>
+<li class="chapter" data-level="5.4.4" data-path="html-document.html"><a href="html-document.html#使用自定义的-html-模板"><i class="fa fa-check"></i><b>5.4.4</b> 使用自定义的 HTML 模板</a></li>
+<li class="chapter" data-level="5.4.5" data-path="html-document.html"><a href="html-document.html#include-html"><i class="fa fa-check"></i><b>5.4.5</b> 包含其它文件</a></li>
+<li class="chapter" data-level="5.4.6" data-path="html-document.html"><a href="html-document.html#html-fragments"><i class="fa fa-check"></i><b>5.4.6</b> 生成 HTML 片段</a></li>
+<li class="chapter" data-level="5.4.7" data-path="html-document.html"><a href="html-document.html#使用自定义的浏览器图标"><i class="fa fa-check"></i><b>5.4.7</b> 使用自定义的浏览器图标</a></li>
+<li class="chapter" data-level="5.4.8" data-path="html-document.html"><a href="html-document.html#共用-yaml-配置文件"><i class="fa fa-check"></i><b>5.4.8</b> 共用 YAML 配置文件</a></li>
+<li class="chapter" data-level="5.4.9" data-path="html-document.html"><a href="html-document.html#嵌入-rmd-源文件"><i class="fa fa-check"></i><b>5.4.9</b> 嵌入 Rmd 源文件</a></li>
+<li class="chapter" data-level="5.4.10" data-path="html-document.html"><a href="html-document.html#嵌入其它文件"><i class="fa fa-check"></i><b>5.4.10</b> 嵌入其它文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="PDF-document.html"><a href="PDF-document.html"><i class="fa fa-check"></i><b>6</b> PDF 文档</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-tinytex-1"><i class="fa fa-check"></i><b>6.1</b> 安装 <code>TinyTex</code></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-latex-组件"><i class="fa fa-check"></i><b>6.1.1</b> 安装 LaTeX 组件</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="PDF-document.html"><a href="PDF-document.html#从-r-markdown-到-pdf-文档"><i class="fa fa-check"></i><b>6.2</b> 从 R Markdown 到 PDF 文档</a></li>
+<li class="chapter" data-level="6.3" data-path="PDF-document.html"><a href="PDF-document.html#在-pdf-文档中使用中文的注意事项"><i class="fa fa-check"></i><b>6.3</b> 在 PDF 文档中使用中文的注意事项</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="PDF-document.html"><a href="PDF-document.html#显示目录-1"><i class="fa fa-check"></i><b>6.3.1</b> 显示目录</a></li>
+<li class="chapter" data-level="6.3.2" data-path="PDF-document.html"><a href="PDF-document.html#图片相关的配置"><i class="fa fa-check"></i><b>6.3.2</b> 图片相关的配置</a></li>
+<li class="chapter" data-level="6.3.3" data-path="PDF-document.html"><a href="PDF-document.html#打印数据框"><i class="fa fa-check"></i><b>6.3.3</b> 打印数据框</a></li>
+<li class="chapter" data-level="6.3.4" data-path="PDF-document.html"><a href="PDF-document.html#代码高亮-1"><i class="fa fa-check"></i><b>6.3.4</b> 代码高亮</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="PDF-document.html"><a href="PDF-document.html#latex-选项"><i class="fa fa-check"></i><b>6.4</b> LaTeX 选项</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="PDF-document.html"><a href="PDF-document.html#通用文档部件"><i class="fa fa-check"></i><b>6.4.1</b> 通用文档部件</a></li>
+<li class="chapter" data-level="6.4.2" data-path="PDF-document.html"><a href="PDF-document.html#选择-latex-模板"><i class="fa fa-check"></i><b>6.4.2</b> 选择 LaTeX 模板</a></li>
+<li class="chapter" data-level="6.4.3" data-path="PDF-document.html"><a href="PDF-document.html#配置-latex-模板的参数"><i class="fa fa-check"></i><b>6.4.3</b> 配置 LaTeX 模板的参数</a></li>
+<li class="chapter" data-level="6.4.4" data-path="PDF-document.html"><a href="PDF-document.html#使用-latex-包处理引用"><i class="fa fa-check"></i><b>6.4.4</b> 使用 LaTeX 包处理引用</a></li>
+<li class="chapter" data-level="6.4.5" data-path="PDF-document.html"><a href="PDF-document.html#latex-的渲染引擎"><i class="fa fa-check"></i><b>6.4.5</b> LaTeX 的渲染引擎</a></li>
+<li class="chapter" data-level="6.4.6" data-path="PDF-document.html"><a href="PDF-document.html#保留生成的-tex-中间文件"><i class="fa fa-check"></i><b>6.4.6</b> 保留生成的 TeX 中间文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>7</b> 演示文稿</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="presentation.html"><a href="presentation.html#rmarkdown-basic-presentation"><i class="fa fa-check"></i><b>7.1</b> R Markdown 基础幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="presentation.html"><a href="presentation.html#ioslides-presentation"><i class="fa fa-check"></i><b>7.1.1</b> ioslides 幻灯片</a></li>
+<li class="chapter" data-level="7.1.2" data-path="presentation.html"><a href="presentation.html#slidy-presentation"><i class="fa fa-check"></i><b>7.1.2</b> Slidy 幻灯片</a></li>
+<li class="chapter" data-level="7.1.3" data-path="presentation.html"><a href="presentation.html#beamer-presentation"><i class="fa fa-check"></i><b>7.1.3</b> Beamer 演示文稿</a></li>
+<li class="chapter" data-level="7.1.4" data-path="presentation.html"><a href="presentation.html#powerpoint-presentation"><i class="fa fa-check"></i><b>7.1.4</b> PowerPoint 演示文稿</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="presentation.html"><a href="presentation.html#xaringan-presentation"><i class="fa fa-check"></i><b>7.2</b> Xaringan 幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="presentation.html"><a href="presentation.html#简介"><i class="fa fa-check"></i><b>7.2.1</b> 简介</a></li>
+<li class="chapter" data-level="7.2.2" data-path="presentation.html"><a href="presentation.html#入门"><i class="fa fa-check"></i><b>7.2.2</b> 入门</a></li>
+<li class="chapter" data-level="7.2.3" data-path="presentation.html"><a href="presentation.html#使用其他主题"><i class="fa fa-check"></i><b>7.2.3</b> 使用其他主题</a></li>
+<li class="chapter" data-level="7.2.4" data-path="presentation.html"><a href="presentation.html#提升-xaringan-幻灯片的-b-格"><i class="fa fa-check"></i><b>7.2.4</b> 提升 xaringan 幻灯片的 B 格</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="word.html"><a href="word.html"><i class="fa fa-check"></i><b>8</b> Word</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="word.html"><a href="word.html#word-new-template"><i class="fa fa-check"></i><b>8.1</b> 创建 word 模板</a></li>
+<li class="chapter" data-level="8.2" data-path="word.html"><a href="word.html#word-template"><i class="fa fa-check"></i><b>8.2</b> 自定义 Word 模板</a></li>
+<li class="chapter" data-level="8.3" data-path="word.html"><a href="word.html#word-redoc"><i class="fa fa-check"></i><b>8.3</b> R Markdown 和 Word 之间的双向工作流程</a></li>
+<li class="chapter" data-level="8.4" data-path="word.html"><a href="word.html#word-officedown"><i class="fa fa-check"></i><b>8.4</b> 个人风格元素</a></li>
+</ul></li>
+<li class="part"><span><b>III 操作技巧</b></span></li>
+<li class="chapter" data-level="9" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>9</b> 表格操作</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="table.html"><a href="table.html#kable"><i class="fa fa-check"></i><b>9.1</b> 表格生成函数 <code>knitr::kable()</code></a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="table.html"><a href="table.html#kable-formats"><i class="fa fa-check"></i><b>9.1.1</b> 已支持的表的格式</a></li>
+<li class="chapter" data-level="9.1.2" data-path="table.html"><a href="table.html#修改列名"><i class="fa fa-check"></i><b>9.1.2</b> 修改列名</a></li>
+<li class="chapter" data-level="9.1.3" data-path="table.html"><a href="table.html#指定列的对齐方式"><i class="fa fa-check"></i><b>9.1.3</b> 指定列的对齐方式</a></li>
+<li class="chapter" data-level="9.1.4" data-path="table.html"><a href="table.html#kable-caption"><i class="fa fa-check"></i><b>9.1.4</b> 添加表格标题</a></li>
+<li class="chapter" data-level="9.1.5" data-path="table.html"><a href="table.html#调整数字格式"><i class="fa fa-check"></i><b>9.1.5</b> 调整数字格式</a></li>
+<li class="chapter" data-level="9.1.6" data-path="table.html"><a href="table.html#显示缺失值"><i class="fa fa-check"></i><b>9.1.6</b> 显示缺失值</a></li>
+<li class="chapter" data-level="9.1.7" data-path="table.html"><a href="table.html#特殊字符的转义"><i class="fa fa-check"></i><b>9.1.7</b> 特殊字符的转义</a></li>
+<li class="chapter" data-level="9.1.8" data-path="table.html"><a href="table.html#多张表格并排"><i class="fa fa-check"></i><b>9.1.8</b> 多张表格并排</a></li>
+<li class="chapter" data-level="9.1.9" data-path="table.html"><a href="table.html#利用for循环生成多个表"><i class="fa fa-check"></i><b>9.1.9</b> 利用<code>for</code>循环生成多个表 (*)</a></li>
+<li class="chapter" data-level="9.1.10" data-path="table.html"><a href="table.html#自定义-latex-表格"><i class="fa fa-check"></i><b>9.1.10</b> 自定义 LaTex 表格 (*)</a></li>
+<li class="chapter" data-level="9.1.11" data-path="table.html"><a href="table.html#自定义-html-表格"><i class="fa fa-check"></i><b>9.1.11</b> 自定义 HTML 表格 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="table.html"><a href="table.html#kableextra"><i class="fa fa-check"></i><b>9.2</b> <strong>kableExtra</strong> 包</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="table.html"><a href="table.html#设定字体尺寸"><i class="fa fa-check"></i><b>9.2.1</b> 设定字体尺寸</a></li>
+<li class="chapter" data-level="9.2.2" data-path="table.html"><a href="table.html#特定的行或列的样式"><i class="fa fa-check"></i><b>9.2.2</b> 特定的行或列的样式</a></li>
+<li class="chapter" data-level="9.2.3" data-path="table.html"><a href="table.html#给行或列分组"><i class="fa fa-check"></i><b>9.2.3</b> 给行或列分组</a></li>
+<li class="chapter" data-level="9.2.4" data-path="table.html"><a href="table.html#按比例缩小latex中的表格"><i class="fa fa-check"></i><b>9.2.4</b> 按比例缩小LaTex中的表格</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="table.html"><a href="table.html#table-other"><i class="fa fa-check"></i><b>9.3</b> 其它生成表格的包</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chunk-options.html"><a href="chunk-options.html"><i class="fa fa-check"></i><b>10</b> 块选项</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chunk-options.html"><a href="chunk-options.html#chunk-variable"><i class="fa fa-check"></i><b>10.1</b> 在块选项中使用变量</a></li>
+<li class="chapter" data-level="10.2" data-path="chunk-options.html"><a href="chunk-options.html#opts-error"><i class="fa fa-check"></i><b>10.2</b> 如何在遇到 error 的时候继续编译</a></li>
+<li class="chapter" data-level="10.3" data-path="chunk-options.html"><a href="chunk-options.html#dev-vector"><i class="fa fa-check"></i><b>10.3</b> 同一张图的多种图像输出格式</a></li>
+<li class="chapter" data-level="10.4" data-path="chunk-options.html"><a href="chunk-options.html#cache"><i class="fa fa-check"></i><b>10.4</b> 缓存耗时的代码块</a></li>
+<li class="chapter" data-level="10.5" data-path="chunk-options.html"><a href="chunk-options.html#cache-path"><i class="fa fa-check"></i><b>10.5</b> 为多种输出格式缓存代码块</a></li>
+<li class="chapter" data-level="10.6" data-path="chunk-options.html"><a href="chunk-options.html#cache-lazy"><i class="fa fa-check"></i><b>10.6</b> 缓存大型的对象</a></li>
+<li class="chapter" data-level="10.7" data-path="chunk-options.html"><a href="chunk-options.html#hide-one"><i class="fa fa-check"></i><b>10.7</b> 隐藏源代码、message、warning、文本输出或图像输出</a></li>
+<li class="chapter" data-level="10.8" data-path="chunk-options.html"><a href="chunk-options.html#hide-all"><i class="fa fa-check"></i><b>10.8</b> 隐藏代码块的所有输出</a></li>
+<li class="chapter" data-level="10.9" data-path="chunk-options.html"><a href="chunk-options.html#opts-collapse"><i class="fa fa-check"></i><b>10.9</b> 将文本输出压缩到源代码块中</a></li>
+<li class="chapter" data-level="10.10" data-path="chunk-options.html"><a href="chunk-options.html#opts-tidy"><i class="fa fa-check"></i><b>10.10</b> 重新格式化源代码</a></li>
+<li class="chapter" data-level="10.11" data-path="chunk-options.html"><a href="chunk-options.html#results-asis"><i class="fa fa-check"></i><b>10.11</b> 将输出文本作为原始的Markdown的内容 (*)</a></li>
+<li class="chapter" data-level="10.12" data-path="chunk-options.html"><a href="chunk-options.html#opts-comment"><i class="fa fa-check"></i><b>10.12</b> 删除文本输出中的前导符号</a></li>
+<li class="chapter" data-level="10.13" data-path="chunk-options.html"><a href="chunk-options.html#attr-output"><i class="fa fa-check"></i><b>10.13</b> 为文本输出块添加属性 (*)</a></li>
+<li class="chapter" data-level="10.14" data-path="chunk-options.html"><a href="chunk-options.html#fig-process"><i class="fa fa-check"></i><b>10.14</b> 图像的后期加工 (*)</a></li>
+<li class="chapter" data-level="10.15" data-path="chunk-options.html"><a href="chunk-options.html#graphical-device"><i class="fa fa-check"></i><b>10.15</b> 高质量的图像 (*)</a></li>
+<li class="chapter" data-level="10.16" data-path="chunk-options.html"><a href="chunk-options.html#low-plots"><i class="fa fa-check"></i><b>10.16</b> 带有低级绘图功能的逐步绘图 (*)</a></li>
+<li class="chapter" data-level="10.17" data-path="chunk-options.html"><a href="chunk-options.html#opts-render"><i class="fa fa-check"></i><b>10.17</b> 在代码块中自定义对象的打印格式 (*)</a></li>
+<li class="chapter" data-level="10.18" data-path="chunk-options.html"><a href="chunk-options.html#option-hooks"><i class="fa fa-check"></i><b>10.18</b> 选项钩子 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="output-hooks.html"><a href="output-hooks.html"><i class="fa fa-check"></i><b>11</b> 输出钩子 (*)</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="output-hooks.html"><a href="output-hooks.html#hook-hide"><i class="fa fa-check"></i><b>11.1</b> 编辑源代码</a></li>
+<li class="chapter" data-level="11.2" data-path="output-hooks.html"><a href="output-hooks.html#hook-number"><i class="fa fa-check"></i><b>11.2</b> 向源代码中添加行号</a></li>
+<li class="chapter" data-level="11.3" data-path="output-hooks.html"><a href="output-hooks.html#hook-scroll"><i class="fa fa-check"></i><b>11.3</b> 可滚动的文本输出</a></li>
+<li class="chapter" data-level="11.4" data-path="output-hooks.html"><a href="output-hooks.html#hook-truncate"><i class="fa fa-check"></i><b>11.4</b> 截断文本输出</a></li>
+<li class="chapter" data-level="11.5" data-path="output-hooks.html"><a href="output-hooks.html#hook-html5"><i class="fa fa-check"></i><b>11.5</b> 以HTML5格式输出图像</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="knitr-misc.html"><a href="knitr-misc.html"><i class="fa fa-check"></i><b>12</b> 其它使用 knitr 的小技巧</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="knitr-misc.html"><a href="knitr-misc.html#reuse-chunks"><i class="fa fa-check"></i><b>12.1</b> 重复使用代码块</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="knitr-misc.html"><a href="knitr-misc.html#embed-chunk"><i class="fa fa-check"></i><b>12.1.1</b> 将一个块嵌入到另一个块中 (*)</a></li>
+<li class="chapter" data-level="12.1.2" data-path="knitr-misc.html"><a href="knitr-misc.html#same-label"><i class="fa fa-check"></i><b>12.1.2</b> 在另一个块中使用相同的块标签</a></li>
+<li class="chapter" data-level="12.1.3" data-path="knitr-misc.html"><a href="knitr-misc.html#ref-label"><i class="fa fa-check"></i><b>12.1.3</b> 使用引用标签 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="knitr-misc.html"><a href="knitr-misc.html#load-cache"><i class="fa fa-check"></i><b>12.2</b> 在创建对象之前使用它 (*)</a></li>
+<li class="chapter" data-level="12.3" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-exit"><i class="fa fa-check"></i><b>12.3</b> 提前退出编译</a></li>
+<li class="chapter" data-level="12.4" data-path="knitr-misc.html"><a href="knitr-misc.html#fig-chunk"><i class="fa fa-check"></i><b>12.4</b> 生成一个图像并在其他地方显示</a></li>
+<li class="chapter" data-level="12.5" data-path="knitr-misc.html"><a href="knitr-misc.html#global-device"><i class="fa fa-check"></i><b>12.5</b> 修改前一个代码块中的图像</a></li>
+<li class="chapter" data-level="12.6" data-path="knitr-misc.html"><a href="knitr-misc.html#opts-template"><i class="fa fa-check"></i><b>12.6</b> 保存一组块选项并重复使用它们 (*)</a></li>
+<li class="chapter" data-level="12.7" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-expand"><i class="fa fa-check"></i><b>12.7</b> 使用 <code>knitr::knit_expand()</code> 来生成 Rmd 源代码</a></li>
+<li class="chapter" data-level="12.8" data-path="knitr-misc.html"><a href="knitr-misc.html#duplicate-label"><i class="fa fa-check"></i><b>12.8</b> 允许代码块中的标签重复 Allow duplicate labels in code chunks (*)</a></li>
+<li class="chapter" data-level="12.9" data-path="knitr-misc.html"><a href="knitr-misc.html#cache-rds"><i class="fa fa-check"></i><b>12.9</b> 一个更透明的缓存机制</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改表达式中的代码使缓存失效"><i class="fa fa-check"></i><b>12.9.1</b> 通过更改表达式中的代码使缓存失效</a></li>
+<li class="chapter" data-level="12.9.2" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改全局变量使缓存失效"><i class="fa fa-check"></i><b>12.9.2</b> 通过更改全局变量使缓存失效</a></li>
+<li class="chapter" data-level="12.9.3" data-path="knitr-misc.html"><a href="knitr-misc.html#保留缓存的多个副本"><i class="fa fa-check"></i><b>12.9.3</b> 保留缓存的多个副本</a></li>
+<li class="chapter" data-level="12.9.4" data-path="knitr-misc.html"><a href="knitr-misc.html#与knitr的缓存比较"><i class="fa fa-check"></i><b>12.9.4</b> 与<strong>knitr</strong>的缓存比较</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV 第四部分：进阶操作</b></span></li>
+<li class="chapter" data-level="13" data-path="other-languages.html"><a href="other-languages.html"><i class="fa fa-check"></i><b>13</b> 与其他语言的结合</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="other-languages.html"><a href="other-languages.html#custom-engine"><i class="fa fa-check"></i><b>13.1</b> 注册自定义语言引擎（*）</a></li>
+<li class="chapter" data-level="13.2" data-path="other-languages.html"><a href="other-languages.html#eng-python"><i class="fa fa-check"></i><b>13.2</b> 运行 Python 代码并与 Python 交互</a></li>
+<li class="chapter" data-level="13.3" data-path="other-languages.html"><a href="other-languages.html#eng-asis"><i class="fa fa-check"></i><b>13.3</b> 通过 <code>asis</code> 引擎有条件地执行内容</a></li>
+<li class="chapter" data-level="13.4" data-path="other-languages.html"><a href="other-languages.html#eng-bash"><i class="fa fa-check"></i><b>13.4</b> 执行 Shell 脚本</a></li>
+<li class="chapter" data-level="13.5" data-path="other-languages.html"><a href="other-languages.html#d3"><i class="fa fa-check"></i><b>13.5</b> 用 D3 可视化</a></li>
+<li class="chapter" data-level="13.6" data-path="other-languages.html"><a href="other-languages.html#eng-cat"><i class="fa fa-check"></i><b>13.6</b> 通过 <code>cat</code> 引擎将块内容写入文件</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="other-languages.html"><a href="other-languages.html#写入-css-文件"><i class="fa fa-check"></i><b>13.6.1</b> 写入 CSS 文件</a></li>
+<li class="chapter" data-level="13.6.2" data-path="other-languages.html"><a href="other-languages.html#在序言中包含-latex-代码"><i class="fa fa-check"></i><b>13.6.2</b> 在序言中包含 LaTeX 代码</a></li>
+<li class="chapter" data-level="13.6.3" data-path="other-languages.html"><a href="other-languages.html#将-yaml-数据写入文件并显示它"><i class="fa fa-check"></i><b>13.6.3</b> 将 YAML 数据写入文件并显示它</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="other-languages.html"><a href="other-languages.html#eng-sas"><i class="fa fa-check"></i><b>13.7</b> 运行 SAS 代码</a></li>
+<li class="chapter" data-level="13.8" data-path="other-languages.html"><a href="other-languages.html#eng-stata"><i class="fa fa-check"></i><b>13.8</b> 运行 Stata 代码</a></li>
+<li class="chapter" data-level="13.9" data-path="other-languages.html"><a href="other-languages.html#eng-asy"><i class="fa fa-check"></i><b>13.9</b> 用渐近线 Asymptote 创建图形</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="other-languages.html"><a href="other-languages.html#在-r-中生成数据并通过-asymptote-读取"><i class="fa fa-check"></i><b>13.9.1</b> 在 R 中生成数据并通过 Asymptote 读取</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="other-languages.html"><a href="other-languages.html#eng-sass"><i class="fa fa-check"></i><b>13.10</b> 使用 Sass/SCSS 构建 HTML 页面风格</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Dashboards.html"><a href="Dashboards.html"><i class="fa fa-check"></i><b>14</b> Dashboards</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Dashboards.html"><a href="Dashboards.html#入门-1"><i class="fa fa-check"></i><b>14.1</b> 入门</a></li>
+<li class="chapter" data-level="14.2" data-path="Dashboards.html"><a href="Dashboards.html#排版"><i class="fa fa-check"></i><b>14.2</b> 排版</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="Dashboards.html"><a href="Dashboards.html#基于行的布局"><i class="fa fa-check"></i><b>14.2.1</b> 基于行的布局</a></li>
+<li class="chapter" data-level="14.2.2" data-path="Dashboards.html"><a href="Dashboards.html#节属性"><i class="fa fa-check"></i><b>14.2.2</b> 节属性</a></li>
+<li class="chapter" data-level="14.2.3" data-path="Dashboards.html"><a href="Dashboards.html#多页"><i class="fa fa-check"></i><b>14.2.3</b> 多页</a></li>
+<li class="chapter" data-level="14.2.4" data-path="Dashboards.html"><a href="Dashboards.html#故事板"><i class="fa fa-check"></i><b>14.2.4</b> 故事板</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="Dashboards.html"><a href="Dashboards.html#dashboard-components"><i class="fa fa-check"></i><b>14.3</b> 组件</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="Dashboards.html"><a href="Dashboards.html#数值框"><i class="fa fa-check"></i><b>14.3.1</b> 数值框</a></li>
+<li class="chapter" data-level="14.3.2" data-path="Dashboards.html"><a href="Dashboards.html#仪表"><i class="fa fa-check"></i><b>14.3.2</b> 仪表</a></li>
+<li class="chapter" data-level="14.3.3" data-path="Dashboards.html"><a href="Dashboards.html#文本注释"><i class="fa fa-check"></i><b>14.3.3</b> 文本注释</a></li>
+<li class="chapter" data-level="14.3.4" data-path="Dashboards.html"><a href="Dashboards.html#导航栏"><i class="fa fa-check"></i><b>14.3.4</b> 导航栏</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="Dashboards.html"><a href="Dashboards.html#shiny"><i class="fa fa-check"></i><b>14.4</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="Dashboards.html"><a href="Dashboards.html#入门指南"><i class="fa fa-check"></i><b>14.4.1</b> 入门指南</a></li>
+<li class="chapter" data-level="14.4.2" data-path="Dashboards.html"><a href="Dashboards.html#shiny-仪表盘的一个示例"><i class="fa fa-check"></i><b>14.4.2</b> Shiny 仪表盘的一个示例</a></li>
+<li class="chapter" data-level="14.4.3" data-path="Dashboards.html"><a href="Dashboards.html#输入栏"><i class="fa fa-check"></i><b>14.4.3</b> 输入栏</a></li>
+<li class="chapter" data-level="14.4.4" data-path="Dashboards.html"><a href="Dashboards.html#拓展"><i class="fa fa-check"></i><b>14.4.4</b> 拓展</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="shiny-started.html"><a href="shiny-started.html"><i class="fa fa-check"></i><b>15</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-start"><i class="fa fa-check"></i><b>15.1</b> 入门指南</a></li>
+<li class="chapter" data-level="15.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-deploy"><i class="fa fa-check"></i><b>15.2</b> 部署</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapps.io"><i class="fa fa-check"></i><b>15.2.1</b> ShinyApps.io</a></li>
+<li class="chapter" data-level="15.2.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-server-rstudio-connect"><i class="fa fa-check"></i><b>15.2.2</b> Shiny Server / RStudio Connect</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embedded"><i class="fa fa-check"></i><b>15.3</b> 嵌入 Shiny 应用程序</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embed-inline"><i class="fa fa-check"></i><b>15.3.1</b> 内联应用程序</a></li>
+<li class="chapter" data-level="15.3.2" data-path="shiny-started.html"><a href="shiny-started.html#外联应用程序"><i class="fa fa-check"></i><b>15.3.2</b> 外联应用程序</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="shiny-started.html"><a href="shiny-started.html#shiny-widgets"><i class="fa fa-check"></i><b>15.4</b> Shiny 小部件</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapp-函数"><i class="fa fa-check"></i><b>15.4.1</b> <code>shinyApp()</code> 函数</a></li>
+<li class="chapter" data-level="15.4.2" data-path="shiny-started.html"><a href="shiny-started.html#例子k---means-聚类"><i class="fa fa-check"></i><b>15.4.2</b> 例子：k - means 聚类</a></li>
+<li class="chapter" data-level="15.4.3" data-path="shiny-started.html"><a href="shiny-started.html#小部件的大小和布局"><i class="fa fa-check"></i><b>15.4.3</b> 小部件的大小和布局</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="shiny-started.html"><a href="shiny-started.html#shiny-multiple"><i class="fa fa-check"></i><b>15.5</b> 多页</a></li>
+<li class="chapter" data-level="15.6" data-path="shiny-started.html"><a href="shiny-started.html#shiny-delay"><i class="fa fa-check"></i><b>15.6</b> 延迟渲染</a></li>
+<li class="chapter" data-level="15.7" data-path="shiny-started.html"><a href="shiny-started.html#shiny-args"><i class="fa fa-check"></i><b>15.7</b> 渲染函数的输出参数</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="shiny-started.html"><a href="shiny-started.html#附加说明"><i class="fa fa-check"></i><b>15.7.1</b> 附加说明</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="custom-output.html"><a href="custom-output.html"><i class="fa fa-check"></i><b>16</b> 自定义排版</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="custom-output.html"><a href="custom-output.html#parameterized-report"><i class="fa fa-check"></i><b>16.1</b> 有参数的 R Markdown 报告</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="custom-output.html"><a href="custom-output.html#params-declare"><i class="fa fa-check"></i><b>16.1.1</b> 声明参数</a></li>
+<li class="chapter" data-level="16.1.2" data-path="custom-output.html"><a href="custom-output.html#params-use"><i class="fa fa-check"></i><b>16.1.2</b> 使用参数</a></li>
+<li class="chapter" data-level="16.1.3" data-path="custom-output.html"><a href="custom-output.html#params-knit"><i class="fa fa-check"></i><b>16.1.3</b> 有参编译</a></li>
+<li class="chapter" data-level="16.1.4" data-path="custom-output.html"><a href="custom-output.html#params-publish"><i class="fa fa-check"></i><b>16.1.4</b> 发布文档</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="custom-output.html"><a href="custom-output.html#document-template"><i class="fa fa-check"></i><b>16.2</b> 文档模板</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="custom-output.html"><a href="custom-output.html#template-structure"><i class="fa fa-check"></i><b>16.2.1</b> 模板的结构</a></li>
+<li class="chapter" data-level="16.2.2" data-path="custom-output.html"><a href="custom-output.html#template-support"><i class="fa fa-check"></i><b>16.2.2</b> 模板支持文件</a></li>
+<li class="chapter" data-level="16.2.3" data-path="custom-output.html"><a href="custom-output.html#template-pandoc"><i class="fa fa-check"></i><b>16.2.3</b> 设置 Pandoc 模板</a></li>
+<li class="chapter" data-level="16.2.4" data-path="custom-output.html"><a href="custom-output.html#template-share"><i class="fa fa-check"></i><b>16.2.4</b> 分享模板</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="custom-output.html"><a href="custom-output.html#new-formats"><i class="fa fa-check"></i><b>16.3</b> 创建新的文档格式</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="custom-output.html"><a href="custom-output.html#format-derive"><i class="fa fa-check"></i><b>16.3.1</b> 从现有文档格式衍生新格式</a></li>
+<li class="chapter" data-level="16.3.2" data-path="custom-output.html"><a href="custom-output.html#fully-custom-format"><i class="fa fa-check"></i><b>16.3.2</b> 完全的自定义输出格式</a></li>
+<li class="chapter" data-level="16.3.3" data-path="custom-output.html"><a href="custom-output.html#using-a-new-format"><i class="fa fa-check"></i><b>16.3.3</b> 使用新的文档输出格式</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Markdown 指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="custom-output" class="section level1" number="16">
+<h1><span class="header-section-number">第 16 章</span> 自定义排版</h1>
+<p>本部分主要分为三个部分，第一部分介绍有参数的 R Markdown 报告，
+第二部分介绍 R Markdown 模板并基于新模板创建文档，
+第三部分介绍如何自定义一个 R Markdown 输出格式。</p>
+<div id="parameterized-report" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> 有参数的 R Markdown 报告</h2>
+<p>对于 R Markdown 文档来说，只需要一个命令就可以生成一份报告。不过在日常应用过程中，
+一份报告可能会有不同的应用背景。比如日报、周报、月报、年报等这一类的周期性报告，
+可能需要制定相应的时间，而中国、美国等这一类的区域性报告中，则需要经常变动相应的区域。</p>
+<p>因此，这部分内容主要介绍使用参数来对 R Markdown 文档进行更多的定制，
+这个技巧适合于周期性、区域性的自动化报告。这些变量可以被视为报告运行的参数，
+这样的一份报告不妨称为“有参报告”。</p>
+<div id="params-declare" class="section level3" number="16.1.1">
+<h3><span class="header-section-number">16.1.1</span> 声明参数</h3>
+<p>有参报告中的参数在 YAML 区块使用 <code>params</code> 来指定，每行一个参数。例如：</p>
+<div class="sourceCode" id="cb425"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb425-1"><a href="custom-output.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb425-2"><a href="custom-output.html#cb425-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;文档标题&quot;</span></span>
+<span id="cb425-3"><a href="custom-output.html#cb425-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span>
+<span id="cb425-4"><a href="custom-output.html#cb425-4" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb425-5"><a href="custom-output.html#cb425-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">year</span><span class="kw">:</span><span class="at"> </span><span class="dv">2018</span></span>
+<span id="cb425-6"><a href="custom-output.html#cb425-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">region</span><span class="kw">:</span><span class="at"> 欧洲</span></span>
+<span id="cb425-7"><a href="custom-output.html#cb425-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">printcode</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
+<span id="cb425-8"><a href="custom-output.html#cb425-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">data</span><span class="kw">:</span><span class="at"> file.csv</span></span>
+<span id="cb425-9"><a href="custom-output.html#cb425-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>R Markdown 在编译过程中使用 <code>yaml::yaml.load()</code> 函数处理参数，可以识别 <code>character</code>，
+<code>numeric</code>，<code>integer</code> 和 <code>logical</code> 等不同类型的 R 标准类。此外，我们可以通过 <code>!r</code> 前缀
+执行 R 语言表达式，获取参数的值。例如，在报告中使用当前日期可以这样操作：</p>
+<div class="sourceCode" id="cb426"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb426-1"><a href="custom-output.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb426-2"><a href="custom-output.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;文档标题&quot;</span></span>
+<span id="cb426-3"><a href="custom-output.html#cb426-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span>
+<span id="cb426-4"><a href="custom-output.html#cb426-4" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb426-5"><a href="custom-output.html#cb426-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">date</span><span class="kw">:</span><span class="at"> !r Sys.Date()</span></span>
+<span id="cb426-6"><a href="custom-output.html#cb426-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>YAML 区块中的 R 语言表达式在编译时会先于文档中的其它 R 语言代码执行，因此需要在这里
+使用 <code>package::function</code> 的写法来调用不同软件包中的函数（因为即便你在 R Markdown 文档
+中已经使用 <code>library("package")</code> 命令，该包在这一阶段仍然没有被载入）。例如：</p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb427-1"><a href="custom-output.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb427-2"><a href="custom-output.html#cb427-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> My Document</span></span>
+<span id="cb427-3"><a href="custom-output.html#cb427-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span>
+<span id="cb427-4"><a href="custom-output.html#cb427-4" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb427-5"><a href="custom-output.html#cb427-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">date</span><span class="kw">:</span><span class="at"> !r lubridate::today()</span></span>
+<span id="cb427-6"><a href="custom-output.html#cb427-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+</div>
+<div id="params-use" class="section level3" number="16.1.2">
+<h3><span class="header-section-number">16.1.2</span> 使用参数</h3>
+<p>YAML 区块中声明的参数在 R Markdown 中会被保存在一个名为 <code>params</code> 的只读列表中，
+可以通过下面的方式来访问它们：</p>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="custom-output.html#cb428-1" aria-hidden="true" tabindex="-1"></a>params<span class="sc">$</span>year</span>
+<span id="cb428-2"><a href="custom-output.html#cb428-2" aria-hidden="true" tabindex="-1"></a>params<span class="sc">$</span>region</span></code></pre></div>
+<p>这些参数可以用来设置 <strong>knitr</strong> 的在编译时的行为。
+例如通过赋值给 <strong>knitr</strong> 的区块参数 <code>echo</code> 来改变编译结果中是否显示源代码：</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="custom-output.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="at">file =</span> <span class="st">&quot;examples/custom-report/change-echo-value.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb430-1"><a href="custom-output.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb430-2"><a href="custom-output.html#cb430-2" aria-hidden="true" tabindex="-1"></a><span class="an">params:</span></span>
+<span id="cb430-3"><a href="custom-output.html#cb430-3" aria-hidden="true" tabindex="-1"></a><span class="co">  printcode: false  # or set it to true</span></span>
+<span id="cb430-4"><a href="custom-output.html#cb430-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb430-5"><a href="custom-output.html#cb430-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb430-6"><a href="custom-output.html#cb430-6" aria-hidden="true" tabindex="-1"></a>`r &#39;&#39;````{r, setup, include=FALSE}</span>
+<span id="cb430-7"><a href="custom-output.html#cb430-7" aria-hidden="true" tabindex="-1"></a><span class="fu"># 在这里将 echo 的值设为 false</span></span>
+<span id="cb430-8"><a href="custom-output.html#cb430-8" aria-hidden="true" tabindex="-1"></a>knitr::opts_chunk$set(echo = params$printcode)</span>
+<span id="cb430-9"><a href="custom-output.html#cb430-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+</div>
+<div id="params-knit" class="section level3" number="16.1.3">
+<h3><span class="header-section-number">16.1.3</span> 有参编译</h3>
+<p>除了像上面介绍的在 YAML 区块中声明参数，还有另外两种使用参数的方式：</p>
+<ol style="list-style-type: decimal">
+<li><p>通过向 <code>rmarkdown::render()</code> 函数的 <code>params</code> 参数赋值来设置编译的参数；</p></li>
+<li><p>通过一个交互性的可视化界面来设置编译参数的值。</p></li>
+</ol>
+<p>例如，下面的例子将起到与 <a href="custom-output.html#params-declare">前文</a> 一样的效果。</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="custom-output.html#cb431-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">&quot;MyDocument.Rmd&quot;</span>, <span class="at">params =</span> <span class="fu">list</span>(</span>
+<span id="cb431-2"><a href="custom-output.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2017</span>,</span>
+<span id="cb431-3"><a href="custom-output.html#cb431-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">region =</span> <span class="st">&quot;亚洲&quot;</span>,</span>
+<span id="cb431-4"><a href="custom-output.html#cb431-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">printcode =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb431-5"><a href="custom-output.html#cb431-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;file2.csv&quot;</span></span>
+<span id="cb431-6"><a href="custom-output.html#cb431-6" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<p>这两种方法并不冲突，为了方便理解，你不妨将 YAML 区块中的设置视为默认配置。
+当运行 <code>rmarkdown::render()</code> 进行有参编译时，如果在 <code>params</code> 下有新的设置，
+那么将应用新的设置，否则使用原有的默认配置。</p>
+<p>不过，<code>rmarkdown::render()</code> 执行有参编译时，也有其配置灵活的优势。
+在下面的例子中，我们可以通过一个自定义函数来指定文档输出的位置。</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="custom-output.html#cb432-1" aria-hidden="true" tabindex="-1"></a>render_report <span class="ot">=</span> <span class="cf">function</span>(region, year) {</span>
+<span id="cb432-2"><a href="custom-output.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">render</span>(</span>
+<span id="cb432-3"><a href="custom-output.html#cb432-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;MyDocument.Rmd&quot;</span>, <span class="at">params =</span> <span class="fu">list</span>(</span>
+<span id="cb432-4"><a href="custom-output.html#cb432-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">region =</span> region,</span>
+<span id="cb432-5"><a href="custom-output.html#cb432-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">year =</span> year</span>
+<span id="cb432-6"><a href="custom-output.html#cb432-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb432-7"><a href="custom-output.html#cb432-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">output_file =</span> <span class="fu">paste0</span>(<span class="st">&quot;Report-&quot;</span>, region, <span class="st">&quot;-&quot;</span>, year, <span class="st">&quot;.pdf&quot;</span>)</span>
+<span id="cb432-8"><a href="custom-output.html#cb432-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb432-9"><a href="custom-output.html#cb432-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>使用可视化界面来进行带参编译的方法有两种，一是直接在 RStudio 用户界面中的 <code>Knit</code>
+按钮处的下拉菜单中选择 <code>Knit with Parameters</code> 命令，二是在 <code>rmarkdown::render()</code>
+中将 <code>params</code> 的值设为 <code>"ask"</code>，即 <code>rmarkdown::render("MyDocument.Rmd", params="ask")</code>。</p>
+<p>图 <a href="custom-output.html#fig:params-input">16.1</a> 显示了通过可视化界面配置编译参数时的情形。</p>
+<div class="figure"><span id="fig:params-input"></span>
+<img src="images/custom-report/knit-with-parameters.png" alt="使用图形界面配置编译参数"  />
+<p class="caption">
+图 16.1: 使用图形界面配置编译参数
+</p>
+</div>
+<p>通过可视化界面可以直观的设置编译时所需的参数。而且，除了上图中所列出的样式，
+我们还可以通过 YAML 区块来详细配置编译参数的可用数值范围及显示的模式，从而通过
+滑块、复选框、文本框和下拉菜单来设置参数（图 <a href="custom-output.html#fig:params-controls">16.2</a>）。</p>
+<div class="figure"><span id="fig:params-controls"></span>
+<img src="images/custom-report/params-knit-interface.png" alt="设置对话框的呈现形式"  />
+<p class="caption">
+图 16.2: 设置对话框的呈现形式
+</p>
+</div>
+<p>上图对话框的呈现形式通过下面的配置来实现的：</p>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="custom-output.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/custom-report/custom-report-controls.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb434-1"><a href="custom-output.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb434-2"><a href="custom-output.html#cb434-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> My Document</span></span>
+<span id="cb434-3"><a href="custom-output.html#cb434-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb434-4"><a href="custom-output.html#cb434-4" aria-hidden="true" tabindex="-1"></a><span class="an">params:</span></span>
+<span id="cb434-5"><a href="custom-output.html#cb434-5" aria-hidden="true" tabindex="-1"></a><span class="co">  year:</span></span>
+<span id="cb434-6"><a href="custom-output.html#cb434-6" aria-hidden="true" tabindex="-1"></a><span class="co">    label: &quot;年份&quot;</span></span>
+<span id="cb434-7"><a href="custom-output.html#cb434-7" aria-hidden="true" tabindex="-1"></a><span class="co">    value: 2020</span></span>
+<span id="cb434-8"><a href="custom-output.html#cb434-8" aria-hidden="true" tabindex="-1"></a><span class="co">    input: slider</span></span>
+<span id="cb434-9"><a href="custom-output.html#cb434-9" aria-hidden="true" tabindex="-1"></a><span class="co">    min: 2020</span></span>
+<span id="cb434-10"><a href="custom-output.html#cb434-10" aria-hidden="true" tabindex="-1"></a><span class="co">    max: 2030</span></span>
+<span id="cb434-11"><a href="custom-output.html#cb434-11" aria-hidden="true" tabindex="-1"></a><span class="co">    step: 1</span></span>
+<span id="cb434-12"><a href="custom-output.html#cb434-12" aria-hidden="true" tabindex="-1"></a><span class="co">    sep: &quot;&quot;</span></span>
+<span id="cb434-13"><a href="custom-output.html#cb434-13" aria-hidden="true" tabindex="-1"></a><span class="co">  region:</span></span>
+<span id="cb434-14"><a href="custom-output.html#cb434-14" aria-hidden="true" tabindex="-1"></a><span class="co">    label: &quot;区域：&quot;</span></span>
+<span id="cb434-15"><a href="custom-output.html#cb434-15" aria-hidden="true" tabindex="-1"></a><span class="co">    value: 欧洲</span></span>
+<span id="cb434-16"><a href="custom-output.html#cb434-16" aria-hidden="true" tabindex="-1"></a><span class="co">    input: select</span></span>
+<span id="cb434-17"><a href="custom-output.html#cb434-17" aria-hidden="true" tabindex="-1"></a><span class="co">    choices: [北美, 欧洲, 亚洲, 非洲]</span></span>
+<span id="cb434-18"><a href="custom-output.html#cb434-18" aria-hidden="true" tabindex="-1"></a><span class="co">  printcode:</span></span>
+<span id="cb434-19"><a href="custom-output.html#cb434-19" aria-hidden="true" tabindex="-1"></a><span class="co">    label: &quot;是否显示源代码&quot;</span></span>
+<span id="cb434-20"><a href="custom-output.html#cb434-20" aria-hidden="true" tabindex="-1"></a><span class="co">    value: TRUE</span></span>
+<span id="cb434-21"><a href="custom-output.html#cb434-21" aria-hidden="true" tabindex="-1"></a><span class="co">  data:</span></span>
+<span id="cb434-22"><a href="custom-output.html#cb434-22" aria-hidden="true" tabindex="-1"></a><span class="co">    label: &quot;数据源：&quot;</span></span>
+<span id="cb434-23"><a href="custom-output.html#cb434-23" aria-hidden="true" tabindex="-1"></a><span class="co">    value: results.csv</span></span>
+<span id="cb434-24"><a href="custom-output.html#cb434-24" aria-hidden="true" tabindex="-1"></a><span class="co">    input: file</span></span>
+<span id="cb434-25"><a href="custom-output.html#cb434-25" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<p>在这里，给定了年份、区域等参数的范围，并分别通过滑块和下拉菜单时间实现了便捷赋值。
+除了上面演示的例子，其它一些可用的控件可以参见表格 <a href="custom-output.html#tab:params-types">16.1</a> 。</p>
+<table>
+<caption>
+<span id="tab:params-types">表 16.1: </span>有参编译用户界面中可用的 Shiny 控件
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+控件类型
+</th>
+<th style="text-align:left;">
+对应的 Shiny 函数
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+checkbox
+</td>
+<td style="text-align:left;">
+checkboxInput
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+numericInput
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+slider
+</td>
+<td style="text-align:left;">
+sliderInput
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+date
+</td>
+<td style="text-align:left;">
+dateInput
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+textInput
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+file
+</td>
+<td style="text-align:left;">
+fileInput
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+radio
+</td>
+<td style="text-align:left;">
+radioButtons
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+select
+</td>
+<td style="text-align:left;">
+selectInput
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+password
+</td>
+<td style="text-align:left;">
+passwordInput
+</td>
+</tr>
+</tbody>
+</table>
+<p>值得一提的是，该处用户界面的生成是基于 <strong>Shiny</strong> 技术的，其本质是一个动态网页。
+因此，欲了解控件的详细配置（包括可用的参数名称）攻略，可以查看相应函数的文档。
+例如 <code>?shiny::checkboxInput</code>，<code>?shiny::radioButtons</code> 等等。</p>
+</div>
+<div id="params-publish" class="section level3" number="16.1.4">
+<h3><span class="header-section-number">16.1.4</span> 发布文档</h3>
+<p>有参数的 R Markdown 报告也可以发布到包括 RStudio Connect（<a href="https://www.rstudio.com/products/connect/）在内的网络服务器上" class="uri">https://www.rstudio.com/products/connect/）在内的网络服务器上</a>。
+发布后的 R Markdown 报告在运行时相当于一个动态网页，用户可以使用交互性空间设置
+编译的参数，并得到相应的文档。</p>
+</div>
+</div>
+<div id="document-template" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> 文档模板</h2>
+<p>前面已经多次提过，R Markdown 使用文档模板来定义输出的格式。不管是标准的 HTML 文档，
+还是 PDF 文档，亦或是演示文稿等输出格式，都有相应的模板。不同的模板提供不同的功能和
+样式。例如 HTML 文档通常使用 <code>output: html_document</code> 作为配置参数，PDF 文档通常使用
+<code>output: pdf_document</code> 作为配置参数。</p>
+<p>在 RStudio 中新建 R Markdown 文件时，有一项 <code>"From Template"</code> 的选项，这里列出了
+当前可用的所有 R Markdown 文档模板。第 <a href="presentation.html#xaringan-presentation">7.2</a> 章我们讲述如何创建“写轮眼”幻灯片的部分，
+我们曾经使用了这里的功能。</p>
+<p>实际上，这些文档模板是拓展 R Markdown 功能的重要途径之一。通过创作自己的
+R Markdown 模板，可以便利很多日常的工作任务。例如：</p>
+<ul>
+<li><p>创建一个带有自己组织机构 LOGO、商标和视觉方案的模板，可在文档中充分体现组织特色；</p></li>
+<li><p>在一个模板中指定 <code>title</code>，<code>author</code>，<code>date</code> 等参数的默认值，免得每一次都需要
+重新设置；</p></li>
+<li><p>指定输出文档的布局，并引入 YAML 区块中新的可用参数等。例如，你可以添加一个
+<code>department</code> 参数来指定部门的名称；</p></li>
+</ul>
+<p>新的 R Markdown 模板被创建后，可以非常便捷的在 RStudio 中使用（见图 <a href="custom-output.html#fig:templates-select">16.3</a>）。</p>
+<div class="figure"><span id="fig:templates-select"></span>
+<img src="images/custom-report/templates-select.png" alt="在 RStudio 中选择模板"  />
+<p class="caption">
+图 16.3: 在 RStudio 中选择模板
+</p>
+</div>
+<p>RStudio 中可选的 R Markdown 模板会因为用户安装的软件包差异而有所不同。
+在这一部分的内容中，我们将介绍如何创建一个新的模板。在此之外，你还可以通过参阅一些
+软件包的源代码研究模板的创建。例如 <strong>rticles</strong>（<a href="https://github.com/rstudio/rticles" class="uri">https://github.com/rstudio/rticles</a>）
+软件包中定义了多个学术期刊的文档格式，而 <code>rmarkdown::html_vignette</code> 模板则是另一个
+相对简单的实例。</p>
+<div id="template-structure" class="section level3" number="16.2.1">
+<h3><span class="header-section-number">16.2.1</span> 模板的结构</h3>
+<p>R Markdown 模板仅可以通过创建一个新的 R 语言软件包来实现。本文不打算介绍软件包的
+开发，而仅仅涉及模板的制作。对于没有经验的普通用户而言，不妨将这一途径视为 R Markdown
+模板的分发策略。</p>
+<p>简单来说，要创建一个新模板，首先需要创建一个 R 语言软件包项目。
+这一步可以在 RStudio 中通过菜单 <code>File -&gt; New Project</code> 中选择 “R Package” 来完成。</p>
+<p>R Markdown 模板位于软件包项目中的 <code>inst/rmarkdown/templates</code> 目录中。
+这一位置是明确指定的，文件夹的名称和结构要确保正确。
+假设我们要新建一个名为 <code>my_template</code> 的 R Markdown 模板，则需要在这一目录下再
+新建一个子文件夹，并命名为 <code>my_template</code>。则该子文件夹下，至少需要以下两个文件：</p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb435-1"><a href="custom-output.html#cb435-1" aria-hidden="true" tabindex="-1"></a>template.yaml</span>
+<span id="cb435-2"><a href="custom-output.html#cb435-2" aria-hidden="true" tabindex="-1"></a>skeleton/skeleton.Rmd</span></code></pre></div>
+<p>在 <strong>usethis</strong> 软件包中，提供了 <code>use_rmarkdown_template()</code> 函数来便捷化这一操作步骤
+（参见<code>?usethis::use_rmarkdown_template</code>）。</p>
+<p>其中，<code>template.yaml</code> 文件被用来指定在 RStudio 的 “From Template” 对话框中显示的
+模板名称和描述。因此，这个 YAML 文件必须要指定 <code>name</code> 和 <code>description</code> 的值。
+此外，通过设置可选参数 <code>create_dir: true</code> 在使用该模板时新建一个文件夹。如下所示：</p>
+<div class="sourceCode" id="cb436"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb436-1"><a href="custom-output.html#cb436-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> My Template</span></span>
+<span id="cb436-2"><a href="custom-output.html#cb436-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> This is my template</span></span></code></pre></div>
+<p>在 <code>skeleton.Rmd</code> 文件中，你可以创建一个 R Markdown 文档的默认框架，这里面指定了
+应用该模板新建 R Markdown 文档后其中包括的默认内容。在下面的例子中，我们指定了
+文档的标题、作者、输出格式和主要结构等。</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="custom-output.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/custom-report/template-skeleton.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb438-1"><a href="custom-output.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb438-2"><a href="custom-output.html#cb438-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;未命名&quot;</span></span>
+<span id="cb438-3"><a href="custom-output.html#cb438-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;你的名字&quot;</span></span>
+<span id="cb438-4"><a href="custom-output.html#cb438-4" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb438-5"><a href="custom-output.html#cb438-5" aria-hidden="true" tabindex="-1"></a><span class="co">  bookdown::html_document2:</span></span>
+<span id="cb438-6"><a href="custom-output.html#cb438-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb438-7"><a href="custom-output.html#cb438-7" aria-hidden="true" tabindex="-1"></a><span class="co">    fig_caption: true</span></span>
+<span id="cb438-8"><a href="custom-output.html#cb438-8" aria-hidden="true" tabindex="-1"></a><span class="co">    template: flatly</span></span>
+<span id="cb438-9"><a href="custom-output.html#cb438-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb438-10"><a href="custom-output.html#cb438-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb438-11"><a href="custom-output.html#cb438-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 前言</span></span>
+<span id="cb438-12"><a href="custom-output.html#cb438-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb438-13"><a href="custom-output.html#cb438-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 分析和结果</span></span>
+<span id="cb438-14"><a href="custom-output.html#cb438-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb438-15"><a href="custom-output.html#cb438-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结和讨论</span></span></code></pre></div>
+</div>
+<div id="template-support" class="section level3" number="16.2.2">
+<h3><span class="header-section-number">16.2.2</span> 模板支持文件</h3>
+<p>为了丰富 R Markdown 模板的内容、样式和功能，我们还需要在其中添加其它的支持文件。
+这些文件都需要放置在 <code>skeleton</code> 文件夹中，当使用该模板创建的文档被编译时，相关的
+支持文件会自动被拷贝到新文档生成的位置上，从而可以被新文档访问和使用。</p>
+<p>如果我们想在模板中加入一个 LOGO 图片和 CSS 样式等内容，则可以在模板文件夹中
+添加 <code>logo.png</code> 和 <code>style.css</code> 等文件。</p>
+<div class="sourceCode" id="cb439"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb439-1"><a href="custom-output.html#cb439-1" aria-hidden="true" tabindex="-1"></a>template.yaml</span>
+<span id="cb439-2"><a href="custom-output.html#cb439-2" aria-hidden="true" tabindex="-1"></a>skeleton/skeleton.Rmd</span>
+<span id="cb439-3"><a href="custom-output.html#cb439-3" aria-hidden="true" tabindex="-1"></a>skeleton/logo.png</span>
+<span id="cb439-4"><a href="custom-output.html#cb439-4" aria-hidden="true" tabindex="-1"></a>skeleton/styles.css</span></code></pre></div>
+<p>为了应用新的样式，则需要在 <code>skeleton.Rmd</code> 中做下列修改：</p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="custom-output.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/custom-report/template-skeleton-extra.Rmd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb441-1"><a href="custom-output.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb441-2"><a href="custom-output.html#cb441-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;未命名&quot;</span></span>
+<span id="cb441-3"><a href="custom-output.html#cb441-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;你的名字&quot;</span></span>
+<span id="cb441-4"><a href="custom-output.html#cb441-4" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb441-5"><a href="custom-output.html#cb441-5" aria-hidden="true" tabindex="-1"></a><span class="co">  bookdown::html_document2:</span></span>
+<span id="cb441-6"><a href="custom-output.html#cb441-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb441-7"><a href="custom-output.html#cb441-7" aria-hidden="true" tabindex="-1"></a><span class="co">    fig_caption: true</span></span>
+<span id="cb441-8"><a href="custom-output.html#cb441-8" aria-hidden="true" tabindex="-1"></a><span class="co">    css: style.css</span></span>
+<span id="cb441-9"><a href="custom-output.html#cb441-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb441-10"><a href="custom-output.html#cb441-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-11"><a href="custom-output.html#cb441-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-12"><a href="custom-output.html#cb441-12" aria-hidden="true" tabindex="-1"></a><span class="al">![logo](logo.png)</span></span>
+<span id="cb441-13"><a href="custom-output.html#cb441-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-14"><a href="custom-output.html#cb441-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 前言</span></span>
+<span id="cb441-15"><a href="custom-output.html#cb441-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-16"><a href="custom-output.html#cb441-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 分析和结果</span></span>
+<span id="cb441-17"><a href="custom-output.html#cb441-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-18"><a href="custom-output.html#cb441-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结和讨论</span></span></code></pre></div>
+</div>
+<div id="template-pandoc" class="section level3" number="16.2.3">
+<h3><span class="header-section-number">16.2.3</span> 设置 Pandoc 模板</h3>
+<p>前面的章节中已经提过，R Markdown 文档先由 <strong>knitr</strong> 编译为 Markdown，然后再通过
+Pandoc 转换为其它各种不同的输出格式。在 Pandoc 的转换过程是通过对应的 Pandoc 模板
+来实现的。Pandoc 模板的功能是将 YAML 区块的设置应用到文档转换的过程中，对诸如 HTML
+文档的标题、作者等信息进行设置。</p>
+<p>Pandoc 模板是一个标记文档，其中使用美元符号来标记变量和代码，实现文档内容的变化；
+与此同时使用美元符号以外的部分来指定文档的静态内容。在下面的极简 HTML 文档模板中，
+只有两个变量 <code>$title$</code> 和 <code>$body$</code>，分别指定 HTML 文档的标题和页面内容。</p>
+<div class="sourceCode" id="cb442"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb442-1"><a href="custom-output.html#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb442-2"><a href="custom-output.html#cb442-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;head&gt;</span></span>
+<span id="cb442-3"><a href="custom-output.html#cb442-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;title&gt;</span>$title$<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb442-4"><a href="custom-output.html#cb442-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb442-5"><a href="custom-output.html#cb442-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb442-6"><a href="custom-output.html#cb442-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb442-7"><a href="custom-output.html#cb442-7" aria-hidden="true" tabindex="-1"></a>  $body$</span>
+<span id="cb442-8"><a href="custom-output.html#cb442-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb442-9"><a href="custom-output.html#cb442-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<p>创建一个新的 Pandoc 文档模板后，可以在最终生成文档时使用新的变量。
+比如，下面的例子将 <a href="custom-output.html#document-template">前面</a> 提到的 <code>department</code> 的内容写到 HTML 的 <code>&lt;head&gt;&lt;/head&gt;</code> 区域中去。这里使用 <code>if</code> 语句来检测是否存在 <code>department</code> 的赋值，
+如果存在的话，则将其加入网页的 <code>&lt;meta /&gt;</code> 区域中。</p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb443-1"><a href="custom-output.html#cb443-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb443-2"><a href="custom-output.html#cb443-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;head&gt;</span></span>
+<span id="cb443-3"><a href="custom-output.html#cb443-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;title&gt;</span>$title$<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb443-4"><a href="custom-output.html#cb443-4" aria-hidden="true" tabindex="-1"></a>    $if(department)$<span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;department&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;$department$&quot;</span> <span class="kw">/&gt;</span>$endif$</span>
+<span id="cb443-5"><a href="custom-output.html#cb443-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb443-6"><a href="custom-output.html#cb443-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb443-7"><a href="custom-output.html#cb443-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb443-8"><a href="custom-output.html#cb443-8" aria-hidden="true" tabindex="-1"></a>  $body$</span>
+<span id="cb443-9"><a href="custom-output.html#cb443-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb443-10"><a href="custom-output.html#cb443-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<p>值得一提的是，要应用上述 Pandoc 模板，还需要在 R Markdown 的 YAML 区块中进行配置。</p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb444-1"><a href="custom-output.html#cb444-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb444-2"><a href="custom-output.html#cb444-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb444-3"><a href="custom-output.html#cb444-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">template</span><span class="kw">:</span><span class="at"> template.html</span></span></code></pre></div>
+<p>除此之外，Pandoc 模板还有自己的一套语法来定义文档中的不同元素，包括条件判断、循环、
+列表等的实现方法。其语法定义形式上比较简单，但是可读性较差。
+在其 <a href="https://pandoc.org/MANUAL.html#templates">官方文档</a> 中可查。
+虽然这部分内容虽然通常不会用到，但是了解这一部分的内容有利于进一步理解 R Markdown
+动态文档的工作原理。</p>
+</div>
+<div id="template-share" class="section level3" number="16.2.4">
+<h3><span class="header-section-number">16.2.4</span> 分享模板</h3>
+<p>因为 R Markdown 的文档模板保存在 R 软件包中，所以模板的共享可以通过安装软件包来实现。
+只要把 R Markdown 文档模板的软件包发布在 CRAN 或者 GitHub 网站，就可以通过安装软件包
+的方式来使用该模板。</p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="custom-output.html#cb445-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 安装一个 CRAN 上的软件包</span></span>
+<span id="cb445-2"><a href="custom-output.html#cb445-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;packageName&quot;</span>)</span>
+<span id="cb445-3"><a href="custom-output.html#cb445-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb445-4"><a href="custom-output.html#cb445-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 安装一个 GitHub 上的软件包</span></span>
+<span id="cb445-5"><a href="custom-output.html#cb445-5" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;github_username/packageName&quot;</span>)</span></code></pre></div>
+<p>很多基于 R Markdown 软件包都携带了相应的 R Markdown 模板，包括 <strong>bookdown</strong>，
+<strong>xaringan</strong>，<strong>rticles</strong> 等。如果要深入了解这方面的内容，不妨去参考其源代码。</p>
+</div>
+</div>
+<div id="new-formats" class="section level2" number="16.3">
+<h2><span class="header-section-number">16.3</span> 创建新的文档格式</h2>
+<p>作为实现 R Markdown 技术最重要的软件包之一，<strong>rmarkdown</strong> 软件包中已经包括了很多
+文档和演示文稿的输出格式。这些文档格式的背后，本质上仍然是一些 R 语言的函数。当你
+在 YAML 区块中指定输出格式的时候，实际上是在调用相应的函数并将函数的参数传递给它。</p>
+<p>因此，我们也可以通过自定义一个新的函数来创建新的文档格式。新文档格式的函数通常需要
+整合到新的 R Markdown 文档模板中去（参见第 <a href="#document-templates"><strong>??</strong></a> 章）。这是因为
+文档模板是通过 R 语言软件包创建的，原本就可以加入新的函数。于是，通过 R 语言的软件包，
+就实现了文档格式和模板的分发。这也是现有的 R Markdown 文档格式、模板的一贯做法。</p>
+<div id="format-derive" class="section level3" number="16.3.1">
+<h3><span class="header-section-number">16.3.1</span> 从现有文档格式衍生新格式</h3>
+<p>创建新的文档格式最简单的办法就是基于现有的文档格式衍生出新的文档格式。<strong>rmarkdown</strong>
+内嵌的文档格式都是高度可定制的，包含众多可用参数。只需要为这些参数赋值，就可以创建
+出一个新的文档格式出来。</p>
+<p>在下面的例子中，我们创建了一个新的文档格式函数 <code>quarterly_report</code> 以进行季度报告。
+这个函数是基于 <strong>rmarkdown</strong> 的内嵌函数 <code>html_document</code> 工作的。</p>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="custom-output.html#cb446-1" aria-hidden="true" tabindex="-1"></a>quarterly_report <span class="ot">=</span> <span class="cf">function</span>(<span class="at">toc =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb446-2"><a href="custom-output.html#cb446-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 查找软件包的安装位置</span></span>
+<span id="cb446-3"><a href="custom-output.html#cb446-3" aria-hidden="true" tabindex="-1"></a>  pkg_resource <span class="ot">=</span> <span class="cf">function</span>(...) {</span>
+<span id="cb446-4"><a href="custom-output.html#cb446-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system.file</span>(..., <span class="at">package =</span> <span class="st">&quot;mypackage&quot;</span>)</span>
+<span id="cb446-5"><a href="custom-output.html#cb446-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb446-6"><a href="custom-output.html#cb446-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb446-7"><a href="custom-output.html#cb446-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 在软件包的子目录中找到新文档格式依赖的文档模板</span></span>
+<span id="cb446-8"><a href="custom-output.html#cb446-8" aria-hidden="true" tabindex="-1"></a>  css    <span class="ot">=</span> <span class="fu">pkg_resource</span>(<span class="st">&quot;reports/styles.css&quot;</span>)</span>
+<span id="cb446-9"><a href="custom-output.html#cb446-9" aria-hidden="true" tabindex="-1"></a>  header <span class="ot">=</span> <span class="fu">pkg_resource</span>(<span class="st">&quot;reports/quarterly/header.html&quot;</span>)</span>
+<span id="cb446-10"><a href="custom-output.html#cb446-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb446-11"><a href="custom-output.html#cb446-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 调用 html_document 函数并指定其参数</span></span>
+<span id="cb446-12"><a href="custom-output.html#cb446-12" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">html_document</span>(</span>
+<span id="cb446-13"><a href="custom-output.html#cb446-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">toc =</span> toc, <span class="at">fig_width =</span> <span class="fl">6.5</span>, <span class="at">fig_height =</span> <span class="dv">4</span>,</span>
+<span id="cb446-14"><a href="custom-output.html#cb446-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="cn">NULL</span>, <span class="at">css =</span> css,</span>
+<span id="cb446-15"><a href="custom-output.html#cb446-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">includes =</span> rmarkdown<span class="sc">::</span><span class="fu">includes</span>(<span class="at">before_body =</span> header)</span>
+<span id="cb446-16"><a href="custom-output.html#cb446-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb446-17"><a href="custom-output.html#cb446-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>这个新的输出格式实现了下列几项功能：</p>
+<ol style="list-style-type: decimal">
+<li><p>提供了一个参数 <code>toc</code> 来决定是否显示文档目录（参数最后被传递给了 <code>html_document</code>）；</p></li>
+<li><p>指定了图片默认的长度和高度（这可以避免文档中的图片出现大小参差不齐的现象）；</p></li>
+<li><p>指定了一个新的 CSS 样式表，同时也禁用了默认的 Bootstrap 主题样式表；</p></li>
+<li><p>在每一份文档中都添加了一个标准的头文件。</p></li>
+</ol>
+<p>值得一提的是，第 3 项和第 4 项功能依赖于软件包提供的外部文件。也就是说，
+在 <code>quarterly_report</code> 函数中，分别获取了 <code>"mypackage"</code> 的软件包中携带的 CSS 文件和
+一个 HTML 文档，然后分别将 CSS 定义传递给了 <code>html_document</code> 函数的 <code>css</code> 和 <code>includes</code>
+参数。在这里，后者使用了一个 <code>rmarkdown::includes()</code> 函数，从而将这个 HTML 文档（片段）
+作为文档 <code>before_body</code> 的内容嵌入到使用该格式的文档中去。</p>
+</div>
+<div id="fully-custom-format" class="section level3" number="16.3.2">
+<h3><span class="header-section-number">16.3.2</span> 完全的自定义输出格式</h3>
+<p>在基于现有格式衍生新输出格式之外，我们也可以从底层出发创建出一个完全的新格式。
+为此我们需要了解文档格式的底层工作原理，简单来说 R Markdown 的输出格式
+由下列几个部分构成：</p>
+<ol style="list-style-type: decimal">
+<li><p>一系列的参数来确保 <strong>knitr</strong> 将 Rmd 文件正确的编译为 Markdown 格式的文档；</p></li>
+<li><p>另外的一些参数来指导 Pandoc 将 Markdown 文档转换为其它输出格式（如 HTML）；</p></li>
+<li><p>其它的一些标记或过滤器（通常用于处理输出格式的支持文件）。</p></li>
+</ol>
+<p>你可以使用 <strong>rmarkdown</strong> 软件包中的函数 <code>output_format()</code> 来创建一个新的输出格式。
+下面是一个例子：</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="custom-output.html#cb447-1" aria-hidden="true" tabindex="-1"></a>simple_html_format <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb447-2"><a href="custom-output.html#cb447-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 这里使用了完整的引用方式来使用 output_format、knitr_options 和</span></span>
+<span id="cb447-3"><a href="custom-output.html#cb447-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pandoc_options 等 3 个函数。</span></span>
+<span id="cb447-4"><a href="custom-output.html#cb447-4" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">output_format</span>(</span>
+<span id="cb447-5"><a href="custom-output.html#cb447-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">knitr =</span> rmarkdown<span class="sc">::</span><span class="fu">knitr_options</span>(<span class="at">opts_chunk =</span> <span class="fu">list</span>(<span class="at">dev =</span> <span class="st">&#39;png&#39;</span>)),</span>
+<span id="cb447-6"><a href="custom-output.html#cb447-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">pandoc =</span> rmarkdown<span class="sc">::</span><span class="fu">pandoc_options</span>(<span class="at">to =</span> <span class="st">&quot;html&quot;</span>),</span>
+<span id="cb447-7"><a href="custom-output.html#cb447-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">clean_supporting =</span> <span class="cn">FALSE</span></span>
+<span id="cb447-8"><a href="custom-output.html#cb447-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb447-9"><a href="custom-output.html#cb447-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>在这个函数中，<strong>knitr</strong> 和 Pandoc 的参数分别由两个参数指定，其内容可以相当的复杂
+（参见 <code>?rmarkdown::knitr_options</code> 和 <code>?rmarkdown::pandoc_options</code> 了解更多）。
+而 <code>clean_supporting</code> 则控制是否清理文档编译过程中使用的临时文件。</p>
+<p><code>output_format()</code> 函数中还有一个 <code>base_format</code> 参数用来指定一个原有的输出格式，
+并在此基础上进行配置（相当于衍生格式）。</p>
+<p>如果你有其它的一些支持文件无法通过 <code>includes</code> 参数指定，那么还需要使用 <code>output_format()</code>
+中的其它参数来帮助你处理这些文件（例如，使用 <code>intermediates_generator</code> 来讲它们拷贝
+到文档的输出目录中去）。</p>
+<p>学习创建一个新的文档输出格式最好的方法可能是阅读原有格式的源代码。从 <strong>rmarkdown</strong>
+的 <code>html_document</code> 和 <code>pdf_document</code> 开始是个不错的主意，其源代码的位置在
+<a href="https://github.com/rstudio/rmarkdown/tree/master/R。如果你的新格式需要用到" class="uri">https://github.com/rstudio/rmarkdown/tree/master/R。如果你的新格式需要用到</a> Pandoc
+模板，则请参见 <a href="custom-output.html#template-pandoc">16.2.3</a> 及 Pandoc 的使用手册。</p>
+</div>
+<div id="using-a-new-format" class="section level3" number="16.3.3">
+<h3><span class="header-section-number">16.3.3</span> 使用新的文档输出格式</h3>
+<p>新的文档格式在创建完成后，需要安装到你的本地环境中去（参见 <a href="custom-output.html#template-share">16.2.4</a>）。
+这样新的输出格式便可以通过 YAML 区块来应用。加入我们的 <code>quarterly_report</code> 位于一个
+名为 <strong>mypackage</strong> 的软件包中且该软件包已经安装成功，那么：</p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb448-1"><a href="custom-output.html#cb448-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb448-2"><a href="custom-output.html#cb448-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;文档标题&quot;</span></span>
+<span id="cb448-3"><a href="custom-output.html#cb448-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb448-4"><a href="custom-output.html#cb448-4" aria-hidden="true" tabindex="-1"></a><span class="co">  mypackage::quarterly_report:</span></span>
+<span id="cb448-5"><a href="custom-output.html#cb448-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb448-6"><a href="custom-output.html#cb448-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<p>这里面就设置了新的输出格式，并且将 <code>toc</code> 参数传递给了 <code>quarterly_report()</code> 函数。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="shiny-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cosname/rmarkdown-guide/edit/master/19-custom-output.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 10 章 块选项 | R Markdown 指南</title>
+  <meta name="description" content="第 10 章 块选项 | R Markdown 指南" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 10 章 块选项 | R Markdown 指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="第 10 章 块选项 | R Markdown 指南" />
+  <meta name="github-repo" content="cosname/rmarkdown-guide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 10 章 块选项 | R Markdown 指南" />
+  
+  <meta name="twitter:description" content="第 10 章 块选项 | R Markdown 指南" />
+  
+
+<meta name="author" content="王祎帆" />
+<meta name="author" content="闫求识" />
+<meta name="author" content="高春辉" />
+<meta name="author" content="庄亮亮" />
+
+
+<meta name="date" content="2021-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="table.html"/>
+<link rel="next" href="output-hooks.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Markdown 中文指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="part"><span><b>I 基础</b></span></li>
+<li class="chapter" data-level="1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html"><i class="fa fa-check"></i><b>1</b> 认识 R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#数据分析报告和文档"><i class="fa fa-check"></i><b>1.1</b> 数据分析报告和文档</a></li>
+<li class="chapter" data-level="1.2" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#个人简历"><i class="fa fa-check"></i><b>1.2</b> 个人简历</a></li>
+<li class="chapter" data-level="1.3" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#网站"><i class="fa fa-check"></i><b>1.3</b> 网站</a></li>
+<li class="chapter" data-level="1.4" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#幻灯片"><i class="fa fa-check"></i><b>1.4</b> 幻灯片</a></li>
+<li class="chapter" data-level="1.5" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#交互报表"><i class="fa fa-check"></i><b>1.5</b> 交互报表</a></li>
+<li class="chapter" data-level="1.6" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#r-markdown-的渊源与历史"><i class="fa fa-check"></i><b>1.6</b> R Markdown 的渊源与历史</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> 安装</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#安装-r-markdown"><i class="fa fa-check"></i><b>2.1</b> 安装 R Markdown</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#create-first-rmd"><i class="fa fa-check"></i><b>2.2</b> 创建第一个 R Markdown 文档</a></li>
+<li class="chapter" data-level="2.3" data-path="installation.html"><a href="installation.html#安装-tinytex"><i class="fa fa-check"></i><b>2.3</b> 安装 Tinytex</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html"><i class="fa fa-check"></i><b>3</b> 基础知识</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#再看-html-输出文件"><i class="fa fa-check"></i><b>3.1</b> 再看 HTML 输出文件</a></li>
+<li class="chapter" data-level="3.2" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#markdown-语法"><i class="fa fa-check"></i><b>3.2</b> Markdown 语法</a></li>
+<li class="chapter" data-level="3.3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#使用-r-代码"><i class="fa fa-check"></i><b>3.3</b> 使用 R 代码</a></li>
+<li class="chapter" data-level="3.4" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#输出格式"><i class="fa fa-check"></i><b>3.4</b> 输出格式</a></li>
+<li class="chapter" data-level="3.5" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#r-markdown-的编译过程"><i class="fa fa-check"></i><b>3.5</b> R Markdown 的编译过程</a></li>
+</ul></li>
+<li class="part"><span><b>II 输出”万花筒”</b></span></li>
+<li class="chapter" data-level="4" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>4</b> 常用文档格式</a></li>
+<li class="chapter" data-level="5" data-path="html-document.html"><a href="html-document.html"><i class="fa fa-check"></i><b>5</b> 从 R Markdown 到 HTML 文档</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="html-document.html"><a href="html-document.html#目录和标题"><i class="fa fa-check"></i><b>5.1</b> 目录和标题</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="html-document.html"><a href="html-document.html#显示目录"><i class="fa fa-check"></i><b>5.1.1</b> 显示目录</a></li>
+<li class="chapter" data-level="5.1.2" data-path="html-document.html"><a href="html-document.html#悬停目录"><i class="fa fa-check"></i><b>5.1.2</b> 悬停目录</a></li>
+<li class="chapter" data-level="5.1.3" data-path="html-document.html"><a href="html-document.html#显示标题编号"><i class="fa fa-check"></i><b>5.1.3</b> 显示标题编号</a></li>
+<li class="chapter" data-level="5.1.4" data-path="html-document.html"><a href="html-document.html#使用标签页"><i class="fa fa-check"></i><b>5.1.4</b> 使用标签页</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="html-document.html"><a href="html-document.html#appearance-and-style"><i class="fa fa-check"></i><b>5.2</b> 主题和样式</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="html-document.html"><a href="html-document.html#可选主题"><i class="fa fa-check"></i><b>5.2.1</b> 可选主题</a></li>
+<li class="chapter" data-level="5.2.2" data-path="html-document.html"><a href="html-document.html#代码高亮"><i class="fa fa-check"></i><b>5.2.2</b> 代码高亮</a></li>
+<li class="chapter" data-level="5.2.3" data-path="html-document.html"><a href="html-document.html#style-css"><i class="fa fa-check"></i><b>5.2.3</b> 自定义样式表</a></li>
+<li class="chapter" data-level="5.2.4" data-path="html-document.html"><a href="html-document.html#通过-css-代码块定义样式"><i class="fa fa-check"></i><b>5.2.4</b> 通过 CSS 代码块定义样式</a></li>
+<li class="chapter" data-level="5.2.5" data-path="html-document.html"><a href="html-document.html#使用丰富多样的内置-css-样式"><i class="fa fa-check"></i><b>5.2.5</b> 使用丰富多样的内置 CSS 样式</a></li>
+<li class="chapter" data-level="5.2.6" data-path="html-document.html"><a href="html-document.html#代码折叠"><i class="fa fa-check"></i><b>5.2.6</b> 代码折叠</a></li>
+<li class="chapter" data-level="5.2.7" data-path="html-document.html"><a href="html-document.html#html-scroll"><i class="fa fa-check"></i><b>5.2.7</b> 设置代码块内容可滚动</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="html-document.html"><a href="html-document.html#图片和数据框"><i class="fa fa-check"></i><b>5.3</b> 图片和数据框</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="html-document.html"><a href="html-document.html#设置图片的属性"><i class="fa fa-check"></i><b>5.3.1</b> 设置图片的属性</a></li>
+<li class="chapter" data-level="5.3.2" data-path="html-document.html"><a href="html-document.html#插入外源图片"><i class="fa fa-check"></i><b>5.3.2</b> 插入外源图片</a></li>
+<li class="chapter" data-level="5.3.3" data-path="html-document.html"><a href="html-document.html#输出数据框"><i class="fa fa-check"></i><b>5.3.3</b> 输出数据框</a></li>
+<li class="chapter" data-level="5.3.4" data-path="html-document.html"><a href="html-document.html#分页打印数据框时的附加参数"><i class="fa fa-check"></i><b>5.3.4</b> 分页打印数据框时的附加参数</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="html-document.html"><a href="html-document.html#组件和内容"><i class="fa fa-check"></i><b>5.4</b> 组件和内容</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="html-document.html"><a href="html-document.html#理解-html-文档的依赖关系"><i class="fa fa-check"></i><b>5.4.1</b> 理解 HTML 文档的依赖关系</a></li>
+<li class="chapter" data-level="5.4.2" data-path="html-document.html"><a href="html-document.html#mathjax-库的配置"><i class="fa fa-check"></i><b>5.4.2</b> MathJax 库的配置</a></li>
+<li class="chapter" data-level="5.4.3" data-path="html-document.html"><a href="html-document.html#是否保留-markdown"><i class="fa fa-check"></i><b>5.4.3</b> 是否保留 Markdown</a></li>
+<li class="chapter" data-level="5.4.4" data-path="html-document.html"><a href="html-document.html#使用自定义的-html-模板"><i class="fa fa-check"></i><b>5.4.4</b> 使用自定义的 HTML 模板</a></li>
+<li class="chapter" data-level="5.4.5" data-path="html-document.html"><a href="html-document.html#include-html"><i class="fa fa-check"></i><b>5.4.5</b> 包含其它文件</a></li>
+<li class="chapter" data-level="5.4.6" data-path="html-document.html"><a href="html-document.html#html-fragments"><i class="fa fa-check"></i><b>5.4.6</b> 生成 HTML 片段</a></li>
+<li class="chapter" data-level="5.4.7" data-path="html-document.html"><a href="html-document.html#使用自定义的浏览器图标"><i class="fa fa-check"></i><b>5.4.7</b> 使用自定义的浏览器图标</a></li>
+<li class="chapter" data-level="5.4.8" data-path="html-document.html"><a href="html-document.html#共用-yaml-配置文件"><i class="fa fa-check"></i><b>5.4.8</b> 共用 YAML 配置文件</a></li>
+<li class="chapter" data-level="5.4.9" data-path="html-document.html"><a href="html-document.html#嵌入-rmd-源文件"><i class="fa fa-check"></i><b>5.4.9</b> 嵌入 Rmd 源文件</a></li>
+<li class="chapter" data-level="5.4.10" data-path="html-document.html"><a href="html-document.html#嵌入其它文件"><i class="fa fa-check"></i><b>5.4.10</b> 嵌入其它文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="PDF-document.html"><a href="PDF-document.html"><i class="fa fa-check"></i><b>6</b> PDF 文档</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-tinytex-1"><i class="fa fa-check"></i><b>6.1</b> 安装 <code>TinyTex</code></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-latex-组件"><i class="fa fa-check"></i><b>6.1.1</b> 安装 LaTeX 组件</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="PDF-document.html"><a href="PDF-document.html#从-r-markdown-到-pdf-文档"><i class="fa fa-check"></i><b>6.2</b> 从 R Markdown 到 PDF 文档</a></li>
+<li class="chapter" data-level="6.3" data-path="PDF-document.html"><a href="PDF-document.html#在-pdf-文档中使用中文的注意事项"><i class="fa fa-check"></i><b>6.3</b> 在 PDF 文档中使用中文的注意事项</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="PDF-document.html"><a href="PDF-document.html#显示目录-1"><i class="fa fa-check"></i><b>6.3.1</b> 显示目录</a></li>
+<li class="chapter" data-level="6.3.2" data-path="PDF-document.html"><a href="PDF-document.html#图片相关的配置"><i class="fa fa-check"></i><b>6.3.2</b> 图片相关的配置</a></li>
+<li class="chapter" data-level="6.3.3" data-path="PDF-document.html"><a href="PDF-document.html#打印数据框"><i class="fa fa-check"></i><b>6.3.3</b> 打印数据框</a></li>
+<li class="chapter" data-level="6.3.4" data-path="PDF-document.html"><a href="PDF-document.html#代码高亮-1"><i class="fa fa-check"></i><b>6.3.4</b> 代码高亮</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="PDF-document.html"><a href="PDF-document.html#latex-选项"><i class="fa fa-check"></i><b>6.4</b> LaTeX 选项</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="PDF-document.html"><a href="PDF-document.html#通用文档部件"><i class="fa fa-check"></i><b>6.4.1</b> 通用文档部件</a></li>
+<li class="chapter" data-level="6.4.2" data-path="PDF-document.html"><a href="PDF-document.html#选择-latex-模板"><i class="fa fa-check"></i><b>6.4.2</b> 选择 LaTeX 模板</a></li>
+<li class="chapter" data-level="6.4.3" data-path="PDF-document.html"><a href="PDF-document.html#配置-latex-模板的参数"><i class="fa fa-check"></i><b>6.4.3</b> 配置 LaTeX 模板的参数</a></li>
+<li class="chapter" data-level="6.4.4" data-path="PDF-document.html"><a href="PDF-document.html#使用-latex-包处理引用"><i class="fa fa-check"></i><b>6.4.4</b> 使用 LaTeX 包处理引用</a></li>
+<li class="chapter" data-level="6.4.5" data-path="PDF-document.html"><a href="PDF-document.html#latex-的渲染引擎"><i class="fa fa-check"></i><b>6.4.5</b> LaTeX 的渲染引擎</a></li>
+<li class="chapter" data-level="6.4.6" data-path="PDF-document.html"><a href="PDF-document.html#保留生成的-tex-中间文件"><i class="fa fa-check"></i><b>6.4.6</b> 保留生成的 TeX 中间文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>7</b> 演示文稿</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="presentation.html"><a href="presentation.html#rmarkdown-basic-presentation"><i class="fa fa-check"></i><b>7.1</b> R Markdown 基础幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="presentation.html"><a href="presentation.html#ioslides-presentation"><i class="fa fa-check"></i><b>7.1.1</b> ioslides 幻灯片</a></li>
+<li class="chapter" data-level="7.1.2" data-path="presentation.html"><a href="presentation.html#slidy-presentation"><i class="fa fa-check"></i><b>7.1.2</b> Slidy 幻灯片</a></li>
+<li class="chapter" data-level="7.1.3" data-path="presentation.html"><a href="presentation.html#beamer-presentation"><i class="fa fa-check"></i><b>7.1.3</b> Beamer 演示文稿</a></li>
+<li class="chapter" data-level="7.1.4" data-path="presentation.html"><a href="presentation.html#powerpoint-presentation"><i class="fa fa-check"></i><b>7.1.4</b> PowerPoint 演示文稿</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="presentation.html"><a href="presentation.html#xaringan-presentation"><i class="fa fa-check"></i><b>7.2</b> Xaringan 幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="presentation.html"><a href="presentation.html#简介"><i class="fa fa-check"></i><b>7.2.1</b> 简介</a></li>
+<li class="chapter" data-level="7.2.2" data-path="presentation.html"><a href="presentation.html#入门"><i class="fa fa-check"></i><b>7.2.2</b> 入门</a></li>
+<li class="chapter" data-level="7.2.3" data-path="presentation.html"><a href="presentation.html#使用其他主题"><i class="fa fa-check"></i><b>7.2.3</b> 使用其他主题</a></li>
+<li class="chapter" data-level="7.2.4" data-path="presentation.html"><a href="presentation.html#提升-xaringan-幻灯片的-b-格"><i class="fa fa-check"></i><b>7.2.4</b> 提升 xaringan 幻灯片的 B 格</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="word.html"><a href="word.html"><i class="fa fa-check"></i><b>8</b> Word</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="word.html"><a href="word.html#word-new-template"><i class="fa fa-check"></i><b>8.1</b> 创建 word 模板</a></li>
+<li class="chapter" data-level="8.2" data-path="word.html"><a href="word.html#word-template"><i class="fa fa-check"></i><b>8.2</b> 自定义 Word 模板</a></li>
+<li class="chapter" data-level="8.3" data-path="word.html"><a href="word.html#word-redoc"><i class="fa fa-check"></i><b>8.3</b> R Markdown 和 Word 之间的双向工作流程</a></li>
+<li class="chapter" data-level="8.4" data-path="word.html"><a href="word.html#word-officedown"><i class="fa fa-check"></i><b>8.4</b> 个人风格元素</a></li>
+</ul></li>
+<li class="part"><span><b>III 操作技巧</b></span></li>
+<li class="chapter" data-level="9" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>9</b> 表格操作</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="table.html"><a href="table.html#kable"><i class="fa fa-check"></i><b>9.1</b> 表格生成函数 <code>knitr::kable()</code></a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="table.html"><a href="table.html#kable-formats"><i class="fa fa-check"></i><b>9.1.1</b> 已支持的表的格式</a></li>
+<li class="chapter" data-level="9.1.2" data-path="table.html"><a href="table.html#修改列名"><i class="fa fa-check"></i><b>9.1.2</b> 修改列名</a></li>
+<li class="chapter" data-level="9.1.3" data-path="table.html"><a href="table.html#指定列的对齐方式"><i class="fa fa-check"></i><b>9.1.3</b> 指定列的对齐方式</a></li>
+<li class="chapter" data-level="9.1.4" data-path="table.html"><a href="table.html#kable-caption"><i class="fa fa-check"></i><b>9.1.4</b> 添加表格标题</a></li>
+<li class="chapter" data-level="9.1.5" data-path="table.html"><a href="table.html#调整数字格式"><i class="fa fa-check"></i><b>9.1.5</b> 调整数字格式</a></li>
+<li class="chapter" data-level="9.1.6" data-path="table.html"><a href="table.html#显示缺失值"><i class="fa fa-check"></i><b>9.1.6</b> 显示缺失值</a></li>
+<li class="chapter" data-level="9.1.7" data-path="table.html"><a href="table.html#特殊字符的转义"><i class="fa fa-check"></i><b>9.1.7</b> 特殊字符的转义</a></li>
+<li class="chapter" data-level="9.1.8" data-path="table.html"><a href="table.html#多张表格并排"><i class="fa fa-check"></i><b>9.1.8</b> 多张表格并排</a></li>
+<li class="chapter" data-level="9.1.9" data-path="table.html"><a href="table.html#利用for循环生成多个表"><i class="fa fa-check"></i><b>9.1.9</b> 利用<code>for</code>循环生成多个表 (*)</a></li>
+<li class="chapter" data-level="9.1.10" data-path="table.html"><a href="table.html#自定义-latex-表格"><i class="fa fa-check"></i><b>9.1.10</b> 自定义 LaTex 表格 (*)</a></li>
+<li class="chapter" data-level="9.1.11" data-path="table.html"><a href="table.html#自定义-html-表格"><i class="fa fa-check"></i><b>9.1.11</b> 自定义 HTML 表格 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="table.html"><a href="table.html#kableextra"><i class="fa fa-check"></i><b>9.2</b> <strong>kableExtra</strong> 包</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="table.html"><a href="table.html#设定字体尺寸"><i class="fa fa-check"></i><b>9.2.1</b> 设定字体尺寸</a></li>
+<li class="chapter" data-level="9.2.2" data-path="table.html"><a href="table.html#特定的行或列的样式"><i class="fa fa-check"></i><b>9.2.2</b> 特定的行或列的样式</a></li>
+<li class="chapter" data-level="9.2.3" data-path="table.html"><a href="table.html#给行或列分组"><i class="fa fa-check"></i><b>9.2.3</b> 给行或列分组</a></li>
+<li class="chapter" data-level="9.2.4" data-path="table.html"><a href="table.html#按比例缩小latex中的表格"><i class="fa fa-check"></i><b>9.2.4</b> 按比例缩小LaTex中的表格</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="table.html"><a href="table.html#table-other"><i class="fa fa-check"></i><b>9.3</b> 其它生成表格的包</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chunk-options.html"><a href="chunk-options.html"><i class="fa fa-check"></i><b>10</b> 块选项</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chunk-options.html"><a href="chunk-options.html#chunk-variable"><i class="fa fa-check"></i><b>10.1</b> 在块选项中使用变量</a></li>
+<li class="chapter" data-level="10.2" data-path="chunk-options.html"><a href="chunk-options.html#opts-error"><i class="fa fa-check"></i><b>10.2</b> 如何在遇到 error 的时候继续编译</a></li>
+<li class="chapter" data-level="10.3" data-path="chunk-options.html"><a href="chunk-options.html#dev-vector"><i class="fa fa-check"></i><b>10.3</b> 同一张图的多种图像输出格式</a></li>
+<li class="chapter" data-level="10.4" data-path="chunk-options.html"><a href="chunk-options.html#cache"><i class="fa fa-check"></i><b>10.4</b> 缓存耗时的代码块</a></li>
+<li class="chapter" data-level="10.5" data-path="chunk-options.html"><a href="chunk-options.html#cache-path"><i class="fa fa-check"></i><b>10.5</b> 为多种输出格式缓存代码块</a></li>
+<li class="chapter" data-level="10.6" data-path="chunk-options.html"><a href="chunk-options.html#cache-lazy"><i class="fa fa-check"></i><b>10.6</b> 缓存大型的对象</a></li>
+<li class="chapter" data-level="10.7" data-path="chunk-options.html"><a href="chunk-options.html#hide-one"><i class="fa fa-check"></i><b>10.7</b> 隐藏源代码、message、warning、文本输出或图像输出</a></li>
+<li class="chapter" data-level="10.8" data-path="chunk-options.html"><a href="chunk-options.html#hide-all"><i class="fa fa-check"></i><b>10.8</b> 隐藏代码块的所有输出</a></li>
+<li class="chapter" data-level="10.9" data-path="chunk-options.html"><a href="chunk-options.html#opts-collapse"><i class="fa fa-check"></i><b>10.9</b> 将文本输出压缩到源代码块中</a></li>
+<li class="chapter" data-level="10.10" data-path="chunk-options.html"><a href="chunk-options.html#opts-tidy"><i class="fa fa-check"></i><b>10.10</b> 重新格式化源代码</a></li>
+<li class="chapter" data-level="10.11" data-path="chunk-options.html"><a href="chunk-options.html#results-asis"><i class="fa fa-check"></i><b>10.11</b> 将输出文本作为原始的Markdown的内容 (*)</a></li>
+<li class="chapter" data-level="10.12" data-path="chunk-options.html"><a href="chunk-options.html#opts-comment"><i class="fa fa-check"></i><b>10.12</b> 删除文本输出中的前导符号</a></li>
+<li class="chapter" data-level="10.13" data-path="chunk-options.html"><a href="chunk-options.html#attr-output"><i class="fa fa-check"></i><b>10.13</b> 为文本输出块添加属性 (*)</a></li>
+<li class="chapter" data-level="10.14" data-path="chunk-options.html"><a href="chunk-options.html#fig-process"><i class="fa fa-check"></i><b>10.14</b> 图像的后期加工 (*)</a></li>
+<li class="chapter" data-level="10.15" data-path="chunk-options.html"><a href="chunk-options.html#graphical-device"><i class="fa fa-check"></i><b>10.15</b> 高质量的图像 (*)</a></li>
+<li class="chapter" data-level="10.16" data-path="chunk-options.html"><a href="chunk-options.html#low-plots"><i class="fa fa-check"></i><b>10.16</b> 带有低级绘图功能的逐步绘图 (*)</a></li>
+<li class="chapter" data-level="10.17" data-path="chunk-options.html"><a href="chunk-options.html#opts-render"><i class="fa fa-check"></i><b>10.17</b> 在代码块中自定义对象的打印格式 (*)</a></li>
+<li class="chapter" data-level="10.18" data-path="chunk-options.html"><a href="chunk-options.html#option-hooks"><i class="fa fa-check"></i><b>10.18</b> 选项钩子 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="output-hooks.html"><a href="output-hooks.html"><i class="fa fa-check"></i><b>11</b> 输出钩子 (*)</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="output-hooks.html"><a href="output-hooks.html#hook-hide"><i class="fa fa-check"></i><b>11.1</b> 编辑源代码</a></li>
+<li class="chapter" data-level="11.2" data-path="output-hooks.html"><a href="output-hooks.html#hook-number"><i class="fa fa-check"></i><b>11.2</b> 向源代码中添加行号</a></li>
+<li class="chapter" data-level="11.3" data-path="output-hooks.html"><a href="output-hooks.html#hook-scroll"><i class="fa fa-check"></i><b>11.3</b> 可滚动的文本输出</a></li>
+<li class="chapter" data-level="11.4" data-path="output-hooks.html"><a href="output-hooks.html#hook-truncate"><i class="fa fa-check"></i><b>11.4</b> 截断文本输出</a></li>
+<li class="chapter" data-level="11.5" data-path="output-hooks.html"><a href="output-hooks.html#hook-html5"><i class="fa fa-check"></i><b>11.5</b> 以HTML5格式输出图像</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="knitr-misc.html"><a href="knitr-misc.html"><i class="fa fa-check"></i><b>12</b> 其它使用 knitr 的小技巧</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="knitr-misc.html"><a href="knitr-misc.html#reuse-chunks"><i class="fa fa-check"></i><b>12.1</b> 重复使用代码块</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="knitr-misc.html"><a href="knitr-misc.html#embed-chunk"><i class="fa fa-check"></i><b>12.1.1</b> 将一个块嵌入到另一个块中 (*)</a></li>
+<li class="chapter" data-level="12.1.2" data-path="knitr-misc.html"><a href="knitr-misc.html#same-label"><i class="fa fa-check"></i><b>12.1.2</b> 在另一个块中使用相同的块标签</a></li>
+<li class="chapter" data-level="12.1.3" data-path="knitr-misc.html"><a href="knitr-misc.html#ref-label"><i class="fa fa-check"></i><b>12.1.3</b> 使用引用标签 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="knitr-misc.html"><a href="knitr-misc.html#load-cache"><i class="fa fa-check"></i><b>12.2</b> 在创建对象之前使用它 (*)</a></li>
+<li class="chapter" data-level="12.3" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-exit"><i class="fa fa-check"></i><b>12.3</b> 提前退出编译</a></li>
+<li class="chapter" data-level="12.4" data-path="knitr-misc.html"><a href="knitr-misc.html#fig-chunk"><i class="fa fa-check"></i><b>12.4</b> 生成一个图像并在其他地方显示</a></li>
+<li class="chapter" data-level="12.5" data-path="knitr-misc.html"><a href="knitr-misc.html#global-device"><i class="fa fa-check"></i><b>12.5</b> 修改前一个代码块中的图像</a></li>
+<li class="chapter" data-level="12.6" data-path="knitr-misc.html"><a href="knitr-misc.html#opts-template"><i class="fa fa-check"></i><b>12.6</b> 保存一组块选项并重复使用它们 (*)</a></li>
+<li class="chapter" data-level="12.7" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-expand"><i class="fa fa-check"></i><b>12.7</b> 使用 <code>knitr::knit_expand()</code> 来生成 Rmd 源代码</a></li>
+<li class="chapter" data-level="12.8" data-path="knitr-misc.html"><a href="knitr-misc.html#duplicate-label"><i class="fa fa-check"></i><b>12.8</b> 允许代码块中的标签重复 Allow duplicate labels in code chunks (*)</a></li>
+<li class="chapter" data-level="12.9" data-path="knitr-misc.html"><a href="knitr-misc.html#cache-rds"><i class="fa fa-check"></i><b>12.9</b> 一个更透明的缓存机制</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改表达式中的代码使缓存失效"><i class="fa fa-check"></i><b>12.9.1</b> 通过更改表达式中的代码使缓存失效</a></li>
+<li class="chapter" data-level="12.9.2" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改全局变量使缓存失效"><i class="fa fa-check"></i><b>12.9.2</b> 通过更改全局变量使缓存失效</a></li>
+<li class="chapter" data-level="12.9.3" data-path="knitr-misc.html"><a href="knitr-misc.html#保留缓存的多个副本"><i class="fa fa-check"></i><b>12.9.3</b> 保留缓存的多个副本</a></li>
+<li class="chapter" data-level="12.9.4" data-path="knitr-misc.html"><a href="knitr-misc.html#与knitr的缓存比较"><i class="fa fa-check"></i><b>12.9.4</b> 与<strong>knitr</strong>的缓存比较</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV 第四部分：进阶操作</b></span></li>
+<li class="chapter" data-level="13" data-path="other-languages.html"><a href="other-languages.html"><i class="fa fa-check"></i><b>13</b> 与其他语言的结合</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="other-languages.html"><a href="other-languages.html#custom-engine"><i class="fa fa-check"></i><b>13.1</b> 注册自定义语言引擎（*）</a></li>
+<li class="chapter" data-level="13.2" data-path="other-languages.html"><a href="other-languages.html#eng-python"><i class="fa fa-check"></i><b>13.2</b> 运行 Python 代码并与 Python 交互</a></li>
+<li class="chapter" data-level="13.3" data-path="other-languages.html"><a href="other-languages.html#eng-asis"><i class="fa fa-check"></i><b>13.3</b> 通过 <code>asis</code> 引擎有条件地执行内容</a></li>
+<li class="chapter" data-level="13.4" data-path="other-languages.html"><a href="other-languages.html#eng-bash"><i class="fa fa-check"></i><b>13.4</b> 执行 Shell 脚本</a></li>
+<li class="chapter" data-level="13.5" data-path="other-languages.html"><a href="other-languages.html#d3"><i class="fa fa-check"></i><b>13.5</b> 用 D3 可视化</a></li>
+<li class="chapter" data-level="13.6" data-path="other-languages.html"><a href="other-languages.html#eng-cat"><i class="fa fa-check"></i><b>13.6</b> 通过 <code>cat</code> 引擎将块内容写入文件</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="other-languages.html"><a href="other-languages.html#写入-css-文件"><i class="fa fa-check"></i><b>13.6.1</b> 写入 CSS 文件</a></li>
+<li class="chapter" data-level="13.6.2" data-path="other-languages.html"><a href="other-languages.html#在序言中包含-latex-代码"><i class="fa fa-check"></i><b>13.6.2</b> 在序言中包含 LaTeX 代码</a></li>
+<li class="chapter" data-level="13.6.3" data-path="other-languages.html"><a href="other-languages.html#将-yaml-数据写入文件并显示它"><i class="fa fa-check"></i><b>13.6.3</b> 将 YAML 数据写入文件并显示它</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="other-languages.html"><a href="other-languages.html#eng-sas"><i class="fa fa-check"></i><b>13.7</b> 运行 SAS 代码</a></li>
+<li class="chapter" data-level="13.8" data-path="other-languages.html"><a href="other-languages.html#eng-stata"><i class="fa fa-check"></i><b>13.8</b> 运行 Stata 代码</a></li>
+<li class="chapter" data-level="13.9" data-path="other-languages.html"><a href="other-languages.html#eng-asy"><i class="fa fa-check"></i><b>13.9</b> 用渐近线 Asymptote 创建图形</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="other-languages.html"><a href="other-languages.html#在-r-中生成数据并通过-asymptote-读取"><i class="fa fa-check"></i><b>13.9.1</b> 在 R 中生成数据并通过 Asymptote 读取</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="other-languages.html"><a href="other-languages.html#eng-sass"><i class="fa fa-check"></i><b>13.10</b> 使用 Sass/SCSS 构建 HTML 页面风格</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Dashboards.html"><a href="Dashboards.html"><i class="fa fa-check"></i><b>14</b> Dashboards</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Dashboards.html"><a href="Dashboards.html#入门-1"><i class="fa fa-check"></i><b>14.1</b> 入门</a></li>
+<li class="chapter" data-level="14.2" data-path="Dashboards.html"><a href="Dashboards.html#排版"><i class="fa fa-check"></i><b>14.2</b> 排版</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="Dashboards.html"><a href="Dashboards.html#基于行的布局"><i class="fa fa-check"></i><b>14.2.1</b> 基于行的布局</a></li>
+<li class="chapter" data-level="14.2.2" data-path="Dashboards.html"><a href="Dashboards.html#节属性"><i class="fa fa-check"></i><b>14.2.2</b> 节属性</a></li>
+<li class="chapter" data-level="14.2.3" data-path="Dashboards.html"><a href="Dashboards.html#多页"><i class="fa fa-check"></i><b>14.2.3</b> 多页</a></li>
+<li class="chapter" data-level="14.2.4" data-path="Dashboards.html"><a href="Dashboards.html#故事板"><i class="fa fa-check"></i><b>14.2.4</b> 故事板</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="Dashboards.html"><a href="Dashboards.html#dashboard-components"><i class="fa fa-check"></i><b>14.3</b> 组件</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="Dashboards.html"><a href="Dashboards.html#数值框"><i class="fa fa-check"></i><b>14.3.1</b> 数值框</a></li>
+<li class="chapter" data-level="14.3.2" data-path="Dashboards.html"><a href="Dashboards.html#仪表"><i class="fa fa-check"></i><b>14.3.2</b> 仪表</a></li>
+<li class="chapter" data-level="14.3.3" data-path="Dashboards.html"><a href="Dashboards.html#文本注释"><i class="fa fa-check"></i><b>14.3.3</b> 文本注释</a></li>
+<li class="chapter" data-level="14.3.4" data-path="Dashboards.html"><a href="Dashboards.html#导航栏"><i class="fa fa-check"></i><b>14.3.4</b> 导航栏</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="Dashboards.html"><a href="Dashboards.html#shiny"><i class="fa fa-check"></i><b>14.4</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="Dashboards.html"><a href="Dashboards.html#入门指南"><i class="fa fa-check"></i><b>14.4.1</b> 入门指南</a></li>
+<li class="chapter" data-level="14.4.2" data-path="Dashboards.html"><a href="Dashboards.html#shiny-仪表盘的一个示例"><i class="fa fa-check"></i><b>14.4.2</b> Shiny 仪表盘的一个示例</a></li>
+<li class="chapter" data-level="14.4.3" data-path="Dashboards.html"><a href="Dashboards.html#输入栏"><i class="fa fa-check"></i><b>14.4.3</b> 输入栏</a></li>
+<li class="chapter" data-level="14.4.4" data-path="Dashboards.html"><a href="Dashboards.html#拓展"><i class="fa fa-check"></i><b>14.4.4</b> 拓展</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="shiny-started.html"><a href="shiny-started.html"><i class="fa fa-check"></i><b>15</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-start"><i class="fa fa-check"></i><b>15.1</b> 入门指南</a></li>
+<li class="chapter" data-level="15.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-deploy"><i class="fa fa-check"></i><b>15.2</b> 部署</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapps.io"><i class="fa fa-check"></i><b>15.2.1</b> ShinyApps.io</a></li>
+<li class="chapter" data-level="15.2.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-server-rstudio-connect"><i class="fa fa-check"></i><b>15.2.2</b> Shiny Server / RStudio Connect</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embedded"><i class="fa fa-check"></i><b>15.3</b> 嵌入 Shiny 应用程序</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embed-inline"><i class="fa fa-check"></i><b>15.3.1</b> 内联应用程序</a></li>
+<li class="chapter" data-level="15.3.2" data-path="shiny-started.html"><a href="shiny-started.html#外联应用程序"><i class="fa fa-check"></i><b>15.3.2</b> 外联应用程序</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="shiny-started.html"><a href="shiny-started.html#shiny-widgets"><i class="fa fa-check"></i><b>15.4</b> Shiny 小部件</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapp-函数"><i class="fa fa-check"></i><b>15.4.1</b> <code>shinyApp()</code> 函数</a></li>
+<li class="chapter" data-level="15.4.2" data-path="shiny-started.html"><a href="shiny-started.html#例子k---means-聚类"><i class="fa fa-check"></i><b>15.4.2</b> 例子：k - means 聚类</a></li>
+<li class="chapter" data-level="15.4.3" data-path="shiny-started.html"><a href="shiny-started.html#小部件的大小和布局"><i class="fa fa-check"></i><b>15.4.3</b> 小部件的大小和布局</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="shiny-started.html"><a href="shiny-started.html#shiny-multiple"><i class="fa fa-check"></i><b>15.5</b> 多页</a></li>
+<li class="chapter" data-level="15.6" data-path="shiny-started.html"><a href="shiny-started.html#shiny-delay"><i class="fa fa-check"></i><b>15.6</b> 延迟渲染</a></li>
+<li class="chapter" data-level="15.7" data-path="shiny-started.html"><a href="shiny-started.html#shiny-args"><i class="fa fa-check"></i><b>15.7</b> 渲染函数的输出参数</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="shiny-started.html"><a href="shiny-started.html#附加说明"><i class="fa fa-check"></i><b>15.7.1</b> 附加说明</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="custom-output.html"><a href="custom-output.html"><i class="fa fa-check"></i><b>16</b> 自定义排版</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="custom-output.html"><a href="custom-output.html#parameterized-report"><i class="fa fa-check"></i><b>16.1</b> 有参数的 R Markdown 报告</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="custom-output.html"><a href="custom-output.html#params-declare"><i class="fa fa-check"></i><b>16.1.1</b> 声明参数</a></li>
+<li class="chapter" data-level="16.1.2" data-path="custom-output.html"><a href="custom-output.html#params-use"><i class="fa fa-check"></i><b>16.1.2</b> 使用参数</a></li>
+<li class="chapter" data-level="16.1.3" data-path="custom-output.html"><a href="custom-output.html#params-knit"><i class="fa fa-check"></i><b>16.1.3</b> 有参编译</a></li>
+<li class="chapter" data-level="16.1.4" data-path="custom-output.html"><a href="custom-output.html#params-publish"><i class="fa fa-check"></i><b>16.1.4</b> 发布文档</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="custom-output.html"><a href="custom-output.html#document-template"><i class="fa fa-check"></i><b>16.2</b> 文档模板</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="custom-output.html"><a href="custom-output.html#template-structure"><i class="fa fa-check"></i><b>16.2.1</b> 模板的结构</a></li>
+<li class="chapter" data-level="16.2.2" data-path="custom-output.html"><a href="custom-output.html#template-support"><i class="fa fa-check"></i><b>16.2.2</b> 模板支持文件</a></li>
+<li class="chapter" data-level="16.2.3" data-path="custom-output.html"><a href="custom-output.html#template-pandoc"><i class="fa fa-check"></i><b>16.2.3</b> 设置 Pandoc 模板</a></li>
+<li class="chapter" data-level="16.2.4" data-path="custom-output.html"><a href="custom-output.html#template-share"><i class="fa fa-check"></i><b>16.2.4</b> 分享模板</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="custom-output.html"><a href="custom-output.html#new-formats"><i class="fa fa-check"></i><b>16.3</b> 创建新的文档格式</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="custom-output.html"><a href="custom-output.html#format-derive"><i class="fa fa-check"></i><b>16.3.1</b> 从现有文档格式衍生新格式</a></li>
+<li class="chapter" data-level="16.3.2" data-path="custom-output.html"><a href="custom-output.html#fully-custom-format"><i class="fa fa-check"></i><b>16.3.2</b> 完全的自定义输出格式</a></li>
+<li class="chapter" data-level="16.3.3" data-path="custom-output.html"><a href="custom-output.html#using-a-new-format"><i class="fa fa-check"></i><b>16.3.3</b> 使用新的文档输出格式</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Markdown 指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chunk-options" class="section level1" number="10">
+<h1><span class="header-section-number">第 10 章</span> 块选项</h1>
+<p>正如图<a href="#fig:rmdworkflow"><strong>??</strong></a>所展示的那样，R包<strong>knitr</strong>在R Markdown中起着关键的作用。在本章和接下来的两章中，我们将展示一些与<strong>knitr</strong>相关的编程技巧。</p>
+<p>事实上，R Markdown的代码块中，有超过50个选项可以用来微调<strong>knitr</strong>处理基于R代码块的方式，选项的完整列表请参阅在线文档<a href="https://yihui.org/knitr/options/" class="uri">https://yihui.org/knitr/options/</a>。</p>
+<p>在接下来的几节中，我们只展示了将块选项应用到单个代码块的示例。然而需要注意的是，任何块选项也可以进行全局设置，应用于整个文档，不必在每个代码块中重复这些选项。如果要设置全局的块选项，需要在代码块（通常为文档中的第一个代码块）中调用<code>knitr::opts_chunk$set()</code>，例如：</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb233-1"><a href="chunk-options.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb233-2"><a href="chunk-options.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(</span></span>
+<span id="cb233-3"><a href="chunk-options.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="in">  comment = &quot;#&gt;&quot;, echo = FALSE, fig.width = 6</span></span>
+<span id="cb233-4"><a href="chunk-options.html#cb233-4" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb233-5"><a href="chunk-options.html#cb233-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div id="chunk-variable" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> 在块选项中使用变量</h2>
+<p>通常情况下，块选项中会使用常数（如：<code>fig.width = 6</code>），但实际上可以使用任意的R表达式，无论简单或复杂。一个特殊的情况是变量传递给一个块选项（注意变量本身也是一个R表达式）。例如，你可以在文档开始的部分定义图像宽度，然后在其他代码块中使用它，从而更方便地更改图像宽度：</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb234-1"><a href="chunk-options.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb234-2"><a href="chunk-options.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="in">my_width &lt;- 7</span></span>
+<span id="cb234-3"><a href="chunk-options.html#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb234-4"><a href="chunk-options.html#cb234-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb234-5"><a href="chunk-options.html#cb234-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width=my_width}</span></span>
+<span id="cb234-6"><a href="chunk-options.html#cb234-6" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars)</span></span>
+<span id="cb234-7"><a href="chunk-options.html#cb234-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>块选项中也可以使用<code>if-else</code>语句，例如：</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb235-1"><a href="chunk-options.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb235-2"><a href="chunk-options.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="in">fig_small &lt;- FALSE  # change to TRUE for larger figures</span></span>
+<span id="cb235-3"><a href="chunk-options.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="in">width_small &lt;- 4</span></span>
+<span id="cb235-4"><a href="chunk-options.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="in">width_large &lt;- 8</span></span>
+<span id="cb235-5"><a href="chunk-options.html#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb235-6"><a href="chunk-options.html#cb235-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb235-7"><a href="chunk-options.html#cb235-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width=if (fig_small) width_small else width_large}</span></span>
+<span id="cb235-8"><a href="chunk-options.html#cb235-8" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars)</span></span>
+<span id="cb235-9"><a href="chunk-options.html#cb235-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>不仅如此，我们还可以只在所需要的包可使用时才运行一个代码块：</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb236-1"><a href="chunk-options.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=require(&#39;leaflet&#39;)}</span></span>
+<span id="cb236-2"><a href="chunk-options.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(leaflet)</span></span>
+<span id="cb236-3"><a href="chunk-options.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="in">leaflet() %&gt;% addTiles()</span></span>
+<span id="cb236-4"><a href="chunk-options.html#cb236-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>需要注意的是，<code>require('package')</code> 只有当这个包已安装且可使用时才会返回<code>TRUE</code>，否则会返回<code>FALSE</code>。</p>
+</div>
+<div id="opts-error" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> 如何在遇到 error 的时候继续编译</h2>
+<p>有时你可能想要故意显示错误（例如，在关于R的教程中），然而，在默认情况下，R Markdown文档中代码块中的错误将使程序终止。如果你想在不终止R程序的情况下显示错误，你可以使用块选项<code>error = TRUE</code>，例如：</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb237-1"><a href="chunk-options.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error=TRUE}</span></span>
+<span id="cb237-2"><a href="chunk-options.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="in">1 + &quot;a&quot;</span></span>
+<span id="cb237-3"><a href="chunk-options.html#cb237-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>这样在编译R Markdown文档后，你将在输出文档中看到如下的错误消息：</p>
+<pre><code>Error in 1 + &quot;a&quot;: non-numeric argument to binary operator</code></pre>
+<p>需要注意的是，在R Markdown中，默认设定为<code>error = FALSE</code>，这也导致了R在运行代码块时，出现错误就会终止。</p>
+</div>
+<div id="dev-vector" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> 同一张图的多种图像输出格式</h2>
+<p>在大多数情况下，你可能只需要一种图像格式，例如<code>png</code>或<code>pdf</code>。图像格式由块选项<code>dev</code>控制，即渲染图像的图像设备，这个选项的取值可以为多种设备名（即输出格式）的向量，例如：</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb239-1"><a href="chunk-options.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, dev=c(&#39;png&#39;, &#39;pdf&#39;, &#39;svg&#39;, &#39;tiff&#39;)}</span></span>
+<span id="cb239-2"><a href="chunk-options.html#cb239-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars)</span></span>
+<span id="cb239-3"><a href="chunk-options.html#cb239-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>输出文档中只会呈现第一种格式的图像，但也其它格式的图像也会被生成，当你需要另外提交不同格式的图像时（例如，你在报告中显示一个<code>png</code>格式的图像，但同时也需要<code>tiff</code>格式的图像），会起到很大的帮助。</p>
+<p>需要注意的是，在默认情况下，图像文件在输出文档呈现后即被删除，如要保存这些文件，请参见<a href="#keep-files"><strong>??</strong></a>节。</p>
+</div>
+<div id="cache" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> 缓存耗时的代码块</h2>
+<p>当一个代码块运行起来很费时间时，你可以考虑通过块选项<code>cache = TRUE</code>来缓存它。当启用缓存时，如果一个代码块之前被执行过且之后没有任何变化时，<strong>knitr</strong>将跳过这个代码块的执行。当你修改代码块时（如修改代码或块选项），之前的缓存将自动失效，并且<strong>knitr</strong>将再次运行并缓存该代码块。</p>
+<p>对于一个被缓存了的代码块，它的输出以及变量对象将从上一次的运行中自动加载，就像该代码块再次执行了一样。当加载结果比计算结果快得多时，缓存操作通常是有用的。然而，天下没有免费的午餐，有的时候<strong>knitr</strong>经常会令缓存失效或是部分失效，为此你可能需要了解更多关于如何缓存，特别是缓存失效的相关知识：<a href="https://yihui.org/en/2018/06/cache-invalidation/" class="uri">https://yihui.org/en/2018/06/cache-invalidation/</a>。</p>
+<p>一个典型的缓存用例是保存和重新加载那些需要很长时间才能在代码块中计算的R对象。需要注意的是，代码需要没有任何副作用，否则我们建议您不要进行缓存（例如<code>options()</code>更改全局R选项，这样的更改不会被缓存）。</p>
+<p>正如我们前面简要提到的，缓存依赖于块选项。如果你改变了任何块选项（除了<code>include</code>选项），缓存将会失效。此特性可用于解决一个常见的问题，即当你读取外部数据文件时，你可能希望在更新数据文件时使缓存失效，这样的话像下面这样简单地使用<code>cache = TRUE</code>是不够的：</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb240-1"><a href="chunk-options.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r import-data, cache=TRUE}</span></span>
+<span id="cb240-2"><a href="chunk-options.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="in">d &lt;- read.csv(&#39;my-precious.csv&#39;)</span></span>
+<span id="cb240-3"><a href="chunk-options.html#cb240-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>你必须要让<strong>knitr</strong>知道数据文件是否已被更改。一种方法是添加另一个块选项<code>cache.extra = file.mtime('my-precious.csv')</code>，或者更严格的方式：<code>cache.extra = tools::md5sum('my-precious.csv')</code>。前者意味着如果文件的修改时间发生了变化，我们就需要使缓存失效；而后者的意思是，如果文件的内容被修改，我们就更新缓存。需要注意的是，<code>cache.extra</code>不是一个内置的<strong>knitr</strong> 代码选项，你可以为该选项使用任何其他名称，只要它不与内置选项名称冲突。</p>
+<p>类似地，你可以将缓存与其他信息相关联，比如R的版本（<code>cache.extra = getRversion()</code>）、时间（<code>cache.extra = Sys.Date()</code>）或是你的操作系统（<code>cache.extra = Sys.info()[['sysname']]</code>）， 当这些条件改变时，可以使缓存正确地失效。</p>
+<p>我们不建议在文档中设置全局块选项<code>cache = TRUE</code>，因为缓存可能相当棘手。相反的，我们建议您只在个别耗时很久的代码块上启用缓存，这样并不会产生副作用。</p>
+<p>如果你对<strong>knitr</strong>的缓存设计不满意，当然你可以选择自己缓存对象，下面是一个简单的例子：</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="chunk-options.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(<span class="st">&#39;results.rds&#39;</span>)) {</span>
+<span id="cb241-2"><a href="chunk-options.html#cb241-2" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">&#39;results.rds&#39;</span>)</span>
+<span id="cb241-3"><a href="chunk-options.html#cb241-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb241-4"><a href="chunk-options.html#cb241-4" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">compute_it</span>()  <span class="co"># 一个很耗时的函数</span></span>
+<span id="cb241-5"><a href="chunk-options.html#cb241-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(res, <span class="st">&#39;results.rds&#39;</span>)</span>
+<span id="cb241-6"><a href="chunk-options.html#cb241-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>在这一例子中，使缓存失效的唯一（也是简单的）方法就是删除文件<code>results.rds</code>。如果你喜欢这个简单的缓存机制，可以使用在<a href="knitr-misc.html#cache-rds">12.9</a>节中介绍的函数<code>xfun::cache_rds()</code>。</p>
+</div>
+<div id="cache-path" class="section level2" number="10.5">
+<h2><span class="header-section-number">10.5</span> 为多种输出格式缓存代码块</h2>
+<p>当通过块选项<code>cache = TRUE</code>启用缓存时，<strong>knitr</strong>将把在代码块中生成的R对象写入缓存数据库，以便下次重新加载它们。缓存数据库的路径由块选项<code>cache.path</code>决定。默认情况下，R Markdown对不同的输出格式会使用不同的缓存路径，这意味着对于每种输出格式都将完全执行一次这个（耗时的）代码块。这可能很不方便，但这种默认的行为是有原因的，即代码块的输出可能依赖于特定的输出格式。例如，当你生成一个图像时，当输出格式为<code>word_document</code>时，图像的输出可能是像 <code>![text](path/to/image.png)</code>这样的标记代码，而或者当输出格式为<code>html_document</code>时，输出的HTML代码则类似<code>&lt;img src="path/to/image.png" /&gt;</code>。</p>
+<p>当代码块没有任何副产物（如图像）时，对所有输出格式使用相同的缓存数据库是安全的，这可以节省你的时间。例如，当你读取一个大型数据对象或运行一个比较耗时的模型时，若结果不依赖于输出格式，你就可以使用相同的缓存数据库。你可以通过块选项<code>cache.path</code>指定数据库的路径，例如：</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb242-1"><a href="chunk-options.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r important-computing, cache=TRUE, cache.path=&quot;cache/&quot;}</span></span>
+<span id="cb242-2"><a href="chunk-options.html#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>在R Markdown中，<code>cache.path</code>的默认设置为<code>cache.path = "INPUT_cache/FORMAT/"</code>，其中<code>INPUT</code>代表输入的文件名，<code>FORMAT</code>为输出格式（如<code>html</code>、<code>latex</code>或<code>docx</code>）。</p>
+</div>
+<div id="cache-lazy" class="section level2" number="10.6">
+<h2><span class="header-section-number">10.6</span> 缓存大型的对象</h2>
+<p>当设定块选项<code>cache = TRUE</code>时，缓存的对象将被延迟加载到R中，这意味着对象将不会从缓存数据库中读取，直到它在代码中被实际使用。当不是所有对象都在文档中稍后被使用时，这一操作可以节省一些内存。例如，如果你读取了一个大型的数据对象，但在后续的分析中只使用了其中的一个子集，那么原始的数据对象将不会从缓存数据库中加载：</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb243-1"><a href="chunk-options.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, read-data, cache=TRUE}</span></span>
+<span id="cb243-2"><a href="chunk-options.html#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="in">full &lt;- read.csv(&quot;HUGE.csv&quot;)</span></span>
+<span id="cb243-3"><a href="chunk-options.html#cb243-3" aria-hidden="true" tabindex="-1"></a><span class="in">rows &lt;- subset(full, price &gt; 100)</span></span>
+<span id="cb243-4"><a href="chunk-options.html#cb243-4" aria-hidden="true" tabindex="-1"></a><span class="in"># 之后我们只用 `rows`</span></span>
+<span id="cb243-5"><a href="chunk-options.html#cb243-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb243-6"><a href="chunk-options.html#cb243-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb243-7"><a href="chunk-options.html#cb243-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb243-8"><a href="chunk-options.html#cb243-8" aria-hidden="true" tabindex="-1"></a><span class="in">plot(rows)</span></span>
+<span id="cb243-9"><a href="chunk-options.html#cb243-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>然而，当一个对象太大时，你可能会遇到这样的报错：</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="chunk-options.html#cb244-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">lazyLoadDBinsertVariable</span>(vars[i], ... </span>
+<span id="cb244-2"><a href="chunk-options.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  long vectors not supported yet<span class="sc">:</span> ...</span>
+<span id="cb244-3"><a href="chunk-options.html#cb244-3" aria-hidden="true" tabindex="-1"></a>Execution halted</span></code></pre></div>
+<p>如果出现这个问题，你可以尝试通过块选项<code>cache.lazy = FALSE</code>来关闭延迟加载，这样该代码块中的所有对象都将立即被加载到内存中。</p>
+</div>
+<div id="hide-one" class="section level2" number="10.7">
+<h2><span class="header-section-number">10.7</span> 隐藏源代码、message、warning、文本输出或图像输出</h2>
+<p>默认情况下，<strong>knitr</strong>会显示代码块的所有可能输出，包括源代码、message、warning、文本输出和图像输出，你可以使用相应的块选项来单独隐藏它们。</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb245-1"><a href="chunk-options.html#cb245-1" aria-hidden="true" tabindex="-1"></a>隐藏源代码：</span>
+<span id="cb245-2"><a href="chunk-options.html#cb245-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-3"><a href="chunk-options.html#cb245-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb245-4"><a href="chunk-options.html#cb245-4" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb245-5"><a href="chunk-options.html#cb245-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb245-6"><a href="chunk-options.html#cb245-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-7"><a href="chunk-options.html#cb245-7" aria-hidden="true" tabindex="-1"></a>隐藏message：</span>
+<span id="cb245-8"><a href="chunk-options.html#cb245-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-9"><a href="chunk-options.html#cb245-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
+<span id="cb245-10"><a href="chunk-options.html#cb245-10" aria-hidden="true" tabindex="-1"></a><span class="in">message(&quot;你不会看到这个message.&quot;)</span></span>
+<span id="cb245-11"><a href="chunk-options.html#cb245-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb245-12"><a href="chunk-options.html#cb245-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-13"><a href="chunk-options.html#cb245-13" aria-hidden="true" tabindex="-1"></a>隐藏warning：</span>
+<span id="cb245-14"><a href="chunk-options.html#cb245-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-15"><a href="chunk-options.html#cb245-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, warning=FALSE}</span></span>
+<span id="cb245-16"><a href="chunk-options.html#cb245-16" aria-hidden="true" tabindex="-1"></a><span class="in"># 这将生成一个warning，但不会被输出</span></span>
+<span id="cb245-17"><a href="chunk-options.html#cb245-17" aria-hidden="true" tabindex="-1"></a><span class="in">1:2 + 1:3</span></span>
+<span id="cb245-18"><a href="chunk-options.html#cb245-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb245-19"><a href="chunk-options.html#cb245-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-20"><a href="chunk-options.html#cb245-20" aria-hidden="true" tabindex="-1"></a>隐藏文本输出（你也可以使用<span class="in">`results = FALSE`</span>）：</span>
+<span id="cb245-21"><a href="chunk-options.html#cb245-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-22"><a href="chunk-options.html#cb245-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results=&#39;hide&#39;}</span></span>
+<span id="cb245-23"><a href="chunk-options.html#cb245-23" aria-hidden="true" tabindex="-1"></a><span class="in">print(&quot;你不会看到这个文本输出。&quot;)</span></span>
+<span id="cb245-24"><a href="chunk-options.html#cb245-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb245-25"><a href="chunk-options.html#cb245-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-26"><a href="chunk-options.html#cb245-26" aria-hidden="true" tabindex="-1"></a>隐藏图形输出：</span>
+<span id="cb245-27"><a href="chunk-options.html#cb245-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-28"><a href="chunk-options.html#cb245-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show=&#39;hide&#39;}</span></span>
+<span id="cb245-29"><a href="chunk-options.html#cb245-29" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars)</span></span>
+<span id="cb245-30"><a href="chunk-options.html#cb245-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb245-31"><a href="chunk-options.html#cb245-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-32"><a href="chunk-options.html#cb245-32" aria-hidden="true" tabindex="-1"></a>需要注意的是，上面的代码块会生成图形，它只是没有显示在输出中而已。</span></code></pre></div>
+<p>关于<strong>knitr</strong>的一个常见问题是如何隐藏包的加载消息。例如，当你使用<code>library(tidyverse)</code>或<code>library(ggplot2)</code>时，你可能会看到一些正在加载的message。这类message也可以通过块选项<code>message = FALSE</code>来抑制。</p>
+<p>还可以通过索引来有选择地显示或隐藏这些元素。在下面的示例中，我们只输出了源代码的第四个和第五个表达式（注意，一个注释会被算作一个表达式）、前两个message以及第二个和第三个warning：</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb246-1"><a href="chunk-options.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=c(4, 5), message=c(1, 2), warning=2:3}</span></span>
+<span id="cb246-2"><a href="chunk-options.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 一种生成服从N(0,1)分布的随机数的方法（连续随机变量的分布函数服从U(0,1)分布）</span></span>
+<span id="cb246-3"><a href="chunk-options.html#cb246-3" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- qnorm(runif(10))</span></span>
+<span id="cb246-4"><a href="chunk-options.html#cb246-4" aria-hidden="true" tabindex="-1"></a><span class="in"># 在实践中我们还可以使用</span></span>
+<span id="cb246-5"><a href="chunk-options.html#cb246-5" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- rnorm(10)</span></span>
+<span id="cb246-6"><a href="chunk-options.html#cb246-6" aria-hidden="true" tabindex="-1"></a><span class="in">x</span></span>
+<span id="cb246-7"><a href="chunk-options.html#cb246-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb246-8"><a href="chunk-options.html#cb246-8" aria-hidden="true" tabindex="-1"></a><span class="in">for (i in 1:5) message(&#39;Here is the message &#39;, i)</span></span>
+<span id="cb246-9"><a href="chunk-options.html#cb246-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb246-10"><a href="chunk-options.html#cb246-10" aria-hidden="true" tabindex="-1"></a><span class="in">for (i in 1:5) warning(&#39;Here is the warning &#39;, i)</span></span>
+<span id="cb246-11"><a href="chunk-options.html#cb246-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>你还可以使用负索引，例如，<code>echo = -2</code>表示在输出中排除源代码的第二个表达式。</p>
+<p>类似地，你可以通过使用<code>fig.keep</code>选项来选择显示或隐藏哪些图。例如，<code>fig.keep = 1:2</code>意味着保留前两幅图。这个选项有一些快捷的方式，如<code>fig.keep = "first"</code>将只保留第一幅图、<code>fig.keep = "last"</code>只保留最后的图以及<code>fig.keep = "none"</code>将丢弃所有的图。注意<code>fig.keep = "none"</code>和<code>fig.show = "hide"</code>这两个选项是不同的，后者将生成图像文件，但只隐藏它们，而前者根本不会生成图像文件。</p>
+<p>对于<code>html_document</code>输出中的源代码块，如果你不想完全省略它们（<code>echo = FALSE</code>），你可以参考<a href="#fold-show"><strong>??</strong></a>节，来学习如何在页面上折叠它们，并允许用户通过单击展开按钮来展开它们。</p>
+</div>
+<div id="hide-all" class="section level2" number="10.8">
+<h2><span class="header-section-number">10.8</span> 隐藏代码块的所有输出</h2>
+<p>有的时候，我们可能想要执行一个代码块而根本不显示任何输出。与使用<a href="chunk-options.html#hide-one">10.7</a>节中提到的单独选项不同，我们可以使用一个选项’include = FALSE`来隐藏代码块所有的输出，例如：</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb247-1"><a href="chunk-options.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb247-2"><a href="chunk-options.html#cb247-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 任意的R代码</span></span>
+<span id="cb247-3"><a href="chunk-options.html#cb247-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>使用<code>include=FALSE</code>，代码块将被运行（除非<code>eval=FALSE</code>），但输出将被完全隐藏，你将看不到任何的源代码、message、warning、文本输出或图像输出。</p>
+</div>
+<div id="opts-collapse" class="section level2" number="10.9">
+<h2><span class="header-section-number">10.9</span> 将文本输出压缩到源代码块中</h2>
+<p>如果你觉得输出结果中的文本输出部分和源代码部分之间有太多的间隔，你可以考虑使用块选项<code>collapse = TRUE</code>将文本输出压缩到源代码块中。<code>collapse = TRUE</code>时的输出如下所示：</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="chunk-options.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb248-2"><a href="chunk-options.html#cb248-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span>
+<span id="cb248-3"><a href="chunk-options.html#cb248-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb248-4"><a href="chunk-options.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  1  2  3  4  5  6  7  8  9 10</span></span></code></pre></div>
+<p>若没有设定<code>collapse = TRUE</code>（默认为<code>FALSE</code>），则会变成：</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="chunk-options.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="chunk-options.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+<div id="opts-tidy" class="section level2" number="10.10">
+<h2><span class="header-section-number">10.10</span> 重新格式化源代码</h2>
+<p>当你设置块选项<code>tidy = TRUE</code>时， R的源代码将被<strong>formatR</strong>包 <span class="citation">(<a href="#ref-R-formatR" role="doc-biblioref">Xie 2021b</a>)</span>的<code>tidy_source()</code>函数重新格式化。<code>tidy_source()</code>可以在几个方面重新格式化代码，比如在大多数操作符周围添加空格、适当缩进代码以及用<code>&lt;-</code>替换赋值操作符<code>=</code> 。块选项<code>tidy.opts</code>可以是传递给<code>formatR::tidy_source()</code>的一个参数列表，例如：</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb253-1"><a href="chunk-options.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, tidy=TRUE, tidy.opts=list(arrow=TRUE, indent=2)}</span></span>
+<span id="cb253-2"><a href="chunk-options.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 混乱的 R 代码...</span></span>
+<span id="cb253-3"><a href="chunk-options.html#cb253-3" aria-hidden="true" tabindex="-1"></a><span class="in">1+            1</span></span>
+<span id="cb253-4"><a href="chunk-options.html#cb253-4" aria-hidden="true" tabindex="-1"></a><span class="in">x=1:10#有些使用者更喜欢用 &#39;&lt;-&#39; 来作为赋值操作符</span></span>
+<span id="cb253-5"><a href="chunk-options.html#cb253-5" aria-hidden="true" tabindex="-1"></a><span class="in">if(TRUE){</span></span>
+<span id="cb253-6"><a href="chunk-options.html#cb253-6" aria-hidden="true" tabindex="-1"></a><span class="in">print(&#39;Hello world!&#39;) # 缩进 2 个空格</span></span>
+<span id="cb253-7"><a href="chunk-options.html#cb253-7" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb253-8"><a href="chunk-options.html#cb253-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>输出结果为：</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="chunk-options.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 混乱的 R 代码...</span></span>
+<span id="cb254-2"><a href="chunk-options.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb254-3"><a href="chunk-options.html#cb254-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>  <span class="co">#有些使用者更喜欢用 &#39;&lt;-&#39; 来作为赋值操作符</span></span>
+<span id="cb254-4"><a href="chunk-options.html#cb254-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb254-5"><a href="chunk-options.html#cb254-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Hello world!&quot;</span>)  <span class="co"># 缩进 2 个空格</span></span>
+<span id="cb254-6"><a href="chunk-options.html#cb254-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>在<a href="#text-width"><strong>??</strong></a>节中，我们提到了如何控制文本输出的宽度。如果你想控制源代码的宽度，你可以在设置<code>tidy = TRUE</code>时使用<code>width.cutoff</code>参数，例如：</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb255-1"><a href="chunk-options.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, tidy=TRUE, tidy.opts=list(width.cutoff=50)}</span></span>
+<span id="cb255-2"><a href="chunk-options.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 一个很长的表达式</span></span>
+<span id="cb255-3"><a href="chunk-options.html#cb255-3" aria-hidden="true" tabindex="-1"></a><span class="in">1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+</span></span>
+<span id="cb255-4"><a href="chunk-options.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="in">1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1</span></span>
+<span id="cb255-5"><a href="chunk-options.html#cb255-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>输出结果为：</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="chunk-options.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 一个很长的表达式</span></span>
+<span id="cb256-2"><a href="chunk-options.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb256-3"><a href="chunk-options.html#cb256-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb256-4"><a href="chunk-options.html#cb256-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb256-5"><a href="chunk-options.html#cb256-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<p>更多可能的参数可以参见帮助页<code>?formatR::tidy_source</code>，也可以浏览 <a href="https://yihui.org/formatR/" class="uri">https://yihui.org/formatR/</a> 来了解这个函数的示例和局限性。</p>
+<p>另外，如果你设定块选项<code>tidy = 'styler'</code>，你也可以使用<strong>styler</strong>包<span class="citation">(<a href="#ref-R-styler" role="doc-biblioref"><strong>R-styler?</strong></a>)</span>来重新格式化你的R代码，其中的格式化函数为<code>styler::style_text()</code>。<strong>styler</strong>包比<strong>formatR</strong>具有更丰富的特性。例如，它可以对齐函数参数并使用管道操作符’<code>%&gt;%</code>。块选项<code>tidy.opts</code>同样可以用于将附加参数传递给<code>styler::style_text()</code>，例如：</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb257-1"><a href="chunk-options.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, tidy=&#39;styler&#39;, tidy.opts=list(strict=FALSE)}</span></span>
+<span id="cb257-2"><a href="chunk-options.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 对齐赋值操作符</span></span>
+<span id="cb257-3"><a href="chunk-options.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="in">a   &lt;- 1#一个变量</span></span>
+<span id="cb257-4"><a href="chunk-options.html#cb257-4" aria-hidden="true" tabindex="-1"></a><span class="in">abc &lt;- 2#另一个变量</span></span>
+<span id="cb257-5"><a href="chunk-options.html#cb257-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>在默认情况下，<code>tidy = FALSE</code>并且你的R代码不会被重新格式化。</p>
+</div>
+<div id="results-asis" class="section level2" number="10.11">
+<h2><span class="header-section-number">10.11</span> 将输出文本作为原始的Markdown的内容 (*)</h2>
+<p>默认情况下，代码块的文本输出将逐字输出，并添加两个前导符号<code>##</code>（见<a href="chunk-options.html#opts-comment">10.12</a>节）。由于<strong>knitr</strong>将文本放在隔离的代码块中，所以文本是逐字的。例如，对于代码<code>1:5</code>，<strong>knitr</strong>的原始输出为：</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb258-1"><a href="chunk-options.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb258-2"><a href="chunk-options.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="in">## [1] 1 2 3 4 5</span></span>
+<span id="cb258-3"><a href="chunk-options.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>有时你可能不希望逐字输出文本，而是将文本输出视为Markdown的内容。例如，你可能想写一个类似<code>cat('# 这是一个标题')</code>的节标题，但原始的输出是：</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb259-1"><a href="chunk-options.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb259-2"><a href="chunk-options.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="in">## # 这是一个标题</span></span>
+<span id="cb259-3"><a href="chunk-options.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>你不希望文本位于隔离的代码块（或开头的<code>##</code>）中，也就是说，你希望原始输出与传递给<code>cat()</code>的字符串完全一致：</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb260-1"><a href="chunk-options.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 这是一个标题</span></span></code></pre></div>
+<p>这个问题的解决方案是块选项’<code>results = 'asis'</code>。这个选项告诉<strong>knitr</strong>不要将文本输出逐字包装成代码块，而是“原样”对待它。当你想要从R代码动态生成内容时，这一点特别有用。例如，你可以使用选项<code>results = 'asis'</code>从以下代码块生成<code>iris</code>数据的列名列表:</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="chunk-options.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">&#39;- `&#39;</span>, <span class="fu">names</span>(iris), <span class="st">&#39;`&#39;</span>), <span class="at">sep =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<ul>
+<li><code>Sepal.Length</code></li>
+<li><code>Sepal.Width</code></li>
+<li><code>Petal.Length</code></li>
+<li><code>Petal.Width</code></li>
+<li><code>Species</code></li>
+</ul>
+<p>连字符（<code>-</code>）是Markdown中用于生成无序列表的语法，其中反引号是可选的。若没有设置<code>results = 'asis'</code>选项，则上述代码块的输出为：</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="chunk-options.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">&#39;- `&#39;</span>, <span class="fu">names</span>(iris), <span class="st">&#39;`&#39;</span>), <span class="at">sep =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<pre><code>- `Sepal.Length`
+- `Sepal.Width`
+- `Petal.Length`
+- `Petal.Width`
+- `Species`</code></pre>
+<p>下面是一个完整的例子，展示了如何在<code>for</code>循环中为<code>mtcars</code>数据的所有列生成节标题、段落和图：</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb264-1"><a href="chunk-options.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb264-2"><a href="chunk-options.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 以编程的方式生成内容</span></span>
+<span id="cb264-3"><a href="chunk-options.html#cb264-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb264-4"><a href="chunk-options.html#cb264-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-5"><a href="chunk-options.html#cb264-5" aria-hidden="true" tabindex="-1"></a>通过代码块选项<span class="in">`results = &#39;asis&#39;`</span>，你可以将文本作为原始的Markdown内容写出来，同时也可以与图片混合。</span>
+<span id="cb264-6"><a href="chunk-options.html#cb264-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-7"><a href="chunk-options.html#cb264-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, mtcars-plots, results=&#39;asis&#39;}</span></span>
+<span id="cb264-8"><a href="chunk-options.html#cb264-8" aria-hidden="true" tabindex="-1"></a><span class="in">for (i in names(mtcars)) {</span></span>
+<span id="cb264-9"><a href="chunk-options.html#cb264-9" aria-hidden="true" tabindex="-1"></a><span class="in">  cat(&#39;\n\n# 变量 `&#39;, i, &#39;` 的概要\n\n&#39;)</span></span>
+<span id="cb264-10"><a href="chunk-options.html#cb264-10" aria-hidden="true" tabindex="-1"></a><span class="in">  x &lt;- mtcars[, i]</span></span>
+<span id="cb264-11"><a href="chunk-options.html#cb264-11" aria-hidden="true" tabindex="-1"></a><span class="in">  if (length(unique(x)) &lt;= 6) {</span></span>
+<span id="cb264-12"><a href="chunk-options.html#cb264-12" aria-hidden="true" tabindex="-1"></a><span class="in">    cat(&#39;`&#39;, i, &#39;` 是一个分类变量。\n\n&#39;)</span></span>
+<span id="cb264-13"><a href="chunk-options.html#cb264-13" aria-hidden="true" tabindex="-1"></a><span class="in">    plot(table(x), xlab = i, ylab = &#39;频率&#39;, lwd = 10)</span></span>
+<span id="cb264-14"><a href="chunk-options.html#cb264-14" aria-hidden="true" tabindex="-1"></a><span class="in">  } else {</span></span>
+<span id="cb264-15"><a href="chunk-options.html#cb264-15" aria-hidden="true" tabindex="-1"></a><span class="in">    cat(&#39;连续变量 `&#39;, i, &#39;` 的直方图。\n\n&#39;)</span></span>
+<span id="cb264-16"><a href="chunk-options.html#cb264-16" aria-hidden="true" tabindex="-1"></a><span class="in">    hist(x, xlab = i, main = &#39;&#39;)</span></span>
+<span id="cb264-17"><a href="chunk-options.html#cb264-17" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb264-18"><a href="chunk-options.html#cb264-18" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb264-19"><a href="chunk-options.html#cb264-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>需要注意的是，我们在代码中添加了过多的换行符（<code>\n</code>），这是因为我们希望不同的元素在Markdown的内容中清晰地分开。在不同的元素之间使用过多的换行符是无害的，但是如果换行符不够，就会产生问题。例如，下面的Markdown文本就会产生很多的歧义：</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb265-1"><a href="chunk-options.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 这是一个标题吗？</span></span>
+<span id="cb265-2"><a href="chunk-options.html#cb265-2" aria-hidden="true" tabindex="-1"></a>这是一个段落还是标题的一部分呢？</span>
+<span id="cb265-3"><a href="chunk-options.html#cb265-3" aria-hidden="true" tabindex="-1"></a><span class="al">![这张图片呢？](foo.png)</span></span>
+<span id="cb265-4"><a href="chunk-options.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="fu"># 这行又是什么？</span></span></code></pre></div>
+<p>如果产生了更多的空行（可以由<code>cat('\n')</code>生成），则歧义就会消失：</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb266-1"><a href="chunk-options.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 这是一个标题！</span></span>
+<span id="cb266-2"><a href="chunk-options.html#cb266-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb266-3"><a href="chunk-options.html#cb266-3" aria-hidden="true" tabindex="-1"></a>这绝对是个段落。</span>
+<span id="cb266-4"><a href="chunk-options.html#cb266-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb266-5"><a href="chunk-options.html#cb266-5" aria-hidden="true" tabindex="-1"></a><span class="al">![这是一张图。](foo.png)</span></span>
+<span id="cb266-6"><a href="chunk-options.html#cb266-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb266-7"><a href="chunk-options.html#cb266-7" aria-hidden="true" tabindex="-1"></a><span class="fu"># 这是另一个标题</span></span></code></pre></div>
+<p><code>cat()</code>函数不是唯一可以生成文本输出的函数，另一个常用的函数是<code>print()</code>。需要注意的是，<code>print()</code>经常被 <em>隐式</em> 调用来打印对象，这就是为什么你在R控制台（console）中输入一个对象或值后会看到输出。例如，当你在R控制台中输入<code>1:5</code>并按下<code>Enter</code>键时，你会看到输出，因为R实际上隐式地调用了<code>print(1:5)</code>。经常令人感到困惑的是，你不能在表达式（例如<code>for</code>循环）中直接生成输出，而如果在R控制台上输入对象或值，它们将被正确打印出来。这个主题非常技术性，具体细节可以参看博文<a href="https://yihui.org/en/2017/06/top-level-r-expressions/">“The Ghost Printer behind Top-level R Expressions”</a>。如果你对技术细节不感兴趣，只要记住这条规则即可：如果你没有看到<code>for</code>循环的输出，那么你可能应该使用<code>print()</code>函数来显式地打印对象。</p>
+</div>
+<div id="opts-comment" class="section level2" number="10.12">
+<h2><span class="header-section-number">10.12</span> 删除文本输出中的前导符号</h2>
+<!-- https://stackoverflow.com/questions/15081212/remove-hashes-in-r-output-from-r-markdown-and-knitr -->
+<p>默认情况下，R代码输出将在文本输出的前面插入两个符号<code>##</code>。我们可以通过块选项<code>comment</code> 来改变这种输出。如果要删除<code>##</code>，可以使用空字符串，例如:</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb267-1"><a href="chunk-options.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, comment=&quot;&quot;}</span></span>
+<span id="cb267-2"><a href="chunk-options.html#cb267-2" aria-hidden="true" tabindex="-1"></a><span class="in">1:100</span></span>
+<span id="cb267-3"><a href="chunk-options.html#cb267-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>当然，你可以使用任何其他的字符值，例如，<code>comment = "#&gt;"</code>。那么为什么<code>comment</code>选项默认为<code>##</code>呢？这是因为<code>#</code>表示R中的注释，当文本输出被注释掉时，从报告中的代码块中一次性复制所有代码并自己运行它将更容易，不需要担心运行文本输出（并非R代码）会报错。例如，在下面的代码块中，你可以复制所有四行文本，并将它们作为R代码正确地运行：</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="chunk-options.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb268-2"><a href="chunk-options.html#cb268-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span>
+<span id="cb268-3"><a href="chunk-options.html#cb268-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb268-4"><a href="chunk-options.html#cb268-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span></code></pre></div>
+<p>而如果你通过<code>comment = ""</code>删除<code>##</code>，你通常会无法直接运行所有的代码。如下面的例子所展示的，如果你直接复制这四行，你将不得不手动删除第二和第四行：</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="chunk-options.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb269-2"><a href="chunk-options.html#cb269-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">2</span></span>
+<span id="cb269-3"><a href="chunk-options.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb269-4"><a href="chunk-options.html#cb269-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">4</span></span></code></pre></div>
+<p>设置<code>comment = ""</code>的一个理由是，使用R控制台（console）的用户对其更为熟悉。在R控制台中，你不会在文本输出前面看到<code>##</code>。如果你想真正模仿R控制台的行为，你可以将<code>comment = ""</code>和<code>prompt = TRUE</code>结合在一起使用，例如：</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb270-1"><a href="chunk-options.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, comment=&quot;&quot;, prompt=TRUE}</span></span>
+<span id="cb270-2"><a href="chunk-options.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb270-3"><a href="chunk-options.html#cb270-3" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
+<span id="cb270-4"><a href="chunk-options.html#cb270-4" aria-hidden="true" tabindex="-1"></a><span class="in">  2 + 2</span></span>
+<span id="cb270-5"><a href="chunk-options.html#cb270-5" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb270-6"><a href="chunk-options.html#cb270-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>如果你曾经在R控制台中输入并运行过代码，那么输出结果看起来应该相当熟悉，因为源代码中包含提示字符（prompt character）<code>&gt;</code>和延续字符（continuation character）<code>+</code>：</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="chunk-options.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb271-2"><a href="chunk-options.html#cb271-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">2</span></span>
+<span id="cb271-3"><a href="chunk-options.html#cb271-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="cf">if</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb271-4"><a href="chunk-options.html#cb271-4" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb271-5"><a href="chunk-options.html#cb271-5" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> }</span>
+<span id="cb271-6"><a href="chunk-options.html#cb271-6" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">4</span></span></code></pre></div>
+</div>
+<div id="attr-output" class="section level2" number="10.13">
+<h2><span class="header-section-number">10.13</span> 为文本输出块添加属性 (*)</h2>
+<p>在<a href="#chunk-styling"><strong>??</strong></a>节中，我们展示了一些基于块选项<code>class.source</code>和<code>class.output</code>样式化代码块和文本输出块的示例。实际上，在<strong>knitr</strong>中有更多类似的选项，如<code>class.message</code>、<code>class.warning</code>以及<code>class.error</code>。这些选项可以用于将类名添加到相应的文本输出块中，例如<code>error = TRUE</code>（见<a href="chunk-options.html#opts-error">10.2</a>节）。这些选项最常见的应用可能是使用根据类名定义的CSS规则对输出块进行样式化，就像在<a href="#chunk-styling"><strong>??</strong></a>节中演示的那样。</p>
+<p>通常情况下，文本输出块本质上是一个单独的代码块，它的Markdown源代码如下所示：</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb272-1"><a href="chunk-options.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.className}</span></span>
+<span id="cb272-2"><a href="chunk-options.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="in">输出行</span></span>
+<span id="cb272-3"><a href="chunk-options.html#cb272-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>当输出格式为HTML时，通常会转换为<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>:</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb273-1"><a href="chunk-options.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;className&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb273-2"><a href="chunk-options.html#cb273-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;code&gt;</span>输出行<span class="kw">&lt;/code&gt;</span></span>
+<span id="cb273-3"><a href="chunk-options.html#cb273-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/pre&gt;</span></span></code></pre></div>
+<p><code>class.*</code>选项控制了<code>&lt;pre&gt;</code>元素中的<code>class</code>属性，而<code>&lt;pre&gt;</code>是我们上面提到的文本输出块的“容器”。</p>
+<p>事实上，这个类只是HTML中<code>&lt;pre&gt;</code>元素可能的属性之一。一个HTML元素可以有许多其他属性，比如宽度、高度和样式等。块选项<code>attr.*</code>,包括<code>attr.source</code>、<code>attr.output</code>、<code>attr.message</code>、<code>attr.warning</code>以及<code>attr.error</code>，允许你向文本输出块添加任意属性。例如，使用<code>attr.source = 'style="background: pink;"'</code>，你可以将源代码块的背景颜色更改为粉红色，相应的代码块将是</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb274-1"><a href="chunk-options.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{style=&quot;background: pink;&quot;}</span></span>
+<span id="cb274-2"><a href="chunk-options.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="in">...</span></span>
+<span id="cb274-3"><a href="chunk-options.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>以及HTML输出会是：</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb275-1"><a href="chunk-options.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;background: pink;&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb275-2"><a href="chunk-options.html#cb275-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb275-3"><a href="chunk-options.html#cb275-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/pre&gt;</span></span></code></pre></div>
+<p>更多的例子可以参见<a href="#number-lines"><strong>??</strong></a>节和<a href="output-hooks.html#hook-scroll">11.3</a>节。</p>
+<p>作为一个技术说明，块选项<code>class.*</code>只是<code>attr.*</code>的特殊情况，例如，<code>class.source = 'numberLines'</code>等价于<code>attr.source = '.numberLines'</code>（注意这里的前导点），但<code>attr.source</code>可以取任意的属性值，例如<code>attr.source = c('.numberLines', 'startFrom="11"')</code>。</p>
+<p>这些选项对HTML输出非常有用。在某些情况下，这些属性可能对其他输出格式也有用，但这种情况相对较少。这些属性需要被Pandoc或第三方的包支持。例如Pandoc中，<code>.numberLines</code>属性适用于HTML和LaTeX输出；第三方的包则通常需要通过一个Lua过滤器，详情请参见<a href="#lua-filters"><strong>??</strong></a>节。</p>
+</div>
+<div id="fig-process" class="section level2" number="10.14">
+<h2><span class="header-section-number">10.14</span> 图像的后期加工 (*)</h2>
+<p>代码块生成图像后，你可以通过块选项<code>fig.process</code>对图像文件进行后期加工。处理过程应该是一个输入文件路径，返回已处理图像文件路径的函数。该函数可以有第二个可选参数<code>options</code>，代表一个由当前块选项组成的列表。</p>
+<p>下面我们展示了一个使用功能强大的<strong>magick</strong>包 <span class="citation">(<a href="#ref-R-magick" role="doc-biblioref">Ooms 2021</a>)</span>来在图像中添加R logo的例子。如果你不熟悉这个包，可以阅读它的在线文档或包简介，其中包含许多示例。首先，我们定义一个函数<code>add_logo()</code>：</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="chunk-options.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;magick&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="chunk-options.html#cb277-1" aria-hidden="true" tabindex="-1"></a>add_logo <span class="ot">=</span> <span class="cf">function</span>(path, options) {</span>
+<span id="cb277-2"><a href="chunk-options.html#cb277-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 代码块中创建的图像</span></span>
+<span id="cb277-3"><a href="chunk-options.html#cb277-3" aria-hidden="true" tabindex="-1"></a>  img <span class="ot">=</span> magick<span class="sc">::</span><span class="fu">image_read</span>(path)</span>
+<span id="cb277-4"><a href="chunk-options.html#cb277-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># R logo</span></span>
+<span id="cb277-5"><a href="chunk-options.html#cb277-5" aria-hidden="true" tabindex="-1"></a>  logo <span class="ot">=</span> <span class="fu">file.path</span>(<span class="fu">R.home</span>(<span class="st">&quot;doc&quot;</span>), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;logo.jpg&quot;</span>)</span>
+<span id="cb277-6"><a href="chunk-options.html#cb277-6" aria-hidden="true" tabindex="-1"></a>  logo <span class="ot">=</span> magick<span class="sc">::</span><span class="fu">image_read</span>(logo)</span>
+<span id="cb277-7"><a href="chunk-options.html#cb277-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 默认的重力方向为西北，用户可以通过代码块来改变它</span></span>
+<span id="cb277-8"><a href="chunk-options.html#cb277-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># option magick.gravity</span></span>
+<span id="cb277-9"><a href="chunk-options.html#cb277-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(g <span class="ot">&lt;-</span> options<span class="sc">$</span>magick.gravity)) g <span class="ot">=</span> <span class="st">&#39;northwest&#39;</span></span>
+<span id="cb277-10"><a href="chunk-options.html#cb277-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 在图像中添加 logo</span></span>
+<span id="cb277-11"><a href="chunk-options.html#cb277-11" aria-hidden="true" tabindex="-1"></a>  img <span class="ot">=</span> magick<span class="sc">::</span><span class="fu">image_composite</span>(img, logo, <span class="at">gravity =</span> g)</span>
+<span id="cb277-12"><a href="chunk-options.html#cb277-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 写入新的图像中 </span></span>
+<span id="cb277-13"><a href="chunk-options.html#cb277-13" aria-hidden="true" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_write</span>(img, path)</span>
+<span id="cb277-14"><a href="chunk-options.html#cb277-14" aria-hidden="true" tabindex="-1"></a>  path</span>
+<span id="cb277-15"><a href="chunk-options.html#cb277-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>该函数会读取图像的路径，添加R logo，并将新图像保存到原路径。在默认情况下，logo会被添加到图像的左上角（西北方向），但用户可以通过自定义块选项<code>magick.gravity</code>（这个选项名可以是任意的）来自定义位置。</p>
+<p>现在我们将上面的处理函数应用到下面的代码块上，并使用块选项<code>fig.process = add_logo</code> 和 <code>magick.gravity = "northeast"</code>，所以logo会被添加到右上角。实际输出见图 <a href="chunk-options.html#fig:magick-logo">10.1</a>。</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="chunk-options.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb278-2"><a href="chunk-options.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(faithful<span class="sc">$</span>eruptions, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">main =</span> <span class="st">&#39;&#39;</span>, <span class="at">col =</span> <span class="st">&#39;gray&#39;</span>, <span class="at">border =</span> <span class="st">&#39;white&#39;</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:magick-logo"></span>
+<img src="rmarkdown-guide_files/figure-html/magick-logo-1.png" alt="通过块选项 fig.process 来给一幅图添加 R logo。"  />
+<p class="caption">
+图 10.1: 通过块选项 fig.process 来给一幅图添加 R logo。
+</p>
+</div>
+<p>在你对<strong>magick</strong>包更加熟悉后，你就可以通过更有创意和有用的想法来后期加工你的图像。</p>
+<p>最后，我们展示了<code>fig.process</code>选项的另一个应用。下例中的<code>pdf2png()</code>函数可以将PDF图像转换成PNG格式。在<a href="chunk-options.html#graphical-device">10.15</a>节中，我们有一个使用<code>tikz</code>图像设备来生成图的例子。但问题是，该设备生成的PDF图不适用于非LaTeX的输出文档。在设置块选项<code>dev = "tikz"</code> 和 <code>fig.process = pdf2png</code>后，我们可以显示PNG版本的图 <a href="chunk-options.html#fig:dev-tikz">10.2</a>。</p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="chunk-options.html#cb279-1" aria-hidden="true" tabindex="-1"></a>pdf2png <span class="ot">=</span> <span class="cf">function</span>(path) {</span>
+<span id="cb279-2"><a href="chunk-options.html#cb279-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 只对非LaTeX的输出进行转换</span></span>
+<span id="cb279-3"><a href="chunk-options.html#cb279-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (knitr<span class="sc">::</span><span class="fu">is_latex_output</span>()) <span class="fu">return</span>(path)</span>
+<span id="cb279-4"><a href="chunk-options.html#cb279-4" aria-hidden="true" tabindex="-1"></a>  path2 <span class="ot">=</span> xfun<span class="sc">::</span><span class="fu">with_ext</span>(path, <span class="st">&quot;png&quot;</span>)</span>
+<span id="cb279-5"><a href="chunk-options.html#cb279-5" aria-hidden="true" tabindex="-1"></a>  img <span class="ot">=</span> magick<span class="sc">::</span><span class="fu">image_read_pdf</span>(path)</span>
+<span id="cb279-6"><a href="chunk-options.html#cb279-6" aria-hidden="true" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_write</span>(img, path2, <span class="at">format =</span> <span class="st">&quot;png&quot;</span>)</span>
+<span id="cb279-7"><a href="chunk-options.html#cb279-7" aria-hidden="true" tabindex="-1"></a>  path2</span>
+<span id="cb279-8"><a href="chunk-options.html#cb279-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="graphical-device" class="section level2" number="10.15">
+<h2><span class="header-section-number">10.15</span> 高质量的图像 (*)</h2>
+<p><strong>rmarkdown</strong>包为不同的输出格式设置了合理的默认图像设备。例如，HTML输出格式使用<code>png()</code>设备，所以<strong>knitr</strong>将生成png绘图文件；而PDF输出格式则使用<code>pdf()</code>设备。如果你对默认图像设备的输出质量不满意，你可以通过块选项<code>dev</code>来更改它们。<strong>knitr</strong>支持的设备为：<code>"bmp"</code>，<code>"postscript"</code>，<code>"pdf"</code>，<code>"png"</code>，<code>"svg"</code>，<code>"jpeg"</code>，<code>"pictex"</code>，<code>"tiff"</code>，<code>"win.metafile"</code>，<code>"cairo_pdf"</code>，<code>"cairo_ps"</code>，<code>"quartz_pdf"</code>，<code>"quartz_png"</code>，<code>"quartz_jpeg"</code>，<code>"quartz_tiff"</code>，<code>"quartz_gif"</code>，<code>"quartz_psd"</code>，<code>"quartz_bmp"</code>，<code>"CairoJPEG"</code>，<code>"CairoPNG"</code>，<code>"CairoPS"</code>，<code>"CairoPDF"</code>，<code>"CairoSVG"</code>，<code>"CairoTIFF"</code>，<code>"Cairo_pdf"</code>，<code>"Cairo_png"</code>，<code>"Cairo_ps"</code>，<code>"Cairo_svg"</code>，<code>"svglite"</code>，<code>"ragg_png"</code>，以及<code>"tikz"</code>。</p>
+<p>通常情况下，图像设备名也是函数名。更多关于设备的信息请参阅R的帮助页面。例如，你可以在R的控制台中输入<code>?svg</code>来了解关于<code>svg</code>设备的细节，它包含在R的基础包中，所以不需要额外安装。需要注意的是，<code>quartz_XXX</code>设备是基于<code>quartz()</code>函数的，并且它们仅在macOS上可用；<code>CairoXXX</code>设备来自附加的R包<strong>cairoDevice</strong><span class="citation">(<a href="#ref-R-cairoDevice" role="doc-biblioref"><strong>R-cairoDevice?</strong></a>)</span>；<code>svglite</code>设备来自<strong>svglite</strong> 包 <span class="citation">(<a href="#ref-R-svglite" role="doc-biblioref"><strong>R-svglite?</strong></a>)</span>；<code>tikz</code>设备在<strong>tikzDevice</strong> 包 <span class="citation">(<a href="#ref-R-tikzDevice" role="doc-biblioref">Sharpsteen and Bracken 2020</a>)</span>中。如果你想使用附加包中的设备，你必须先安装这个包。</p>
+<p>通常，矢量图比位图质量更高，并且你可以在不损失质量的情况下缩放矢量图。对于HTML输出，你可以使用<code>dev = "svg"</code>或<code>dev = "svglite"</code>来绘制SVG（可缩放矢量图，Scalable Vector Graphics）。需要注意的是，默认情况下<code>png</code>设备生成的图像为位图。</p>
+<p>对于PDF输出，如果你对图像中的字体非常挑剔，可以使用<code>dev = "tikz"</code>，因为它提供了对LaTeX的原生支持，这意味着图像中的所有元素，包括文本和符号，都可以通过LaTeX以高质量呈现。图 <a href="chunk-options.html#fig:dev-tikz">10.2</a>展示了一个在R图像中用块选项’<code>dev = "tikz"</code>添加LaTeX数学表达式的例子。</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="chunk-options.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, .<span class="dv">1</span>))</span>
+<span id="cb280-2"><a href="chunk-options.html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(dnorm, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">xlab =</span> <span class="st">&#39;$x$&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;$</span><span class="sc">\\</span><span class="st">phi(x)$&#39;</span>,</span>
+<span id="cb280-3"><a href="chunk-options.html#cb280-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;The density function of $N(0, 1)$&#39;</span>)</span>
+<span id="cb280-4"><a href="chunk-options.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="sc">-</span><span class="dv">1</span>, .<span class="dv">2</span>, <span class="at">cex =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>,</span>
+<span id="cb280-5"><a href="chunk-options.html#cb280-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;$</span><span class="sc">\\</span><span class="st">phi(x)=</span><span class="sc">\\</span><span class="st">frac{1}{</span><span class="sc">\\</span><span class="st">sqrt{2</span><span class="sc">\\</span><span class="st">pi}}e^{</span><span class="sc">\\</span><span class="st">frac{-x^2}{2}}$&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:dev-tikz"></span>
+<img src="images/tikz-latex.png" alt="通过 tikz  设备呈现的图像。"  />
+<p class="caption">
+图 10.2: 通过 tikz 设备呈现的图像。
+</p>
+</div>
+<p>需要注意的是，R的基础包实际上支持数学表达式，但它们不是通过LaTeX呈现的（具体细节可参见<code>?plotmath</code>）。此外，有几个高级选项可以调整<code>tikz</code>设备的排版细节（参见<code>?tikzDevice::tikz</code>）。例如，如果你的图像中包含多字节字符，你可以设置选项：</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="chunk-options.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tikzDefaultEngine =</span> <span class="st">&#39;xetex&#39;</span>)</span></code></pre></div>
+<p>这是因为在处理LaTeX文档中的多字节字符时，<code>xetex</code>通常比默认引擎<code>pdftex</code>要好。</p>
+<p><code>tikz</code>设备主要有两个缺点。首先，它需要安装LaTeX，但这其实并不会很麻烦（见<a href="#install-latex"><strong>??</strong></a>节），你还需要几个LaTeX包，这些包可以通过TinyTeX很方便地安装：</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="chunk-options.html#cb282-1" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">tlmgr_install</span>(<span class="fu">c</span>(<span class="st">&#39;pgf&#39;</span>, <span class="st">&#39;preview&#39;</span>, <span class="st">&#39;xcolor&#39;</span>))</span></code></pre></div>
+<p>其次，<code>tikz</code>设备渲染图的速度通常要慢得多，因为这个设备会生成LaTeX文件，并且必须将其编译成PDF。如果你觉得代码块很耗时，你可以通过块选项<code>cache = TRUE</code>来启用缓存（见<a href="chunk-options.html#cache">10.4</a>节）。</p>
+<p>对于图 <a href="chunk-options.html#fig:dev-tikz">10.2</a>，我们也使用了块选项<code>fig.process = pdf2png</code>，其中当输出格式不是LaTeX时，<code>pdf2png</code>函数可以将PDF图转换为PNG，其定义见 <a href="chunk-options.html#fig-process">10.14</a>节。如果没有这一转换，你可能无法在web浏览器中查看该书在线版本中的PDF图。</p>
+</div>
+<div id="low-plots" class="section level2" number="10.16">
+<h2><span class="header-section-number">10.16</span> 带有低级绘图功能的逐步绘图 (*)</h2>
+<p>在R中，有两种类型的绘图函数可以用来画图：高级的绘图函数用于创建新图，以及低级的绘图函数用于在现有的图中添加元素，更多信息请参见R手册《<a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html"><em>An Introduction to R</em></a>》的第12章（“Graphical procedures”）。</p>
+<p>在默认的情况下，当使用一系列低级的绘图函数来修改以前的图像时，<strong>knitr</strong>不显示中间的图，只显示所有函数执行后的最后一个图。</p>
+<p>然而有的时候，尤其是在教学过程中，展示中间的图像是很有用的。为此，你可以设置块选项<code>fig.keep = 'low'</code>来保留各低级函数更改后的图。例如，图<a href="chunk-options.html#fig:low-plots-1">10.3</a>和图<a href="chunk-options.html#fig:low-plots-2">10.4</a>来自一个带有块选项<code>fig.keep = 'low'</code>的单个代码块，尽管它们很像两个代码块的输出结果。不仅如此，我们还通过块选项<code>fig.cap=c('cars ...', '在现有的...')</code>给它们分配了不同的标题。</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="chunk-options.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb283-2"><a href="chunk-options.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span></code></pre></div>
+<div class="figure"><span id="fig:low-plots-1"></span>
+<img src="rmarkdown-guide_files/figure-html/low-plots-1.png" alt="cars 数据的点图" width="672" />
+<p class="caption">
+图 10.3: cars 数据的点图
+</p>
+</div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="chunk-options.html#cb284-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
+<span id="cb284-2"><a href="chunk-options.html#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit)</span></code></pre></div>
+<div class="figure"><span id="fig:low-plots-2"></span>
+<img src="rmarkdown-guide_files/figure-html/low-plots-2.png" alt="在现有的点图中添加一条回归线" width="672" />
+<p class="caption">
+图 10.4: 在现有的点图中添加一条回归线
+</p>
+</div>
+<p>如果你想在<em>不同的</em>代码块中继续修改这张图，请参阅<a href="knitr-misc.html#global-device">12.5</a>节。</p>
+</div>
+<div id="opts-render" class="section level2" number="10.17">
+<h2><span class="header-section-number">10.17</span> 在代码块中自定义对象的打印格式 (*)</h2>
+<p>在默认的情况下，代码块中的对象通过<code>knitr::knit_print()</code>函数来打印，基本上就是R中的<code>print()</code>。<code>knit_print()</code>函数是一个S3通用函数，这意味着你可以通过在其上注册S3方法来拓展输出方式。下面的例子展示了如何通过<code>knitr::kable()</code>来自动将数据框打印成表格：</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb285-1"><a href="chunk-options.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb285-2"><a href="chunk-options.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 使用使用自定义的 `knit_print` 方法来打印数据框</span></span>
+<span id="cb285-3"><a href="chunk-options.html#cb285-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb285-4"><a href="chunk-options.html#cb285-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb285-5"><a href="chunk-options.html#cb285-5" aria-hidden="true" tabindex="-1"></a>首先，我们定义一个<span class="in">`knit_print`</span>方法，并且注册它：</span>
+<span id="cb285-6"><a href="chunk-options.html#cb285-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb285-7"><a href="chunk-options.html#cb285-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb285-8"><a href="chunk-options.html#cb285-8" aria-hidden="true" tabindex="-1"></a><span class="in">knit_print.data.frame = function(x, ...) {</span></span>
+<span id="cb285-9"><a href="chunk-options.html#cb285-9" aria-hidden="true" tabindex="-1"></a><span class="in">  res = paste(c(&quot;&quot;, &quot;&quot;, knitr::kable(x)), collapse = &quot;\n&quot;)</span></span>
+<span id="cb285-10"><a href="chunk-options.html#cb285-10" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::asis_output(res)</span></span>
+<span id="cb285-11"><a href="chunk-options.html#cb285-11" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb285-12"><a href="chunk-options.html#cb285-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb285-13"><a href="chunk-options.html#cb285-13" aria-hidden="true" tabindex="-1"></a><span class="in">registerS3method(</span></span>
+<span id="cb285-14"><a href="chunk-options.html#cb285-14" aria-hidden="true" tabindex="-1"></a><span class="in">  &quot;knit_print&quot;, &quot;data.frame&quot;, knit_print.data.frame,</span></span>
+<span id="cb285-15"><a href="chunk-options.html#cb285-15" aria-hidden="true" tabindex="-1"></a><span class="in">  envir = asNamespace(&quot;knitr&quot;)</span></span>
+<span id="cb285-16"><a href="chunk-options.html#cb285-16" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb285-17"><a href="chunk-options.html#cb285-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb285-18"><a href="chunk-options.html#cb285-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb285-19"><a href="chunk-options.html#cb285-19" aria-hidden="true" tabindex="-1"></a>现在我们可以在数据框上测试这个自定义的打印方法。</span>
+<span id="cb285-20"><a href="chunk-options.html#cb285-20" aria-hidden="true" tabindex="-1"></a>注意，你不再需要显式地调用<span class="in">`knitr::kable()`</span>了。</span>
+<span id="cb285-21"><a href="chunk-options.html#cb285-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb285-22"><a href="chunk-options.html#cb285-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb285-23"><a href="chunk-options.html#cb285-23" aria-hidden="true" tabindex="-1"></a><span class="in">head(iris)</span></span>
+<span id="cb285-24"><a href="chunk-options.html#cb285-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb285-25"><a href="chunk-options.html#cb285-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb285-26"><a href="chunk-options.html#cb285-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb285-27"><a href="chunk-options.html#cb285-27" aria-hidden="true" tabindex="-1"></a><span class="in">head(mtcars)</span></span>
+<span id="cb285-28"><a href="chunk-options.html#cb285-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>更多关于<code>knit_print()</code>函数的信息可参见<strong>knitr</strong>包的简介：</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="chunk-options.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span>(<span class="st">&#39;knit_print&#39;</span>, <span class="at">package =</span> <span class="st">&#39;knitr&#39;</span>)</span></code></pre></div>
+<p><strong>printr</strong>包 <span class="citation">(<a href="#ref-R-printr" role="doc-biblioref"><strong>R-printr?</strong></a>)</span>提供了一些S3方法来自动将R对象打印为表格。你只需要在R代码块中输入<code>library(printr)</code>，这一所有的方法都将自动注册。</p>
+<p>如果你觉得这个技术对你来说太高级了，一些R Markdown输出格式，如<code>html_document</code>’和<code>pdf_document</code>也提供了一个选项<code>df_print</code>，它允许你自定义数据框的打印行为。例如，如果你想通过<code>knitr::kable()</code>来将数据框打印为表格，你可以设置选项：</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb287-1"><a href="chunk-options.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb287-2"><a href="chunk-options.html#cb287-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb287-3"><a href="chunk-options.html#cb287-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb287-4"><a href="chunk-options.html#cb287-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">df_print</span><span class="kw">:</span><span class="at"> kable</span></span>
+<span id="cb287-5"><a href="chunk-options.html#cb287-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>有关输出格式的更多细节可参阅输出格式的帮助页（如<code>?rmarkdown::html_document</code>），可以帮助你了解<code>df_print</code>选项支持哪些输出格式，以及对应的值是什么。</p>
+<p>事实上，你可以通过块选项<code>render</code>来完全代替打印函数<code>knit_print()</code>，<code>render</code>可以使用任何函数来打印对象。例如，如果你想使用<strong>pander</strong>包来打印对象，你可以设置块选项<code>render</code>为函数<code>pander::pander()</code>：</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb288-1"><a href="chunk-options.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, render=pander::pander}</span></span>
+<span id="cb288-2"><a href="chunk-options.html#cb288-2" aria-hidden="true" tabindex="-1"></a><span class="in">iris</span></span>
+<span id="cb288-3"><a href="chunk-options.html#cb288-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p><code>render</code>选项给了你完全的自由来打印你的R对象。</p>
+</div>
+<div id="option-hooks" class="section level2" number="10.18">
+<h2><span class="header-section-number">10.18</span> 选项钩子 (*)</h2>
+<p>有时候，你可能想要更具其他块选项的值，来动态地改变某个块选项 ，你可以使用对象<code>opts_hooks</code>来设置一个<em>选项钩子</em>（option hook）来实现这个功能。选项钩子是一个与该选项相关的函数，会在对应的块选项不是<code>NULL</code>时自动执行。这个函数将当前代码块的选项列表作为输入参数，并且会返回一个（可能是修改过的）列表。例如，我们可以调整<code>fig.width</code>选项，使它总是不小于<code>fig.height</code>：</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="chunk-options.html#cb289-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width =</span> <span class="cf">function</span>(options) {</span>
+<span id="cb289-2"><a href="chunk-options.html#cb289-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (options<span class="sc">$</span>fig.width <span class="sc">&lt;</span> options<span class="sc">$</span>fig.height) {</span>
+<span id="cb289-3"><a href="chunk-options.html#cb289-3" aria-hidden="true" tabindex="-1"></a>    options<span class="sc">$</span>fig.width <span class="ot">=</span> options<span class="sc">$</span>fig.height</span>
+<span id="cb289-4"><a href="chunk-options.html#cb289-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb289-5"><a href="chunk-options.html#cb289-5" aria-hidden="true" tabindex="-1"></a>  options</span>
+<span id="cb289-6"><a href="chunk-options.html#cb289-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>因为<code>fig.width</code>永远不会是<code>NULL</code>，所以这个钩子函数总是在代码块之前执行，以更新它的块选项。对于下面的代码块，如果设置了上述的选项钩子，则<code>fig.width</code>的实际值将是6而不是最初的5：</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb290-1"><a href="chunk-options.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.width = 5, fig.height = 6}</span></span>
+<span id="cb290-2"><a href="chunk-options.html#cb290-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot(1:10)</span></span>
+<span id="cb290-3"><a href="chunk-options.html#cb290-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>作为另一个例子，我们重写了<a href="chunk-options.html#opts-comment">10.12</a>节中的最后一个例子，这样我们就可以使用一个单独的块选项<code>console = TRUE</code>来代表<code>comment = ""</code>和<code>prompt = TRUE</code>。需要注意的是，<code>console</code>不是一个内置的<strong>knitr</strong> 块选项，而是一个自定义的任意的选项名，它的默认值是<code>NULL</code>。下面是一个完整的例子：</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb291-1"><a href="chunk-options.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb291-2"><a href="chunk-options.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_hooks$set(console = function(options) {</span></span>
+<span id="cb291-3"><a href="chunk-options.html#cb291-3" aria-hidden="true" tabindex="-1"></a><span class="in">  if (isTRUE(options$console)) {</span></span>
+<span id="cb291-4"><a href="chunk-options.html#cb291-4" aria-hidden="true" tabindex="-1"></a><span class="in">    options$comment &lt;- &#39;&#39;; options$prompt &lt;- TRUE</span></span>
+<span id="cb291-5"><a href="chunk-options.html#cb291-5" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb291-6"><a href="chunk-options.html#cb291-6" aria-hidden="true" tabindex="-1"></a><span class="in">  options</span></span>
+<span id="cb291-7"><a href="chunk-options.html#cb291-7" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb291-8"><a href="chunk-options.html#cb291-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb291-9"><a href="chunk-options.html#cb291-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-10"><a href="chunk-options.html#cb291-10" aria-hidden="true" tabindex="-1"></a>默认输出为：</span>
+<span id="cb291-11"><a href="chunk-options.html#cb291-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-12"><a href="chunk-options.html#cb291-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb291-13"><a href="chunk-options.html#cb291-13" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb291-14"><a href="chunk-options.html#cb291-14" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
+<span id="cb291-15"><a href="chunk-options.html#cb291-15" aria-hidden="true" tabindex="-1"></a><span class="in">  2 + 2</span></span>
+<span id="cb291-16"><a href="chunk-options.html#cb291-16" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb291-17"><a href="chunk-options.html#cb291-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb291-18"><a href="chunk-options.html#cb291-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-19"><a href="chunk-options.html#cb291-19" aria-hidden="true" tabindex="-1"></a>设置 <span class="in">`console = TRUE`</span> 时的输出为：</span>
+<span id="cb291-20"><a href="chunk-options.html#cb291-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-21"><a href="chunk-options.html#cb291-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, console=TRUE}</span></span>
+<span id="cb291-22"><a href="chunk-options.html#cb291-22" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb291-23"><a href="chunk-options.html#cb291-23" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
+<span id="cb291-24"><a href="chunk-options.html#cb291-24" aria-hidden="true" tabindex="-1"></a><span class="in">  2 + 2</span></span>
+<span id="cb291-25"><a href="chunk-options.html#cb291-25" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb291-26"><a href="chunk-options.html#cb291-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>第三个例子介绍了如何自动向输出块添加行号，输出块可以包括源代码块、文本输出、message、warning以及报错。我们在<a href="#number-lines"><strong>??</strong></a>节中已经提到了如何使用块选项，如<code>attr.source</code> 和 <code>attr.output</code>来添加行号，这里我们想使用单个的块选项（本例中为<code>numberLines</code>）来控制我们想要添加行号的输出块。</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="chunk-options.html#cb292-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_hooks<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb292-2"><a href="chunk-options.html#cb292-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numberLines =</span> <span class="cf">function</span>(options) {</span>
+<span id="cb292-3"><a href="chunk-options.html#cb292-3" aria-hidden="true" tabindex="-1"></a>    attrs <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;attr.&quot;</span>, options<span class="sc">$</span>numberLines)</span>
+<span id="cb292-4"><a href="chunk-options.html#cb292-4" aria-hidden="true" tabindex="-1"></a>    options[attrs] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(options[attrs], c, <span class="st">&quot;.numberLines&quot;</span>)</span>
+<span id="cb292-5"><a href="chunk-options.html#cb292-5" aria-hidden="true" tabindex="-1"></a>    options</span>
+<span id="cb292-6"><a href="chunk-options.html#cb292-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb292-7"><a href="chunk-options.html#cb292-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb292-8"><a href="chunk-options.html#cb292-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb292-9"><a href="chunk-options.html#cb292-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb292-10"><a href="chunk-options.html#cb292-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">numberLines =</span> <span class="fu">c</span>(</span>
+<span id="cb292-11"><a href="chunk-options.html#cb292-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;source&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;message&quot;</span>, <span class="st">&quot;warning&quot;</span>, <span class="st">&quot;error&quot;</span></span>
+<span id="cb292-12"><a href="chunk-options.html#cb292-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb292-13"><a href="chunk-options.html#cb292-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>基本上，选项挂钩<code>numberLines</code>将属性<code>.numberLines</code>附加到输出块上，并且通过<code>opts_chunk$set()</code>来设置块选项<code>numberLines</code>，从而确保选项挂钩会被执行。</p>
+<p>通过以上设置，你可以在代码块上使用选项<code>numberLines</code>来决定它的哪些输出块将具有行号，例如<code>numberLines = c('source', 'output')</code>；而设定<code>numberLines = NULL</code>则将完全删除行号。</p>
+<p>你可能想知道这种方法与直接设置块选项有何不同，例如，就像在<a href="#number-lines"><strong>??</strong></a>节那样，我们可以仅设置<code>knitr::opts_chunk$set(attr.source = '.numberLines')</code>。本节介绍的选项钩子的优点是，它们只在块选项中<em>附加</em>属性<code>.numberLines</code>，这意味着它们不会<em>覆盖</em>现有的块选项值，例如，下面代码块中的源代码块将被编号（使用上面的设置），并且编号会从第二行开始:</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb293-1"><a href="chunk-options.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, attr.source=&#39;startFrom=&quot;2&quot;&#39;}</span></span>
+<span id="cb293-2"><a href="chunk-options.html#cb293-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 这行注释不会被编号</span></span>
+<span id="cb293-3"><a href="chunk-options.html#cb293-3" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb293-4"><a href="chunk-options.html#cb293-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>这等价于：</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb294-1"><a href="chunk-options.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, attr.source=c(&#39;startFrom=&quot;2&quot;&#39;, &#39;.numberLines&#39;}</span></span>
+<span id="cb294-2"><a href="chunk-options.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 这行注释不会被编号</span></span>
+<span id="cb294-3"><a href="chunk-options.html#cb294-3" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb294-4"><a href="chunk-options.html#cb294-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+
+</div>
+</div>
+<h3>参考文献</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-magick" class="csl-entry">
+Ooms, Jeroen. 2021. <em>Magick: Advanced Graphics and Image-Processing in r</em>. <a href="https://CRAN.R-project.org/package=magick">https://CRAN.R-project.org/package=magick</a>.
+</div>
+<div id="ref-R-tikzDevice" class="csl-entry">
+Sharpsteen, Charlie, and Cameron Bracken. 2020. <em>tikzDevice: R Graphics Output in LaTeX Format</em>. <a href="https://github.com/daqana/tikzDevice">https://github.com/daqana/tikzDevice</a>.
+</div>
+<div id="ref-R-formatR" class="csl-entry">
+———. 2021b. <em>formatR: Format r Code Automatically</em>. <a href="https://github.com/yihui/formatR">https://github.com/yihui/formatR</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="9">
+<li id="fn9"><p>也可以转换为<code>&lt;div class="className"&gt;&lt;/div&gt;</code>，可以查看HTML输出文档的源代码来确定<a href="chunk-options.html#fnref9" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="table.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="output-hooks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cosname/rmarkdown-guide/edit/master/13-chunk-options.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

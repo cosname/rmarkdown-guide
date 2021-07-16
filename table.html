@@ -1,0 +1,2595 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 9 章 表格操作 | R Markdown 指南</title>
+  <meta name="description" content="第 9 章 表格操作 | R Markdown 指南" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 9 章 表格操作 | R Markdown 指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="第 9 章 表格操作 | R Markdown 指南" />
+  <meta name="github-repo" content="cosname/rmarkdown-guide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 9 章 表格操作 | R Markdown 指南" />
+  
+  <meta name="twitter:description" content="第 9 章 表格操作 | R Markdown 指南" />
+  
+
+<meta name="author" content="王祎帆" />
+<meta name="author" content="闫求识" />
+<meta name="author" content="高春辉" />
+<meta name="author" content="庄亮亮" />
+
+
+<meta name="date" content="2021-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="word.html"/>
+<link rel="next" href="chunk-options.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Markdown 中文指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="part"><span><b>I 基础</b></span></li>
+<li class="chapter" data-level="1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html"><i class="fa fa-check"></i><b>1</b> 认识 R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#数据分析报告和文档"><i class="fa fa-check"></i><b>1.1</b> 数据分析报告和文档</a></li>
+<li class="chapter" data-level="1.2" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#个人简历"><i class="fa fa-check"></i><b>1.2</b> 个人简历</a></li>
+<li class="chapter" data-level="1.3" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#网站"><i class="fa fa-check"></i><b>1.3</b> 网站</a></li>
+<li class="chapter" data-level="1.4" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#幻灯片"><i class="fa fa-check"></i><b>1.4</b> 幻灯片</a></li>
+<li class="chapter" data-level="1.5" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#交互报表"><i class="fa fa-check"></i><b>1.5</b> 交互报表</a></li>
+<li class="chapter" data-level="1.6" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#r-markdown-的渊源与历史"><i class="fa fa-check"></i><b>1.6</b> R Markdown 的渊源与历史</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> 安装</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#安装-r-markdown"><i class="fa fa-check"></i><b>2.1</b> 安装 R Markdown</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#create-first-rmd"><i class="fa fa-check"></i><b>2.2</b> 创建第一个 R Markdown 文档</a></li>
+<li class="chapter" data-level="2.3" data-path="installation.html"><a href="installation.html#安装-tinytex"><i class="fa fa-check"></i><b>2.3</b> 安装 Tinytex</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html"><i class="fa fa-check"></i><b>3</b> 基础知识</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#再看-html-输出文件"><i class="fa fa-check"></i><b>3.1</b> 再看 HTML 输出文件</a></li>
+<li class="chapter" data-level="3.2" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#markdown-语法"><i class="fa fa-check"></i><b>3.2</b> Markdown 语法</a></li>
+<li class="chapter" data-level="3.3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#使用-r-代码"><i class="fa fa-check"></i><b>3.3</b> 使用 R 代码</a></li>
+<li class="chapter" data-level="3.4" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#输出格式"><i class="fa fa-check"></i><b>3.4</b> 输出格式</a></li>
+<li class="chapter" data-level="3.5" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#r-markdown-的编译过程"><i class="fa fa-check"></i><b>3.5</b> R Markdown 的编译过程</a></li>
+</ul></li>
+<li class="part"><span><b>II 输出”万花筒”</b></span></li>
+<li class="chapter" data-level="4" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>4</b> 常用文档格式</a></li>
+<li class="chapter" data-level="5" data-path="html-document.html"><a href="html-document.html"><i class="fa fa-check"></i><b>5</b> 从 R Markdown 到 HTML 文档</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="html-document.html"><a href="html-document.html#目录和标题"><i class="fa fa-check"></i><b>5.1</b> 目录和标题</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="html-document.html"><a href="html-document.html#显示目录"><i class="fa fa-check"></i><b>5.1.1</b> 显示目录</a></li>
+<li class="chapter" data-level="5.1.2" data-path="html-document.html"><a href="html-document.html#悬停目录"><i class="fa fa-check"></i><b>5.1.2</b> 悬停目录</a></li>
+<li class="chapter" data-level="5.1.3" data-path="html-document.html"><a href="html-document.html#显示标题编号"><i class="fa fa-check"></i><b>5.1.3</b> 显示标题编号</a></li>
+<li class="chapter" data-level="5.1.4" data-path="html-document.html"><a href="html-document.html#使用标签页"><i class="fa fa-check"></i><b>5.1.4</b> 使用标签页</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="html-document.html"><a href="html-document.html#appearance-and-style"><i class="fa fa-check"></i><b>5.2</b> 主题和样式</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="html-document.html"><a href="html-document.html#可选主题"><i class="fa fa-check"></i><b>5.2.1</b> 可选主题</a></li>
+<li class="chapter" data-level="5.2.2" data-path="html-document.html"><a href="html-document.html#代码高亮"><i class="fa fa-check"></i><b>5.2.2</b> 代码高亮</a></li>
+<li class="chapter" data-level="5.2.3" data-path="html-document.html"><a href="html-document.html#style-css"><i class="fa fa-check"></i><b>5.2.3</b> 自定义样式表</a></li>
+<li class="chapter" data-level="5.2.4" data-path="html-document.html"><a href="html-document.html#通过-css-代码块定义样式"><i class="fa fa-check"></i><b>5.2.4</b> 通过 CSS 代码块定义样式</a></li>
+<li class="chapter" data-level="5.2.5" data-path="html-document.html"><a href="html-document.html#使用丰富多样的内置-css-样式"><i class="fa fa-check"></i><b>5.2.5</b> 使用丰富多样的内置 CSS 样式</a></li>
+<li class="chapter" data-level="5.2.6" data-path="html-document.html"><a href="html-document.html#代码折叠"><i class="fa fa-check"></i><b>5.2.6</b> 代码折叠</a></li>
+<li class="chapter" data-level="5.2.7" data-path="html-document.html"><a href="html-document.html#html-scroll"><i class="fa fa-check"></i><b>5.2.7</b> 设置代码块内容可滚动</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="html-document.html"><a href="html-document.html#图片和数据框"><i class="fa fa-check"></i><b>5.3</b> 图片和数据框</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="html-document.html"><a href="html-document.html#设置图片的属性"><i class="fa fa-check"></i><b>5.3.1</b> 设置图片的属性</a></li>
+<li class="chapter" data-level="5.3.2" data-path="html-document.html"><a href="html-document.html#插入外源图片"><i class="fa fa-check"></i><b>5.3.2</b> 插入外源图片</a></li>
+<li class="chapter" data-level="5.3.3" data-path="html-document.html"><a href="html-document.html#输出数据框"><i class="fa fa-check"></i><b>5.3.3</b> 输出数据框</a></li>
+<li class="chapter" data-level="5.3.4" data-path="html-document.html"><a href="html-document.html#分页打印数据框时的附加参数"><i class="fa fa-check"></i><b>5.3.4</b> 分页打印数据框时的附加参数</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="html-document.html"><a href="html-document.html#组件和内容"><i class="fa fa-check"></i><b>5.4</b> 组件和内容</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="html-document.html"><a href="html-document.html#理解-html-文档的依赖关系"><i class="fa fa-check"></i><b>5.4.1</b> 理解 HTML 文档的依赖关系</a></li>
+<li class="chapter" data-level="5.4.2" data-path="html-document.html"><a href="html-document.html#mathjax-库的配置"><i class="fa fa-check"></i><b>5.4.2</b> MathJax 库的配置</a></li>
+<li class="chapter" data-level="5.4.3" data-path="html-document.html"><a href="html-document.html#是否保留-markdown"><i class="fa fa-check"></i><b>5.4.3</b> 是否保留 Markdown</a></li>
+<li class="chapter" data-level="5.4.4" data-path="html-document.html"><a href="html-document.html#使用自定义的-html-模板"><i class="fa fa-check"></i><b>5.4.4</b> 使用自定义的 HTML 模板</a></li>
+<li class="chapter" data-level="5.4.5" data-path="html-document.html"><a href="html-document.html#include-html"><i class="fa fa-check"></i><b>5.4.5</b> 包含其它文件</a></li>
+<li class="chapter" data-level="5.4.6" data-path="html-document.html"><a href="html-document.html#html-fragments"><i class="fa fa-check"></i><b>5.4.6</b> 生成 HTML 片段</a></li>
+<li class="chapter" data-level="5.4.7" data-path="html-document.html"><a href="html-document.html#使用自定义的浏览器图标"><i class="fa fa-check"></i><b>5.4.7</b> 使用自定义的浏览器图标</a></li>
+<li class="chapter" data-level="5.4.8" data-path="html-document.html"><a href="html-document.html#共用-yaml-配置文件"><i class="fa fa-check"></i><b>5.4.8</b> 共用 YAML 配置文件</a></li>
+<li class="chapter" data-level="5.4.9" data-path="html-document.html"><a href="html-document.html#嵌入-rmd-源文件"><i class="fa fa-check"></i><b>5.4.9</b> 嵌入 Rmd 源文件</a></li>
+<li class="chapter" data-level="5.4.10" data-path="html-document.html"><a href="html-document.html#嵌入其它文件"><i class="fa fa-check"></i><b>5.4.10</b> 嵌入其它文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="PDF-document.html"><a href="PDF-document.html"><i class="fa fa-check"></i><b>6</b> PDF 文档</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-tinytex-1"><i class="fa fa-check"></i><b>6.1</b> 安装 <code>TinyTex</code></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-latex-组件"><i class="fa fa-check"></i><b>6.1.1</b> 安装 LaTeX 组件</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="PDF-document.html"><a href="PDF-document.html#从-r-markdown-到-pdf-文档"><i class="fa fa-check"></i><b>6.2</b> 从 R Markdown 到 PDF 文档</a></li>
+<li class="chapter" data-level="6.3" data-path="PDF-document.html"><a href="PDF-document.html#在-pdf-文档中使用中文的注意事项"><i class="fa fa-check"></i><b>6.3</b> 在 PDF 文档中使用中文的注意事项</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="PDF-document.html"><a href="PDF-document.html#显示目录-1"><i class="fa fa-check"></i><b>6.3.1</b> 显示目录</a></li>
+<li class="chapter" data-level="6.3.2" data-path="PDF-document.html"><a href="PDF-document.html#图片相关的配置"><i class="fa fa-check"></i><b>6.3.2</b> 图片相关的配置</a></li>
+<li class="chapter" data-level="6.3.3" data-path="PDF-document.html"><a href="PDF-document.html#打印数据框"><i class="fa fa-check"></i><b>6.3.3</b> 打印数据框</a></li>
+<li class="chapter" data-level="6.3.4" data-path="PDF-document.html"><a href="PDF-document.html#代码高亮-1"><i class="fa fa-check"></i><b>6.3.4</b> 代码高亮</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="PDF-document.html"><a href="PDF-document.html#latex-选项"><i class="fa fa-check"></i><b>6.4</b> LaTeX 选项</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="PDF-document.html"><a href="PDF-document.html#通用文档部件"><i class="fa fa-check"></i><b>6.4.1</b> 通用文档部件</a></li>
+<li class="chapter" data-level="6.4.2" data-path="PDF-document.html"><a href="PDF-document.html#选择-latex-模板"><i class="fa fa-check"></i><b>6.4.2</b> 选择 LaTeX 模板</a></li>
+<li class="chapter" data-level="6.4.3" data-path="PDF-document.html"><a href="PDF-document.html#配置-latex-模板的参数"><i class="fa fa-check"></i><b>6.4.3</b> 配置 LaTeX 模板的参数</a></li>
+<li class="chapter" data-level="6.4.4" data-path="PDF-document.html"><a href="PDF-document.html#使用-latex-包处理引用"><i class="fa fa-check"></i><b>6.4.4</b> 使用 LaTeX 包处理引用</a></li>
+<li class="chapter" data-level="6.4.5" data-path="PDF-document.html"><a href="PDF-document.html#latex-的渲染引擎"><i class="fa fa-check"></i><b>6.4.5</b> LaTeX 的渲染引擎</a></li>
+<li class="chapter" data-level="6.4.6" data-path="PDF-document.html"><a href="PDF-document.html#保留生成的-tex-中间文件"><i class="fa fa-check"></i><b>6.4.6</b> 保留生成的 TeX 中间文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>7</b> 演示文稿</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="presentation.html"><a href="presentation.html#rmarkdown-basic-presentation"><i class="fa fa-check"></i><b>7.1</b> R Markdown 基础幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="presentation.html"><a href="presentation.html#ioslides-presentation"><i class="fa fa-check"></i><b>7.1.1</b> ioslides 幻灯片</a></li>
+<li class="chapter" data-level="7.1.2" data-path="presentation.html"><a href="presentation.html#slidy-presentation"><i class="fa fa-check"></i><b>7.1.2</b> Slidy 幻灯片</a></li>
+<li class="chapter" data-level="7.1.3" data-path="presentation.html"><a href="presentation.html#beamer-presentation"><i class="fa fa-check"></i><b>7.1.3</b> Beamer 演示文稿</a></li>
+<li class="chapter" data-level="7.1.4" data-path="presentation.html"><a href="presentation.html#powerpoint-presentation"><i class="fa fa-check"></i><b>7.1.4</b> PowerPoint 演示文稿</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="presentation.html"><a href="presentation.html#xaringan-presentation"><i class="fa fa-check"></i><b>7.2</b> Xaringan 幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="presentation.html"><a href="presentation.html#简介"><i class="fa fa-check"></i><b>7.2.1</b> 简介</a></li>
+<li class="chapter" data-level="7.2.2" data-path="presentation.html"><a href="presentation.html#入门"><i class="fa fa-check"></i><b>7.2.2</b> 入门</a></li>
+<li class="chapter" data-level="7.2.3" data-path="presentation.html"><a href="presentation.html#使用其他主题"><i class="fa fa-check"></i><b>7.2.3</b> 使用其他主题</a></li>
+<li class="chapter" data-level="7.2.4" data-path="presentation.html"><a href="presentation.html#提升-xaringan-幻灯片的-b-格"><i class="fa fa-check"></i><b>7.2.4</b> 提升 xaringan 幻灯片的 B 格</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="word.html"><a href="word.html"><i class="fa fa-check"></i><b>8</b> Word</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="word.html"><a href="word.html#word-new-template"><i class="fa fa-check"></i><b>8.1</b> 创建 word 模板</a></li>
+<li class="chapter" data-level="8.2" data-path="word.html"><a href="word.html#word-template"><i class="fa fa-check"></i><b>8.2</b> 自定义 Word 模板</a></li>
+<li class="chapter" data-level="8.3" data-path="word.html"><a href="word.html#word-redoc"><i class="fa fa-check"></i><b>8.3</b> R Markdown 和 Word 之间的双向工作流程</a></li>
+<li class="chapter" data-level="8.4" data-path="word.html"><a href="word.html#word-officedown"><i class="fa fa-check"></i><b>8.4</b> 个人风格元素</a></li>
+</ul></li>
+<li class="part"><span><b>III 操作技巧</b></span></li>
+<li class="chapter" data-level="9" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>9</b> 表格操作</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="table.html"><a href="table.html#kable"><i class="fa fa-check"></i><b>9.1</b> 表格生成函数 <code>knitr::kable()</code></a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="table.html"><a href="table.html#kable-formats"><i class="fa fa-check"></i><b>9.1.1</b> 已支持的表的格式</a></li>
+<li class="chapter" data-level="9.1.2" data-path="table.html"><a href="table.html#修改列名"><i class="fa fa-check"></i><b>9.1.2</b> 修改列名</a></li>
+<li class="chapter" data-level="9.1.3" data-path="table.html"><a href="table.html#指定列的对齐方式"><i class="fa fa-check"></i><b>9.1.3</b> 指定列的对齐方式</a></li>
+<li class="chapter" data-level="9.1.4" data-path="table.html"><a href="table.html#kable-caption"><i class="fa fa-check"></i><b>9.1.4</b> 添加表格标题</a></li>
+<li class="chapter" data-level="9.1.5" data-path="table.html"><a href="table.html#调整数字格式"><i class="fa fa-check"></i><b>9.1.5</b> 调整数字格式</a></li>
+<li class="chapter" data-level="9.1.6" data-path="table.html"><a href="table.html#显示缺失值"><i class="fa fa-check"></i><b>9.1.6</b> 显示缺失值</a></li>
+<li class="chapter" data-level="9.1.7" data-path="table.html"><a href="table.html#特殊字符的转义"><i class="fa fa-check"></i><b>9.1.7</b> 特殊字符的转义</a></li>
+<li class="chapter" data-level="9.1.8" data-path="table.html"><a href="table.html#多张表格并排"><i class="fa fa-check"></i><b>9.1.8</b> 多张表格并排</a></li>
+<li class="chapter" data-level="9.1.9" data-path="table.html"><a href="table.html#利用for循环生成多个表"><i class="fa fa-check"></i><b>9.1.9</b> 利用<code>for</code>循环生成多个表 (*)</a></li>
+<li class="chapter" data-level="9.1.10" data-path="table.html"><a href="table.html#自定义-latex-表格"><i class="fa fa-check"></i><b>9.1.10</b> 自定义 LaTex 表格 (*)</a></li>
+<li class="chapter" data-level="9.1.11" data-path="table.html"><a href="table.html#自定义-html-表格"><i class="fa fa-check"></i><b>9.1.11</b> 自定义 HTML 表格 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="table.html"><a href="table.html#kableextra"><i class="fa fa-check"></i><b>9.2</b> <strong>kableExtra</strong> 包</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="table.html"><a href="table.html#设定字体尺寸"><i class="fa fa-check"></i><b>9.2.1</b> 设定字体尺寸</a></li>
+<li class="chapter" data-level="9.2.2" data-path="table.html"><a href="table.html#特定的行或列的样式"><i class="fa fa-check"></i><b>9.2.2</b> 特定的行或列的样式</a></li>
+<li class="chapter" data-level="9.2.3" data-path="table.html"><a href="table.html#给行或列分组"><i class="fa fa-check"></i><b>9.2.3</b> 给行或列分组</a></li>
+<li class="chapter" data-level="9.2.4" data-path="table.html"><a href="table.html#按比例缩小latex中的表格"><i class="fa fa-check"></i><b>9.2.4</b> 按比例缩小LaTex中的表格</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="table.html"><a href="table.html#table-other"><i class="fa fa-check"></i><b>9.3</b> 其它生成表格的包</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chunk-options.html"><a href="chunk-options.html"><i class="fa fa-check"></i><b>10</b> 块选项</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chunk-options.html"><a href="chunk-options.html#chunk-variable"><i class="fa fa-check"></i><b>10.1</b> 在块选项中使用变量</a></li>
+<li class="chapter" data-level="10.2" data-path="chunk-options.html"><a href="chunk-options.html#opts-error"><i class="fa fa-check"></i><b>10.2</b> 如何在遇到 error 的时候继续编译</a></li>
+<li class="chapter" data-level="10.3" data-path="chunk-options.html"><a href="chunk-options.html#dev-vector"><i class="fa fa-check"></i><b>10.3</b> 同一张图的多种图像输出格式</a></li>
+<li class="chapter" data-level="10.4" data-path="chunk-options.html"><a href="chunk-options.html#cache"><i class="fa fa-check"></i><b>10.4</b> 缓存耗时的代码块</a></li>
+<li class="chapter" data-level="10.5" data-path="chunk-options.html"><a href="chunk-options.html#cache-path"><i class="fa fa-check"></i><b>10.5</b> 为多种输出格式缓存代码块</a></li>
+<li class="chapter" data-level="10.6" data-path="chunk-options.html"><a href="chunk-options.html#cache-lazy"><i class="fa fa-check"></i><b>10.6</b> 缓存大型的对象</a></li>
+<li class="chapter" data-level="10.7" data-path="chunk-options.html"><a href="chunk-options.html#hide-one"><i class="fa fa-check"></i><b>10.7</b> 隐藏源代码、message、warning、文本输出或图像输出</a></li>
+<li class="chapter" data-level="10.8" data-path="chunk-options.html"><a href="chunk-options.html#hide-all"><i class="fa fa-check"></i><b>10.8</b> 隐藏代码块的所有输出</a></li>
+<li class="chapter" data-level="10.9" data-path="chunk-options.html"><a href="chunk-options.html#opts-collapse"><i class="fa fa-check"></i><b>10.9</b> 将文本输出压缩到源代码块中</a></li>
+<li class="chapter" data-level="10.10" data-path="chunk-options.html"><a href="chunk-options.html#opts-tidy"><i class="fa fa-check"></i><b>10.10</b> 重新格式化源代码</a></li>
+<li class="chapter" data-level="10.11" data-path="chunk-options.html"><a href="chunk-options.html#results-asis"><i class="fa fa-check"></i><b>10.11</b> 将输出文本作为原始的Markdown的内容 (*)</a></li>
+<li class="chapter" data-level="10.12" data-path="chunk-options.html"><a href="chunk-options.html#opts-comment"><i class="fa fa-check"></i><b>10.12</b> 删除文本输出中的前导符号</a></li>
+<li class="chapter" data-level="10.13" data-path="chunk-options.html"><a href="chunk-options.html#attr-output"><i class="fa fa-check"></i><b>10.13</b> 为文本输出块添加属性 (*)</a></li>
+<li class="chapter" data-level="10.14" data-path="chunk-options.html"><a href="chunk-options.html#fig-process"><i class="fa fa-check"></i><b>10.14</b> 图像的后期加工 (*)</a></li>
+<li class="chapter" data-level="10.15" data-path="chunk-options.html"><a href="chunk-options.html#graphical-device"><i class="fa fa-check"></i><b>10.15</b> 高质量的图像 (*)</a></li>
+<li class="chapter" data-level="10.16" data-path="chunk-options.html"><a href="chunk-options.html#low-plots"><i class="fa fa-check"></i><b>10.16</b> 带有低级绘图功能的逐步绘图 (*)</a></li>
+<li class="chapter" data-level="10.17" data-path="chunk-options.html"><a href="chunk-options.html#opts-render"><i class="fa fa-check"></i><b>10.17</b> 在代码块中自定义对象的打印格式 (*)</a></li>
+<li class="chapter" data-level="10.18" data-path="chunk-options.html"><a href="chunk-options.html#option-hooks"><i class="fa fa-check"></i><b>10.18</b> 选项钩子 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="output-hooks.html"><a href="output-hooks.html"><i class="fa fa-check"></i><b>11</b> 输出钩子 (*)</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="output-hooks.html"><a href="output-hooks.html#hook-hide"><i class="fa fa-check"></i><b>11.1</b> 编辑源代码</a></li>
+<li class="chapter" data-level="11.2" data-path="output-hooks.html"><a href="output-hooks.html#hook-number"><i class="fa fa-check"></i><b>11.2</b> 向源代码中添加行号</a></li>
+<li class="chapter" data-level="11.3" data-path="output-hooks.html"><a href="output-hooks.html#hook-scroll"><i class="fa fa-check"></i><b>11.3</b> 可滚动的文本输出</a></li>
+<li class="chapter" data-level="11.4" data-path="output-hooks.html"><a href="output-hooks.html#hook-truncate"><i class="fa fa-check"></i><b>11.4</b> 截断文本输出</a></li>
+<li class="chapter" data-level="11.5" data-path="output-hooks.html"><a href="output-hooks.html#hook-html5"><i class="fa fa-check"></i><b>11.5</b> 以HTML5格式输出图像</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="knitr-misc.html"><a href="knitr-misc.html"><i class="fa fa-check"></i><b>12</b> 其它使用 knitr 的小技巧</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="knitr-misc.html"><a href="knitr-misc.html#reuse-chunks"><i class="fa fa-check"></i><b>12.1</b> 重复使用代码块</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="knitr-misc.html"><a href="knitr-misc.html#embed-chunk"><i class="fa fa-check"></i><b>12.1.1</b> 将一个块嵌入到另一个块中 (*)</a></li>
+<li class="chapter" data-level="12.1.2" data-path="knitr-misc.html"><a href="knitr-misc.html#same-label"><i class="fa fa-check"></i><b>12.1.2</b> 在另一个块中使用相同的块标签</a></li>
+<li class="chapter" data-level="12.1.3" data-path="knitr-misc.html"><a href="knitr-misc.html#ref-label"><i class="fa fa-check"></i><b>12.1.3</b> 使用引用标签 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="knitr-misc.html"><a href="knitr-misc.html#load-cache"><i class="fa fa-check"></i><b>12.2</b> 在创建对象之前使用它 (*)</a></li>
+<li class="chapter" data-level="12.3" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-exit"><i class="fa fa-check"></i><b>12.3</b> 提前退出编译</a></li>
+<li class="chapter" data-level="12.4" data-path="knitr-misc.html"><a href="knitr-misc.html#fig-chunk"><i class="fa fa-check"></i><b>12.4</b> 生成一个图像并在其他地方显示</a></li>
+<li class="chapter" data-level="12.5" data-path="knitr-misc.html"><a href="knitr-misc.html#global-device"><i class="fa fa-check"></i><b>12.5</b> 修改前一个代码块中的图像</a></li>
+<li class="chapter" data-level="12.6" data-path="knitr-misc.html"><a href="knitr-misc.html#opts-template"><i class="fa fa-check"></i><b>12.6</b> 保存一组块选项并重复使用它们 (*)</a></li>
+<li class="chapter" data-level="12.7" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-expand"><i class="fa fa-check"></i><b>12.7</b> 使用 <code>knitr::knit_expand()</code> 来生成 Rmd 源代码</a></li>
+<li class="chapter" data-level="12.8" data-path="knitr-misc.html"><a href="knitr-misc.html#duplicate-label"><i class="fa fa-check"></i><b>12.8</b> 允许代码块中的标签重复 Allow duplicate labels in code chunks (*)</a></li>
+<li class="chapter" data-level="12.9" data-path="knitr-misc.html"><a href="knitr-misc.html#cache-rds"><i class="fa fa-check"></i><b>12.9</b> 一个更透明的缓存机制</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改表达式中的代码使缓存失效"><i class="fa fa-check"></i><b>12.9.1</b> 通过更改表达式中的代码使缓存失效</a></li>
+<li class="chapter" data-level="12.9.2" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改全局变量使缓存失效"><i class="fa fa-check"></i><b>12.9.2</b> 通过更改全局变量使缓存失效</a></li>
+<li class="chapter" data-level="12.9.3" data-path="knitr-misc.html"><a href="knitr-misc.html#保留缓存的多个副本"><i class="fa fa-check"></i><b>12.9.3</b> 保留缓存的多个副本</a></li>
+<li class="chapter" data-level="12.9.4" data-path="knitr-misc.html"><a href="knitr-misc.html#与knitr的缓存比较"><i class="fa fa-check"></i><b>12.9.4</b> 与<strong>knitr</strong>的缓存比较</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV 第四部分：进阶操作</b></span></li>
+<li class="chapter" data-level="13" data-path="other-languages.html"><a href="other-languages.html"><i class="fa fa-check"></i><b>13</b> 与其他语言的结合</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="other-languages.html"><a href="other-languages.html#custom-engine"><i class="fa fa-check"></i><b>13.1</b> 注册自定义语言引擎（*）</a></li>
+<li class="chapter" data-level="13.2" data-path="other-languages.html"><a href="other-languages.html#eng-python"><i class="fa fa-check"></i><b>13.2</b> 运行 Python 代码并与 Python 交互</a></li>
+<li class="chapter" data-level="13.3" data-path="other-languages.html"><a href="other-languages.html#eng-asis"><i class="fa fa-check"></i><b>13.3</b> 通过 <code>asis</code> 引擎有条件地执行内容</a></li>
+<li class="chapter" data-level="13.4" data-path="other-languages.html"><a href="other-languages.html#eng-bash"><i class="fa fa-check"></i><b>13.4</b> 执行 Shell 脚本</a></li>
+<li class="chapter" data-level="13.5" data-path="other-languages.html"><a href="other-languages.html#d3"><i class="fa fa-check"></i><b>13.5</b> 用 D3 可视化</a></li>
+<li class="chapter" data-level="13.6" data-path="other-languages.html"><a href="other-languages.html#eng-cat"><i class="fa fa-check"></i><b>13.6</b> 通过 <code>cat</code> 引擎将块内容写入文件</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="other-languages.html"><a href="other-languages.html#写入-css-文件"><i class="fa fa-check"></i><b>13.6.1</b> 写入 CSS 文件</a></li>
+<li class="chapter" data-level="13.6.2" data-path="other-languages.html"><a href="other-languages.html#在序言中包含-latex-代码"><i class="fa fa-check"></i><b>13.6.2</b> 在序言中包含 LaTeX 代码</a></li>
+<li class="chapter" data-level="13.6.3" data-path="other-languages.html"><a href="other-languages.html#将-yaml-数据写入文件并显示它"><i class="fa fa-check"></i><b>13.6.3</b> 将 YAML 数据写入文件并显示它</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="other-languages.html"><a href="other-languages.html#eng-sas"><i class="fa fa-check"></i><b>13.7</b> 运行 SAS 代码</a></li>
+<li class="chapter" data-level="13.8" data-path="other-languages.html"><a href="other-languages.html#eng-stata"><i class="fa fa-check"></i><b>13.8</b> 运行 Stata 代码</a></li>
+<li class="chapter" data-level="13.9" data-path="other-languages.html"><a href="other-languages.html#eng-asy"><i class="fa fa-check"></i><b>13.9</b> 用渐近线 Asymptote 创建图形</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="other-languages.html"><a href="other-languages.html#在-r-中生成数据并通过-asymptote-读取"><i class="fa fa-check"></i><b>13.9.1</b> 在 R 中生成数据并通过 Asymptote 读取</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="other-languages.html"><a href="other-languages.html#eng-sass"><i class="fa fa-check"></i><b>13.10</b> 使用 Sass/SCSS 构建 HTML 页面风格</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Dashboards.html"><a href="Dashboards.html"><i class="fa fa-check"></i><b>14</b> Dashboards</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Dashboards.html"><a href="Dashboards.html#入门-1"><i class="fa fa-check"></i><b>14.1</b> 入门</a></li>
+<li class="chapter" data-level="14.2" data-path="Dashboards.html"><a href="Dashboards.html#排版"><i class="fa fa-check"></i><b>14.2</b> 排版</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="Dashboards.html"><a href="Dashboards.html#基于行的布局"><i class="fa fa-check"></i><b>14.2.1</b> 基于行的布局</a></li>
+<li class="chapter" data-level="14.2.2" data-path="Dashboards.html"><a href="Dashboards.html#节属性"><i class="fa fa-check"></i><b>14.2.2</b> 节属性</a></li>
+<li class="chapter" data-level="14.2.3" data-path="Dashboards.html"><a href="Dashboards.html#多页"><i class="fa fa-check"></i><b>14.2.3</b> 多页</a></li>
+<li class="chapter" data-level="14.2.4" data-path="Dashboards.html"><a href="Dashboards.html#故事板"><i class="fa fa-check"></i><b>14.2.4</b> 故事板</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="Dashboards.html"><a href="Dashboards.html#dashboard-components"><i class="fa fa-check"></i><b>14.3</b> 组件</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="Dashboards.html"><a href="Dashboards.html#数值框"><i class="fa fa-check"></i><b>14.3.1</b> 数值框</a></li>
+<li class="chapter" data-level="14.3.2" data-path="Dashboards.html"><a href="Dashboards.html#仪表"><i class="fa fa-check"></i><b>14.3.2</b> 仪表</a></li>
+<li class="chapter" data-level="14.3.3" data-path="Dashboards.html"><a href="Dashboards.html#文本注释"><i class="fa fa-check"></i><b>14.3.3</b> 文本注释</a></li>
+<li class="chapter" data-level="14.3.4" data-path="Dashboards.html"><a href="Dashboards.html#导航栏"><i class="fa fa-check"></i><b>14.3.4</b> 导航栏</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="Dashboards.html"><a href="Dashboards.html#shiny"><i class="fa fa-check"></i><b>14.4</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="Dashboards.html"><a href="Dashboards.html#入门指南"><i class="fa fa-check"></i><b>14.4.1</b> 入门指南</a></li>
+<li class="chapter" data-level="14.4.2" data-path="Dashboards.html"><a href="Dashboards.html#shiny-仪表盘的一个示例"><i class="fa fa-check"></i><b>14.4.2</b> Shiny 仪表盘的一个示例</a></li>
+<li class="chapter" data-level="14.4.3" data-path="Dashboards.html"><a href="Dashboards.html#输入栏"><i class="fa fa-check"></i><b>14.4.3</b> 输入栏</a></li>
+<li class="chapter" data-level="14.4.4" data-path="Dashboards.html"><a href="Dashboards.html#拓展"><i class="fa fa-check"></i><b>14.4.4</b> 拓展</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="shiny-started.html"><a href="shiny-started.html"><i class="fa fa-check"></i><b>15</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-start"><i class="fa fa-check"></i><b>15.1</b> 入门指南</a></li>
+<li class="chapter" data-level="15.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-deploy"><i class="fa fa-check"></i><b>15.2</b> 部署</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapps.io"><i class="fa fa-check"></i><b>15.2.1</b> ShinyApps.io</a></li>
+<li class="chapter" data-level="15.2.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-server-rstudio-connect"><i class="fa fa-check"></i><b>15.2.2</b> Shiny Server / RStudio Connect</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embedded"><i class="fa fa-check"></i><b>15.3</b> 嵌入 Shiny 应用程序</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embed-inline"><i class="fa fa-check"></i><b>15.3.1</b> 内联应用程序</a></li>
+<li class="chapter" data-level="15.3.2" data-path="shiny-started.html"><a href="shiny-started.html#外联应用程序"><i class="fa fa-check"></i><b>15.3.2</b> 外联应用程序</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="shiny-started.html"><a href="shiny-started.html#shiny-widgets"><i class="fa fa-check"></i><b>15.4</b> Shiny 小部件</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapp-函数"><i class="fa fa-check"></i><b>15.4.1</b> <code>shinyApp()</code> 函数</a></li>
+<li class="chapter" data-level="15.4.2" data-path="shiny-started.html"><a href="shiny-started.html#例子k---means-聚类"><i class="fa fa-check"></i><b>15.4.2</b> 例子：k - means 聚类</a></li>
+<li class="chapter" data-level="15.4.3" data-path="shiny-started.html"><a href="shiny-started.html#小部件的大小和布局"><i class="fa fa-check"></i><b>15.4.3</b> 小部件的大小和布局</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="shiny-started.html"><a href="shiny-started.html#shiny-multiple"><i class="fa fa-check"></i><b>15.5</b> 多页</a></li>
+<li class="chapter" data-level="15.6" data-path="shiny-started.html"><a href="shiny-started.html#shiny-delay"><i class="fa fa-check"></i><b>15.6</b> 延迟渲染</a></li>
+<li class="chapter" data-level="15.7" data-path="shiny-started.html"><a href="shiny-started.html#shiny-args"><i class="fa fa-check"></i><b>15.7</b> 渲染函数的输出参数</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="shiny-started.html"><a href="shiny-started.html#附加说明"><i class="fa fa-check"></i><b>15.7.1</b> 附加说明</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="custom-output.html"><a href="custom-output.html"><i class="fa fa-check"></i><b>16</b> 自定义排版</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="custom-output.html"><a href="custom-output.html#parameterized-report"><i class="fa fa-check"></i><b>16.1</b> 有参数的 R Markdown 报告</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="custom-output.html"><a href="custom-output.html#params-declare"><i class="fa fa-check"></i><b>16.1.1</b> 声明参数</a></li>
+<li class="chapter" data-level="16.1.2" data-path="custom-output.html"><a href="custom-output.html#params-use"><i class="fa fa-check"></i><b>16.1.2</b> 使用参数</a></li>
+<li class="chapter" data-level="16.1.3" data-path="custom-output.html"><a href="custom-output.html#params-knit"><i class="fa fa-check"></i><b>16.1.3</b> 有参编译</a></li>
+<li class="chapter" data-level="16.1.4" data-path="custom-output.html"><a href="custom-output.html#params-publish"><i class="fa fa-check"></i><b>16.1.4</b> 发布文档</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="custom-output.html"><a href="custom-output.html#document-template"><i class="fa fa-check"></i><b>16.2</b> 文档模板</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="custom-output.html"><a href="custom-output.html#template-structure"><i class="fa fa-check"></i><b>16.2.1</b> 模板的结构</a></li>
+<li class="chapter" data-level="16.2.2" data-path="custom-output.html"><a href="custom-output.html#template-support"><i class="fa fa-check"></i><b>16.2.2</b> 模板支持文件</a></li>
+<li class="chapter" data-level="16.2.3" data-path="custom-output.html"><a href="custom-output.html#template-pandoc"><i class="fa fa-check"></i><b>16.2.3</b> 设置 Pandoc 模板</a></li>
+<li class="chapter" data-level="16.2.4" data-path="custom-output.html"><a href="custom-output.html#template-share"><i class="fa fa-check"></i><b>16.2.4</b> 分享模板</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="custom-output.html"><a href="custom-output.html#new-formats"><i class="fa fa-check"></i><b>16.3</b> 创建新的文档格式</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="custom-output.html"><a href="custom-output.html#format-derive"><i class="fa fa-check"></i><b>16.3.1</b> 从现有文档格式衍生新格式</a></li>
+<li class="chapter" data-level="16.3.2" data-path="custom-output.html"><a href="custom-output.html#fully-custom-format"><i class="fa fa-check"></i><b>16.3.2</b> 完全的自定义输出格式</a></li>
+<li class="chapter" data-level="16.3.3" data-path="custom-output.html"><a href="custom-output.html#using-a-new-format"><i class="fa fa-check"></i><b>16.3.3</b> 使用新的文档输出格式</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Markdown 指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="table" class="section level1" number="9">
+<h1><span class="header-section-number">第 9 章</span> 表格操作</h1>
+<p>在日常报告中，表格是我们展示结果的主要方式之一。为了满足你的特定需求，你可能经常需要调整各个表格的外观。在本章中，我们将介绍如何个性化制作表格。本章主要目的如下:</p>
+<ul>
+<li><p>展现表格生成函数 <code>knitr::kable()</code> 的所有特征；</p></li>
+<li><p>使用 <strong>kableExtra</strong> 包 <span class="citation">(<a href="#ref-R-kableExtra" role="doc-biblioref">Zhu 2020</a>)</span> 来展现更高级的个性化制作方法；</p></li>
+<li><p>提供其它生成表格的R包。</p></li>
+</ul>
+<div id="kable" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> 表格生成函数 <code>knitr::kable()</code></h2>
+<p>在 <strong>knitr</strong> 中，函数 <code>kable()</code> 是一个非常简单的表格生成器，并且设计简单。它仅为严格的“矩形数据”（如矩阵和数据框）生成表格，不能自由地设计单元格或合并单元格。然而，这个函数有大量的参数供你自定义表格的外观:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="table.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(x, format, <span class="at">digits =</span> <span class="fu">getOption</span>(<span class="st">&quot;digits&quot;</span>), </span>
+<span id="cb168-2"><a href="table.html#cb168-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">NA</span>, <span class="at">col.names =</span> <span class="cn">NA</span>, align, <span class="at">caption =</span> <span class="cn">NULL</span>, </span>
+<span id="cb168-3"><a href="table.html#cb168-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NULL</span>, <span class="at">format.args =</span> <span class="fu">list</span>(), <span class="at">escape =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb168-4"><a href="table.html#cb168-4" aria-hidden="true" tabindex="-1"></a>    ...)</span></code></pre></div>
+<div id="kable-formats" class="section level3" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> 已支持的表的格式</h3>
+<p>在大多数情况下，如果你只需要数据对象 <code>x</code> 的一个简单表格，<code>knitr::kable(x)</code> 就足够了，<code>format</code> 参数会根据 <strong>knitr</strong> 源文档自动设置。它可能的取值是 <code>pipe</code> （列与列之间由短的竖线分隔的表），<code>simple</code> （Pandoc 的简单表格），<code>latex</code> （LaTex 表格），<code>html</code> （HTML 表格），和 <code>rst</code> （reStructuredText 表格）。对于 R Markdown 文档，<code>kable()</code> 默认使用’ <code>pipe</code> 格式的表格，如下所示:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="table.html#cb169-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(mtcars[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]), <span class="st">&#39;pipe&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb170-1"><a href="table.html#cb170-1" aria-hidden="true" tabindex="-1"></a>|                  |  mpg| cyl| disp|  hp|</span>
+<span id="cb170-2"><a href="table.html#cb170-2" aria-hidden="true" tabindex="-1"></a>|:-----------------|----:|---:|----:|---:|</span>
+<span id="cb170-3"><a href="table.html#cb170-3" aria-hidden="true" tabindex="-1"></a>|Mazda RX4         | 21.0|   6|  160| 110|</span>
+<span id="cb170-4"><a href="table.html#cb170-4" aria-hidden="true" tabindex="-1"></a>|Mazda RX4 Wag     | 21.0|   6|  160| 110|</span>
+<span id="cb170-5"><a href="table.html#cb170-5" aria-hidden="true" tabindex="-1"></a>|Datsun 710        | 22.8|   4|  108|  93|</span>
+<span id="cb170-6"><a href="table.html#cb170-6" aria-hidden="true" tabindex="-1"></a>|Hornet 4 Drive    | 21.4|   6|  258| 110|</span>
+<span id="cb170-7"><a href="table.html#cb170-7" aria-hidden="true" tabindex="-1"></a>|Hornet Sportabout | 18.7|   8|  360| 175|</span>
+<span id="cb170-8"><a href="table.html#cb170-8" aria-hidden="true" tabindex="-1"></a>|Valiant           | 18.1|   6|  225| 105|</span></code></pre></div>
+<p>你也可以生成基于 Pandoc 的简单表格，或 HMTL、LaTex以及 reStructuredText 格式的表格：</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="table.html#cb171-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(mtcars[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]), <span class="st">&#39;simple&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb172-1"><a href="table.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="in">                      mpg   cyl   disp    hp</span></span>
+<span id="cb172-2"><a href="table.html#cb172-2" aria-hidden="true" tabindex="-1"></a>------------------  -----  ----  -----  ----</span>
+<span id="cb172-3"><a href="table.html#cb172-3" aria-hidden="true" tabindex="-1"></a>Mazda RX4            21.0     6    160   110</span>
+<span id="cb172-4"><a href="table.html#cb172-4" aria-hidden="true" tabindex="-1"></a>Mazda RX4 Wag        21.0     6    160   110</span>
+<span id="cb172-5"><a href="table.html#cb172-5" aria-hidden="true" tabindex="-1"></a>Datsun 710           22.8     4    108    93</span>
+<span id="cb172-6"><a href="table.html#cb172-6" aria-hidden="true" tabindex="-1"></a>Hornet 4 Drive       21.4     6    258   110</span>
+<span id="cb172-7"><a href="table.html#cb172-7" aria-hidden="true" tabindex="-1"></a>Hornet Sportabout    18.7     8    360   175</span>
+<span id="cb172-8"><a href="table.html#cb172-8" aria-hidden="true" tabindex="-1"></a>Valiant              18.1     6    225   105</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="table.html#cb173-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="st">&#39;html&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb174-1"><a href="table.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;table&gt;</span></span>
+<span id="cb174-2"><a href="table.html#cb174-2" aria-hidden="true" tabindex="-1"></a> <span class="kw">&lt;thead&gt;</span></span>
+<span id="cb174-3"><a href="table.html#cb174-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb174-4"><a href="table.html#cb174-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;th</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:left;&quot;</span><span class="kw">&gt;</span>   <span class="kw">&lt;/th&gt;</span></span>
+<span id="cb174-5"><a href="table.html#cb174-5" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;th</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> mpg <span class="kw">&lt;/th&gt;</span></span>
+<span id="cb174-6"><a href="table.html#cb174-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;th</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> cyl <span class="kw">&lt;/th&gt;</span></span>
+<span id="cb174-7"><a href="table.html#cb174-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb174-8"><a href="table.html#cb174-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">&lt;/thead&gt;</span></span>
+<span id="cb174-9"><a href="table.html#cb174-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;tbody&gt;</span></span>
+<span id="cb174-10"><a href="table.html#cb174-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb174-11"><a href="table.html#cb174-11" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:left;&quot;</span><span class="kw">&gt;</span> Mazda RX4 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb174-12"><a href="table.html#cb174-12" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> 21 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb174-13"><a href="table.html#cb174-13" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> 6 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb174-14"><a href="table.html#cb174-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb174-15"><a href="table.html#cb174-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb174-16"><a href="table.html#cb174-16" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:left;&quot;</span><span class="kw">&gt;</span> Mazda RX4 Wag <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb174-17"><a href="table.html#cb174-17" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> 21 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb174-18"><a href="table.html#cb174-18" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> 6 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb174-19"><a href="table.html#cb174-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb174-20"><a href="table.html#cb174-20" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/tbody&gt;</span></span>
+<span id="cb174-21"><a href="table.html#cb174-21" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/table&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="table.html#cb175-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(mtcars[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]), <span class="st">&#39;latex&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb176-1"><a href="table.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tabular</span>}{l|r|r|r|r}</span>
+<span id="cb176-2"><a href="table.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb176-3"><a href="table.html#cb176-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">&amp;</span> mpg <span class="op">&amp;</span> cyl <span class="op">&amp;</span> disp <span class="op">&amp;</span> hp<span class="fu">\\</span></span>
+<span id="cb176-4"><a href="table.html#cb176-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb176-5"><a href="table.html#cb176-5" aria-hidden="true" tabindex="-1"></a>Mazda RX4 <span class="op">&amp;</span> 21.0 <span class="op">&amp;</span> 6 <span class="op">&amp;</span> 160 <span class="op">&amp;</span> 110<span class="fu">\\</span></span>
+<span id="cb176-6"><a href="table.html#cb176-6" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb176-7"><a href="table.html#cb176-7" aria-hidden="true" tabindex="-1"></a>Mazda RX4 Wag <span class="op">&amp;</span> 21.0 <span class="op">&amp;</span> 6 <span class="op">&amp;</span> 160 <span class="op">&amp;</span> 110<span class="fu">\\</span></span>
+<span id="cb176-8"><a href="table.html#cb176-8" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb176-9"><a href="table.html#cb176-9" aria-hidden="true" tabindex="-1"></a>Datsun 710 <span class="op">&amp;</span> 22.8 <span class="op">&amp;</span> 4 <span class="op">&amp;</span> 108 <span class="op">&amp;</span> 93<span class="fu">\\</span></span>
+<span id="cb176-10"><a href="table.html#cb176-10" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb176-11"><a href="table.html#cb176-11" aria-hidden="true" tabindex="-1"></a>Hornet 4 Drive <span class="op">&amp;</span> 21.4 <span class="op">&amp;</span> 6 <span class="op">&amp;</span> 258 <span class="op">&amp;</span> 110<span class="fu">\\</span></span>
+<span id="cb176-12"><a href="table.html#cb176-12" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb176-13"><a href="table.html#cb176-13" aria-hidden="true" tabindex="-1"></a>Hornet Sportabout <span class="op">&amp;</span> 18.7 <span class="op">&amp;</span> 8 <span class="op">&amp;</span> 360 <span class="op">&amp;</span> 175<span class="fu">\\</span></span>
+<span id="cb176-14"><a href="table.html#cb176-14" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb176-15"><a href="table.html#cb176-15" aria-hidden="true" tabindex="-1"></a>Valiant <span class="op">&amp;</span> 18.1 <span class="op">&amp;</span> 6 <span class="op">&amp;</span> 225 <span class="op">&amp;</span> 105<span class="fu">\\</span></span>
+<span id="cb176-16"><a href="table.html#cb176-16" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb176-17"><a href="table.html#cb176-17" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tabular</span>}</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="table.html#cb177-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(mtcars[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]), <span class="st">&#39;rst&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode rst"><code class="sourceCode rest"><span id="cb178-1"><a href="table.html#cb178-1" aria-hidden="true" tabindex="-1"></a>=================  ====  ===  ====  ===</span>
+<span id="cb178-2"><a href="table.html#cb178-2" aria-hidden="true" tabindex="-1"></a>\                   mpg  cyl  disp   hp</span>
+<span id="cb178-3"><a href="table.html#cb178-3" aria-hidden="true" tabindex="-1"></a>=================  ====  ===  ====  ===</span>
+<span id="cb178-4"><a href="table.html#cb178-4" aria-hidden="true" tabindex="-1"></a>Mazda RX4          21.0    6   160  110</span>
+<span id="cb178-5"><a href="table.html#cb178-5" aria-hidden="true" tabindex="-1"></a>Mazda RX4 Wag      21.0    6   160  110</span>
+<span id="cb178-6"><a href="table.html#cb178-6" aria-hidden="true" tabindex="-1"></a>Datsun 710         22.8    4   108   93</span>
+<span id="cb178-7"><a href="table.html#cb178-7" aria-hidden="true" tabindex="-1"></a>Hornet 4 Drive     21.4    6   258  110</span>
+<span id="cb178-8"><a href="table.html#cb178-8" aria-hidden="true" tabindex="-1"></a>Hornet Sportabout  18.7    8   360  175</span>
+<span id="cb178-9"><a href="table.html#cb178-9" aria-hidden="true" tabindex="-1"></a>Valiant            18.1    6   225  105</span>
+<span id="cb178-10"><a href="table.html#cb178-10" aria-hidden="true" tabindex="-1"></a>=================  ====  ===  ====  ===</span></code></pre></div>
+<p>需要注意的是，只有 <code>pipe</code> 和 <code>simple</code> 格式是可移植的，也就是说，它们适用于任何输出文档的格式，而其他格式则只适用于特定的输出格式，例如，<code>format = 'latex'</code> 只适用于 LaTex 输出文档。使用特定的表格格式可以带给你更多的自主控制能力，但代价是牺牲了可移植性。</p>
+<p>如果你只需要一种非默认的表格格式，你可以直接设置全局的 R 选项 <code>knitr.table.format</code>，例如,</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="table.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.table.format =</span> <span class="st">&#39;latex&#39;</span>)</span></code></pre></div>
+<p>这一选项也可以是一个返回格式字符串或 <code>NULL</code> 的函数，在 <code>NULL</code> 的情况下，<strong>knitr</strong> 将自动决定适当的格式。例如，我们只能在输出格式为 LaTeX 时使用 <code>latex</code> 格式:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="table.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.table.format =</span> <span class="cf">function</span>() {</span>
+<span id="cb180-2"><a href="table.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (knitr<span class="sc">::</span><span class="fu">is_latex_output</span>()) <span class="st">&#39;latex&#39;</span> <span class="cf">else</span> <span class="st">&#39;pipe&#39;</span></span>
+<span id="cb180-3"><a href="table.html#cb180-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+</div>
+<div id="修改列名" class="section level3" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> 修改列名</h3>
+<!-- https://stackoverflow.com/questions/51432502/replace-column-names-in-kable-r-markdown/51444998#51444998 -->
+<p>数据框中我们定义的列的名称可能与我们想要显示给读者的内容不同，在 R 中，数据的列名通常不使用空格来分隔单词，而是使用点、下划线以及大小写来进行分隔。而当我们在制作表格时，这样子的变量名会显得有些不自然。在这种情况下，我们可以使用 <code>col.names</code> 参数将列名替换为一个包含新名称的向量。例如，我们可以在 <code>iris</code> 数据的列名中用空格代替点:</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="table.html#cb181-1" aria-hidden="true" tabindex="-1"></a>iris2 <span class="ot">=</span> <span class="fu">head</span>(iris)</span>
+<span id="cb181-2"><a href="table.html#cb181-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris2, <span class="at">col.names =</span> <span class="fu">gsub</span>(<span class="st">&#39;[.]&#39;</span>, <span class="st">&#39; &#39;</span>, <span class="fu">names</span>(iris)))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sepal Length</th>
+<th align="right">Sepal Width</th>
+<th align="right">Petal Length</th>
+<th align="right">Petal Width</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+</tbody>
+</table>
+<p><code>col.names</code> 参数可以接受任意字符向量（不一定是通过 <code>gsub()</code> 等函数修改的列名），只要向量的长度等于数据对象的列数即可，例如：</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="table.html#cb182-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb182-2"><a href="table.html#cb182-2" aria-hidden="true" tabindex="-1"></a>  iris,</span>
+<span id="cb182-3"><a href="table.html#cb182-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&#39;We&#39;</span>, <span class="st">&#39;Need&#39;</span>, <span class="st">&#39;Five&#39;</span>, <span class="st">&#39;Names&#39;</span>, <span class="st">&#39;Here&#39;</span>)</span>
+<span id="cb182-4"><a href="table.html#cb182-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="指定列的对齐方式" class="section level3" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> 指定列的对齐方式</h3>
+<p>要改变表格中列的对齐方式，可以使用由字符 <code>l</code> （左对齐）、<code>c</code> （居中）以及 <code>r</code> （右对齐）组成的值向量或一个多字符的字符串来进行对齐，例如可以将 <code>kable(..., align = c('c', 'l'))</code> 缩写为 <code>kable(..., align = 'cl')</code> 。在默认情况下，数字列是右对齐的，其他列是左对齐的。下面是一个例子:</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="table.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 左对齐，居中，居中，右对齐，右对齐</span></span>
+<span id="cb183-2"><a href="table.html#cb183-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris2, <span class="at">align =</span> <span class="st">&#39;lccrr&#39;</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sepal.Length</th>
+<th align="center">Sepal.Width</th>
+<th align="center">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="right">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">5.1</td>
+<td align="center">3.5</td>
+<td align="center">1.4</td>
+<td align="right">0.2</td>
+<td align="right">setosa</td>
+</tr>
+<tr class="even">
+<td align="left">4.9</td>
+<td align="center">3.0</td>
+<td align="center">1.4</td>
+<td align="right">0.2</td>
+<td align="right">setosa</td>
+</tr>
+<tr class="odd">
+<td align="left">4.7</td>
+<td align="center">3.2</td>
+<td align="center">1.3</td>
+<td align="right">0.2</td>
+<td align="right">setosa</td>
+</tr>
+<tr class="even">
+<td align="left">4.6</td>
+<td align="center">3.1</td>
+<td align="center">1.5</td>
+<td align="right">0.2</td>
+<td align="right">setosa</td>
+</tr>
+<tr class="odd">
+<td align="left">5.0</td>
+<td align="center">3.6</td>
+<td align="center">1.4</td>
+<td align="right">0.2</td>
+<td align="right">setosa</td>
+</tr>
+<tr class="even">
+<td align="left">5.4</td>
+<td align="center">3.9</td>
+<td align="center">1.7</td>
+<td align="right">0.4</td>
+<td align="right">setosa</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="kable-caption" class="section level3" number="9.1.4">
+<h3><span class="header-section-number">9.1.4</span> 添加表格标题</h3>
+<p>你可以通过 <code>caption</code> 参数来给表格添加一个标题，如表<a href="table.html#tab:kable-cap">9.1</a>：</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="table.html#cb184-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris2, <span class="at">caption =</span> <span class="st">&#39;一个简单的标题&#39;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:kable-cap">表 9.1: </span>一个简单的标题</caption>
+<thead>
+<tr class="header">
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+</tbody>
+</table>
+<p>正如我们在本书<a href="#cross-ref"><strong>??</strong></a>节所提到的那样，当一个表格有标题并且以 <strong>bookdown</strong> 来输出格式时，它可以被交叉引用。</p>
+</div>
+<div id="调整数字格式" class="section level3" number="9.1.5">
+<h3><span class="header-section-number">9.1.5</span> 调整数字格式</h3>
+<p>你可以通过<code>digits</code>参数（会被传递给<code>round()</code>函数）来设置最大的小数位数，以及通过<code>format.args</code>（会被传递给R中的<code>format()</code>函数）来设置其他格式化参数。首先，我们展示了几个简单的<code>round()</code>和<code>format()</code>的例子，从而帮助你在之后的<code>kable()</code>中理解这些参数是如何工作的:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="table.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">1.234567</span>, <span class="dv">0</span>)</span>
+<span id="cb185-2"><a href="table.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb185-3"><a href="table.html#cb185-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">1.234567</span>, <span class="at">digits =</span> <span class="dv">1</span>)</span>
+<span id="cb185-4"><a href="table.html#cb185-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.2</span></span>
+<span id="cb185-5"><a href="table.html#cb185-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">1.234567</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb185-6"><a href="table.html#cb185-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.235</span></span>
+<span id="cb185-7"><a href="table.html#cb185-7" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="dv">1000</span>, <span class="at">scientific =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb185-8"><a href="table.html#cb185-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;1e+03&quot;</span></span>
+<span id="cb185-9"><a href="table.html#cb185-9" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fl">10000.123</span>, <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>)</span>
+<span id="cb185-10"><a href="table.html#cb185-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;10,000.12&quot;</span></span></code></pre></div>
+<p>然后我们将数字四舍五入并格式化成表格：</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="table.html#cb186-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">cbind</span>(<span class="at">X1 =</span> <span class="fu">runif</span>(<span class="dv">3</span>), <span class="at">X2 =</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>), <span class="at">X3 =</span> <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1000</span>))</span>
+<span id="cb186-2"><a href="table.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 保留最多四位小数</span></span>
+<span id="cb186-3"><a href="table.html#cb186-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">X2</th>
+<th align="right">X3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.3921</td>
+<td align="right">1e+03</td>
+<td align="right">1284.9078</td>
+</tr>
+<tr class="even">
+<td align="right">0.1432</td>
+<td align="right">1e+05</td>
+<td align="right">146.9113</td>
+</tr>
+<tr class="odd">
+<td align="right">0.8265</td>
+<td align="right">1e+07</td>
+<td align="right">-1004.9729</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="table.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 每列分别设置</span></span>
+<span id="cb187-2"><a href="table.html#cb187-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">X2</th>
+<th align="right">X3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.39206</td>
+<td align="right">1e+03</td>
+<td align="right">1284.91</td>
+</tr>
+<tr class="even">
+<td align="right">0.14316</td>
+<td align="right">1e+05</td>
+<td align="right">146.91</td>
+</tr>
+<tr class="odd">
+<td align="right">0.82647</td>
+<td align="right">1e+07</td>
+<td align="right">-1004.97</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="table.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 不使用科学计数法</span></span>
+<span id="cb188-2"><a href="table.html#cb188-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">format.args =</span> <span class="fu">list</span>(<span class="at">scientific =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">X2</th>
+<th align="right">X3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.392</td>
+<td align="right">1000</td>
+<td align="right">1284.908</td>
+</tr>
+<tr class="even">
+<td align="right">0.143</td>
+<td align="right">100000</td>
+<td align="right">146.911</td>
+</tr>
+<tr class="odd">
+<td align="right">0.826</td>
+<td align="right">10000000</td>
+<td align="right">-1004.973</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="table.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 给 big numbers 添加逗号</span></span>
+<span id="cb189-2"><a href="table.html#cb189-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">format.args =</span> <span class="fu">list</span>(<span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">X2</th>
+<th align="right">X3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.392</td>
+<td align="right">1,000</td>
+<td align="right">1,284.908</td>
+</tr>
+<tr class="even">
+<td align="right">0.143</td>
+<td align="right">100,000</td>
+<td align="right">146.911</td>
+</tr>
+<tr class="odd">
+<td align="right">0.826</td>
+<td align="right">10,000,000</td>
+<td align="right">-1,004.973</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="显示缺失值" class="section level3" number="9.1.6">
+<h3><span class="header-section-number">9.1.6</span> 显示缺失值</h3>
+<p>在默认情况下，缺失值（如<code>NA</code>）在表格中显示为字符串<code>NA</code>，你可以使用其他的值来替换它们，或者通过使用全局R选项 <code>knitr.kable.NA</code>来选择不显示任何东西（例如使<code>NA</code>对应的单元格为空），。例如，我们将在下面第二个表中的<code>NA</code>单元格设为空，然后在第三个表中显示<code>**</code>；</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="table.html#cb190-1" aria-hidden="true" tabindex="-1"></a>d[<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>))] <span class="ot">=</span> <span class="cn">NA</span></span>
+<span id="cb190-2"><a href="table.html#cb190-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d)  <span class="co"># 默认显示 NA</span></span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">X2</th>
+<th align="right">X3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">1e+03</td>
+<td align="right">1284.908</td>
+</tr>
+<tr class="even">
+<td align="right">0.1431603</td>
+<td align="right">1e+05</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">0.8264741</td>
+<td align="right">NA</td>
+<td align="right">-1004.973</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="table.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 用空值代替 NA</span></span>
+<span id="cb191-2"><a href="table.html#cb191-2" aria-hidden="true" tabindex="-1"></a>opts <span class="ot">=</span> <span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb191-3"><a href="table.html#cb191-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">X2</th>
+<th align="right">X3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"></td>
+<td align="right">1e+03</td>
+<td align="right">1284.908</td>
+</tr>
+<tr class="even">
+<td align="right">0.1431603</td>
+<td align="right">1e+05</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">0.8264741</td>
+<td align="right"></td>
+<td align="right">-1004.973</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="table.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 用指定字符（**） 代替 NA</span></span>
+<span id="cb192-2"><a href="table.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;**&#39;</span>)</span>
+<span id="cb192-3"><a href="table.html#cb192-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">X2</th>
+<th align="right">X3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">**</td>
+<td align="right">1e+03</td>
+<td align="right">1284.908</td>
+</tr>
+<tr class="even">
+<td align="right">0.1431603</td>
+<td align="right">1e+05</td>
+<td align="right">**</td>
+</tr>
+<tr class="odd">
+<td align="right">0.8264741</td>
+<td align="right">**</td>
+<td align="right">-1004.973</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="table.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(opts)  <span class="co"># 恢复全局 R 选项</span></span></code></pre></div>
+</div>
+<div id="特殊字符的转义" class="section level3" number="9.1.7">
+<h3><span class="header-section-number">9.1.7</span> 特殊字符的转义</h3>
+<p>对于HTML或者LaTex，对应的编程语言之中包含了一些特殊的字符。为了使结果能够正常输出，<code>kable()</code>将默认通过参数<code>escape = TRUE</code>来转义这些特殊字符，这意味着所有的字符将逐字生成，特殊字符将失去其特殊含义。例如对于HTML格式的表格，<code>&gt;</code>将被替换为<code>&amp;gt;</code>；而对于LaTex格式的表格，<code>_</code>将转义为<code>\_</code>。如果你接触过这些字符，并且知道如何正确使用它们，那么可以通过<code>escape = FALSE</code>来禁用这个参数。在下面的第二个表中，我们介绍了一些包含特殊字符（<code>$</code>、<code>\</code>以及<code>_</code>）的LaTex数学表达式：</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="table.html#cb194-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
+<span id="cb194-2"><a href="table.html#cb194-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">coef</span>(<span class="fu">summary</span>(m))</span>
+<span id="cb194-3"><a href="table.html#cb194-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">-17.579095</td>
+<td align="right">6.7584402</td>
+<td align="right">-2.601058</td>
+<td align="right">0.0123188</td>
+</tr>
+<tr class="even">
+<td align="left">speed</td>
+<td align="right">3.932409</td>
+<td align="right">0.4155128</td>
+<td align="right">9.463990</td>
+<td align="right">0.0000000</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="table.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 在行名和列名中添加数学表达式</span></span>
+<span id="cb195-2"><a href="table.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(d) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;$</span><span class="sc">\\</span><span class="st">beta_0$&#39;</span>, <span class="st">&#39;$</span><span class="sc">\\</span><span class="st">beta_1$&#39;</span>)</span>
+<span id="cb195-3"><a href="table.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d)[<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;$P(T &gt; |t|)$&#39;</span></span>
+<span id="cb195-4"><a href="table.html#cb195-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">escape =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right"><span class="math inline">\(P(T &gt; &amp;#124;t&amp;#124;)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="right">-17.579095</td>
+<td align="right">6.7584402</td>
+<td align="right">-2.601058</td>
+<td align="right">0.0123188</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\beta_1\)</span></td>
+<td align="right">3.932409</td>
+<td align="right">0.4155128</td>
+<td align="right">9.463990</td>
+<td align="right">0.0000000</td>
+</tr>
+</tbody>
+</table>
+<p>如果没有<code>escape = FALSE</code>，特殊字符将被转义或替换。例如，<code>$</code>会被转义为<code>\$</code>、<code>_</code>被转义为<code>\_</code>以及<code>\</code> ’被替换为<code>\textbackslash{}</code>:</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="table.html#cb196-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">format =</span> <span class="st">&#39;latex&#39;</span>, <span class="at">escape =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb197-1"><a href="table.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tabular</span>}{l|r|r|r|r}</span>
+<span id="cb197-2"><a href="table.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb197-3"><a href="table.html#cb197-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">&amp;</span> Estimate <span class="op">&amp;</span> Std. Error <span class="op">&amp;</span> t value <span class="op">&amp;</span> <span class="fu">\$</span>P(T &gt; |t|)<span class="fu">\$\\</span></span>
+<span id="cb197-4"><a href="table.html#cb197-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb197-5"><a href="table.html#cb197-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\$\textbackslash</span>{}beta<span class="fu">\_</span>0<span class="fu">\$</span> <span class="op">&amp;</span> -17.579095 <span class="op">&amp;</span> 6.7584402 <span class="op">&amp;</span> -2.601058 <span class="op">&amp;</span> 0.0123188<span class="fu">\\</span></span>
+<span id="cb197-6"><a href="table.html#cb197-6" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb197-7"><a href="table.html#cb197-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\$\textbackslash</span>{}beta<span class="fu">\_</span>1<span class="fu">\$</span> <span class="op">&amp;</span> 3.932409 <span class="op">&amp;</span> 0.4155128 <span class="op">&amp;</span> 9.463990 <span class="op">&amp;</span> 0.0000000<span class="fu">\\</span></span>
+<span id="cb197-8"><a href="table.html#cb197-8" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb197-9"><a href="table.html#cb197-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tabular</span>}</span></code></pre></div>
+<p>其他LaTex中常见的特殊字符包括<code>#</code>、<code>%</code>、<code>&amp;</code>、<code>{</code>以及 <code>}</code>；HTML中常见的特殊字符包括<code>&amp;</code>、<code>&lt;</code>、 <code>&gt;</code>以及<code>"</code>。在生成带有<code>escape = FALSE</code>的表格时，需要格外小心并确保正确地使用了特殊字符。一个常见的错误是在使用<code>escape = FALSE</code>时，在LaTeX表格的列名或标题中包含<code>%</code>或<code>_</code>等字符，而没有意识到它们是特殊的字符。</p>
+<p>如果你不确定如何正确地转义特殊字符，在<strong>knitr</strong>中有两个内部辅助函数。下面是一些例子：</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="table.html#cb198-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">:::</span><span class="fu">escape_latex</span>(<span class="fu">c</span>(<span class="st">&#39;100%&#39;</span>, <span class="st">&#39;# a comment&#39;</span>, <span class="st">&#39;column_name&#39;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;100\\%&quot;        &quot;\\# a comment&quot; &quot;column\\_name&quot;</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="table.html#cb200-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">:::</span><span class="fu">escape_html</span>(<span class="fu">c</span>(<span class="st">&#39;&lt;address&gt;&#39;</span>, <span class="st">&#39;x = &quot;character&quot;&#39;</span>, <span class="st">&#39;a &amp; b&#39;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;&amp;lt;address&amp;gt;&quot;           &quot;x = &amp;quot;character&amp;quot;&quot;
+## [3] &quot;a &amp;amp; b&quot;</code></pre>
+</div>
+<div id="多张表格并排" class="section level3" number="9.1.8">
+<h3><span class="header-section-number">9.1.8</span> 多张表格并排</h3>
+<p>你可以通过将数据框或矩阵的列表传递给<code>kable()</code>来并排生成很多张表。例如，表<a href="table.html#tab:two-tables">9.2</a> 包含以下代码生成的两个表:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="table.html#cb202-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">head</span>(cars, <span class="dv">3</span>)</span>
+<span id="cb202-2"><a href="table.html#cb202-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">head</span>(mtcars[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">5</span>)</span>
+<span id="cb202-3"><a href="table.html#cb202-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb202-4"><a href="table.html#cb202-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(d1, d2),</span>
+<span id="cb202-5"><a href="table.html#cb202-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;两张表并排放置&#39;</span>,</span>
+<span id="cb202-6"><a href="table.html#cb202-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">valign =</span> <span class="st">&#39;t&#39;</span></span>
+<span id="cb202-7"><a href="table.html#cb202-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table class="kable_wrapper">
+<caption>
+<span id="tab:two-tables">表 9.2: </span>两张表并排放置
+</caption>
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="right">speed</th>
+<th align="right">dist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mazda RX4</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+</tr>
+<tr class="even">
+<td align="left">Mazda RX4 Wag</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+</tr>
+<tr class="odd">
+<td align="left">Datsun 710</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">108</td>
+</tr>
+<tr class="even">
+<td align="left">Hornet 4 Drive</td>
+<td align="right">21.4</td>
+<td align="right">6</td>
+<td align="right">258</td>
+</tr>
+<tr class="odd">
+<td align="left">Hornet Sportabout</td>
+<td align="right">18.7</td>
+<td align="right">8</td>
+<td align="right">360</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>需要注意的是，此功能仅适用于HTML和PDF格式的输出。</p>
+<p>如果你想在将每个表并排放置时能够分别自定义它们，你可以使用<code>kables()</code>函数（<code>kable()</code>的复数形式），并将一个对象为<code>kable()</code>的列表传递给它。例如，在表 <a href="table.html#tab:kables">9.3</a> 中，我们更改左表中的列名，并将右表中的小数点位数设置为零：</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="table.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 数据对象 d1 和 d2 由之前的代码块生成</span></span>
+<span id="cb203-2"><a href="table.html#cb203-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kables</span>(</span>
+<span id="cb203-3"><a href="table.html#cb203-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb203-4"><a href="table.html#cb203-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 第一个 kable()：修改列名</span></span>
+<span id="cb203-5"><a href="table.html#cb203-5" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb203-6"><a href="table.html#cb203-6" aria-hidden="true" tabindex="-1"></a>      d1, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&#39;SPEED&#39;</span>, <span class="st">&#39;DISTANCE&#39;</span>), <span class="at">valign =</span> <span class="st">&#39;t&#39;</span></span>
+<span id="cb203-7"><a href="table.html#cb203-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb203-8"><a href="table.html#cb203-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 第二个 kable()：设置 digits 选项</span></span>
+<span id="cb203-9"><a href="table.html#cb203-9" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(d2, <span class="at">digits =</span> <span class="dv">0</span>, <span class="at">valign =</span> <span class="st">&#39;t&#39;</span>)</span>
+<span id="cb203-10"><a href="table.html#cb203-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb203-11"><a href="table.html#cb203-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;由 knitr::kables() 生成的两张表&#39;</span></span>
+<span id="cb203-12"><a href="table.html#cb203-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table class="kable_wrapper">
+<caption>
+<span id="tab:kables">表 9.3: </span>由 knitr::kables() 生成的两张表
+</caption>
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="right">SPEED</th>
+<th align="right">DISTANCE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mazda RX4</td>
+<td align="right">21</td>
+<td align="right">6</td>
+<td align="right">160</td>
+</tr>
+<tr class="even">
+<td align="left">Mazda RX4 Wag</td>
+<td align="right">21</td>
+<td align="right">6</td>
+<td align="right">160</td>
+</tr>
+<tr class="odd">
+<td align="left">Datsun 710</td>
+<td align="right">23</td>
+<td align="right">4</td>
+<td align="right">108</td>
+</tr>
+<tr class="even">
+<td align="left">Hornet 4 Drive</td>
+<td align="right">21</td>
+<td align="right">6</td>
+<td align="right">258</td>
+</tr>
+<tr class="odd">
+<td align="left">Hornet Sportabout</td>
+<td align="right">19</td>
+<td align="right">8</td>
+<td align="right">360</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="利用for循环生成多个表" class="section level3" number="9.1.9">
+<h3><span class="header-section-number">9.1.9</span> 利用<code>for</code>循环生成多个表 (*)</h3>
+<p>对于<code>kable()</code>，有一个常见的错误认识是它不能在<code>for</code>循环中工作。这个问题并不特定于<code>kable()</code>，同时也存在于许多其他的R包中。其背后原因有点复杂，如果你对技术细节感兴趣，可以在博文<a href="https://yihui.org/en/2017/06/top-level-r-expressions/">“The Ghost Printer behind Top-level R Expressions.”</a> 中进行进一步的了解。</p>
+<p>你可能期望下面的代码块可以生成三个表，但事实上它并不会：</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb204-1"><a href="table.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb204-2"><a href="table.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="in">for (i in 1:3) {</span></span>
+<span id="cb204-3"><a href="table.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::kable(head(iris))</span></span>
+<span id="cb204-4"><a href="table.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb204-5"><a href="table.html#cb204-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>你必须显式打印<code>kable()</code>结果，并应用chunk选项<code>results = 'asis'</code>，例如：</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb205-1"><a href="table.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results=&#39;asis&#39;}</span></span>
+<span id="cb205-2"><a href="table.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="in">for (i in 1:3) {</span></span>
+<span id="cb205-3"><a href="table.html#cb205-3" aria-hidden="true" tabindex="-1"></a><span class="in">  print(knitr::kable(head(iris)))</span></span>
+<span id="cb205-4"><a href="table.html#cb205-4" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb205-5"><a href="table.html#cb205-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>通常情况下，当你从<code>for</code>循环中输出结果时，我们建议你添加一些换行符（<code>\n</code>）或HTML注释（<code>&lt;!-- --&gt;</code>），以便清晰地分隔所有输出的元素，例如:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb206-1"><a href="table.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results=&#39;asis&#39;}</span></span>
+<span id="cb206-2"><a href="table.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="in">for (i in 1:3) {</span></span>
+<span id="cb206-3"><a href="table.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="in">  print(knitr::kable(head(iris), caption = &#39;A caption.&#39;))</span></span>
+<span id="cb206-4"><a href="table.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="in">  cat(&#39;\n\n&lt;!-- --&gt;\n\n&#39;)</span></span>
+<span id="cb206-5"><a href="table.html#cb206-5" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb206-6"><a href="table.html#cb206-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>如果没有这些分隔符，Pandoc可能无法检测到单个元素。例如，当一个图片之后面紧跟着一个表格时，这个表格不会被识别：</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb207-1"><a href="table.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="al">![](logo.png)</span></span>
+<span id="cb207-2"><a href="table.html#cb207-2" aria-hidden="true" tabindex="-1"></a>                      mpg   cyl   disp    hp</span>
+<span id="cb207-3"><a href="table.html#cb207-3" aria-hidden="true" tabindex="-1"></a>------------------  -----  ----  -----  ----</span>
+<span id="cb207-4"><a href="table.html#cb207-4" aria-hidden="true" tabindex="-1"></a>Mazda RX4            21.0     6    160   110</span>
+<span id="cb207-5"><a href="table.html#cb207-5" aria-hidden="true" tabindex="-1"></a>Mazda RX4 Wag        21.0     6    160   110</span></code></pre></div>
+<p>但如果像这样有一个清晰的分隔（注意，我们在图像下面添加了一个空行），它将变成：</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb208-1"><a href="table.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="al">![](logo.png)</span></span>
+<span id="cb208-2"><a href="table.html#cb208-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-3"><a href="table.html#cb208-3" aria-hidden="true" tabindex="-1"></a><span class="in">                      mpg   cyl   disp    hp</span></span>
+<span id="cb208-4"><a href="table.html#cb208-4" aria-hidden="true" tabindex="-1"></a>------------------  -----  ----  -----  ----</span>
+<span id="cb208-5"><a href="table.html#cb208-5" aria-hidden="true" tabindex="-1"></a>Mazda RX4            21.0     6    160   110</span>
+<span id="cb208-6"><a href="table.html#cb208-6" aria-hidden="true" tabindex="-1"></a>Mazda RX4 Wag        21.0     6    160   110</span></code></pre></div>
+<p>或者</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb209-1"><a href="table.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="al">![](logo.png)</span></span>
+<span id="cb209-2"><a href="table.html#cb209-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-3"><a href="table.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- --&gt;</span></span>
+<span id="cb209-4"><a href="table.html#cb209-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-5"><a href="table.html#cb209-5" aria-hidden="true" tabindex="-1"></a><span class="in">                      mpg   cyl   disp    hp</span></span>
+<span id="cb209-6"><a href="table.html#cb209-6" aria-hidden="true" tabindex="-1"></a>------------------  -----  ----  -----  ----</span>
+<span id="cb209-7"><a href="table.html#cb209-7" aria-hidden="true" tabindex="-1"></a>Mazda RX4            21.0     6    160   110</span>
+<span id="cb209-8"><a href="table.html#cb209-8" aria-hidden="true" tabindex="-1"></a>Mazda RX4 Wag        21.0     6    160   110</span></code></pre></div>
+</div>
+<div id="自定义-latex-表格" class="section level3" number="9.1.10">
+<h3><span class="header-section-number">9.1.10</span> 自定义 LaTex 表格 (*)</h3>
+<p>如果你只需要LaTex的输出格式，则可以在<code>kable()</code>中使用一些额外的选项。注意在其他类型的输出中（如HTML），这些选项将被忽略。除非你已经设置了全局的表格格式选项（见本书<a href="table.html#kable-formats">9.1.1</a>节），否则必须像本节的例子那样使用<code>kable()</code>的<code>format</code>参数，例如：</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="table.html#cb210-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris2, <span class="at">format =</span> <span class="st">&#39;latex&#39;</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>当你给一个表格分配一个标题时（见本书<a href="table.html#kable-caption">9.1.4</a>节）， <code>kable()</code>将使用<code>table</code>环境来纳入这个表，即：</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode latex"><code class="sourceCode latex"><span id="cb211-1"><a href="table.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">table</span>}</span>
+<span id="cb211-2"><a href="table.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="co">% 表格 (通常为 tabular 环境)</span></span>
+<span id="cb211-3"><a href="table.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">table</span>}</span></code></pre></div>
+<p>你可以通过<code>table.envir</code>参数来改变这个环境，即：</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="table.html#cb212-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(cars[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, ], <span class="at">format =</span> <span class="st">&#39;latex&#39;</span>, <span class="at">table.envir =</span> <span class="st">&#39;figure&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb213-1"><a href="table.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">figure</span>}</span>
+<span id="cb213-2"><a href="table.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tabular</span>}{r|r}</span>
+<span id="cb213-3"><a href="table.html#cb213-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb213-4"><a href="table.html#cb213-4" aria-hidden="true" tabindex="-1"></a>speed <span class="op">&amp;</span> dist<span class="fu">\\</span></span>
+<span id="cb213-5"><a href="table.html#cb213-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb213-6"><a href="table.html#cb213-6" aria-hidden="true" tabindex="-1"></a>4 <span class="op">&amp;</span> 2<span class="fu">\\</span></span>
+<span id="cb213-7"><a href="table.html#cb213-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb213-8"><a href="table.html#cb213-8" aria-hidden="true" tabindex="-1"></a>4 <span class="op">&amp;</span> 10<span class="fu">\\</span></span>
+<span id="cb213-9"><a href="table.html#cb213-9" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb213-10"><a href="table.html#cb213-10" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tabular</span>}</span>
+<span id="cb213-11"><a href="table.html#cb213-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">figure</span>}</span></code></pre></div>
+<p>表格的位置由参数<code>position</code>来控制。例如，我们可以通过<code>position = "!b"</code>来强制将表格固定到页面的底部：</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="table.html#cb214-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(cars[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, ], <span class="at">format =</span> <span class="st">&#39;latex&#39;</span>, <span class="at">table.envir =</span> <span class="st">&#39;table&#39;</span>, <span class="at">position =</span> <span class="st">&#39;!b&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb215-1"><a href="table.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">table</span>}[!b]</span>
+<span id="cb215-2"><a href="table.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tabular</span>}{r|r}</span>
+<span id="cb215-3"><a href="table.html#cb215-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb215-4"><a href="table.html#cb215-4" aria-hidden="true" tabindex="-1"></a>speed <span class="op">&amp;</span> dist<span class="fu">\\</span></span>
+<span id="cb215-5"><a href="table.html#cb215-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb215-6"><a href="table.html#cb215-6" aria-hidden="true" tabindex="-1"></a>4 <span class="op">&amp;</span> 2<span class="fu">\\</span></span>
+<span id="cb215-7"><a href="table.html#cb215-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb215-8"><a href="table.html#cb215-8" aria-hidden="true" tabindex="-1"></a>4 <span class="op">&amp;</span> 10<span class="fu">\\</span></span>
+<span id="cb215-9"><a href="table.html#cb215-9" aria-hidden="true" tabindex="-1"></a><span class="fu">\hline</span></span>
+<span id="cb215-10"><a href="table.html#cb215-10" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tabular</span>}</span>
+<span id="cb215-11"><a href="table.html#cb215-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">table</span>}</span></code></pre></div>
+<p>当一个表格有一个标题时，你也可以通过<code>caption.short</code>参数给它分配一个短的标题，例如：</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="table.html#cb216-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris2, <span class="at">caption =</span> <span class="st">&#39;一个很长很长的标题！&#39;</span>, <span class="at">caption.short =</span> <span class="st">&#39;短标题&#39;</span>)</span></code></pre></div>
+<p>短标题进入LaTeX中的<code>\caption[]{}</code>命令的方括号中，经常在PDF输出文档的表格目录中使用（如果不提供短标题，那里则会显示完整的标题）。</p>
+<p>如果你熟悉用于生成可供发布的表格的LaTeX包<a href="https://ctan.org/pkg/booktabs"><strong>booktabs</strong></a>{LaTeX package!booktabs}，您可以设置<code>booktabs = TRUE</code>，例如：</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="table.html#cb217-1" aria-hidden="true" tabindex="-1"></a>iris3 <span class="ot">=</span> <span class="fu">head</span>(iris, <span class="dv">10</span>)</span>
+<span id="cb217-2"><a href="table.html#cb217-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris3, <span class="at">format =</span> <span class="st">&#39;latex&#39;</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb218-1"><a href="table.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tabular</span>}{rrrrl}</span>
+<span id="cb218-2"><a href="table.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\toprule</span>{}</span>
+<span id="cb218-3"><a href="table.html#cb218-3" aria-hidden="true" tabindex="-1"></a>Sepal.Length <span class="op">&amp;</span> Sepal.Width <span class="op">&amp;</span> Petal.Length <span class="op">&amp;</span> Petal.Width <span class="op">&amp;</span> Species<span class="fu">\\</span></span>
+<span id="cb218-4"><a href="table.html#cb218-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\midrule</span>{}</span>
+<span id="cb218-5"><a href="table.html#cb218-5" aria-hidden="true" tabindex="-1"></a>5.1 <span class="op">&amp;</span> 3.5 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-6"><a href="table.html#cb218-6" aria-hidden="true" tabindex="-1"></a>4.9 <span class="op">&amp;</span> 3.0 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-7"><a href="table.html#cb218-7" aria-hidden="true" tabindex="-1"></a>4.7 <span class="op">&amp;</span> 3.2 <span class="op">&amp;</span> 1.3 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-8"><a href="table.html#cb218-8" aria-hidden="true" tabindex="-1"></a>4.6 <span class="op">&amp;</span> 3.1 <span class="op">&amp;</span> 1.5 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-9"><a href="table.html#cb218-9" aria-hidden="true" tabindex="-1"></a>5.0 <span class="op">&amp;</span> 3.6 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-10"><a href="table.html#cb218-10" aria-hidden="true" tabindex="-1"></a><span class="fu">\addlinespace</span></span>
+<span id="cb218-11"><a href="table.html#cb218-11" aria-hidden="true" tabindex="-1"></a>5.4 <span class="op">&amp;</span> 3.9 <span class="op">&amp;</span> 1.7 <span class="op">&amp;</span> 0.4 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-12"><a href="table.html#cb218-12" aria-hidden="true" tabindex="-1"></a>4.6 <span class="op">&amp;</span> 3.4 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.3 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-13"><a href="table.html#cb218-13" aria-hidden="true" tabindex="-1"></a>5.0 <span class="op">&amp;</span> 3.4 <span class="op">&amp;</span> 1.5 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-14"><a href="table.html#cb218-14" aria-hidden="true" tabindex="-1"></a>4.4 <span class="op">&amp;</span> 2.9 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-15"><a href="table.html#cb218-15" aria-hidden="true" tabindex="-1"></a>4.9 <span class="op">&amp;</span> 3.1 <span class="op">&amp;</span> 1.5 <span class="op">&amp;</span> 0.1 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb218-16"><a href="table.html#cb218-16" aria-hidden="true" tabindex="-1"></a><span class="fu">\bottomrule</span>{}</span>
+<span id="cb218-17"><a href="table.html#cb218-17" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tabular</span>}</span></code></pre></div>
+<p>需要注意的是，当你在R Markdown文档中需要额外的LaTeX包时（如<strong>booktabs</strong>），你必须在YAML中声明这些包（请参阅<a href="#latex-extra"><strong>??</strong></a>一节了解如何声明）。</p>
+<p>参数<code>booktabs</code>取<code>TRUE</code>或<code>FALSE</code>(默认值)时，表的外观是不同的。对于<code>booktabs = FALSE</code>：</p>
+<ul>
+<li><p>表的列由垂直线分隔。你可以通过<code>vline</code>参数来删除垂直线，例如<code>knitr::kable(iris, vline = "")</code> （默认值是<code>vline = "|"</code>）。你可以将这个选项设置为一个全局的R选项，这样你就不需要为每个表设置它，例如，<code>options(knitr.table.vline = "")</code>。</p></li>
+<li><p>水平线可以通过参数<code>toprule</code>、<code>midrule</code>、<code>linesep</code>以及 <code>bottomrule</code>来定义，它们的默认值都是<code>\hline</code>。</p></li>
+</ul>
+<p>对于 <code>booktabs = TRUE</code>：</p>
+<ul>
+<li><p>表格中没有垂直线，但可以通过<code>vline</code>参数来添加。</p></li>
+<li><p>表格的只有标题和底部行有水平线。默认参数值是<code>toprule = "\\toprule"</code>、<code>midrule = "\\midrule"</code>以及<code>bottomrule = "\\bottomrule"</code>。默认情况下，每5行加一个行间距（<code>\addlinespace</code>），这是由参数<code>linesep</code>控制的，默认值为<code>c("", "", "", "", "\\addlinespace")</code>。如果你想每3行加一个<code>\addlinespace</code>，你可以这样做:</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="table.html#cb219-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris3, <span class="at">format =</span> <span class="st">&#39;latex&#39;</span>, <span class="at">linesep =</span> <span class="fu">c</span>(<span class="st">&#39;&#39;</span>, <span class="st">&#39;&#39;</span>, <span class="st">&#39;</span><span class="sc">\\</span><span class="st">addlinespace&#39;</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb220-1"><a href="table.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tabular</span>}{rrrrl}</span>
+<span id="cb220-2"><a href="table.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\toprule</span>{}</span>
+<span id="cb220-3"><a href="table.html#cb220-3" aria-hidden="true" tabindex="-1"></a>Sepal.Length <span class="op">&amp;</span> Sepal.Width <span class="op">&amp;</span> Petal.Length <span class="op">&amp;</span> Petal.Width <span class="op">&amp;</span> Species<span class="fu">\\</span></span>
+<span id="cb220-4"><a href="table.html#cb220-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\midrule</span>{}</span>
+<span id="cb220-5"><a href="table.html#cb220-5" aria-hidden="true" tabindex="-1"></a>5.1 <span class="op">&amp;</span> 3.5 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-6"><a href="table.html#cb220-6" aria-hidden="true" tabindex="-1"></a>4.9 <span class="op">&amp;</span> 3.0 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-7"><a href="table.html#cb220-7" aria-hidden="true" tabindex="-1"></a>4.7 <span class="op">&amp;</span> 3.2 <span class="op">&amp;</span> 1.3 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-8"><a href="table.html#cb220-8" aria-hidden="true" tabindex="-1"></a><span class="fu">\addlinespace</span></span>
+<span id="cb220-9"><a href="table.html#cb220-9" aria-hidden="true" tabindex="-1"></a>4.6 <span class="op">&amp;</span> 3.1 <span class="op">&amp;</span> 1.5 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-10"><a href="table.html#cb220-10" aria-hidden="true" tabindex="-1"></a>5.0 <span class="op">&amp;</span> 3.6 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-11"><a href="table.html#cb220-11" aria-hidden="true" tabindex="-1"></a>5.4 <span class="op">&amp;</span> 3.9 <span class="op">&amp;</span> 1.7 <span class="op">&amp;</span> 0.4 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-12"><a href="table.html#cb220-12" aria-hidden="true" tabindex="-1"></a><span class="fu">\addlinespace</span></span>
+<span id="cb220-13"><a href="table.html#cb220-13" aria-hidden="true" tabindex="-1"></a>4.6 <span class="op">&amp;</span> 3.4 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.3 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-14"><a href="table.html#cb220-14" aria-hidden="true" tabindex="-1"></a>5.0 <span class="op">&amp;</span> 3.4 <span class="op">&amp;</span> 1.5 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-15"><a href="table.html#cb220-15" aria-hidden="true" tabindex="-1"></a>4.4 <span class="op">&amp;</span> 2.9 <span class="op">&amp;</span> 1.4 <span class="op">&amp;</span> 0.2 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-16"><a href="table.html#cb220-16" aria-hidden="true" tabindex="-1"></a><span class="fu">\addlinespace</span></span>
+<span id="cb220-17"><a href="table.html#cb220-17" aria-hidden="true" tabindex="-1"></a>4.9 <span class="op">&amp;</span> 3.1 <span class="op">&amp;</span> 1.5 <span class="op">&amp;</span> 0.1 <span class="op">&amp;</span> setosa<span class="fu">\\</span></span>
+<span id="cb220-18"><a href="table.html#cb220-18" aria-hidden="true" tabindex="-1"></a><span class="fu">\bottomrule</span>{}</span>
+<span id="cb220-19"><a href="table.html#cb220-19" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tabular</span>}</span></code></pre></div></li>
+</ul>
+<p>如果你想删除所有的行间距，你可以使用<code>linesep = ''</code>。</p>
+<p>有的时候，表可能比一页还长。在本例中，你可以使用参数<code>longtable = TRUE</code>，该参数使用LaTeX包<a href="https://ctan.org/pkg/longtable"><strong>longtable</strong></a>将表跨到多个页面。</p>
+<p>当表格被包含在<code>table</code>环境中时（例如，当表有标题时），表格默认居中对齐。如果你不想让表格居中，可以使用参数<code>centering = FALSE</code>。</p>
+</div>
+<div id="自定义-html-表格" class="section level3" number="9.1.11">
+<h3><span class="header-section-number">9.1.11</span> 自定义 HTML 表格 (*)</h3>
+<!-- https://stackoverflow.com/questions/24254552/knitr-style-table-with-css -->
+<p>如果你想自定义通过<code>knitr::kable(format = "html")</code>生成的表，除了前面提到的常见参数外，只有一个额外的参数需要注意：<code>table.attr</code>。这个参数允许你向<code>&lt;table&gt;</code>标签添加任意属性。例如：</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="table.html#cb221-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">table.attr =</span> <span class="st">&#39;class=&quot;striped&quot;&#39;</span>, <span class="at">format =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb222-1"><a href="table.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;table</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;striped&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb222-2"><a href="table.html#cb222-2" aria-hidden="true" tabindex="-1"></a> <span class="kw">&lt;thead&gt;</span></span>
+<span id="cb222-3"><a href="table.html#cb222-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb222-4"><a href="table.html#cb222-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;th</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:left;&quot;</span><span class="kw">&gt;</span>   <span class="kw">&lt;/th&gt;</span></span>
+<span id="cb222-5"><a href="table.html#cb222-5" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;th</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> mpg <span class="kw">&lt;/th&gt;</span></span>
+<span id="cb222-6"><a href="table.html#cb222-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;th</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> cyl <span class="kw">&lt;/th&gt;</span></span>
+<span id="cb222-7"><a href="table.html#cb222-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb222-8"><a href="table.html#cb222-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">&lt;/thead&gt;</span></span>
+<span id="cb222-9"><a href="table.html#cb222-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;tbody&gt;</span></span>
+<span id="cb222-10"><a href="table.html#cb222-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb222-11"><a href="table.html#cb222-11" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:left;&quot;</span><span class="kw">&gt;</span> Mazda RX4 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb222-12"><a href="table.html#cb222-12" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> 21 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb222-13"><a href="table.html#cb222-13" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> 6 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb222-14"><a href="table.html#cb222-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb222-15"><a href="table.html#cb222-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb222-16"><a href="table.html#cb222-16" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:left;&quot;</span><span class="kw">&gt;</span> Mazda RX4 Wag <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb222-17"><a href="table.html#cb222-17" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> 21 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb222-18"><a href="table.html#cb222-18" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;td</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;text-align:right;&quot;</span><span class="kw">&gt;</span> 6 <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb222-19"><a href="table.html#cb222-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb222-20"><a href="table.html#cb222-20" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/tbody&gt;</span></span>
+<span id="cb222-21"><a href="table.html#cb222-21" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/table&gt;</span></span></code></pre></div>
+<p>我们向表格中添加了一个类<code>striped</code>。然而，类名不足以改变表的外观。你必须定义CSS类的规则。例如，要制作奇数行和偶数行有不同颜色的条纹表，您可以为偶数行或奇数行添加浅灰色背景:</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb223-1"><a href="table.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.striped</span> tr<span class="in">:nth-child(even)</span> { <span class="kw">background</span>: <span class="cn">#eee</span><span class="op">;</span> }</span></code></pre></div>
+<p>上面的CSS规则意味着所有<code>striped</code>类的元素的子元素，且具有偶数行号（<code>:nth-child(even)</code>）的行（即<code>&lt;tr&gt;</code>标签），将它们的背景颜色设置为<code>#eee</code>。</p>
+<p>使用一点CSS可以使一个普通的HTML表看起来好看很多。图 <a href="table.html#fig:striped-table">9.1</a>是一个HTML表格的截图，其中应用了以下CSS规则：</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb224-1"><a href="table.html#cb224-1" aria-hidden="true" tabindex="-1"></a>table {</span>
+<span id="cb224-2"><a href="table.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin</span>: <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb224-3"><a href="table.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-top</span>: <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="cn">#666</span><span class="op">;</span></span>
+<span id="cb224-4"><a href="table.html#cb224-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-bottom</span>: <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="cn">#666</span><span class="op">;</span></span>
+<span id="cb224-5"><a href="table.html#cb224-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb224-6"><a href="table.html#cb224-6" aria-hidden="true" tabindex="-1"></a>table thead th { <span class="kw">border-bottom</span>: <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="cn">#ddd</span><span class="op">;</span> }</span>
+<span id="cb224-7"><a href="table.html#cb224-7" aria-hidden="true" tabindex="-1"></a>th<span class="op">,</span> td { <span class="kw">padding</span>: <span class="dv">5</span><span class="dt">px</span><span class="op">;</span> }</span>
+<span id="cb224-8"><a href="table.html#cb224-8" aria-hidden="true" tabindex="-1"></a>thead<span class="op">,</span> tfoot<span class="op">,</span> tr<span class="in">:nth-child(even)</span> { <span class="kw">background</span>: <span class="cn">#eee</span><span class="op">;</span> }</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:striped-table"></span>
+<img src="images/striped-table.png" alt="A striped table created with HTML and CSS."  />
+<p class="caption">
+图 9.1: A striped table created with HTML and CSS.
+</p>
+</div>
+</div>
+</div>
+<div id="kableextra" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> <strong>kableExtra</strong> 包</h2>
+<p><strong>kableExtra</strong> 包 <span class="citation">(<a href="#ref-R-kableExtra" role="doc-biblioref">Zhu 2020</a>)</span> 设计的目的为扩展<code>knitr::kable()</code>生成表格的基本功能（见<a href="table.html#kable">9.1</a>节）。由于<code>knitr::kable()</code>的设计很简单，就像很多其他的R包一样，它肯定有很多缺失的功能，而<strong>kableExtra</strong>完美地填补了空白。最令人惊讶的是，<strong>kableExtra</strong>的大多数表格的特性都适用于HTML和PDF格式，例如，绘制如图<a href="table.html#fig:striped-table">9.1</a>的条纹表。</p>
+<p>一般情况下，<strong>kableExtra</strong> 包可以通过CRAN安装，你也可以尝试GitHub上的开发版本 (<a href="https://github.com/haozhu233/kableExtra" class="uri">https://github.com/haozhu233/kableExtra</a>):</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="table.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install from CRAN</span></span>
+<span id="cb225-2"><a href="table.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;kableExtra&quot;</span>)</span>
+<span id="cb225-3"><a href="table.html#cb225-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install the development version</span></span>
+<span id="cb225-4"><a href="table.html#cb225-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;haozhu233/kableExtra&quot;</span>)</span></code></pre></div>
+<p><a href="https://haozhu233.github.io/kableExtra/" class="uri">https://haozhu233.github.io/kableExtra/</a> 提供了大量的文档，介绍了很多关于如何自定义<code>kable()</code>的HTML或LaTex输出结果的例子。本节只提供几个示例，如有兴趣我们建议您详细阅读该文档。</p>
+<p><strong>kableExtra</strong>包支持使用管道操作符<code>%&gt;%</code>，你可以将<code>kable()</code>的输出结果连到<strong>kableExtra</strong>的样式函数上，例如</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="table.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb226-2"><a href="table.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb226-3"><a href="table.html#cb226-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(iris) <span class="sc">%&gt;%</span></span>
+<span id="cb226-4"><a href="table.html#cb226-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">&quot;striped&quot;</span>)</span></code></pre></div>
+<div id="设定字体尺寸" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> 设定字体尺寸</h3>
+<p><strong>kableExtra</strong>包中的<code>kable_styling()</code>函数允许你对整个表进行样式化。例如，你可以指定页面上表格的对齐方式、表格的宽度和字体大小。下面是一个使用小字体的例子:</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="table.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(iris, <span class="dv">5</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb227-2"><a href="table.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
+<table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="特定的行或列的样式" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> 特定的行或列的样式</h3>
+<p>函数<code>row_spec()</code>和<code>column_spec()</code>可分别用于样式化单独的行和列。在下面的示例中，我们将第一行文字加粗并设为斜体，将第二行和第三行添加黑色背景，同时更改字体颜色为白色，给第四行文字加下划线并更改其字体，旋转第五行文字，并给第五列加删除线：</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="table.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(iris, <span class="dv">5</span>), <span class="at">align =</span> <span class="st">&#39;c&#39;</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb228-2"><a href="table.html#cb228-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">italic =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb228-3"><a href="table.html#cb228-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">color =</span> <span class="st">&#39;white&#39;</span>, <span class="at">background =</span> <span class="st">&#39;black&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb228-4"><a href="table.html#cb228-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">4</span>, <span class="at">underline =</span> <span class="cn">TRUE</span>, <span class="at">monospace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb228-5"><a href="table.html#cb228-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">5</span>, <span class="at">angle =</span> <span class="dv">45</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb228-6"><a href="table.html#cb228-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">5</span>, <span class="at">strikeout =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+Sepal.Length
+</th>
+<th style="text-align:center;">
+Sepal.Width
+</th>
+<th style="text-align:center;">
+Petal.Length
+</th>
+<th style="text-align:center;">
+Petal.Width
+</th>
+<th style="text-align:center;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;font-style: italic;">
+5.1
+</td>
+<td style="text-align:center;font-weight: bold;font-style: italic;">
+3.5
+</td>
+<td style="text-align:center;font-weight: bold;font-style: italic;">
+1.4
+</td>
+<td style="text-align:center;font-weight: bold;font-style: italic;">
+0.2
+</td>
+<td style="text-align:center;font-weight: bold;font-style: italic;text-decoration: line-through;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: black !important;">
+4.9
+</td>
+<td style="text-align:center;color: white !important;background-color: black !important;">
+3.0
+</td>
+<td style="text-align:center;color: white !important;background-color: black !important;">
+1.4
+</td>
+<td style="text-align:center;color: white !important;background-color: black !important;">
+0.2
+</td>
+<td style="text-align:center;color: white !important;background-color: black !important;text-decoration: line-through;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: black !important;">
+4.7
+</td>
+<td style="text-align:center;color: white !important;background-color: black !important;">
+3.2
+</td>
+<td style="text-align:center;color: white !important;background-color: black !important;">
+1.3
+</td>
+<td style="text-align:center;color: white !important;background-color: black !important;">
+0.2
+</td>
+<td style="text-align:center;color: white !important;background-color: black !important;text-decoration: line-through;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-family: monospace;text-decoration: underline;">
+4.6
+</td>
+<td style="text-align:center;font-family: monospace;text-decoration: underline;">
+3.1
+</td>
+<td style="text-align:center;font-family: monospace;text-decoration: underline;">
+1.5
+</td>
+<td style="text-align:center;font-family: monospace;text-decoration: underline;">
+0.2
+</td>
+<td style="text-align:center;font-family: monospace;text-decoration: underline;text-decoration: line-through;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);">
+5.0
+</td>
+<td style="text-align:center;-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);">
+3.6
+</td>
+<td style="text-align:center;-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);">
+1.4
+</td>
+<td style="text-align:center;-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);">
+0.2
+</td>
+<td style="text-align:center;-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);text-decoration: line-through;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+<p>类似地，你可以使用<code>cell_spec()</code>函数来给单个单元格设定样式。</p>
+</div>
+<div id="给行或列分组" class="section level3" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> 给行或列分组</h3>
+<p>行和列可以分别通过函数<code>pack_rows()</code>和<code>add_header_above()</code>来进行分组。你也可以通过<code>collapse_rows()</code>来折叠行，这样一个单元格可以跨越多个行。下面是一个例子，展示了一个给标题列分组后的表格：</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="table.html#cb229-1" aria-hidden="true" tabindex="-1"></a>iris2 <span class="ot">&lt;-</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span>
+<span id="cb229-2"><a href="table.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(iris2) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&#39;[.].+&#39;</span>, <span class="st">&#39;&#39;</span>, <span class="fu">names</span>(iris2))</span>
+<span id="cb229-3"><a href="table.html#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(iris2, <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb229-4"><a href="table.html#cb229-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot;Length&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Width&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb229-5"><a href="table.html#cb229-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot;Measurements&quot;</span> <span class="ot">=</span> <span class="dv">4</span>, <span class="st">&quot;More attributes&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Measurements
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+More attributes
+</div>
+</th>
+</tr>
+<tr>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Length
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Width
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:right;">
+Sepal
+</th>
+<th style="text-align:right;">
+Petal
+</th>
+<th style="text-align:right;">
+Sepal
+</th>
+<th style="text-align:right;">
+Petal
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+<p>对于<code>add_header_above()</code>中的命名向量，其名称是显示在表头中的文本，向量的整数值表示一个名称应该跨越多少列，例如，<code>"Length" = 2</code>表示<code>Length</code>应该跨越两列。</p>
+<p>下面是<code>pack_rows()</code>的示例，其中<code>index</code>参数的含义类似于我们之前解释过的<code>add_header_above()</code>参数。</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="table.html#cb230-1" aria-hidden="true" tabindex="-1"></a>iris3 <span class="ot">&lt;-</span> iris[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">51</span><span class="sc">:</span><span class="dv">54</span>, <span class="dv">101</span><span class="sc">:</span><span class="dv">103</span>), ]</span>
+<span id="cb230-2"><a href="table.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(iris3[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">pack_rows</span>(</span>
+<span id="cb230-3"><a href="table.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;setosa&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;versicolor&quot;</span> <span class="ot">=</span> <span class="dv">4</span>, <span class="st">&quot;virginica&quot;</span> <span class="ot">=</span> <span class="dv">3</span>)</span>
+<span id="cb230-4"><a href="table.html#cb230-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="2">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>setosa</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+1
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+2
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr grouplength="4">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>versicolor</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+51
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+52
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+53
+</td>
+<td style="text-align:right;">
+6.9
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+54
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+</tr>
+<tr grouplength="3">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>virginica</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+101
+</td>
+<td style="text-align:right;">
+6.3
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+102
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+103
+</td>
+<td style="text-align:right;">
+7.1
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="按比例缩小latex中的表格" class="section level3" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> 按比例缩小LaTex中的表格</h3>
+<p>有一些特性是HTML或LaTeX输出格式特有的。例如，横向打印格式只在LaTeX中有意义，所以<strong>kableExtra</strong>中的’<code>landscape()</code>函数只对LaTeX格式的输出有效。下面的例子中，我们将表格按比例缩小以适应页面的宽度（否则该表格会太宽）:</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="table.html#cb231-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">kable</span>(<span class="fu">tail</span>(mtcars, <span class="dv">5</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb231-2"><a href="table.html#cb231-2" aria-hidden="true" tabindex="-1"></a>tab  <span class="co"># original table (too wide)</span></span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+mpg
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+disp
+</th>
+<th style="text-align:right;">
+hp
+</th>
+<th style="text-align:right;">
+drat
+</th>
+<th style="text-align:right;">
+wt
+</th>
+<th style="text-align:right;">
+qsec
+</th>
+<th style="text-align:right;">
+vs
+</th>
+<th style="text-align:right;">
+am
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+carb
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Lotus Europa
+</td>
+<td style="text-align:right;">
+30.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+95.1
+</td>
+<td style="text-align:right;">
+113
+</td>
+<td style="text-align:right;">
+3.77
+</td>
+<td style="text-align:right;">
+1.513
+</td>
+<td style="text-align:right;">
+16.9
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ford Pantera L
+</td>
+<td style="text-align:right;">
+15.8
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+351.0
+</td>
+<td style="text-align:right;">
+264
+</td>
+<td style="text-align:right;">
+4.22
+</td>
+<td style="text-align:right;">
+3.170
+</td>
+<td style="text-align:right;">
+14.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ferrari Dino
+</td>
+<td style="text-align:right;">
+19.7
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+145.0
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.62
+</td>
+<td style="text-align:right;">
+2.770
+</td>
+<td style="text-align:right;">
+15.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Maserati Bora
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+301.0
+</td>
+<td style="text-align:right;">
+335
+</td>
+<td style="text-align:right;">
+3.54
+</td>
+<td style="text-align:right;">
+3.570
+</td>
+<td style="text-align:right;">
+14.6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Volvo 142E
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+121.0
+</td>
+<td style="text-align:right;">
+109
+</td>
+<td style="text-align:right;">
+4.11
+</td>
+<td style="text-align:right;">
+2.780
+</td>
+<td style="text-align:right;">
+18.6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="table.html#cb232-1" aria-hidden="true" tabindex="-1"></a>tab <span class="sc">%&gt;%</span></span>
+<span id="cb232-2"><a href="table.html#cb232-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">&quot;scale_down&quot;</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+mpg
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+disp
+</th>
+<th style="text-align:right;">
+hp
+</th>
+<th style="text-align:right;">
+drat
+</th>
+<th style="text-align:right;">
+wt
+</th>
+<th style="text-align:right;">
+qsec
+</th>
+<th style="text-align:right;">
+vs
+</th>
+<th style="text-align:right;">
+am
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+carb
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Lotus Europa
+</td>
+<td style="text-align:right;">
+30.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+95.1
+</td>
+<td style="text-align:right;">
+113
+</td>
+<td style="text-align:right;">
+3.77
+</td>
+<td style="text-align:right;">
+1.513
+</td>
+<td style="text-align:right;">
+16.9
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ford Pantera L
+</td>
+<td style="text-align:right;">
+15.8
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+351.0
+</td>
+<td style="text-align:right;">
+264
+</td>
+<td style="text-align:right;">
+4.22
+</td>
+<td style="text-align:right;">
+3.170
+</td>
+<td style="text-align:right;">
+14.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ferrari Dino
+</td>
+<td style="text-align:right;">
+19.7
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+145.0
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.62
+</td>
+<td style="text-align:right;">
+2.770
+</td>
+<td style="text-align:right;">
+15.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Maserati Bora
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+301.0
+</td>
+<td style="text-align:right;">
+335
+</td>
+<td style="text-align:right;">
+3.54
+</td>
+<td style="text-align:right;">
+3.570
+</td>
+<td style="text-align:right;">
+14.6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Volvo 142E
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+121.0
+</td>
+<td style="text-align:right;">
+109
+</td>
+<td style="text-align:right;">
+4.11
+</td>
+<td style="text-align:right;">
+2.780
+</td>
+<td style="text-align:right;">
+18.6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p>注意如果你在浏览HTML版本的话，上面两个表格是没有差异的。</p>
+</div>
+</div>
+<div id="table-other" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> 其它生成表格的包</h2>
+<p>还有很多其他的R包可以用来生成表格。我们引入<code>kable()</code> （见<a href="table.html#kable">9.1</a>节）和<strong>kableExtra</strong> （见<a href="table.html#kableextra">9.2</a>节）的主要原因不是它们比其他包更好，而是因为我们只熟悉它们。接下来将列出一些我们知道但不太熟悉的软件包。你可以自己看看，然后去决定哪一个最适合你。</p>
+<ul>
+<li><p><strong>flextable</strong> <span class="citation">(<a href="#ref-R-flextable" role="doc-biblioref"><strong>R-flextable?</strong></a>)</span> 和 <strong>huxtable</strong> <span class="citation">(<a href="#ref-R-huxtable" role="doc-biblioref"><strong>R-huxtable?</strong></a>)</span>：如果您正在寻找一个支持最多种表格输出格式的包，<strong>flextable</strong>和<strong>huxtable</strong>可能是两个最好的选择。它们都支持HTML、LaTeX以及Office格式，并且包含最常见的表格特性（例如条件格式化）。更多关于<strong>flextable</strong>的信息可参见：<a href="https://davidgohel.github.io/flextable/" class="uri">https://davidgohel.github.io/flextable/</a>，<strong>huxtable</strong>的说明文档则在：<a href="https://hughjonesd.github.io/huxtable/" class="uri">https://hughjonesd.github.io/huxtable/</a>。</p></li>
+<li><p><strong>gt</strong> <span class="citation">(<a href="#ref-R-gt" role="doc-biblioref"><strong>R-gt?</strong></a>)</span>：这个R包允许你将表格的不同部分组合在一起，例如表头（标题和副标题）、列标签、表格主体、行组标签以及表格的脚注，从而组成一个完整的表格，其中有些部分是可选择性添加的。你还可以格式化数字，并为单元格添加背景阴影。目前<strong>gt</strong>主要支持HTML输出。<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>更多关于<strong>gt</strong>的信息可参见：<a href="https://gt.rstudio.com" class="uri">https://gt.rstudio.com</a>。</p></li>
+<li><p><strong>formattable</strong> <span class="citation">(<a href="#ref-R-formattable" role="doc-biblioref"><strong>R-formattable?</strong></a>)</span>：这个R包提供了一些格式化数字的工具函数（如<code>percent()</code>和<code>accounting()</code>），以及对列进行样式化的函数（如格式化文本，用背景阴影或颜色条注释数字，或在单元格中添加图标等等）。和<strong>gt</strong>相同，<strong>formattable</strong>包也主要支持HTML格式。更多信息可参见GitHub项目：<a href="https://github.com/renkun-ken/formattable/" class="uri">https://github.com/renkun-ken/formattable/</a>。</p></li>
+<li><p><strong>DT</strong> <span class="citation">(<a href="#ref-R-DT" role="doc-biblioref"><strong>R-DT?</strong></a>)</span>：本书的作者之一（谢益辉）为这个包的作者，但我们没有单独介绍它，因为它只支持HTML格式。<strong>DT</strong>构建在JavaScript库<strong>DataTables</strong>之上，它可以将静态表转换为HTML页面上的交互式表。你可以对表进行排序、搜索和分页。<strong>DT</strong>还支持格式化单元格，与Shiny一起构建交互式应用程序，并包含了大量的<strong>DataTables</strong>扩展（例如，你可以将表格导出到Excel，或交互式重新排列表格的列）。更多信息可参见：<a href="https://github.com/rstudio/DT/" class="uri">https://github.com/rstudio/DT/</a>。</p></li>
+<li><p><strong>reactable</strong> <span class="citation">(<a href="#ref-R-reactable" role="doc-biblioref"><strong>R-reactable?</strong></a>)</span>：与<strong>DT</strong>类似，这个包也基于JavaScript库创建交互式表。坦率地说，在我们看来，它在某些方面比<strong>DT</strong>更好（比如行分组和聚合操作，以及嵌入HTML小部件）。如果2015年有了<strong>reactable</strong>，我（谢益辉）可能就不会开发<strong>DT</strong>了。也就是说，<strong>reactable</strong>并不包含<strong>DT</strong>全部的特性，所以你可以阅读它的文档，看看哪个更适合你：<a href="https://glin.github.io/reactable/" class="uri">https://glin.github.io/reactable/</a>。</p></li>
+<li><p><strong>rhandsontable</strong><span class="citation">(<a href="#ref-R-rhandsontable" role="doc-biblioref"><strong>R-rhandsontable?</strong></a>)</span>：这个包也类似于<strong>DT</strong>，并且和Excel比较像（例如，你可以直接在表中编辑数据），更多信息可参见：<a href="https://jrowen.github.io/rhandsontable/" class="uri">https://jrowen.github.io/rhandsontable/</a>。</p></li>
+<li><p><strong>pixiedust</strong> <span class="citation">(<a href="#ref-R-pixiedust" role="doc-biblioref"><strong>R-pixiedust?</strong></a>)</span>：这个包通过<strong>broom</strong>包<span class="citation">(<a href="#ref-R-broom" role="doc-biblioref"><strong>R-broom?</strong></a>)</span>来为为模型结果（如线性模型）创建表格，它支持Markdown、HTML以及LaTeX输出格式。更多信息可参见：<a href="https://github.com/nutterb/pixiedust/" class="uri">https://github.com/nutterb/pixiedust/</a>。</p></li>
+<li><p><strong>stargazer</strong> <span class="citation">(<a href="#ref-R-stargazer" role="doc-biblioref"><strong>R-stargazer?</strong></a>)</span>：格式化回归模型和汇总统计表。更多信息可参见：<a href="https://cran.r-project.org/package=stargazer/" class="uri">https://cran.r-project.org/package=stargazer/</a>。</p></li>
+<li><p><strong>xtable</strong> <span class="citation">(<a href="#ref-R-xtable" role="doc-biblioref">Dahl et al. 2019</a>)</span>；这个包可能是最早的创建表格的包，其第一次发布是在2000年。它同时支持LaTeX和HTML格式。该软件包可在CRAN上访问：<a href="https://cran.r-project.org/package=xtable/" class="uri">https://cran.r-project.org/package=xtable/</a>。</p></li>
+</ul>
+<p>还有一些其它生成表格的包，我们不打算再进一步介绍，只是在这里列出它们，以供感兴趣者参考：<strong>tables</strong> <span class="citation">(<a href="#ref-R-tables" role="doc-biblioref"><strong>R-tables?</strong></a>)</span>、<strong>pander</strong> <span class="citation">(<a href="#ref-R-pander" role="doc-biblioref"><strong>R-pander?</strong></a>)</span>、<strong>tangram</strong> <span class="citation">(<a href="#ref-R-tangram" role="doc-biblioref"><strong>R-tangram?</strong></a>)</span>、<strong>ztable</strong> <span class="citation">(<a href="#ref-R-ztable" role="doc-biblioref"><strong>R-ztable?</strong></a>)</span>以及<strong>condformat</strong> <span class="citation">(<a href="#ref-R-condformat" role="doc-biblioref"><strong>R-condformat?</strong></a>)</span>。</p>
+
+</div>
+</div>
+<h3>参考文献</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-xtable" class="csl-entry">
+Dahl, David B., David Scott, Charles Roosen, Arni Magnusson, and Jonathan Swinton. 2019. <em>Xtable: Export Tables to LaTeX or HTML</em>. <a href="http://xtable.r-forge.r-project.org/">http://xtable.r-forge.r-project.org/</a>.
+</div>
+<div id="ref-R-kableExtra" class="csl-entry">
+Zhu, Hao. 2020. <em>kableExtra: Construct Complex Table with Kable and Pipe Syntax</em>. <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>如果你需要支持其他输出格式，如LaTeX和Word，<strong>gtsummary</strong>包<span class="citation">(<a href="#ref-R-gtsummary" role="doc-biblioref"><strong>R-gtsummary?</strong></a>)</span>已经做了一些基于<strong>gt</strong>的扩展：<a href="https://github.com/ddsjoberg/gtsummary" class="uri">https://github.com/ddsjoberg/gtsummary</a>.<a href="table.html#fnref8" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="word.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chunk-options.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cosname/rmarkdown-guide/edit/master/12-table-operation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

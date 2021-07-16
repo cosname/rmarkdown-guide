@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 15 章 Shiny | R Markdown 指南</title>
+  <meta name="description" content="第 15 章 Shiny | R Markdown 指南" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 15 章 Shiny | R Markdown 指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="第 15 章 Shiny | R Markdown 指南" />
+  <meta name="github-repo" content="cosname/rmarkdown-guide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 15 章 Shiny | R Markdown 指南" />
+  
+  <meta name="twitter:description" content="第 15 章 Shiny | R Markdown 指南" />
+  
+
+<meta name="author" content="王祎帆" />
+<meta name="author" content="闫求识" />
+<meta name="author" content="高春辉" />
+<meta name="author" content="庄亮亮" />
+
+
+<meta name="date" content="2021-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="Dashboards.html"/>
+<link rel="next" href="custom-output.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Markdown 中文指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="part"><span><b>I 基础</b></span></li>
+<li class="chapter" data-level="1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html"><i class="fa fa-check"></i><b>1</b> 认识 R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#数据分析报告和文档"><i class="fa fa-check"></i><b>1.1</b> 数据分析报告和文档</a></li>
+<li class="chapter" data-level="1.2" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#个人简历"><i class="fa fa-check"></i><b>1.2</b> 个人简历</a></li>
+<li class="chapter" data-level="1.3" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#网站"><i class="fa fa-check"></i><b>1.3</b> 网站</a></li>
+<li class="chapter" data-level="1.4" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#幻灯片"><i class="fa fa-check"></i><b>1.4</b> 幻灯片</a></li>
+<li class="chapter" data-level="1.5" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#交互报表"><i class="fa fa-check"></i><b>1.5</b> 交互报表</a></li>
+<li class="chapter" data-level="1.6" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#r-markdown-的渊源与历史"><i class="fa fa-check"></i><b>1.6</b> R Markdown 的渊源与历史</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> 安装</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#安装-r-markdown"><i class="fa fa-check"></i><b>2.1</b> 安装 R Markdown</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#create-first-rmd"><i class="fa fa-check"></i><b>2.2</b> 创建第一个 R Markdown 文档</a></li>
+<li class="chapter" data-level="2.3" data-path="installation.html"><a href="installation.html#安装-tinytex"><i class="fa fa-check"></i><b>2.3</b> 安装 Tinytex</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html"><i class="fa fa-check"></i><b>3</b> 基础知识</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#再看-html-输出文件"><i class="fa fa-check"></i><b>3.1</b> 再看 HTML 输出文件</a></li>
+<li class="chapter" data-level="3.2" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#markdown-语法"><i class="fa fa-check"></i><b>3.2</b> Markdown 语法</a></li>
+<li class="chapter" data-level="3.3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#使用-r-代码"><i class="fa fa-check"></i><b>3.3</b> 使用 R 代码</a></li>
+<li class="chapter" data-level="3.4" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#输出格式"><i class="fa fa-check"></i><b>3.4</b> 输出格式</a></li>
+<li class="chapter" data-level="3.5" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#r-markdown-的编译过程"><i class="fa fa-check"></i><b>3.5</b> R Markdown 的编译过程</a></li>
+</ul></li>
+<li class="part"><span><b>II 输出”万花筒”</b></span></li>
+<li class="chapter" data-level="4" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>4</b> 常用文档格式</a></li>
+<li class="chapter" data-level="5" data-path="html-document.html"><a href="html-document.html"><i class="fa fa-check"></i><b>5</b> 从 R Markdown 到 HTML 文档</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="html-document.html"><a href="html-document.html#目录和标题"><i class="fa fa-check"></i><b>5.1</b> 目录和标题</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="html-document.html"><a href="html-document.html#显示目录"><i class="fa fa-check"></i><b>5.1.1</b> 显示目录</a></li>
+<li class="chapter" data-level="5.1.2" data-path="html-document.html"><a href="html-document.html#悬停目录"><i class="fa fa-check"></i><b>5.1.2</b> 悬停目录</a></li>
+<li class="chapter" data-level="5.1.3" data-path="html-document.html"><a href="html-document.html#显示标题编号"><i class="fa fa-check"></i><b>5.1.3</b> 显示标题编号</a></li>
+<li class="chapter" data-level="5.1.4" data-path="html-document.html"><a href="html-document.html#使用标签页"><i class="fa fa-check"></i><b>5.1.4</b> 使用标签页</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="html-document.html"><a href="html-document.html#appearance-and-style"><i class="fa fa-check"></i><b>5.2</b> 主题和样式</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="html-document.html"><a href="html-document.html#可选主题"><i class="fa fa-check"></i><b>5.2.1</b> 可选主题</a></li>
+<li class="chapter" data-level="5.2.2" data-path="html-document.html"><a href="html-document.html#代码高亮"><i class="fa fa-check"></i><b>5.2.2</b> 代码高亮</a></li>
+<li class="chapter" data-level="5.2.3" data-path="html-document.html"><a href="html-document.html#style-css"><i class="fa fa-check"></i><b>5.2.3</b> 自定义样式表</a></li>
+<li class="chapter" data-level="5.2.4" data-path="html-document.html"><a href="html-document.html#通过-css-代码块定义样式"><i class="fa fa-check"></i><b>5.2.4</b> 通过 CSS 代码块定义样式</a></li>
+<li class="chapter" data-level="5.2.5" data-path="html-document.html"><a href="html-document.html#使用丰富多样的内置-css-样式"><i class="fa fa-check"></i><b>5.2.5</b> 使用丰富多样的内置 CSS 样式</a></li>
+<li class="chapter" data-level="5.2.6" data-path="html-document.html"><a href="html-document.html#代码折叠"><i class="fa fa-check"></i><b>5.2.6</b> 代码折叠</a></li>
+<li class="chapter" data-level="5.2.7" data-path="html-document.html"><a href="html-document.html#html-scroll"><i class="fa fa-check"></i><b>5.2.7</b> 设置代码块内容可滚动</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="html-document.html"><a href="html-document.html#图片和数据框"><i class="fa fa-check"></i><b>5.3</b> 图片和数据框</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="html-document.html"><a href="html-document.html#设置图片的属性"><i class="fa fa-check"></i><b>5.3.1</b> 设置图片的属性</a></li>
+<li class="chapter" data-level="5.3.2" data-path="html-document.html"><a href="html-document.html#插入外源图片"><i class="fa fa-check"></i><b>5.3.2</b> 插入外源图片</a></li>
+<li class="chapter" data-level="5.3.3" data-path="html-document.html"><a href="html-document.html#输出数据框"><i class="fa fa-check"></i><b>5.3.3</b> 输出数据框</a></li>
+<li class="chapter" data-level="5.3.4" data-path="html-document.html"><a href="html-document.html#分页打印数据框时的附加参数"><i class="fa fa-check"></i><b>5.3.4</b> 分页打印数据框时的附加参数</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="html-document.html"><a href="html-document.html#组件和内容"><i class="fa fa-check"></i><b>5.4</b> 组件和内容</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="html-document.html"><a href="html-document.html#理解-html-文档的依赖关系"><i class="fa fa-check"></i><b>5.4.1</b> 理解 HTML 文档的依赖关系</a></li>
+<li class="chapter" data-level="5.4.2" data-path="html-document.html"><a href="html-document.html#mathjax-库的配置"><i class="fa fa-check"></i><b>5.4.2</b> MathJax 库的配置</a></li>
+<li class="chapter" data-level="5.4.3" data-path="html-document.html"><a href="html-document.html#是否保留-markdown"><i class="fa fa-check"></i><b>5.4.3</b> 是否保留 Markdown</a></li>
+<li class="chapter" data-level="5.4.4" data-path="html-document.html"><a href="html-document.html#使用自定义的-html-模板"><i class="fa fa-check"></i><b>5.4.4</b> 使用自定义的 HTML 模板</a></li>
+<li class="chapter" data-level="5.4.5" data-path="html-document.html"><a href="html-document.html#include-html"><i class="fa fa-check"></i><b>5.4.5</b> 包含其它文件</a></li>
+<li class="chapter" data-level="5.4.6" data-path="html-document.html"><a href="html-document.html#html-fragments"><i class="fa fa-check"></i><b>5.4.6</b> 生成 HTML 片段</a></li>
+<li class="chapter" data-level="5.4.7" data-path="html-document.html"><a href="html-document.html#使用自定义的浏览器图标"><i class="fa fa-check"></i><b>5.4.7</b> 使用自定义的浏览器图标</a></li>
+<li class="chapter" data-level="5.4.8" data-path="html-document.html"><a href="html-document.html#共用-yaml-配置文件"><i class="fa fa-check"></i><b>5.4.8</b> 共用 YAML 配置文件</a></li>
+<li class="chapter" data-level="5.4.9" data-path="html-document.html"><a href="html-document.html#嵌入-rmd-源文件"><i class="fa fa-check"></i><b>5.4.9</b> 嵌入 Rmd 源文件</a></li>
+<li class="chapter" data-level="5.4.10" data-path="html-document.html"><a href="html-document.html#嵌入其它文件"><i class="fa fa-check"></i><b>5.4.10</b> 嵌入其它文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="PDF-document.html"><a href="PDF-document.html"><i class="fa fa-check"></i><b>6</b> PDF 文档</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-tinytex-1"><i class="fa fa-check"></i><b>6.1</b> 安装 <code>TinyTex</code></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-latex-组件"><i class="fa fa-check"></i><b>6.1.1</b> 安装 LaTeX 组件</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="PDF-document.html"><a href="PDF-document.html#从-r-markdown-到-pdf-文档"><i class="fa fa-check"></i><b>6.2</b> 从 R Markdown 到 PDF 文档</a></li>
+<li class="chapter" data-level="6.3" data-path="PDF-document.html"><a href="PDF-document.html#在-pdf-文档中使用中文的注意事项"><i class="fa fa-check"></i><b>6.3</b> 在 PDF 文档中使用中文的注意事项</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="PDF-document.html"><a href="PDF-document.html#显示目录-1"><i class="fa fa-check"></i><b>6.3.1</b> 显示目录</a></li>
+<li class="chapter" data-level="6.3.2" data-path="PDF-document.html"><a href="PDF-document.html#图片相关的配置"><i class="fa fa-check"></i><b>6.3.2</b> 图片相关的配置</a></li>
+<li class="chapter" data-level="6.3.3" data-path="PDF-document.html"><a href="PDF-document.html#打印数据框"><i class="fa fa-check"></i><b>6.3.3</b> 打印数据框</a></li>
+<li class="chapter" data-level="6.3.4" data-path="PDF-document.html"><a href="PDF-document.html#代码高亮-1"><i class="fa fa-check"></i><b>6.3.4</b> 代码高亮</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="PDF-document.html"><a href="PDF-document.html#latex-选项"><i class="fa fa-check"></i><b>6.4</b> LaTeX 选项</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="PDF-document.html"><a href="PDF-document.html#通用文档部件"><i class="fa fa-check"></i><b>6.4.1</b> 通用文档部件</a></li>
+<li class="chapter" data-level="6.4.2" data-path="PDF-document.html"><a href="PDF-document.html#选择-latex-模板"><i class="fa fa-check"></i><b>6.4.2</b> 选择 LaTeX 模板</a></li>
+<li class="chapter" data-level="6.4.3" data-path="PDF-document.html"><a href="PDF-document.html#配置-latex-模板的参数"><i class="fa fa-check"></i><b>6.4.3</b> 配置 LaTeX 模板的参数</a></li>
+<li class="chapter" data-level="6.4.4" data-path="PDF-document.html"><a href="PDF-document.html#使用-latex-包处理引用"><i class="fa fa-check"></i><b>6.4.4</b> 使用 LaTeX 包处理引用</a></li>
+<li class="chapter" data-level="6.4.5" data-path="PDF-document.html"><a href="PDF-document.html#latex-的渲染引擎"><i class="fa fa-check"></i><b>6.4.5</b> LaTeX 的渲染引擎</a></li>
+<li class="chapter" data-level="6.4.6" data-path="PDF-document.html"><a href="PDF-document.html#保留生成的-tex-中间文件"><i class="fa fa-check"></i><b>6.4.6</b> 保留生成的 TeX 中间文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>7</b> 演示文稿</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="presentation.html"><a href="presentation.html#rmarkdown-basic-presentation"><i class="fa fa-check"></i><b>7.1</b> R Markdown 基础幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="presentation.html"><a href="presentation.html#ioslides-presentation"><i class="fa fa-check"></i><b>7.1.1</b> ioslides 幻灯片</a></li>
+<li class="chapter" data-level="7.1.2" data-path="presentation.html"><a href="presentation.html#slidy-presentation"><i class="fa fa-check"></i><b>7.1.2</b> Slidy 幻灯片</a></li>
+<li class="chapter" data-level="7.1.3" data-path="presentation.html"><a href="presentation.html#beamer-presentation"><i class="fa fa-check"></i><b>7.1.3</b> Beamer 演示文稿</a></li>
+<li class="chapter" data-level="7.1.4" data-path="presentation.html"><a href="presentation.html#powerpoint-presentation"><i class="fa fa-check"></i><b>7.1.4</b> PowerPoint 演示文稿</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="presentation.html"><a href="presentation.html#xaringan-presentation"><i class="fa fa-check"></i><b>7.2</b> Xaringan 幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="presentation.html"><a href="presentation.html#简介"><i class="fa fa-check"></i><b>7.2.1</b> 简介</a></li>
+<li class="chapter" data-level="7.2.2" data-path="presentation.html"><a href="presentation.html#入门"><i class="fa fa-check"></i><b>7.2.2</b> 入门</a></li>
+<li class="chapter" data-level="7.2.3" data-path="presentation.html"><a href="presentation.html#使用其他主题"><i class="fa fa-check"></i><b>7.2.3</b> 使用其他主题</a></li>
+<li class="chapter" data-level="7.2.4" data-path="presentation.html"><a href="presentation.html#提升-xaringan-幻灯片的-b-格"><i class="fa fa-check"></i><b>7.2.4</b> 提升 xaringan 幻灯片的 B 格</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="word.html"><a href="word.html"><i class="fa fa-check"></i><b>8</b> Word</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="word.html"><a href="word.html#word-new-template"><i class="fa fa-check"></i><b>8.1</b> 创建 word 模板</a></li>
+<li class="chapter" data-level="8.2" data-path="word.html"><a href="word.html#word-template"><i class="fa fa-check"></i><b>8.2</b> 自定义 Word 模板</a></li>
+<li class="chapter" data-level="8.3" data-path="word.html"><a href="word.html#word-redoc"><i class="fa fa-check"></i><b>8.3</b> R Markdown 和 Word 之间的双向工作流程</a></li>
+<li class="chapter" data-level="8.4" data-path="word.html"><a href="word.html#word-officedown"><i class="fa fa-check"></i><b>8.4</b> 个人风格元素</a></li>
+</ul></li>
+<li class="part"><span><b>III 操作技巧</b></span></li>
+<li class="chapter" data-level="9" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>9</b> 表格操作</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="table.html"><a href="table.html#kable"><i class="fa fa-check"></i><b>9.1</b> 表格生成函数 <code>knitr::kable()</code></a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="table.html"><a href="table.html#kable-formats"><i class="fa fa-check"></i><b>9.1.1</b> 已支持的表的格式</a></li>
+<li class="chapter" data-level="9.1.2" data-path="table.html"><a href="table.html#修改列名"><i class="fa fa-check"></i><b>9.1.2</b> 修改列名</a></li>
+<li class="chapter" data-level="9.1.3" data-path="table.html"><a href="table.html#指定列的对齐方式"><i class="fa fa-check"></i><b>9.1.3</b> 指定列的对齐方式</a></li>
+<li class="chapter" data-level="9.1.4" data-path="table.html"><a href="table.html#kable-caption"><i class="fa fa-check"></i><b>9.1.4</b> 添加表格标题</a></li>
+<li class="chapter" data-level="9.1.5" data-path="table.html"><a href="table.html#调整数字格式"><i class="fa fa-check"></i><b>9.1.5</b> 调整数字格式</a></li>
+<li class="chapter" data-level="9.1.6" data-path="table.html"><a href="table.html#显示缺失值"><i class="fa fa-check"></i><b>9.1.6</b> 显示缺失值</a></li>
+<li class="chapter" data-level="9.1.7" data-path="table.html"><a href="table.html#特殊字符的转义"><i class="fa fa-check"></i><b>9.1.7</b> 特殊字符的转义</a></li>
+<li class="chapter" data-level="9.1.8" data-path="table.html"><a href="table.html#多张表格并排"><i class="fa fa-check"></i><b>9.1.8</b> 多张表格并排</a></li>
+<li class="chapter" data-level="9.1.9" data-path="table.html"><a href="table.html#利用for循环生成多个表"><i class="fa fa-check"></i><b>9.1.9</b> 利用<code>for</code>循环生成多个表 (*)</a></li>
+<li class="chapter" data-level="9.1.10" data-path="table.html"><a href="table.html#自定义-latex-表格"><i class="fa fa-check"></i><b>9.1.10</b> 自定义 LaTex 表格 (*)</a></li>
+<li class="chapter" data-level="9.1.11" data-path="table.html"><a href="table.html#自定义-html-表格"><i class="fa fa-check"></i><b>9.1.11</b> 自定义 HTML 表格 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="table.html"><a href="table.html#kableextra"><i class="fa fa-check"></i><b>9.2</b> <strong>kableExtra</strong> 包</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="table.html"><a href="table.html#设定字体尺寸"><i class="fa fa-check"></i><b>9.2.1</b> 设定字体尺寸</a></li>
+<li class="chapter" data-level="9.2.2" data-path="table.html"><a href="table.html#特定的行或列的样式"><i class="fa fa-check"></i><b>9.2.2</b> 特定的行或列的样式</a></li>
+<li class="chapter" data-level="9.2.3" data-path="table.html"><a href="table.html#给行或列分组"><i class="fa fa-check"></i><b>9.2.3</b> 给行或列分组</a></li>
+<li class="chapter" data-level="9.2.4" data-path="table.html"><a href="table.html#按比例缩小latex中的表格"><i class="fa fa-check"></i><b>9.2.4</b> 按比例缩小LaTex中的表格</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="table.html"><a href="table.html#table-other"><i class="fa fa-check"></i><b>9.3</b> 其它生成表格的包</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chunk-options.html"><a href="chunk-options.html"><i class="fa fa-check"></i><b>10</b> 块选项</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chunk-options.html"><a href="chunk-options.html#chunk-variable"><i class="fa fa-check"></i><b>10.1</b> 在块选项中使用变量</a></li>
+<li class="chapter" data-level="10.2" data-path="chunk-options.html"><a href="chunk-options.html#opts-error"><i class="fa fa-check"></i><b>10.2</b> 如何在遇到 error 的时候继续编译</a></li>
+<li class="chapter" data-level="10.3" data-path="chunk-options.html"><a href="chunk-options.html#dev-vector"><i class="fa fa-check"></i><b>10.3</b> 同一张图的多种图像输出格式</a></li>
+<li class="chapter" data-level="10.4" data-path="chunk-options.html"><a href="chunk-options.html#cache"><i class="fa fa-check"></i><b>10.4</b> 缓存耗时的代码块</a></li>
+<li class="chapter" data-level="10.5" data-path="chunk-options.html"><a href="chunk-options.html#cache-path"><i class="fa fa-check"></i><b>10.5</b> 为多种输出格式缓存代码块</a></li>
+<li class="chapter" data-level="10.6" data-path="chunk-options.html"><a href="chunk-options.html#cache-lazy"><i class="fa fa-check"></i><b>10.6</b> 缓存大型的对象</a></li>
+<li class="chapter" data-level="10.7" data-path="chunk-options.html"><a href="chunk-options.html#hide-one"><i class="fa fa-check"></i><b>10.7</b> 隐藏源代码、message、warning、文本输出或图像输出</a></li>
+<li class="chapter" data-level="10.8" data-path="chunk-options.html"><a href="chunk-options.html#hide-all"><i class="fa fa-check"></i><b>10.8</b> 隐藏代码块的所有输出</a></li>
+<li class="chapter" data-level="10.9" data-path="chunk-options.html"><a href="chunk-options.html#opts-collapse"><i class="fa fa-check"></i><b>10.9</b> 将文本输出压缩到源代码块中</a></li>
+<li class="chapter" data-level="10.10" data-path="chunk-options.html"><a href="chunk-options.html#opts-tidy"><i class="fa fa-check"></i><b>10.10</b> 重新格式化源代码</a></li>
+<li class="chapter" data-level="10.11" data-path="chunk-options.html"><a href="chunk-options.html#results-asis"><i class="fa fa-check"></i><b>10.11</b> 将输出文本作为原始的Markdown的内容 (*)</a></li>
+<li class="chapter" data-level="10.12" data-path="chunk-options.html"><a href="chunk-options.html#opts-comment"><i class="fa fa-check"></i><b>10.12</b> 删除文本输出中的前导符号</a></li>
+<li class="chapter" data-level="10.13" data-path="chunk-options.html"><a href="chunk-options.html#attr-output"><i class="fa fa-check"></i><b>10.13</b> 为文本输出块添加属性 (*)</a></li>
+<li class="chapter" data-level="10.14" data-path="chunk-options.html"><a href="chunk-options.html#fig-process"><i class="fa fa-check"></i><b>10.14</b> 图像的后期加工 (*)</a></li>
+<li class="chapter" data-level="10.15" data-path="chunk-options.html"><a href="chunk-options.html#graphical-device"><i class="fa fa-check"></i><b>10.15</b> 高质量的图像 (*)</a></li>
+<li class="chapter" data-level="10.16" data-path="chunk-options.html"><a href="chunk-options.html#low-plots"><i class="fa fa-check"></i><b>10.16</b> 带有低级绘图功能的逐步绘图 (*)</a></li>
+<li class="chapter" data-level="10.17" data-path="chunk-options.html"><a href="chunk-options.html#opts-render"><i class="fa fa-check"></i><b>10.17</b> 在代码块中自定义对象的打印格式 (*)</a></li>
+<li class="chapter" data-level="10.18" data-path="chunk-options.html"><a href="chunk-options.html#option-hooks"><i class="fa fa-check"></i><b>10.18</b> 选项钩子 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="output-hooks.html"><a href="output-hooks.html"><i class="fa fa-check"></i><b>11</b> 输出钩子 (*)</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="output-hooks.html"><a href="output-hooks.html#hook-hide"><i class="fa fa-check"></i><b>11.1</b> 编辑源代码</a></li>
+<li class="chapter" data-level="11.2" data-path="output-hooks.html"><a href="output-hooks.html#hook-number"><i class="fa fa-check"></i><b>11.2</b> 向源代码中添加行号</a></li>
+<li class="chapter" data-level="11.3" data-path="output-hooks.html"><a href="output-hooks.html#hook-scroll"><i class="fa fa-check"></i><b>11.3</b> 可滚动的文本输出</a></li>
+<li class="chapter" data-level="11.4" data-path="output-hooks.html"><a href="output-hooks.html#hook-truncate"><i class="fa fa-check"></i><b>11.4</b> 截断文本输出</a></li>
+<li class="chapter" data-level="11.5" data-path="output-hooks.html"><a href="output-hooks.html#hook-html5"><i class="fa fa-check"></i><b>11.5</b> 以HTML5格式输出图像</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="knitr-misc.html"><a href="knitr-misc.html"><i class="fa fa-check"></i><b>12</b> 其它使用 knitr 的小技巧</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="knitr-misc.html"><a href="knitr-misc.html#reuse-chunks"><i class="fa fa-check"></i><b>12.1</b> 重复使用代码块</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="knitr-misc.html"><a href="knitr-misc.html#embed-chunk"><i class="fa fa-check"></i><b>12.1.1</b> 将一个块嵌入到另一个块中 (*)</a></li>
+<li class="chapter" data-level="12.1.2" data-path="knitr-misc.html"><a href="knitr-misc.html#same-label"><i class="fa fa-check"></i><b>12.1.2</b> 在另一个块中使用相同的块标签</a></li>
+<li class="chapter" data-level="12.1.3" data-path="knitr-misc.html"><a href="knitr-misc.html#ref-label"><i class="fa fa-check"></i><b>12.1.3</b> 使用引用标签 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="knitr-misc.html"><a href="knitr-misc.html#load-cache"><i class="fa fa-check"></i><b>12.2</b> 在创建对象之前使用它 (*)</a></li>
+<li class="chapter" data-level="12.3" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-exit"><i class="fa fa-check"></i><b>12.3</b> 提前退出编译</a></li>
+<li class="chapter" data-level="12.4" data-path="knitr-misc.html"><a href="knitr-misc.html#fig-chunk"><i class="fa fa-check"></i><b>12.4</b> 生成一个图像并在其他地方显示</a></li>
+<li class="chapter" data-level="12.5" data-path="knitr-misc.html"><a href="knitr-misc.html#global-device"><i class="fa fa-check"></i><b>12.5</b> 修改前一个代码块中的图像</a></li>
+<li class="chapter" data-level="12.6" data-path="knitr-misc.html"><a href="knitr-misc.html#opts-template"><i class="fa fa-check"></i><b>12.6</b> 保存一组块选项并重复使用它们 (*)</a></li>
+<li class="chapter" data-level="12.7" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-expand"><i class="fa fa-check"></i><b>12.7</b> 使用 <code>knitr::knit_expand()</code> 来生成 Rmd 源代码</a></li>
+<li class="chapter" data-level="12.8" data-path="knitr-misc.html"><a href="knitr-misc.html#duplicate-label"><i class="fa fa-check"></i><b>12.8</b> 允许代码块中的标签重复 Allow duplicate labels in code chunks (*)</a></li>
+<li class="chapter" data-level="12.9" data-path="knitr-misc.html"><a href="knitr-misc.html#cache-rds"><i class="fa fa-check"></i><b>12.9</b> 一个更透明的缓存机制</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改表达式中的代码使缓存失效"><i class="fa fa-check"></i><b>12.9.1</b> 通过更改表达式中的代码使缓存失效</a></li>
+<li class="chapter" data-level="12.9.2" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改全局变量使缓存失效"><i class="fa fa-check"></i><b>12.9.2</b> 通过更改全局变量使缓存失效</a></li>
+<li class="chapter" data-level="12.9.3" data-path="knitr-misc.html"><a href="knitr-misc.html#保留缓存的多个副本"><i class="fa fa-check"></i><b>12.9.3</b> 保留缓存的多个副本</a></li>
+<li class="chapter" data-level="12.9.4" data-path="knitr-misc.html"><a href="knitr-misc.html#与knitr的缓存比较"><i class="fa fa-check"></i><b>12.9.4</b> 与<strong>knitr</strong>的缓存比较</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV 第四部分：进阶操作</b></span></li>
+<li class="chapter" data-level="13" data-path="other-languages.html"><a href="other-languages.html"><i class="fa fa-check"></i><b>13</b> 与其他语言的结合</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="other-languages.html"><a href="other-languages.html#custom-engine"><i class="fa fa-check"></i><b>13.1</b> 注册自定义语言引擎（*）</a></li>
+<li class="chapter" data-level="13.2" data-path="other-languages.html"><a href="other-languages.html#eng-python"><i class="fa fa-check"></i><b>13.2</b> 运行 Python 代码并与 Python 交互</a></li>
+<li class="chapter" data-level="13.3" data-path="other-languages.html"><a href="other-languages.html#eng-asis"><i class="fa fa-check"></i><b>13.3</b> 通过 <code>asis</code> 引擎有条件地执行内容</a></li>
+<li class="chapter" data-level="13.4" data-path="other-languages.html"><a href="other-languages.html#eng-bash"><i class="fa fa-check"></i><b>13.4</b> 执行 Shell 脚本</a></li>
+<li class="chapter" data-level="13.5" data-path="other-languages.html"><a href="other-languages.html#d3"><i class="fa fa-check"></i><b>13.5</b> 用 D3 可视化</a></li>
+<li class="chapter" data-level="13.6" data-path="other-languages.html"><a href="other-languages.html#eng-cat"><i class="fa fa-check"></i><b>13.6</b> 通过 <code>cat</code> 引擎将块内容写入文件</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="other-languages.html"><a href="other-languages.html#写入-css-文件"><i class="fa fa-check"></i><b>13.6.1</b> 写入 CSS 文件</a></li>
+<li class="chapter" data-level="13.6.2" data-path="other-languages.html"><a href="other-languages.html#在序言中包含-latex-代码"><i class="fa fa-check"></i><b>13.6.2</b> 在序言中包含 LaTeX 代码</a></li>
+<li class="chapter" data-level="13.6.3" data-path="other-languages.html"><a href="other-languages.html#将-yaml-数据写入文件并显示它"><i class="fa fa-check"></i><b>13.6.3</b> 将 YAML 数据写入文件并显示它</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="other-languages.html"><a href="other-languages.html#eng-sas"><i class="fa fa-check"></i><b>13.7</b> 运行 SAS 代码</a></li>
+<li class="chapter" data-level="13.8" data-path="other-languages.html"><a href="other-languages.html#eng-stata"><i class="fa fa-check"></i><b>13.8</b> 运行 Stata 代码</a></li>
+<li class="chapter" data-level="13.9" data-path="other-languages.html"><a href="other-languages.html#eng-asy"><i class="fa fa-check"></i><b>13.9</b> 用渐近线 Asymptote 创建图形</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="other-languages.html"><a href="other-languages.html#在-r-中生成数据并通过-asymptote-读取"><i class="fa fa-check"></i><b>13.9.1</b> 在 R 中生成数据并通过 Asymptote 读取</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="other-languages.html"><a href="other-languages.html#eng-sass"><i class="fa fa-check"></i><b>13.10</b> 使用 Sass/SCSS 构建 HTML 页面风格</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Dashboards.html"><a href="Dashboards.html"><i class="fa fa-check"></i><b>14</b> Dashboards</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Dashboards.html"><a href="Dashboards.html#入门-1"><i class="fa fa-check"></i><b>14.1</b> 入门</a></li>
+<li class="chapter" data-level="14.2" data-path="Dashboards.html"><a href="Dashboards.html#排版"><i class="fa fa-check"></i><b>14.2</b> 排版</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="Dashboards.html"><a href="Dashboards.html#基于行的布局"><i class="fa fa-check"></i><b>14.2.1</b> 基于行的布局</a></li>
+<li class="chapter" data-level="14.2.2" data-path="Dashboards.html"><a href="Dashboards.html#节属性"><i class="fa fa-check"></i><b>14.2.2</b> 节属性</a></li>
+<li class="chapter" data-level="14.2.3" data-path="Dashboards.html"><a href="Dashboards.html#多页"><i class="fa fa-check"></i><b>14.2.3</b> 多页</a></li>
+<li class="chapter" data-level="14.2.4" data-path="Dashboards.html"><a href="Dashboards.html#故事板"><i class="fa fa-check"></i><b>14.2.4</b> 故事板</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="Dashboards.html"><a href="Dashboards.html#dashboard-components"><i class="fa fa-check"></i><b>14.3</b> 组件</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="Dashboards.html"><a href="Dashboards.html#数值框"><i class="fa fa-check"></i><b>14.3.1</b> 数值框</a></li>
+<li class="chapter" data-level="14.3.2" data-path="Dashboards.html"><a href="Dashboards.html#仪表"><i class="fa fa-check"></i><b>14.3.2</b> 仪表</a></li>
+<li class="chapter" data-level="14.3.3" data-path="Dashboards.html"><a href="Dashboards.html#文本注释"><i class="fa fa-check"></i><b>14.3.3</b> 文本注释</a></li>
+<li class="chapter" data-level="14.3.4" data-path="Dashboards.html"><a href="Dashboards.html#导航栏"><i class="fa fa-check"></i><b>14.3.4</b> 导航栏</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="Dashboards.html"><a href="Dashboards.html#shiny"><i class="fa fa-check"></i><b>14.4</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="Dashboards.html"><a href="Dashboards.html#入门指南"><i class="fa fa-check"></i><b>14.4.1</b> 入门指南</a></li>
+<li class="chapter" data-level="14.4.2" data-path="Dashboards.html"><a href="Dashboards.html#shiny-仪表盘的一个示例"><i class="fa fa-check"></i><b>14.4.2</b> Shiny 仪表盘的一个示例</a></li>
+<li class="chapter" data-level="14.4.3" data-path="Dashboards.html"><a href="Dashboards.html#输入栏"><i class="fa fa-check"></i><b>14.4.3</b> 输入栏</a></li>
+<li class="chapter" data-level="14.4.4" data-path="Dashboards.html"><a href="Dashboards.html#拓展"><i class="fa fa-check"></i><b>14.4.4</b> 拓展</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="shiny-started.html"><a href="shiny-started.html"><i class="fa fa-check"></i><b>15</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-start"><i class="fa fa-check"></i><b>15.1</b> 入门指南</a></li>
+<li class="chapter" data-level="15.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-deploy"><i class="fa fa-check"></i><b>15.2</b> 部署</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapps.io"><i class="fa fa-check"></i><b>15.2.1</b> ShinyApps.io</a></li>
+<li class="chapter" data-level="15.2.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-server-rstudio-connect"><i class="fa fa-check"></i><b>15.2.2</b> Shiny Server / RStudio Connect</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embedded"><i class="fa fa-check"></i><b>15.3</b> 嵌入 Shiny 应用程序</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embed-inline"><i class="fa fa-check"></i><b>15.3.1</b> 内联应用程序</a></li>
+<li class="chapter" data-level="15.3.2" data-path="shiny-started.html"><a href="shiny-started.html#外联应用程序"><i class="fa fa-check"></i><b>15.3.2</b> 外联应用程序</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="shiny-started.html"><a href="shiny-started.html#shiny-widgets"><i class="fa fa-check"></i><b>15.4</b> Shiny 小部件</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapp-函数"><i class="fa fa-check"></i><b>15.4.1</b> <code>shinyApp()</code> 函数</a></li>
+<li class="chapter" data-level="15.4.2" data-path="shiny-started.html"><a href="shiny-started.html#例子k---means-聚类"><i class="fa fa-check"></i><b>15.4.2</b> 例子：k - means 聚类</a></li>
+<li class="chapter" data-level="15.4.3" data-path="shiny-started.html"><a href="shiny-started.html#小部件的大小和布局"><i class="fa fa-check"></i><b>15.4.3</b> 小部件的大小和布局</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="shiny-started.html"><a href="shiny-started.html#shiny-multiple"><i class="fa fa-check"></i><b>15.5</b> 多页</a></li>
+<li class="chapter" data-level="15.6" data-path="shiny-started.html"><a href="shiny-started.html#shiny-delay"><i class="fa fa-check"></i><b>15.6</b> 延迟渲染</a></li>
+<li class="chapter" data-level="15.7" data-path="shiny-started.html"><a href="shiny-started.html#shiny-args"><i class="fa fa-check"></i><b>15.7</b> 渲染函数的输出参数</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="shiny-started.html"><a href="shiny-started.html#附加说明"><i class="fa fa-check"></i><b>15.7.1</b> 附加说明</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="custom-output.html"><a href="custom-output.html"><i class="fa fa-check"></i><b>16</b> 自定义排版</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="custom-output.html"><a href="custom-output.html#parameterized-report"><i class="fa fa-check"></i><b>16.1</b> 有参数的 R Markdown 报告</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="custom-output.html"><a href="custom-output.html#params-declare"><i class="fa fa-check"></i><b>16.1.1</b> 声明参数</a></li>
+<li class="chapter" data-level="16.1.2" data-path="custom-output.html"><a href="custom-output.html#params-use"><i class="fa fa-check"></i><b>16.1.2</b> 使用参数</a></li>
+<li class="chapter" data-level="16.1.3" data-path="custom-output.html"><a href="custom-output.html#params-knit"><i class="fa fa-check"></i><b>16.1.3</b> 有参编译</a></li>
+<li class="chapter" data-level="16.1.4" data-path="custom-output.html"><a href="custom-output.html#params-publish"><i class="fa fa-check"></i><b>16.1.4</b> 发布文档</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="custom-output.html"><a href="custom-output.html#document-template"><i class="fa fa-check"></i><b>16.2</b> 文档模板</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="custom-output.html"><a href="custom-output.html#template-structure"><i class="fa fa-check"></i><b>16.2.1</b> 模板的结构</a></li>
+<li class="chapter" data-level="16.2.2" data-path="custom-output.html"><a href="custom-output.html#template-support"><i class="fa fa-check"></i><b>16.2.2</b> 模板支持文件</a></li>
+<li class="chapter" data-level="16.2.3" data-path="custom-output.html"><a href="custom-output.html#template-pandoc"><i class="fa fa-check"></i><b>16.2.3</b> 设置 Pandoc 模板</a></li>
+<li class="chapter" data-level="16.2.4" data-path="custom-output.html"><a href="custom-output.html#template-share"><i class="fa fa-check"></i><b>16.2.4</b> 分享模板</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="custom-output.html"><a href="custom-output.html#new-formats"><i class="fa fa-check"></i><b>16.3</b> 创建新的文档格式</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="custom-output.html"><a href="custom-output.html#format-derive"><i class="fa fa-check"></i><b>16.3.1</b> 从现有文档格式衍生新格式</a></li>
+<li class="chapter" data-level="16.3.2" data-path="custom-output.html"><a href="custom-output.html#fully-custom-format"><i class="fa fa-check"></i><b>16.3.2</b> 完全的自定义输出格式</a></li>
+<li class="chapter" data-level="16.3.3" data-path="custom-output.html"><a href="custom-output.html#using-a-new-format"><i class="fa fa-check"></i><b>16.3.3</b> 使用新的文档输出格式</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Markdown 指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="shiny-started" class="section level1" number="15">
+<h1><span class="header-section-number">第 15 章</span> Shiny</h1>
+<p>Shiny 包（Chang等，2021年）构建了由 R 驱动的交互式 Web 应用程序。要从 R Markdown 文档中调用 Shiny 代码，在 YAML 元数据添加 <code>runtime: shiny</code> 即可。Shiny 是用于构建基于 R 的 Web 应用程序的功能非常强大的框架。本书不全面介绍 Shiny（这是一个太大的话题），超出了本书的范围。 我们建议不熟悉 Shiny 的读者在阅读本章之前，先从 <a href="https://shiny.rstudio.com" class="uri">https://shiny.rstudio.com</a> 网站了解有关它的更多信息。</p>
+<p>与创建静态报告的传统工作流不同，你可以创建允许读者更改分析基础参数的文档，并在 Shiny 的 R Markdown 文档中立即看到结果。
+<!-- 如图 \@ref(fig:shiny)所示，柱状图将自动更新，以反映bin数量的变化。 --></p>
+<p>一张图片胜过千言万语，当你与它互动时，一份 Shiny 文档可能会向你展示上千张图片。读者不再被报告中固定的分析和结论所束缚。他们可能会自己探索其他可能性，可能会有新的发现或得出不同的结论。</p>
+<div id="shiny-start" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> 入门指南</h2>
+<p>你可以通过在 YAML 元数据中加入 <code>runtime: shiny</code>，这样就可以把任何面向 html 的 R Markdown 文档变成 Shiny 文档了，例如：</p>
+<div class="sourceCode" id="cb411"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb411-1"><a href="shiny-started.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb411-2"><a href="shiny-started.html#cb411-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Shiny Document&quot;</span></span>
+<span id="cb411-3"><a href="shiny-started.html#cb411-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span>
+<span id="cb411-4"><a href="shiny-started.html#cb411-4" aria-hidden="true" tabindex="-1"></a><span class="fu">runtime</span><span class="kw">:</span><span class="at"> shiny</span></span>
+<span id="cb411-5"><a href="shiny-started.html#cb411-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>注意，R Markdown 文档的输出格式必须是 HTML 格式。也就是说，文档最后生成的是一个 web 页面（<code>*.html</code> 文件）。</p>
+<blockquote>
+<p><strong>注意：</strong> 非 html 格式，如 <code>pdf_document</code> 和 <code>word_document</code> 将不能与 Shiny 同时运行。另外，一些演示格式也是 HTML 格式，比如<code>ioslides_presentation</code> 和 <code>slidy_presentation</code>。</p>
+</blockquote>
+<p>你也通过 RStudio 构建一个新的 Shiny 文档。步骤如下：File -&gt; new File -&gt; R Markdown 并选择 Shiny，具体见图 <a href="shiny-started.html#fig:shiny-new-document">15.1</a>。</p>
+<div class="figure" style="text-align: center"><span id="fig:shiny-new-document"></span>
+<img src="images/shiny-new-document.png" alt=" 在 RStudio 中创建一个新的 Shiny 文档。"  />
+<p class="caption">
+图 15.1:  在 RStudio 中创建一个新的 Shiny 文档。
+</p>
+</div>
+<p>要在 RStudio 中运行 Shiny 文档，你需要单击编辑器工具栏上的 “Run Document” 按钮(当 RStudio 检测到这是 Shiny 文档时，它会自动将 Knit 按钮替换为 run document)。如果你没使用 RStudio，或者想在 R 控制台运行文档进行故障排除，你可以调用函数 <code>rmarkdown::run()</code> 并将文件名传递给它。</p>
+<p>你可以在文档中嵌入 Shiny 的输入和输出。输入发生变化时，输出将自动更新。在下面的示例中，我们创建一个名称为 <code>rows</code> 的数字输入( <code>numericInput</code> )，然后在生成输出时通过 <code>input$rows</code> 引用其值：</p>
+<div class="sourceCode" id="cb412"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb412-1"><a href="shiny-started.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb412-2"><a href="shiny-started.html#cb412-2" aria-hidden="true" tabindex="-1"></a><span class="in">numericInput(&quot;rows&quot;, &quot;How many cars?&quot;, 5)</span></span>
+<span id="cb412-3"><a href="shiny-started.html#cb412-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb412-4"><a href="shiny-started.html#cb412-4" aria-hidden="true" tabindex="-1"></a><span class="in">renderTable({</span></span>
+<span id="cb412-5"><a href="shiny-started.html#cb412-5" aria-hidden="true" tabindex="-1"></a><span class="in">  head(cars, input$rows)</span></span>
+<span id="cb412-6"><a href="shiny-started.html#cb412-6" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb412-7"><a href="shiny-started.html#cb412-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:shiny-table"></span>
+<img src="images/shiny-table.png" alt="增加 Shiny 文档中表中的行数。"  />
+<p class="caption">
+图 15.2: 增加 Shiny 文档中表中的行数。
+</p>
+</div>
+<p>在上面的示例中，输出代码包装在对 <code>renderTable()</code> 的调用中。 Shiny 中还有许多其他渲染功能可用于绘图、打印的 R 输出等。 本示例使用 <code>renderPlot()</code> 创建动态绘图输出：</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb413-1"><a href="shiny-started.html#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE} </span></span>
+<span id="cb413-2"><a href="shiny-started.html#cb413-2" aria-hidden="true" tabindex="-1"></a><span class="in">sliderInput(&quot;bins&quot;, &quot;Number of bins:&quot;, 30, min = 1, max = 50)</span></span>
+<span id="cb413-3"><a href="shiny-started.html#cb413-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb413-4"><a href="shiny-started.html#cb413-4" aria-hidden="true" tabindex="-1"></a><span class="in">renderPlot({</span></span>
+<span id="cb413-5"><a href="shiny-started.html#cb413-5" aria-hidden="true" tabindex="-1"></a><span class="in">  x    = faithful[, 2]  # Old Faithful Geyser data</span></span>
+<span id="cb413-6"><a href="shiny-started.html#cb413-6" aria-hidden="true" tabindex="-1"></a><span class="in">  bins = seq(min(x), max(x), length.out = input$bins + 1)</span></span>
+<span id="cb413-7"><a href="shiny-started.html#cb413-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb413-8"><a href="shiny-started.html#cb413-8" aria-hidden="true" tabindex="-1"></a><span class="in">  # draw the histogram with the specified number of bins</span></span>
+<span id="cb413-9"><a href="shiny-started.html#cb413-9" aria-hidden="true" tabindex="-1"></a><span class="in">  hist(x, breaks = bins, col = &#39;darkgray&#39;, border = &#39;white&#39;)</span></span>
+<span id="cb413-10"><a href="shiny-started.html#cb413-10" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb413-11"><a href="shiny-started.html#cb413-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:shiny-plot"></span>
+<img src="images/shiny-plot.png" alt="改变一个 Shiny 文档的直方图的箱子数。"  />
+<p class="caption">
+图 15.3: 改变一个 Shiny 文档的直方图的箱子数。
+</p>
+</div>
+</div>
+<div id="shiny-deploy" class="section level2" number="15.2">
+<h2><span class="header-section-number">15.2</span> 部署</h2>
+<p>Shiny 文档必须由后台实时 R 会话支持。当你在本地运行一个 Shiny 文档时，它会使用你的本地 R 会话。通常只有你才能看到文档并与之交互。如果你希望与没有安装 R 的用户共享文档，或者不希望在本地运行文档，则必须将文档部署到服务器上，并共享文档的 URL。那么其他人只需要一个 web 浏览器就可以访问你的文档。</p>
+<p>有两种方法可以部署 Shiny 文档。你可以使用 RStudio 提供的托管服务，也可以设置自己的服务器。</p>
+<p>第一种方法从技术上来说比较容易，但是有时你可能不被允许使用外部托管服务，因此莫必须在自己的服务器上安装必需的软件（Shiny Server 或 RStudio Connect） 才能部署 Shiny 文档。</p>
+<div id="shinyapps.io" class="section level3" number="15.2.1">
+<h3><span class="header-section-number">15.2.1</span> ShinyApps.io</h3>
+<p>你可以把 Shiny 文档发布到 ShinyApps (<a href="https://shinyapps.io" class="uri">https://shinyapps.io</a>) 进行托管服务。</p>
+<p>要做到这一点，就应该确保你有：</p>
+<ol style="list-style-type: decimal">
+<li><p>在 ShinyApps 上注册一个账号(使用注册表单申请一个账号)。</p></li>
+<li><p>最新版本的 <strong>rsconnect</strong> 包。你可以按照如下方式安装它</p></li>
+</ol>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="shiny-started.html#cb414-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rsconnect&quot;</span>)</span></code></pre></div>
+<p>然后，从包含文档的工作目录中执行：</p>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="shiny-started.html#cb415-1" aria-hidden="true" tabindex="-1"></a>rsconnect<span class="sc">::</span><span class="fu">deployApp</span>()</span></code></pre></div>
+<p>如果你使用的是 RStudio，那么在运行一个 Shiny 文档时，还可以使用窗口右上角的 <code>Publish</code> 按钮(图 <a href="shiny-started.html#fig:shiny-deploy">15.4</a>)。</p>
+<div class="figure" style="text-align: center"><span id="fig:shiny-deploy"></span>
+<img src="images/shiny-deploy.png" alt="部署一个 Shiny 文档到 ShinyApps.io.。"  />
+<p class="caption">
+图 15.4: 部署一个 Shiny 文档到 ShinyApps.io.。
+</p>
+</div>
+<p>如果目录中有一个名为 <code>index.Rmd</code> 的文件，它将用作该目录的默认文档，否则，如果要访问此 Rmd 文档，则应在 URL 中指定 Rmd 文件的显式路径。</p>
+<p>例如，部署到 ShinyApps 的 <code>index.Rmd</code> 的 URL 可以采用以下形式 <code>https://example.shinyapps.io/appName/</code>，并且 <code>test.Rmd</code> 的 URL 可以采用以下形式 <code>https://example.shinyapps.io/appName/test.Rmd</code>。</p>
+</div>
+<div id="shiny-server-rstudio-connect" class="section level3" number="15.2.2">
+<h3><span class="header-section-number">15.2.2</span> Shiny Server / RStudio Connect</h3>
+<p>Shiny Server (<a href="https://www.rstudio.com/products/shiny/shiny-server/" class="uri">https://www.rstudio.com/products/shiny/shiny-server/</a>) 和 RStudio Connect(<a href="https://www.rstudio.com/products/connect/" class="uri">https://www.rstudio.com/products/connect/</a>) 都可以发布 Shiny 文档。 但是他们需要有关 Linux 的知识，如果你不熟悉 Linux 或没有特权，则安装和配置它们通常应该是系统管理员的任务。</p>
+</div>
+</div>
+<div id="shiny-embedded" class="section level2" number="15.3">
+<h2><span class="header-section-number">15.3</span> 嵌入 Shiny 应用程序</h2>
+<p>除了在 R Markdown 中嵌入单个 Shiny 的输入和输出外，还可以在文档中嵌入一个独立的 Shiny 应用程序。有两种方法可以做到这一点：</p>
+<ol style="list-style-type: decimal">
+<li><p>使用 <code>shinyApp()</code> 函数内联定义应用程序;</p></li>
+<li><p>使用 <code>shinyApp()</code> 函数引用外部应用程序目录。</p></li>
+</ol>
+<p>这两个函数在 <strong>shiny</strong> 包中都是可用的(不是 <strong>rmarkdown</strong>)，当在 YAML 元数据指定 <code>runtime: shiny</code> 时，它们会被自动加载。因此，你不必调用 <code>library(shiny)</code> 来加载 shiny。</p>
+<div id="shiny-embed-inline" class="section level3" number="15.3.1">
+<h3><span class="header-section-number">15.3.1</span> 内联应用程序</h3>
+<p>这个例子使用了内联定义：</p>
+<div class="sourceCode" id="cb416"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb416-1"><a href="shiny-started.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE} </span></span>
+<span id="cb416-2"><a href="shiny-started.html#cb416-2" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(</span></span>
+<span id="cb416-3"><a href="shiny-started.html#cb416-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb416-4"><a href="shiny-started.html#cb416-4" aria-hidden="true" tabindex="-1"></a><span class="in">  ui = fluidPage(</span></span>
+<span id="cb416-5"><a href="shiny-started.html#cb416-5" aria-hidden="true" tabindex="-1"></a><span class="in">    selectInput(&quot;region&quot;, &quot;Region:&quot;,</span></span>
+<span id="cb416-6"><a href="shiny-started.html#cb416-6" aria-hidden="true" tabindex="-1"></a><span class="in">                choices = colnames(WorldPhones)),</span></span>
+<span id="cb416-7"><a href="shiny-started.html#cb416-7" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput(&quot;phonePlot&quot;)</span></span>
+<span id="cb416-8"><a href="shiny-started.html#cb416-8" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb416-9"><a href="shiny-started.html#cb416-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb416-10"><a href="shiny-started.html#cb416-10" aria-hidden="true" tabindex="-1"></a><span class="in">  server = function(input, output) {</span></span>
+<span id="cb416-11"><a href="shiny-started.html#cb416-11" aria-hidden="true" tabindex="-1"></a><span class="in">    output$phonePlot = renderPlot({</span></span>
+<span id="cb416-12"><a href="shiny-started.html#cb416-12" aria-hidden="true" tabindex="-1"></a><span class="in">      barplot(WorldPhones[,input$region]*1000,</span></span>
+<span id="cb416-13"><a href="shiny-started.html#cb416-13" aria-hidden="true" tabindex="-1"></a><span class="in">              ylab = &quot;Number of Telephones&quot;, xlab = &quot;Year&quot;)</span></span>
+<span id="cb416-14"><a href="shiny-started.html#cb416-14" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb416-15"><a href="shiny-started.html#cb416-15" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
+<span id="cb416-16"><a href="shiny-started.html#cb416-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb416-17"><a href="shiny-started.html#cb416-17" aria-hidden="true" tabindex="-1"></a><span class="in">  options = list(height = 500)</span></span>
+<span id="cb416-18"><a href="shiny-started.html#cb416-18" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb416-19"><a href="shiny-started.html#cb416-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>注意，使用 <code>height</code> 参数来确定嵌入式应用程序应该占用多少垂直空间。</p>
+</div>
+<div id="外联应用程序" class="section level3" number="15.3.2">
+<h3><span class="header-section-number">15.3.2</span> 外联应用程序</h3>
+<p>这个示例嵌入了一个定义在另一个目录中的 Shiny 应用程序。</p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb417-1"><a href="shiny-started.html#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
+<span id="cb417-2"><a href="shiny-started.html#cb417-2" aria-hidden="true" tabindex="-1"></a><span class="in">shinyAppDir(</span></span>
+<span id="cb417-3"><a href="shiny-started.html#cb417-3" aria-hidden="true" tabindex="-1"></a><span class="in">  system.file(&quot;examples/06_tabsets&quot;, package=&quot;shiny&quot;),</span></span>
+<span id="cb417-4"><a href="shiny-started.html#cb417-4" aria-hidden="true" tabindex="-1"></a><span class="in">  options = list(width = &quot;100%&quot;, height = 700)</span></span>
+<span id="cb417-5"><a href="shiny-started.html#cb417-5" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb417-6"><a href="shiny-started.html#cb417-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>注意，在上面的所有代码块中，都使用了 <code>echo = FALSE</code> 的选项。这是为了防止块中的 R 代码与 Shiny 组件一起呈现到输出文档中。</p>
+</div>
+</div>
+<div id="shiny-widgets" class="section level2" number="15.4">
+<h2><span class="header-section-number">15.4</span> Shiny 小部件</h2>
+<p>Shiny 小部件使你能够使用一个函数调用创建包含在 R Markdown 文档中的可重复使用的 Shiny 组件。还可以直接从控制台调用 Shiny 小部件(在创作过程中很有用)，并在 RStudio Viewer 窗格或外部 web 浏览器中显示它们的输出。</p>
+<div id="shinyapp-函数" class="section level3" number="15.4.1">
+<h3><span class="header-section-number">15.4.1</span> <code>shinyApp()</code> 函数</h3>
+<p>Shiny 窗口小部件的核心是使用 <code>shinyApp()</code> 函数创建的微型应用程序。 你无需像经典的 Shiny 应用程序那样创建 <code>ui.R</code> 和 <code>server.R</code>（或 <code>app.R</code>），而是将 UI 和服务器定义作为参数传递给 <code>shinyApp()</code> 函数。 我们在第 <a href="shiny-started.html#shiny-embed-inline">15.3.1</a> 节中给出了一个示例。</p>
+<p>最简单的 Shiny 小部件类型只是一个返回 <code>shinyApp()</code> 的 R 函数。</p>
+</div>
+<div id="例子k---means-聚类" class="section level3" number="15.4.2">
+<h3><span class="header-section-number">15.4.2</span> 例子：k - means 聚类</h3>
+<p><strong>rmdexamples</strong> 包 (<a href="https://github.com/rstudio/rmdexamples" class="uri">https://github.com/rstudio/rmdexamples</a>) 包括一个以上面所诉形式实现的 Shiny 小部件示例。 <code>kmeans_cluster()</code> 函数接受单个数据集（<code>dataset</code>）参数，并返回一个小部件来显示 k-Means 聚类的结果。你可以像这样在 R Markdown 文档中使用它：</p>
+<div class="sourceCode" id="cb418"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb418-1"><a href="shiny-started.html#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
+<span id="cb418-2"><a href="shiny-started.html#cb418-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(rmdexamples)</span></span>
+<span id="cb418-3"><a href="shiny-started.html#cb418-3" aria-hidden="true" tabindex="-1"></a><span class="in">kmeans_cluster(iris)</span></span>
+<span id="cb418-4"><a href="shiny-started.html#cb418-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>图 <a href="shiny-started.html#fig:shiny-widget-kmeans">15.5</a> 显示了在运行文档时小部件的样子。</p>
+<div class="figure" style="text-align: center"><span id="fig:shiny-widget-kmeans"></span>
+<img src="images/shiny-widget-kmeans.png" alt=" 一个在数据集上应用 k-Means 聚类的 Shiny 小部件。"  />
+<p class="caption">
+图 15.5:  一个在数据集上应用 k-Means 聚类的 Shiny 小部件。
+</p>
+</div>
+<p>下面是 <code>kmeans_cluster()</code> 函数的源代码：</p>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="shiny-started.html#cb419-1" aria-hidden="true" tabindex="-1"></a>kmeans_cluster <span class="ot">=</span> <span class="cf">function</span>(dataset) {</span>
+<span id="cb419-2"><a href="shiny-started.html#cb419-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb419-3"><a href="shiny-started.html#cb419-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(shiny)  </span>
+<span id="cb419-4"><a href="shiny-started.html#cb419-4" aria-hidden="true" tabindex="-1"></a>  vars <span class="ot">=</span> <span class="fu">names</span>(dataset)</span>
+<span id="cb419-5"><a href="shiny-started.html#cb419-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb419-6"><a href="shiny-started.html#cb419-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb419-7"><a href="shiny-started.html#cb419-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb419-8"><a href="shiny-started.html#cb419-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fluidRow</span>(<span class="at">style =</span> <span class="st">&quot;padding-bottom: 20px;&quot;</span>,</span>
+<span id="cb419-9"><a href="shiny-started.html#cb419-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">selectInput</span>(<span class="st">&#39;xcol&#39;</span>, <span class="st">&#39;X Variable&#39;</span>, vars)),</span>
+<span id="cb419-10"><a href="shiny-started.html#cb419-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">selectInput</span>(<span class="st">&#39;ycol&#39;</span>, <span class="st">&#39;Y Variable&#39;</span>, vars,</span>
+<span id="cb419-11"><a href="shiny-started.html#cb419-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">selected =</span> vars[<span class="dv">2</span>])),</span>
+<span id="cb419-12"><a href="shiny-started.html#cb419-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">numericInput</span>(<span class="st">&#39;clusters&#39;</span>, <span class="st">&#39;Cluster count&#39;</span>, <span class="dv">3</span>,</span>
+<span id="cb419-13"><a href="shiny-started.html#cb419-13" aria-hidden="true" tabindex="-1"></a>                               <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">9</span>))</span>
+<span id="cb419-14"><a href="shiny-started.html#cb419-14" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb419-15"><a href="shiny-started.html#cb419-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fluidRow</span>(</span>
+<span id="cb419-16"><a href="shiny-started.html#cb419-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plotOutput</span>(<span class="st">&#39;kmeans&#39;</span>, <span class="at">height =</span> <span class="st">&quot;400px&quot;</span>)  </span>
+<span id="cb419-17"><a href="shiny-started.html#cb419-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb419-18"><a href="shiny-started.html#cb419-18" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb419-19"><a href="shiny-started.html#cb419-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb419-20"><a href="shiny-started.html#cb419-20" aria-hidden="true" tabindex="-1"></a>      <span class="co">#  将选定的变量组合到一个新的数据框中</span></span>
+<span id="cb419-21"><a href="shiny-started.html#cb419-21" aria-hidden="true" tabindex="-1"></a>      selectedData <span class="ot">=</span> <span class="fu">reactive</span>({</span>
+<span id="cb419-22"><a href="shiny-started.html#cb419-22" aria-hidden="true" tabindex="-1"></a>        dataset[, <span class="fu">c</span>(input<span class="sc">$</span>xcol, input<span class="sc">$</span>ycol)]</span>
+<span id="cb419-23"><a href="shiny-started.html#cb419-23" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb419-24"><a href="shiny-started.html#cb419-24" aria-hidden="true" tabindex="-1"></a>      clusters <span class="ot">=</span> <span class="fu">reactive</span>({</span>
+<span id="cb419-25"><a href="shiny-started.html#cb419-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">kmeans</span>(<span class="fu">selectedData</span>(), input<span class="sc">$</span>clusters)</span>
+<span id="cb419-26"><a href="shiny-started.html#cb419-26" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb419-27"><a href="shiny-started.html#cb419-27" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>kmeans <span class="ot">=</span> <span class="fu">renderPlot</span>(<span class="at">height =</span> <span class="dv">400</span>, {</span>
+<span id="cb419-28"><a href="shiny-started.html#cb419-28" aria-hidden="true" tabindex="-1"></a>        res <span class="ot">=</span> <span class="fu">clusters</span>()</span>
+<span id="cb419-29"><a href="shiny-started.html#cb419-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">4.1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb419-30"><a href="shiny-started.html#cb419-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(<span class="fu">selectedData</span>(),</span>
+<span id="cb419-31"><a href="shiny-started.html#cb419-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> res<span class="sc">$</span>cluster, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb419-32"><a href="shiny-started.html#cb419-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">points</span>(res<span class="sc">$</span>centers, <span class="at">pch =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb419-33"><a href="shiny-started.html#cb419-33" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb419-34"><a href="shiny-started.html#cb419-34" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb419-35"><a href="shiny-started.html#cb419-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(<span class="at">height =</span> <span class="dv">500</span>)</span>
+<span id="cb419-36"><a href="shiny-started.html#cb419-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb419-37"><a href="shiny-started.html#cb419-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="小部件的大小和布局" class="section level3" number="15.4.3">
+<h3><span class="header-section-number">15.4.3</span> 小部件的大小和布局</h3>
+<p>Shiny 小部件可以嵌入在不同的地方，包括标准的全宽页面、页面内的小列，甚至在 HTML5 幻灯片中。为了让小部件的大小和布局在所有这些上下文中都能很好地工作，我们建议小部件的总高度不大于 500 像素。这并不是一个硬性的规则，但是在 HTML5 幻灯片中，通常只能显示低于 500px 的内容，所以如果你想让你的小部件在演示中可用，这是一个很好的建议。当然，你还可以在创建小部件的函数中添加一个显式的 height 参数（默认值为500）。</p>
+</div>
+</div>
+<div id="shiny-multiple" class="section level2" number="15.5">
+<h2><span class="header-section-number">15.5</span> 多页</h2>
+<p>你可以使用 Markdown 链接语法并指定文档的<em>相对</em>路径，链接到其他 Shiny 文档上，例如： <code>[另一个Shiny文档]（another.Rmd）</code>。如果在一个页面上单击指向另一个 Rmd 文档的链接，该 Rmd 文档将作为当前交互式闪亮文档启动。</p>
+<p>目前，一次只能激活一个文档，因此尽管可以通过 R 脚本 <code>global.R</code> 进行一些原始的全局共享，但文档无法轻易共享状态（请参阅帮助页面 <code>?rmarkdown::run</code>）。</p>
+<p>默认情况下，只能链接到调用 <code>rmarkdown::run()</code> 的文件所在目录子树中的 R Markdown 文件(例如，你无法连接到 <code>../foo.Rmd</code>)。 但是，你可以使用 <code>rmarkdown::run()</code> 的 <code>dir</code> 参数来定义根目录。</p>
+</div>
+<div id="shiny-delay" class="section level2" number="15.6">
+<h2><span class="header-section-number">15.6</span> 延迟渲染</h2>
+<p>一个 Shiny 文档通常在每次显示时都被呈现，并且在呈现完成之前不会显示给用户。因此，较大或包含昂贵计算的文档可能需要一些时间来加载。</p>
+<p>如果你的文档包含不需要立即渲染的交互式 Shiny 组件，你可以在 <code>rmarkdown::render_delayed()</code> 函数中封装 Shiny 代码。这个函数保存它的参数，直到文档呈现完成并显示给用户，然后计算它，并在计算完成时将其注入输出文档。</p>
+<p>下面我们将演示 <code>render_delayed()</code> 是如何工作的。 <code>render_delayed()</code> 调用中包含的代码只有在加载了文档并显示给用户之后才会执行</p>
+<div class="sourceCode" id="cb420"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb420-1"><a href="shiny-started.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
+<span id="cb420-2"><a href="shiny-started.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="in">numericInput(&quot;rows&quot;, &quot;How many cars?&quot;, 5)</span></span>
+<span id="cb420-3"><a href="shiny-started.html#cb420-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb420-4"><a href="shiny-started.html#cb420-4" aria-hidden="true" tabindex="-1"></a><span class="in">rmarkdown::render_delayed({</span></span>
+<span id="cb420-5"><a href="shiny-started.html#cb420-5" aria-hidden="true" tabindex="-1"></a><span class="in">  renderTable({</span></span>
+<span id="cb420-6"><a href="shiny-started.html#cb420-6" aria-hidden="true" tabindex="-1"></a><span class="in">    head(cars, input$rows)</span></span>
+<span id="cb420-7"><a href="shiny-started.html#cb420-7" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb420-8"><a href="shiny-started.html#cb420-8" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb420-9"><a href="shiny-started.html#cb420-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+</div>
+<div id="shiny-args" class="section level2" number="15.7">
+<h2><span class="header-section-number">15.7</span> 渲染函数的输出参数</h2>
+<p>在一个典型的 Shiny 应用程序中，你可以使用 <code>plotOutput()</code> 和 <code>verbatimTextOutput()</code> 等函数在 UI 中指定输出元素，并使用 <code>renderPlot()</code> 和 <code>renderPrint()</code> 等函数呈现其内容。</p>
+<p>相比之下，在一个 Shiny 文档中，UI 元素通常是在调用 <code>renderXXX()</code> 函数时隐式和自动创建的。例如，你可能希望使用 <code>renderPlot()</code> 函数，而预先没有创建对应的 <code>plotOutput()</code>。在这种情况下，Shiny 将相应的输出对象与每个 <code>renderXXX()</code> 函数关联起来，让你可以在一个完整的 Shiny 应用程序之外使用 Shiny 代码。但是，在这个过程中可能会丢失一些功能。特别地，<code>plotOutput()</code> 可以接受一些可选参数来设置宽度和高度等内容，或者允许你单击或刷过绘图(并存储该信息)。</p>
+<p>要将选项从 <code>renderXXX()</code> 传递到 <code>xxxOutput()</code>，可以使用 <code>outputArgs</code> 参数（如果特定的 <code>renderXXX()</code> 函数可用）。 例如：假设你要绘制一张宽度为 200px，高度为 100px 的图形时。 你可以设定为如下形式：</p>
+<div class="sourceCode" id="cb421"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb421-1"><a href="shiny-started.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
+<span id="cb421-2"><a href="shiny-started.html#cb421-2" aria-hidden="true" tabindex="-1"></a><span class="in">renderPlot({</span></span>
+<span id="cb421-3"><a href="shiny-started.html#cb421-3" aria-hidden="true" tabindex="-1"></a><span class="in">  plot(yourData)</span></span>
+<span id="cb421-4"><a href="shiny-started.html#cb421-4" aria-hidden="true" tabindex="-1"></a><span class="in">}, outputArgs = list(width = &quot;200px&quot;, height = &quot;100px&quot;)</span></span>
+<span id="cb421-5"><a href="shiny-started.html#cb421-5" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb421-6"><a href="shiny-started.html#cb421-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>无论你想设置多少个输出参数，<code>outputArgs</code> 总是设定为一个列表(默认是一个空列表，它不设置输出参数)。如果你试图传入一个不存在的参数，那么将得到以下的错误提示信息(在本例中，你试图设置一个名为 <code>not_an_argument</code> 的参数)：</p>
+<div class="sourceCode" id="cb422"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb422-1"><a href="shiny-started.html#cb422-1" aria-hidden="true" tabindex="-1"></a>**Error**: Unused argument: in <span class="in">`outputArgs`</span>, <span class="in">`not_an_argument`</span></span>
+<span id="cb422-2"><a href="shiny-started.html#cb422-2" aria-hidden="true" tabindex="-1"></a>is not an valid argument for the output function</span></code></pre></div>
+<p>要查看运行中的 <code>outputArgs</code>，请运行下面的 R Markdown 文档或访问在线版 <a href="https://gallery.shinyapps.io/output-args/" class="uri">https://gallery.shinyapps.io/output-args/</a>。文档是交互式的：在图像上刷新一下，看到 <code>xmin</code>, <code>xmax</code>, <code>ymin</code> 和 <code>ymax</code> 值的变化(正好印在图片下方)。</p>
+<div class="sourceCode" id="cb423"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb423-1"><a href="shiny-started.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb423-2"><a href="shiny-started.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 通过呈现函数来设置输出参数</span></span>
+<span id="cb423-3"><a href="shiny-started.html#cb423-3" aria-hidden="true" tabindex="-1"></a><span class="an">runtime:</span><span class="co"> shiny</span></span>
+<span id="cb423-4"><a href="shiny-started.html#cb423-4" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb423-5"><a href="shiny-started.html#cb423-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb423-6"><a href="shiny-started.html#cb423-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-7"><a href="shiny-started.html#cb423-7" aria-hidden="true" tabindex="-1"></a>这个交互式 Rmd 文档使用了 <span class="in">`outputArgs`</span></span>
+<span id="cb423-8"><a href="shiny-started.html#cb423-8" aria-hidden="true" tabindex="-1"></a>参数，并且现在可用于所有 Shiny <span class="in">`render`</span> 函数。 举个例子，这可以让你通过 <span class="in">`renderImage`</span> 设置 <span class="in">`imageOutput`</span> 的参数。 意味着你不必为了刷过图像而创建 <span class="in">`ui`</span> 对象。 注意，这仅适用于交互式  Rmd 期间的 Shiny 代码片段（不适用于嵌入式完整应用程序——你需要调用 <span class="in">`shinyApp`</span> 才能运行的应用程序）。 </span>
+<span id="cb423-9"><a href="shiny-started.html#cb423-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-10"><a href="shiny-started.html#cb423-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 刷过图像(并存储数据)</span></span>
+<span id="cb423-11"><a href="shiny-started.html#cb423-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-12"><a href="shiny-started.html#cb423-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, echo=FALSE}</span></span>
+<span id="cb423-13"><a href="shiny-started.html#cb423-13" aria-hidden="true" tabindex="-1"></a><span class="in">library(datasets)</span></span>
+<span id="cb423-14"><a href="shiny-started.html#cb423-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-15"><a href="shiny-started.html#cb423-15" aria-hidden="true" tabindex="-1"></a><span class="in">generateImage = function() {</span></span>
+<span id="cb423-16"><a href="shiny-started.html#cb423-16" aria-hidden="true" tabindex="-1"></a><span class="in">  outfile = tempfile(fileext = &#39;.png&#39;)</span></span>
+<span id="cb423-17"><a href="shiny-started.html#cb423-17" aria-hidden="true" tabindex="-1"></a><span class="in">  png(outfile)</span></span>
+<span id="cb423-18"><a href="shiny-started.html#cb423-18" aria-hidden="true" tabindex="-1"></a><span class="in">  par(mar = c(0,0,0,0))</span></span>
+<span id="cb423-19"><a href="shiny-started.html#cb423-19" aria-hidden="true" tabindex="-1"></a><span class="in">  image(volcano, axes = FALSE)</span></span>
+<span id="cb423-20"><a href="shiny-started.html#cb423-20" aria-hidden="true" tabindex="-1"></a><span class="in">  contour(volcano, add = TRUE)</span></span>
+<span id="cb423-21"><a href="shiny-started.html#cb423-21" aria-hidden="true" tabindex="-1"></a><span class="in">  dev.off()</span></span>
+<span id="cb423-22"><a href="shiny-started.html#cb423-22" aria-hidden="true" tabindex="-1"></a><span class="in">  list(src = outfile)</span></span>
+<span id="cb423-23"><a href="shiny-started.html#cb423-23" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb423-24"><a href="shiny-started.html#cb423-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb423-25"><a href="shiny-started.html#cb423-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-26"><a href="shiny-started.html#cb423-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r image}</span></span>
+<span id="cb423-27"><a href="shiny-started.html#cb423-27" aria-hidden="true" tabindex="-1"></a><span class="in">renderImage({</span></span>
+<span id="cb423-28"><a href="shiny-started.html#cb423-28" aria-hidden="true" tabindex="-1"></a><span class="in">  generateImage()</span></span>
+<span id="cb423-29"><a href="shiny-started.html#cb423-29" aria-hidden="true" tabindex="-1"></a><span class="in">}, deleteFile = TRUE, </span></span>
+<span id="cb423-30"><a href="shiny-started.html#cb423-30" aria-hidden="true" tabindex="-1"></a><span class="in">   outputArgs = list(brush = brushOpts(id = &quot;plot_brush&quot;),</span></span>
+<span id="cb423-31"><a href="shiny-started.html#cb423-31" aria-hidden="true" tabindex="-1"></a><span class="in">                     width = &quot;250&quot;,</span></span>
+<span id="cb423-32"><a href="shiny-started.html#cb423-32" aria-hidden="true" tabindex="-1"></a><span class="in">                     height = &quot;250px&quot;)</span></span>
+<span id="cb423-33"><a href="shiny-started.html#cb423-33" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb423-34"><a href="shiny-started.html#cb423-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb423-35"><a href="shiny-started.html#cb423-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-36"><a href="shiny-started.html#cb423-36" aria-hidden="true" tabindex="-1"></a>以下是发送到服务器的一些信息: (刷过图像以更改数据)</span>
+<span id="cb423-37"><a href="shiny-started.html#cb423-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-38"><a href="shiny-started.html#cb423-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r brush info}</span></span>
+<span id="cb423-39"><a href="shiny-started.html#cb423-39" aria-hidden="true" tabindex="-1"></a><span class="in">renderText({ </span></span>
+<span id="cb423-40"><a href="shiny-started.html#cb423-40" aria-hidden="true" tabindex="-1"></a><span class="in">  print(input$plot_brush)</span></span>
+<span id="cb423-41"><a href="shiny-started.html#cb423-41" aria-hidden="true" tabindex="-1"></a><span class="in">  brush = input$plot_brush</span></span>
+<span id="cb423-42"><a href="shiny-started.html#cb423-42" aria-hidden="true" tabindex="-1"></a><span class="in">  paste0(&quot;xmin: &quot;, brush$xmin, &quot;; &quot;,</span></span>
+<span id="cb423-43"><a href="shiny-started.html#cb423-43" aria-hidden="true" tabindex="-1"></a><span class="in">         &quot;xmax: &quot;, brush$xmax, &quot;; &quot;,</span></span>
+<span id="cb423-44"><a href="shiny-started.html#cb423-44" aria-hidden="true" tabindex="-1"></a><span class="in">         &quot;ymin: &quot;, brush$ymin, &quot;; &quot;,</span></span>
+<span id="cb423-45"><a href="shiny-started.html#cb423-45" aria-hidden="true" tabindex="-1"></a><span class="in">         &quot;ymax: &quot;, brush$ymax)</span></span>
+<span id="cb423-46"><a href="shiny-started.html#cb423-46" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb423-47"><a href="shiny-started.html#cb423-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb423-48"><a href="shiny-started.html#cb423-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-49"><a href="shiny-started.html#cb423-49" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb423-50"><a href="shiny-started.html#cb423-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-51"><a href="shiny-started.html#cb423-51" aria-hidden="true" tabindex="-1"></a><span class="fu">###  调整图片</span></span>
+<span id="cb423-52"><a href="shiny-started.html#cb423-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-53"><a href="shiny-started.html#cb423-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-54"><a href="shiny-started.html#cb423-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot}</span></span>
+<span id="cb423-55"><a href="shiny-started.html#cb423-55" aria-hidden="true" tabindex="-1"></a><span class="in">renderPlot({ </span></span>
+<span id="cb423-56"><a href="shiny-started.html#cb423-56" aria-hidden="true" tabindex="-1"></a><span class="in">  plot(cars) </span></span>
+<span id="cb423-57"><a href="shiny-started.html#cb423-57" aria-hidden="true" tabindex="-1"></a><span class="in">}, outputArgs = list(width = &quot;75%&quot;, </span></span>
+<span id="cb423-58"><a href="shiny-started.html#cb423-58" aria-hidden="true" tabindex="-1"></a><span class="in">                     height = &quot;250px&quot;)</span></span>
+<span id="cb423-59"><a href="shiny-started.html#cb423-59" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb423-60"><a href="shiny-started.html#cb423-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div id="附加说明" class="section level3" number="15.7.1">
+<h3><span class="header-section-number">15.7.1</span> 附加说明</h3>
+<p>我们要强调的是，你只能在一个 Shiny 的 R Markdown 文档中使用这个功能(也就是说，你必须在 YAML 元数据中设置 <code>runtime: shiny</code> )。但即使是这样，这也只适用于在 UI 中没有相应的显式输出元素的情况下呈现输出的 Shiny 代码片段。如果你在你的文档中嵌入一个完整的 Shiny 的应用程序，并尝试使用 <code>outputArgs</code> ，这时它将被忽略，并将以下警告打印到 R Markdown 控制台中(在这种情况下，你的 <code>ui</code> 函数将类似于 <code>ui = plotOutput("plot")</code> )：</p>
+<div class="sourceCode" id="cb424"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb424-1"><a href="shiny-started.html#cb424-1" aria-hidden="true" tabindex="-1"></a>Warning in <span class="in">`output$plot`</span>(...) :</span>
+<span id="cb424-2"><a href="shiny-started.html#cb424-2" aria-hidden="true" tabindex="-1"></a>Unused argument: outputArgs. The argument outputArgs is only</span>
+<span id="cb424-3"><a href="shiny-started.html#cb424-3" aria-hidden="true" tabindex="-1"></a>meant to be used when embedding snippets of Shiny code in an</span>
+<span id="cb424-4"><a href="shiny-started.html#cb424-4" aria-hidden="true" tabindex="-1"></a>R Markdown code chunk (using runtime: shiny). When running a</span>
+<span id="cb424-5"><a href="shiny-started.html#cb424-5" aria-hidden="true" tabindex="-1"></a>full Shiny app, please set the output arguments directly in</span>
+<span id="cb424-6"><a href="shiny-started.html#cb424-6" aria-hidden="true" tabindex="-1"></a>the corresponding output function of your UI code.</span></code></pre></div>
+<p>如果你尝试在其他任何上下文中使用 <code>outputArgs</code>，例如：在常用的（即非嵌入式）Shiny 应用程序内部使用 <code>outputArgs</code>，也会发生同样的情况。 基本原理解释如下：如果你已经在所有输出对象都明确指定的情况下指定了 <code>ui</code> 函数，则应在此处直接设置其参数，而不要采用这种绕行方式。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Dashboards.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="custom-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cosname/rmarkdown-guide/edit/master/18-shiny.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

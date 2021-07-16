@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 11 章 输出钩子 (*) | R Markdown 指南</title>
+  <meta name="description" content="第 11 章 输出钩子 (*) | R Markdown 指南" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 11 章 输出钩子 (*) | R Markdown 指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="第 11 章 输出钩子 (*) | R Markdown 指南" />
+  <meta name="github-repo" content="cosname/rmarkdown-guide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 11 章 输出钩子 (*) | R Markdown 指南" />
+  
+  <meta name="twitter:description" content="第 11 章 输出钩子 (*) | R Markdown 指南" />
+  
+
+<meta name="author" content="王祎帆" />
+<meta name="author" content="闫求识" />
+<meta name="author" content="高春辉" />
+<meta name="author" content="庄亮亮" />
+
+
+<meta name="date" content="2021-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chunk-options.html"/>
+<link rel="next" href="knitr-misc.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Markdown 中文指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="part"><span><b>I 基础</b></span></li>
+<li class="chapter" data-level="1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html"><i class="fa fa-check"></i><b>1</b> 认识 R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#数据分析报告和文档"><i class="fa fa-check"></i><b>1.1</b> 数据分析报告和文档</a></li>
+<li class="chapter" data-level="1.2" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#个人简历"><i class="fa fa-check"></i><b>1.2</b> 个人简历</a></li>
+<li class="chapter" data-level="1.3" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#网站"><i class="fa fa-check"></i><b>1.3</b> 网站</a></li>
+<li class="chapter" data-level="1.4" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#幻灯片"><i class="fa fa-check"></i><b>1.4</b> 幻灯片</a></li>
+<li class="chapter" data-level="1.5" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#交互报表"><i class="fa fa-check"></i><b>1.5</b> 交互报表</a></li>
+<li class="chapter" data-level="1.6" data-path="know-rmarkdown.html"><a href="know-rmarkdown.html#r-markdown-的渊源与历史"><i class="fa fa-check"></i><b>1.6</b> R Markdown 的渊源与历史</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> 安装</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#安装-r-markdown"><i class="fa fa-check"></i><b>2.1</b> 安装 R Markdown</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#create-first-rmd"><i class="fa fa-check"></i><b>2.2</b> 创建第一个 R Markdown 文档</a></li>
+<li class="chapter" data-level="2.3" data-path="installation.html"><a href="installation.html#安装-tinytex"><i class="fa fa-check"></i><b>2.3</b> 安装 Tinytex</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html"><i class="fa fa-check"></i><b>3</b> 基础知识</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#再看-html-输出文件"><i class="fa fa-check"></i><b>3.1</b> 再看 HTML 输出文件</a></li>
+<li class="chapter" data-level="3.2" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#markdown-语法"><i class="fa fa-check"></i><b>3.2</b> Markdown 语法</a></li>
+<li class="chapter" data-level="3.3" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#使用-r-代码"><i class="fa fa-check"></i><b>3.3</b> 使用 R 代码</a></li>
+<li class="chapter" data-level="3.4" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#输出格式"><i class="fa fa-check"></i><b>3.4</b> 输出格式</a></li>
+<li class="chapter" data-level="3.5" data-path="rmarkdown-basics.html"><a href="rmarkdown-basics.html#r-markdown-的编译过程"><i class="fa fa-check"></i><b>3.5</b> R Markdown 的编译过程</a></li>
+</ul></li>
+<li class="part"><span><b>II 输出”万花筒”</b></span></li>
+<li class="chapter" data-level="4" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>4</b> 常用文档格式</a></li>
+<li class="chapter" data-level="5" data-path="html-document.html"><a href="html-document.html"><i class="fa fa-check"></i><b>5</b> 从 R Markdown 到 HTML 文档</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="html-document.html"><a href="html-document.html#目录和标题"><i class="fa fa-check"></i><b>5.1</b> 目录和标题</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="html-document.html"><a href="html-document.html#显示目录"><i class="fa fa-check"></i><b>5.1.1</b> 显示目录</a></li>
+<li class="chapter" data-level="5.1.2" data-path="html-document.html"><a href="html-document.html#悬停目录"><i class="fa fa-check"></i><b>5.1.2</b> 悬停目录</a></li>
+<li class="chapter" data-level="5.1.3" data-path="html-document.html"><a href="html-document.html#显示标题编号"><i class="fa fa-check"></i><b>5.1.3</b> 显示标题编号</a></li>
+<li class="chapter" data-level="5.1.4" data-path="html-document.html"><a href="html-document.html#使用标签页"><i class="fa fa-check"></i><b>5.1.4</b> 使用标签页</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="html-document.html"><a href="html-document.html#appearance-and-style"><i class="fa fa-check"></i><b>5.2</b> 主题和样式</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="html-document.html"><a href="html-document.html#可选主题"><i class="fa fa-check"></i><b>5.2.1</b> 可选主题</a></li>
+<li class="chapter" data-level="5.2.2" data-path="html-document.html"><a href="html-document.html#代码高亮"><i class="fa fa-check"></i><b>5.2.2</b> 代码高亮</a></li>
+<li class="chapter" data-level="5.2.3" data-path="html-document.html"><a href="html-document.html#style-css"><i class="fa fa-check"></i><b>5.2.3</b> 自定义样式表</a></li>
+<li class="chapter" data-level="5.2.4" data-path="html-document.html"><a href="html-document.html#通过-css-代码块定义样式"><i class="fa fa-check"></i><b>5.2.4</b> 通过 CSS 代码块定义样式</a></li>
+<li class="chapter" data-level="5.2.5" data-path="html-document.html"><a href="html-document.html#使用丰富多样的内置-css-样式"><i class="fa fa-check"></i><b>5.2.5</b> 使用丰富多样的内置 CSS 样式</a></li>
+<li class="chapter" data-level="5.2.6" data-path="html-document.html"><a href="html-document.html#代码折叠"><i class="fa fa-check"></i><b>5.2.6</b> 代码折叠</a></li>
+<li class="chapter" data-level="5.2.7" data-path="html-document.html"><a href="html-document.html#html-scroll"><i class="fa fa-check"></i><b>5.2.7</b> 设置代码块内容可滚动</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="html-document.html"><a href="html-document.html#图片和数据框"><i class="fa fa-check"></i><b>5.3</b> 图片和数据框</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="html-document.html"><a href="html-document.html#设置图片的属性"><i class="fa fa-check"></i><b>5.3.1</b> 设置图片的属性</a></li>
+<li class="chapter" data-level="5.3.2" data-path="html-document.html"><a href="html-document.html#插入外源图片"><i class="fa fa-check"></i><b>5.3.2</b> 插入外源图片</a></li>
+<li class="chapter" data-level="5.3.3" data-path="html-document.html"><a href="html-document.html#输出数据框"><i class="fa fa-check"></i><b>5.3.3</b> 输出数据框</a></li>
+<li class="chapter" data-level="5.3.4" data-path="html-document.html"><a href="html-document.html#分页打印数据框时的附加参数"><i class="fa fa-check"></i><b>5.3.4</b> 分页打印数据框时的附加参数</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="html-document.html"><a href="html-document.html#组件和内容"><i class="fa fa-check"></i><b>5.4</b> 组件和内容</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="html-document.html"><a href="html-document.html#理解-html-文档的依赖关系"><i class="fa fa-check"></i><b>5.4.1</b> 理解 HTML 文档的依赖关系</a></li>
+<li class="chapter" data-level="5.4.2" data-path="html-document.html"><a href="html-document.html#mathjax-库的配置"><i class="fa fa-check"></i><b>5.4.2</b> MathJax 库的配置</a></li>
+<li class="chapter" data-level="5.4.3" data-path="html-document.html"><a href="html-document.html#是否保留-markdown"><i class="fa fa-check"></i><b>5.4.3</b> 是否保留 Markdown</a></li>
+<li class="chapter" data-level="5.4.4" data-path="html-document.html"><a href="html-document.html#使用自定义的-html-模板"><i class="fa fa-check"></i><b>5.4.4</b> 使用自定义的 HTML 模板</a></li>
+<li class="chapter" data-level="5.4.5" data-path="html-document.html"><a href="html-document.html#include-html"><i class="fa fa-check"></i><b>5.4.5</b> 包含其它文件</a></li>
+<li class="chapter" data-level="5.4.6" data-path="html-document.html"><a href="html-document.html#html-fragments"><i class="fa fa-check"></i><b>5.4.6</b> 生成 HTML 片段</a></li>
+<li class="chapter" data-level="5.4.7" data-path="html-document.html"><a href="html-document.html#使用自定义的浏览器图标"><i class="fa fa-check"></i><b>5.4.7</b> 使用自定义的浏览器图标</a></li>
+<li class="chapter" data-level="5.4.8" data-path="html-document.html"><a href="html-document.html#共用-yaml-配置文件"><i class="fa fa-check"></i><b>5.4.8</b> 共用 YAML 配置文件</a></li>
+<li class="chapter" data-level="5.4.9" data-path="html-document.html"><a href="html-document.html#嵌入-rmd-源文件"><i class="fa fa-check"></i><b>5.4.9</b> 嵌入 Rmd 源文件</a></li>
+<li class="chapter" data-level="5.4.10" data-path="html-document.html"><a href="html-document.html#嵌入其它文件"><i class="fa fa-check"></i><b>5.4.10</b> 嵌入其它文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="PDF-document.html"><a href="PDF-document.html"><i class="fa fa-check"></i><b>6</b> PDF 文档</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-tinytex-1"><i class="fa fa-check"></i><b>6.1</b> 安装 <code>TinyTex</code></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="PDF-document.html"><a href="PDF-document.html#安装-latex-组件"><i class="fa fa-check"></i><b>6.1.1</b> 安装 LaTeX 组件</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="PDF-document.html"><a href="PDF-document.html#从-r-markdown-到-pdf-文档"><i class="fa fa-check"></i><b>6.2</b> 从 R Markdown 到 PDF 文档</a></li>
+<li class="chapter" data-level="6.3" data-path="PDF-document.html"><a href="PDF-document.html#在-pdf-文档中使用中文的注意事项"><i class="fa fa-check"></i><b>6.3</b> 在 PDF 文档中使用中文的注意事项</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="PDF-document.html"><a href="PDF-document.html#显示目录-1"><i class="fa fa-check"></i><b>6.3.1</b> 显示目录</a></li>
+<li class="chapter" data-level="6.3.2" data-path="PDF-document.html"><a href="PDF-document.html#图片相关的配置"><i class="fa fa-check"></i><b>6.3.2</b> 图片相关的配置</a></li>
+<li class="chapter" data-level="6.3.3" data-path="PDF-document.html"><a href="PDF-document.html#打印数据框"><i class="fa fa-check"></i><b>6.3.3</b> 打印数据框</a></li>
+<li class="chapter" data-level="6.3.4" data-path="PDF-document.html"><a href="PDF-document.html#代码高亮-1"><i class="fa fa-check"></i><b>6.3.4</b> 代码高亮</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="PDF-document.html"><a href="PDF-document.html#latex-选项"><i class="fa fa-check"></i><b>6.4</b> LaTeX 选项</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="PDF-document.html"><a href="PDF-document.html#通用文档部件"><i class="fa fa-check"></i><b>6.4.1</b> 通用文档部件</a></li>
+<li class="chapter" data-level="6.4.2" data-path="PDF-document.html"><a href="PDF-document.html#选择-latex-模板"><i class="fa fa-check"></i><b>6.4.2</b> 选择 LaTeX 模板</a></li>
+<li class="chapter" data-level="6.4.3" data-path="PDF-document.html"><a href="PDF-document.html#配置-latex-模板的参数"><i class="fa fa-check"></i><b>6.4.3</b> 配置 LaTeX 模板的参数</a></li>
+<li class="chapter" data-level="6.4.4" data-path="PDF-document.html"><a href="PDF-document.html#使用-latex-包处理引用"><i class="fa fa-check"></i><b>6.4.4</b> 使用 LaTeX 包处理引用</a></li>
+<li class="chapter" data-level="6.4.5" data-path="PDF-document.html"><a href="PDF-document.html#latex-的渲染引擎"><i class="fa fa-check"></i><b>6.4.5</b> LaTeX 的渲染引擎</a></li>
+<li class="chapter" data-level="6.4.6" data-path="PDF-document.html"><a href="PDF-document.html#保留生成的-tex-中间文件"><i class="fa fa-check"></i><b>6.4.6</b> 保留生成的 TeX 中间文件</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>7</b> 演示文稿</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="presentation.html"><a href="presentation.html#rmarkdown-basic-presentation"><i class="fa fa-check"></i><b>7.1</b> R Markdown 基础幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="presentation.html"><a href="presentation.html#ioslides-presentation"><i class="fa fa-check"></i><b>7.1.1</b> ioslides 幻灯片</a></li>
+<li class="chapter" data-level="7.1.2" data-path="presentation.html"><a href="presentation.html#slidy-presentation"><i class="fa fa-check"></i><b>7.1.2</b> Slidy 幻灯片</a></li>
+<li class="chapter" data-level="7.1.3" data-path="presentation.html"><a href="presentation.html#beamer-presentation"><i class="fa fa-check"></i><b>7.1.3</b> Beamer 演示文稿</a></li>
+<li class="chapter" data-level="7.1.4" data-path="presentation.html"><a href="presentation.html#powerpoint-presentation"><i class="fa fa-check"></i><b>7.1.4</b> PowerPoint 演示文稿</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="presentation.html"><a href="presentation.html#xaringan-presentation"><i class="fa fa-check"></i><b>7.2</b> Xaringan 幻灯片</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="presentation.html"><a href="presentation.html#简介"><i class="fa fa-check"></i><b>7.2.1</b> 简介</a></li>
+<li class="chapter" data-level="7.2.2" data-path="presentation.html"><a href="presentation.html#入门"><i class="fa fa-check"></i><b>7.2.2</b> 入门</a></li>
+<li class="chapter" data-level="7.2.3" data-path="presentation.html"><a href="presentation.html#使用其他主题"><i class="fa fa-check"></i><b>7.2.3</b> 使用其他主题</a></li>
+<li class="chapter" data-level="7.2.4" data-path="presentation.html"><a href="presentation.html#提升-xaringan-幻灯片的-b-格"><i class="fa fa-check"></i><b>7.2.4</b> 提升 xaringan 幻灯片的 B 格</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="word.html"><a href="word.html"><i class="fa fa-check"></i><b>8</b> Word</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="word.html"><a href="word.html#word-new-template"><i class="fa fa-check"></i><b>8.1</b> 创建 word 模板</a></li>
+<li class="chapter" data-level="8.2" data-path="word.html"><a href="word.html#word-template"><i class="fa fa-check"></i><b>8.2</b> 自定义 Word 模板</a></li>
+<li class="chapter" data-level="8.3" data-path="word.html"><a href="word.html#word-redoc"><i class="fa fa-check"></i><b>8.3</b> R Markdown 和 Word 之间的双向工作流程</a></li>
+<li class="chapter" data-level="8.4" data-path="word.html"><a href="word.html#word-officedown"><i class="fa fa-check"></i><b>8.4</b> 个人风格元素</a></li>
+</ul></li>
+<li class="part"><span><b>III 操作技巧</b></span></li>
+<li class="chapter" data-level="9" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>9</b> 表格操作</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="table.html"><a href="table.html#kable"><i class="fa fa-check"></i><b>9.1</b> 表格生成函数 <code>knitr::kable()</code></a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="table.html"><a href="table.html#kable-formats"><i class="fa fa-check"></i><b>9.1.1</b> 已支持的表的格式</a></li>
+<li class="chapter" data-level="9.1.2" data-path="table.html"><a href="table.html#修改列名"><i class="fa fa-check"></i><b>9.1.2</b> 修改列名</a></li>
+<li class="chapter" data-level="9.1.3" data-path="table.html"><a href="table.html#指定列的对齐方式"><i class="fa fa-check"></i><b>9.1.3</b> 指定列的对齐方式</a></li>
+<li class="chapter" data-level="9.1.4" data-path="table.html"><a href="table.html#kable-caption"><i class="fa fa-check"></i><b>9.1.4</b> 添加表格标题</a></li>
+<li class="chapter" data-level="9.1.5" data-path="table.html"><a href="table.html#调整数字格式"><i class="fa fa-check"></i><b>9.1.5</b> 调整数字格式</a></li>
+<li class="chapter" data-level="9.1.6" data-path="table.html"><a href="table.html#显示缺失值"><i class="fa fa-check"></i><b>9.1.6</b> 显示缺失值</a></li>
+<li class="chapter" data-level="9.1.7" data-path="table.html"><a href="table.html#特殊字符的转义"><i class="fa fa-check"></i><b>9.1.7</b> 特殊字符的转义</a></li>
+<li class="chapter" data-level="9.1.8" data-path="table.html"><a href="table.html#多张表格并排"><i class="fa fa-check"></i><b>9.1.8</b> 多张表格并排</a></li>
+<li class="chapter" data-level="9.1.9" data-path="table.html"><a href="table.html#利用for循环生成多个表"><i class="fa fa-check"></i><b>9.1.9</b> 利用<code>for</code>循环生成多个表 (*)</a></li>
+<li class="chapter" data-level="9.1.10" data-path="table.html"><a href="table.html#自定义-latex-表格"><i class="fa fa-check"></i><b>9.1.10</b> 自定义 LaTex 表格 (*)</a></li>
+<li class="chapter" data-level="9.1.11" data-path="table.html"><a href="table.html#自定义-html-表格"><i class="fa fa-check"></i><b>9.1.11</b> 自定义 HTML 表格 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="table.html"><a href="table.html#kableextra"><i class="fa fa-check"></i><b>9.2</b> <strong>kableExtra</strong> 包</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="table.html"><a href="table.html#设定字体尺寸"><i class="fa fa-check"></i><b>9.2.1</b> 设定字体尺寸</a></li>
+<li class="chapter" data-level="9.2.2" data-path="table.html"><a href="table.html#特定的行或列的样式"><i class="fa fa-check"></i><b>9.2.2</b> 特定的行或列的样式</a></li>
+<li class="chapter" data-level="9.2.3" data-path="table.html"><a href="table.html#给行或列分组"><i class="fa fa-check"></i><b>9.2.3</b> 给行或列分组</a></li>
+<li class="chapter" data-level="9.2.4" data-path="table.html"><a href="table.html#按比例缩小latex中的表格"><i class="fa fa-check"></i><b>9.2.4</b> 按比例缩小LaTex中的表格</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="table.html"><a href="table.html#table-other"><i class="fa fa-check"></i><b>9.3</b> 其它生成表格的包</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chunk-options.html"><a href="chunk-options.html"><i class="fa fa-check"></i><b>10</b> 块选项</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chunk-options.html"><a href="chunk-options.html#chunk-variable"><i class="fa fa-check"></i><b>10.1</b> 在块选项中使用变量</a></li>
+<li class="chapter" data-level="10.2" data-path="chunk-options.html"><a href="chunk-options.html#opts-error"><i class="fa fa-check"></i><b>10.2</b> 如何在遇到 error 的时候继续编译</a></li>
+<li class="chapter" data-level="10.3" data-path="chunk-options.html"><a href="chunk-options.html#dev-vector"><i class="fa fa-check"></i><b>10.3</b> 同一张图的多种图像输出格式</a></li>
+<li class="chapter" data-level="10.4" data-path="chunk-options.html"><a href="chunk-options.html#cache"><i class="fa fa-check"></i><b>10.4</b> 缓存耗时的代码块</a></li>
+<li class="chapter" data-level="10.5" data-path="chunk-options.html"><a href="chunk-options.html#cache-path"><i class="fa fa-check"></i><b>10.5</b> 为多种输出格式缓存代码块</a></li>
+<li class="chapter" data-level="10.6" data-path="chunk-options.html"><a href="chunk-options.html#cache-lazy"><i class="fa fa-check"></i><b>10.6</b> 缓存大型的对象</a></li>
+<li class="chapter" data-level="10.7" data-path="chunk-options.html"><a href="chunk-options.html#hide-one"><i class="fa fa-check"></i><b>10.7</b> 隐藏源代码、message、warning、文本输出或图像输出</a></li>
+<li class="chapter" data-level="10.8" data-path="chunk-options.html"><a href="chunk-options.html#hide-all"><i class="fa fa-check"></i><b>10.8</b> 隐藏代码块的所有输出</a></li>
+<li class="chapter" data-level="10.9" data-path="chunk-options.html"><a href="chunk-options.html#opts-collapse"><i class="fa fa-check"></i><b>10.9</b> 将文本输出压缩到源代码块中</a></li>
+<li class="chapter" data-level="10.10" data-path="chunk-options.html"><a href="chunk-options.html#opts-tidy"><i class="fa fa-check"></i><b>10.10</b> 重新格式化源代码</a></li>
+<li class="chapter" data-level="10.11" data-path="chunk-options.html"><a href="chunk-options.html#results-asis"><i class="fa fa-check"></i><b>10.11</b> 将输出文本作为原始的Markdown的内容 (*)</a></li>
+<li class="chapter" data-level="10.12" data-path="chunk-options.html"><a href="chunk-options.html#opts-comment"><i class="fa fa-check"></i><b>10.12</b> 删除文本输出中的前导符号</a></li>
+<li class="chapter" data-level="10.13" data-path="chunk-options.html"><a href="chunk-options.html#attr-output"><i class="fa fa-check"></i><b>10.13</b> 为文本输出块添加属性 (*)</a></li>
+<li class="chapter" data-level="10.14" data-path="chunk-options.html"><a href="chunk-options.html#fig-process"><i class="fa fa-check"></i><b>10.14</b> 图像的后期加工 (*)</a></li>
+<li class="chapter" data-level="10.15" data-path="chunk-options.html"><a href="chunk-options.html#graphical-device"><i class="fa fa-check"></i><b>10.15</b> 高质量的图像 (*)</a></li>
+<li class="chapter" data-level="10.16" data-path="chunk-options.html"><a href="chunk-options.html#low-plots"><i class="fa fa-check"></i><b>10.16</b> 带有低级绘图功能的逐步绘图 (*)</a></li>
+<li class="chapter" data-level="10.17" data-path="chunk-options.html"><a href="chunk-options.html#opts-render"><i class="fa fa-check"></i><b>10.17</b> 在代码块中自定义对象的打印格式 (*)</a></li>
+<li class="chapter" data-level="10.18" data-path="chunk-options.html"><a href="chunk-options.html#option-hooks"><i class="fa fa-check"></i><b>10.18</b> 选项钩子 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="output-hooks.html"><a href="output-hooks.html"><i class="fa fa-check"></i><b>11</b> 输出钩子 (*)</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="output-hooks.html"><a href="output-hooks.html#hook-hide"><i class="fa fa-check"></i><b>11.1</b> 编辑源代码</a></li>
+<li class="chapter" data-level="11.2" data-path="output-hooks.html"><a href="output-hooks.html#hook-number"><i class="fa fa-check"></i><b>11.2</b> 向源代码中添加行号</a></li>
+<li class="chapter" data-level="11.3" data-path="output-hooks.html"><a href="output-hooks.html#hook-scroll"><i class="fa fa-check"></i><b>11.3</b> 可滚动的文本输出</a></li>
+<li class="chapter" data-level="11.4" data-path="output-hooks.html"><a href="output-hooks.html#hook-truncate"><i class="fa fa-check"></i><b>11.4</b> 截断文本输出</a></li>
+<li class="chapter" data-level="11.5" data-path="output-hooks.html"><a href="output-hooks.html#hook-html5"><i class="fa fa-check"></i><b>11.5</b> 以HTML5格式输出图像</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="knitr-misc.html"><a href="knitr-misc.html"><i class="fa fa-check"></i><b>12</b> 其它使用 knitr 的小技巧</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="knitr-misc.html"><a href="knitr-misc.html#reuse-chunks"><i class="fa fa-check"></i><b>12.1</b> 重复使用代码块</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="knitr-misc.html"><a href="knitr-misc.html#embed-chunk"><i class="fa fa-check"></i><b>12.1.1</b> 将一个块嵌入到另一个块中 (*)</a></li>
+<li class="chapter" data-level="12.1.2" data-path="knitr-misc.html"><a href="knitr-misc.html#same-label"><i class="fa fa-check"></i><b>12.1.2</b> 在另一个块中使用相同的块标签</a></li>
+<li class="chapter" data-level="12.1.3" data-path="knitr-misc.html"><a href="knitr-misc.html#ref-label"><i class="fa fa-check"></i><b>12.1.3</b> 使用引用标签 (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="knitr-misc.html"><a href="knitr-misc.html#load-cache"><i class="fa fa-check"></i><b>12.2</b> 在创建对象之前使用它 (*)</a></li>
+<li class="chapter" data-level="12.3" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-exit"><i class="fa fa-check"></i><b>12.3</b> 提前退出编译</a></li>
+<li class="chapter" data-level="12.4" data-path="knitr-misc.html"><a href="knitr-misc.html#fig-chunk"><i class="fa fa-check"></i><b>12.4</b> 生成一个图像并在其他地方显示</a></li>
+<li class="chapter" data-level="12.5" data-path="knitr-misc.html"><a href="knitr-misc.html#global-device"><i class="fa fa-check"></i><b>12.5</b> 修改前一个代码块中的图像</a></li>
+<li class="chapter" data-level="12.6" data-path="knitr-misc.html"><a href="knitr-misc.html#opts-template"><i class="fa fa-check"></i><b>12.6</b> 保存一组块选项并重复使用它们 (*)</a></li>
+<li class="chapter" data-level="12.7" data-path="knitr-misc.html"><a href="knitr-misc.html#knit-expand"><i class="fa fa-check"></i><b>12.7</b> 使用 <code>knitr::knit_expand()</code> 来生成 Rmd 源代码</a></li>
+<li class="chapter" data-level="12.8" data-path="knitr-misc.html"><a href="knitr-misc.html#duplicate-label"><i class="fa fa-check"></i><b>12.8</b> 允许代码块中的标签重复 Allow duplicate labels in code chunks (*)</a></li>
+<li class="chapter" data-level="12.9" data-path="knitr-misc.html"><a href="knitr-misc.html#cache-rds"><i class="fa fa-check"></i><b>12.9</b> 一个更透明的缓存机制</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改表达式中的代码使缓存失效"><i class="fa fa-check"></i><b>12.9.1</b> 通过更改表达式中的代码使缓存失效</a></li>
+<li class="chapter" data-level="12.9.2" data-path="knitr-misc.html"><a href="knitr-misc.html#通过更改全局变量使缓存失效"><i class="fa fa-check"></i><b>12.9.2</b> 通过更改全局变量使缓存失效</a></li>
+<li class="chapter" data-level="12.9.3" data-path="knitr-misc.html"><a href="knitr-misc.html#保留缓存的多个副本"><i class="fa fa-check"></i><b>12.9.3</b> 保留缓存的多个副本</a></li>
+<li class="chapter" data-level="12.9.4" data-path="knitr-misc.html"><a href="knitr-misc.html#与knitr的缓存比较"><i class="fa fa-check"></i><b>12.9.4</b> 与<strong>knitr</strong>的缓存比较</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV 第四部分：进阶操作</b></span></li>
+<li class="chapter" data-level="13" data-path="other-languages.html"><a href="other-languages.html"><i class="fa fa-check"></i><b>13</b> 与其他语言的结合</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="other-languages.html"><a href="other-languages.html#custom-engine"><i class="fa fa-check"></i><b>13.1</b> 注册自定义语言引擎（*）</a></li>
+<li class="chapter" data-level="13.2" data-path="other-languages.html"><a href="other-languages.html#eng-python"><i class="fa fa-check"></i><b>13.2</b> 运行 Python 代码并与 Python 交互</a></li>
+<li class="chapter" data-level="13.3" data-path="other-languages.html"><a href="other-languages.html#eng-asis"><i class="fa fa-check"></i><b>13.3</b> 通过 <code>asis</code> 引擎有条件地执行内容</a></li>
+<li class="chapter" data-level="13.4" data-path="other-languages.html"><a href="other-languages.html#eng-bash"><i class="fa fa-check"></i><b>13.4</b> 执行 Shell 脚本</a></li>
+<li class="chapter" data-level="13.5" data-path="other-languages.html"><a href="other-languages.html#d3"><i class="fa fa-check"></i><b>13.5</b> 用 D3 可视化</a></li>
+<li class="chapter" data-level="13.6" data-path="other-languages.html"><a href="other-languages.html#eng-cat"><i class="fa fa-check"></i><b>13.6</b> 通过 <code>cat</code> 引擎将块内容写入文件</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="other-languages.html"><a href="other-languages.html#写入-css-文件"><i class="fa fa-check"></i><b>13.6.1</b> 写入 CSS 文件</a></li>
+<li class="chapter" data-level="13.6.2" data-path="other-languages.html"><a href="other-languages.html#在序言中包含-latex-代码"><i class="fa fa-check"></i><b>13.6.2</b> 在序言中包含 LaTeX 代码</a></li>
+<li class="chapter" data-level="13.6.3" data-path="other-languages.html"><a href="other-languages.html#将-yaml-数据写入文件并显示它"><i class="fa fa-check"></i><b>13.6.3</b> 将 YAML 数据写入文件并显示它</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="other-languages.html"><a href="other-languages.html#eng-sas"><i class="fa fa-check"></i><b>13.7</b> 运行 SAS 代码</a></li>
+<li class="chapter" data-level="13.8" data-path="other-languages.html"><a href="other-languages.html#eng-stata"><i class="fa fa-check"></i><b>13.8</b> 运行 Stata 代码</a></li>
+<li class="chapter" data-level="13.9" data-path="other-languages.html"><a href="other-languages.html#eng-asy"><i class="fa fa-check"></i><b>13.9</b> 用渐近线 Asymptote 创建图形</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="other-languages.html"><a href="other-languages.html#在-r-中生成数据并通过-asymptote-读取"><i class="fa fa-check"></i><b>13.9.1</b> 在 R 中生成数据并通过 Asymptote 读取</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="other-languages.html"><a href="other-languages.html#eng-sass"><i class="fa fa-check"></i><b>13.10</b> 使用 Sass/SCSS 构建 HTML 页面风格</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Dashboards.html"><a href="Dashboards.html"><i class="fa fa-check"></i><b>14</b> Dashboards</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Dashboards.html"><a href="Dashboards.html#入门-1"><i class="fa fa-check"></i><b>14.1</b> 入门</a></li>
+<li class="chapter" data-level="14.2" data-path="Dashboards.html"><a href="Dashboards.html#排版"><i class="fa fa-check"></i><b>14.2</b> 排版</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="Dashboards.html"><a href="Dashboards.html#基于行的布局"><i class="fa fa-check"></i><b>14.2.1</b> 基于行的布局</a></li>
+<li class="chapter" data-level="14.2.2" data-path="Dashboards.html"><a href="Dashboards.html#节属性"><i class="fa fa-check"></i><b>14.2.2</b> 节属性</a></li>
+<li class="chapter" data-level="14.2.3" data-path="Dashboards.html"><a href="Dashboards.html#多页"><i class="fa fa-check"></i><b>14.2.3</b> 多页</a></li>
+<li class="chapter" data-level="14.2.4" data-path="Dashboards.html"><a href="Dashboards.html#故事板"><i class="fa fa-check"></i><b>14.2.4</b> 故事板</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="Dashboards.html"><a href="Dashboards.html#dashboard-components"><i class="fa fa-check"></i><b>14.3</b> 组件</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="Dashboards.html"><a href="Dashboards.html#数值框"><i class="fa fa-check"></i><b>14.3.1</b> 数值框</a></li>
+<li class="chapter" data-level="14.3.2" data-path="Dashboards.html"><a href="Dashboards.html#仪表"><i class="fa fa-check"></i><b>14.3.2</b> 仪表</a></li>
+<li class="chapter" data-level="14.3.3" data-path="Dashboards.html"><a href="Dashboards.html#文本注释"><i class="fa fa-check"></i><b>14.3.3</b> 文本注释</a></li>
+<li class="chapter" data-level="14.3.4" data-path="Dashboards.html"><a href="Dashboards.html#导航栏"><i class="fa fa-check"></i><b>14.3.4</b> 导航栏</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="Dashboards.html"><a href="Dashboards.html#shiny"><i class="fa fa-check"></i><b>14.4</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="Dashboards.html"><a href="Dashboards.html#入门指南"><i class="fa fa-check"></i><b>14.4.1</b> 入门指南</a></li>
+<li class="chapter" data-level="14.4.2" data-path="Dashboards.html"><a href="Dashboards.html#shiny-仪表盘的一个示例"><i class="fa fa-check"></i><b>14.4.2</b> Shiny 仪表盘的一个示例</a></li>
+<li class="chapter" data-level="14.4.3" data-path="Dashboards.html"><a href="Dashboards.html#输入栏"><i class="fa fa-check"></i><b>14.4.3</b> 输入栏</a></li>
+<li class="chapter" data-level="14.4.4" data-path="Dashboards.html"><a href="Dashboards.html#拓展"><i class="fa fa-check"></i><b>14.4.4</b> 拓展</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="shiny-started.html"><a href="shiny-started.html"><i class="fa fa-check"></i><b>15</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-start"><i class="fa fa-check"></i><b>15.1</b> 入门指南</a></li>
+<li class="chapter" data-level="15.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-deploy"><i class="fa fa-check"></i><b>15.2</b> 部署</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapps.io"><i class="fa fa-check"></i><b>15.2.1</b> ShinyApps.io</a></li>
+<li class="chapter" data-level="15.2.2" data-path="shiny-started.html"><a href="shiny-started.html#shiny-server-rstudio-connect"><i class="fa fa-check"></i><b>15.2.2</b> Shiny Server / RStudio Connect</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embedded"><i class="fa fa-check"></i><b>15.3</b> 嵌入 Shiny 应用程序</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="shiny-started.html"><a href="shiny-started.html#shiny-embed-inline"><i class="fa fa-check"></i><b>15.3.1</b> 内联应用程序</a></li>
+<li class="chapter" data-level="15.3.2" data-path="shiny-started.html"><a href="shiny-started.html#外联应用程序"><i class="fa fa-check"></i><b>15.3.2</b> 外联应用程序</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="shiny-started.html"><a href="shiny-started.html#shiny-widgets"><i class="fa fa-check"></i><b>15.4</b> Shiny 小部件</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="shiny-started.html"><a href="shiny-started.html#shinyapp-函数"><i class="fa fa-check"></i><b>15.4.1</b> <code>shinyApp()</code> 函数</a></li>
+<li class="chapter" data-level="15.4.2" data-path="shiny-started.html"><a href="shiny-started.html#例子k---means-聚类"><i class="fa fa-check"></i><b>15.4.2</b> 例子：k - means 聚类</a></li>
+<li class="chapter" data-level="15.4.3" data-path="shiny-started.html"><a href="shiny-started.html#小部件的大小和布局"><i class="fa fa-check"></i><b>15.4.3</b> 小部件的大小和布局</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="shiny-started.html"><a href="shiny-started.html#shiny-multiple"><i class="fa fa-check"></i><b>15.5</b> 多页</a></li>
+<li class="chapter" data-level="15.6" data-path="shiny-started.html"><a href="shiny-started.html#shiny-delay"><i class="fa fa-check"></i><b>15.6</b> 延迟渲染</a></li>
+<li class="chapter" data-level="15.7" data-path="shiny-started.html"><a href="shiny-started.html#shiny-args"><i class="fa fa-check"></i><b>15.7</b> 渲染函数的输出参数</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="shiny-started.html"><a href="shiny-started.html#附加说明"><i class="fa fa-check"></i><b>15.7.1</b> 附加说明</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="custom-output.html"><a href="custom-output.html"><i class="fa fa-check"></i><b>16</b> 自定义排版</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="custom-output.html"><a href="custom-output.html#parameterized-report"><i class="fa fa-check"></i><b>16.1</b> 有参数的 R Markdown 报告</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="custom-output.html"><a href="custom-output.html#params-declare"><i class="fa fa-check"></i><b>16.1.1</b> 声明参数</a></li>
+<li class="chapter" data-level="16.1.2" data-path="custom-output.html"><a href="custom-output.html#params-use"><i class="fa fa-check"></i><b>16.1.2</b> 使用参数</a></li>
+<li class="chapter" data-level="16.1.3" data-path="custom-output.html"><a href="custom-output.html#params-knit"><i class="fa fa-check"></i><b>16.1.3</b> 有参编译</a></li>
+<li class="chapter" data-level="16.1.4" data-path="custom-output.html"><a href="custom-output.html#params-publish"><i class="fa fa-check"></i><b>16.1.4</b> 发布文档</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="custom-output.html"><a href="custom-output.html#document-template"><i class="fa fa-check"></i><b>16.2</b> 文档模板</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="custom-output.html"><a href="custom-output.html#template-structure"><i class="fa fa-check"></i><b>16.2.1</b> 模板的结构</a></li>
+<li class="chapter" data-level="16.2.2" data-path="custom-output.html"><a href="custom-output.html#template-support"><i class="fa fa-check"></i><b>16.2.2</b> 模板支持文件</a></li>
+<li class="chapter" data-level="16.2.3" data-path="custom-output.html"><a href="custom-output.html#template-pandoc"><i class="fa fa-check"></i><b>16.2.3</b> 设置 Pandoc 模板</a></li>
+<li class="chapter" data-level="16.2.4" data-path="custom-output.html"><a href="custom-output.html#template-share"><i class="fa fa-check"></i><b>16.2.4</b> 分享模板</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="custom-output.html"><a href="custom-output.html#new-formats"><i class="fa fa-check"></i><b>16.3</b> 创建新的文档格式</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="custom-output.html"><a href="custom-output.html#format-derive"><i class="fa fa-check"></i><b>16.3.1</b> 从现有文档格式衍生新格式</a></li>
+<li class="chapter" data-level="16.3.2" data-path="custom-output.html"><a href="custom-output.html#fully-custom-format"><i class="fa fa-check"></i><b>16.3.2</b> 完全的自定义输出格式</a></li>
+<li class="chapter" data-level="16.3.3" data-path="custom-output.html"><a href="custom-output.html#using-a-new-format"><i class="fa fa-check"></i><b>16.3.3</b> 使用新的文档输出格式</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Markdown 指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="output-hooks" class="section level1" number="11">
+<h1><span class="header-section-number">第 11 章</span> 输出钩子 (*)</h1>
+<p>通过使用<strong>knitr</strong>包，您可以控制代码块的每一段输出，如源代码、文本输出、图像输出以及message等，这一控制是通过“输出钩子”（Output Hook）实现的。输出钩子是一系列函数，它们的输入为一段输出（通常是一个字符向量），并返回一个要写入输出文档的字符向量。到目前为止这个说法可能不容易理解，但希望你可以通过下面的一个例子来更清楚地理解这个想法，这个小例子解释了一个简单代码块的输出是如何通过<strong>knitr</strong>的输出钩子呈现的，这里我们考虑一个由一行代码组成的代码块：</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb295-1"><a href="output-hooks.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb295-2"><a href="output-hooks.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb295-3"><a href="output-hooks.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>在<strong>knitr</strong>对代码块进行处理后，它会得到两个输出元素，它们都存储为字符串：源代码<code>"1 + 1"</code>和文本输出<code>"[1] 2"</code>。这些字符串将由块挂钩（chunk hooks）进一步处理，以获得所需的输出格式。例如，对于Markdown文档，<strong>knitr</strong>将把源代码包装在带有编程语言名称的代码块中。这是通过<code>source</code>钩子完成的，它看起来像这个函数：</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="output-hooks.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 对于上面的例子， `x` 为字符串 &quot;1 + 1&quot;</span></span>
+<span id="cb296-2"><a href="output-hooks.html#cb296-2" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(x, options) {</span>
+<span id="cb296-3"><a href="output-hooks.html#cb296-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 小写的 &quot;r&quot; 在这里表示编程语言的名称</span></span>
+<span id="cb296-4"><a href="output-hooks.html#cb296-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="fu">c</span>(<span class="st">&#39;```r&#39;</span>, x, <span class="st">&#39;```&#39;</span>), <span class="at">collapse =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb296-5"><a href="output-hooks.html#cb296-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>类似的，由输出钩子处理的文本输出类似于下面这个函数；</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="output-hooks.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(x, options) {</span>
+<span id="cb297-2"><a href="output-hooks.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="fu">c</span>(<span class="st">&#39;```&#39;</span>, x, <span class="st">&#39;```&#39;</span>), <span class="at">collapse =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb297-3"><a href="output-hooks.html#cb297-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>所以上述代码块的最终输出为：</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb298-1"><a href="output-hooks.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb298-2"><a href="output-hooks.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb298-3"><a href="output-hooks.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb298-4"><a href="output-hooks.html#cb298-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-5"><a href="output-hooks.html#cb298-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb298-6"><a href="output-hooks.html#cb298-6" aria-hidden="true" tabindex="-1"></a><span class="in">[1] 2</span></span>
+<span id="cb298-7"><a href="output-hooks.html#cb298-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>实际的钩子比上面的两个函数更复杂，但背后的思想是一样的。你可以通过<code>get()</code>方法从<code>knit_hooks</code>获得实际的钩子，例如：</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="output-hooks.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 为了得到有意义的输出，以下代码应在一个 knitr 文档的代码块内部执行 </span></span>
+<span id="cb299-2"><a href="output-hooks.html#cb299-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">get</span>(<span class="st">&#39;source&#39;</span>)</span>
+<span id="cb299-3"><a href="output-hooks.html#cb299-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">get</span>(<span class="st">&#39;output&#39;</span>)</span>
+<span id="cb299-4"><a href="output-hooks.html#cb299-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 或者 knitr::knit_hooks$get(c(&#39;source&#39;, &#39;output&#39;))</span></span></code></pre></div>
+<p>除非你真的有兴趣为<strong>knitr</strong>包做贡献，否则我们不建议你阅读这些内置钩子的源代码。如果你感兴趣，可以在 <a href="https://github.com/yihui/knitr/tree/master/R" class="uri">https://github.com/yihui/knitr/tree/master/R</a> 里以<code>hooks-*.R</code>形式命名的脚本中找到这些代码（例如，<code>hooks-md.R</code>包含R Markdown文档的钩子）。作为<strong>knitr</strong>用户，如果你知道如何利用内置钩子创建自定义输出钩子，通常就足够了。你将在本章的几个例子中学习到这一点，我们将在下面展示基本的思想。</p>
+<p>一个自定义的输出钩子是通过<code>knit_hooks</code>的<code>set()</code>方法注册的。由于该方法将覆盖现有的默认钩子，我们建议先保存默认钩子的副本，以自己的方式处理输出元素，并将结果传递给默认钩子。常见的语法为：</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="output-hooks.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 在这里使用 local() 是可选的，我们只是想避免创建不必要的全局变量，如 `hook_old`）</span></span>
+<span id="cb300-2"><a href="output-hooks.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="fu">local</span>({</span>
+<span id="cb300-3"><a href="output-hooks.html#cb300-3" aria-hidden="true" tabindex="-1"></a>  hook_old <span class="ot">=</span> knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">get</span>(<span class="st">&#39;NAME&#39;</span>)  <span class="co"># 保存现有的钩子</span></span>
+<span id="cb300-4"><a href="output-hooks.html#cb300-4" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">NAME =</span> <span class="cf">function</span>(x, options) {</span>
+<span id="cb300-5"><a href="output-hooks.html#cb300-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 现在可以对 x 做任何处理，并将 x 传递给现有的钩子</span></span>
+<span id="cb300-6"><a href="output-hooks.html#cb300-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hook_old</span>(x, options)</span>
+<span id="cb300-7"><a href="output-hooks.html#cb300-7" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb300-8"><a href="output-hooks.html#cb300-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>这里，<code>NAME</code>是钩子的名称，它可以是以下值之一：</p>
+<ul>
+<li><p><code>source</code>： 处理源代码；</p></li>
+<li><p><code>output</code>： 处理文本输出；</p></li>
+<li><p><code>warning</code>： 处理 warning （通常来自 <code>warning()</code>）；</p></li>
+<li><p><code>message</code>： 处理 message （通常来自 <code>message()</code>）；</p></li>
+<li><p><code>error</code>： 处理 error message （通常来自 <code>stop()</code>）；</p></li>
+<li><p><code>plot</code>： 处理图像输出路径；</p></li>
+<li><p><code>inline</code>： 处理行内 R 表达式的输出；</p></li>
+<li><p><code>chunk</code>： 处理整个块的输出；</p></li>
+<li><p><code>document</code>： 处理整个文档的输出。</p></li>
+</ul>
+<p>钩子函数中的参数<code>x</code>的含义在上面的列表中解释。对于钩子的<code>options</code> 参数，它表示当前代码块的块选项（以列表形式给出）。例如，如果你在一个块上设置<code>foo = TRUE</code>，你可以通过钩子中的<code>options$foo</code>获取它的值。但需要注意的是，参数<code>options</code>对<code>inline</code>和<code>document</code> 钩子不可用。</p>
+<p>输出钩子可以让你能够最终控制块和文档输出的每个单独部分。与块选项（通常具有预定义的用途）相比，输出钩子可能要强大得多，因为它们是用户自定义的函数，而且你可以在函数中做任何你想做的事情。</p>
+<div id="hook-hide" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> 编辑源代码</h2>
+<p>有时我们可能不希望在报告中完全展示我们的源代码。例如，你可能在某一行代码中需要写一个密码（如爬虫代码等）。我们在<a href="chunk-options.html#hide-one">10.7</a>节中提到，你可以使用块选项<code>echo</code>来选择显示哪个表达式（例如，通过<code>echo = 2</code>可以显示第二个表达式）。在本节中，我们提供了一种更加灵活的方法，它不需要指定表达式的位置或索引。</p>
+<p>它的基本思想是在代码中添加一个特殊的注释（例如，<code># SECRET!!</code>）。当在代码中检测到该注释时，将自动忽略该行。下面是使用<code>source</code>钩子的完整示例:</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb301-1"><a href="output-hooks.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb301-2"><a href="output-hooks.html#cb301-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 用`source`钩子来隐藏某行代码</span></span>
+<span id="cb301-3"><a href="output-hooks.html#cb301-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb301-4"><a href="output-hooks.html#cb301-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-5"><a href="output-hooks.html#cb301-5" aria-hidden="true" tabindex="-1"></a>首先，我们设置一个<span class="in">`source`</span>钩子来匹配并隐藏（排除）末尾处包含字符串<span class="in">`# SECRET!!`</span>的代码行：</span>
+<span id="cb301-6"><a href="output-hooks.html#cb301-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-7"><a href="output-hooks.html#cb301-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb301-8"><a href="output-hooks.html#cb301-8" aria-hidden="true" tabindex="-1"></a><span class="in">local({</span></span>
+<span id="cb301-9"><a href="output-hooks.html#cb301-9" aria-hidden="true" tabindex="-1"></a><span class="in">  hook_source &lt;- knitr::knit_hooks$get(&#39;source&#39;)</span></span>
+<span id="cb301-10"><a href="output-hooks.html#cb301-10" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::knit_hooks$set(source = function(x, options) {</span></span>
+<span id="cb301-11"><a href="output-hooks.html#cb301-11" aria-hidden="true" tabindex="-1"></a><span class="in">    x &lt;- x[!grepl(&#39;# SECRET!!$&#39;, x)]</span></span>
+<span id="cb301-12"><a href="output-hooks.html#cb301-12" aria-hidden="true" tabindex="-1"></a><span class="in">    hook_source(x, options)</span></span>
+<span id="cb301-13"><a href="output-hooks.html#cb301-13" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb301-14"><a href="output-hooks.html#cb301-14" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb301-15"><a href="output-hooks.html#cb301-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb301-16"><a href="output-hooks.html#cb301-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-17"><a href="output-hooks.html#cb301-17" aria-hidden="true" tabindex="-1"></a>现在我们可以测试这个新的钩子。在编译这个文档时，你将看不到带有特殊注释<span class="in">`# SECRET!!`</span>的代码行。</span>
+<span id="cb301-18"><a href="output-hooks.html#cb301-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-19"><a href="output-hooks.html#cb301-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb301-20"><a href="output-hooks.html#cb301-20" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1  # 正常显示代码</span></span>
+<span id="cb301-21"><a href="output-hooks.html#cb301-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-22"><a href="output-hooks.html#cb301-22" aria-hidden="true" tabindex="-1"></a><span class="in"># 请使用你的用户名及密码</span></span>
+<span id="cb301-23"><a href="output-hooks.html#cb301-23" aria-hidden="true" tabindex="-1"></a><span class="in">auth &lt;- httr::authenticate(&quot;user&quot;, &quot;passwd&quot;)</span></span>
+<span id="cb301-24"><a href="output-hooks.html#cb301-24" aria-hidden="true" tabindex="-1"></a><span class="in">auth &lt;- httr::authenticate(&quot;yihui&quot;, &quot;horsebattery&quot;)  # SECRET!!</span></span>
+<span id="cb301-25"><a href="output-hooks.html#cb301-25" aria-hidden="true" tabindex="-1"></a><span class="in">httr::GET(&quot;http://httpbin.org/basic-auth/user/passwd&quot;, auth)</span></span>
+<span id="cb301-26"><a href="output-hooks.html#cb301-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>上述<code>source</code>钩子的关键部分为下面这一行，它会通过<code>grepl()</code>来匹配源代码向量<code>x</code>中末尾处包含注释<code># SECRET!!</code>的代码行，并隐藏（排除）它们：</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="output-hooks.html#cb302-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&#39;# SECRET!!$&#39;</span>, x)]</span></code></pre></div>
+<p>准确地说，上述的钩子将隐藏（排除）所有末尾处包含注释<code># SECRET!!</code>的 <em>表达式</em>，而非单独的行，因为<code>x</code> 实际上是一个由R中表达式组成的向量。例如，对于下面的代码块：</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="output-hooks.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb303-2"><a href="output-hooks.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">TRUE</span>) { <span class="co"># SECRET!!</span></span>
+<span id="cb303-3"><a href="output-hooks.html#cb303-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb303-4"><a href="output-hooks.html#cb303-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>在<code>source</code>钩子中，<code>x</code>的值为：</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="output-hooks.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;1 + 1&quot;</span>, <span class="st">&quot;if (TRUE) { # SECRET!!</span><span class="sc">\n</span><span class="st">  1:10</span><span class="sc">\n</span><span class="st">}&quot;</span>)</span></code></pre></div>
+<p>如果你想隐藏某些特定行而非R代码中完整的表达式，你必须将<code>x</code>分割成单独的行。你可以考虑使用函数<code>xfun::split_lines()</code>，这样的话钩子函数会变成：</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="output-hooks.html#cb305-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">split_lines</span>(x)  <span class="co"># 分为单独的行</span></span>
+<span id="cb305-2"><a href="output-hooks.html#cb305-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&#39;# SECRET!!$&#39;</span>, x)]</span>
+<span id="cb305-3"><a href="output-hooks.html#cb305-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)  <span class="co"># 组合成单个字符串</span></span>
+<span id="cb305-4"><a href="output-hooks.html#cb305-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hook_source</span>(x, options)</span></code></pre></div>
+<p>这个示例向你展示了如何操作源代码字符串，而<code>grepl()</code>当然不是字符串操作的唯一选择。在<a href="output-hooks.html#hook-number">11.2</a>节中，我们将展示其它可能的选择。</p>
+</div>
+<div id="hook-number" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> 向源代码中添加行号</h2>
+<p>在本节中，我们将展示一个定义<code>source</code>钩子的例子，该钩子会将行号作为注释添加到源代码中。例如，对于下面这个代码块：</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb306-1"><a href="output-hooks.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb306-2"><a href="output-hooks.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
+<span id="cb306-3"><a href="output-hooks.html#cb306-3" aria-hidden="true" tabindex="-1"></a><span class="in">  x &lt;- 1:10</span></span>
+<span id="cb306-4"><a href="output-hooks.html#cb306-4" aria-hidden="true" tabindex="-1"></a><span class="in">  x + 1</span></span>
+<span id="cb306-5"><a href="output-hooks.html#cb306-5" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb306-6"><a href="output-hooks.html#cb306-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>我们想要得到如下的输出：</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="output-hooks.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">TRUE</span>) {    <span class="co"># 1</span></span>
+<span id="cb307-2"><a href="output-hooks.html#cb307-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>    <span class="co"># 2</span></span>
+<span id="cb307-3"><a href="output-hooks.html#cb307-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">1</span>        <span class="co"># 3</span></span>
+<span id="cb307-4"><a href="output-hooks.html#cb307-4" aria-hidden="true" tabindex="-1"></a>}              <span class="co"># 4</span></span></code></pre></div>
+<p>完整的例子如下：</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb308-1"><a href="output-hooks.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb308-2"><a href="output-hooks.html#cb308-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 向源代码中添加行号</span></span>
+<span id="cb308-3"><a href="output-hooks.html#cb308-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb308-4"><a href="output-hooks.html#cb308-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb308-5"><a href="output-hooks.html#cb308-5" aria-hidden="true" tabindex="-1"></a>我们设置了一个<span class="in">`source`</span>钩子来向源代码中添加行号，行号会出现在每行末尾的注释中。</span>
+<span id="cb308-6"><a href="output-hooks.html#cb308-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb308-7"><a href="output-hooks.html#cb308-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb308-8"><a href="output-hooks.html#cb308-8" aria-hidden="true" tabindex="-1"></a><span class="in">local({</span></span>
+<span id="cb308-9"><a href="output-hooks.html#cb308-9" aria-hidden="true" tabindex="-1"></a><span class="in">  hook_source &lt;- knitr::knit_hooks$get(&#39;source&#39;)</span></span>
+<span id="cb308-10"><a href="output-hooks.html#cb308-10" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::knit_hooks$set(source = function(x, options) {</span></span>
+<span id="cb308-11"><a href="output-hooks.html#cb308-11" aria-hidden="true" tabindex="-1"></a><span class="in">    x &lt;- xfun::split_lines(x)</span></span>
+<span id="cb308-12"><a href="output-hooks.html#cb308-12" aria-hidden="true" tabindex="-1"></a><span class="in">    n &lt;- nchar(x, &#39;width&#39;)</span></span>
+<span id="cb308-13"><a href="output-hooks.html#cb308-13" aria-hidden="true" tabindex="-1"></a><span class="in">    i &lt;- seq_along(x)  # 行号</span></span>
+<span id="cb308-14"><a href="output-hooks.html#cb308-14" aria-hidden="true" tabindex="-1"></a><span class="in">    n &lt;- n + nchar(i)</span></span>
+<span id="cb308-15"><a href="output-hooks.html#cb308-15" aria-hidden="true" tabindex="-1"></a><span class="in">    s &lt;- knitr:::v_spaces(max(n) - n)</span></span>
+<span id="cb308-16"><a href="output-hooks.html#cb308-16" aria-hidden="true" tabindex="-1"></a><span class="in">    x &lt;- paste(x, s, &#39;  # &#39;, i, sep = &#39;&#39;, collapse = &#39;\n&#39;)</span></span>
+<span id="cb308-17"><a href="output-hooks.html#cb308-17" aria-hidden="true" tabindex="-1"></a><span class="in">    hook_source(x, options)</span></span>
+<span id="cb308-18"><a href="output-hooks.html#cb308-18" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb308-19"><a href="output-hooks.html#cb308-19" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb308-20"><a href="output-hooks.html#cb308-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb308-21"><a href="output-hooks.html#cb308-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb308-22"><a href="output-hooks.html#cb308-22" aria-hidden="true" tabindex="-1"></a>现在我们可以测试这个新钩子了。编译此文档时，你将在每行末尾的注释中看到行号：</span>
+<span id="cb308-23"><a href="output-hooks.html#cb308-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb308-24"><a href="output-hooks.html#cb308-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb308-25"><a href="output-hooks.html#cb308-25" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
+<span id="cb308-26"><a href="output-hooks.html#cb308-26" aria-hidden="true" tabindex="-1"></a><span class="in">  x &lt;- 1:10</span></span>
+<span id="cb308-27"><a href="output-hooks.html#cb308-27" aria-hidden="true" tabindex="-1"></a><span class="in">  x + 1</span></span>
+<span id="cb308-28"><a href="output-hooks.html#cb308-28" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb308-29"><a href="output-hooks.html#cb308-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>上面这个例子中使用的主要技巧是确定每行注释之前需要的空格数，以便注释可以在右边对齐。该空格数取决于每行代码的宽度，我们将钩子函数中的代码留给读者来理解。需要注意的是，函数<code>knitr:::v_spaces()</code>用于生成指定长度的空格，例如：</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="output-hooks.html#cb309-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">:::</span><span class="fu">v_spaces</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## [1] &quot; &quot;      &quot;   &quot;    &quot;      &quot; &quot;&quot;</code></pre>
+<p>在实际中，如果想要在源代码中添加行号的话，<a href="#number-lines"><strong>??</strong></a>节中介绍的方法更好，它的语法更简洁，并且适用于源代码和文本输出块。本节中介绍<code>source</code>钩子的主要目的是展示一种使用自定义函数操作源代码的可能性。</p>
+</div>
+<div id="hook-scroll" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> 可滚动的文本输出</h2>
+<p>在<a href="html-document.html#html-scroll">5.2.7</a>节中，我们展示了如何通过CSS来限制代码块和文本输出块的高度。实际上，有一个更简单的方法，可以使用块选项的<code>attr.source</code>和<code>attr.output</code>来将<code>style</code>属性添加到Markdown输出中的分离代码块中（有关这些选项的更多信息，请参阅<a href="chunk-options.html#attr-output">10.13</a>节）。例如，对于这个带有<code>attr.output</code>选项的代码块：</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb311-1"><a href="output-hooks.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, attr.output=&#39;style=&quot;max-height: 100px;&quot;&#39;}</span></span>
+<span id="cb311-2"><a href="output-hooks.html#cb311-2" aria-hidden="true" tabindex="-1"></a><span class="in">1:300</span></span>
+<span id="cb311-3"><a href="output-hooks.html#cb311-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>它的Markdown输出为：</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb312-1"><a href="output-hooks.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb312-2"><a href="output-hooks.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">300</span></span>
+<span id="cb312-3"><a href="output-hooks.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb312-4"><a href="output-hooks.html#cb312-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb312-5"><a href="output-hooks.html#cb312-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{style=&quot;max-height: 100px;&quot;}</span></span>
+<span id="cb312-6"><a href="output-hooks.html#cb312-6" aria-hidden="true" tabindex="-1"></a><span class="in">##   [1]   1   2   3   4   5   6   7   8   9  10</span></span>
+<span id="cb312-7"><a href="output-hooks.html#cb312-7" aria-hidden="true" tabindex="-1"></a><span class="in">##  [11]  11  12  13  14  15  16  17  18  19  20</span></span>
+<span id="cb312-8"><a href="output-hooks.html#cb312-8" aria-hidden="true" tabindex="-1"></a><span class="in">##  ... ...</span></span>
+<span id="cb312-9"><a href="output-hooks.html#cb312-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>随后文本输出块将被Pandoc转换为HTML：</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb313-1"><a href="output-hooks.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;max-height: 100px;&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb313-2"><a href="output-hooks.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;code&gt;</span>##   [1]   1   2   3   4   5   6   7   8   9  10</span>
+<span id="cb313-3"><a href="output-hooks.html#cb313-3" aria-hidden="true" tabindex="-1"></a>##  [11]  11  12  13  14  15  16  17  18  19  20</span>
+<span id="cb313-4"><a href="output-hooks.html#cb313-4" aria-hidden="true" tabindex="-1"></a>##  ... ...<span class="kw">&lt;/code&gt;</span></span>
+<span id="cb313-5"><a href="output-hooks.html#cb313-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/pre&gt;</span></span></code></pre></div>
+<p>更多有关Pandoc中分离代码块的信息，可参阅其阅读手册：<a href="https://pandoc.org/MANUAL.html#fenced-code-blocks" class="uri">https://pandoc.org/MANUAL.html#fenced-code-blocks</a>.</p>
+<p><code>attr.source</code>和<code>attr.output</code>选项使我们能够指定每个代码块的最大高度，但是对应的语法有点笨拙，需要我们更好地理解CSS和Pandoc的Markdown语法。下面我们展示了一个使用自定义块选项<code>max.height</code>来自定义输出钩子的例子，这样你只需要设置块选项，如<code>max.height = "100px"</code>而非<code>attr.output = 'style="max-height: 100px;"'</code>。在本例中，我们只操作<code>options</code>参数，而不操作<code>x</code>参数：</p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb314-1"><a href="output-hooks.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb314-2"><a href="output-hooks.html#cb314-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 可滚动的代码块</span></span>
+<span id="cb314-3"><a href="output-hooks.html#cb314-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb314-4"><a href="output-hooks.html#cb314-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document: </span></span>
+<span id="cb314-5"><a href="output-hooks.html#cb314-5" aria-hidden="true" tabindex="-1"></a><span class="co">    highlight: tango</span></span>
+<span id="cb314-6"><a href="output-hooks.html#cb314-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb314-7"><a href="output-hooks.html#cb314-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-8"><a href="output-hooks.html#cb314-8" aria-hidden="true" tabindex="-1"></a>我们设置了一个输出钩子，可以当块选项<span class="in">`max.height`</span>已被设置时，向文本输出添加<span class="in">`style`</span>属性：</span>
+<span id="cb314-9"><a href="output-hooks.html#cb314-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-10"><a href="output-hooks.html#cb314-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb314-11"><a href="output-hooks.html#cb314-11" aria-hidden="true" tabindex="-1"></a><span class="in">options(width = 60)</span></span>
+<span id="cb314-12"><a href="output-hooks.html#cb314-12" aria-hidden="true" tabindex="-1"></a><span class="in">local({</span></span>
+<span id="cb314-13"><a href="output-hooks.html#cb314-13" aria-hidden="true" tabindex="-1"></a><span class="in">  hook_output &lt;- knitr::knit_hooks$get(&#39;output&#39;)</span></span>
+<span id="cb314-14"><a href="output-hooks.html#cb314-14" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::knit_hooks$set(output = function(x, options) {</span></span>
+<span id="cb314-15"><a href="output-hooks.html#cb314-15" aria-hidden="true" tabindex="-1"></a><span class="in">    if (!is.null(options$max.height)) options$attr.output &lt;- c(</span></span>
+<span id="cb314-16"><a href="output-hooks.html#cb314-16" aria-hidden="true" tabindex="-1"></a><span class="in">      options$attr.output,</span></span>
+<span id="cb314-17"><a href="output-hooks.html#cb314-17" aria-hidden="true" tabindex="-1"></a><span class="in">      sprintf(&#39;style=&quot;max-height: %s;&quot;&#39;, options$max.height)</span></span>
+<span id="cb314-18"><a href="output-hooks.html#cb314-18" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb314-19"><a href="output-hooks.html#cb314-19" aria-hidden="true" tabindex="-1"></a><span class="in">    hook_output(x, options)</span></span>
+<span id="cb314-20"><a href="output-hooks.html#cb314-20" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb314-21"><a href="output-hooks.html#cb314-21" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb314-22"><a href="output-hooks.html#cb314-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb314-23"><a href="output-hooks.html#cb314-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-24"><a href="output-hooks.html#cb314-24" aria-hidden="true" tabindex="-1"></a>如果没有<span class="in">`max.height`</span>，可以看到完整的输出，即：</span>
+<span id="cb314-25"><a href="output-hooks.html#cb314-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-26"><a href="output-hooks.html#cb314-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb314-27"><a href="output-hooks.html#cb314-27" aria-hidden="true" tabindex="-1"></a><span class="in">1:100</span></span>
+<span id="cb314-28"><a href="output-hooks.html#cb314-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb314-29"><a href="output-hooks.html#cb314-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-30"><a href="output-hooks.html#cb314-30" aria-hidden="true" tabindex="-1"></a>现在我们设置<span class="in">`max.height`</span>为<span class="in">`100px`</span>，这样可以在文本输出中看到一个滚动条，因为它的高度大于100px。</span>
+<span id="cb314-31"><a href="output-hooks.html#cb314-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-32"><a href="output-hooks.html#cb314-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, max.height=&#39;100px&#39;}</span></span>
+<span id="cb314-33"><a href="output-hooks.html#cb314-33" aria-hidden="true" tabindex="-1"></a><span class="in">1:100</span></span>
+<span id="cb314-34"><a href="output-hooks.html#cb314-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb314-35"><a href="output-hooks.html#cb314-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-36"><a href="output-hooks.html#cb314-36" aria-hidden="true" tabindex="-1"></a>本质上，<span class="in">`max.height`</span>选项被转换为<span class="in">`attr.output`</span>选项，并且即使<span class="in">`attr.output`</span>选项是存在的，这一转换也是有效的，也就是说，它不会覆盖<span class="in">`attr.output`</span>选项，例如，我们可以通过<span class="in">`.numberLines`</span> 属性在文本输出的左侧显示行号：</span>
+<span id="cb314-37"><a href="output-hooks.html#cb314-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-38"><a href="output-hooks.html#cb314-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, max.height=&#39;100px&#39;, attr.output=&#39;.numberLines&#39;}</span></span>
+<span id="cb314-39"><a href="output-hooks.html#cb314-39" aria-hidden="true" tabindex="-1"></a><span class="in">1:100</span></span>
+<span id="cb314-40"><a href="output-hooks.html#cb314-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>图<a href="output-hooks.html#fig:hook-scroll">11.1</a>展示了代码的输出结果。需要注意的是，在最后一个代码块中使用块选项<code>attr.output</code>时，该选项将不会被<code>max.height</code>覆盖，因为我们将现有的属性与<code>max.height</code>生成的<code>style</code>属性组合在了一起：</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="output-hooks.html#cb315-1" aria-hidden="true" tabindex="-1"></a>options<span class="sc">$</span>attr.output <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb315-2"><a href="output-hooks.html#cb315-2" aria-hidden="true" tabindex="-1"></a>  options<span class="sc">$</span>attr.output,</span>
+<span id="cb315-3"><a href="output-hooks.html#cb315-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">&#39;style=&quot;max-height: %s;&quot;&#39;</span>, options<span class="sc">$</span>max.height)</span>
+<span id="cb315-4"><a href="output-hooks.html#cb315-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="figure"><span id="fig:hook-scroll"></span>
+<img src="images/hook-scroll.png" alt="一个可滚动文本输出的例子，其高度通过块选项`max.height`来给定"  />
+<p class="caption">
+图 11.1: 一个可滚动文本输出的例子，其高度通过块选项<code>max.height</code>来给定
+</p>
+</div>
+<p>同样地，<code>source</code> 钩子中也可以使用相似的技巧来限制源代码块的高度。</p>
+</div>
+<div id="hook-truncate" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> 截断文本输出</h2>
+<p>当代码块的文本输出很长时，你可能希望只显示前几行。例如，当输出一个几千行数据框时，显示完整的数据可能没有什么帮助，仅显示前几行可能就足够了。下面我们会重新定义输出钩子，以便我们可以通过自定义块选项<code>out.lines</code>来控制最大行数：</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="output-hooks.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 保存内置的 output 钩子</span></span>
+<span id="cb316-2"><a href="output-hooks.html#cb316-2" aria-hidden="true" tabindex="-1"></a>hook_output <span class="ot">=</span> knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">get</span>(<span class="st">&quot;output&quot;</span>)</span>
+<span id="cb316-3"><a href="output-hooks.html#cb316-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb316-4"><a href="output-hooks.html#cb316-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置一个新的 output 钩子来截断文本输出</span></span>
+<span id="cb316-5"><a href="output-hooks.html#cb316-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">output =</span> <span class="cf">function</span>(x, options) {</span>
+<span id="cb316-6"><a href="output-hooks.html#cb316-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(n <span class="ot">&lt;-</span> options<span class="sc">$</span>out.lines)) {</span>
+<span id="cb316-7"><a href="output-hooks.html#cb316-7" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">=</span> xfun<span class="sc">::</span><span class="fu">split_lines</span>(x)</span>
+<span id="cb316-8"><a href="output-hooks.html#cb316-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">&gt;</span> n) {</span>
+<span id="cb316-9"><a href="output-hooks.html#cb316-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 截断文本输出</span></span>
+<span id="cb316-10"><a href="output-hooks.html#cb316-10" aria-hidden="true" tabindex="-1"></a>      x <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">head</span>(x, n), <span class="st">&#39;....</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb316-11"><a href="output-hooks.html#cb316-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb316-12"><a href="output-hooks.html#cb316-12" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">=</span> <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb316-13"><a href="output-hooks.html#cb316-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb316-14"><a href="output-hooks.html#cb316-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hook_output</span>(x, options)</span>
+<span id="cb316-15"><a href="output-hooks.html#cb316-15" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>上述钩子函数的基本思想是，如果文本输出的行数大于块选项<code>out.lines</code>设置的阈值（存储在变量<code>n</code>中），我们只保留前<code>n</code>行，并添加省略号（<code>....</code>）来表示输出被截断。</p>
+<p>现在我们可以通过设置块选项<code>out.lines = 4</code>来测试新的输出钩子，你将看到四行输出：</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="output-hooks.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cars)</span></code></pre></div>
+<pre><code>##    speed dist
+## 1      4    2
+## 2      4   10
+## 3      7    4
+....</code></pre>
+<p>由于我们已经将原始的输出钩子存储在<code>output</code>中，我们可以通过再次调用<code>set()</code>来恢复它：</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="output-hooks.html#cb319-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">output =</span> hook_output)</span></code></pre></div>
+<p>作为进一步的练习，你可以尝试以不同的方式截断输出：给定块选项’ <code>out.lines</code>来确定最大行数，你能在中间而不是末尾截断输出吗？例如，如果设定<code>out.lines = 10</code>，提取前5行和后5行，并在中间添加<code>....</code>的输出是这样的：</p>
+<p>As an exercise for readers, you may try to truncate the output in a different way: given the chunk option <code>out.lines</code> to determine the maximum number of lines, can you truncate the output in the middle instead of the end? For example, if <code>out.lines = 10</code>, you extract the first and last five lines, and add <code>....</code> in the middle like this:</p>
+<pre class="text"><code>##    speed dist
+## 1      4    2
+## 2      4   10
+## 3      7    4
+## 4      7   22
+....
+## 46    24   70
+## 47    24   92
+## 48    24   93
+## 49    24  120
+## 50    25   85</code></pre>
+<p>需要注意的是，输出的最后一行（即钩子函数的参数<code>x</code>）可能是空行，所以可能需要设定<code>c(head(x, n/2), '....', tail(x, n/2 + 1))</code>，其中<code>+ 1</code>将最后的空行也纳入考虑。</p>
+</div>
+<div id="hook-html5" class="section level2" number="11.5">
+<h2><span class="header-section-number">11.5</span> 以HTML5格式输出图像</h2>
+<p>默认情况下，R Markdown的HTML输出中的图包含在标签<code>&lt;p&gt;</code>或<code>&lt;div&gt;</code>下的<code>&lt;img src="..." /&gt;</code>中。下面的例子展示了如何使用HTML5的标签<code>&lt;figure&gt;</code>来显示图像。</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb321-1"><a href="output-hooks.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb321-2"><a href="output-hooks.html#cb321-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 在标签`&lt;figure&gt;`中输出图像</span></span>
+<span id="cb321-3"><a href="output-hooks.html#cb321-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb321-4"><a href="output-hooks.html#cb321-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb321-5"><a href="output-hooks.html#cb321-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-6"><a href="output-hooks.html#cb321-6" aria-hidden="true" tabindex="-1"></a>在块选项<span class="in">`options$fig.cap`</span>中给定图像文件路径<span class="in">`x`</span>和图像标题（caption），我们想用如下形式把图像写入HTML5的标签之中：</span>
+<span id="cb321-7"><a href="output-hooks.html#cb321-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-8"><a href="output-hooks.html#cb321-8" aria-hidden="true" tabindex="-1"></a><span class="in">```html</span></span>
+<span id="cb321-9"><a href="output-hooks.html#cb321-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;figure&gt;</span></span>
+<span id="cb321-10"><a href="output-hooks.html#cb321-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;PATH&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;CAPTION&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb321-11"><a href="output-hooks.html#cb321-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;figcaption&gt;</span>CAPTION<span class="kw">&lt;/figcaption&gt;</span></span>
+<span id="cb321-12"><a href="output-hooks.html#cb321-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/figure&gt;</span></span>
+<span id="cb321-13"><a href="output-hooks.html#cb321-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb321-14"><a href="output-hooks.html#cb321-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-15"><a href="output-hooks.html#cb321-15" aria-hidden="true" tabindex="-1"></a>现在我们重新定义<span class="in">`plot`</span>钩子（仅当输出格式为HTML时）:</span>
+<span id="cb321-16"><a href="output-hooks.html#cb321-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-17"><a href="output-hooks.html#cb321-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb321-18"><a href="output-hooks.html#cb321-18" aria-hidden="true" tabindex="-1"></a><span class="in">if (knitr::is_html_output()) knitr::knit_hooks$set(</span></span>
+<span id="cb321-19"><a href="output-hooks.html#cb321-19" aria-hidden="true" tabindex="-1"></a><span class="in">  plot = function(x, options) {</span></span>
+<span id="cb321-20"><a href="output-hooks.html#cb321-20" aria-hidden="true" tabindex="-1"></a><span class="in">    cap  &lt;- options$fig.cap  # 图像标题</span></span>
+<span id="cb321-21"><a href="output-hooks.html#cb321-21" aria-hidden="true" tabindex="-1"></a><span class="in">    tags &lt;- htmltools::tags</span></span>
+<span id="cb321-22"><a href="output-hooks.html#cb321-22" aria-hidden="true" tabindex="-1"></a><span class="in">    as.character(tags$figure(</span></span>
+<span id="cb321-23"><a href="output-hooks.html#cb321-23" aria-hidden="true" tabindex="-1"></a><span class="in">      tags$img(src = x, alt = cap),</span></span>
+<span id="cb321-24"><a href="output-hooks.html#cb321-24" aria-hidden="true" tabindex="-1"></a><span class="in">      tags$figcaption(cap)</span></span>
+<span id="cb321-25"><a href="output-hooks.html#cb321-25" aria-hidden="true" tabindex="-1"></a><span class="in">    ))</span></span>
+<span id="cb321-26"><a href="output-hooks.html#cb321-26" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb321-27"><a href="output-hooks.html#cb321-27" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb321-28"><a href="output-hooks.html#cb321-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb321-29"><a href="output-hooks.html#cb321-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-30"><a href="output-hooks.html#cb321-30" aria-hidden="true" tabindex="-1"></a>代码块中的图像将被放置在<span class="in">`&lt;figure&gt;`</span>标签之中：</span>
+<span id="cb321-31"><a href="output-hooks.html#cb321-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-32"><a href="output-hooks.html#cb321-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-33"><a href="output-hooks.html#cb321-33" aria-hidden="true" tabindex="-1"></a>``<span class="in">`{r, fig.cap=&#39;一个`</span>cars`数据的散点图&#39;}</span>
+<span id="cb321-34"><a href="output-hooks.html#cb321-34" aria-hidden="true" tabindex="-1"></a>par(mar = c(4.5, 4.5, .2, .2))</span>
+<span id="cb321-35"><a href="output-hooks.html#cb321-35" aria-hidden="true" tabindex="-1"></a>plot(cars, pch = 19, col = &#39;red&#39;)</span>
+<span id="cb321-36"><a href="output-hooks.html#cb321-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb321-37"><a href="output-hooks.html#cb321-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-38"><a href="output-hooks.html#cb321-38" aria-hidden="true" tabindex="-1"></a><span class="in">我们可以进一步添加一些CSS样式来让`&lt;figure&gt;`和`&lt;figcaption&gt;`标签“看”起来更好一些（`figure`有虚线边框，图像标题有浅粉色背景）：</span></span>
+<span id="cb321-39"><a href="output-hooks.html#cb321-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-40"><a href="output-hooks.html#cb321-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{css, echo=FALSE}</span></span>
+<span id="cb321-41"><a href="output-hooks.html#cb321-41" aria-hidden="true" tabindex="-1"></a><span class="in">figure {</span></span>
+<span id="cb321-42"><a href="output-hooks.html#cb321-42" aria-hidden="true" tabindex="-1"></a><span class="in">  border: 2px dashed red;</span></span>
+<span id="cb321-43"><a href="output-hooks.html#cb321-43" aria-hidden="true" tabindex="-1"></a><span class="in">  margin: 1em 0;</span></span>
+<span id="cb321-44"><a href="output-hooks.html#cb321-44" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb321-45"><a href="output-hooks.html#cb321-45" aria-hidden="true" tabindex="-1"></a><span class="in">figcaption {</span></span>
+<span id="cb321-46"><a href="output-hooks.html#cb321-46" aria-hidden="true" tabindex="-1"></a><span class="in">  padding: .5em;</span></span>
+<span id="cb321-47"><a href="output-hooks.html#cb321-47" aria-hidden="true" tabindex="-1"></a><span class="in">  background: lightpink;</span></span>
+<span id="cb321-48"><a href="output-hooks.html#cb321-48" aria-hidden="true" tabindex="-1"></a><span class="in">  font-size: 1.3em;</span></span>
+<span id="cb321-49"><a href="output-hooks.html#cb321-49" aria-hidden="true" tabindex="-1"></a><span class="in">  font-variant: small-caps;</span></span>
+<span id="cb321-50"><a href="output-hooks.html#cb321-50" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb321-51"><a href="output-hooks.html#cb321-51" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>图像的输出如图figure <a href="output-hooks.html#fig:hook-html5">11.2</a>所示。注意，在这个例子中我们实际上覆盖了默认的<code>plot</code>钩子，而本章的大多数其他例子都是在默认钩子的基础上构建自定义钩子。只有当你确定要忽略默认钩子的一些内置特性时，你才应该完全覆盖默认钩子。例如，在本例中，<code>plot</code>钩子函数没有考虑像<code>out.width = '100%'</code>或<code>fig.show = 'animate'</code>这样的块选项。</p>
+<div class="figure"><span id="fig:hook-html5"></span>
+<img src="images/hook-html5.png" alt="一个在HTML5 `figure` 标签中的图像"  />
+<p class="caption">
+图 11.2: 一个在HTML5 <code>figure</code> 标签中的图像
+</p>
+</div>
+<p>上例展示了在<code>plot</code>钩子中使用图像文件路径<code>x</code>可以进行的操作。如果你所需要的只是自定义图像的样式，则不必使用HTML5标签。通常情况下，默认的<code>plot</code>钩子会以如下的HTML代码输出图像：</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb322-1"><a href="output-hooks.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;figure&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb322-2"><a href="output-hooks.html#cb322-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;PATH&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb322-3"><a href="output-hooks.html#cb322-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;caption&quot;</span><span class="kw">&gt;</span>CAPTION<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb322-4"><a href="output-hooks.html#cb322-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>所以你可以仅为<code>div.figure</code>和<code>p.caption</code>定义css规则。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chunk-options.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="knitr-misc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cosname/rmarkdown-guide/edit/master/14-output-hooks.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
