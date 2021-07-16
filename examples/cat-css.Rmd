@@ -1,17 +1,16 @@
 ---
-title: "Create a CSS file from a code chunk"
+title: "从代码块中创建一个 CSS 文件"
 output: 
   html_document:
     css: custom.css
 ---
 
-The chunk below will be written to `custom.css`, which
-will be used during the Pandoc conversion.
-
+下面的 chunck 中将写入 `custom.css`，它将在 Pandoc 转换期间使用。
 ```{cat, engine.opts = list(file = "custom.css")}
 h2 {
   color: blue;
 }
 ```
 
-## And this title will blue
+## 标题会变蓝
+

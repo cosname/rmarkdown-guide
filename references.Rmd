@@ -42,12 +42,18 @@ knitr::write_bib(c(
   'pagedown',
   'broom',
   'xaringan',
-  'styler'
+  'styler',
+  'xaringanthemer',
+  'showtext',
+  'xaringanExtra',
+  'officedown',
+  'flexdashboard',
+  'officer'
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {
 #     if (system.file(package = pkg) != '') return()
-#     renv::install(pkg, repos = "https://cloud.r-project.org/") 
+#     renv::install(pkg, repos = "https://cloud.r-project.org/")
 #     }
 # )
 ```

@@ -1,0 +1,16 @@
+---
+title: 带有officedown的样式文本
+output:
+  officedown::rdocx_document: default
+---
+
+```{r}
+library(officedown)
+library(officer)
+ft <- fp_text(color = 'red', bold = TRUE)
+```
+
+# 检验
+
+**officedown** 包是
+`r ftext('awesome', ft)`!

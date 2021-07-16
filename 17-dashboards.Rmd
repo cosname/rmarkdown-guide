@@ -19,20 +19,20 @@
 
 ## 入门
 
-首先，安装`flexdashboard`包：
+首先，安装 `flexdashboard` 包：
 
 ```
 install.packages("flexdashboard")
 ```
 
-其次，通过点击  `File -> New File -> R Markdown` 对话框在 RStudio 中创建文档，并选择 "Flex Dashboard" 模板。这是我们就已经创建了一个新的dashboard文件了。操作界面如图\@ref(fig:dashboard-new)所示：
+其次，通过点击  `File -> New File -> R Markdown` 对话框在 RStudio 中创建文档，并选择 "Flex Dashboard" 模板。这是我们就已经创建了一个新的 dashboard 文件了。操作界面如图 \@ref(fig:dashboard-new) 所示：
 
-```{r dashboard-new, echo=FALSE, fig.cap='创建新的dashboard文件', out.width='100%'}
+```{r dashboard-new, echo=FALSE,fig.width=6,fig.align='center', fig.cap='创建新的dashboard文件。'}
 knitr::include_graphics('images/dashboard-new.png', dpi = NA)
 ```
 
 
-> **注**：如果你并没有使用 RStudio进行操作，那么你也可以从 R 控制台创建一个新的 `flexdashboard` 的 R Markdown 文件，具体操作如下：
+> **注**：如果你并没有使用 RStudio 进行操作，那么你也可以从 R 控制台创建一个新的 `flexdashboard` 的 R Markdown 文件，具体操作如下：
 
 ```r
 rmarkdown::draft(
@@ -89,7 +89,7 @@ Column 1
 > **注**：在这个例子中，我们没有在代码块中加入任何 R 代码，所以所有的框都是空的。当然在实际使用中，你可以编写任意的 R 代码来生成 R 图、HTML 小部件或 \@ref(dashboard-components) 节中介绍的各种其他组件，并将其加入到这些“盒子”中。
 
 
-```{r dashboard-start, echo=FALSE, fig.cap='简单仪表盘布局示例', out.width='100%'}
+```{r dashboard-start, echo=FALSE,fig.width=6,fig.align='center', fig.cap='简单仪表盘布局示例。'}
 knitr::include_graphics('images/dashboard-start.png', dpi = NA)
 ```
 
@@ -103,9 +103,9 @@ output:
     orientation: rows
 ```
 
-这时二级结构中将会按照行进行排列，三级结构中会按照行中的列进行堆叠。我们将上述例子修改后，输出结果如图\@ref(dashboard-rows)所示：
+这时二级结构中将会按照行进行排列，三级结构中会按照行中的列进行堆叠。我们将上述例子修改后，输出结果如图 \@ref(fig:dashboard-rows) 所示：
 
-```{r dashboard-rows, echo=FALSE, fig.cap='基于行布局的结果', out.width='100%'}
+```{r dashboard-rows, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于行布局的结果。'}
 knitr::include_graphics('images/dashboard-rows.png', dpi = NA)
 ```
 
@@ -130,23 +130,23 @@ Two tabs {.tabset}
 ### Tab B
 ```
 
-所得结果如图\@ref(dashboard-tab)所示：
+所得结果如图 \@ref(fig:dashboard-tab) 所示：
 
-```{r dashboard-tab, echo=FALSE, fig.cap='以制表符的形式排列所得到的结果', out.width='100%'}
+```{r dashboard-tab, echo=FALSE,fig.width=6,fig.align='center', fig.cap='以制表符的形式排列所得到的结果。', out.width='100%'}
 knitr::include_graphics('images/dashboard-tab.png', dpi = NA)
 ```
 
 
 ### 多页
 
-如果rmd文档中有多个一级结构的内容时，这时仪表盘会将每个一节结构分别显示为单独页面。下面给出一个简单的例子：
+如果 rmd 文档中有多个一级结构的内容时，这时仪表盘会将每个一节结构分别显示为单独页面。下面给出一个简单的例子：
 
 
 ````markdown
 `r xfun::file_string('examples/dashboard/02-pages.Rmd')`
 ````
 
-```{r dashboard-pages, echo=FALSE, fig.cap='仪表盘上的多个页面情况', out.width='100%'}
+```{r dashboard-pages, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的多个页面情况。'}
 knitr::include_graphics('images/dashboard-pages.png', dpi = NA)
 ```
 
@@ -160,15 +160,13 @@ knitr::include_graphics('images/dashboard-pages.png', dpi = NA)
 
 ### 故事板
 
-除了基于列或行布局外，你还可以通过故事板（"storyboard"）进行布局，呈现一些可视化图形或其他说明。
-
-下面给出一个简单的例子：
+除了基于列或行布局外，你还可以通过故事板（"storyboard"）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：
 
 ````markdown
 `r xfun::file_string('examples/dashboard/03-storyboard.Rmd')`
 ````
 
-```{r dashboard-story, echo=FALSE, fig.cap='基于故事板布局的结果', out.width='100%'}
+```{r dashboard-story, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于故事板布局的结果。'}
 knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 ```
 
@@ -204,11 +202,11 @@ knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 `r xfun::file_string('examples/dashboard/04-valueboxes.Rmd')`
 ````
 
-```{r dashboard-valueboxes, echo=FALSE, fig.cap='仪表盘上并排的三个值', out.width='100%'}
+```{r dashboard-valueboxes, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上并排的三个值。'}
 knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 ```
 
-图 \@ref(fig:dashboard-valueboxes) 展示了三个并排的仪表，每个仪表都显示了一个数值和标题。这里我们重点解释下第三个代码块（`### Spam per Day`）。这里的`valueBox()` 函数定义了一个值(`spam`)和一个图标(`icon = "fa-trash"`)。并使用 `color` 设置参数框的颜色。内部使用了一个`ifelse()`语句，使得不同值表示不同的颜色。当然，可用的颜色还包括： `"info"`, `"success"` 和 `"danger"`（默认值为： `"primary"`）。你也可以指定任何有效的 CSS 颜色（例如：`"#ffffff"`， `"rgb(100, 100, 100)"`等）。
+图 \@ref(fig:dashboard-valueboxes) 展示了三个并排的仪表，每个仪表都显示了一个数值和标题。这里我们重点解释下第三个代码块（`### Spam per Day`）。这里的 `valueBox()` 函数定义了一个值( `spam` )和一个图标( `icon = "fa-trash"` )。并使用 `color` 设置参数框的颜色。内部使用了一个 `ifelse()` 语句，使得不同值表示不同的颜色。当然，可用的颜色还包括： `"info"`, `"success"` 和 `"danger"`（默认值为： `"primary"`）。你也可以指定任何有效的 CSS 颜色（例如：`"#ffffff"`， `"rgb(100, 100, 100)"` 等）。
 
 
 ### 仪表
@@ -219,13 +217,13 @@ knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 `r xfun::file_string('examples/dashboard/05-gauges.Rmd')`
 ````
 
-```{r dashboard-gauges, echo=FALSE, fig.cap='三个仪表并排放在仪表盘上', out.width='100%'}
+```{r dashboard-gauges, echo=FALSE,fig.width=6,fig.align='center', fig.cap='三个仪表并排放在仪表盘上。'}
 knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 ```
 
 这个示例需要解释以下几点：
 
-1. 通过`gauge()` 函数设置一个仪表盘。其内部三个参数需要确定：`value`， `min` 和 `max` （可以是任何数值）。
+1. 通过 `gauge()` 函数设置一个仪表盘。其内部三个参数需要确定：`value`， `min` 和 `max` （可以是任何数值）。
 
 1. 可以指定一个可选的符号（`symbol`）和值一起显示(在示例中， "`%`" 用来表示百分比)。
 
@@ -240,13 +238,13 @@ knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 
 1. 定义不包含图表，而是仅包含任意内容(文本、图像和方程等)的指示板。
 
-如图\@ref(fig:dashboard-text) 所示，顶部包含了一些内容说明和右下角包含了一个只有内容的指示板：
+如图 \@ref(fig:dashboard-text) 所示，顶部包含了一些内容说明和右下角包含了一个只有内容的指示板：
 
 ````markdown
 `r xfun::file_string('examples/dashboard/06-text.Rmd')`
 ````
 
-```{r dashboard-text, echo=FALSE, fig.cap='仪表盘上的文本注释', out.width='100%'}
+```{r dashboard-text, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的文本注释。'}
 knitr::include_graphics('images/dashboard-text.png', dpi = NA)
 ```
 
@@ -271,9 +269,9 @@ output:
 ---
 ```
 
-这时得到的界面如图\@ref(fig:dashboard-about)下所示：
+这时得到的界面如图 \@ref(fig:dashboard-about) 所示：
 
-```{r dashboard-about, echo=FALSE, fig.cap='导航栏中添加自定义链接', out.width='100%'}
+```{r dashboard-about, echo=FALSE,fig.width=6,fig.align='center', fig.cap='导航栏中添加自定义链接。'}
 knitr::include_graphics('images/dashboard-about.png', dpi = NA)
 ```
 
@@ -293,7 +291,7 @@ output:
 
 这时得到的界面如图\@ref(fig:dashboard-social)下所示：
 
-```{r dashboard-social, echo=FALSE, fig.cap='导航栏中添加社交选项', out.width='100%'}
+```{r dashboard-social, echo=FALSE,fig.width=6,fig.align='center', fig.cap='导航栏中添加社交选项。'}
 knitr::include_graphics('images/dashboard-social.png', dpi = NA)
 ```
 
@@ -303,7 +301,7 @@ knitr::include_graphics('images/dashboard-social.png', dpi = NA)
 
 ## Shiny
 
-在仪表盘中添加 Shiny\index{Shiny}，可以利用viewers更改参数，并显示实时结果。或者当仪表盘的数据发生变化时，让仪表盘进行实时更新(请参阅 **shiny** 包中的 `reactiveFileReader()` 和 `reactivePoll()` 函数)。这是通过将 `runtime: shiny` 添加到标准仪表盘文档来实现的，然后添加一个或多个输入控件或响应式表达式来动态驱动仪表板内组件的外观。
+在仪表盘中添加 Shiny\index{Shiny}，可以利用 viewers 更改参数，并显示实时结果。或者当仪表盘的数据发生变化时，让仪表盘进行实时更新(请参阅 **shiny** 包中的 `reactiveFileReader()` 和 `reactivePoll()` 函数)。这是通过将 `runtime: shiny` 添加到标准仪表盘文档来实现的，然后添加一个或多个输入控件或响应式表达式来动态驱动仪表板内组件的外观。
 
 在 **flexdashboard** 中使用 Shiny 可以将一个静态的 R Markdown 报告变成一个交互式文档。需要注意的是，交互式文档需要部署到 Shiny 的服务器上，以便广泛共享(而静态 R Markdown 文档是可以附加到电子邮件或从任何标准 web 服务器提供的独立 web 页面)。
 
@@ -320,7 +318,7 @@ knitr::include_graphics('images/dashboard-social.png', dpi = NA)
 
 1. 根据需求，添加 Shiny 的输入和输出。
 
-1. 当代码中包含绘图函数时（例如：    `hist()`），得将它们封装在 `renderPlot()` 中。这有利于界面在布局更改时，自动调整尺寸大小。
+1. 当代码中包含绘图函数时（例如：`hist()`），得将它们封装在 `renderPlot()` 中。这有利于界面在布局更改时，自动调整尺寸大小。
 
 ###  Shiny 仪表盘的一个示例
 
@@ -330,7 +328,7 @@ knitr::include_graphics('images/dashboard-social.png', dpi = NA)
 `r xfun::file_string('examples/dashboard/07-shiny.Rmd')`
 ````
 
-```{r dashboard-shiny, echo=FALSE, fig.cap='An interactive dashboard based on Shiny.', out.width='100%'}
+```{r dashboard-shiny, echo=FALSE, fig.width=6,fig.align='center',fig.cap='基于 Shiny 的交互式仪表盘。'}
 knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 ```
 
