@@ -1,19 +1,13 @@
 ---
-title: Setting output args via render functions
+title: 通过呈现函数来设置输出参数
 runtime: shiny
 output: html_document
 ---
 
-This interactive Rmd document makes use of the `outputArgs`
-argument now available to all Shiny `render` functions. To
-give an example, this allows you to set arguments to
-`imageOutput` through `renderImage`. This means that you
-don't have to create a `ui` object just to be able to brush
-over an image. Note that this only applies to snippets of
-Shiny code during an interactive Rmd (and not to embedded
-full apps -- the ones you need to call `shinyApp` to run).
+这个交互式 Rmd 文档使用了 `outputArgs`
+参数，并且现在可用于所有 Shiny `render` 函数。 举个例子，这可以让你通过 `renderImage` 设置 `imageOutput` 的参数。 意味着你不必为了刷过图像而创建 `ui` 对象。 注意，这仅适用于交互式  Rmd 期间的 Shiny 代码片段（不适用于嵌入式完整应用程序——你需要调用 `shinyApp` 才能运行的应用程序）。 
 
-## Brushing over an image (and storing the data)
+## 刷过图像(并存储数据)
 
 ```{r setup, echo=FALSE}
 library(datasets)
@@ -39,8 +33,7 @@ renderImage({
 )
 ```
 
-Here is some of the brushing info sent to the server:
-(brush over the image to change the data)
+以下是发送到服务器的一些信息: (刷过图像以更改数据)
 
 ```{r brush info}
 renderText({ 
@@ -55,7 +48,8 @@ renderText({
 
 ---
 
-### Resizing a plot
+###  调整图片
+
 
 ```{r plot}
 renderPlot({ 

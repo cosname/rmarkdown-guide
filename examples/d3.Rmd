@@ -3,15 +3,13 @@ title: Generate a chart with D3
 output: html_document
 ---
 
-First, load the package **r2d3** to set up the `d3` engine
-for **knitr** automatically:
+首先，加载包 **r2d3** 以自动为 **knitr** 设置 `d3` 引擎：
 
 ```{r setup}
 library(r2d3)
 ```
 
-Now we can generate data in R, pass it to D3, and draw
-the chart:
+我们可以在 R 中生成数据，传递给 D3，并绘制图表：
 
 ```{d3, data=runif(30), options=list(color='steelblue')}
 svg.selectAll('rect')

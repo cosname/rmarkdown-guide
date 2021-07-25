@@ -1,3 +1,4 @@
+
 # 演示文稿 {#presentation}
 
 本章讲述使用 R Markdown 生成演示文稿（俗称“PPT”）的技巧。
@@ -7,7 +8,6 @@ R Markdown 文档可以直接输出为 HTML 或者 PDF 格式的幻灯片，并�
 幻灯片的具体样式。在这一部分，我们首先介绍 R Markdown 基础幻灯片的使用，然后介绍使用
 `xaringan` 创建的更加精美的幻灯片。
 
-
 ## R Markdown 基础幻灯片 {#rmarkdown-basic-presentation}
 
 使用基础幻灯片不需要安装额外的包。
@@ -15,7 +15,7 @@ R Markdown 文档可以直接输出为 HTML 或者 PDF 格式的幻灯片，并�
 R Markdown 支持 4 种不同样式的幻灯片，分别是 `ioslides`，`Slidy`，`Beamer` 和 PowerPoint。
 在 RStudio 中，你可以通过菜单中的 “New File -> R Markdown...” 打开如下一个窗口（图 \@ref(fig:rmd-presentation-popup)），然后选择 “OK” 后即可新建一个幻灯片。
 
-```{r rmd-presentation-popup, fig.width=6, fig.cap="新建 R Markdown 时可选的幻灯片格式"}
+```{r rmd-presentation-popup, fig.width=6, echo=FALSE, fig.cap="新建 R Markdown 时可选的幻灯片格式",fig.align='center'}
 knitr::include_graphics("images/rmd-presentation-popup.png")
 ```
 
@@ -34,7 +34,7 @@ import_example("examples/ioslides-presentation.Rmd")
 `##` 后面的内容是这一张幻灯片中的内容。R Markdown 会自动将命令和输出的内容添加到幻灯片中。
 
 
-```{r ioslides-presentation-screenshot, fig.cap="新建文件编译后生成的 ioslides 幻灯片"}
+```{r ioslides-presentation-screenshot, echo=FALSE, fig.cap="新建文件编译后生成的 ioslides 幻灯片",fig.align='center'}
 knitr::include_graphics("examples/ioslides-presentation-screenshot.png")
 ```
 
@@ -314,7 +314,7 @@ import_example("examples/slidy-presentation.Rmd")
 Slidy 幻灯片的内容设置基本与 ioslides 幻灯片相似，不过其默认样式与之有异。
 一份 Slidy 幻灯片大体是这样的（图 \@ref(fig:slidy-presentation-screen-shot)）。
 
-```{r slidy-presentation-screen-shot, fig.cap="Slidy 幻灯片"}
+```{r slidy-presentation-screen-shot, echo=FALSE,fig.width=6,  fig.cap="Slidy 幻灯片",fig.align='center'}
 knitr::include_graphics("examples/slidy-presentation-screenshot.png")
 ```
 
@@ -373,7 +373,7 @@ import_example("examples/beamer-presentation.Rmd")
 
 Beamer 演示文稿编译后的文件是一个 PDF 文档，大概像下面这个样子（图 \@ref(fig:beamer-presentation-screenshot)）。
 
-```{r beamer-presentation-screenshot, fig.cap="Beamer 演示文稿示例"}
+```{r beamer-presentation-screenshot, echo=FALSE,fig.cap="Beamer 演示文稿示例",fig.align='center'}
 knitr::include_graphics("examples/beamer-presentation-screenshot.png")
 ```
 
@@ -402,7 +402,7 @@ output:
 这个主题为标题幻灯片添加了页眉和页脚，显示作者、主题、日期和页码等信息。
 
 
-```{r beamer-presentation-theme,fig.cap="应用主题后的 Beamer 演示文稿"}
+```{r beamer-presentation-theme,  echo=FALSE,fig.align='center',  fig.cap="应用主题后的 Beamer 演示文稿"}
 import_example_result("examples/beamer-presentation-theme.Rmd")
 ```
 
@@ -446,7 +446,7 @@ import_example("examples/powerpoint-presentation.Rmd")
 
 R Markdown 生成的 PowerPoint 演示文稿大概长这个样子（图 \@ref(fig:powerpoint-presentation-screenshot)）：
 
-```{r powerpoint-presentation-screenshot, fig.cap="PowerPoint 演示文稿"}
+```{r powerpoint-presentation-screenshot,fig.align='center', echo=FALSE, fig.cap="PowerPoint 演示文稿"}
 knitr::include_graphics("examples/powerpoint-presentation-screenshot.png")
 ```
 
@@ -508,6 +508,8 @@ PowerPoint 演示文稿从 HTML 文档中继承了目录内容、图片属性、
 
 ## Xaringan 幻灯片 {#xaringan-presentation}
 
+### 简介
+
 虽然 R Markdown 提供的基础幻灯片已经能够实现了基本的幻灯片功能，而且没有额外的学习成本，
 但是，善于制作精良幻灯片的“忍者”通常使用一个额外的包来创建幻灯片，这个包的名字叫做 `xaringan`。
 
@@ -524,16 +526,17 @@ PowerPoint 演示文稿从 HTML 文档中继承了目录内容、图片属性、
 
 [^audience-sleep]: 糟糕的演讲也可以催眠听众，但显然这两种催眠完全不同。
 
-```{r sharingan-icon, fig.cap="幻灯忍者：写轮眼", fig.width=2, fig.height=2}
+```{r sharingan-icon, fig.cap="幻灯忍者：写轮眼", echo=FALSE, fig.width=2, fig.height=2,fig.align='center'}
 knitr::include_graphics("images/xaringan-hex.png")
 ```
 
 与其它工具相比，`xaringan` 创建的幻灯片样式更加精美，功能更加丰富，且具有高度的可定制性（图 \@ref(fig:xaringan-screenshot)）。
 
-```{r xaringan-screenshot, fig.cap="`xaringan` 幻灯片的实例", out.width="49%"}
+```{r xaringan-screenshot, fig.cap="`xaringan` 幻灯片的实例",fig.width=6,fig.align='center', echo=FALSE}
 knitr::include_graphics("images/xaringan-scrennshot.png")
 ```
 
+### 入门
 
 要创建“写轮眼”幻灯片，需要先安装 `xaringan` 包[@R-xaringan]）。
 
@@ -542,4 +545,474 @@ if (!requireNamespace("xaringan"))
   install.packages("xaringan")
 ```
 
-安装完成之后，在 RStudio 中新建文件 R Markdown 文件时，在左侧选择 “From Template”即可。
+安装完成之后，在 RStudio 中新建 R Markdown 文件，并在左侧选择 “From Template”，然后选择 Ninja Presentation (Simplified Chinese)。填写必要信息之后，即可创建一个新的“写轮眼”幻灯片模板（图 \@ref(fig:xaringan-new)）。
+
+```{r xaringan-new, echo=FALSE,fig.width=6,fig.align='center', fig.cap="创建一个新文档"}
+knitr::include_graphics("images/xaringan-new.png")
+```
+
+然后点击 Knit 按钮编译文档，或者点击 RStudio 插件 “Infinite Moon Reader” 在 RStudio 里实时预览幻灯片（每次你保存文档的时候，它会自动重新编译）。 
+
+> **原理：** xaringan 将 R Markdown 的查克拉注入了 remark.js。浏览器中的幻灯片是 remark.js 渲染出来的，而它的 Markdown 源文档是从 R Markdown 生成的（实际上主要是 knitr）。
+
+#### 一些技巧
+
+1. 播放设置
+
+`nature` 下面的 `autoplay` 选项可以用来自动播放幻灯片，它的取值是毫秒，例如：每 30 秒播放一张片子：
+
+```markdown
+output:  
+  xaringan::moon_reader:  
+  nature:  
+    autoplay: 30000  
+```
+
+`nature` 下面的 `countdown` 选项可以为每一页幻灯片添加一个（倒数）计时器，取值同样为毫秒，例如每一页片子都用 60 秒倒计时：
+
+```markdown
+output:  
+  xaringan::moon_reader:  
+    nature:  
+      countdown: 60000  
+```
+
+2. 快捷键
+
+- 点击按键 `h` 或者 `?` 之后可以看到所有快捷键示意图（图 \@ref(fig:xaringan-help)）
+
+
+```{r xaringan-help, fig.width=6,fig.align='center',fig.cap="展示所有快捷键"}
+knitr::include_graphics("images/xaringan-help.png")
+```
+
+- `p` 进入演讲者模式（可以看见自己写的注释，比如：提醒自己要讲的笑话，图 \@ref(fig:xaringan-review)）。
+
+
+```{r xaringan-review, echo=FALSE,fig.width=6,fig.align='center', fig.cap="进入演讲者模式"}
+knitr::include_graphics("images/xaringan-review.png")
+```
+
+- 点击按键 `c` 可以复制幻灯片到新窗口。演讲时可以在自己面前的屏幕上显示演讲者模式，把新窗口中正常的幻灯片拖到大屏幕投影上给观众看（见图 \@ref(fig:xaringan-new-screan)）。
+
+```{r xaringan-new-screan, fig.width=6,fig.align='center', echo=FALSE,fig.cap="复制幻灯片到新窗口"}
+knitr::include_graphics("images/xaringan-new-screan.png")
+```
+
+### 使用其他主题
+
+Aden-Buie 写了一个叫做 **xaringanthemer** 包\index{R package!xaringanthemer}[@R-xaringanthemer]的包，可以更改写轮眼的主题，使用起来也非常方便，接下来看教程。
+
+#### 安装
+
+你可以从 CRAN 或者 Github安装 **xaringanthemer** 包。
+
+```markdown
+# 通过 CRAN 安装
+install.packages("xaringanthemer")  
+
+# 通过 Github 安装
+# install.packages("remotes")  
+remotes::install_github("gadenbuie/xaringanthemer") 
+```
+
+#### 快速入门
+
+1. 创建完新文档后，我们将 `xaringan-themer.css` 文件添加到 xaringan 幻灯片的 YAML 中。
+
+```markdown
+output:  
+  xaringan::moon_reader:  
+    css: xaringan-themer.css  
+```    
+
+
+2. 然后，在 chunck 中加载 **xaringanthemer** 并[设置主题](https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html#themes)。下面给出一个简单的例子，图 （\@ref(fig:xaringan-themer-sample-view)） 展示了设置主题后的界面预览。当然该包还给出了很多其他主题，我们将在下面给出一些主题模板预览。
+
+```markdown
+library(xaringanthemer)  
+style_mono_accent(  
+  base_color = "#1c5253",  
+  header_font_google = google_font("Josefin Sans"),  
+  text_font_google   = google_font("Montserrat", "300", "300i"),  
+  code_font_google   = google_font("Fira Mono")  
+)  
+```
+
+```{r xaringan-themer-sample-view, echo=FALSE,fig.width=6,fig.align='center', fig.cap="主题设置后的界面预览"}
+knitr::include_graphics("images/xaringan-themer-sample-view.png")
+```
+
+> **注意**：在 chunck 头部中设置 `include=FALSE, warning=FALSE` 可以隐藏代码。 
+
+#### 使用技巧
+
+1. 匹配 ggplot 主题
+
+**xaringanthemer** 包甚至提供带有 `theme_xaringan（）` 的 `ggplot2` 主题，可以直接使用幻灯片主题中的颜色和字体。建立在 **showtext** 包 [@R-showtext] 的基础上，旨在与 Google 字体无缝协作。有关更多详细信息，请参见 `?scale_xaringan` 和 `vignette(“ggplot2-themes”)`中找到（图 \@ref(fig:xaringan-themer-ggplot)）。
+
+```markdown
+library(ggplot2)  
+ggplot(diamonds) +  
+  aes(cut, fill = cut) +  
+  geom_bar(show.legend = FALSE) +  
+  labs(  
+    x = "Cut",  
+    y = "Count",  
+    title = "A Fancy diamonds Plot") +  
+  theme_xaringan(background_color = "#FFFFFF") +  
+  scale_xaringan_fill_discrete()  
+```
+
+```{r xaringan-themer-ggplot, echo=FALSE,fig.width=6,fig.align='center', fig.cap="前面例子对应的 ggplot 配色"}
+knitr::include_graphics("images/xaringan-themer-ggplot.png")
+```
+
+2. 自补全功能
+
+**xaringanthemer** 包对 Tab 键十分友好，该功能可以在查找每个主题中调整模板的函数。对应的 gif 演示可见[官网教程](https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)。
+
+<!-- #### 在 RStudio 中打开该模板 -->
+
+<!-- 你也可以跳过上述内容，仅从 RStudio 中的“新建 Rmarkdwon 文档”菜单创建一个“Ninja Themed Presentation”（图 \@ref(fig:xaringan-themer-new1)）。 -->
+
+
+<!-- ```{r xaringan-themer-new1, echo=FALSE,fig.width=6,fig.align='center', fig.cap="创建模板的另一种选择"} -->
+<!-- knitr::include_graphics("images/xaringan-themer-new1.png") -->
+<!-- ``` -->
+
+#### 其他主题设置
+
+该包提供各式各样的主题模板，你可以根据喜好选择自己想要的主题，在正文开头加入以下代码，就会得到相应的模板了！这里给出 6 个模板函数以及对应的界面预览图，更多模板可见<https://pkg.garrickadenbuie.com/xaringanthemer/articles/themes.html>。
+
+> 记得在使用以下函数前，先加载 **xaringanthemer** 包。
+
+1. style_mono_light()
+
+```markdown
+style_mono_light(base_color = "#23395b")  
+```
+
+```{r xaringan-themer-demo1,fig.width=6,fig.align='center', echo=FALSE, fig.cap="模板1"}
+knitr::include_graphics("images/xaringan-themer-demo1.png")
+```
+
+2. style_mono_dark()  
+
+```markdown
+style_mono_dark(base_color = "#cbf7ed")  
+```
+
+```{r xaringan-themer-demo2, fig.width=6,fig.align='center', echo=FALSE, fig.cap="模板2"}
+knitr::include_graphics("images/xaringan-themer-demo2.png")
+```
+
+3. style_mono_accent()  
+
+```markdown
+style_mono_accent(base_color = "#43418A")  
+```
+
+```{r xaringan-themer-demo3,fig.width=6,fig.align='center', echo=FALSE, fig.cap="模板3"}
+knitr::include_graphics("images/xaringan-themer-demo3.png")
+```
+
+4. style_mono_accent_inverse()
+
+```markdown
+style_mono_accent(base_color = "#43418A")  
+```
+
+```{r xaringan-themer-demo4, fig.width=6,fig.align='center',echo=FALSE, fig.cap="模板4"}
+knitr::include_graphics("images/xaringan-themer-demo4.png")
+```
+
+5. style_duo()  
+
+```markdown
+style_duo(primary_color = "#1F4257", secondary_color = "#F97B64")  
+```
+
+```{r xaringan-themer-demo5,fig.width=6,fig.align='center', echo=FALSE, fig.cap="模板5"}
+knitr::include_graphics("images/xaringan-themer-demo5.png")
+```
+
+6. style_solarized_light()
+
+```markdown
+style_solarized_light()  
+```
+
+```{r xaringan-themer-demo6,fig.width=6,fig.align='center', echo=FALSE, fig.cap="模板6"}
+knitr::include_graphics("images/xaringan-themer-demo6.png")
+```
+
+
+### 提升 xaringan 幻灯片的 B 格
+
+如果你想提升 xaringan 幻灯片的 B 格，那你需要了解下与 xaringan 幻灯片息息有关的包： **xaringanExtra** 包[@R-xaringanExtra]。
+
+这个包涵盖了很多写轮眼的拓展功能，具体如下所示：
+
+- 并列方式展示演示文稿 ⭐
+- 在线编辑演示文稿 ⭐
+- 分享幻灯片样式
+- 通过广播向观众实时播放幻灯片
+- 在演示幻灯片上进行涂鸦 ⭐️
+- 幻灯片切换时有声音提示 ⭐️
+- 加入幻灯片切换动画 ⭐️
+- 将选项卡面板加入幻灯片中 ⭐️
+- 给幻灯片添加全局 logo ⭐️
+- 添加搜索框
+- 使用 Tachyons CSS 实用程序工具包
+- 添加网络摄像头进行实时视频 ⭐️
+- 使用剪贴板添加一键式代码复制
+- 从幻灯片开始就播放 GIF
+- 调整幻灯片的大小以填充浏览器窗口 ⭐️
+- 添加额外的 CSS 样式
+
+这里，作者不会对所有的拓展功能都介绍一遍。主要对一些平常我使用比较多的功能进行介绍（上面标 ⭐️的）。如果大家对其他没提到的功能感兴趣的话。可以看[官方的网站](https://pkg.garrickadenbuie.com/xaringanExtra/#/README\?id=xaringanextra)
+
+
+你可以从 GitHub 安装当前版本的 `xaringanExtra`，如果安装存在问题，可以尝试通过本地安装，这篇[教程](https://mp.weixin.qq.com/s/NMxhX-7SZEw4KRn8Jr9dVw)可供大家参考。
+
+```markdown
+# install.packages("devtools")  
+devtools::install_github("gadenbuie/xaringanExtra")  
+```
+
+安装好包后，我们可以 **xaringan** 或者 **xaringanthemer** 创建一个写轮眼模板(记得先安装！)。
+
+#### 并列方式展示演示文稿
+
+**使用方法**：将以下代码块添加到幻灯片 R Markdown 文件中，之后对该 rmd 文件进行重新渲染。
+
+````markdown
+```{r xaringan-tile-view, echo=FALSE}  `r ''`
+xaringanExtra::use_tile_view()  
+```  
+````
+
+> 位置随意，建议放在 YAML 的后面吧。
+
+渲染后，在演示的界面中（默认 Rstudio 的右下角跳出）按 `O` 键（ Overview 的第一个字母）即可得到以下界面，再按 `O` 键即可回到默认形式。
+
+```{r xaringan-extra-1, echo=FALSE,fig.width=6,fig.align='center', fig.cap="并列方式展示演示文稿"}
+knitr::include_graphics("images/xaringan-extra-1.png")
+```
+
+> 该功能类似 ppt 中的幻灯片浏览模式。黄色的框表示你当前所在的位置，你可以通过鼠标直接切换到你想要的位置。这个功能非常方便实用，而且操作简单，只要加入前面的代码就可以了。
+
+
+#### 在线编辑演示文稿
+
+这个功能无敌！你可以在放映的幻灯片上直接书写内容，实时更新。主要是使用 `.can-edit [...]` 实现。
+
+**使用方法**：你只需将下面代码加入你创建的 rmd 文档中：
+
+
+````markdown
+```{r xaringan-editable, echo = FALSE}  `r ''`
+xaringanExtra::use_editable(expires = 1)  
+```  
+````
+
+使用 `.can-edit[]` 使幻灯片组件可编辑。
+
+```markdown
+##.can-edit[You can edit this slide title]  
+```
+
+每当将幻灯片重新加载到浏览器中时，`.can-edit` 类的可编辑字段将被重置。如果要存储已编辑并使它们在浏览器会话之间持久存在，请为每个可编辑字段提供一个 `.key- <NAME>` 类。例如：
+
+
+```markdown
+## .can-edit.key-firstSlideTitle[Change this title and then reload the page]  
+```
+
+对于更复杂的 HTML 元素，最好仅使一部分文本可编辑，例如
+
+```markdown
+Hello, .can-edit[world], and welcome to my talk!  
+```
+
+或者使用占位符文本。
+
+
+```markdown
+## A few of my favorite things  
+  
+.can-edit.key-likes[  
+- thing one  
+- thing two  
+]  
+```
+
+官方给出了 gif 的[演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/editable)。在教学的时候非常合适，可以增加与学生，观众的互动。
+
+#### 在演示幻灯片上进行涂鸦
+
+**使用方法**：只需在 rmd 文件中加入下面代码，重新编译即可得到这个效果。
+
+````markdown 
+```{r xaringan-scribble, echo=FALSE}  `r ''`
+xaringanExtra::use_scribble()  
+```  
+````
+
+单击铅笔图标或按 `S` 键进行绘图。按 `S` 或启动绘图模式切换涂鸦工具箱。你也可以使用橡皮擦来删除线条或单击“清除（trash）”按钮清除当前幻灯片上的所有涂鸦。
+
+> **注意**，当你更改幻灯片时，图纸将保持在每张幻灯片上。在绘图模式下不能更改幻灯片。事实上，你可以使用 `←` 和` →` 键来撤消或重做您的图纸。
+
+如果想将幻灯片与涂鸦一起保存，最好的方法是从浏览器中打印演示文稿，官方给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/scribble)。
+
+#### 幻灯片切换时有声音提示
+
+**使用方法**：只需在 rmd 文件中加入下面代码，重新编译即可得到这个效果。当然，官方也给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/slide-tone)。
+
+````markdown
+```{r xaringan-slide-tone, echo=FALSE}    `r ''`
+xaringanExtra::use_slide_tone()  
+```  
+````
+
+
+#### 加入幻灯片切换动画
+
+**使用方法**：在 rmd 文件中加入下面代码
+
+````markdown
+```{r xaringan-animate-css, echo=FALSE}  `r ''` 
+xaringanExtra::use_animate_css()  
+```  
+````
+
+然后将 `animated` 类和所需动画添加到对应的幻灯片中。下面给出一个代码的例子：
+
+> 注意：退出动画只应用于退出时的幻灯片。
+
+```markdown
+---  
+class: animated slideInRight fadeOutLeft  
+  
+## This slide...  
+  
+- slides in from the right  
+- and fades out to the left on exit  
+```
+
+这时，该张幻灯片将从右边滑入。如果你想使所有幻灯片使用同一个转化形式，可以使用：`use_animate_all()`，代码如下（建议加到正文前部）。除此之外，官方给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/animate-css)。
+
+````markdown
+```{r xaringan-animate-all, echo=FALSE}  `r ''` 
+xaringanExtra::use_animate_all("slide_left")  
+```  
+````
+
+#### 将选项卡面板加入幻灯片中
+
+**使用方法**：在 rmd 文件中加入下面代码
+
+````markdown
+```{r xaringan-panelset, echo=FALSE}  `r ''`  
+xaringanExtra::use_panelset()  
+```  
+````
+
+然后，创建一个包含若干个 `.panel[]` 的 `.panelset [...]`。每个 `.panel []` 应该具有 `.panel-name []` 和想写的内容，例如：
+
+````markdown
+.panel[.panel-name[NAME]  
+...content...  
+]  
+````
+
+下面是演示幻灯片中使用的例子。
+
+````markdown
+---  
+## 我是庄闪闪  
+  
+.panelset[  
+.panel[.panel-name[R Code]  
+  
+欢迎关注[庄闪闪的R语言手册]呀！  
+```{r panel-chunk,fig.align='center',out.width="60%"}  `r ''`  
+library(ggplot2)  
+(g <- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())  
+```  
+]  
+  
+.panel[.panel-name[Plot]  
+  
+<center><img src="https://octodex.github.com/images/labtocat.png" height="300" /></center>  
+  
+]  
+]  
+````
+图 \@ref(fig:xaringan-extra-2) 给出了上面代码的结果。官网给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset)。
+
+
+```{r xaringan-extra-2, echo=FALSE,fig.width=6,fig.align='center', fig.cap="将选项卡面板加入幻灯片中"}
+knitr::include_graphics("images/xaringan-extra-2.png")
+```
+
+要定制面板的外观，可以使用直接在幻灯片的 R 块中调用 `style_panelset_tabs()`。将下面代码加到前面的代码块下，这时代码块的颜色发生了变化。
+
+````markdown
+```{r echo=FALSE}   `r ''`   
+xaringanExtra::style_panelset_tabs(foreground = "honeydew", background = "seagreen")  
+```  
+````
+
+
+#### 给幻灯片添加全局 logo
+
+**使用方法**：在 rmd 文件中加入下面代码
+
+````markdown
+```{r xaringan-logo, echo=FALSE}   `r ''`   
+xaringanExtra::use_logo(  
+  image_url = "https://gitee.com/zhuang_liang_liang0825/other/raw/master/%E6%B8%A9%E5%B7%9E%E5%A4%A7%E5%AD%A6logo.png"  
+)  
+```  
+````
+
+这时，所有幻灯片右上角都加上了对应的 logo 啦！如果想在某几张不显示 logo，可以使用 `hide_logo` 隐藏特定幻灯片的徽标，具体例子如下（图 \@ref(fig:xaringan-extra-3)）：
+```{r xaringan-extra-3, echo=FALSE,fig.width=6,fig.align='center', fig.cap="给幻灯片添加全局 logo"}
+knitr::include_graphics("images/xaringan-extra-3.png")
+```
+
+#### 添加网络摄像头进行实时视频
+
+**使用方法**：在 rmd 文件中加入下面代码，然后重新渲染。
+
+````markdown
+```{r xaringan-webcam, include = FALSE}   `r ''`  
+xaringanExtra::use_webcam()  
+```  
+````
+
+之后点击 `w` 键（记得用浏览器打开哦！）就会得到一下的界面了（写的有点晚，献丑了，懒得打码了，作者无精打采 ing）当然镜头的位置你可以手动任意拖拉（图 \@ref(fig:xaringan-extra-4)）！
+
+```{r xaringan-extra-4, echo=FALSE,fig.width=6,fig.align='center', fig.cap="添加网络摄像头进行实时视频"}
+knitr::include_graphics("images/xaringan-extra-3.png")
+```
+
+> 当你通过视频会议进行陈述时，包括你的视频，或者当你在录制一节课或讲座时，这个真的非常好用！
+
+#### 调整幻灯片的大小以填充浏览器窗口
+
+**使用方法**：在 rmd 文件中加入下面代码，然后重新渲染。
+
+````markdown
+```{r xaringan-fit-screen, echo=FALSE}  `r ''`  
+xaringanExtra::use_fit_screen()  
+```  
+````
+
+使用快捷键 `Alt / Option + F` 使幻灯片适合屏幕，并忽略幻灯片比例（重新加载幻灯片以恢复正常）。官网给出了 gif 的[演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/fit-to-screen)。
+
+
+
+
