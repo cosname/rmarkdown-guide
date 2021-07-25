@@ -464,7 +464,7 @@ kable(iris3[, 1:4], booktabs = TRUE) %>% pack_rows(
 
 ```{r, tidy=FALSE}
 tab <- kable(tail(mtcars, 5), booktabs = TRUE)
-tab  # original table (too wide)
+tab  # 原始表格 (太宽)
 tab %>%
   kable_styling(latex_options = "scale_down")
 ```

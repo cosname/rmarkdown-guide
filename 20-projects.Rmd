@@ -1,0 +1,412 @@
+# (PART) 用 Rmd 开展工作 {.unnumbered}
+
+# 管理项目
+
+当你在处理比较大的项目或报告时，你可能不想把所有的文本和代码都放在一个R Markdown文档中，而是把它们组织成更小的单元。在本章中，我们将介绍一些方法，来帮助你更好地组织与R Markdown相关的多个文件。
+
+## 来自外部的R脚本 {#source-script}
+
+如果你的R Markdown中有大量代码，则可以考虑将一些代码放入外部R脚本中，并通过 `source()`\index{source()} 或 `sys.source()`\index{sys.source()}来运行它们，例如：
+
+````md
+```{r, include=FALSE}`r ''`
+source("your-script.R", local = knitr::knit_global())
+# 或 sys.source("your-script.R", envir = knitr::knit_global())
+```
+````
+
+我们建议你显式地使用`source()`中的`local`或`sys.source()`中的`envir`来确保代码在正确的环境中被运行，即`knitr::knit_global()`\index{knitr!knit\_global()}。它们的默认值可能并不能提供合适的环境：你可能最终会在错误的环境中创建变量，并且发现在后面的代码块中找不到某些对象。
+
+接下来，在R Markdown文档中，你可以使用这些脚本中创建的对象（例如，数据对象或函数）。这种方法不仅可以让你的R Markdown文档更简洁，而且可以让你更方便地开发R代码（例如，使用纯R脚本调试R代码通常比使用R Markdown更容易）。
+
+注意，我们在上面的例子中使用了`include = FALSE`\index{chunk option!include}，因为我们只想执行脚本而不显示任何输出。如果你想要输出，你可以删除这个块选项，或者使用第 \@ref(hide-one)节中的块选项来有选择地隐藏或显示不同类型的输出。
+
+## 将外部脚本读取到一个块中 {#option-code}
+
+第\@ref(source-script)节中的`source()`方法有一个缺点。也就是说，默认情况下你将无法看到源代码。你可以使用`source(..., echo = TRUE)`，但源代码将不会正确地突出显示语法。此外，如第\@ref(source-script)节中提到的那样，你需要小心`source()`的`local`参数。在本节中，我们将介绍一种没有上述问题的替代方法。
+
+基本上，当你有一个或多个外部脚本时，你可以读取它们并将内容传递给`code`选项\index\index{chunk option!code}。`code`选项可以接受一个字符向量，并将其作为代码块的内容。下面我们展示了几个例子。
+
+
+- `code`选项可以接受源代码形式的字符向量。例如：
+
+    ````md
+    ```{r, code=c('1 + 1', 'if (TRUE) plot(cars)')}`r ''`
+    ```
+    ````
+
+- 你也可以读取外部文件：
+
+    ````md
+    ```{r, code=xfun::read_utf8('your-script.R')}`r ''`
+    ```
+    ````
+
+- 你可以读取任意数量的脚本：
+
+    ````md
+    ```{r, include=FALSE}`r ''`
+    read_files <- function(files) {
+      unlist(lapply(files, xfun::read_utf8))
+    }
+    ```
+
+    ```{r, code=read_files(c('one.R', 'two.R'))}`r ''`
+    ```
+    ````
+
+你也可以读取其他语言的脚本。在R Markdown中如何使用其他语言，请参阅 第\@ref(other-languages)章。下面是关于非R代码的一些示例。
+
+- 读取Python脚本：
+
+    ````md
+    ```{python, code=xfun::read_utf8('script.py')}`r ''`
+    ```
+    ````
+
+- 读取C++文件：
+
+    ````md
+    ```{Rcpp, code=xfun::read_utf8('file.cpp')}`r ''`
+    ```
+    ````
+
+使用`code`选项，你可以在你喜欢的编辑器中开发复杂的代码，并将其读到一个R Markdown文档的代码块中。
+
+## 从外部脚本读取多个代码块 (\*) {#read-chunk}
+
+在第\@ref(option-code)节中，我们介绍了一种将代码读取到单个代码块的方法。在本节中，我们将介绍一种从外部脚本中读取多个代码块的方法。该方法的关键点在于你需要标记脚本中的代码，进而可以在R Markdown文档的代码块中使用相同的标签，所以外部脚本中的代码可以通过函数`knitr::read_chunk()`\index{knitr!read\_chunk()}映射到代码块。要给脚本中的代码块贴上标签，你可以在`## ----`后面写标签（供选择：还可以在该行的末尾添加一系列破折号）。一个脚本可以包含多个已被标记的代码块，例如：
+
+```r
+## ---- test-a --------
+1 + 1
+
+## ---- test-b --------
+if (TRUE) {
+  plot(cars)
+}
+```
+
+假设上面脚本的文件名是`test.R`。在R Markdown文档中，我们可以通过`knitr::read_chunk()`来读取它，并使用带有标签的代码块中的代码，例如：
+
+````md
+读取外部脚本：
+
+```{r, include=FALSE, cache=FALSE}`r ''`
+knitr::read_chunk('test.R')
+```
+
+现在我们可以使用被标记的代码，即：
+
+```{r, test-a, echo=FALSE}`r ''`
+```
+
+```{r, test-b, fig.height=4}`r ''`
+```
+````
+
+需要注意的是，我们使用`knitr::read_chunk()`主要是为了它的“副作用”，所以请确保你调用这个函数的代码块没有被缓存（见第\@ref(cache)节的解释）。
+
+与第\@ref(source-script)节和第\@ref(option-code)节中引入的方法一样，该方法也为在独立环境中开发代码提供了灵活性。
+
+## 子文档 (\*) {#child-document}
+
+当你觉得一个R Markdown文档太长，你可以考虑把它分成更短的文档\index{child documents}，并通过块选项`child`\index{chunk option!child}将它们设置为主文档的子文档。在`child`选项中需要以字符向量的形式给定子文档的路径，例如：
+
+````md
+```{r, child=c('one.Rmd', 'two.Rmd')}`r ''`
+```
+````
+
+因为**knitr**块选项可以从任意的R表达式中获取值，故`child`选项的一个应用就是有条件地包含文档。例如，如果你的报告有一个附录，其中包含了你的老板可能不感兴趣的技术细节，你可以使用一个变量来控制这个附录是否包含在报告中：
+
+````md
+
+如果你的老板阅读这份报告，则将 `BOSS_MODE` 改为 `TRUE`：
+
+```{r, include=FALSE}`r ''`
+BOSS_MODE <- FALSE
+```
+
+有条件地包含附录：
+
+```{r, child=if (!BOSS_MODE) 'appendix.Rmd'}`r ''`
+```
+````
+
+或者如果你正在写一篇关于一场尚未发生的足球比赛的新闻报道（例如德国和巴西之间的比赛），你可以根据结果包含不同的子文档，例如，`child = if (winner == 'brazil') 'brazil.Rmd' else 'germany.Rmd'`。然后，一旦比赛结束，你就可以立即发表你的报告。
+
+另一种编译子文档的方法是函数`knitr::knit_child()`\index{knitr!knit\_child()}。你可以在一个R代码块或一个行内R表达式中调用这个函数，例如：
+
+````md
+```{r, echo=FALSE, results='asis'}`r ''`
+res <- knitr::knit_child('child.Rmd', quiet = TRUE)
+cat(res, sep = '\n')
+```
+````
+
+函数`knit_child()`返回已编译输出的字符向量，我们可以使用`cat()`和快选项`results = 'asis'`\index{chunk option!results}来将其写回主文档。
+
+你甚至可以使用子文档作为模板，并使用不同的参数重复调用`knit_child()`。在下面的例子中，我们使用`mpg`作为响应变量，而`mtcars`数据中的其他变量作为解释变量进行回归：
+
+````md
+```{r, echo=FALSE, results='asis'}`r ''`
+res <- lapply(setdiff(names(mtcars), 'mpg'), function(x) {
+  knitr::knit_child(text = c(
+    '## 对 "`r knitr::inline_expr('x')`" 跑回归 ',
+    '',
+    '```{r}',
+    'lm(mpg ~ ., data = mtcars[, c("mpg", x)])',
+    '```',
+    ''
+  ), envir = environment(), quiet = TRUE)
+})
+cat(unlist(res), sep = '\n')
+```
+````
+
+为了使上面的示例自成一体，我们使用`knit_child()`的`text`参数而不是文件输入来传递要编译的R Markdown内容。你当然可以将内容写入一个文件，并将路径传递给`knit_child()`。例如，你可以将下面的内容保存到一个名为`template.Rmd`的文件中：
+
+````md
+## 对 "`r knitr::inline_expr('x')`" 跑回归
+
+```{r}`r ''`
+lm(mpg ~ ., data = mtcars[, c("mpg", x)])
+```
+````
+
+然后编译这个文件：
+
+```{r, eval=FALSE, tidy=FALSE}
+res <- lapply(setdiff(names(mtcars), 'mpg'), function(x) {
+  knitr::knit_child(
+    'template.Rmd', envir = environment(), quiet = TRUE
+  )
+})
+cat(unlist(res), sep = '\n')
+```
+
+## 保留图像文件 {#keep-files}
+
+大多数R Markdown输出格式默认使用选项`self_contained = TRUE`\index{output option!self\_contained}。这将导致R的图像会直接被嵌入到输出文档中，所以在查看输出文档时我们不需要这些中间产物（图像文件）。因此，图像文件夹（通常带有后缀`_files`）将在Rmd文档编译完成后被删除。
+
+然而，有的时候你可能想要保留图像文件。例如，一些学术期刊要求作者单独提交数据文件。对于R Markdown来说，有三种方法可以避免自动删除这些文件：
+
+1. 如果输出格式支持，请使用选项`self_contained = FALSE`，例如：
+
+    ```yaml
+    output:
+      html_document:
+        self_contained: false
+    ```
+
+    但是，这意味着图像文件不会被嵌入到输出文档中。如果这不是你想要的，则可以考虑下面两种方法。
+    
+1. 为至少一个代码块启用缓存（见第\@ref(cache)节）。当启用缓存时，R Markdown将不会删除plot文件夹。
+
+1. 如果输出格式支持，请使用选项`keep_md = TRUE`\index{output option!keep\_md}，例如：
+
+    ```yaml
+    output:
+      word_document:
+        keep_md: true
+    ```
+
+    当您要求R Markdown保存中间的Markdown输出文件时，它也将保存图像文件夹。
+
+## R代码块的工作目录 {#working-directory}
+
+在默认情况下，R代码块的工作目录\index{working directory}是包含Rmd文档的目录。例如，如果一个Rmd文件的路径是`~/Downloads/foo.Rmd`，计算R代码块的工作目录是`~/Downloads/`。这意味着当你在代码块中引用具有相对路径的外部文件时，你需要知道这些路径是相对于Rmd文件的目录的。在前面提到的Rmd示例文件中，`read.csv("data/iris.csv")`在代码块中意味着读取CSV文件`~/Downloads/data/iris.csv`。
+
+当有问题时，你可以将`getwd()`添加到代码块中，编译文档，并检查`getwd()`的输出。
+
+有时你可能希望使用另一个目录作为工作目录。通常改变工作目录的方法是`setwd()`,但是需要注意的是,`setwd()`在R Markdown（或其他类型的**knitr**源文档）中并不是持久的，即`setwd()`仅对当前代码块有效，工作目录将在此代码块计算后恢复。
+
+如果你想改变所有代码块的工作目录，你可以通过在文档开头的`setup`代码块来设置：\index{knitr!root.dir}\index{knitr!opts\_knit}
+
+````md
+```{r, setup, include=FALSE}`r ''`
+knitr::opts_knit$set(root.dir = '/tmp')
+```
+````
+
+这将改变所有后续代码块的工作目录。
+
+如果你使用RStudio来编译，你也可以从菜单`Tools -> Global Options -> R Markdown`中选择工作目录\index{RStudio!working directory}（见图\@ref(fig:rmd-wd)）。默认工作目录的是Rmd的目录文件，并且还有另外两个可能的选择：可以使用R控制台的当前工作目录（选项“Current”），或者使用包含这个Rmd文件的项目的根目录（选项“Project”）作为工作目录。
+
+```{r, rmd-wd, echo=FALSE, fig.cap='在 RStudio 中改变所有 R Markdown 文档的默认工作目录。', fig.align='center'}
+knitr::include_graphics('images/rmd-wd.png', dpi = NA)
+```
+
+在RStudio中，你也可以编译一个带有特定工作目录的独立Rmd文档，如图\@ref(fig:knit-wd)所示。在你改变“Knit Directory”并点击“Knit”按钮后，**knitr**将使用新的工作目录来编译你的代码块。所有这些设置都可以归结为我们前面提到的`knitr::opts_knit$set(root.dir = ...)`，所以如果你不满意上述更改工作目录方式的任何一个，也可以自己用`knitr::opts_knit$set()`指定一个目录。
+
+```{r, knit-wd, echo=FALSE, fig.cap='在 R Studio 中用其它可能的工作目录编译一个 Rmd 文档。', fig.align='center'}
+knitr::include_graphics('images/knit-wd.png', dpi = NA)
+```
+
+更改工作目录各方式的选择没有哪种绝对正确，每种选择都有其优缺点：
+
+- 如果你使用Rmd文档目录作为代码块的工作目录（**knitr**的默认值），则需假定文件路径是相对于Rmd文档的。这类似于web浏览器如何处理相对路径，例如，对于在HTML页面`https://www.example.org/path/to/page.html`的一个图像`<img src="foo/bar.png" />`，你的web浏览器将尝试从`https://www.example.org/path/to/foo/bar.png`获取图像。换句话说，相对路径' foo/bar.png '`foo/bar.png`是相对于HTML文件的目录，即`https://www.example.org/path/to/`。
+
+    这种方法的优点是，你可以自由地将Rmd文件与其引用的文件一起移动到任何地方，只要它们的相对位置保持不变。对于上面的HTML页面和图像示例，文件`page.html`和`foo/bar.png`可以一起移动到不同的目录，如`https://www.example.org/another/path/`，你将不需要更新`<img />`的`src`属性中的相对路径。
+  
+    一些用户喜欢将Rmd文档中的相对路径看作是“相对于R控制台的工作目录”，而不是“相对于Rmd文件”。因此，**knitr**的默认工作目录让人感到困惑。当设计者在设计**knitr**时，没有使用R控制台的工作目录作为默认目录的原因是，用户可以使用`setwd()`随时更改工作目录。这个工作目录不能保证是稳定的。每当用户在控制台中调用`setwd()`时，就存在Rmd文档中的文件路径可能失效的风险，因为这在Rmd文件的控制之外。当考虑相对路径时，如果你将Rmd文件视为“宇宙的中心”，那么Rmd文件中的路径可能更稳定。
+
+    此外，如果你不想过多地考虑相对路径，则可以使用RStudio的自动填充功能在RStudio中输入一个路径，如图\@ref(fig:rmd-relative)所示。RStudio将尝试自动完成一个相对于Rmd文件的路径。
+    
+- 使用R控制台的工作目录可以是一个很好的选择，可以以编程方式或交互式方式编译文档。例如，你可以在循环中多次编译一个文档，并每次使用不同的工作目录来读取该目录中的不同数据文件（具有相同的文件名）。这种类型的工作目录是由**ezknitr**包\index{R package!ezknitr} [@R-ezknitr]实现的，其本质上是使用`knitr::opts_knit$set(root.dir)`来改变**knitr**中的代码块的工作目录。
+
+- 使用项目目录作为工作目录需要一个明显的假设：首先必须使用一个项目（例如，RStudio项目或版本控制项目），这可能是这种方法的一个缺点。这种类型的工作目录的优点是，任何Rmd文档中的所有相对路径都是相对于项目根目录的，因此你不需要考虑您的Rmd文件在项目中的位置，也不需要相应地调整其他文件的相对路径。这种类型的工作目录是由**here**\index{R package!here} [@R-here]实现的，它提供了函数`here::here()`，通过解析传递给它的相对路径来返回绝对路径（需要注意的是，相对路径是相对于项目根的）。然而，该方法的缺点是，当你将引用的文件和Rmd文件一起移动到项目中的另一个位置时，你需要更新Rmd文档中的引用路径。当你与其他人共享Rmd文件时，你也必须共享整个项目。
+    
+    这些类型的路径类似于HTML中没有协议（protocol）或域（domain）的绝对路径。例如，`https://www.example.org/path/to/page.html` 页面上的`<img src="/foo/bar.png" />`图像是指网站根目录下的图像，即`https://www.example.org/foo/bar.png`。图像`src`属性中的`/`表示网站的根目录。如果你想了解更多关于HTML中绝对路径和相对路径的知识，请参阅[附录B.1 -- **blogdown**书](https://bookdown.org/yihui/blogdown/html.html) [@blogdown2017]。
+
+工作目录之苦主要来自于处理相对路径时的这个问题：   _相对于什么？_正如我们之前提到的，不同的人有不同的偏好，没有绝对正确的答案。
+
+```{r, rmd-relative, echo=FALSE, fig.cap='在 RStudio 中自动填充 Rmd 文档中的文件路径。', fig.align='center'}
+knitr::include_graphics('images/rmd-relative.png', dpi = NA)
+```
+
+## R包长文档（vignettes） {#package-vignette}
+
+如果你有开发R包的经验，或者你的项目中编写的自定义函数需要清晰的文档和严格的测试，那么你可以考虑将项目制作成一个R包。如果你不知道如何创建一个R包，你可以很容易地在RStudio IDE中通过点击菜单`File -> New Project`开始，选择项目类型为“R Package”。\index{R package!vignette}\index{vignette}
+
+使用R包来管理项目有很多好处。例如，你可以将数据集放在`data/`文件夹中，在`R/`下写R代码，生成文档到`man/`（例如，使用**roxygen2**包[@R-roxygen2]\index{R package!roxygen2}），并将单元测试添加到`test/`中。当涉及到R Markdown报告时，你可以将它们作为`vignettes/`下的软件包长文档来编写。在这些长文档中，你可以加载数据集并调用包中的函数。当你构建包时（通过`R CMD build`或RStudio命令），长文档将被自动编译。
+
+要在R Markdown中创建一个包的长文档，最简单的方法是通过RStudio菜单`File -> New File -> R Markdown -> From Template`\index{RStudio!vignette template}（见图\@ref(fig:package-vignette)）。然后从**rmarkdown**包中选择“Package Vignette”，你将得到一个长文档的模板。在更改模板的标题、作者和其他元数据之后，就可以开始编写报告的内容了。
+
+```{r, package-vignette, echo=FALSE, fig.cap='在 RStudio 中创建一个包的长文档。'}
+knitr::include_graphics('images/package-vignette.png', dpi = NA)
+```
+
+或者，你也可以安装包**usethis**\index{R package!usethis} [@R-usethis]并使用其中的函数`usethis::use_vignette()`\index{usethis!use\_vignette()}来创建一个长文档框架。下面是软件包长文档的YAML前端内容通常情况下的样子\index{YAML!vignette frontmatter}：
+
+```yaml
+---
+title: "Vignette Title"
+author: "Vignette Author"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```
+
+需要注意的是，你需要在`title`字段和`\VignetteIndexEntry{}`命令中更改长文档的标题。除了长文档中的上述信息外，你还需要在包的`DESCRIPTION`文件中做另外两件事：
+
+1. 在`DESCRIPTION`文件中指定`VignetteBuilder: knitr`。
+
+1. 在`DESCRIPTION`文件中添加`Suggests: knitr, rmarkdown`。
+
+长文档的输出格式不一定非得是HTML，也可以是PDF，所以你也可以使用`output: pdf_document`。创建除HTML和PDF之外的任何其他输出格式也可以，比如`beamer_presentation`和`tufte::tufte_html`。然而，目前R只识别HTML和PDF格式的长文档。
+
+## R 包中的 R Markdown 模板 {#package-template}
+
+第\@ref(package-vignette)节的图\@ref(fig:package-vignette)给出了从**rmarkdown**包中检索可编辑的Package Vignette（HTML）模板的过程。这个R Markdown文件预先填充了适用于R包长文档的元数据。\index{R package!R Markdown template}\index{template!R Markdown} 
+
+类似地，任何包都可以包含R Markdown模板，包的用户可以通过RStudio IDE（如图\@ref(fig:package-vignette)所示）或使用`rmarkdown::draft()`\index{rmarkdown!draft}函数访问这些模板。
+
+### 模板使用样例
+
+模板是共享自定义结构、样式和内容的有效的方法，有很多优秀的例子都体现了这一特点。\index{R package!R Markdown templates}
+
+许多模板通过预填充YAML元数据来添加结构和样式。我们已经看到了**rmarkdown**包的Package Vignette （HTML）模板的一个例子。类似地，**rmdformats**包[@R-rmdformats]提供了许多模板，这些模板将不同的自定义的样式函数传递给`output`选项。
+
+其他模板演示了包所需的文档结构。例如，**pagedown**包[@R-pagedown]包含了许多海报、简历和其他页面布局的模板。类似地，**xaringan**包的Ninja Presentation模板[@R-xaringan]展示了许多不同幻灯片格式选项的语法。
+
+模板也可以展示包的特性和语法。例如，**flexdashboard**包[@R-flexdashboard]和**learnr**包[@R-learnr]都包含了带有代码块的模板，这些代码块分别调用包中的函数来创建示例仪表板或教程。
+
+类似地，模板也可以包含样板内容。例如，**rticles**包[@R-rticles]提供了许多这样的模板，以使R Markdown输出符合不同学术期刊所需的风格和内容指导。样板内容在组织设置中也很有用，比如生成季度报告的团队。
+
+### 模版设置 Template setup
+
+**usethis**包[@R-usethis]有一个创建模板的功能。运行`usethis::use_rmarkdown_template("Template Name")`\index{usethis!use\_rmarkdown\_template()}将自动创建所需的目录结构和文件（模板名应自己提供）。
+
+如果你想手动设置模板，可以在`inst/rmarkdown/templates`目录下创建一个子目录。在这个目录中，你需要保存至少两个文件：
+
+1. 一个名为`template.yaml`的文件，它为RStudio IDE提供了基本的元数据，比如模板的可读名称。这个文件至少应该有`name`和`description`字段，例如：
+
+    ```yaml
+    name: 模板样例
+    description: 这个模板做了什么
+    ```
+    
+    如果你想在模板被选用时创建一个新目录，你可以包含'`create_dir: true`，如果你的模板依赖于额外的资源，这也是有用的。例如，[**learnr** 包的模板](https://github.com/rstudio/learnr/blob/master/inst/rmarkdown/templates/tutorial/template.yaml)设置了`create_dir: true`，而[**flexdashboard** 包的模板](https://github.com/rstudio/flexdashboard/blob/master/inst/rmarkdown/templates/flex_dashboard/template.yaml)则使用默认的`create_dir: false`。你可以尝试在RStudio中打开这两个模板，以注意到不同的用户提示。
+
+2. 保存在`skeleton/skeleton.Rmd`下的R Markdown文档。这可能包含你希望放入R Markdown文档中的任何内容。
+
+可供选择的是，`skeleton`文件夹可能还包括其他资源，如模板使用的样式表或图像。这些文件将与模板一起被加载到用户的计算机中。
+
+建立自定义R Markdown模板的更多细节，请参阅[RStudio 扩展](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)的网站，以及 _R Markdown Definitive Guide_ 的第十七章[“Document Templates” ](https://bookdown.org/yihui/rmarkdown/document-templates.html)[@rmarkdown2018]。
+
+## 用 **bookdown** 写书及长报告 {#bookdown}
+
+**bookdown** 包 [@R-bookdown]\index{R package!bookdown}被设计为创建由多个R Markdown文档组成的长篇文档\index{book}。例如，如果你想写一本书，你可以在其自己的Rmd文件中编写每个章节，并使用**bookdown**将这些Rmd文件编译成一本书。
+
+对于RStudio的用户来说，最简单的开始方法是通过`File -> New Project -> New Directory -> Book Project using bookdown`，用IDE创建一个**bookdown**项目\index{RStudio!bookdown project}，正如图\@ref(fig:bookdown-project)所示。
+
+如果你不使用RStudio或者你喜欢在控制台工作，你可以通过调用函数`bookdown:::bookdown_skeleton('your-book-dir')`产生相同的结果。
+
+```{r, bookdown-project, echo=FALSE, fig.cap='在 RStudio 中创建一个 bookdown 项目。'}
+knitr::include_graphics('images/bookdown-project.png', dpi = NA)
+```
+
+为了演示用法，我们提供了一个最小的示例，包含同一个目录中的三个文件：
+
+```md
+directory
+  |- index.Rmd
+  |- 01-intro.Rmd
+  |- 02-analysis.Rmd
+```
+
+下面我们将显示每个文件的内容并解释它们的作用。
+
+- **index.Rmd**:
+
+  ````md
+  ---
+  title: "A Minimal bookdown Project"
+  site: bookdown::bookdown_site
+  output: bookdown::gitbook
+  ---
+  
+  # Preface {-}
+  
+  Some content
+  ````
+
+第一个文件通常被称为`index.Rmd`。它应该是你提供YAML前端内容的唯一Rmd文件，它还应该包含一个特殊的YAML字段`site: bookdown::bookdown_site`，以便**rmarkdown**知道使用**bookdown**来构建所有Rmd文件，而不是呈现单个Rmd文件。你可以使用任何**bookdown**输出格式，例如`bookdown::gitbook`、 `bookdown::pdf_book`、 `bookdown::word_document2`以及 `bookdown::epub_book`。
+
+接下来的两个Rmd文件是两个章节：
+
+- **01-intro.Rmd:**
+
+  ````md
+  # Chapter 1
+  
+  This is chapter 1.
+  ````
+
+- **02-analysis.Rmd**:
+
+  ```md
+  # Chapter 2
+  
+  This is chapter 2.
+  ```
+
+要呈现这些Rmd文件，你应该调用`bookdown::render_book('index.Rmd')`而不是`rmarkdown::render()`。在底端，**bookdown**在默认情况下会将所有Rmd文件合并为单个Rmd并编译它。文件按字母顺序合并。这就是为什么我们在上面的例子中为文件名添加数字前缀的原因。
+
+你可以通过很多设置来自定义一个**bookdown**项目。关于**bookdown**的更全面的概述，可以查看 _R Markdown Definitive Guide_的第十八章[“Creating New Formats”](https://bookdown.org/yihui/rmarkdown/new-formats.html) [@rmarkdown2018]。完整文档请参见书籍 [**bookdown**](https://bookdown.org/yihui/bookdown/) [@bookdown2016]。
+
+需要注意的是，本节提供例子内容为英文，若需要编译含中文的文档，则需要加入特殊的命令，如`documentclass: ctexbook`，一个简单的中文书例子请参见 https://github.com/yihui/bookdown-chinese。
+
+## 使用 **blogdown** 建立网站 {#blogdown}
+
+如果你想建立一个基于R Markdown的网站，你可以考虑使用**blogdown**包 \index{R package!blogdown} [@R-blogdown]。最简单的方法是在RStudio菜单中依次选择`File -> New Project -> New Directory -> Website using blogdown`（见图\@ref(fig:bookdown-project)）。如果你之前从未使用过**blogdown**，你可以使用默认设置的对话框，如果你有一定经验的话也可以进行自定义，如网站主题等。如果你不使用RStudio，也可以在一个空目录下调用函数`blogdown::new_site()` 来创建一个新的网站。
+
+一个网站项目可以包含任意数量的Rmd文档。它们可以是普通的页面或博客帖子。R Markdown可以使你更容易地维护你的网站，因为你的网站上的结果是自动和动态生成的。
+
+我们建议你阅读**blogdown**书[@blogdown2017]的[第一章](https://bookdown.org/yihui/blogdown/get-started.html)，以了解这个包的概述以及维护网站的基本工作流程。
+

@@ -42,7 +42,20 @@ knitr::write_bib(c(
   'pagedown',
   'broom',
   'xaringan',
-  'styler'
+  'styler',
+  'ezknitr',
+  'here',
+  'roxygen2',
+  'usethis',
+  'rmdformats',
+  'learnr',
+  'rticles',
+  'blogdown',
+  'spelling',
+  'blastula',
+  'googledrive',
+  'rmdrive',
+  'workflowr'
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {

@@ -1,0 +1,289 @@
+# 工作流
+
+在本章中，我们将介绍一些处理R Markdown文档以及运行R Markdown项目的技巧。你也可以查看 _R for Data Science_ 的第三十章[“R Markdown workflow”](https://r4ds.had.co.nz/r-markdown-workflow.html)[@wickham2016]，该书简要介绍了一些使用分析笔记本的技巧（包括R Markdown文档）。Nicholas Tierney在书[_R Markdown for Scientists_](https://rmd4sci.njtierney.com/workflow.html)中也讨论了工作流。
+
+
+## 使用 RStudio 键盘快捷键 {#rstudio-shortcuts}
+
+R Markdown格式可以与你选择的任何编辑器一起使用，只要安装了R、**rmarkdown**包以及Pandoc。然而，RStudio\index{RStudio!keyboard shortcuts}与R Markdown深度集成，所以你可以在RStudio中利用R Markdown顺利地开展工作。
+
+与任何IDE(（集成开发环境，Integrated Development Environment）一样，RStudio也有键盘快捷键。完整的列表可以在菜单“`Tools -> Keyboard Shortcuts Help`”下找到。一些与R Markdown相关的最有用的快捷方式总结可见表\@ref(tab:shortcuts)。
+
+```{r, include = FALSE}
+ks_win <- function(letters, ctrl = TRUE, alt = TRUE, shift = FALSE, enter = FALSE) {
+  paste0(
+    if (ctrl) "Ctrl+",
+    if (alt) "Alt+",
+    if (shift) "Shift+",
+    if (enter) "Enter+",
+    letters
+  )
+}
+ks_mac <- function(letters, cmd = TRUE, opt = TRUE, shift = FALSE, enter = FALSE) {
+  paste0(
+    if (cmd) "Command+",
+    if (opt) "Option+",
+    if (shift) "Shift+",
+    if (enter) "Enter+",
+    letters
+  )
+}
+```
+
+```{r shortcuts, echo = FALSE}
+keyboard_table <- tibble::tribble(
+  ~ "任务"             , ~ "Windows & Linux"                    , ~ "macOS",
+  "插入 R 块"            , ks_win("I")                            , ks_mac("I"),
+  "HTML预览"              , ks_win("K", alt = FALSE, shift = TRUE) , ks_mac("K", opt = FALSE, shift = TRUE),
+  "编译文档（knitr）"    , ks_win("K", alt = FALSE, shift = TRUE) , ks_mac("K", opt = FALSE, shift = TRUE),
+  "编译Notebook"          , ks_win("K", alt = FALSE, shift = TRUE) , ks_mac("K", opt = FALSE, shift = TRUE),
+  "编译PDF"               , ks_win("K", alt = FALSE, shift = TRUE) , ks_mac("K", opt = FALSE, shift = TRUE),
+  "运行上面的所有块、"      , ks_win("P")                            , ks_mac("P"),
+  "运行当前的块"         , ks_win("C")                            , ks_mac("C"),
+  "运行当前的块"         , ks_win("Enter", TRUE, FALSE, TRUE)     , ks_mac("Enter", TRUE, FALSE, TRUE),
+  "运行下一个块"            , ks_win("N")                            , ks_mac("N"),
+  "运行所有的块"            , ks_win("R")                            , ks_mac("R"),
+  "转到下一个块/标题"    , ks_win("PgDown", alt = FALSE)          , ks_mac("PgDown", opt = FALSE),
+  "转到上一个块/标题", ks_win("PgUp", alt = FALSE)            , ks_mac("PgUp", opt = FALSE),
+  "显示/隐藏文档大纲", ks_win("O", TRUE, FALSE, TRUE)         , ks_mac("O", TRUE, FALSE, TRUE),
+  "Build书、网站..."  , ks_win("B", TRUE, FALSE, TRUE)         , ks_mac("B", TRUE, FALSE, TRUE)
+)
+knitr::kable(keyboard_table, caption = "与R Markdown相关的RStudio键盘快捷键。", booktabs = TRUE)
+```
+
+此外，你可以按`F7`来检查你的文档拼写，还可以通过`Ctrl + Alt + F10`（或macOS中的`Command + Option + F10`）来重新启动R会话。定期重新启动有助于保证结果的再现性，因为如果结果是从一个新的R会话计算出来的，那么其更有可能再现。这也可以通过工具栏上`Run`按钮后面的下拉菜单`Restart R and Run All Chunks`来完成。
+
+## R Markdown 的拼写检查 {#spell-check}
+
+如果你使用RStudio IDE\index{RStudio!spellcheck}，你可以按`F7`键或点击菜单`Edit -> Check Spelling`对Rmd文档进行拼写检查。实时拼写检查在RStudio v1.3中已经可以使用了，所以在这个版本或更高版本的RStudio中，你不再需要手动触发拼写检查。
+
+如果不使用RStudio，则**spelling**包\index{R package!spelling} [@R-spelling]有一个函数`spell_check_files()`，可以检查常见文档格式的拼写，包括R Markdown。当拼写检查Rmd文档时，它将跳过代码块，只检查普通文本。
+
+## 用 `rmarkdown::render()` 呈现 R Markdown {#rmarkdown-render}
+
+如果你不使用RStudio或任何其他IDE，你需要知道一个事实：R Markdown文档是通过函数`rmarkdown::render()`\index{rmarkdown!render()}来呈现的。这意味着你可以在任何R脚本中以编程方式呈现R Markdown文档。例如，你可以在`for`循环中为一个国家的每个州呈现一系列报告：
+
+```{r, eval=FALSE, tidy=FALSE}
+for (state in state.name) {
+  rmarkdown::render(
+    'input.Rmd', output_file = paste0(state, '.html')
+  )
+}
+```
+
+这样的话，每个州的输出文件名是不同的。你还可以在文档`input.Rmd`中使用`state`变量，例如：
+
+
+````md
+---
+title: "`r knitr::inline_expr('state')` 的一个报告"
+output: html_document
+---
+
+`r knitr::inline_expr('state')`的面积是`r knitr::inline_expr('state.area[state.name == state]')`平方英里。
+````
+
+你可以阅读帮助页面`?rmarkdown::render`以了解其他可能的参数。这里我们只想提到其中两个，即`clean`和`envir`参数。
+
+当Pandoc转换出现任何问题时，`clean`参数将特别有助于调试。如果你调用`rmarkdown::render(..., clean = FALSE)`，所有中间文件将被保留，包括编译`.Rmd`文件得到的中间文件`.md`。如果Pandoc发出错误信号，你可以从`.md`文件开始调试。
+
+当你调用`rmarkdown::render(..., envir = new.env())`时，`envir`参数可以保证空白的新环境下呈现文档，因此在代码块中创建的对象将留在该环境中，而不会影响当前的全局环境。另一方面，如果你喜欢在一个新的R会话中呈现Rmd文档，以便当前R会话中的对象不会影响你的Rmd文档，你可以在`xfun::Rscript_call()`中调用`rmarkdown::render`，例如：
+
+```{r, eval=FALSE, tidy=FALSE}
+xfun::Rscript_call(
+  rmarkdown::render,
+  list(input = 'my-file.Rmd', output_format = 'pdf_document')
+)
+```
+
+这个方法类似于点击RStudio\index{RStudio!Knit button}的`Knit`按钮，它也在新的R会话中呈现Rmd文档。考虑到你可能需要在一个Rmd文档内呈现另一个Rmd文档，我们强烈建议你使用这种方法，而不是在代码块中直接调用`rmarkdown::render()`，因为`rmarkdown::render()`产生并依赖于内部的很多“副作用”，这可能会影响在同一个R会话中呈现其他的Rmd文件。
+
+`xfun::Rscript_call()`的第二个参数接受传递给`rmarkdown::render()`的参数列表。事实上，`xfun::Rscript_call`是一个通用的函数，用于在新的R会话中调用任何R函数。如果你感兴趣，请查看它的帮助页面。
+
+## 参数化的报告 {#parameterized-reports}
+
+在第\@ref(rmarkdown-render)节中，我们提到了一种在`for`循环中呈现一系列报告的方法。实际上，`rmarkdown::render()`\index{rmarkdown!render()}有一个叫`params`的参数，是专门为这个任务设计的。你可以通过这个参数来参数化\index{parameter}你的报告。当你为报表指定参数时，可以在报表中使用变量`params`。例如，如果你调用：
+
+```{r, eval=FALSE, tidy=FALSE}
+for (state in state.name) {
+  rmarkdown::render('input.Rmd', params = list(state = state))
+}
+```
+
+那么在`input.Rmd`中，`params`对象会是一个包含`state`变量的列表：
+
+````md
+---
+title: "`r knitr::inline_expr('params$state')`的一个报告"
+output: html_document
+---
+
+`r knitr::inline_expr('params$state')`的面积是`r knitr::inline_expr('state.area[state.name == params$state]')`平方英里。
+
+````
+
+另一种为报告指定参数的方法是使用YAML字段`params`，例如：
+
+```yaml
+---
+title: 参数化的报告
+output: html_document
+params:
+  state: Nebraska
+  year: 2019
+  midwest: true
+---
+```
+
+需要注意的是，你可以在YAML字段`params`\index{YAML!params}或`rmarkdown::render()`的参数`params`中包含尽可能多的参数。如果YAML字段`params`和参数`params`同时存在，则参数`params`中的参数值将覆盖YAML字段`params`中相应的参数。例如，当我们在前面有YAML字段`params`的例子中调用`rmarkdown::render(..., params = list(state = 'Iowa', year = 2018)`，则在R Markdown文档中，`params$state`将变成`Iowa`（而不是`Nebraska`）， `params$year`将变成`2018`（而不是`2019`）
+
+当将相同的R Markdown文档呈现给一系列报告时，你需要调整`rmarkdown::render()`的`output_file`参数，以确保每个报告都有其唯一的文件名。否则，你将意外地覆盖某些报告文件。例如，你可以编写一个函数来生成每个州每年的报告；
+
+
+```{r, eval=FALSE, tidy=FALSE}
+render_one <- function(state, year) {
+  # 假设 input.Rmd 的输出格式是 PDF
+  rmarkdown::render(
+    'input.Rmd',
+    output_file = paste0(state, '-', year, '.pdf'),
+    params = list(state = state, year = year),
+    envir = parent.frame()
+  )
+}
+```
+
+之后你可以使用嵌套的`for`循环来生成所有的报告：
+
+```{r, eval=FALSE}
+for (state in state.name) {
+  for (year in 2000:2020) {
+    render_one(state, year)
+  }
+}
+```
+
+最后，你会得到一系列的报告文件，如`Alabama-2000.pdf`，`Alabama-2001.pdf`，...，`Wyoming-2019.pdf`，以及`Wyoming-2020.pdf`。
+
+对于参数化的报告，你还可以通过一个由Shiny创建的图形用户界面（Graphical User Interface，GUI）来交互式地输入参数。这需要你在YAML中提供一个`params`字段，**rmarkdown**将为每个参数使用适当的输入部件自动创建GUI，例如，将为布尔（Boolean）参数提供一个复选框。
+
+如果你不使用RStudio，你可以用`params = 'ask'` '调用`rmarkdown::render()`来启动GUI：
+
+```{r, eval=FALSE}
+rmarkdown::render('input.Rmd', params = 'ask')
+```
+
+如果你使用RStudio，你可以点击`Knit`按钮后面的菜单`Knit with Parameters`\index{RStudio!Knit with Parameters}。图\@ref(fig:params-shiny)显示了一个参数的GUI示例。
+
+```{r, params-shiny, echo=FALSE, fig.cap='使用可以从GUI输入的参数编译一个R Markdown文档。'}
+knitr::include_graphics('images/params-shiny.png', dpi = NA)
+```
+
+有关参数化报告的更多信息，请阅读 _R Markdown Definitive Guide_的第十五章[“Parameterized reports”](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html)[@rmarkdown2018]。
+
+## 自定义 `Knit` 按钮 (\*) {#custom-knit}
+
+当你点击RStudio\index{RStudio!Knit button}的`Knit`按钮时，它将在一个新的R会话中调用`rmarkdown::render()`函数，并输出一个与输入文件的基本名相同的文件。例如，编译输出格式为`html_document`的`example.Rmd`，将得到一个输出文件`example.html`。
+
+在某些情况下，我们可能需要自定义文档的呈现方式。例如，我们可能希望呈现的文档包含当前日期，或者希望将编译后的报告输出到不同的目录中。尽管我们可以通过使用适当的`output_file`参数调用`rmarkdown::render()`（请参阅第\@ref(rmarkdown-render)节）来实现这些目标，但依赖自定义调用`rmarkdown::render()`来编译报告可能会很不方便。
+
+可以通过在文档的YAML frontmatter中提供`knit`字段来控制`Knit`按钮的行为。该字段接受一个主参数为`input`（输入Rmd文档的路径）和其他当前被忽略的参数的函数。你可以直接在`knit`字段中编写函数的源代码，也可以把函数放在其他地方（例如，在R包中），然后在`knit`字段中调用函数。如果你经常需要自定义的`knit`功能，我们建议你把它放在一个包中，而不是在每个R Markdown文档中重复它的源代码。
+
+如果你直接将代码存储在YAML中，则必须将整个函数包装在括号中。如果源代码有多行，则必须缩进所有行（第一行除外）至少两个空格。例如，如果我们想要输出文件名包含它呈现的日期，我们可以使用以下的YAML代码\index{YAML!knit}：
+
+```yaml
+---
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_file = paste0(
+        xfun::sans_ext(input), '-', Sys.Date(), '.html'
+      ),
+      envir = globalenv()
+    )
+  })
+---
+``` 
+
+例如，如果我们在2019-07-29编译`example.Rmd`，则输出的文件名将为`example-2019-07-29.html`。
+
+虽然上面的方法看起来足够简单和直接，但直接在YAML中嵌入函数可能会使维护它变得困难，除非该函数只在单个R Markdown文档中使用一次。一般来说，我们建议使用R包来维护这样的函数，例如，你可以在包中创建一个函数`knit_with_date()`：
+
+```{r, eval=FALSE, tidy=FALSE}
+#' 为 RStudio 自定义编译功能
+#'
+#' @export
+knit_with_date <- function(input, ...) {
+  rmarkdown::render(
+    input,
+    output_file = paste0(
+        xfun::sans_ext(input), '-', Sys.Date(), '.',
+        xfun::file_ext(input)
+    ),
+    envir = globalenv()
+  )
+}
+```
+
+如果你将上面的代码添加到一个名为**myPackage**的包中，你将能够使用以下YAML设置来引用你的自定义`knit`函数：
+
+```yaml
+---
+knit: myPackage::knit_with_date
+---
+```
+
+你可以参考帮助页面`?rmarkdown::render`来找到更多关于如何在RStudio中自定义`Knit`按钮后`knit`函数的方法。
+
+## 通过 Google Drive 对 Rmd 文档进行协作 {#google-drive}
+
+基于**googledrive**包\index{R package!googledrive} [@R-googledrive]， Emily Kothe在**rmdrive** 包\index{R package!rmdrive}中提供了一些包装函数，该包目前只能从GitHub上获得（https://github.com/ekothe/rmdrive）。在撰写本书时，它仍然缺乏丰富的文档，所以我们建议尝试Janosch Linkersdörfer的分支：https://github.com/januz/rmdrive，该分支基于Ben Marwick的分支（如果你还没有学会GIT，你可能会被这些自由分支和改进其他人GIT库的例子所激励）。
+
+使用**rmdrive**进行工作的流程可被概述如下：
+
+1. 我们假设有一个项目的主要作者或贡献者，他能够使用像GIT这样的版本控制工具。主要作者编写Rmd文档的初始版本，并通过`upload_rmd()`函数将其上传到Google Drive。
+
+1. Google Drive中的Rmd文档可以与其他合作者共享，他们可以对Google Document进行更改或提出更改建议。
+
+1. 主要作者可以接受建议的修改，并通过`render_rmd()`在本地下载或预览Rmd文档。如果其他合作者有修改过的代码块，并且希望看到新的结果，他们也可以自己完成这项工作。
+
+1. 如果满意，主作者可以将更改提交到GIT存储库
+
+在Google Drive中，协作编辑可以是同步的，也可以是异步的。多人可以同时编辑同一文档，也可以等待其他人先完成编辑。
+
+包中还有一个`udpate_rmd()`函数，它允许你在本地编辑Rmd文档，并将本地Rmd文档上传到Google Drive。你可能永远都不应该运行这个函数，因为它将完全覆盖Google Drive中的文档。主要作者需要提前警告合作者。理想情况下，所有协作者应该只在Google Drive中编辑文档，而不是在本地。可以通过`render_rmd()`在本地预览编辑的文档，不过需要注意的是，`render_rmd()`会在呈现之前自动下载文档。
+
+## 用 **workflowr** 将R Markdown项目组织到一个研究网站上 {#workflowr}
+
+**workflowr**包\index{R package!workflowr} [@R-workflowr; @workflowr2019]可以帮助你用项目模板\index{template!project}和版本控制工具GIT组织一个（数据分析）的项目。每次你对项目做出更改时，可以记录更改，**workflowr**可以建立一个与项目的特定版本相对应的网站。这意味着你将能够查看分析结果的完整历史记录。尽管这个包使用GIT作为版本控制的后端，但你并不需要真正熟悉GIT。这个包提供了R函数，这些函数在底层执行GIT操作，你只需要调用这些R函数。此外，**workflowr**自动化了可重复性代码的最优方法。每次R Markdown文档被呈现时，**workflowr**会自动使用`set.seed()`设置一个种子，使用`sessionInfo()`记录会话信息，并扫描绝对文件路径等。请参阅[包文档](https://jdblischak.github.io/workflowr/)来了解如何开始并获取更多信息。
+
+**workflowr**的主要作者John Blischak也整理了一个与R项目工作流相关的R包和指南的非详尽列表，可见GitHub仓库： https://github.com/jdblischak/r-project-workflows。
+
+## 发送基于 R Markdown 的邮件 {#blastula-email}
+
+用**blastula**包\index{R package!blastula}\index{email} [@R-blastula]，你可以将Rmd文档呈现在电子邮件正文并发送电子邮件。要将Rmd文档呈现到电子邮件中，需要在文档中使用输出格式`blastula::blastula_email`，例如：
+
+````md
+---
+title: 周报
+output: blastula::blastula_email
+--- 
+
+尊敬的老板，
+
+以下是对 `iris` 数据的分析：
+
+```{r}`r ''`
+summary(iris)
+plot(iris[, -5])
+```
+
+若感兴趣请及时回复。
+
+祝好，  
+张三
+````
+
+这个Rmd文档会通过函数`blastula::render_email()`来呈现，输出将被传递给`blastula::smtp_send()`，它将发送电子邮件。需要注意的是，`smtp_send()`需要一个电子邮件服务器和你的凭证（credentials）。
+
+如果你使用RStudio Connect，你可以在https://solutions.rstudio.com/examples/blastula-overview/上找到更多的例子，包括自动的、有条件的和参数化的电子邮件。
+
