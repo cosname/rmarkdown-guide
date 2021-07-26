@@ -214,7 +214,7 @@ cat(unlist(res), sep = '\n')
 
     当您要求R Markdown保存中间的Markdown输出文件时，它也将保存图像文件夹。
 
-## R代码块的工作目录 {#working-directory}
+## R 代码块的工作目录 {#working-directory}
 
 在默认情况下，R代码块的工作目录\index{working directory}是包含Rmd文档的目录。例如，如果一个Rmd文件的路径是`~/Downloads/foo.Rmd`，计算R代码块的工作目录是`~/Downloads/`。这意味着当你在代码块中引用具有相对路径的外部文件时，你需要知道这些路径是相对于Rmd文件的目录的。在前面提到的Rmd示例文件中，`read.csv("data/iris.csv")`在代码块中意味着读取CSV文件`~/Downloads/data/iris.csv`。
 
@@ -398,7 +398,7 @@ directory
 
 要呈现这些Rmd文件，你应该调用`bookdown::render_book('index.Rmd')`而不是`rmarkdown::render()`。在底端，**bookdown**在默认情况下会将所有Rmd文件合并为单个Rmd并编译它。文件按字母顺序合并。这就是为什么我们在上面的例子中为文件名添加数字前缀的原因。
 
-你可以通过很多设置来自定义一个**bookdown**项目。关于**bookdown**的更全面的概述，可以查看 _R Markdown Definitive Guide_的第十八章[“Creating New Formats”](https://bookdown.org/yihui/rmarkdown/new-formats.html) [@rmarkdown2018]。完整文档请参见书籍 [**bookdown**](https://bookdown.org/yihui/bookdown/) [@bookdown2016]。
+你可以通过很多设置来自定义一个**bookdown**项目。关于**bookdown**的更全面的概述，可以查看 _R Markdown Definitive Guide_ 的第十八章[“Creating New Formats”](https://bookdown.org/yihui/rmarkdown/new-formats.html) [@rmarkdown2018]。完整文档请参见书籍 [**bookdown**](https://bookdown.org/yihui/bookdown/) [@bookdown2016]。
 
 需要注意的是，本节提供例子内容为英文，若需要编译含中文的文档，则需要加入特殊的命令，如`documentclass: ctexbook`，一个简单的中文书例子请参见 https://github.com/yihui/bookdown-chinese。
 
