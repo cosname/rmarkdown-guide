@@ -178,7 +178,7 @@ rmarkdown::render('input.Rmd', params = 'ask')
 knitr::include_graphics('images/params-shiny.png', dpi = NA)
 ```
 
-有关参数化报告的更多信息，请阅读 _R Markdown Definitive Guide_的第十五章[“Parameterized reports”](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html)[@rmarkdown2018]。
+有关参数化报告的更多信息，请阅读 _R Markdown Definitive Guide_ 的第十五章[“Parameterized reports”](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html)[@rmarkdown2018]。
 
 ## 自定义 `Knit` 按钮 (\*) {#custom-knit}
 
