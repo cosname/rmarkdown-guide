@@ -145,7 +145,7 @@ cat(res, sep = '\n')
 ```
 ````
 
-函数`knit_child()`返回已编译输出的字符向量，我们可以使用`cat()`和快选项`results = 'asis'`\index{chunk option!results}来将其写回主文档。
+函数`knit_child()`返回已编译输出的字符向量，我们可以使用`cat()`和块选项`results = 'asis'`\index{chunk option!results}来将其写回主文档。
 
 你甚至可以使用子文档作为模板，并使用不同的参数重复调用`knit_child()`。在下面的例子中，我们使用`mpg`作为响应变量，而`mtcars`数据中的其他变量作为解释变量进行回归：
 
