@@ -1,5 +1,7 @@
 bookdown::gitbook:
   css: css/style.css
+  includes:
+    after_body: disqus.html
   config:
     toc:
       collapse: section
