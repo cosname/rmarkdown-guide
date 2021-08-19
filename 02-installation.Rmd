@@ -8,26 +8,7 @@ source("utils.R")
 
 本章介绍安装 R Markdown 相关依赖包的方法，并编译第一个 R Markdown 源文档，输出为 HTML 和 PDF 两种格式。
 
-读者学习 R Markdown 的过程中，可能会用到许多文件记录学习过程，例如 R Markdown 自己的文档，R 的代码脚本，图片和其他笔记文件等等。我们推荐使用 RStudio 自带的项目功能管理相关的文件。可以通过菜单栏中的 `File --> New Project` 创建新项目，此时 RStudio 会在选定的根目录下生成一个后缀为 `.Rproj` 的文件，我们可以在该目录创建不同的文件夹记录学习过程。下次启动项目时，只需要通过 RStudio 编辑器右上角下拉菜单内的 Open Project 选项加载该 `.Rproj` 文件，或者直接双击该文件并使用 RStudio 打开。一个使用项目文件的好处是，我们可以在一个固定的根目录内使用相对路径引用各种文件资源。例如，我们可能有下面的文件结构
 
-
-```
-ch1
-  - first-rmd.Rmd
-  - second-rmd.Rmd
-ch2
-  - third-rmd.Rmd
-scripts
-  - utils.R
-images
-  - my-picture.png
-...
-learn-rmarkdown.Rproj
-```
-
-此时，如果需要在 `ch1` 文件夹中的 `first-rmd.Rmd` 中引用 `images` 文件夹中的 my-picture.png ，可以使用相对路径 `../images/my-picture.png`。无论后续我们在 images 中添加多少文件，都只需要在相对路径中改变图片的名称。
-
-此外，使用项目文件还可以让 RStudio 自适应一些 R Markdown 包的特定选项，为我们后续介绍的诸多 R Markdown 扩展功能提供更好的编辑器支持。
 
 ## 安装 R Markdown 
 
@@ -72,7 +53,7 @@ import_example_result("first-rmd.Rmd")
 ```
 
 
-图 \@ref(fig:first-rmarkdown) 给出了我们新创建的 first-rmd.Rmd 文件的 HTML 格式输出结果。此时，与该 R Markdown 源文件同级目录下也应该出现一个 `first-rmd.html` 文件，读者可以用浏览器打开该 HTML 验证是否与 RStudio 面板中输出的结果一致。 
+图 \@ref(fig:first-rmarkdown) 为我们新创建的 `first-rmd.Rmd` 文件的 HTML 格式输出结果。此时，与该 R Markdown 源文件同级目录下也应该出现一个 `first-rmd.html` 文件，读者可以用浏览器打开该 HTML 验证是否与 RStudio 面板中输出的结果一致。 
 
 一些读者可能会疑惑，之前点击 Knit 时，为什么我们没有用 `library(rmarkdown)` 导入 `rmarkdown` 包，也没有在源文档中运行相关的函数，编译仍能成功呢？当我们点击 Knit 的时候，RStudio 自行调用了
 
@@ -81,7 +62,7 @@ import_example_result("first-rmd.Rmd")
 rmarkdown::render("first-rmd.Rmd", output_format = "html_document")
 ```
 
-读者不妨自己在控制台内运行一遍以上代码，看结果与点击 Knit 是否相同。
+读者不妨自己在控制台内运行一遍以上代码，看结果与点击 Knit 是否相同。^[自己调用 `render()` 时源文档中的代码在当前进程中运行，而 Knit 按钮会新建一个空白的环境完成编译。为了确保当前 R 进程不对 R Markdown 造成干扰，最好清空当前环境或重启 R 后使用 `render()`。]
 
 
 ## 安装 Tinytex 
@@ -110,3 +91,27 @@ tinytex:::install_prebuilt('~/Downloads/TinyTeX-v2021.01.zip')
 熟悉 LaTeX 的用户可能会好奇 TinyTeX 的工作机制。TinyTeX 是一个基于 TeX Live 的自定义轻量级 LaTeX 套件，特别为 R Markdown 用户设计了许多定制化的 PDF 编译功能。例如，它可以自动安装编译过程中缺少的宏包。大部分情况下，我们不需要直接使用 TinyTeX 包，R Markdown 已经与之高度集成。此外，建议在安装 TinyTeX 之前卸载系统中已有的 LaTeX 套件，例如 Tex Live，MiKTeX，Mac—TeX 等，否则可能产生冲突。更多信息请参照[文档](https://yihui.org/tinytex/cn/)。 
 
 
+## 使用 RStudio 项目文件
+
+最后，我们暂且从 R Markdown 的内容脱离出来，讨论一个学习 R 的 "最佳实践"。它不是必需的，但在大多数情况下可以为我们自己和他人带来更多便利。
+
+读者学习 R Markdown 的过程中，可能会用到许多文件记录学习过程，例如 R Markdown 自己的文档，R 的代码脚本，图片和其他笔记文件等等。我们推荐使用 RStudio 自带的项目功能管理相关的文件。可以通过菜单栏中的 `File --> New Project` 创建新项目，此时 RStudio 会在选定的根目录下生成一个后缀为 `.Rproj` 的文件，我们可以在该目录创建不同的文件夹记录学习过程。下次启动项目时，只需要通过 RStudio 编辑器右上角下拉菜单内的 Open Project 选项加载该 `.Rproj` 文件，或者直接双击该文件并使用 RStudio 打开。一个使用项目文件的好处是，我们可以在一个固定的根目录内使用相对路径引用各种文件资源。例如，我们可能有下面的文件结构
+
+
+```
+ch1
+  - first-rmd.Rmd
+  - second-rmd.Rmd
+ch2
+  - third-rmd.Rmd
+scripts
+  - utils.R
+images
+  - my-picture.png
+...
+learn-rmarkdown.Rproj
+```
+
+此时，如果需要在 `ch1` 文件夹中的 `first-rmd.Rmd` 中引用 `images` 文件夹中的 my-picture.png ，可以使用相对路径 `../images/my-picture.png`。无论后续我们在 images 中添加多少文件，都只需要在相对路径中改变图片的名称。同理，读写数据等的 I/O 操作也只需要使用相对于 `.Rproj` 根目录的相对路径。一些读者可能习惯使用 `setwd()` 解决类似的问题，但它往往导致他人难以重复使用的绝对路径。
+
+除易于启动和路径引用上的好处外，RStudio 项目内还有更好的快捷键支持，读者可用 Alt+Shift+K 浏览全部项目快捷键。博客 [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)更深入讨论了使用项目或脚本方式的优劣。 

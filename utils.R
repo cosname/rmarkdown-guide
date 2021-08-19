@@ -1,3 +1,13 @@
+import_example <- function(file, lang = xfun::file_ext(file)) {
+  x = xfun::read_utf8(xfun::magic_path(file))
+  lang = tolower(lang)
+  if (nchar(lang) > 1) {
+    lang = sub('^r', '', lang)
+    if (lang == 'nw') lang = 'tex'
+  }
+  knitr::asis_output(paste(c(sprintf("````%s", lang), x, "````"), collapse = '\n'))
+}
+
 import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 400, ...){
   file <- xfun::magic_path(file)
   out <- rmarkdown::all_output_formats(file)
@@ -62,3 +72,29 @@ pdf_screenshot <- function(pdf, outfile = xfun::with_ext(pdf, "png")){
   magick::image_write(content, outfile)
   return(outfile)
 }
+
+
+
+use_examples <- function(names, dir = "exmaples", open_path = NULL) {
+  rmd_paths <- paste0("examples", "/", names, ".Rmd")
+  text <- "---\ntitle: 'Untitled'\noutput: html_document \n---\n"
+  for (p in rmd_paths) {
+    writeLines(text, p)
+  }
+  if (is.null(open_path)) {
+    open_path <- rmd_paths[1]
+  } else {
+    open_path <- paste0("examples/", open_path, ".Rmd")
+  }
+  if (rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
+    rstudioapi::navigateToFile(open_path)
+  }
+  else {
+    utils::file.edit(open_path)
+  }
+  invisible(open_path)
+}
+
+
+
+

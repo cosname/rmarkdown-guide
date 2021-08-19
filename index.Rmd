@@ -33,16 +33,6 @@ if (knitr::is_html_output()) {
   })
 }
 
-import_example <- function(file, lang = xfun::file_ext(file)) {
-  x = xfun::read_utf8(xfun::magic_path(file))
-  lang = tolower(lang)
-  if (nchar(lang) > 1) {
-    lang = sub('^r', '', lang)
-    if (lang == 'nw') lang = 'tex'
-  }
-  knitr::asis_output(paste(c(sprintf("````%s", lang), x, "````"), collapse = '\n'))
-}
-
 options(bookdown.post.latex = function(x) {
   # substitute nonbreaking spaces in \texttt{} with normal spaces
   m = gregexpr('\\\\texttt\\{[^}]+}', x)
