@@ -39,6 +39,8 @@ jobs:
         run: |
           R -e 'install.packages("renv")'
           R -e 'renv::restore()'
+          R -e 'reticulate::install_miniconda()'
+          R -e 'reticulate::py_install(c("seaborn", "pandas"))'
 
       - name: Build book
         run: make gitbook

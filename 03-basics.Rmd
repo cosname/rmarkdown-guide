@@ -143,7 +143,7 @@ knitr::include_graphics("images/03-knit-process.jpg")
 
 作为总结，对于 HTML 格式来说，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步: tinytex 包或其他 LaTeX 套件编译 Pandoc 生成的 `.tex` 文件生成 PDF 文档。
 
-需要说明的是，我们几乎从不需要在底层与 knitr 或 Pandoc 做直接交互，而是 `.Rmd` 文档中发出这些指令。但理解它们在 R Markdown 编译中的角色有利于在编译失败时排错，和掌握更进阶的排版技巧。
+本节对编译过程的简介意在让读者对 knitr 和 Pandoc 工具有基础认识。实际写作中，我们几乎从不需要在底层与 knitr 或 Pandoc 做直接交互，而是 `.Rmd` 文档中发出这些指令。但理解它们在 R Markdown 编译中的角色有利于在编译失败时排错，和掌握更进阶的排版技巧。
 
 ## R Markdown 的基本元素
 
@@ -251,11 +251,11 @@ output:
 
 上面的文档有三种可选的输出格式，`html_document`，`pdf_document` 和 `tufte_html`。
 
-在 `html_document` 格式中，我们用 `toc: true` 指定自动生成目录, `toc_float: true` 设置目录的显示方式为浮动侧边栏 (默认标题会固定在正式文字内容之前), `code_folding: hide` 可以折叠所有代码块，但读者可以在每个代码块右上角的选项卡展开内容，这是一个 HTML 输出格式特有的选项。
+在 `html_document` 格式中，我们用 `toc: true` 指定自动生成目录, `toc_float: true` 设置目录的显示方式为浮动侧边栏 (默认标题会固定在正式文字内容之前), `code_folding: hide` 可以折叠所有代码块，但读者可以在每个代码块右上角的选项卡展开内容，这是一个 HTML 输出格式特有的选项。^[注意，YAML 中的布尔变量 `true` 和]
 
 在 `pdf_document` 格式中，我们同样设置了生成目录，`number_sections: true` 自动生成章节编号，`keep_tex: true` 保留 Pandoc 生成的 `.tex` 文件。`latex_engine: xelatex` 设置编译引擎为 XeLaTeX (默认为 pdflatex), 引擎设置对正确显示中文字体非常重要。
 
-第三种格式 `tufte::tufte_handout` 在一般 PDF 输出中定义了更多格式，模仿了统计学家 Edward Tufte 以及物理学家费曼的教科书的风格，它的一个显著特点就是边栏的使用，例如脚注和边栏注解，以及放在边栏里的小型插图。在 `output` 中，它的应用方式与前两种不同。这是因为 `html_document` 和 `pdf_document`是 rmarkdown 包内的输出格式，而 `tufte_html` 是 tufte 包提供的。这样不在 rmarkdown 包的输出格式需要在前面加上 `::` 表明它们的来源。`default` 表示该输出格式完全使用默认设置。应用多个输出格式时， 即便没有没有定制设置也必须有 default 指定。
+第三种格式 `tufte::tufte_handout` 在一般 PDF 输出中定义了更多格式，模仿了统计学家 Edward Tufte 以及物理学家费曼的教科书的风格，它的一个显著特点就是边栏的使用，例如脚注和边栏注解，以及放在边栏里的小型插图。在 `output` 中，它的应用方式与前两种不同。这是因为 `html_document` 和 `pdf_document`是 rmarkdown 包内的输出格式，而 `tufte_html` 是 tufte 包提供的。这样不在 rmarkdown 包的输出格式需要在前面加上 `::` 表明它们的来源。例如我们想使用 bookdown 包提供的 `html_document2` 输出格式，引用方法为 `output: bookdown::html_document2`。`default` 表示该输出格式完全使用默认设置。应用多个输出格式时， 即便没有没有定制设置也必须有 default 指定。
 
 有多个输出格式时，我们可以点击 Knit 的下拉按钮选择任意一种格式编译 (图 \@ref(fig:multi-outputs))。编译快捷键 `Ctrl+Shift+K` 会使用最近一次编译的输出格式。 
 
@@ -812,3 +812,6 @@ ts.rolling(5).mean().plot()
 其他语言的运行同样是在 knitr 生成 `.md` 的阶段完成的，这意味着我们同样可以对其他语言的代码块应用某些 knitr 选项。上面的 Python 代码设置了 `fig.cap`, `fig.align='left'`。
 
 
+本节对应的 R Markdown 源文档如下
+
+`r import_example("example/multilingual.Rmd")`

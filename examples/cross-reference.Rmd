@@ -1,0 +1,43 @@
+---
+title: '交叉引用'
+output: 
+  bookdown::html_document2: default 
+---
+
+
+
+# Hello World 
+
+欲使用交叉引用，首先要有支持它的格式，如 `bookdown::html_document2` 和 `bookdown::pdf_document2`。
+
+英文标题会自动生成引用标签，如第 \@ref(hello-world) 节所示。
+
+# 中文标题 {#chinese-header}
+
+除了使用 Pandoc 自动生成的标签外，我们可以在标题后添加 `{#label}` 自行设置标签。
+
+需要引用中文标题时，最好用手动添加一个英文标签。如第 \@ref(chinese-header) 节所示。
+
+# 引用图片
+
+```{r cars-plot, fig.cap = "一张散点图"}
+plot(cars)
+```
+
+引用图片需要为代码块设置标签，并有标题 `fig.cap`, 如图 \@ref(fig:cars-plot) 所示。
+
+下面的图片虽然设置了代码块标签，但没有 `fig.cap`，无法创建单独的图表环境，引用 \@ref(fig:iris-plot) 失效。
+
+```{r iris-plot}
+plot(iris)
+```
+
+## 引用表格
+
+
+引用表格与图片类似，如表 \@ref(tab:iris-table) 所示。
+ 
+```{r iris-table}
+knitr::kable(head(iris), caption = "一个表格")
+```
+

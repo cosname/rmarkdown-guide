@@ -35,7 +35,8 @@ import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 40
         tryCatch(rmd_pdf_screenshot(file, fmt, outfile),
                  error = function(e)paste0("Failed to process ", file))
 
-      if (fmt %in% c("html_document","ioslides_presentation","slidy_presentation"))
+      if (fmt %in% c("html_document","ioslides_presentation","slidy_presentation", "prettydoc::html_pretty", "bookdown::html_document2"
+))
         tryCatch(rmd_html_screenshot(file, fmt, outfile, vwidth=vwidth, vheight=vheight),
                  error = function(e)paste0("Failed to process ", file))
 

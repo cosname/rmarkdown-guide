@@ -7,7 +7,7 @@ output: html_document
 
 `babynames` 数据来自同名 R 包，这里作简单处理后写入 csv 文件。
 
-```{r}
+```{r prepare-data}
 library(babynames)
 library(dplyr)
 library(readr)
@@ -19,12 +19,19 @@ babynames::babynames %>%
 ```
 
 
-将数据存入 SQLite 数据库中
+加载提供 Python 接口的 reticulate 包
 
 ```{r}
-library(DBI)
 library(reticulate)
+# reticulate::py_install(c("seaborn", "pandas"))
+```
 
+
+
+将数据存入 SQLite 数据库中
+
+```{r write-db}
+library(DBI)
 raw <- read_csv("data/babynames.csv")
 
 con <- dbConnect(RSQLite::SQLite(), ":memory:")
@@ -32,7 +39,7 @@ dbWriteTable(con, "babynames", raw)
 ```
 
 
-```{r}
+```{r read-db}
 library(DBI)
 library(reticulate)
 
@@ -62,7 +69,7 @@ library(dplyr)
 glimpse(babynames)
 ```
 
-```{r}
+```{r plot-df}
 library(tidyr)
 
 plot_df <- babynames %>%
@@ -94,7 +101,7 @@ plot_df %>%
 
 
 
-```{r}
+```{r marg}
 # 在 R 中选取 Margaret 对应的全部数据
 marg <- babynames::babynames %>%filter(name == "Margaret")
 ```
@@ -116,9 +123,7 @@ ts.plot()
 
 
 
-```{python}
+```{python, fig.cap = "以 5 年为窗口的移动平均", fig.align = 'left'}
 ts.rolling(5).mean().plot()
 ```
-
-
 

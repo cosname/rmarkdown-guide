@@ -1,0 +1,103 @@
+---
+title: "用 R Markdown 创作精美文档"
+subtitle: "使用 prettydoc 包的 Cayman 主题"
+author: "邱怡轩"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: true
+    math: katex 
+toc-title: "目录"
+---
+
+
+
+## prettydoc 输出格式
+
+
+prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如
+
+  - `cayman`: 修改自 [Cayman](https://github.com/jasonlong/cayman-theme) 主题
+  
+  - `tactile`: 修改自 [Tactile](https://github.com/jasonlong/tactile-theme) 主题
+  
+  - `architect`: 修改自 [Architect](https://github.com/jasonlong/architect-theme) 主题
+  
+  - `leonids`: 修改自 [Leonids](https://github.com/renyuanz/leonids) 主题
+  
+  - `hpstr`: 修改自 [HPSTR](https://github.com/mmistakes/jekyll-theme-hpstr) 主题
+  
+我们还可以提供其他 YAML 选项
+
+
+- `highlight`: 高亮方案，取值为 `github` 或 `vignette`
+
+- `math`: LaTeX 数学公式的渲染方式，取值为 `mathjax` 或 `katex`，后者可以在没有网络连接时显示公式
+
+使用 `html_pretty` 格式的输出文档也有一定限制，它不支持 `toc_float`, `code_folding`, `code_download` 等选项。
+
+
+$$
+f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+
+
+## 元素
+
+下面展示一些常见 HTML 元素的样式
+
+### 三级标题
+
+#### 四级标题
+
+##### 五级标题
+
+
+### 表格
+
+|           | Df | Sum Sq | Mean Sq | F value | Pr(>F)  |    |
+|-----------|----|--------|---------|---------|---------|----|
+| Block     | 5  | 343.3  | 68.66   | 4.447   | 0.01594 | *  |
+| N         | 1  | 189.3  | 189.28  | 12.259  | 0.00437 | ** |
+| P         | 1  | 8.4    | 8.40    | 0.544   | 0.47490 |    |
+| K         | 1  | 95.2   | 95.20   | 6.166   | 0.02880 | *  |
+| N:P       | 1  | 21.3   | 21.28   | 1.378   | 0.26317 |    |
+| N:K       | 1  | 33.1   | 33.14   | 2.146   | 0.16865 |    |
+| P:K       | 1  | 0.5    | 0.48    | 0.031   | 0.86275 |    |
+| Residuals | 12 | 185.3  | 15.44   |         |         |    |
+
+
+### 列表
+
+世界上有三种谎言
+
+1. 谎言
+2. 该死的谎言
+3. 统计学
+    - 频率学派
+    - 贝叶斯学派
+    - ...
+
+
+
+### 行内格式
+
+**粗体**, *斜体*, <del>删除线</del>.
+
+
+### 代码
+
+使用 `R` 代码
+
+```{r fig.width=6, fig.height=6, fig.align='center'}
+set.seed(123)
+n <- 1000
+x1  <- matrix(rnorm(n), ncol = 2)
+x2  <- matrix(rnorm(n, mean = 3, sd = 1.5), ncol = 2)
+x   <- rbind(x1, x2)
+smoothScatter(x, xlab = "x1", ylab = "x2")
+head(x)
+```
