@@ -137,9 +137,15 @@ summary(cars)
 knitr::include_graphics("images/03-knit-process.jpg")
 ```
 
-首先，knitr 包 [@R-knitr] 将 `.Rmd` 源文档转换为 `.md` 文件。knitr 早于 R Markdown 诞生，它的目的是帮助 R 语言自动化地生成报告。在 R Markdown 的编译中，knitr 的最主要工作是提取和运行 `.Rmd` 中的代码，并将返还的文字或图片等结果置于合适的位置。同时，knitr 还会读取部分 YAML 头部数据，并确保我们在源文档中使用的标记符号适于下一步的格式转换。这一步结束后，knitr 生成了临时性的 `.md` 文件。例如，`first-rmd.Rmd` 被转换为 `first-rmd.md`。`.md` 被称为 Markdown 文件，我们在 `.Rmd` 中的格式标记即是 Markdown 标记语言确定的标准，在 \@ref(markdown-syntax) 中作进一步介绍。
+首先，knitr 包 [@R-knitr] 将 `.Rmd` 源文档转换为 `.md` 文件。早在 R Markdown 诞生之前，knitr 包就承担了自动化生成 R 语言报告的功能。在 R Markdown 的编译中，knitr 的最主要工作是提取和运行 `.Rmd` 中的代码，并将返还的文字或图片等结果置于合适的位置。我们之前笼统说的 "R Markdown 运行代码" 实质上就是 knitr 的工作。同时，knitr 还会读取部分 YAML 头部数据，并确保我们在源文档中使用的标记符号适于下一步的格式转换。这一步结束后，knitr 生成了临时性的 `.md` 文件。例如，`first-rmd.Rmd` 被转换为 `first-rmd.md`。`.md` 被称为 Markdown 文件，我们在 `.Rmd` 中的格式标记即是 Markdown 标记语言确定的标准，在 \@ref(markdown-syntax) 中作进一步介绍。
 
-随后，Pandoc 软件负责下一步的转换。Pandoc 是一个开源的命令行程序，可以完成多种文档格式之间的互相转换，已经随 RStudio 下载安装好。这里，R Markdown 将 `.md` 文件 转换为 YAML 头部中 `output` 对应的输出格式。Pandoc 还读取了其他 YAML 头部中的设定，一些被插入文档内容 (如 `title`)，另一些键则作为命令行参数，对转换过程做特定的控制。
+随后，Pandoc 软件负责下一步的转换。Pandoc 是一个开源的命令行程序，可以完成多种文档格式之间的互相转换，已经随 RStudio 下载安装好。这里，R Markdown 将 `.md` 文件 转换为 YAML 头部中 `output` 对应的输出格式。Pandoc 还读取了其他 YAML 头部中的设定，一些被插入文档内容 (如 `title`)，另一些选项则作为命令行参数，对转换过程做特定的控制。我们可以验证 Pandoc 的存在和版本：
+
+```{r, collapse = TRUE}
+rmarkdown::pandoc_available()
+rmarkdown::pandoc_version()
+```
+
 
 作为总结，对于 HTML 格式来说，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步: tinytex 包或其他 LaTeX 套件编译 Pandoc 生成的 `.tex` 文件生成 PDF 文档。
 
@@ -554,7 +560,7 @@ knitr::opts_chunk$set(echo = TRUE)
   
 - `message` 和 `warning`： 是否显示代码段可能输出的提示和警告
 
-- `fig.width` 和 `fig.height`: 调整代码块生成图形时图形设备 (graphical device)的大小。这是因为 kntir 首先通过图形设备将图片存储为文件 (例如 png, jpg)，随后在输出文档中引用这些文件。默认情况下 `fig.width=7, fig.height=5`, 我们不需要知道操作图形设备的底层细节，按照需要调整大小即可。两个类似的选项是 `out.width` 和 `out.height`, 通常取值为百分比，表示图片占据一页的比例。例如, `out.height='80%'` 表示图片占据页面高度的 80%。
+- `fig.width` 和 `fig.height`: 调整代码块生成图形时图形设备 (graphical device)的大小。这是因为 kntir 首先通过图形设备将图片存储为文件 (例如 png, jpg)，随后在输出文档中引用这些文件。默认情况下 `fig.width=7, fig.height=5`, 我们不需要知道操作图形设备的底层细节，按照需要调整大小即可。两个类似的选项是 `out.width` 和 `out.height`, 通常取值为百分比，表示图片占据一页的比例。例如, `out.height = '80%'` 表示图片占据页面高度的 80%。
 
 - `fig.cap`: 代码段生成图片的标题
 
@@ -814,4 +820,4 @@ ts.rolling(5).mean().plot()
 
 本节对应的 R Markdown 源文档如下
 
-`r import_example("example/multilingual.Rmd")`
+`r import_example("examples/multilingual.Rmd")`
