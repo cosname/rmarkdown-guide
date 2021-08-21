@@ -15,7 +15,7 @@
 
 - 插入文献参考和引用
 
-- 创建网络和流程图
+- 创建流程图和网络图
 
 - 插入分页符和分割线
 
@@ -50,7 +50,7 @@ plot(pressure, pch = 19, type = "b")
 plot(cars, pch = 19)
 ```
 
-我们在第 \@ref(r-code) 节提到过 `fig.width`, `fig.height` 和 `out.width`, `out.height` 的区别。前两者控制了 R 用图形设备创建图片时的大小，而后两者控制了图片 (按照 `fig.width` 和 `fig.height`生成后) 插入输出文档时的比例。例如，`out.width = '70%'` 时, HTML 输出中的 `<img>` 标签添加了属性 `width = '70%'`，而 PDF 输出设置了 `.7\linewidth`
+我们在第 \@ref(r-code) 节提到过 `fig.width`, `fig.height` 和 `out.width`, `out.height` 的区别。前两者控制了 R 用图形设备创建图片时的大小，而后两者控制了图片 (按照 `fig.width` 和 `fig.height`生成后) 插入输出文档时的比例。例如，`out.width = '70%'` 时, HTML 输出中的 `<img>` 标签添加了属性 `width = '70%'`，而 PDF 输出设置了 `.7\linewidth`。`fig.dim` 是同时设置 `fig.width` 和 `fig.height` 的快捷选项，如 `fig.dim = c(8, 6)` 等同于 `fig.width = 8` 和 `fig.height = 6`。
 
 
 另一个和图片大小有关的 knitr 选项是 `dpi`。当我们不设置 `out.width` 时，`dpi` 是图片的像素与宽度 (英寸) 之比。 默认情况下。knitr 会自动计算 dpi 值，我们可以用 `include_graphics(dpi = NA)`取消自动计算。
@@ -443,7 +443,9 @@ grViz("digraph {
 
 
 
+
 我们可以在 `grViz` 函数用 `@@` 插入 R 变量的的值，如图 \@ref(fig:gv-rvar) 所示。
+
 
 ```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值"}
 DiagrammeR::grViz("
@@ -509,6 +511,7 @@ render_graph(example_graph, layout = "nicely")
 
 
 生成网络和流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，diagram [@R-diagram]，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
+
 
 
 ## 插入分页符和分割线

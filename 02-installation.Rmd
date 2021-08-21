@@ -18,7 +18,9 @@ source("utils.R")
 install.packages("rmarkdown")
 ```
 
-中国大陆的读者有可能遇到网络问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.packages` 中设置 `repos` 参数
+后文经常谈到的 "R Markdown 如何如何" 泛指 rmarkdown 包及一系列相关工具的功能与使用，如果特指 `rmarkdown` 包的功能或函数，则用小写字母说明。
+
+中国大陆的读者可能有下载速度过慢的问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.packages` 中设置 `repos` 参数
 
 ```{r, eval = FALSE}
 install.packages("rmarkdown", repos = <某镜像>)
@@ -28,13 +30,13 @@ install.packages("rmarkdown", repos = <某镜像>)
 
 ## 创建第一个 R Markdown 文档 {#create-first-rmd}
 
-安装完成后，我们可以开始创建第一个 R Markdown 文档。在 RStudio 中选择 `File --> New File --> R Markdown`, 弹出以下提示框
+安装完成后，我们可以开始创建第一个 R Markdown 文档。在 RStudio 中选择 `File --> New File --> R Markdown`, 弹出图 \@ref(create-rmd-prompt) 所示的提示框。
 
-```{r, echo = FALSE}
+```{r create-rmd-prompt, echo = FALSE}
 knitr::include_graphics("images/02-first-rmd-prompt.png")
 ```
 
-在这里可以提前设定输出文档的标题，作者和格式。这里我们保留默认设置，点击 OK 即可。
+在这里，我们可以提前设定输出文档的标题，作者和格式。这里我们保留默认设置，点击 OK 即可。
 
 随后，RStudio 编辑器内生成了如下内容
 
@@ -46,7 +48,7 @@ knitr::include_graphics("images/02-first-rmd-prompt.png")
 
 在编辑器内保存该文件，我们可以发现根目录下增加了 `first-rmd.Rmd` 文件，这种后缀为 `.Rmd` 的文件即是 R Markdown 的源文档。在源文件中，我们定义了 R Markdown 输出文件的形式和内容。本书后续章节对文本和代码的编辑以及日常使用均是围绕类似这样的源文档展开的。
 
-点击源文档顶部的 **Knit** 按钮，RStudio 首先提示应保存源文档，读者可以在不更改 `.Rmd` 文件后缀的情况下任意选择保存名称, 但最好不要包含中文。 保存后，R Markdown 包开始将源文档编译为输出。几秒后弹出以下界面说明编译成功，同时 R Markdown 包安装无误，可以开始快乐的写作了。 
+点击源文档顶部的 **Knit** 按钮，RStudio 首先提示应保存源文档，读者可以在不更改 `.Rmd` 文件后缀的情况下任意选择保存名称, 但最好不要包含中文。保存后，R Markdown 包开始将源文档编译为输出。几秒后弹出以下界面说明编译成功，同时 R Markdown 包安装无误，可以开始快乐的写作了。 
 
 ```{r first-rmarkdown, echo = FALSE, fig.cap = "first-rmd.Rmd 文件输出的 HTML 文档"}
 import_example_result("first-rmd.Rmd")

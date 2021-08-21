@@ -5,7 +5,7 @@ source("utils.R")
 ```
 
 
-本章介绍读者使用 R Markdown 写作的必要基础知识。首先，我们简要介绍 R Markdown 的编译过程，了解 Knit 按钮为我们代劳的细节。随后，重点讲述了如何在写作中运用 R Markdown 的三种基本元素，包括
+本章介绍使用 R Markdown 写作的必要基础知识。首先，我们简要介绍 R Markdown 的编译过程，了解 Knit 按钮为我们代劳的细节。随后，重点讲述了 R Markdown 文档的三种基本元素，包括
 
 - 用 YAML 头部设定输出格式和其他文档选项
 
@@ -147,7 +147,7 @@ rmarkdown::pandoc_version()
 ```
 
 
-作为总结，对于 HTML 格式来说，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步: tinytex 包或其他 LaTeX 套件编译 Pandoc 生成的 `.tex` 文件生成 PDF 文档。
+作为总结，对于 HTML 格式来说，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步： tinytex 包或其他 LaTeX 发行版编译 Pandoc 生成的 `.tex` 文件，生成 PDF 文档。
 
 本节对编译过程的简介意在让读者对 knitr 和 Pandoc 工具有基础认识。实际写作中，我们几乎从不需要在底层与 knitr 或 Pandoc 做直接交互，而是 `.Rmd` 文档中发出这些指令。但理解它们在 R Markdown 编译中的角色有利于在编译失败时排错，和掌握更进阶的排版技巧。
 
@@ -274,6 +274,13 @@ knitr::include_graphics("images/03-multi-outputs.jpg")
 ```{r tufte-handout, echo = FALSE, fig.cap = "tufte_handout 输出的 PDF 文档"}
 knitr::include_graphics("images/03-tufte.jpg")
 ```
+
+R Markdown 也支持输出 MS Word 文档，在输出中指定 `output: word_document`，读者可以在第 \@ref(word) 章了解更多输出 Word 文档的知识。
+
+
+
+
+
 
 ### 总结 
 
@@ -495,14 +502,17 @@ knitr::kable(head(iris))
 ### 总结
 
 
+表 \@ref(markdown-summary) 总结了常见的 Markdown 语法以及他们的效果。
+
+
 ```{r, echo = FALSE}
 library(huxtable)
 t <- read.csv("data/markdown.csv", encoding = "UTF-8")
 t <- as_huxtable(t)
 ```
 
-```{r, echo = FALSE}
-set_markdown(t, everywhere, everywhere)
+```{r markdown-summary, echo = FALSE}
+set_caption(set_markdown(t, everywhere, everywhere, t), "Markdown 常见语法总结")
 ```
 
 
@@ -512,6 +522,7 @@ set_markdown(t, everywhere, everywhere)
 \- 这一行不会显示为列表
 ```
 
+乍一看，Markdown 似乎是一项额外的学习任务，带来了繁多的记忆要求。但如前文所言，Markdown 是对复杂多样格式的简单替代，可以极大地便利我们的写作。在日常的文档书写中，用到的 Markdown 语法也是相对单一和简单的，且 R Markdown 也提供了很多工具降低记忆门槛。
 
 值得一提的是， 虽然 Markdown 本身是一种统一的标准，独立开发者们逐渐添加了不同的功能扩展，一些组织和公司在此基础上加以规范化，形成了不同的 Markdown 变体 (flavor)。 我们在 R Markdown 中使用的是 Pandoc 式的 Markdown，即 Pandoc 支持的 Markdown 语法。一些读者可能还会接触到 ExtraMark Markdown, Github Markdown 等变体。但在大多数情况下，Pandoc Markdown 已经支持了足够多的文本元素，相同元素在不同变体中对应的标记也是一致的。
 
@@ -525,7 +536,7 @@ knitr::include_graphics("images/03-dillinger.jpg")
 
 在 R Markdown 中，有两种使用 R 代码的形式: 代码块和行内代码。
 
-代码块是单独的可运行代码的段落。例如，在本书创建的第一个 R Markdown 文档 `first-rmd.Rmd` 中，第一个代码段是
+代码块是单独的可运行代码的段落。例如，在本书创建的第一个 R Markdown 文档 `first-rmd.Rmd` 中，第一个代码块是
 
 ````
 ```{r setup, include=FALSE}`r ''`
@@ -533,7 +544,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 ````
 
-我们已经知道 ` ```{r} ` 和 ` ``` ` 是插入 R 代码的格式，但没有解释 `setup` 和 `include=FALSE` 的含义。这里的 `setup` 是设置代码块标签的简写，上面的代码段等价于
+我们已经知道 ` ```{r} ` 和 ` ``` ` 是插入 R 代码的格式，但没有解释 `setup` 和 `include=FALSE` 的含义。这里的 `setup` 是设置代码块标签的简写，上面的代码块等价于
 
 
 ````
@@ -543,35 +554,38 @@ knitr::opts_chunk$set(echo = TRUE)
 ````
 
 
-`label` 和 `include` 被称为该代码块的 knitr 选项。knitr 选项可以定制 knitr 包运行代码块时的相关行为。`label` 为代码段设置了唯一的标签，利于后续引用。而 `include=FALSE` 使 knitr 仅在转换过程中运行该段代码，不在输出中显示代码段内容和相关的输出结果。 `include=TRUE` 是所有代码段的默认设置。
+`label` 和 `include` 被称为该代码块的 knitr 选项。knitr 选项可以定制 knitr 包运行代码块时的相关行为。`label` 为代码块设置了唯一的标签，利于后续引用。而 `include=FALSE` 使 knitr 仅在转换过程中运行该段代码，不在输出中显示代码块内容和相关的输出结果。 `include=TRUE` 是所有代码块的默认设置。
 
 读者可以在 https://yihui.org/knitr/options/ 查看所有 knitr 选项和它们的含义，这里列出一些常见选项
 
-- `eval`: 是否运行该段代码
+- `eval`: 是否运行该代码块
 
-- `echo`: 是否显示代码段内容。
+- `echo`: 是否显示代码块内容。
 
-- `results`
-  - `='hide'`: 隐藏代码段的输出结果。`results='hide'` 加上 `echo=FALSE` 等价于 `include=FALSE`
-  - `='asis'`: 按原样输出结果。默认情况下，knitr 在生成 `.md` 文件时会将代码的文字输出在放在 Markdown 的代码块中
-  - `='markup'` 默认设置
+- `results`：如何处理代码块和生成结果
+
+  - `'hide'`: 隐藏代码块的输出结果。`results='hide'` 加上 `echo=FALSE` 等价于 `include = FALSE`
+  - `'asis'`: 按原样输出结果。默认情况下，knitr 在生成 `.md` 文件时会将代码的文字输出在放在 Markdown 的代码块中
+  - `'markup'` 默认设置
   
-- `error`：是否允许代码段包含错误代码。默认情况下，只要一个代码段运行失败，整个 R Markdown 文档就无法编译成功。当我们想要展示错误的代码写法时，可以用 `error=TRUE` 或 `eval=FALSE`
+- `error`：是否允许代码块包含错误代码。默认情况下，只要一个代码块运行失败，整个 R Markdown 文档就无法编译成功。当我们想要展示错误的代码写法时，可以用 `error = TRUE` 或 `eval = FALSE`
   
-- `message` 和 `warning`： 是否显示代码段可能输出的提示和警告
+- `message` 和 `warning`： 是否显示代码块可能输出的提示和警告
+
+- `collapse`: 为 `true` 时，在输出文档中将代码块和结果放到同一个块中
 
 - `fig.width` 和 `fig.height`: 调整代码块生成图形时图形设备 (graphical device)的大小。这是因为 kntir 首先通过图形设备将图片存储为文件 (例如 png, jpg)，随后在输出文档中引用这些文件。默认情况下 `fig.width=7, fig.height=5`, 我们不需要知道操作图形设备的底层细节，按照需要调整大小即可。两个类似的选项是 `out.width` 和 `out.height`, 通常取值为百分比，表示图片占据一页的比例。例如, `out.height = '80%'` 表示图片占据页面高度的 80%。
 
-- `fig.cap`: 代码段生成图片的标题
+- `fig.cap`: 代码块生成图片的标题
 
-- `fig.align`: 代码段图片的对齐方式
-  - `="left"`: 靠左对齐
-  - `="center"` 居中对齐 (本书的设置)
-  - `="right"`: 靠右对齐
+- `fig.align`: 代码块图片的对齐方式，有三种取值
+  - `"left"`: 靠左对齐
+  - `"center"` 居中对齐 (本书的设置)
+  - `"right"`: 靠右对齐
 
-- `cache`: 是否缓存代码段的运行结果。如果代码段涉及复杂，耗时长的计算，`cache=TRUE` 可以让 knitr 把运行结果保存为 `.rds` 文件，并在下次编译时略过计算过程，直接读取 `.rds` 节省时间。只有代码段的内容发生变化时，knitr 才会重新计算。有时 knitr 的缓存机制会让人难以预测代码是否重新运行，只推荐对确有需要的代码段设置它。
+- `cache`: 是否缓存代码块的运行结果。如果代码块涉及复杂，耗时长的计算，`cache = TRUE` 可以让 knitr 把运行结果保存为 `.rds` 文件，并在下次编译时略过计算过程，直接读取 `.rds` 节省时间。只有代码块的内容发生变化时，knitr 才会重新计算。有时 knitr 的缓存机制会让人难以预测代码是否重新运行，只推荐对确有需要的代码块设置它。
 
-我们可以用 `knitr::opts_chunk` 对象设置整篇 R Markdown 文档所有代码段的 knitr 选项，如： 
+我们可以用 `knitr::opts_chunk` 对象设置整篇 R Markdown 文档所有代码块的 knitr 选项，如： 
 
 ````
 ---
@@ -579,7 +593,7 @@ title: "全局设置 knitr 选项"
 ---
 
 
-```{r, include = FALSE}`r ''``
+```{r, include = FALSE}`r ''`
 knitr::opts_chunk$set(
   error = TRUE,
   message = TRUE,
@@ -597,7 +611,7 @@ plot(mtcars)
 ````
 
 
-```{r, fig.width=7}r''
+```{r, fig.width = 7}r''
 # 更改 fig.width 为 7，其他选项不变
 plot(mtcars)
 ````
@@ -641,14 +655,14 @@ date: `r '\x60r Sys.Date()\x60'`
 ## 在 R Markdown 中使用其他语言 {#basic-other-languages}
 
 
-R Markdown 脱胎于 R 语言的生态体系，但不熟悉的 R 的读者也不必因此感到束缚。一些包在 R 中提供了对其他语言的接口，我们可以轻松在 R Markdown 种使用其他编程语言。例如, `reticulate` 包可以在 R 中调用 Python. 首先安装
+R Markdown 脱胎于 R 语言的生态体系，但不熟悉的 R 的读者也不必因此感到束缚。一些包在 R 中提供了对其他语言的接口，我们可以轻松在 R Markdown 种使用其他编程语言。例如, `reticulate` 包可以在 R 中调用 Python. 首先安装 reticulate 包。
 
 ```r
-install.packages("")
+install.packages("reticulate")
 ```
 
 
-安装完成后，我们在插入一段 Python 代码
+安装完成后，我们插入一段 Python 代码
 
 
 ````
@@ -663,7 +677,7 @@ print("I'm Python, how R you?")
 ## I'm Python, how R you?
 ```
 
-我们也可以使用任何第三方库，例如 saeborn 
+我们也可以使用任何第三方库，例如 seaborn 
 
 ```{r, eval = FALSE}
 # 用 reticulate 包管理 Python 环境
@@ -672,7 +686,7 @@ reticulate::py_install("seaborn")
 
 
 ```python
-# 用 searborn 在 R Markdown 中作图
+# 用 seaborn 在 R Markdown 中作图
 import seaborn as sns
 sns.set_theme(style="ticks")
 
@@ -685,7 +699,7 @@ knitr::include_graphics("images/03-searborn.png")
 ```
 
 
-如上所示，在代码块选项 ` ```{} ` 中用 `python` 代替 `r` 后, 我们就得到了一个 Python 代码块。当然，R 的解释器或者 RStudio 本身没有运行其他语言代码的功能，类似 reticulate 的包把实际的执行工作转交给了对应语言的解释器或编译器。上面的例子中, reticulate 把代码块 `print("I'm Python, how R you?")` 传递给了你电脑中的 Python 解释器。这样的传递过程是通过 knitr 提供的"引擎" (engine) 机制实现的。
+如上所示，在代码块选项 ` ```{} ` 中用 `python` 代替 `r` 后, 我们就得到了一个 Python 代码块。当然，R 的解释器或者 RStudio 本身没有运行其他语言代码的功能，类似 reticulate 的包把实际的执行工作转交给了对应语言的解释器或编译器。上面的例子中, reticulate 把代码块 `print("I'm Python, how R you?")` 传递给了我们电脑中已有 Python 解释器。这样的传递过程是通过 knitr 提供的"引擎" (engine) 机制实现的。
 
 用户可以用包设计自定义引擎，为 R Markdown 提供更多的语言支持。目前，R Markdown 支持的引擎有 `r length(names(knitr::knit_engines$get()))` 种，如下所示
 
@@ -821,3 +835,6 @@ ts.rolling(5).mean().plot()
 本节对应的 R Markdown 源文档如下
 
 `r import_example("examples/multilingual.Rmd")`
+
+
+
