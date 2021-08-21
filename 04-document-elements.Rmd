@@ -112,9 +112,9 @@ knitr::kable(head(mtcars[, 1:8], 10),
              caption = "mtcars 数据的前 10 行", booktabs = TRUE)
 ```
 
-与图片类似，带标题的表格将获得独立的环境。我们可以把多个表格放入同一个环境，如图 \@ref(tab:two-tables) 所示。
+与图片类似，带标题的表格将获得独立的环境。我们可以把多个表格放入同一个环境，如图 \@ref(tab:two-tables-same-env) 所示。
 
-```{r two-tables}
+```{r two-tables-same-env}
 knitr::kable(
   list(
     head(iris[, 1:2], 3),
@@ -321,7 +321,27 @@ import_example_result("examples/pandoc-attributes.Rmd")
 
 ## 参考文献和引用
 
-`.bib` 文件是一种纯文本文件，用于存储参考文献的题目，作者和日期等信息，每一条参考的存储格式形如 
+R Markdown 支持在输出文档末尾自动生成参考文献，并提供了很方便的引用格式。这项功能是通过 Pandoc 实现的，它有两种管理引用和参考文献的方式
+
+1. 默认情况下，Pandoc 会使用 `[pandoc-citeproc](https://github.com/jgm/pandoc-citeproc)` 程序按照 CSL (Citation Style Language) 语言的标准和特定的 CSL 风格文件组织参考文献和引用的格式。
+
+2. 读者还可以使用 [natbib](https://ctan.org/pkg/natbib) 包 (基于 LaTeX 的 `bibtex`包) 或 [biblatex](https://ctan.org/pkg/biblatex) 包提供的格式。此时我们需要参考的数据文件符合 `bibtex` 或 `biblatex` 格式。
+
+我们可以用 YAML 元数据中的 `citation_package` 选项选择 `natlib` 或 `biblatex`  
+
+```
+---
+output:
+  pdf_document:
+    citation_package: natbib
+  bookdown::pdf_book:
+    citation_package: biblatex
+---
+```
+
+读者需注意，`citation_package` 仅限于 PDF 输出格式。对其他输出格式，我们只能依靠 `pandoc-citeproc`，如果需要保持 PDF 格式和其他格式的一致性，就应该始终使用 `pandoc-citeproc`。
+
+设置好格式后，我们需要知道如何从数据上表达参考文献的各个条目。我们在这里以 BibTeX 数据库的方法为例。一个 BibTeX 数据库是一种用于存储参考文献数据的纯文本文件，后缀为 `bib`，每一个条目都至少包含名称，作者和时间等信息，格式形如
 
 
 ```
@@ -336,14 +356,57 @@ import_example_result("examples/pandoc-attributes.Rmd")
 }
 ```
 
+一个条目以 `@type{` 开始，`type` 表示该条参考的类型，可以识 `article`, `book`, `manual` 等。在类型之后的是引用标签，如 `R-base`，其他项包含参考的作者，组织，地址，日期和链接等信息。为了使用 `.bib` 文件中的条目，我们需要用 YAML 元数据中的 `bibliography` 加载一个或多个 `.bib` 文件：
 
+```
+---
+output: pdf_document
+bibliography: ["one.bib", "another.bib", "yet-another.bib"]
+biblio-style: "apalike"
+link-citations: true
+---
+```
 
+在上面的例子中，我们引入了 `one.bib`，`another.bib`，`yet-another.bib`  三个 `.bib` 文件中的参考数据，`biblio-style: 'apalike'` 设置参考样式为美国心理学学会期刊样式 (American Psychology Association, APA)，`link-cations: true` 为引用添加指向参考文献的跳转链接。
 
+用 `bibliography` 引入 `.bib` 后，我们可以在文档中引用其中包含的任意条目，语法为 `@key` 或 `[@key]`，其中 `key` 为该参考条目类型之后的标签。如 `@R-base` 生成为 @R-base，而 `[@R-base]` 生成 [@R-base]。 
 
+对 PDF 输出，Pandoc 会在最后一个章节后额外生成一节放置参考文献。对其他输出格式，我们可以用行内代码自动创建一节参考文献。例如，在源文档的最后插入：
 
+```
+`r if (knitr::is_html_output()) '# 参考文献 {-}'`
+```
 
 ### 引用 R 包
 
+参考"文献"还可以包括文章使用的软件包。knitr 提供了 `write_bib` 函数为 R 包生成 `.bib` 格式的参考条目： 
+
+
+```{r}
+# 第二个参数可以是任意 .bib 文件
+knitr::write_bib(c("base", "knitr", "rmarkdown"), "", width = 60)
+```
+
+不提供第一个参数时。`write_bib` 会导出当前进程加载的全部 R 包的引用数据。我们可以在文档末尾插入如下代码段自动化生成 R 包对应的 `.bib` 文件：
+
+
+````
+---
+bibliography: [packages.bib, references.bib]
+---
+
+
+# 总结
+
+最后，...
+
+
+```{r, include=FALSE}`r ''`
+knitr::write_bib(file = 'packages.bib')
+```
+
+`r if (knitr::is_html_output()) '# References {-}
+````
 
 
 ## 插入示意图
