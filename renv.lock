@@ -16,6 +16,13 @@
       "Repository": "CRAN",
       "Hash": "030aaec5bc6553f35347cbb1e70b1a17"
     },
+    "DiagrammeR": {
+      "Package": "DiagrammeR",
+      "Version": "1.0.6.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3cb13b97961593b4a1ed0c8e37df9d9b"
+    },
     "MASS": {
       "Package": "MASS",
       "Version": "7.3-54",
@@ -198,6 +205,13 @@
       "Repository": "CRAN",
       "Hash": "a0cbe758a531d054b537d16dff4d58a1"
     },
+    "downloader": {
+      "Package": "downloader",
+      "Version": "0.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f4f2a915e0dedbdf016a83b63477349f"
+    },
     "dplyr": {
       "Package": "dplyr",
       "Version": "1.0.7",
@@ -310,6 +324,13 @@
       "Repository": "CRAN",
       "Hash": "6efd734b14c6471cfe443345f3e35e29"
     },
+    "gridExtra": {
+      "Package": "gridExtra",
+      "Version": "2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7d7f283939f563670a697165b2cf5560"
+    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.0",
@@ -365,6 +386,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "633926f3332d7a937ff16a8a98aa2192"
+    },
+    "igraph": {
+      "Package": "igraph",
+      "Version": "1.2.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7b1f856410253d56ea67ad808f7cdff6"
+    },
+    "influenceR": {
+      "Package": "influenceR",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "611f9a55ad32ccfa17ccbd77be7a2804"
     },
     "isoband": {
       "Package": "isoband",
@@ -540,6 +575,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "03b7076c234cb3331288919983326c55"
+    },
+    "prettydoc": {
+      "Package": "prettydoc",
+      "Version": "0.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c20a905f41b50770438ac4727649546f"
     },
     "prettyunits": {
       "Package": "prettyunits",
@@ -817,12 +859,26 @@
       "Repository": "CRAN",
       "Hash": "ecf749a1b39ea72bd9b51b76292261f1"
     },
+    "viridis": {
+      "Package": "viridis",
+      "Version": "0.6.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "424d1285b7372d39806abb19467e4df4"
+    },
     "viridisLite": {
       "Package": "viridisLite",
       "Version": "0.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "55e157e2aa88161bdb0754218470d204"
+    },
+    "visNetwork": {
+      "Package": "visNetwork",
+      "Version": "2.0.9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "12545f2acf49d1d346d075580122d89c"
     },
     "vroom": {
       "Package": "vroom",

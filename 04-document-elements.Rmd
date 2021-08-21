@@ -15,7 +15,7 @@
 
 - 插入文献参考和引用
 
-- 创建示意图
+- 创建流程图
 
 - 插入分页符和分割线
 
@@ -356,7 +356,9 @@ output:
 }
 ```
 
+
 一个条目以 `@type{` 开始，`type` 表示该条参考的类型，可以识 `article`, `book`, `manual` 等。在类型之后的是引用标签，如 `R-base`，其他项包含参考的作者，组织，地址，日期和链接等信息。为了使用 `.bib` 文件中的条目，我们需要用 YAML 元数据中的 `bibliography` 加载一个或多个 `.bib` 文件：
+
 
 ```
 ---
@@ -405,12 +407,89 @@ bibliography: [packages.bib, references.bib]
 knitr::write_bib(file = 'packages.bib')
 ```
 
-`r if (knitr::is_html_output()) '# References {-}
+`r "\x60r if (knitr::is_html_output()) '# References {-}'\x60"`
 ````
 
 
-## 插入示意图
+## 插入流程图
+
+RStudio 提供了对 Graphviz (`.gz`) 和 mermaid (`.mmd`) 文件的原生支持。我们也可以直接用 R 代码在 R Markdown 文档中插入流程图。这里简介 [DiagrammeR]( https://rich-iannone.github.io/DiagrammeR/) 包的基础功能。
+
+```{r}
+library(DiagrammeR)
+
+grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle]        
+  rec1 [label = 'Step 1. 起床']
+  rec2 [label = 'Step 2. 写代码']
+  rec3 [label =  'Step 3. ???']
+  rec4 [label = 'Step 4. 赚钱']
+  
+  # edge definitions with the node IDs
+  rec1 -> rec2 -> rec3 -> rec4
+  }",
+  height = 500)
+```
+
+
+
+我们可以在 `grViz` 用 `@@` 插入 R 变量的的值，例如：
+
+```{r}
+DiagrammeR::grViz("
+  digraph graph2 {
+  
+  graph [layout = dot, rankdir = LR]
+  
+  # node definitions with substituted label text
+  node [shape = oval]
+  a [label = '@@1']
+  b [label = '@@2']
+  c [label = '@@3']
+  d [label = '@@4']
+  
+  a -> b -> c -> d
+  }
+  
+  [1]: names(iris)[1]
+  [2]: names(iris)[2]
+  [3]: names(iris)[3]
+  [4]: names(iris)[4]
+  ",
+  height = 100)
+```
+
+
+
+
+生成流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，diagram [@R-diagram]，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
+
 
 ## 插入分页符和分割线
 
+我们可以用 `\newpage` 在各类输出文档中插入分页符。这是一个 LaTeX 命令，但 R Markdown 会帮我们翻译为其他输出理解的语法。同时，可以用 Markdown 语法 `___` 插入一条水平分割线。
 
+
+
+````
+```{r}`r ''`
+---
+title: 插入分页符和分割线
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+  odt_document: default
+---
+
+# The first section
+
+\newpage
+  
+___
+
+# The second section
+```
+````
