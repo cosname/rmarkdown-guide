@@ -15,7 +15,7 @@
 
 - 插入文献参考和引用
 
-- 创建流程图
+- 创建网络和流程图
 
 - 插入分页符和分割线
 
@@ -411,11 +411,19 @@ knitr::write_bib(file = 'packages.bib')
 ````
 
 
-## 插入流程图
+## 插入流程图和网络图
 
-RStudio 提供了对 Graphviz (`.gz`) 和 mermaid (`.mmd`) 文件的原生支持。我们也可以直接用 R 代码在 R Markdown 文档中插入流程图。这里简介 [DiagrammeR]( https://rich-iannone.github.io/DiagrammeR/) 包的基础功能。
 
-```{r}
+Graphviz 和 mermaid 是两个常用于流程和网络图的软件包。[DiagrammeR](https://rich-iannone.github.io/DiagrammeR/) 包让我们可以用 R 代码生成 Graphviz 或 mermaid 图。以 Graphviz 为例，一个图文件包含对图 (graph)，节点 (node) 和边 (edge) 的定义，RStudio 提供了对 Graphviz (`.gv`) 和 mermaid (`.mmd`) 的原生支持，如图 \@ref(fig:rstudio-gv) 所示。
+
+```{r rstudio-gv, echo = FALSE, fig.cap = "RStudio 提供对 Graphviz 和 mermaid 的原生支持"}
+knitr::include_graphics("images/04-graphviz-rstudio.png")
+```
+
+
+我们也可以直接使用 Graphviz 格式的字符串，如图 \@ref(fig:gv-diagram) 所示。
+
+```{r gv-diagram, fig.cap = "用 DiagrammeR 创建 Graphviz 流程图"}
 library(DiagrammeR)
 
 grViz("digraph {
@@ -435,9 +443,9 @@ grViz("digraph {
 
 
 
-我们可以在 `grViz` 用 `@@` 插入 R 变量的的值，例如：
+我们可以在 `grViz` 函数用 `@@` 插入 R 变量的的值，如图 \@ref(fig:gv-rvar) 所示。
 
-```{r}
+```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值"}
 DiagrammeR::grViz("
   digraph graph2 {
   
@@ -462,14 +470,50 @@ DiagrammeR::grViz("
 ```
 
 
+除了流程图外，DiagrammeR 可以创建复杂的网络关系可视化，如图 \@ref(gr-network) 所示。
+
+```{r gr-network, fig.cap = "DiagrammeR 创作的网络可视化图"}
+example_graph <-
+  create_graph() %>%
+  add_pa_graph(
+    n = 50, m = 1,
+    set_seed = 23
+  ) %>%
+  add_gnp_graph(
+    n = 50, p = 1/100,
+    set_seed = 23
+  ) %>%
+  join_node_attrs(df = get_betweenness(.)) %>%
+  join_node_attrs(df = get_degree_total(.)) %>%
+  colorize_node_attrs(
+    node_attr_from = total_degree,
+    node_attr_to = fillcolor,
+    palette = "Greens",
+    alpha = 90
+  ) %>%
+  rescale_node_attrs(
+    node_attr_from = betweenness,
+    to_lower_bound = 0.5,
+    to_upper_bound = 1.0,
+    node_attr_to = height
+  ) %>%
+  select_nodes_by_id(nodes = get_articulation_points(.)) %>%
+  set_node_attrs_ws(node_attr = peripheries, value = 2) %>%
+  set_node_attrs_ws(node_attr = penwidth, value = 3) %>%
+  clear_selection() %>%
+  set_node_attr_to_display(attr = NULL)
+
+render_graph(example_graph, layout = "nicely")
+```
 
 
-生成流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，diagram [@R-diagram]，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
+
+生成网络和流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，diagram [@R-diagram]，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
 
 
 ## 插入分页符和分割线
 
-我们可以用 `\newpage` 在各类输出文档中插入分页符。这是一个 LaTeX 命令，但 R Markdown 会帮我们翻译为其他输出理解的语法。同时，可以用 Markdown 语法 `___` 插入一条水平分割线。
+我们可以用 `\newpage` 在各类输出文档中插入分页符。这是一个 LaTeX 命令，但 R Markdown 会帮我们翻译为其他格式理解的语法。同时，可以用 Markdown 语法 `___` 插入一条水平分割线。
 
 
 

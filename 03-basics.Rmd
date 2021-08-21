@@ -815,7 +815,7 @@ ts.plot()
 ts.rolling(5).mean().plot()
 ```
 
-其他语言的运行同样是在 knitr 生成 `.md` 的阶段完成的，这意味着我们同样可以对其他语言的代码块应用某些 knitr 选项。上面的 Python 代码设置了 `fig.cap`, `fig.align='left'`。
+其他语言的运行同样是在 knitr 生成 `.md` 的阶段完成的，这意味着我们同样可以对其他语言的代码块应用某些 knitr 选项。上面的 Python 代码设置了 `fig.cap`, `fig.align = 'left'`。
 
 
 本节对应的 R Markdown 源文档如下

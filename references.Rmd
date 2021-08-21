@@ -61,7 +61,8 @@ knitr::write_bib(c(
   'xaringanExtra',
   'officedown',
   'flexdashboard',
-  'officer'
+  'officer',
+  "diagram"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {
