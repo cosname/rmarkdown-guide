@@ -606,17 +606,16 @@ knitr::opts_chunk$set(
 
 以下的全部代码块继承了上面的全局设置，必要时也可以把它们覆盖掉
 
-```{r}r''
+```{r}`r ''`
 # 应用上面的五个选项
 plot(mtcars)
 ````
 
 
-```{r, fig.width = 7}r''
+```{r, fig.width = 7}`r ''`
 # 更改 fig.width 为 7，其他选项不变
 plot(mtcars)
 ````
-
 ````
 
 

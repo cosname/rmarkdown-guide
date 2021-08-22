@@ -18,15 +18,12 @@ babynames::babynames %>%
   write_csv("data/babynames.csv")
 ```
 
-
 加载提供 Python 接口的 reticulate 包
 
 ```{r}
 library(reticulate)
 # reticulate::py_install(c("seaborn", "pandas"))
 ```
-
-
 
 将数据存入 SQLite 数据库中
 
@@ -38,7 +35,6 @@ con <- dbConnect(RSQLite::SQLite(), ":memory:")
 dbWriteTable(con, "babynames", raw)
 ```
 
-
 ```{r read-db}
 library(DBI)
 library(reticulate)
@@ -49,18 +45,13 @@ con <- dbConnect(RSQLite::SQLite(), ":memory:")
 dbWriteTable(con, "babynames", raw)
 ```
 
-
-
 运行 SQL 代码块，查询 1900 年后的所有数据, `output.var` 把结果存到 R 变量中。
-
-
 
 ```{sql, connection=con, output.var = "babynames"}
 SELECT year, sex, name, prop 
 FROM babynames
 WHERE year >= 1900 
 ```
-
 
 dplyr 数据处理
 
@@ -81,7 +72,6 @@ plot_df <- babynames %>%
             mean_prop_rank = mean(prop_rank))
 ```
 
-
 ```{r babynames-plot, fig.width = 10, fig.cap = "x: 平均占比；y: 平均排名"}
 library(ggplot2)
 
@@ -98,14 +88,10 @@ plot_df %>%
   
 ```
 
-
-
-
 ```{r marg}
 # 在 R 中选取 Margaret 对应的全部数据
 marg <- babynames::babynames %>%filter(name == "Margaret")
 ```
-
 
 Python 部分
 
@@ -120,7 +106,6 @@ ts = pd.Series(marg["prop"])
 ts.index = marg["year"]
 ts.plot()
 ```
-
 
 
 ```{python, fig.cap = "以 5 年为窗口的移动平均", fig.align = 'left'}

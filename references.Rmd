@@ -62,7 +62,8 @@ knitr::write_bib(c(
   'officedown',
   'flexdashboard',
   'officer',
-  "diagram"
+  "diagram",
+  "babynames"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {
