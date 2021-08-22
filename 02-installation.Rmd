@@ -12,13 +12,13 @@ source("utils.R")
 
 ## 安装 R Markdown 
 
-编译 R Markdown 文档需要安装 `rmarkdown` 包, 在 RStudio 的控制台中运行
+编译 R Markdown 文档需要安装 **rmarkdown** [@R-rmarkdown] 包，在 RStudio 的控制台中运行
 
 ```{r, eval = FALSE}
 install.packages("rmarkdown")
 ```
 
-后文经常谈到的 "R Markdown 如何如何" 泛指 rmarkdown 包及一系列相关工具的功能与使用，如果特指 `rmarkdown` 包的功能或函数，则用小写字母说明。
+后文经常谈到的 "R Markdown 如何如何" 泛指 rmarkdown 包及一系列相关工具的功能与使用，如果特指 `rmarkdown` 包的功能或函数，则用小写字母。
 
 中国大陆的读者可能有下载速度过慢的问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.packages` 中设置 `repos` 参数
 
@@ -36,7 +36,7 @@ install.packages("rmarkdown", repos = <某镜像>)
 knitr::include_graphics("images/02-first-rmd-prompt.png")
 ```
 
-在这里，我们可以提前设定输出文档的标题，作者和格式。这里我们保留默认设置，点击 OK 即可。
+我们在窗口中可以提前设定输出文档的标题，作者和格式。这里，我们保留默认设置，点击 OK 即可。
 
 随后，RStudio 编辑器内生成了如下内容
 

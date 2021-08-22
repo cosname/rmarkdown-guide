@@ -13,47 +13,9 @@ toc-title: "目录"
 ---
 
 
-
-## prettydoc 输出格式
-
-
-prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如
-
-  - `cayman`: 修改自 [Cayman](https://github.com/jasonlong/cayman-theme) 主题
-  
-  - `tactile`: 修改自 [Tactile](https://github.com/jasonlong/tactile-theme) 主题
-  
-  - `architect`: 修改自 [Architect](https://github.com/jasonlong/architect-theme) 主题
-  
-  - `leonids`: 修改自 [Leonids](https://github.com/renyuanz/leonids) 主题
-  
-  - `hpstr`: 修改自 [HPSTR](https://github.com/mmistakes/jekyll-theme-hpstr) 主题
-  
-我们还可以提供其他 YAML 选项
-
-
-- `highlight`: 高亮方案，取值为 `github` 或 `vignette`
-
-- `math`: LaTeX 数学公式的渲染方式，取值为 `mathjax` 或 `katex`，后者可以在没有网络连接时显示公式
-
-使用 `html_pretty` 格式的输出文档也有一定限制，它不支持 `toc_float`, `code_folding`, `code_download` 等选项。
-
-
-$$
-f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
-$$
-
-
-
-## 元素
-
 下面展示一些常见 HTML 元素的样式
 
-### 三级标题
-
-#### 四级标题
-
-##### 五级标题
+## 二级标题
 
 
 ### 表格
@@ -83,11 +45,6 @@ $$
 
 
 
-### 行内格式
-
-**粗体**, *斜体*, <del>删除线</del>.
-
-
 ### 代码
 
 使用 `R` 代码
@@ -99,5 +56,4 @@ x1  <- matrix(rnorm(n), ncol = 2)
 x2  <- matrix(rnorm(n, mean = 3, sd = 1.5), ncol = 2)
 x   <- rbind(x1, x2)
 smoothScatter(x, xlab = "x1", ylab = "x2")
-head(x)
 ```

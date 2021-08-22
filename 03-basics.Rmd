@@ -13,7 +13,7 @@ source("utils.R")
 
 - 插入并运行不同编程语言的代码块
 
-最后，我们用案例研究展示了如何运用 R Markdown 作为 SQL，Python 和 R 共存的数据分析环境，
+最后。我们用案例研究展示了如何运用 R Markdown 作为 SQL，Python 和 R 共存的数据分析环境，
 
 
 
@@ -137,9 +137,9 @@ summary(cars)
 knitr::include_graphics("images/03-knit-process.png")
 ```
 
-首先，knitr 包 [@R-knitr] 将 `.Rmd` 源文档转换为 `.md` 文件。早在 R Markdown 诞生之前，knitr 包就承担了自动化生成 R 语言报告的功能。在 R Markdown 的编译中，knitr 的最主要工作是提取和运行 `.Rmd` 中的代码，并将返还的文字或图片等结果置于合适的位置。我们之前笼统说的 "R Markdown 运行代码" 实质上就是 knitr 的工作。同时，knitr 还会读取部分 YAML 头部数据，并确保我们在源文档中使用的标记符号适于下一步的格式转换。这一步结束后，knitr 生成了临时性的 `.md` 文件。例如，`first-rmd.Rmd` 被转换为 `first-rmd.md`。`.md` 被称为 Markdown 文件，我们在 `.Rmd` 中的格式标记即是 Markdown 标记语言确定的标准，在 \@ref(markdown-syntax) 中作进一步介绍。
+首先，**knitr** 包 [@R-knitr] 将 `.Rmd` 源文档转换为 `.md` 文件。早在 R Markdown 诞生之前，knitr 包就承担了自动化生成 R 语言报告的功能。在 R Markdown 的编译中，knitr 的最主要工作是提取和运行 `.Rmd` 中的代码，并将返还的文字或图片等结果置于合适的位置。我们之前笼统说的 "R Markdown 运行代码" 实质上就是 knitr 的工作。同时，knitr 还会读取部分 YAML 头部数据，并确保我们在源文档中使用的标记符号适于下一步的格式转换。这一步结束后，knitr 生成了临时性的 `.md` 文件。例如，`first-rmd.Rmd` 被转换为 `first-rmd.md`。`.md` 被称为 Markdown 文件，我们在 `.Rmd` 中的格式标记即是 Markdown 标记语言确定的标准，在 \@ref(markdown-syntax) 中作进一步介绍。
 
-随后，Pandoc 软件负责下一步的转换。Pandoc 是一个开源的命令行程序，可以完成多种文档格式之间的互相转换，已经随 RStudio 下载安装好。这里，R Markdown 将 `.md` 文件 转换为 YAML 头部中 `output` 对应的输出格式。Pandoc 还读取了其他 YAML 头部中的设定，一些被插入文档内容 (如 `title`)，另一些选项则作为命令行参数，对转换过程做特定的控制。我们可以验证 Pandoc 的存在和版本：
+随后，**Pandoc** 软件负责下一步的转换。Pandoc 是一个开源的命令行程序，可以完成多种文档格式之间的互相转换，已经随 RStudio 下载安装好。这里，R Markdown 将 `.md` 文件 转换为 YAML 头部中 `output` 对应的输出格式。Pandoc 还读取了其他 YAML 头部中的设定，一些被插入文档内容 (如 `title`)，另一些选项则作为命令行参数，对转换过程做特定的控制。我们可以验证 Pandoc 的存在和版本：
 
 ```{r, collapse = TRUE}
 rmarkdown::pandoc_available()
@@ -147,7 +147,7 @@ rmarkdown::pandoc_version()
 ```
 
 
-作为总结，对于 HTML 格式来说，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步： tinytex 包或其他 LaTeX 发行版编译 Pandoc 生成的 `.tex` 文件，生成 PDF 文档。
+作为总结，对于 HTML 格式，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步： tinytex 包或其他 LaTeX 发行版编译 Pandoc 生成的 `.tex` 文件，生成 PDF 文档。
 
 本节对编译过程的简介意在让读者对 knitr 和 Pandoc 工具有基础认识。实际写作中，我们几乎从不需要在底层与 knitr 或 Pandoc 做直接交互，而是 `.Rmd` 文档中发出这些指令。但理解它们在 R Markdown 编译中的角色有利于在编译失败时排错，和掌握更进阶的排版技巧。
 
@@ -160,6 +160,15 @@ rmarkdown::pandoc_version()
 - Markdown 文本: 添加排版格式
 
 - 代码: 运行并保存输出结果
+
+
+我们可以把 R Markdown 文档想象为从上到下的一系列章节，如图 \@ref(fig:document-flow)。YAML 元数据位于头部，确定了文档的输出和元数据。标题之后是正文的各个章节，每个章节包含任意 Markdown 文字和代码块，还可能有类似的子章节。
+
+```{r document-flow, echo = FALSE, fig.cap = "R Markdown 文档示例"}
+knitr::include_graphics("images/03-document-flow.png")
+```
+
+
 
 下面，我们对它们做逐一介绍。
 
@@ -230,11 +239,15 @@ author <- c(
 ```
 
 
-读者对 YAML 头部的语法不熟悉时，可以安装 [ymlthis](https://github.com/r-lib/ymlthis) 包，它会提供一个在 R Markdown 中插入 YAML 数据的图形化界面，可以在 RStudio 的 `Tools --> Addins --> Browse Addins` 中找到。启动后如图 \@ref(fig:ymlthis) 所示。
+读者对 YAML 语法不熟悉时，可以安装 [ymlthis](https://github.com/r-lib/ymlthis) 包，它会提供一个在 R Markdown 中插入 YAML 数据的图形化界面，可以在 RStudio 的 `Tools --> Addins --> Browse Addins` 中找到。启动后如图 \@ref(fig:ymlthis) 所示。
 
 ```{r ymlthis, echo = FALSE, fig.cap = "ymlthis 包提供图形化输入 YAML 元数据的插件"}
 knitr::include_graphics("images/03-ymlthis.jpg")
 ```
+
+
+
+
 
 
 ### 输出格式
@@ -257,7 +270,7 @@ output:
 
 上面的文档有三种可选的输出格式，`html_document`，`pdf_document` 和 `tufte_html`。
 
-在 `html_document` 格式中，我们用 `toc: true` 指定自动生成目录, `toc_float: true` 设置目录的显示方式为浮动侧边栏 (默认标题会固定在正式文字内容之前), `code_folding: hide` 可以折叠所有代码块，但读者可以在每个代码块右上角的选项卡展开内容，这是一个 HTML 输出格式特有的选项。^[注意，YAML 中的布尔变量 `true` 和]
+在 `html_document` 格式中，我们用 `toc: true` 指定自动生成目录, `toc_float: true` 设置目录的显示方式为浮动侧边栏 (默认标题会固定在正式文字内容之前), `code_folding: hide` 可以折叠所有代码块，但读者可以在每个代码块右上角的选项卡展开内容，这是一个 HTML 输出格式特有的选项。^[注意，YAML 中的布尔变量 `true` 和 `false` 均是小写]
 
 在 `pdf_document` 格式中，我们同样设置了生成目录，`number_sections: true` 自动生成章节编号，`keep_tex: true` 保留 Pandoc 生成的 `.tex` 文件。`latex_engine: xelatex` 设置编译引擎为 XeLaTeX (默认为 pdflatex), 引擎设置对正确显示中文字体非常重要。
 
@@ -276,9 +289,6 @@ knitr::include_graphics("images/03-tufte.jpg")
 ```
 
 R Markdown 也支持输出 MS Word 文档，在输出中指定 `output: word_document`，读者可以在第 \@ref(word) 章了解更多输出 Word 文档的知识。
-
-
-
 
 
 
@@ -302,6 +312,7 @@ R Markdown 也支持输出 MS Word 文档，在输出中指定 `output: word_doc
 ```{r yaml-review, echo = FALSE, fig.cap = "YAML 元数据对应的 PDF 输出"}
 knitr::include_graphics("images/03-yaml-test.jpg")
 ```
+
 
 
 
@@ -651,11 +662,14 @@ date: `r '\x60r Sys.Date()\x60'`
 ...
 ```
 
+## 
+
+
 
 ## 在 R Markdown 中使用其他语言 {#basic-other-languages}
 
 
-R Markdown 脱胎于 R 语言的生态体系，但不熟悉的 R 的读者也不必因此感到束缚。一些包在 R 中提供了对其他语言的接口，我们可以轻松在 R Markdown 种使用其他编程语言。例如, `reticulate` 包可以在 R 中调用 Python. 首先安装 reticulate 包。
+R Markdown 脱胎于 R 语言的生态体系，但不熟悉的 R 的读者也不必因此感到束缚。一些包在 R 中提供了对其他语言的接口，我们可以轻松在 R Markdown 种使用其他编程语言。例如, **reticulate** [@R-reticulate] 包提供了 R 对 Python 的接口。首先安装 reticulate 包。
 
 ```r
 install.packages("reticulate")
@@ -677,7 +691,7 @@ print("I'm Python, how R you?")
 ## I'm Python, how R you?
 ```
 
-我们也可以使用任何第三方库，例如 seaborn 
+我们也可以使用任何 Python 的库，例如 seaborn 
 
 ```{r, eval = FALSE}
 # 用 reticulate 包管理 Python 环境
@@ -719,7 +733,7 @@ names(knitr::knit_engines$get())
 
 本章的最后，我们给出一个简单的 R Markdown 数据分析项目例子。简便起见，对于 R 和 Python 代码块，本节不再写出 ` ```{r} ` 的格式，而是直接运行代码块得出结果 (本书的一章就是一个 R Markdown 文档)。
 
-真实世界的数据分析项目往往是从查询数据库开始的。我们提前在 SQLite 数据库中存储了一张表 `babynames`，它是 babynames 包 [@R-babynames] 提供的 1880 - 2017 历年美国新生儿姓名数据。经过简化后，仅包含每年男女中占比最高的 100 个名字。
+真实世界的数据分析项目往往是从查询数据库开始的。我们提前在 SQLite 数据库中存储了一张表 `babynames`，它是 **babynames** 包 [@R-babynames] 提供的 1880 - 2017 历年美国新生儿姓名数据。经过简化后，仅包含每年男女中占比最高的 100 个名字。
 
 
 ```{r, include = FALSE}
@@ -764,7 +778,7 @@ glimpse(babynames)
 
 - 进入前 100 名时，平均占比更大
 
-我们可以关注两个统计量，每个名字历年的平均排名 (我们预先截取了每年前 100 名的名字，未出现的名字按最后一名处理) 和平均占比。用 R 中的 dplyr [@R-ggplot2] 和 ggplot2 [@R-ggplot2] 作数据处理和可视化。当然这里的重点不是代码写法，而是展示 R Markdown 中数据分析的流程。
+我们可以关注两个统计量，每个名字历年的平均排名 (我们预先截取了每年前 100 名的名字，未出现的名字按最后一名处理) 和平均占比。用 R 中的 **dplyr** [@R-ggplot2] 和 **ggplot2** [@R-ggplot2] 作数据处理和可视化。当然这里的重点不是代码写法，而是展示 R Markdown 中数据分析的流程。
 
 ```{r}
 library(tidyr)
@@ -837,4 +851,20 @@ ts.rolling(5).mean().plot()
 `r import_example("examples/multilingual.Rmd")`
 
 
+## 使用 RStudio 图形化编辑器
 
+[RStudio 1.4](https://blog.rstudio.com/2021/04/06/rstudio-1-4-a-quick-tour/) 版本及以上为 R Markdown 文档添加了图形编辑模式。在源文档的上方最右侧点击类似 "A" 的按钮进入可视化编辑器，如图 \@ref(fig:visual-editing) 所示。 
+
+```{r visual-editing, echo = FALSE, fig.cap = "R Markdown 图形编辑模式"}
+knitr::include_graphics("images/04-visual-editing.png")
+```
+
+图形化编辑器还提供了丰富的菜单栏选项，用于插入常见文档元素。如图 \@ref(visual-editing-insert-menu) 所示。
+
+```{r visual-editing-insert-menu, fig.cap = "图形化编辑器提供了很多菜单栏选项"}
+knitr::include_graphics("images/04-visual-editing-insert-menu.png")
+```
+
+
+
+读者可以在 <https://rstudio.github.io/visual-markdown-editing/> 了解更多知识。

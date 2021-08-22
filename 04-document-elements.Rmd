@@ -5,7 +5,7 @@
 
 - 处理文档中的图片，表格和数学公式
 
-- 用主题定制输出外观
+- 用主题和模板定制文档外观
 
 - 插入目录
 
@@ -14,6 +14,8 @@
 - 设置章节编号
 
 - 插入文献参考和引用
+
+- 创作可交互文档
 
 - 创建流程图和网络图
 
@@ -84,9 +86,9 @@ knitr::include_graphics("<image-path>")
 - 对于 PDF 输出，`include_graphics` 能自动采用质量更高的 PDF 格式图片，例如用 `foo/bar.pdf` 取代 `foo/bar.png`。knitr 选项 `auto_pdf = TRUE` 可以启动这项功能，或设置全局选项 `options(knitr.graphics.auto_pdf = TRUE)。`
 
 
-`include_graphics` 可以一次插入多个图片，下面的代码块插入了三张图片，并设置 `out.width = '33%'` 和 `fig.show = "hold"`：
+`include_graphics` 可以一次插入多个图片，下面的代码块插入了三张图片，并设置 `out.width = '30%'` 和 `fig.show = "hold"`：
 
-```{r, out.width = "33%", fig.show = "hold"}
+```{r, out.width = "30%", fig.show = "hold"}
 knitr::include_graphics(rep("images/knit-logo.png", 3))
 ```
 
@@ -124,7 +126,7 @@ knitr::kable(
 )
 ```
 
-[kableExtra](https://github.com/haozhu233/kableExtra) [@R-kableExtra]  包 在 `knitr::kable` 基础上提供了更多定制表格外观的参数, 提供了 `kableExtra::kbl` 函数作为 `kable` 的升级版。我们可以用很少的代码创作出外形美观，意义丰富的表格。 
+[kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable` 基础上提供了更多定制表格外观的参数, 提供了 `kableExtra::kbl` 函数作为 `kable` 的升级版。我们可以用很少的代码创作出外形美观，意义丰富的表格。 
 
 
 ```{r kableExtra-example}
@@ -190,7 +192,7 @@ $$X = \begin{bmatrix}1 & x_{1}\\
 1 & x_{3}
 \end{bmatrix}$$
 
-## 主题
+## 主题和模板
 
 对于 rmarkdown 包提供的 HTML 输出格式，我们可以用 YAML 元数据中的 `theme` 选项设置输出的外观主题。
 
@@ -218,7 +220,26 @@ import_example_result("examples/theme-united.Rmd")
 knitr::include_graphics("images/04-bootswatch.jpg")
 ```
 
-除了 `theme` 提供的主题选择之外，读者还可以使用其他包提供的 R Markdown 模板。一个例子是 [prettydoc](https://github.com/yixuan/prettydoc) 包，
+除了 `theme` 提供的主题选择之外，读者还可以使用其他包提供的 R Markdown 模板。一个例子是 [prettydoc](https://github.com/yixuan/prettydoc) 包 [@R-prettydoc]。prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如
+
+  - `cayman`: 修改自 [Cayman](https://github.com/jasonlong/cayman-theme) 主题
+  
+  - `tactile`: 修改自 [Tactile](https://github.com/jasonlong/tactile-theme) 主题
+  
+  - `architect`: 修改自 [Architect](https://github.com/jasonlong/architect-theme) 主题
+  
+  - `leonids`: 修改自 [Leonids](https://github.com/renyuanz/leonids) 主题
+  
+  - `hpstr`: 修改自 [HPSTR](https://github.com/mmistakes/jekyll-theme-hpstr) 主题
+  
+我们还可以提供其他 YAML 选项
+
+
+- `highlight`: 高亮方案，取值为 `github` 或 `vignette`
+
+- `math`: LaTeX 数学公式的渲染方式，取值为 `mathjax` 或 `katex`，后者可以在没有网络连接时显示公式
+
+使用 `html_pretty` 格式的输出文档也有一定限制，它不支持 `toc_float`, `code_folding`, `code_download` 等选项。
 
 
 ```{r, echo = FALSE}
@@ -410,6 +431,53 @@ knitr::write_bib(file = 'packages.bib')
 `r "\x60r if (knitr::is_html_output()) '# References {-}'\x60"`
 ````
 
+## 交互文档 {#interactive-documents}
+
+使用 HTML 输出格式的优势之一是可交互性。我们可以用两种方式构建交互文档
+
+- 使用 htmlwidgets 包提供的 HTML 组件框架
+
+- 使用 shiny 包
+
+### HTML 组件
+
+```{r, include = FALSE}
+library(htmlwidgets)
+```
+
+
+**htmlwidgets** 包 [@R-htmlwidgets] 实现了一套插入 HTML 组件的框架，让其他开发者可以轻松地在 R
+中实现对 JavaScript 库的接口。在此框架上开发的 R 包如 **DT** [@R-DT] (表格)，**leaflet** [@R-leaflet] (地图) 和 ，**dygraphs** [@R-dygraphs] (时间序列图) 为 HTML 输出格式提供了丰富的交互组件。读者可以在 <https://www.htmlwidgets.org> 了解更多使用和开发 HTML 组件的更多细节。
+
+
+
+图 \@ref(fig:leaflet-example) 是一个使用 leaflet 包插入交互地图的例子。
+
+```{r leaflet-example, fig.cap = "用 leaflet 包插入交互地图"}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  
+  setView(174.768, -36.852, zoom = 16) %>%
+  addPopups(lng = 174.768, lat = -36.852, popup="<b>R</b> 的诞生地")
+```
+
+
+### Shiny 文档
+
+**Shiny** [@R-shiny] 包是一套用 R 语言开发网页应用的框架。在 R Markdown 中应用 Shiny 代码需要 YAML 设置 `runtime: shiny`。例如：
+
+
+`r import_example("examples/shiny-document.Rmd")`
+
+输出为：
+
+```{r, echo = FALSE}
+knitr::include_graphics("images/04-shiny-document.jpg")
+```
+
+
+
+
 
 ## 插入流程图和网络图
 
@@ -510,7 +578,7 @@ render_graph(example_graph, layout = "nicely")
 
 
 
-生成网络和流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，diagram [@R-diagram]，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
+生成网络和流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，**diagram** [@R-diagram]，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
 
 
 
