@@ -12,7 +12,6 @@ output:
 knitr::opts_chunk$set(fig.align = "center")
 ```
 
-
 欲使用交叉引用，首先要有支持它的格式，如 `bookdown::html_document2` 和 `bookdown::pdf_document2`。
 
 英文标题会自动生成引用标签，如第 \@ref(hello-world) 节所示。
@@ -38,7 +37,6 @@ plot(iris)
 ```
 
 ## 引用表格
-
 
 引用表格与图片类似，如表 \@ref(tab:iris-table) 所示。
  

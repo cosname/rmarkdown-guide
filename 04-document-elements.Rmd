@@ -114,7 +114,7 @@ knitr::kable(head(mtcars[, 1:8], 10),
              caption = "mtcars 数据的前 10 行", booktabs = TRUE)
 ```
 
-与图片类似，带标题的表格将获得独立的环境。我们可以把多个表格放入同一个环境，如图 \@ref(tab:two-tables-same-env) 所示。
+与图片类似，带标题的表格将获得独立的环境。我们可以把多个表格放入同一个环境，如表 \@ref(tab:two-tables-same-env) 所示。
 
 ```{r two-tables-same-env}
 knitr::kable(
@@ -126,7 +126,7 @@ knitr::kable(
 )
 ```
 
-[kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable` 基础上提供了更多定制表格外观的参数, 提供了 `kableExtra::kbl` 函数作为 `kable` 的升级版。我们可以用很少的代码创作出外形美观，意义丰富的表格。 
+[kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable` 基础上提供了 `kableExtra::kbl` 函数作为 `kable` 的升级版，带有更多定制表格外观的参数,  。我们可以用很少的代码创作出外形美观，意义丰富的表格。 
 
 
 ```{r kableExtra-example}
@@ -549,7 +549,7 @@ DiagrammeR::grViz("
 ```
 
 
-除了流程图外，DiagrammeR 可以创建复杂的网络关系可视化，如图 \@ref(gr-network) 所示。
+除了流程图外，DiagrammeR 可以创建复杂的网络关系可视化，如图 \@ref(fig:gr-network) 所示。
 
 ```{r gr-network, fig.cap = "DiagrammeR 创作的网络可视化图"}
 example_graph <-
