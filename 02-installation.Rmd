@@ -20,7 +20,7 @@ install.packages("rmarkdown")
 
 后文经常谈到的 "R Markdown 如何如何" 泛指 rmarkdown 包及一系列相关工具的功能与使用，如果特指 `rmarkdown` 包的功能或函数，则用小写字母。
 
-中国大陆的读者可能有下载速度过慢的问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.packages` 中设置 `repos` 参数
+中国大陆的读者可能有下载速度过慢的问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.packages` 中设置 `repos` 参数。
 
 ```{r, eval = FALSE}
 install.packages("rmarkdown", repos = <某镜像>)
@@ -38,7 +38,7 @@ knitr::include_graphics("images/02-first-rmd-prompt.png")
 
 我们在窗口中可以提前设定输出文档的标题，作者和格式。这里，我们保留默认设置，点击 OK 即可。
 
-随后，RStudio 编辑器内生成了如下内容
+随后，RStudio 编辑器内生成了如下内容：
 
 `r import_example("first-rmd.Rmd")`
 
@@ -54,14 +54,14 @@ import_example_result("first-rmd.Rmd")
 
 图 \@ref(fig:first-rmarkdown) 为我们新创建的 `first-rmd.Rmd` 文件的 HTML 格式输出结果。此时，与该 R Markdown 源文件同级目录下也应该出现一个 `first-rmd.html` 文件，读者可以用浏览器打开该 HTML 验证是否与 RStudio 面板中输出的结果一致。 
 
-一些读者可能会疑惑，之前点击 Knit 时，为什么我们没有用 `library(rmarkdown)` 导入 `rmarkdown` 包，也没有在源文档中运行相关的函数，编译仍能成功呢？当我们点击 Knit 的时候，RStudio 自行调用了
+一些读者可能会疑惑，之前点击 Knit 时，为什么我们没有用 `library(rmarkdown)` 导入 `rmarkdown` 包，也没有在源文档中运行相关的函数，编译仍能成功呢？当我们点击 Knit 的时候，RStudio 自行调用了 rmarkdown 包中的 `render()` 函数。
 
 ```{r, eval = FALSE}
 # 第一个参数为你保存的文件名
 rmarkdown::render("first-rmd.Rmd", output_format = "html_document")
 ```
 
-读者不妨自己在控制台内运行一遍以上代码，看结果与点击 Knit 是否相同。^[自己调用 `render()` 时源文档中的代码在当前进程中运行，而 Knit 按钮会新建一个空白的环境完成编译。为了确保当前 R 进程不对 R Markdown 造成干扰，最好清空当前环境或重启 R 后使用 `render()`。]
+读者不妨自己在控制台内运行一遍以上代码，看结果与点击 Knit 是否相同。^[在控制台中调用 `render()` 时，R 会在当前进程运行源文档的代码，而 Knit 按钮会新建一个空白的环境完成编译。为了确保当前 R 进程不对 R Markdown 造成干扰，最好清空当前环境或重启 R 后使用 `render()`。]
 
 
 ## 安装 Tinytex 

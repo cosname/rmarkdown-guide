@@ -5,7 +5,7 @@ source("utils.R")
 ```
 
 
-本章介绍使用 R Markdown 写作的必要基础知识。首先，我们简要介绍 R Markdown 的编译过程，了解 Knit 按钮为我们代劳的细节。随后，重点讲述了 R Markdown 文档的三种基本元素，包括
+本章介绍使用 R Markdown 写作的必要基础知识。首先，我们简要介绍 R Markdown 的编译过程，了解 Knit 按钮为我们代劳的细节。随后，重点讲述了 R Markdown 文档的三种基本元素，包括：
 
 - 用 YAML 头部设定输出格式和其他文档选项
 
@@ -69,7 +69,7 @@ output: html_document
 </div>
 ```
 
-不难发现，上面的代码块与源文档 `first-rmd.Rmd` 之间存在明确的文本对应关系。例如，在 R Markdown 文档 `## R Markdown` 后的前两个段落中，我们有
+不难发现，上面的代码块与源文档 `first-rmd.Rmd` 之间存在明确的文本对应关系。例如，在 R Markdown 文档 `## R Markdown` 后的前两个段落中，我们有：
 
 
 
@@ -80,7 +80,7 @@ When you click the **Knit** button a document will be generated that includes bo
 ```
 
 
-在 HTML 文件中对应的段落为
+在 HTML 文件中对应的段落为：
 
 
 
@@ -95,7 +95,7 @@ When you click the **Knit** button a document will be generated that includes bo
 
 这说明，R Markdown 的编译机制中存在某个对纯文本的解析过程，它能将源文档中的特殊符号翻译为输出文档中对应格式的表达方法。正是因为我们可以选择如此多样的输出选择，我们才需要在源文档中使用一个统一格式表达方法作为中介，在源文档中告诉 R Markdown "这里需要一个粗体，这里添加下划线，这里是一段引用"，至于这些格式具体在未知的输出格式中如何表现，就由 R Markdown 在最终的编译中决定了。
 
-最后，我们研究 R Markdown 中代码的运行。以第一段代码 `summary(cars)` 为例，在 R Markdown 源文档中，插入该段代码的语法为
+最后，我们研究 R Markdown 中代码的运行。以第一段代码 `summary(cars)` 为例，在 R Markdown 源文档中，插入该段代码的语法为：
 
 ````
 ```{r}`r ''`
@@ -103,7 +103,7 @@ summary(cars)
 ```
 ````
 
-其中，开头的`` ```{r} `` 和末尾的三个 `` ``` `` 反引号是特殊的标识符，让 R Markdown 在编译时能区分哪段是文本，哪段是需要运行的代码。读者可能在源文档中注意到 RStudio 为这样的代码块提供了高亮支持，这说明 ````{r}` 对 R Markdown 而言有特殊意义，不是一般的文本符号。当 R Markdown 发现了这样符号定义的代码之后，编译机制就能在适当时候调用相应编程语言的引擎（例如 R）并保存它们的输出结果，转换为相应的格式，最终在 HTML 中体现为
+其中，开头的`` ```{r} `` 和末尾的三个 `` ``` `` 反引号是特殊的标识符，让 R Markdown 在编译时能区分哪段是文本，哪段是需要运行的代码。读者可能在源文档中注意到 RStudio 为这样的代码块提供了高亮支持，这说明 ````{r}` 对 R Markdown 而言有特殊意义，不是一般的文本符号。当 R Markdown 发现了这样符号定义的代码之后，编译机制就能在适当时候调用相应编程语言的引擎（例如 R）并保存它们的输出结果，转换为相应的格式，最终在 HTML 中体现为：
 
 ```html
 <pre><code>
@@ -119,7 +119,7 @@ summary(cars)
 
 同理，当下一个代码块 `plot(pressure)` 的输出结果是图片时，R Markdown 也能自动地运用 HTML 标准中对应的 `<img>` 标签。读者还可能发现该段代码没有出现在 HTML 网页中，只有生成的图片被留了下来。这是因为我们在 `` ```{r} `` 中制定了 `echo = FALSE` 选项，它告诉 R Markdown 仅保留该段代码的输出结果，而隐藏代码本身。本书的后续章节将介绍更多类似的代码块选项，进一步定制 R Markdown 文档的输出。
 
-通过以上观察，我们可以总结出 R Markdown 编译中的三个主要工作
+通过以上观察，我们可以总结出 R Markdown 编译中的三个主要工作：
 
 - 读取 YAML 头部，统领编译的全局设定
 
@@ -127,7 +127,7 @@ summary(cars)
 
 - 提取并运行代码块，将代码的运行结果按顺序插入到正常文档流中
 
-图 \@ref(fig:knit-process) 概括了 R Markdown 完成以上工作的流程
+图 \@ref(fig:knit-process) 概括了 R Markdown 完成以上工作的流程。
 
 ```{r knit-process, echo = FALSE, fig.cap = "R Markdown 的编译过程 https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-process.html"}
 knitr::include_graphics("images/03-knit-process.png")
@@ -149,7 +149,7 @@ rmarkdown::pandoc_version()
 
 ## R Markdown 的基本元素
 
-上一节中，我们接触到 R Markdown 编译过程中的三个主要工作，它们分别对应了 R Markdown 的三个基本元素
+上一节中，我们接触到 R Markdown 编译过程中的三个主要工作，它们分别对应了 R Markdown 的三个基本元素：
 
 - YAML 头部: 控制 Pandoc 的格式转换参数
 
@@ -175,14 +175,14 @@ YAML 元数据一般位于 R Markdown 文档的开头，前后各用三个减号
 
 
 
-`title` 设定了输出文档的顶级标题。标题一般不宜过长，更多的描述文字可以考虑放在 `subtitle`, `abstract` 等中。还要注意的是，YAML 不要求为字符串添加引号。但如果字符串中包含空格或特殊字符，就需要放在双引号或单引号中。推荐涉及中文字符时总是使用引号，例如
+`title` 设定了输出文档的顶级标题。标题一般不宜过长，更多的描述文字可以考虑放在 `subtitle`, `abstract` 等中。还要注意的是，YAML 不要求为字符串添加引号。但如果字符串中包含空格或特殊字符，就需要放在双引号或单引号中。推荐涉及中文字符时总是使用引号，例如：
 
 ```
 title: 'bookdown: 用 R Markdown 撰写书籍和技术文档'
 ```
 
 
-`author` 设定文档的作者信息。需要插入多个作者时，我们可以使用 YAML 中的复合结构，如
+`author` 设定文档的作者信息。需要插入多个作者时，我们可以使用 YAML 中的复合结构，如：
 
 ```yaml 
 author:
@@ -190,13 +190,11 @@ author:
   - 李四
 ```
 
-YAML 中，我们用两个空格表示层级关系，`-` 是数组元素的标记。上面的标记表明 `author` 的值是一个有两个元素的数组，分别为"张三"和"李四"。在 R 中可以表示为
+YAML 中，我们用两个空格表示层级关系，`-` 是数组元素的标记。上面的标记表明 `author` 的值是一个有两个元素的数组，分别为"张三"和"李四"。在 R 中可以表示为：
 
 ```r
 author <- c("张三", "李四")
 ```
-
-类似的 YAML 语法同样适用于其他接受多个元素的选项。
 
 
 `date`: 设定文档的日期信息在 \@ref(r-code) 中，我们将学习如何自动更新日期为源文档的编译时间。
@@ -320,13 +318,13 @@ R Markdown 输出文档中的文字排版是通过 Markdown 标记语言实现�
 
 ### 简单段内格式
 
-Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，一些基础的格式列举如下
+Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，一些基础的格式列举如下：
 
 - 粗体: 前后各添加两个星号 `**`。如 `**加粗**` 在输出文档中变为 **加粗**
 
 - 斜体：前后各添加一个星号 `*`。如 `*斜体*` 变为 *斜体* 
 
-- 代码样式: 前后各添加一个反引号 `` ` ``。如 `` `代码` `` 变为 `代码`。如果内容本身有反引号，可以在两边添加同等数量的反引号，如 ``` ``x`` ``` 变为 `` `x` ``。 
+- 代码样式: 前后各添加一个反引号 `` ` ``。如 `` `代码` `` 变为 `代码`。如果内容本身有反引号，可以在两边添加同等数量的反引号，如 ``` ``x`` ``` 变为 `` `x` ``
 
 
 ### 段落格式
@@ -362,7 +360,7 @@ Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，�
     - Indented 
 - Fourth item
 
-我们还可以用数字编号创建有序列表，与上面的无序列表结合使用，如
+我们还可以用数字编号创建有序列表，与上面的无序列表结合使用，如：
 
 ```
 1. 第一
@@ -389,7 +387,7 @@ Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，�
 > 生活是很枯燥的。我的一生就是力求不要在平庸中虚度光阴。这些小小的案件让我遂了心愿。
 ```
 
-在输出文档中渲染为
+在输出文档中渲染为：
 
 > 生活是很枯燥的。我的一生就是力求不要在平庸中虚度光阴。这些小小的案件让我遂了心愿。
 
@@ -409,7 +407,7 @@ lapply(x, mean)
 ```
 ````
 
-显示为
+显示为：
 
 
 ```
@@ -435,7 +433,7 @@ lapply(x, mean)
 ```
 ````
 
-显示为
+显示为：
 
 ```r
 x <- list(a = 1:10, 
@@ -457,7 +455,7 @@ lapply(x, mean)
 
 用 `<链接地址>` 插入一个可点击的链接，如 `<https://example.com>` 显示为 <https://example.com>。
 
-我们还可以创建一个带显示文字的行内链接，方括号内插入描述性文字，圆括号内插入链接目的地，形如
+我们还可以创建一个带显示文字的行内链接，方括号内插入描述性文字，圆括号内插入链接目的地，格式为：
 
 ```
 [显示文字](网页链接)
@@ -475,7 +473,7 @@ lapply(x, mean)
 ![替代文字](图片链接)
 ```
 
-例如, 我们用 `![R logo](https://www.r-project.org/Rlogo.png)` 插入以下图片
+例如, 我们用 `![R logo](https://www.r-project.org/Rlogo.png)` 插入以下图片：
 
 ::: {.center-container}
 ![R logo](https://www.r-project.org/Rlogo.png)
@@ -499,9 +497,9 @@ Markdown 还支持插入表格，语法如下
 | 块引用 | `> some quotes` |
 | 代码块 | ``` some code  ```  |
 
-不过对于 R Markdown 用户，直接使用表格语法通常是不必要的。knitr 中的 `kable()` 函数提供了更完善的表格功能
+不过对于 R Markdown 用户，直接使用表格语法通常是不必要的。knitr 中的 `kable()` 函数提供了更完善的表格功能，如表 \@ref(kable-example) 所示。
 
-```{r}
+```{r kable-example, fig.cap = "用 knitr::kable() 创建表格"}
 knitr::kable(head(iris))
 ```
 
@@ -534,7 +532,7 @@ set_caption(t, "Markdown 常见语法总结")
 
 值得一提的是， 虽然 Markdown 本身是一种统一的标准，独立开发者们逐渐添加了不同的功能扩展，一些组织和公司在此基础上加以规范化，形成了不同的 Markdown 变体 (flavor)。 我们在 R Markdown 中使用的是 Pandoc 式的 Markdown，即 Pandoc 支持的 Markdown 语法。一些读者可能还会接触到 ExtraMark Markdown, Github Markdown 等变体。但在大多数情况下，Pandoc Markdown 已经支持了足够多的文本元素，相同元素在不同变体中对应的标记也是一致的。
 
-一些 Markdown 编辑器提供了即时预览功能，方便读者进行交互性的练习。图 \@ref(fig:dillinger) 是一个在线编辑器的例子
+一些 Markdown 编辑器提供了即时预览功能，方便读者进行交互性的练习。图 \@ref(fig:dillinger) 是一个在线编辑器的例子。
 
 ```{r dillinger, echo = FALSE, fig.cap = "支持实时预览的 Markdown 编辑器 https://dillinger.io/"}
 knitr::include_graphics("images/03-dillinger.jpg")
@@ -544,7 +542,7 @@ knitr::include_graphics("images/03-dillinger.jpg")
 
 在 R Markdown 中，有两种使用 R 代码的形式: 代码块和行内代码。
 
-代码块是单独的可运行代码的段落。例如，在本书创建的第一个 R Markdown 文档 `first-rmd.Rmd` 中，第一个代码块是
+代码块是一系列可运行代码形成的段落。例如，在本书创建的第一个 R Markdown 文档 `first-rmd.Rmd` 中，第一个代码块是：
 
 ````
 ```{r setup, include=FALSE}`r ''`
@@ -552,7 +550,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 ````
 
-我们已经知道 ` ```{r} ` 和 ` ``` ` 是插入 R 代码的格式，但没有解释 `setup` 和 `include=FALSE` 的含义。这里的 `setup` 是设置代码块标签的简写，上面的代码块等价于
+我们已经知道 ` ```{r} ` 和 ` ``` ` 是插入 R 代码的格式，但没有解释 `setup` 和 `include=FALSE` 的含义。这里的 `setup` 是设置代码块标签的简写，上面的代码块等价于：
 
 
 ````
@@ -564,11 +562,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 `label` 和 `include` 被称为该代码块的 knitr 选项。knitr 选项可以定制 knitr 包运行代码块时的相关行为。`label` 为代码块设置了唯一的标签，利于后续引用。而 `include=FALSE` 使 knitr 仅在转换过程中运行该段代码，不在输出中显示代码块内容和相关的输出结果。 `include=TRUE` 是所有代码块的默认设置。
 
-读者可以在 https://yihui.org/knitr/options/ 查看所有 knitr 选项和它们的含义，这里列出一些常见选项
+读者可以在 https://yihui.org/knitr/options/ 查看所有 knitr 选项和它们的含义，这里列出一些常见选项：
 
 - `eval`: 是否运行该代码块
 
-- `echo`: 是否显示代码块内容。
+- `echo`: 是否显示代码块内容
 
 - `results`：如何处理代码块和生成结果
 
@@ -626,7 +624,7 @@ plot(mtcars)
 ````
 
 
-之前的例子没有涉及行内代码 (inline expression)，但它是另外一种插入 R 代码的重要方式。行内代码直接把 R 代码的运行结果插入至文本中，语法是 `` `r ` ``。例如，
+之前的例子没有涉及行内代码 (inline expression)，但它是另外一种插入 R 代码的重要方式。行内代码直接把 R 代码的运行结果插入至文本中，语法是 `` `r ` ``。例如：
 
 ```
 半径为 5 的圆面积为 `r '\x60r pi*5^2\x60'`
@@ -685,7 +683,7 @@ print("I'm Python, how R you?")
 ## I'm Python, how R you?
 ```
 
-我们也可以使用任何 Python 的库，例如 seaborn 
+我们也可以使用任何 Python 的库，例如 seaborn：
 
 ```{r, eval = FALSE}
 # 用 reticulate 包管理 Python 环境
@@ -753,9 +751,6 @@ WHERE year >= 1900
 ```
 
 
-
-
-
 上面的 SQL 代码从 SQLite 数据库的 `babynames` 表提取了 `year` (年份), `sex` (性别), `name` (), 限定年份为 1900 年之前，把查询结果存储的 R 变量 `babynames` 中。在你的项目中，数据库可能是 MySQL, PostgreSQL, Hive 等的任意一种，都可以用类似的 SQL 代码块直接查询。
 
 现在，我们可以在 R 环境访问到这个数据：
@@ -765,8 +760,7 @@ library(dplyr)
 glimpse(babynames)
 ```
 
-
-一个问题是: 哪些名字是一直流行的？可以从两个方面考虑
+一个问题是: 哪些名字是一直流行的？可以从两个方面考虑：
 
 - 进入前 100 名的次数尽可能多
 
@@ -825,13 +819,7 @@ ts.index = marg["year"]
 ts.plot()
 ```
 
-
-
-
-
 我们还可以查看 Margaret 出现比例以 5 年为窗口的移动平均：
-
-
 
 ```{python, fig.cap = "以 5 年为窗口的移动平均", fig.align = 'left'}
 ts.rolling(5).mean().plot()
@@ -840,7 +828,7 @@ ts.rolling(5).mean().plot()
 其他语言的运行同样是在 knitr 生成 `.md` 的阶段完成的，这意味着我们同样可以对其他语言的代码块应用某些 knitr 选项。上面的 Python 代码设置了 `fig.cap`, `fig.align = 'left'`。
 
 
-本节对应的 R Markdown 源文档如下
+本节对应的 R Markdown 源文档如下：
 
 `r import_example("examples/multilingual.Rmd")`
 

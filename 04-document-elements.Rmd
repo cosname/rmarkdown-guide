@@ -36,7 +36,7 @@ plot(cars)
 ````
 
 
-生成
+生成：
 
 ```{r, out.width = '70%', fig.align = 'center', fig.cap = 'cars 散点图', echo = FALSE}
 plot(cars)
@@ -63,7 +63,7 @@ plot(cars, pch = 19)
 ### 插入非代码生成图片
 
 
-对于已有的，非代码块生成的图片，有两种插入方法
+对于已有的，非代码块生成的图片，有两种插入方法:
 
 - 使用 `knitr::include_graphics()` 函数，例如 
 
@@ -77,7 +77,7 @@ knitr::include_graphics("<image-path>")
 
 - 使用 Markdown 语法 `![文字](图片链接)`，
 
-我们推荐总是用 `knitr::include_graphics()` 插入图片，它有几点好处
+我们推荐总是用 `knitr::include_graphics()` 插入图片，它有几点好处：
 
 - 提供独立于输出格式的统一图片语法
 
@@ -97,7 +97,7 @@ knitr::include_graphics(rep("images/knit-logo.png", 3))
 
 ## 表格
 
-使用 `knitr::kable` 是在 R Markdown 中插入表格的最简单方式，它提供了一些修饰表格的参数
+使用 `knitr::kable` 是在 R Markdown 中插入表格的最简单方式，它提供了一些修饰表格的参数：
 
 - `caption`: 标题
 
@@ -150,7 +150,7 @@ mtcars[1:8, 1:8] %>%
 
 我们可以用一对 `$` 插入行内数学公式，例如 `$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$` 渲染为 $f(k) = {n \choose k} p^{k} (1-p)^{n-k}$。
 
-前后各两个 `$$` 会创建块状公式，例如
+前后各两个 `$$` 会创建块状公式，例如：
 
 ```
 $$
@@ -158,7 +158,7 @@ f(k) = {n \choose k} p^{k} (1-p)^{n-k}
 $$
 ```
 
-输出为
+输出为：
 
 $$
 f(k) = {n \choose k} p^{k} (1-p)^{n-k}
@@ -205,22 +205,21 @@ output:
 ---
 ```
 
-一个主题包含了一系列配色，字体，布局等设置。图 
+一个主题包含了一系列配色，字体，布局等设置。图 \@ref(fig:theme-united) 展示了 united 主题。
 
 
-```{r, echo = FALSE}
+```{r theme-united, echo = FALSE,  fig.cap = "使用 html_document 的 united 主题"}
 import_example_result("examples/theme-united.Rmd")
 ```
 
 
-
-可选的主题包括 `united`, `journal`, `flatly` 等 。这些名字来自 UI 框架 bootstrap 的主题扩展 [bootswatch](https://bootswatch.com/)。R Markdown 的默认 HTML 输出格式基于 bootstrap 库，而 bootswatch 提供了一系列扩展主题。读者可以在 bootswatch 网站上看到每个主题的效果。Andrew Zieffler 在[博客](https://www.datadreaming.org/post/r-markdown-theme-gallery/)中同样列举了所有主题的效果。
+`html_document` 中 `theme` 的取值包括 `united`, `journal`, `flatly` 等 。这些名字来自 UI 框架 bootstrap 的主题扩展 [bootswatch](https://bootswatch.com/)。R Markdown 的默认 HTML 输出格式基于 bootstrap 库，而 bootswatch 提供了一系列扩展主题。读者可以在 bootswatch 网站上看到每个主题的效果。Andrew Zieffler 在[博客](https://www.datadreaming.org/post/r-markdown-theme-gallery/)中同样列举了所有主题的效果。
 
 ```{r boots-theme, fig.cap = "bootswatch 网站", echo = FALSE}
 knitr::include_graphics("images/04-bootswatch.jpg")
 ```
 
-除了 `theme` 提供的主题选择之外，读者还可以使用其他包提供的 R Markdown 模板。一个例子是 [prettydoc](https://github.com/yixuan/prettydoc) 包 [@R-prettydoc]。prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如 
+除了 `theme` 提供的主题选择外，读者还可以使用其他包提供的 R Markdown 模板。一个例子是 [prettydoc](https://github.com/yixuan/prettydoc) 包 [@R-prettydoc]。prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如：
 
 ```
 ---
@@ -231,7 +230,7 @@ output:
 ```
 
 
-输出效果如图 \@ref()
+输出效果如图 \@ref(fig:prettydoc-example) 所示。
 
 ```{r prettydoc-example, echo = FALSE, fig.cap = "prettydoc 包的 cayman 主题"}
 import_example_result("examples/prettydoc.Rmd")
@@ -249,7 +248,7 @@ import_example_result("examples/prettydoc.Rmd")
   
   - `hpstr`: 修改自 [HPSTR](https://github.com/mmistakes/jekyll-theme-hpstr) 主题
   
-我们还可以提供其他 YAML 选项
+我们还可以提供其他 YAML 选项：
 
 
 - `highlight`: 高亮方案，取值为 `github` 或 `vignette`
@@ -264,7 +263,7 @@ import_example_result("examples/prettydoc.Rmd")
 
 ## 目录
 
-我们可以设置任意输出格式的 `toc: true` 以自动生成目录，`toc_depth` 控制显示深度。如 ：
+我们可以设置任意输出格式的 `toc: true` 以自动生成目录，`toc_depth` 控制显示深度。如：
 
 ```
 ---
@@ -285,7 +284,6 @@ output:
 - `smooth_scroll` (默认为 `true`)：是否在鼠标点击目录时添加平滑滚动
 
 设置样例如下：
-
 
 ```
 ---
@@ -311,7 +309,7 @@ rmarkdown 包提供的 `html_document`, `pdf_document` 等基础格式不支持�
 Pandoc 会自动为章节标题设置标签。例如 `# Hello World` 对应的标签为 `hello-world`。随后我们可以用 `\@ref(hello-world)` 引用该标题，它会生成该章节对应的编号。对中文标题，Pandoc 生成的标签相对难以预测。我们可以用 `# 标题 {#header}` 为该节添加自定义标签 `header`，随后用 `\@ref(header)` 引用该节。例如本节标题设置了 `## 交叉引用 {#cross-reference}`，`\@ref(cross-reference)` 生成为 \@ref(cross-reference)。建议总是给中文标题设置一个简介的英文标签，仅包含字母和连词符，例如：
 
 
-````
+```
 ---
 output: bookdown::pdf_document2
 ---
@@ -321,17 +319,17 @@ output: bookdown::pdf_document2
 # 方法 {#methods}
 
 我们可以分别用 \@ref(introduction) 和 \@ref(methods) 引用前两章的标题。
-````
+```
 
 
-与章节标题不同，图片和表格的标签是它们所属代码块的标签。我们在 \@ref(r-code) 节中谈到可以用 `  ```{r label} ` 或 `  ```{r, label = "label"}` 为代码块设置标签。当该代码块的输出包含图片或表格时，这个标签就可用于交叉引用。但仅有该标签还不够，交叉引用需要元素有自己的独立环境。因此，我们还需要为图片和表格设置标题。图片可以用`fig.cap`  选项，设置表格标题的方法取决于生成的函数，例如 `knitr::kable` 使用 `caption` 参数。
+与章节标题不同，图片和表格的标签是它们所属代码块的标签。我们在第 \@ref(r-code) 节中谈到可以用 `  ```{r label} ` 或 `  ```{r, label = "label"}` 为代码块设置标签。当该代码块的输出包含图片或表格时，这个标签就可用于交叉引用。但仅有该标签还不够，交叉引用需要元素有自己的独立环境。因此，我们还需要为图片和表格设置标题。图片可以用`fig.cap`  选项，设置表格标题的方法取决于生成的函数，例如 `knitr::kable` 使用 `caption` 参数。
 随后，我们可以用 `\@ref(fig:label)` 引用图片，用 `\@ref(tab:label)` 表格。下面是一个例子：
 
 `r import_example("examples/cross-reference.Rmd")`
 
-输出为：
+输出如图 \@ref(fig:cr-example) 所示。
 
-```{r}
+```{r cr-example, echo = FALSE, fig.cap = "交叉引用图片和表格"}
 import_example_result("examples/cross-reference.Rmd")
 ```
 
@@ -345,16 +343,16 @@ import_example_result("examples/cross-reference.Rmd")
 
 绝大多数输出格式在 YAML 元数据中支持 `number_sections` 属性，值为 `true` 时，各章节标题按照层级自动编号。
 
-我们可以用 Pandoc 的标题属性 `.unnumbered` 省略某个章节的编号，见 <https://pandoc.org/MANUAL.html#extension-header_attributes>。
+我们可以用 Pandoc 的标题属性 `.unnumbered` 省略某个章节的编号，细节见 <https://pandoc.org/MANUAL.html#extension-header_attributes>。例如：
 
 
 `r import_example("examples/pandoc-attributes.Rmd")`
 
 
-以上文档输出为 
+输出如 \@ref(fig:pandoc-attributes) 所示。
 
 
-```{r, echo = FALSE}
+```{r pandoc-attributes, echo = FALSE, fig.cap = "使用 number_sections 和 Pandoc 标题属性控制章节编号"}
 import_example_result("examples/pandoc-attributes.Rmd")
 ```
 
@@ -363,8 +361,10 @@ import_example_result("examples/pandoc-attributes.Rmd")
 
 
 
-
 ## 参考文献和引用
+
+> TODO：这一部分以后应当结合 Zotero 和 EndNote 等常用文献管理软件做适当扩展。
+
 
 R Markdown 支持在输出文档末尾自动生成参考文献，并提供了很方便的引用格式。这项功能是通过 Pandoc 实现的，它有两种管理引用和参考文献的方式
 
@@ -372,7 +372,7 @@ R Markdown 支持在输出文档末尾自动生成参考文献，并提供了很
 
 2. 读者还可以使用 [natbib](https://ctan.org/pkg/natbib) 包 (基于 LaTeX 的 `bibtex`包) 或 [biblatex](https://ctan.org/pkg/biblatex) 包提供的格式。此时我们需要参考的数据文件符合 `bibtex` 或 `biblatex` 格式。
 
-我们可以用 YAML 元数据中的 `citation_package` 选项选择 `natlib` 或 `biblatex`  
+我们可以用 YAML 元数据中的 `citation_package` 选项选择 `natlib` 或 `biblatex`：
 
 ```
 ---
@@ -386,7 +386,7 @@ output:
 
 读者需注意，`citation_package` 仅限于 PDF 输出格式。对其他输出格式，我们只能依靠 `pandoc-citeproc`，如果需要保持 PDF 格式和其他格式的一致性，就应该始终使用 `pandoc-citeproc`。
 
-设置好格式后，我们需要知道如何从数据上表达参考文献的各个条目。我们在这里以 BibTeX 数据库的方法为例。一个 BibTeX 数据库是一种用于存储参考文献数据的纯文本文件，后缀为 `bib`，每一个条目都至少包含名称，作者和时间等信息，格式形如
+设置好格式后，我们需要知道如何从数据上表达参考文献的各个条目。我们在这里以 BibTeX 数据库的方法为例。一个 BibTeX 数据库是一种用于存储参考文献数据的纯文本文件，后缀为 `bib`，每一个条目都至少包含名称，作者和时间等信息，格式形如：
 
 
 ```
@@ -466,7 +466,7 @@ knitr::write_bib(file = 'packages.bib')
 
 ## 交互文档 {#interactive-documents}
 
-使用 HTML 输出格式的优势之一是可交互性。我们可以用两种方式构建交互文档
+使用 HTML 输出格式的优势之一是可交互性。我们可以用两种方式构建交互文档：
 
 - 使用 htmlwidgets 包提供的 HTML 组件框架
 
@@ -502,9 +502,9 @@ leaflet() %>%
 
 `r import_example("examples/shiny-document.Rmd")`
 
-输出为：
+输出为图 \@ref(fig:shiny-document) 所示的文档。
 
-```{r, echo = FALSE}
+```{r shiny-document, echo = FALSE, fig.cap = "在 R Markdown 中使用 shiny 运行环境"}
 knitr::include_graphics("images/04-shiny-document.jpg")
 ```
 
