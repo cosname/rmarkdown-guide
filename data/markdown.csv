@@ -1,4 +1,4 @@
-元素/效果,Markdown,输出
+元素,Markdown,输出
 标题, `# 一级标题` <br> `# 二级标题` <br> `# 三级标题`, # 一级标题  <br> 二级标题  <br> 三级标题
 段落,(在段落间插入空白行) <br> I really like using Markdown. <br> <br> I think I'll use it to format all of my documents from now on., I really like using Markdown. <br> <br> I think I'll use it to format all of my documents from now on.
 换行,(在行末尾添加两个空格) <br>床前明月光<br>疑是地上霜,床前明月光<br>疑是地上霜

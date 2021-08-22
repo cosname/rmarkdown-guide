@@ -42,7 +42,7 @@ plot(cars)
 plot(cars)
 ```
 
-`fig.cap` 是图片的重要属性，它不仅为图片设置了标题，还确保图片被置于独立的环境中。对 HTML 输出，图片对应的 `<img>` 标签被放在一个 `.figure` 类 div 容器中。对 PDF 输出，Pandoc 会创建 `\begin{figure}` 环境，而不是仅插入 `\includegraphics{}` 指令。添加标题可以让我们的文档更有组织性，并支持交叉引用 (\@ref(cross-reference))
+`fig.cap` 是图片的重要属性，它不仅为图片设置了标题，还确保图片被置于独立的环境中。对 HTML 输出，图片对应的 `<img>` 标签被放在一个 `.figure` 类 div 容器中。对 PDF 输出，Pandoc 会创建 `\begin{figure}` 环境，而不是仅插入 `\includegraphics{}` 指令。添加标题可以让我们的文档更有组织性，并支持交叉引用 (见 \@ref(cross-reference) 节)
 
 我们可以把多个图片放置在同一个环境中。knitr 选项 `fig.show = 'hold'` 把同一个代码块生成的多个图片放到同一个图片环境中。我们可以进一步设置 `out.wdith` 使多个图片并排放置。例如，`out.width = '50%'` 可以让一个代码块生成的两张图片位于一行。类似的，如果想并排 3 张图片，可以设置 `out.width = '33%'`。图 \@ref(fig:plots-side-by-side) 是用 `fig.show = "hold"` 和 `out.width = '50%'` 并排两张图片的例子。
 
@@ -142,7 +142,7 @@ mtcars[1:8, 1:8] %>%
               popover = paste("am:", mtcars$am[1:8]))
 ```
 
-读者还可以查看 [gt](https://github.com/rstudio/gt)， [huxtable](https://github.com/hughjonesd/huxtable)， [https://github.com/glin/reactable](https://github.com/glin/reactable)。RStudio 举办的[表格创作比赛](https://blog.rstudio.com/2020/12/23/winners-of-the-2020-rstudio-table-contest/) (Table Contest) 有很多优秀的获奖作品。
+读者还可以查看 [gt](https://github.com/rstudio/gt)， [huxtable](https://github.com/hughjonesd/huxtable)， [reactable](https://github.com/glin/reactable)。RStudio 举办的[表格创作比赛](https://blog.rstudio.com/2020/12/23/winners-of-the-2020-rstudio-table-contest/) (Table Contest) 有很多优秀的获奖作品。
 
 
 
@@ -213,7 +213,7 @@ import_example_result("examples/theme-united.Rmd")
 ```
 
 
-`html_document` 中 `theme` 的取值包括 `united`, `journal`, `flatly` 等 。这些名字来自 UI 框架 bootstrap 的主题扩展 [bootswatch](https://bootswatch.com/)。R Markdown 的默认 HTML 输出格式基于 bootstrap 库，而 bootswatch 提供了一系列扩展主题。读者可以在 bootswatch 网站上看到每个主题的效果。Andrew Zieffler 在[博客](https://www.datadreaming.org/post/r-markdown-theme-gallery/)中同样列举了所有主题的效果。
+`html_document` 中 `theme` 的取值包括 `united`, `journal`, `flatly` 等 。这些名字来自 UI 框架 bootstrap 的主题扩展 [bootswatch](https://bootswatch.com/)。rmarkdown 的 HTML 输出格式基于 bootstrap 框架，而 bootswatch 为 bootstrap 提供了一系列扩展主题。读者可以在 bootswatch 网站上看到每个主题的效果。Andrew Zieffler 在[博客](https://www.datadreaming.org/post/r-markdown-theme-gallery/)中同样列举了所有主题的效果。
 
 ```{r boots-theme, fig.cap = "bootswatch 网站", echo = FALSE}
 knitr::include_graphics("images/04-bootswatch.jpg")
@@ -323,7 +323,7 @@ output: bookdown::pdf_document2
 
 
 与章节标题不同，图片和表格的标签是它们所属代码块的标签。我们在第 \@ref(r-code) 节中谈到可以用 `  ```{r label} ` 或 `  ```{r, label = "label"}` 为代码块设置标签。当该代码块的输出包含图片或表格时，这个标签就可用于交叉引用。但仅有该标签还不够，交叉引用需要元素有自己的独立环境。因此，我们还需要为图片和表格设置标题。图片可以用`fig.cap`  选项，设置表格标题的方法取决于生成的函数，例如 `knitr::kable` 使用 `caption` 参数。
-随后，我们可以用 `\@ref(fig:label)` 引用图片，用 `\@ref(tab:label)` 表格。下面是一个例子：
+随后，我们可以用 `\@ref(fig:label)` 引用图片，用 `\@ref(tab:label)` 引用表格。下面是一个例子：
 
 `r import_example("examples/cross-reference.Rmd")`
 
@@ -429,7 +429,9 @@ link-citations: true
 
 
 ```
+---
 nocite: '@*'
+---
 ```
 
 

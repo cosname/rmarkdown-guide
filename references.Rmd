@@ -68,7 +68,8 @@ knitr::write_bib(c(
   "htmlwidgets",
   "shiny",
   "dygraphs",
-  "DT"
+  "DT",
+  "distill"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {

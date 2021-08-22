@@ -171,7 +171,7 @@ knitr::include_graphics("images/03-document-flow.png")
 
 ## YAML 头部
 
-YAML 元数据一般位于 R Markdown 文档的开头，前后各用三个减号作为分隔标志。最重要的一个域是 `output` 所指定的输出格式，我们在下一个小节集中介绍相关知识。这里介绍除输出格式之外的三个常见选项，`title`, `author` 和 `date`，它们的值将直接作为输出文档的内容。
+YAML 元数据一般位于 R Markdown 文档的开头，前后各用三个减号作为分隔标志。最重要的一个域是 `output` 所指定的输出格式，我们在下一个小节集中介绍相关知识。这里介绍除输出格式之外的三个常见选项，`title`, `author` 和 `date`，它们的值将直接被插入输出为文档。
 
 
 
@@ -197,9 +197,14 @@ author <- c("张三", "李四")
 ```
 
 
-`date`: 设定文档的日期信息在 \@ref(r-code) 中，我们将学习如何自动更新日期为源文档的编译时间。
+`date`: 设定文档的日期信息。在 \@ref(r-code) 中，我们将学习如何自动更新日期为源文档的编译时间。
 
-除了字符串和数组外，YAML 还支持数值型, 布尔 (`true` 和 `false`) 以及更复杂的数据结构。例如，在 distill 包的 `distill_article` 输出格式中，`author` 支持 YAML 里的字典结构，与 R 中的列表类似，可以为每个作者添加更多个人信息：
+```{r, include = FALSE}
+library(distill)
+```
+
+
+除了字符串和数组外，YAML 还支持数值型, 布尔 (`true` 和 `false`) 以及更复杂的数据结构。例如，在 **distill** [@R-distill] 包的 `distill_article` 输出格式中，`author` 支持 YAML 里的字典结构，与 R 中的列表类似，可以为作者添加更多个人信息：
 
 ```yaml 
 author:
@@ -213,7 +218,7 @@ author:
     affilication_url: https://example.com
 ```
 
-上面的表达式等价于 R 中的 
+上面的表达式等价于 R 中的：
 
 ```r
 author <- c(
@@ -268,7 +273,7 @@ output:
 
 在 `pdf_document` 格式中，我们同样设置了生成目录，`number_sections: true` 自动生成章节编号，`keep_tex: true` 保留 Pandoc 生成的 `.tex` 文件。`latex_engine: xelatex` 设置编译引擎为 XeLaTeX (默认为 pdflatex), 引擎设置对正确显示中文字体非常重要。
 
-第三种格式 `tufte::tufte_handout` 在一般 PDF 输出中定义了更多格式，模仿了统计学家 Edward Tufte 以及物理学家费曼的教科书的风格，它的一个显著特点就是边栏的使用，例如脚注和边栏注解，以及放在边栏里的小型插图。在 `output` 中，它的应用方式与前两种不同。这是因为 `html_document` 和 `pdf_document`是 rmarkdown 包内的输出格式，而 `tufte_html` 是 tufte 包提供的。这样不在 rmarkdown 包的输出格式需要在前面加上 `::` 表明它们的来源。例如我们想使用 bookdown 包提供的 `html_document2` 输出格式，引用方法为 `output: bookdown::html_document2`。`default` 表示该输出格式完全使用默认设置。应用多个输出格式时， 即便没有没有定制设置也必须有 default 指定。
+第三种格式 `tufte::tufte_handout` 在一般 PDF 输出中定义了更多格式，模仿了统计学家 Edward Tufte 以及物理学家费曼的教科书的风格，它的一个显著特点就是边栏的使用，例如脚注和边栏注解，以及放在边栏里的小型插图。在 `output` 中，它的应用方式与前两种不同。这是因为 `html_document` 和 `pdf_document`是 rmarkdown 包内的输出格式，而 `tufte_html` 是 tufte 包提供的。这样不在 rmarkdown 包的输出格式需要在前面加上 `::` 表明它们的来源。例如我们想使用 bookdown 包提供的 `html_document2` 输出格式，引用方法为 `output: bookdown::html_document2`。`default` 表示该输出格式完全使用默认设置。应用多个输出格式时， 即便没有细节设置也必须有 default 指定。
 
 有多个输出格式时，我们可以点击 Knit 的下拉按钮选择任意一种格式编译 (图 \@ref(fig:multi-outputs))。编译快捷键 `Ctrl+Shift+K` 会使用最近一次编译的输出格式。 
 
@@ -326,6 +331,46 @@ Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，�
 
 - 代码样式: 前后各添加一个反引号 `` ` ``。如 `` `代码` `` 变为 `代码`。如果内容本身有反引号，可以在两边添加同等数量的反引号，如 ``` ``x`` ``` 变为 `` `x` ``
 
+### 换行
+
+控制换行经常是 Markdown 中最容易困惑新手的部分。作为纯文本格式，Markdown 并非“所见即所得”的，我们可以在源文档中用回车换行，但无法在输出中看到两个段落。例如：
+
+```
+文王拘而演《周易》,
+仲尼厄而作《春秋》
+```
+
+生成： 
+
+文王拘而演《周易》,
+仲尼厄而作《春秋》
+
+要在 Markdown 中换行，需在上一段的末尾添加两个或以上空格。例如：
+
+```
+R is a free software environment for statistical computing and graphics.  
+It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. 
+```
+
+生成:
+
+R is a free software environment for statistical computing and graphics.  
+It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. 
+
+更简单的办法是在两行间添加一个空行：
+
+```
+R is a free software environment for statistical computing and graphics.
+
+It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. 
+```
+
+
+
+
+
+
+
 
 ### 段落格式
 
@@ -335,11 +380,9 @@ Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，�
 
 用引号 `#` 创建不同层级的标题，引号的数量表示标题的层级。如 `# 一级标题` 创建一级标题，`## 二级标题` 创建二级标题，`### 三级标题` 创建三级标题等。注意在井号和标题文字之间要保留一个空格。
 
-
 #### 列表
 
 在列表项之前添加减号 `-` 或星号 `*` 以创建列表，同样注意文字前的空格。缩进一个或多个列表项可创建嵌套列表。
-
 
 ```
 - First 
@@ -350,8 +393,7 @@ Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，�
 - Fourth item
 ```
 
-显示为
-
+显示为：
 
 - First 
 - Second 
@@ -378,7 +420,6 @@ Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，�
   - 其次
 3. 第三
 
-
 #### 块引用
 
 用大于号 `>` 创建一个块引用 (blockquote)
@@ -390,7 +431,6 @@ Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，�
 在输出文档中渲染为：
 
 > 生活是很枯燥的。我的一生就是力求不要在平庸中虚度光阴。这些小小的案件让我遂了心愿。
-
 
 ### 代码块
 
@@ -444,10 +484,6 @@ x <- list(a = 1:10,
 lapply(x, mean)
 ```
 
-
-
-
-
 请注意这里的代码块只是有特殊格式的文字块，不同于 \@ref(r-code) 节中用  ` ```{r} ` 和 ` ``` ` 插入的真正可运行的代码，我们也无法在输出文档中得到它们的运行结果。
 
 
@@ -461,7 +497,7 @@ lapply(x, mean)
 [显示文字](网页链接)
 ```
 
-例如，`[R Markdown 权威指南](https://bookdown.org/yihui/rmarkdown/)` 渲染为 [R Markdown 权威指南](https://bookdown.org/yihui/rmarkdown/)。
+例如，`[R Markdown 权威指南](https://bookdown.org/yihui/rmarkdown/)` 显示为 [R Markdown 权威指南](https://bookdown.org/yihui/rmarkdown/)。
 
 
 ### 图片
@@ -505,7 +541,6 @@ knitr::kable(head(iris))
 
 
 ### 总结
-
 
 表 \@ref(tab:markdown-summary) 总结了常见的 Markdown 语法以及他们的效果。
 
@@ -614,7 +649,7 @@ knitr::opts_chunk$set(
 ```{r}`r ''`
 # 应用上面的五个选项
 plot(mtcars)
-````
+```
 
 
 ```{r, fig.width = 7}`r ''`
@@ -656,8 +691,6 @@ date: `r '\x60r Sys.Date()\x60'`
 ...
 ```
 
-
-
 ## 在 R Markdown 中使用其他语言 {#basic-other-languages}
 
 
@@ -666,7 +699,6 @@ R Markdown 脱胎于 R 语言的生态体系，但不熟悉的 R 的读者也不
 ```r
 install.packages("reticulate")
 ```
-
 
 安装完成后，我们插入一段 Python 代码
 
@@ -713,13 +745,7 @@ knitr::include_graphics("images/03-searborn.png")
 names(knitr::knit_engines$get())
 ```
 
-
-
-
 上面列出的一些引擎不是对某个编程语言的接口，而是提供一些设置了预定格式的文字环境，例如的 `theorem`, `lemma`, `corollary` 等。
-
-
-
 
 ## 案例：同时使用 SQL, R 和 Python 做数据分析
 
@@ -780,7 +806,6 @@ plot_df <- babynames %>%
             mean_prop_rank = mean(prop_rank))
 ```
 
-
 ```{r babynames-plot, fig.width = 10, fig.cap = "x: 平均占比；y: 平均排名"}
 library(ggplot2)
 
@@ -806,7 +831,6 @@ plot_df %>%
 marg <- babynames::babynames %>%filter(name == "Margaret")
 ```
 
-
 ```{python}
 import pandas as pd 
 from pandas.plotting import autocorrelation_plot
@@ -827,7 +851,6 @@ ts.rolling(5).mean().plot()
 
 其他语言的运行同样是在 knitr 生成 `.md` 的阶段完成的，这意味着我们同样可以对其他语言的代码块应用某些 knitr 选项。上面的 Python 代码设置了 `fig.cap`, `fig.align = 'left'`。
 
-
 本节对应的 R Markdown 源文档如下：
 
 `r import_example("examples/multilingual.Rmd")`
@@ -846,7 +869,5 @@ knitr::include_graphics("images/04-visual-editing.png")
 ```{r visual-editing-insert-menu, fig.cap = "图形化编辑器提供了很多菜单栏选项", echo = FALSE}
 knitr::include_graphics("images/04-visual-editing-insert-menu.png")
 ```
-
-
 
 读者可以在 <https://rstudio.github.io/visual-markdown-editing/> 了解更多知识。

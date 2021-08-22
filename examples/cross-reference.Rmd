@@ -4,8 +4,6 @@ output:
   bookdown::html_document2: default 
 ---
 
-
-
 # 引用图片
 
 ```{r cars-plot, fig.cap = "一张散点图"}
