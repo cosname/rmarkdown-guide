@@ -13,7 +13,7 @@ source("utils.R")
 
 - 插入并运行不同编程语言的代码块
 
-最后。我们用案例研究展示了如何运用 R Markdown 作为 SQL，Python 和 R 共存的数据分析环境，
+最后。我们用案例研究展示了如何运用 R Markdown 作为 SQL，Python 和 R 共存的数据分析环境。
 
 
 

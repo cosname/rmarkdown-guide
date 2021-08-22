@@ -220,7 +220,24 @@ import_example_result("examples/theme-united.Rmd")
 knitr::include_graphics("images/04-bootswatch.jpg")
 ```
 
-除了 `theme` 提供的主题选择之外，读者还可以使用其他包提供的 R Markdown 模板。一个例子是 [prettydoc](https://github.com/yixuan/prettydoc) 包 [@R-prettydoc]。prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如
+除了 `theme` 提供的主题选择之外，读者还可以使用其他包提供的 R Markdown 模板。一个例子是 [prettydoc](https://github.com/yixuan/prettydoc) 包 [@R-prettydoc]。prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如 
+
+```
+---
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+---
+```
+
+
+输出效果如图 \@ref()
+
+```{r prettydoc-example, echo = FALSE, fig.cap = "prettydoc 包的 cayman 主题"}
+import_example_result("examples/prettydoc.Rmd")
+```
+
+`html_pretty` 可选的主题包括：
 
   - `cayman`: 修改自 [Cayman](https://github.com/jasonlong/cayman-theme) 主题
   
@@ -239,13 +256,7 @@ knitr::include_graphics("images/04-bootswatch.jpg")
 
 - `math`: LaTeX 数学公式的渲染方式，取值为 `mathjax` 或 `katex`，后者可以在没有网络连接时显示公式
 
-使用 `html_pretty` 格式的输出文档也有一定限制，它不支持 `toc_float`, `code_folding`, `code_download` 等选项。
-
-
-```{r, echo = FALSE}
-import_example_result("examples/prettydoc.Rmd")
-```
-
+使用 `html_pretty` 格式也有一定限制，它不支持 `toc_float`, `code_folding`, `code_download` 等选项。
 
 
 一些类似的提供 R Markdown 模板的包包括 [rmdformats](https://github.com/juba/rmdformats)，[tufte](https://github.com/rstudio/tufte)，[rtciles](https://github.com/rstudio/rticles) (PDF) 等。
@@ -309,7 +320,7 @@ import_example_result("examples/cross-reference.Rmd")
 ```
 
 
-如上所示，我们可以用 `# 标题 {#header}` 为该节添加自定义标签，随后用 `\@ref(header)` 引用该部分。图片和表格的标签即是该代码块的标签，同时需要有 标题属性，交叉引用才能生效。R Markdown 会自动为标题，图片和表格生成顺序编号，我们在引用时只关心它们的标签即可。
+如上所示，我们可以用 `# 标题 {#header}` 为该节添加自定义标签，随后用 `\@ref(header)` 引用该部分。图片和表格的标签即是该代码块的标签，同时需要有标题，交叉引用才能生效。R Markdown 会自动为标题，图片和表格生成顺序编号，我们在引用时只关心它们的标签即可。
 
 读者如果点开生成的 HTML 文档，可以发现设置了标签的元素有对应的`id`属性，这也是交叉引用的跳转基础。对于英文标题，Pandoc 会自动设置一个标签。例如 `# Hello World` 对应的标签为 `hello-world`。对中文标题，我们建议在需要时手动设置一个简洁的英文标签，仅包含英文字母和连字符。
 
@@ -587,7 +598,7 @@ render_graph(example_graph, layout = "nicely")
 
 
 
-生成网络和流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，**diagram** [@R-diagram]，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
+生成网络和流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，diagram，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
 
 
 
