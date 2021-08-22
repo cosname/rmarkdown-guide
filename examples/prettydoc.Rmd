@@ -1,7 +1,6 @@
 ---
-title: "用 R Markdown 创作精美文档"
-subtitle: "使用 prettydoc 包的 Cayman 主题"
-author: "邱怡轩"
+title: "使用 prettydoc 包的 R Markdown 模板"
+subtitle: "cayman 主题"
 date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:

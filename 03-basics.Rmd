@@ -43,7 +43,7 @@ output: html_document
 
 下面，我们观察输出文档中的文本格式。读者可以用任意文本编辑器打开`first-rmd.html`，略过一大段 `script` 脚本引用后，可以发现如下所示的代码片段，即该 HTML 文件的文本主体。由于文件内代码较多，建议直接搜索 `This is an R Markdown document` 定位到相应片段。
 
-::: {.no-h-scroll}
+
 
 ```html
 <div id="r-markdown" class="section level2">
@@ -69,11 +69,9 @@ output: html_document
 </div>
 ```
 
-:::
-
 不难发现，上面的代码块与源文档 `first-rmd.Rmd` 之间存在明确的文本对应关系。例如，在 R Markdown 文档 `## R Markdown` 后的前两个段落中，我们有
 
-::: {.no-h-scroll}
+
 
 ```markdown
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
@@ -81,18 +79,16 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 ```
 
-:::
 
 在 HTML 文件中对应的段落为
 
-::: {.no-h-scroll}
+
 
 ```html
 <p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
 <p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
 ```
 
-:::
 
 
 我们注意到，HTML 文件中的文本并不是照搬 R Markdown 文件，而是做了相应的替换。最显著的变化是，HTML 文件在两个段落的前后分别添加了 `<p>` 标签，这在 HTML 语法中表示一个单独的段落，而 R Markdown 文件中只在两个段落之间添加了空行，没有做其他额外标识。再例如， R Markdown 中的 `**Knit**` 在 HTML 中变成了 `<strong>Knit</strong>`, `*` 号变为在 HTML 中标识粗体的 `<strong>` 标签。对 PDF 编译感兴趣的读者如果查看输出的 `.tex` 文件，会发现 `**Knit**` 被转换为了 `\textbf{Knit}`，即 TeX 中粗体的表示方法。
@@ -626,7 +622,7 @@ plot(mtcars)
 ```{r, fig.width = 7}`r ''`
 # 更改 fig.width 为 7，其他选项不变
 plot(mtcars)
-````
+```
 ````
 
 
@@ -782,7 +778,7 @@ glimpse(babynames)
 library(tidyr)
 
 plot_df <- babynames %>%
-  complete(year, sex, name, fill = list(prop = 0)) %>% # 未进入前 10 时按最后一名处理
+  complete(year, sex, name, fill = list(prop = 0)) %>% # 未进入前 10 时把比例赋值为 0
   group_by(year, sex) %>% 
   mutate(prop_rank = min_rank(-prop)) %>% 
   group_by(name, sex) %>% 

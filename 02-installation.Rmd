@@ -32,7 +32,7 @@ install.packages("rmarkdown", repos = <某镜像>)
 
 安装完成后，我们可以开始创建第一个 R Markdown 文档。在 RStudio 中选择 `File --> New File --> R Markdown`, 弹出图 \@ref(fig:create-rmd-prompt) 所示的提示框。
 
-```{r create-rmd-prompt, echo = FALSE}
+```{r create-rmd-prompt, echo = FALSE, fig.cap = "RStudio 创建 R Markdown 文档时的提示框"}
 knitr::include_graphics("images/02-first-rmd-prompt.png")
 ```
 
@@ -40,11 +40,8 @@ knitr::include_graphics("images/02-first-rmd-prompt.png")
 
 随后，RStudio 编辑器内生成了如下内容
 
-::: {.no-h-scroll}
-
 `r import_example("first-rmd.Rmd")`
 
-:::
 
 在编辑器内保存该文件，我们可以发现根目录下增加了 `first-rmd.Rmd` 文件，这种后缀为 `.Rmd` 的文件即是 R Markdown 的源文档。在源文件中，我们定义了 R Markdown 输出文件的形式和内容。本书后续章节对文本和代码的编辑以及日常使用均是围绕类似这样的源文档展开的。
 
@@ -69,7 +66,7 @@ rmarkdown::render("first-rmd.Rmd", output_format = "html_document")
 
 ## 安装 Tinytex 
 
-对于需要生成 PDF 文档的读者，还需要安装 **tinytex** 包
+对于需要生成 PDF 文档的读者，还需要安装 **tinytex** 包：
 
 ```{r, eval = FALSE}
 # 安装 tinytex 包
@@ -78,13 +75,13 @@ install.packages("tinytex")
 tinytex::install_tinytex()
 ```
 
-安装完成后，在 RStudio 中打开之前保存的 R Markdown 源文档，将第三行 `output_format: html_document` 更改为 `output_format: pdf_document`。点击 Knit 后，生成如下两页 PDF 文档，说明安装成功
+安装完成后，在 RStudio 中打开之前保存的 R Markdown 源文档，将第三行 `output_format: html_document` 更改为 `output_format: pdf_document`。点击 Knit 后，生成如下两页 PDF 文档，说明安装成功。
 
 ```{r, fig.align='default', out.width = "49%", fig.show="hold", echo = FALSE}
 knitr::include_graphics(rep(c("images/02-first-rmd-pdf1.png", "images/02-first-rmd-pdf2.png"), 1))
 ```
 
-如果 TinyTeX 下载速度较慢或者下载失败，读者可以先在 [Github](https://github.com/yihui/tinytex-releases/releases) 上下载对应的压缩包，然后用 `install_prebuilt` 安装该下载文件，例如
+如果 TinyTeX 下载速度较慢或者下载失败，读者可以先在 [Github](https://github.com/yihui/tinytex-releases/releases) 上下载对应的压缩包，然后用 `install_prebuilt` 安装该文件，例如：
 
 ```r
 tinytex:::install_prebuilt('~/Downloads/TinyTeX-v2021.01.zip')
@@ -97,7 +94,7 @@ tinytex:::install_prebuilt('~/Downloads/TinyTeX-v2021.01.zip')
 
 最后，我们暂且从 R Markdown 的内容脱离出来，讨论一个学习 R 的 "最佳实践"。它不是必需的，但在大多数情况下可以为我们自己和他人带来更多便利。
 
-读者学习 R Markdown 的过程中，可能会用到许多文件记录学习过程，例如 R Markdown 自己的文档，R 的代码脚本，图片和其他笔记文件等等。我们推荐使用 RStudio 自带的项目功能管理相关的文件。可以通过菜单栏中的 `File --> New Project` 创建新项目，此时 RStudio 会在选定的根目录下生成一个后缀为 `.Rproj` 的文件，我们可以在该目录创建不同的文件夹记录学习过程。下次启动项目时，只需要通过 RStudio 编辑器右上角下拉菜单内的 Open Project 选项加载该 `.Rproj` 文件，或者直接双击该文件并使用 RStudio 打开。一个使用项目文件的好处是，我们可以在一个固定的根目录内使用相对路径引用各种文件资源。例如，我们可能有下面的文件结构
+读者学习 R Markdown 的过程中，可能会用到许多文件记录学习过程，例如 R Markdown 自己的文档，R 的代码脚本，图片和其他笔记文件等等。我们推荐使用 RStudio 自带的项目功能管理相关的文件。可以通过菜单栏中的 `File --> New Project` 创建新项目，此时 RStudio 会在选定的根目录下生成一个后缀为 `.Rproj` 的文件，我们可以在该目录创建不同的文件夹记录学习过程。下次启动项目时，只需要通过 RStudio 编辑器右上角下拉菜单内的 Open Project 选项加载该 `.Rproj` 文件，或者直接双击该文件并使用 RStudio 打开。一个使用项目文件的好处是，我们可以在一个固定的根目录内使用相对路径引用各种文件资源。例如，我们可能有下面的文件结构：
 
 
 ```

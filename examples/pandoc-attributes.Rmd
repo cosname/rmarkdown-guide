@@ -1,9 +1,7 @@
 ---
 title: "使用 Pandoc 标题属性"
 output: 
-  bookdown::html_document2:
-    toc: true
-    toc_float: true
+  bookdown::html_document2: default
 ---
 
 # 前言 {.unnumbered}
