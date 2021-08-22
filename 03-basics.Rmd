@@ -662,8 +662,6 @@ date: `r '\x60r Sys.Date()\x60'`
 ...
 ```
 
-## 
-
 
 
 ## 在 R Markdown 中使用其他语言 {#basic-other-languages}
@@ -861,7 +859,7 @@ knitr::include_graphics("images/04-visual-editing.png")
 
 图形化编辑器还提供了丰富的菜单栏选项，用于插入常见文档元素。如图 \@ref(visual-editing-insert-menu) 所示。
 
-```{r visual-editing-insert-menu, fig.cap = "图形化编辑器提供了很多菜单栏选项"}
+```{r visual-editing-insert-menu, fig.cap = "图形化编辑器提供了很多菜单栏选项", echo = FALSE}
 knitr::include_graphics("images/04-visual-editing-insert-menu.png")
 ```
 
