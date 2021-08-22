@@ -65,7 +65,10 @@ knitr::write_bib(c(
   "diagram",
   "babynames",
   "prettydoc",
-  "htmlwidgets"
+  "htmlwidgets",
+  "shiny",
+  "dygraphs",
+  "DT"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {

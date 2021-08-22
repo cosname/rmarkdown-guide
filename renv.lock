@@ -464,6 +464,20 @@
       "Repository": "CRAN",
       "Hash": "d908914ae53b04d4c0c0fd72ecc35370"
     },
+    "leaflet": {
+      "Package": "leaflet",
+      "Version": "2.0.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e3d73becdeb92754d27172d278cbf61d"
+    },
+    "leaflet.providers": {
+      "Package": "leaflet.providers",
+      "Version": "1.9.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d3082a7beac4a1aeb96100ff06265d7e"
+    },
     "lifecycle": {
       "Package": "lifecycle",
       "Version": "1.0.0",
@@ -639,6 +653,13 @@
       "Repository": "CRAN",
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
     },
+    "raster": {
+      "Package": "raster",
+      "Version": "3.4-13",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4543b272b756a4ff0f80370c886ef90a"
+    },
     "readr": {
       "Package": "readr",
       "Version": "2.0.1",
@@ -748,6 +769,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "947e4e02a79effa5d512473e10f41797"
+    },
+    "sp": {
+      "Package": "sp",
+      "Version": "1.4-5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "dfd843ee98246cf932823acf613b05dd"
     },
     "stringi": {
       "Package": "stringi",

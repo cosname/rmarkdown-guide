@@ -392,13 +392,22 @@ link-citations: true
 
 在上面的例子中，我们引入了 `one.bib`，`another.bib`，`yet-another.bib`  三个 `.bib` 文件中的参考数据，`biblio-style: 'apalike'` 设置参考样式为美国心理学学会期刊样式 (American Psychology Association, APA)，`link-cations: true` 为引用添加指向参考文献的跳转链接。
 
-用 `bibliography` 引入 `.bib` 后，我们可以在文档中引用其中包含的任意条目，语法为 `@key` 或 `[@key]`，其中 `key` 为该参考条目类型之后的标签。如 `@R-base` 生成为 @R-base，而 `[@R-base]` 生成 [@R-base]。 
+用 `bibliography` 引入 `.bib` 后，我们可以在文档中引用其中包含的任意条目，语法为 `@key` 或 `[@key]`，其中 `key` 为该参考条目类型之后的标签。如 `@R-base` 生成为 @R-base，而 `[@R-base]` 生成 [@R-base]。
+
 
 对 PDF 输出，Pandoc 会在最后一个章节后额外生成一节放置参考文献。对其他输出格式，我们可以用行内代码自动创建一节参考文献。例如，在源文档的最后插入：
 
 ```
-`r if (knitr::is_html_output()) '# 参考文献 {-}'`
+`r "\x60r if (knitr::is_html_output()) '# 参考文献 {-}'\x60"`
 ```
+
+被 `@key` 引用的参考条目会自动出现在最后的参考文献索引中，如果想在最后添加 `.bib` 中的全部条目，不论是否引用，可以设置 YAML 中的 `notice` 属性。例如：
+
+
+```
+nocite: '@*'
+```
+
 
 ### 引用 R 包
 
