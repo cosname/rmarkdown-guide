@@ -134,7 +134,7 @@ summary(cars)
 图 \@ref(fig:knit-process) 概括了 R Markdown 完成以上工作的流程
 
 ```{r knit-process, echo = FALSE, fig.cap = "R Markdown 的编译过程 https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-process.html"}
-knitr::include_graphics("images/03-knit-process.jpg")
+knitr::include_graphics("images/03-knit-process.png")
 ```
 
 首先，knitr 包 [@R-knitr] 将 `.Rmd` 源文档转换为 `.md` 文件。早在 R Markdown 诞生之前，knitr 包就承担了自动化生成 R 语言报告的功能。在 R Markdown 的编译中，knitr 的最主要工作是提取和运行 `.Rmd` 中的代码，并将返还的文字或图片等结果置于合适的位置。我们之前笼统说的 "R Markdown 运行代码" 实质上就是 knitr 的工作。同时，knitr 还会读取部分 YAML 头部数据，并确保我们在源文档中使用的标记符号适于下一步的格式转换。这一步结束后，knitr 生成了临时性的 `.md` 文件。例如，`first-rmd.Rmd` 被转换为 `first-rmd.md`。`.md` 被称为 Markdown 文件，我们在 `.Rmd` 中的格式标记即是 Markdown 标记语言确定的标准，在 \@ref(markdown-syntax) 中作进一步介绍。

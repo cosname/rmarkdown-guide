@@ -30,7 +30,7 @@ install.packages("rmarkdown", repos = <某镜像>)
 
 ## 创建第一个 R Markdown 文档 {#create-first-rmd}
 
-安装完成后，我们可以开始创建第一个 R Markdown 文档。在 RStudio 中选择 `File --> New File --> R Markdown`, 弹出图 \@ref(create-rmd-prompt) 所示的提示框。
+安装完成后，我们可以开始创建第一个 R Markdown 文档。在 RStudio 中选择 `File --> New File --> R Markdown`, 弹出图 \@ref(fig:create-rmd-prompt) 所示的提示框。
 
 ```{r create-rmd-prompt, echo = FALSE}
 knitr::include_graphics("images/02-first-rmd-prompt.png")
