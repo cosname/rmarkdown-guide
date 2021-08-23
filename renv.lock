@@ -121,6 +121,13 @@
       "Repository": "CRAN",
       "Hash": "bc07f4b5b93bbf21075429e0c7e090f8"
     },
+    "brio": {
+      "Package": "brio",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2f01e16ff9571fe70381c7b9ae560dc4"
+    },
     "bslib": {
       "Package": "bslib",
       "Version": "0.2.5.1",
@@ -204,6 +211,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a0cbe758a531d054b537d16dff4d58a1"
+    },
+    "distill": {
+      "Package": "distill",
+      "Version": "1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5edf0b55f685c668d5e800051bc31f3d"
+    },
+    "downlit": {
+      "Package": "downlit",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f24f1e44320a978c03050b8403a83793"
     },
     "downloader": {
       "Package": "downloader",
@@ -485,6 +506,13 @@
       "Repository": "CRAN",
       "Hash": "3471fb65971f1a7b2d4ae7848cf2db8d"
     },
+    "lubridate": {
+      "Package": "lubridate",
+      "Version": "1.7.10",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1ebfdc8a3cfe8fe19184f5481972b092"
+    },
     "magick": {
       "Package": "magick",
       "Version": "2.7.2",
@@ -707,6 +735,13 @@
       "RemoteHost": "api.github.com",
       "Hash": "5126ee03bc1862fcfca1e4b405ce6214"
     },
+    "rprojroot": {
+      "Package": "rprojroot",
+      "Version": "2.0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "249d8cd1e74a8f6a26194a91b47f21d1"
+    },
     "rstudioapi": {
       "Package": "rstudioapi",
       "Version": "0.13",
@@ -921,6 +956,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e99d80ad34457a4853674e89d5e806de"
+    },
+    "whisker": {
+      "Package": "whisker",
+      "Version": "0.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ca970b96d894e90397ed20637a0c1bbe"
     },
     "withr": {
       "Package": "withr",
