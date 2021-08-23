@@ -1,5 +1,5 @@
 
-# 文档元素
+# 文档元素 {#document-elements}
 
 学习过 R Markdown 的基础知识后，本章进一步介绍如何创建和自定义常见的文档元素，包括：
 
@@ -23,8 +23,7 @@
 
 
 
-## 图片
-
+## 图片 {#el-figures}
 ### 用 knitr 选项操作图片
 
 默认设置下，代码块产生的图片被直接插入到输出文档中该段代码的后面，靠左对齐，没有标题, 尺寸默认大小。我们可以用 `fig.align`, `fig.cap`, `fig.width`, `fig.height`, `out.width`, `out.height` 等 knitr 选项操作图片。例如：
@@ -92,7 +91,11 @@ knitr::include_graphics("<image-path>")
 knitr::include_graphics(rep("images/knit-logo.png", 3))
 ```
 
+用 Markdown 语法插入图片时，也可在图片路径后设置输出宽度，例如：
 
+```
+![一个图片](foo/bar.png){width=50%}
+```
 
 
 ## 表格
@@ -510,11 +513,9 @@ leaflet() %>%
 knitr::include_graphics("images/04-shiny-document.jpg")
 ```
 
+读者可以在 \@ref(shiny-started) 了解更多 shiny 文档的知识。
 
-
-
-
-## 插入流程图和网络图
+## 插入流程图和网络图 {#diagrams}
 
 
 Graphviz 和 mermaid 是两个常用于流程和网络图的软件包。[DiagrammeR](https://rich-iannone.github.io/DiagrammeR/) 包让我们可以用 R 代码生成 Graphviz 或 mermaid 图。以 Graphviz 为例，一个图文件包含对图 (graph)，节点 (node) 和边 (edge) 的定义，RStudio 提供了对 Graphviz (`.gv`) 和 mermaid (`.mmd`) 的原生支持，如图 \@ref(fig:rstudio-gv) 所示。
