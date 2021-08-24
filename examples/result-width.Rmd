@@ -1,0 +1,20 @@
+---
+title: '控制输出宽度'
+documentclass: ctexart
+output: rticles::ctex
+---
+
+下面的输出太宽了：
+
+```{r}
+options(width = 300)
+matrix(runif(100), ncol = 20)
+```
+
+用 `options(width)` 控制输出宽度：
+
+```{r}
+options(width = 60)
+matrix(runif(100), ncol = 20)
+```
+

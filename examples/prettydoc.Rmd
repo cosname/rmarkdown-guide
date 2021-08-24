@@ -1,0 +1,58 @@
+---
+title: "使用 prettydoc 包的 R Markdown 模板"
+subtitle: "cayman 主题"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: true
+    math: katex 
+toc-title: "目录"
+---
+
+
+下面展示一些常见 HTML 元素的样式
+
+## 二级标题
+
+
+### 表格
+
+|           | Df | Sum Sq | Mean Sq | F value | Pr(>F)  |    |
+|-----------|----|--------|---------|---------|---------|----|
+| Block     | 5  | 343.3  | 68.66   | 4.447   | 0.01594 | *  |
+| N         | 1  | 189.3  | 189.28  | 12.259  | 0.00437 | ** |
+| P         | 1  | 8.4    | 8.40    | 0.544   | 0.47490 |    |
+| K         | 1  | 95.2   | 95.20   | 6.166   | 0.02880 | *  |
+| N:P       | 1  | 21.3   | 21.28   | 1.378   | 0.26317 |    |
+| N:K       | 1  | 33.1   | 33.14   | 2.146   | 0.16865 |    |
+| P:K       | 1  | 0.5    | 0.48    | 0.031   | 0.86275 |    |
+| Residuals | 12 | 185.3  | 15.44   |         |         |    |
+
+
+### 列表
+
+世界上有三种谎言
+
+1. 谎言
+2. 该死的谎言
+3. 统计学
+    - 频率学派
+    - 贝叶斯学派
+    - ...
+
+
+
+### 代码
+
+使用 `R` 代码
+
+```{r fig.width=6, fig.height=6, fig.align='center'}
+set.seed(123)
+n <- 1000
+x1  <- matrix(rnorm(n), ncol = 2)
+x2  <- matrix(rnorm(n, mean = 3, sd = 1.5), ncol = 2)
+x   <- rbind(x1, x2)
+smoothScatter(x, xlab = "x1", ylab = "x2")
+```

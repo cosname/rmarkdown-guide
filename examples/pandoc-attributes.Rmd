@@ -1,0 +1,19 @@
+---
+title: "使用 Pandoc 标题属性"
+output: 
+  bookdown::html_document2: default
+---
+
+# 前言 {.unnumbered}
+
+前言。
+
+# 第一节 {#first}
+
+现在，我们可以用 \@ref(first) 引用第一章。
+
+# 第二节
+
+# 第三节 {-}
+
+`{-}` 是 `{.unnumbered}` 的简写。

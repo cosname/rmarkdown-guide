@@ -1,0 +1,28 @@
+---
+title: '交叉引用图片和表格'
+output: 
+  bookdown::html_document2: default 
+---
+
+# 引用图片
+
+```{r cars-plot, fig.cap = "一张散点图"}
+plot(cars)
+```
+
+引用图片需要为代码块设置标签，并有标题 `fig.cap`, 如图 \@ref(fig:cars-plot) 所示。
+
+下面的图片虽然设置了代码块标签，但没有 `fig.cap`，无法创建单独的图表环境，引用 \@ref(fig:iris-plot) 失效。
+
+```{r iris-plot}
+plot(iris)
+```
+
+## 引用表格
+
+引用表格与图片类似，如表 \@ref(tab:iris-table) 所示。
+ 
+```{r iris-table}
+knitr::kable(head(iris), caption = "一个表格")
+```
+

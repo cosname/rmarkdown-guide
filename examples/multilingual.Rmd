@@ -1,0 +1,114 @@
+---
+title: "案例研究：同时使用 Python 和 R 和 SQL 做数据分析"
+output: html_document
+---
+
+# 准备工作
+
+`babynames` 数据来自同名 R 包，这里作简单处理后写入 csv 文件。
+
+```{r prepare-data}
+library(babynames)
+library(dplyr)
+library(readr)
+
+babynames::babynames %>% 
+  group_by(year, sex) %>% 
+  slice_max(order_by = prop, n = 100) %>%
+  write_csv("data/babynames.csv")
+```
+
+加载提供 Python 接口的 reticulate 包
+
+```{r}
+library(reticulate)
+# reticulate::py_install(c("seaborn", "pandas"))
+```
+
+将数据存入 SQLite 数据库中
+
+```{r write-db}
+library(DBI)
+raw <- read_csv("data/babynames.csv")
+
+con <- dbConnect(RSQLite::SQLite(), ":memory:")
+dbWriteTable(con, "babynames", raw)
+```
+
+```{r read-db}
+library(DBI)
+library(reticulate)
+
+raw <- read_csv("data/babynames.csv")
+
+con <- dbConnect(RSQLite::SQLite(), ":memory:")
+dbWriteTable(con, "babynames", raw)
+```
+
+运行 SQL 代码块，查询 1900 年后的所有数据, `output.var` 把结果存到 R 变量中。
+
+```{sql, connection=con, output.var = "babynames"}
+SELECT year, sex, name, prop 
+FROM babynames
+WHERE year >= 1900 
+```
+
+dplyr 数据处理
+
+```{r}
+library(dplyr)
+glimpse(babynames)
+```
+
+```{r plot-df}
+library(tidyr)
+
+plot_df <- babynames %>%
+  complete(year, sex, name, fill = list(prop = 0)) %>% # 未进入前 10 时按最后一名处理
+  group_by(year, sex) %>% 
+  mutate(prop_rank = min_rank(-prop)) %>% 
+  group_by(name, sex) %>% 
+  summarise(mean_prop = mean(prop),
+            mean_prop_rank = mean(prop_rank))
+```
+
+```{r babynames-plot, fig.width = 10, fig.cap = "x: 平均占比；y: 平均排名"}
+library(ggplot2)
+
+plot_df %>% 
+  ggplot(aes(mean_prop, mean_prop_rank, 
+             color = sex)) +
+  geom_point(shape = 21, size = 3.5) +
+  ggrepel::geom_text_repel(aes(label = name),
+                           data = . %>% filter(mean_prop_rank >= 10 | mean_prop >= 0.001)) + 
+  facet_wrap(~ sex, scales = "free") + 
+  scale_x_log10() +
+  theme(legend.position = "none") +
+  theme_minimal()
+  
+```
+
+```{r marg}
+# 在 R 中选取 Margaret 对应的全部数据
+marg <- babynames::babynames %>%filter(name == "Margaret")
+```
+
+Python 部分
+
+```{python}
+import pandas as pd 
+from pandas.plotting import autocorrelation_plot
+
+# 将 R 获得的数据传入 Python 环境
+marg = r.marg
+
+ts = pd.Series(marg["prop"])
+ts.index = marg["year"]
+ts.plot()
+```
+
+
+```{python, fig.cap = "以 5 年为窗口的移动平均", fig.align = 'left'}
+ts.rolling(5).mean().plot()
+```
+

@@ -1,0 +1,23 @@
+---
+title: "Shiny 文档"
+output: html_document
+runtime: shiny
+---
+
+我们可以用 shiny 包中的 `renderPlot` 函数为图形添加交互性。`selectInput()` 插入一个可调节直方图区间的交互组件
+
+```{r eruptions, echo=FALSE}
+selectInput(
+  'breaks', label = 'Number of bins:',
+  choices = c(10, 20, 35, 50), selected = 20
+)
+
+renderPlot({
+  par(mar = c(4, 4, .1, .5))
+  hist(
+    faithful$eruptions, as.numeric(input$breaks),
+    col = 'gray', border = 'white',
+    xlab = 'Duration (minutes)', main = ''
+  )
+})
+```

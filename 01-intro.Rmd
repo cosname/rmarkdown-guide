@@ -2,7 +2,7 @@
 
 # 认识 R Markdown {#know-rmarkdown}
 
-本章从 R Markdown 的应用开始，遴选了不同场合 R Markdown 的用例和解决的问题。最后回顾了 R Markdown 渊源的历史发展。话不多说，我们在以下各小节中快速浏览一些 R Markdown 文档的用例，它们有些直接基于原生的 R Markdown 包，有些来自 R Markdown 的扩展包。越来越多的扩展为 R Markdown 文档增加了新的输出格式，为生态体系提供了更丰富的功能覆盖。读者可以挑选自己最感兴趣的使用场合深入后面对应章节的阅读，也可以在 [Github](https://github.com) 上以 R Markdown 为关键词探索各式各样的输出格式。
+本章从 R Markdown 的应用开始，遴选了不同场合 R Markdown 的用例和解决的问题。包括撰写数据分析报告，发表电子书，设计数据驱动的个人简历，建立个人网站，创作演示文档和交互报表。最后回顾了 R Markdown 渊源的历史发展。话不多说，我们在以下各小节中快速浏览一些 R Markdown 文档的用例，它们有些直接基于原生的 R Markdown 包，有些来自 R Markdown 的扩展包。越来越多的扩展为 R Markdown 文档增加了新的输出格式，为生态体系提供了更丰富的功能覆盖。读者可以挑选自己最感兴趣的使用场合深入后面对应章节的阅读，也可以在 [Github](https://github.com) 上以 R Markdown 为关键词探索各式各样的输出格式。
 
 
 ## 数据分析报告和文档
@@ -10,7 +10,7 @@
 从诞生开始，R 便是一门致力于交互式数据分析的语言，R 的用户便时常有着制作数据分析报告的需求，这也是 R Markdown 最常见和基础的功能。它支持 HTML, PDF, Word, EPUB 等多种输出格式以及与之配套开箱即用的主题系统。用户可以将创作重心放在内容上，写作完成后一键输出不同格式，让 R Markdown 的自动化的编译机制代劳形式上的调整。例如，以下 HTML，PDF 和 Word 三种格式的文档是用同一个 R Markdown 生成的。
 
 
-```{r, fig.show = "hold", out.width = "33%", out.height = "95%", echo = FALSE}
+```{r, fig.show = "hold", out.width = "30%", echo = FALSE}
 knitr::include_graphics(paste0("images/", c("01-html-output.png", "01-pdf-output.png", "01-word-output.png")))
 ```
 
@@ -25,16 +25,16 @@ knitr::include_graphics(paste0("images/", c("01-html-output.png", "01-pdf-output
 - 我不了解网页开发，如何在报告中插入可交互的图表和网页元素？ 
 
 
-同时，R Markdown 还为 R 语言之外的几十种编程语言提供了一定程度的支持，例如 Python，C++，Julia，Bash，SQL 等，这意味着我们可以在一篇报告中混用多个工具。Python 作为数据分析师的另一大利器，在 **reticulate** 包 [@R-reticulate] 的帮助下可以流畅地与 R 代码在 R Markdown 文档中并用。下面的例子中，我们先用 R 导入数据并作数据预处理，随后将 R 中的数据传递框到 Python 环境中，生成 **pandas** 格式的 DataFrame, 并用 **seaborn** 包作可视化。
+同时，R Markdown 还为 R 语言之外的几十种编程语言提供了一定程度的支持，例如 Python，C++，Julia，Bash，SQL 等，这意味着我们可以在一篇报告中混用多个工具。Python 作为数据分析师的另一大利器，在 **reticulate** 包 [@R-reticulate] 的帮助下可以流畅地与 R 代码在 R Markdown 文档中并用。下面的例子中，我们先用 R 导入数据并作数据预处理，随后将 R 中的数据传递框到 Python 环境中，生成 **pandas** 格式的 `DataFrame`, 并用 **seaborn** 包作可视化。
 
-```r
+```{r}
 # R 部分: 导入和预处理美国各州犯罪数据
 arrests <- datasets::USArrests
 arrests$State <- rownames(arrests)
 ```
 
-```python
-# Python 部分，导入 R 数据，提取谋杀率最高的 10 个州，并用 seaborn 包作柱形
+```{python}
+# Python 部分，导入 R 数据，提取谋杀率最高的 10 个州，并用 seaborn 包作柱形图
 import pandas as pd 
 import seaborn as sns 
 
@@ -45,9 +45,7 @@ top_states = r.arrests\
 sns.barplot(x = "Murder", y = "State",  data = top_states)
 ```
 
-```{r, echo = FALSE}
-knitr::include_graphics("images/01-seaborn-plot.png")
-```
+我们在 \@ref(basic-other-languages) 节给出了在数据分析项目中混用 SQL，R 和 Python 的例子，并在 \@ref(other-languages) 中详细讨论了如何在 R Markdown 中结合其他编程语言。
 
 
 
@@ -70,12 +68,14 @@ knitr::include_graphics("images/01-bookdown-chinese.png")
 
 一些 R Markdown 扩展包提供了适用于个人简历和 CV 的输出格式。例如基于 **pagedown** 包的[简历模板](https://pagedown.rbind.io/html-resume)，和 [vitae](https://pkg.mitchelloharawild.com/vitae/) 下多种 CV 模板。
 
+除了使用模板外， R Markdown 还能让你的简历变得更加“数据驱动”。[datadrivencv](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，我们可以仅维护这张数据表，R Markdown 负责简历的格式。除此之外，还可以插入 R 代码生成的交互图表，让我们的简历动起来。下图是 datadrivencv 包的作者 Nick Strayer 结合 pagedown 包制作的个人简历。
 
-除了使用模板外， R Markdown 还能让你的简历变得更加“数据驱动”。[datadrivencv](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，我们可以仅维护这张数据表，R Markdown 负责简历的格式。除此之外，还可以插入 R 代码生成的交互图表，让我们的简历动起来。图\@ref(fig:ns-cv)是 datadrivencv 包的作者 Nick Strayer 结合 pagedown 包制作的个人简历。
-
-```{r ns-cv, echo = FALSE, fig.cap = "[Nick Strayer](http://nickstrayer.me/)用 datadrivencv 和 pagedown 包制作的 CV 示意"}
+```{r ns-cv, echo = FALSE, fig.cap = "(ref:ns-cv)"}
 knitr::include_graphics("images/01-resume.png")
 ```
+
+(ref:ns-cv) [Nick Strayer](http://nickstrayer.me/)用 datadrivencv 和 pagedown 包制作的 CV 示意
+
 
 ## 网站
 
@@ -119,8 +119,8 @@ knitr::include_graphics(c("images/01-xaringan1.png", "images/01-xaringan2.png"))
 knitr::include_graphics("images/01-flexdashboard.png")
 ```
 
-
 ## R Markdown 的渊源与历史
 
-本章回顾了 R Markdown 在技术和工具层面的渊源和它的发展历史。喜欢直接进入实操的读者可以跳过本节，从 第 \@ref(installation) 章开始。如果读者已经掌握了 R Markdown 的基础知识，书写过一些 R Markdown 的文档, 也可以直接开始阅读第 \@ref(document) 章。
+本节回顾了 R Markdown 在技术工具层面的渊源和它的发展历史。喜欢直接进入实操的读者可以跳过本节，从 第 \@ref(installation) 章开始。如果读者已经掌握了 R Markdown 的基础知识，书写过一些 R Markdown 的文档, 也可以直接开始阅读第 \@ref(document) 章。
+
 

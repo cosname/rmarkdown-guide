@@ -1,0 +1,34 @@
+---
+title: '常用 YAML 选项'
+date: "2020-08-16"
+author:
+  - 张三
+  - 李四
+output: 
+  rticles::ctex:
+    toc: true
+subtitle: '以 PDF 输出为例'
+keywords:
+  - 中文
+  - R Markdown
+abstract: >
+  统计之都（Capital of Statistics, COS）论坛是一个自由探讨统计学和数据科学的平台。
+  欢迎对统计学、机器学习、数据分析、统计软件、可视化等领域感兴趣的朋友在此交流切磋。
+  首次使用论坛请阅读新手须知。
+fontsize: "10pt"
+papersize: "a5"
+geometry: "margin=1in"
+biblio-title: 参考文献
+bibliography: skeleton.bib
+link-citations: yes
+documentclass: ctexart
+---
+  
+
+# 第一部分
+
+张三写的。
+
+# 第二部分
+
+李四写的。
