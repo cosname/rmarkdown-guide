@@ -1,10 +1,6 @@
 
 # 安装 {#installation}
 
-```{r, echo = FALSE}
-source("utils.R")
-```
-
 
 本章介绍安装 R Markdown 相关依赖包的方法，并编译第一个 R Markdown 源文档，输出为 HTML 和 PDF 两种格式。
 
@@ -23,7 +19,7 @@ install.packages("rmarkdown")
 中国大陆的读者可能有下载速度过慢的问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.packages` 中设置 `repos` 参数。
 
 ```{r, eval = FALSE}
-install.packages("rmarkdown", repos = <某镜像>)
+install.packages("rmarkdown", repos = <镜像网址>)
 ```
 
 
@@ -41,7 +37,6 @@ knitr::include_graphics("images/02-first-rmd-prompt.png")
 随后，RStudio 编辑器内生成了如下内容：
 
 `r import_example("first-rmd.Rmd")`
-
 
 在编辑器内保存该文件，我们可以发现根目录下增加了 `first-rmd.Rmd` 文件，这种后缀为 `.Rmd` 的文件即是 R Markdown 的源文档。在源文件中，我们定义了 R Markdown 输出文件的形式和内容。本书后续章节对文本和代码的编辑以及日常使用均是围绕类似这样的源文档展开的。
 

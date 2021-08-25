@@ -9,4 +9,4 @@ language:
     chapter_name: ["第 ", " 章"]
 delete_merged_file: true
 
-before_chapter_script: "_common.R"
+before_chapter_script: ["_common.R", "utils.R"]

@@ -69,7 +69,9 @@ knitr::write_bib(c(
   "shiny",
   "dygraphs",
   "DT",
-  "distill"
+  "distill",
+  "xaringanExtra",
+  "datadrivencv"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {
