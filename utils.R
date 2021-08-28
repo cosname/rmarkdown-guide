@@ -54,7 +54,7 @@ rmd_html_screenshot <- function(file, fmt = "html_document", outfile = xfun::wit
 }
 
 html_screenshot <- function(url, outfile = xfun::with_ext(url,"png"), ...){
-  webshot::webshot(url, outfile, ...)
+  webshot::webshot(url, paste0("www/", outfile), ...)
   return(outfile)
 }
 

@@ -71,7 +71,8 @@ knitr::write_bib(c(
   "DT",
   "distill",
   "xaringanExtra",
-  "datadrivencv"
+  "datadrivencv",
+  "pagedown"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {
