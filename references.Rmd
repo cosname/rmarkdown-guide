@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 \backmatter
 
@@ -81,3 +82,85 @@ knitr::write_bib(c(
 #     }
 # )
 ```
+=======
+
+\backmatter
+
+`r if (knitr:::is_html_output()) '# 参考文献 {#references .unnumbered}'`
+
+```{r include=FALSE}
+# 自动生成 R 包的参考文献
+knitr::write_bib(c(
+  .packages(),
+  'bookdown', 
+  'knitr',
+  'rmarkdown',
+  'reticulate',
+  'r2d3',
+  'yaml',
+  'sass',
+  'flexdashboard',
+  'kableExtra',
+  'flextable',
+  'huxtable',
+  'gt',
+  'gtsummary',
+  'formattable',
+  'DT',
+  'reactable',
+  'rhandsontable',
+  'pixiedust',
+  'stargazer',
+  'xtable',
+  'tables',
+  'pander',
+  'tangram',
+  'ztable',
+  'condformat',
+  'magick',
+  'cairoDevice',
+  'svglite',
+  'tikzDevice',
+  'printr',
+  'ggplot2',
+  'xfun',
+  'pagedown',
+  'broom',
+  'xaringan',
+  'styler',
+  'ezknitr',
+  'here',
+  'roxygen2',
+  'usethis',
+  'rmdformats',
+  'learnr',
+  'rticles',
+  'blogdown',
+  'spelling',
+  'blastula',
+  'googledrive',
+  'rmdrive',
+  'workflowr',
+  'xaringanthemer',
+  'showtext',
+  'xaringanExtra',
+  'officedown',
+  'flexdashboard',
+  'officer',
+  "diagram",
+  "babynames",
+  "prettydoc",
+  "htmlwidgets",
+  "shiny",
+  "dygraphs",
+  "DT",
+  "distill"
+), 'packages.bib')
+
+# lapply(pkgs, function(pkg) {
+#     if (system.file(package = pkg) != '') return()
+#     renv::install(pkg, repos = "https://cloud.r-project.org/")
+#     }
+# )
+```
+>>>>>>> master
