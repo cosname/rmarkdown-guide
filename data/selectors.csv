@@ -1,0 +1,12 @@
+元素,CSS 选择器
+文档标题, `#title`
+章节标题, `.section h1`，`.section h2`，`.section h3`，...
+段落, `p`
+代码块和文字输出, `pre code`
+粗体, `p strong`
+斜体, `p em`
+图片, `img`
+链接,`a`
+表格, `table`
+浮动目录, `#TOC`
+符动目录链接, `#TOC li`

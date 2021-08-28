@@ -36,7 +36,7 @@ import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 40
                  error = function(e)paste0("Failed to process ", file))
 
       if (fmt %in% c("html_document","ioslides_presentation","slidy_presentation", "prettydoc::html_pretty", "bookdown::html_document2"
-))
+      ))
         tryCatch(rmd_html_screenshot(file, fmt, outfile, vwidth=vwidth, vheight=vheight),
                  error = function(e)paste0("Failed to process ", file))
 
@@ -54,7 +54,7 @@ rmd_html_screenshot <- function(file, fmt = "html_document", outfile = xfun::wit
 }
 
 html_screenshot <- function(url, outfile = xfun::with_ext(url,"png"), ...){
-  webshot::webshot(url, paste0("www/", outfile), ...)
+  webshot::webshot(url, outfile, ...)
   return(outfile)
 }
 
@@ -73,8 +73,6 @@ pdf_screenshot <- function(pdf, outfile = xfun::with_ext(pdf, "png")){
   magick::image_write(content, outfile)
   return(outfile)
 }
-
-
 
 use_examples <- function(names, dir = "exmaples", open_path = NULL) {
   rmd_paths <- paste0("examples", "/", names, ".Rmd")
@@ -95,7 +93,3 @@ use_examples <- function(names, dir = "exmaples", open_path = NULL) {
   }
   invisible(open_path)
 }
-
-
-
-
