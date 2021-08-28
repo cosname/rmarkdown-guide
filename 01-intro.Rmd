@@ -57,7 +57,7 @@ knitr::include_graphics("images/01-bookdown-chinese.png")
 在学术报告或论文的撰写中，用户可能对格式有更细致的要求。越来越多的包提供了易用的 R Markdown 模板，为我们免去了繁杂的手动格式调整，编译后即可直接投稿。**rticles** 包 [@R-rticles] 提供了很多期刊和出版商的模板文档，例如 R Journals 和 Journals of Statistical Software。中文用户可能较常用 rticles 提供的 CTeX 输出格式，它让 R Markdown 输出的 PDF 可以正常显示中文字符。 
 
 
-## 交互笔记本
+## 交互笔记本 {#rmd-notebook}
 
 R Markdown 及 bookdown 文档可运行代码，格式化长篇文本，插入 LaTeX 数学环境，支持交叉引用，特别适合统计，数据科学，计算机科学等领域的学生，研究人员和爱好者们作为首选的笔记本格式。
 

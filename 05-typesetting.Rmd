@@ -1,6 +1,10 @@
 
 # 排版 {#typesetting}
 
+# 通用排版方案
+
+迄今为止，我们在 R Markdown 中的排版效果都是通过 Markdown 实现的。
+
 ## 字体颜色
 
 Markdown 没有提供控制字体颜色的语法。我们需要用 HTML 或 LaTeX 语法改变特定片段的颜色：

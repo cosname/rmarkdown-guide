@@ -59,6 +59,34 @@ rmarkdown::render("first-rmd.Rmd", output_format = "html_document")
 读者不妨自己在控制台内运行一遍以上代码，看结果与点击 Knit 是否相同。^[在控制台中调用 `render()` 时，R 会在当前进程运行源文档的代码，而 Knit 按钮会新建一个空白的环境完成编译。为了确保当前 R 进程不对 R Markdown 造成干扰，最好清空当前环境或重启 R 后使用 `render()`。]
 
 
+
+### 发布
+
+我们在 \@ref(rmd-notebook) 中提到了 RPubs, bookdown 等免费发布 R Markdown 文档的服务。得到 `fist-rmd.html` 后，我们就可以把它上传到这些平台上。以 RPubs 为例，首先需要在 <https://rpubs.com/users/new> 注册账号。
+
+
+在 RPubs 上创建好账号后，我们重新编译 `first.rmd` 源文档，点击源文档上方的 Knit 按钮，在编译成功后弹出窗口的右上角可以看到 **Publish** 按钮，点击后如图 \@ref(fig:publish-button) 所示。
+
+```{r publish-button, fig.cap = "编译成功后，点击弹出窗口右上角的 Publish 按钮", echo = FALSE}
+knitr::include_graphics("images/02-publish-button.jpg")
+```
+
+对于 RPubs，我们无需在 RStudio 中额外关联账户，直接点击 Publish Document，随后选择 RPubs，浏览器弹出图 \@ref(fig:rpubs-signin) 所示的登录界面。
+
+```{r rpubs-signin, fig.cap = "点击发布后弹出 RPubs 登录界面", echo = FALSE}
+knitr::include_graphics("images/02-rpubs-signin.jpg")
+```
+
+确认登陆后，我们可以选择发布文档的标题，描述和网址。随后，RPubs 部署 `first.html` 并生成指定的网址，例如 <https://rpubs.com/Maxine/802744>。以上便是发布 R Markdown 输出文档的全过程，读者可以尝试类比发布到 bookdown 网站上。
+
+除了在输出文档点击 Publish 外，我们还可以用 **rsconnect** 包提供的 API。源文档右上角也有一个发布按钮，如图 \@ref(fig:src-publish) 所示。
+
+```{r src-publish, fig.cap = "源文档中的发布按钮", echo = FALSE}
+knitr::include_graphics("images/02-src-publish.png")
+```
+
+
+
 ## 安装 Tinytex 
 
 对于需要生成 PDF 文档的读者，还需要安装 **tinytex** 包：
