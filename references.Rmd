@@ -70,9 +70,8 @@ knitr::write_bib(c(
   "dygraphs",
   "DT",
   "distill",
-  "xaringanExtra",
-  "datadrivencv",
-  "pagedown"
+  "pagedown",
+  "bslib"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {

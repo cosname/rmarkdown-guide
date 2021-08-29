@@ -31,7 +31,7 @@ import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 40
       fmt = out[[i]]
       outfile = webshot[[i]]
 
-      if (fmt %in% c("pdf_document","beamer_presentation", "rticles::ctex"))
+      if (fmt %in% c("pdf_document","beamer_presentation", "rticles::ctex", "bookdown::pdf_document2"))
         tryCatch(rmd_pdf_screenshot(file, fmt, outfile),
                  error = function(e)paste0("Failed to process ", file))
 

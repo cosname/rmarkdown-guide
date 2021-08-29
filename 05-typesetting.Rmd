@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # 排版 {#typesetting}
 
@@ -46,14 +45,14 @@ p span {
 ```
 1. 对所有 <h1> 元素，设置它们的字体颜色为红色 (red)，大小为 5 倍默认字体的大小
 
-2. 对所有 <p> 元素包含的 <span> 元素，设置它们的字体颜色为蓝色 (蓝色)
+2. 对所有 <p> 元素包含的 <span> 元素，设置它们的字体颜色为蓝色 (blue)
 
 ```
 
 
 
 
-除了颜色，大小，对齐等等简单属性外，CSS 还可用于设计复杂的布局，假设我们有如下网页结构：
+除了颜色，大小，对齐等等简单属性外，CSS 还可用于设计复杂的布局，假设有如下网页结构：
 
 ```html
 <div class="container">
@@ -79,7 +78,7 @@ knitr::include_graphics("images/05-without-flexbox.jpg")
 .container {
   display: flex;
   justify-content: space-around;
-  align-items: center; 
+  align-items: center;
   row-gap: 20px;
 }
 
@@ -155,7 +154,7 @@ import_example_result("examples/css-chunk.Rmd")
 :::: {.special}
 这是第二个 div
 
-::: 
+:::
 这是第三个 div
 :::
 
@@ -176,15 +175,148 @@ Pandoc 将以上语法渲染为 HTML 元素：
 </div>
 ```
 
-随后我们可以在 CSS 中使用 `#special`, `.special` 和 `.special div` 等选择器选择以上三个 div 元素。
+随后我们可以在 CSS 中使用 `#special`, `.special` 和 `.special div` 等选择器选择以上三个 div 元素，应用 CSS 样式。
 
 #### 用 bslib 包自定义 bootstrap 主题
 
+我们在第 \@ref(theme-templates) 节提到 R Markdown 的 HTML 输出基于 bootstrap 框架，采用了 bootstrap 提供的大量 CSS 样式。对于这样的大型前端框架，样式往往是通过 SCSS 变量的方式实现的。SCSS 是 CSS 的一种扩展，增加了变量，嵌套，导入等特性。例如，我们在下面用 SCSS 变量定义了一套配色方案：
 
+```scss
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+...
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$primary:       $blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+```
+
+随后，在 CSS/SCSS 中使用 `primary`, `secondary`, `success` 等变量，就可以应用该主题到网页上。如果想要应用另一套配色方案/主题，更改这些变量的值即可。每个基于 bootstrap 生成的网页由类似如下的颜色设置：
+
+
+```scss
+selector-1 {
+  color: $secondary;
+  background-color: $primary；
+}
+selector-1:hover {
+  background-color: $primary;
+}
+
+selector-2 {
+  border-color: $info;
+}
+```
+
+因此，我们可以通过改变 bootstrap 的 SCSS 变量值来定义 R Markdown HTML 输出的样式。这些变量不限于颜色，还包括大小，间距，字体等。**bslib** 包 [@R-bslib] 允许直接在 R Markdown 的 YAML 选项中定义 bootstrap 变量，例如： 
+
+```
+---
+output:
+  html_document:
+    theme:
+      bg: "#101010"
+      fg: "#FDF7F7"
+      primary: "#ED79F9"
+      base_font:
+        google: "Prompt"
+      code_font:
+        google: "JetBrains Mono"
+---
+```
+
+效果如图 \@ref(fig:bslib-demo) 所示。读者还可以用 [thematic](https://rstudio.github.io/thematic/) 包让 R 生成的图片自适应当前主题的配色。
+
+```{r bslib-demo, fig.cap = "用 bslib 定义 bootstrap Sass 变量", echo = FALSE}
+import_example_result("examples/bslib-demo.Rmd")
+```
+
+
+
+我们还可以直接选择 bootswatch 主题：
+
+```
+---
+output:
+  html_document:
+    theme:
+      bootswatch: minty
+---
+```
 
 ### LaTeX
 
-例如
+对基于 LaTeX 的 PDF 输出格式，进阶的排版设置稍复杂些。但大部分问题都可通过 "搜索 + 引入 LaTeX 包" 解决。
+
+例如，默认生成的 PDF 中链接与其他文字颜色相同，不易区分。我们希望自定义各类链接的颜色，在搜索引擎中搜索 "latex href color"，可以在 stackoverflow 上看到问题 <https://tex.stackexchange.com/questions/61015/how-to-use-different-colors-for-different-href-commands>，第一个回答给出了 LaTeX 命令：
+
+```
+\documentclass{article}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+\begin{document}
+Here is \href{http://www.google.com}{Google} and \href{http://www.yahoo.com}{Yahoo!}.
+\end{document}
+```
+
+R Markdown 用户需要在上面的答案中截取颜色设置的部分。LaTeX 中，`\documentclass{article}` 定义了文档类型 \begin{document}` 和 `\end{document}` 中包含正文内容，在 `\begin{document}` 上方引入包和依赖定义样式。前两者 knitr 会在编译后自动生成，我们仅需要颜色设置的部分：
+
+```
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+```
+
+`\usepackage[]{}` 是 LaTeX 中引入包的命令，类似于 R 中的 `library`，其中 `{}` 包含包的名称，`[]`
+ 中包含该包的初始化指令。上面的设置等价于：
+ 
+```
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+}
+ ```
+
+我们下面的任务是把这段代码引入 R Markdown 中，首先用 tinytex 包安装 `hyperref`：
+
+```{r, eval = FALSE}
+tinytex::tlmgr_install("hyperref")
+```
+
+随后使用 PDF 输出的 `includes` YAML 选项：
+
+```
+output:
+  bookdown::pdf_document2:
+    includes:
+      in_header: preamble.tex
+```
+
+`in_header` 会把 `preamble.tex` 中的 LaTeX 指令放置在生成的中间 `.tex` 文件的头部，随后 tinytex 就能看到颜色指令。这样，我们只需要在 `preabmle.tex` 中使用从答案中截取的代码。最终效果如图 \@ref(fig:hyperref-demo) 所示。
+
+
+```{r hyperref-demo, echo = FALSE, fig.cap = "引入 hyperref 包设置 PDF 链接颜色"}
+import_example_result("examples/latex-typesetting-hyperref.Rmd")
+```
+
+
+排版问题是没有穷尽的，但希望读者从上面的例子中掌握了解决相似问题的思路。我们首先知道要引入什么 LaTeX 包，做哪些初始化设置，一些包需要用 tinytex 额外安装，然后在 `in_header` 引入写好的 `.tex` 配置文件，让 tinytex 解决剩下的问题。简单的思路足以解决 R Markdown PDF 排版中的绝大部分问题。
+
+此外，对于硬核 LaTeX 用户，可以在 YAML 中设置 `keep_tex` 选项：
 
 ```
 ---
@@ -194,10 +326,10 @@ output:
 ---
 ```
 
-此时得到的 `.tex` 文件已经包含了基础 Markdown 格式和代码运行结果，读者可以在此基础上添加 LaTeX 指令得到想要的效果。但这样的二次编辑已经不是使用 R Markdown 的初衷了，同时，我们也假定 R 用户不愿意付出过多时间成本深入 LaTeX。
+此时得到的 `.tex` 文件已经包含了基础 Markdown 格式和代码运行结果，读者可以在此基础上添加 LaTeX 排版命令，然后用任意 LaTeX 发行版编译。尽管这样的二次编辑未必是使用 R Markdown 的初衷了。
 
 
-在 `in_header` 中引入 LaTeX 包并添加几行初始化指令已经能解决绝大部分 R Markdown 用例的排版需要。对更复杂的
+
 
 
 ## 字体颜色
@@ -276,7 +408,7 @@ Red is `r '\x60r colorize("red", "red")\x60'`, blue is `r '\x60r colorize("blue"
 
 输出如图 \@ref(fig:options-width) 所示。
 
-```{r options-with, fig.cap = "用 options 控制输出宽度", echo = FALSE}
+```{r options-width, fig.cap = "用 options 控制输出宽度", echo = FALSE}
 import_example_result("examples/result-width.Rmd")
 ```
 
@@ -301,9 +433,10 @@ output:
 ---
 ```
 
-其中，`in_header: preamble.tex` 在最终输出文档的头部加载 `preamble.tex` 文件，我们设置了
+我们在  `preamble.tex` 设置了 
 
 ```
+\usepackage{listings}
 \lstset{
   breaklines=true
 }
@@ -317,134 +450,116 @@ knitr::include_graphics("images/05-result-with-listings.jpg")
 
 
 
-## 为代码段添加行号
-
 ## 多列布局
 
-
-=======
-
-# 排版 {#typesetting}
-
-## 字体颜色
-
-Markdown 没有提供控制字体颜色的语法。我们需要用 HTML 或 LaTeX 语法改变特定片段的颜色：
-
-- 对 HTML，我们可以用 `style` 属性设置颜色或 css 类，如 `<span style="color: red;">文本</span>`
-
-- 对 PDF，可以用 **xcolor** 包提供的 `\textcolor{}` 指令。改包已经包含在 Pandoc 的安装中。
-
-在 PDF 输出格式中设置字体颜色的例子如下：
+我们可以再次使用 flexbox 布局和 Pandoc 的 "fenced div" 语法在 HTML 输出中实现多列布局：
 
 ````
+:::: {style="display: flex;"}
+
+::: {}
+
+这是第一个 div
+
+```{r}
+str(iris)
+```
+:::
+
+::: {style="margin-left:2rem;"}
+
+这是第二个 div
+
+```{r}
+plot(iris[, -5])
+```
+:::
+
+::::
+````
+
+最顶层的 `::::` 定义了 flexbox 布局的父容器，它包含的两个 div 平分父容器的宽度。效果如图 \@ref(fig:html-multicol) 所示。 
+
+```{r html-multicol, echo = FALSE, fig.cap = "用 flexbox 在 HTML 输出中创建多列布局"}
+knitr::include_graphics("images/05-html-multicol-layout.jpg")
+```
+
+
+我们可以 flexbox 实现任意列数的布局，只许在设置了 `display:flex` 的 div 中添加更多的子 div 即可，但双列已经能满足大部分文档需求。
+
+如果想同时支持 HTML 和 PDF 格式，需要添加额外的 `.tex` 配置文件，源文档为：
+
+```
 ---
-title: "用 PDF 输出中设置字体颜色"
 documentclass: ctexart
-output: rticles::ctex
----
-
-日出江花红胜\textcolor{red}{火}，春来江水绿如\textcolor{blue}{蓝}
-````
-
-`\textcolor` 的第一个括号指定颜色， 第二个括号为颜色应用的文字。
-
-然而，上述写法只在我们仅有一种确定输出格式的时候生效。例如，输出格式是 LaTeX，HTML 写法将被忽略，反之亦然。knitr 包提供了 `is_html_output` 和 `is_latex_output` 两个函数判断当前文档的输出格式，由此，我们可以定义一个动态应用颜色语法的函数：
-
-```{r, eval = FALSE}
-colorize <- function(x, color) {
-  if (knitr::is_latex_output()) {
-    sprintf("\\textcolor{%s}{%s}", color, x)
-  } else if (knitr::is_html_output()) {
-    sprintf("<span style='color: %s;'>%s</span>", color,
-      x)
-  } else x
-}
-```
-
-随后，我们可以使用行内 R 代码：
-
-```
-Red is `r '\x60r colorize("red", "red")\x60'`, blue is `r '\x60r colorize("blue", "blue")\x60'`
-```
-
-我们可以用 Pandoc 的 Lua 过滤器功能实现更进阶的自定义颜色语法。有兴趣的读者可以在 [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/font-color.html#lua-color) 看到一个例子。
-
-
-## 缩进
-
-大部分时候，Markdown 会无视文本中的空格。但表示诗歌或地址等信息时，我们可能希望用空格表示缩进。这时可以在行首添加 `|`，Markdown 会保留紧跟在垂直线后的空格和换行符。例如：
-
-
-```
-> | 古今之成大事业、大学问者，必经过三种之境界： 
-> |   “昨夜西风凋碧树，独上高楼，望尽天涯路。” 此第一境也。 
-> | "衣带渐宽终不悔，为伊消得人憔悴。" 此第二境也。 
-> |   "众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。”此第三境也。
-```
-
-生成：
-
-> | 古今之成大事业、大学问者，必经过三种之境界： 
-> |   ”昨夜西风凋碧树，独上高楼，望尽天涯路。“ 此第一境也。 
-> | "衣带渐宽终不悔，为伊消得人憔悴。" 此第二境也。 
-> |   "众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。”此第三境也。
-
-
-
-
-
-## 控制输出宽度
-
-有时 R 代码生成的文字输出宽度过长，容易溢出当前页面宽度。HTML 格式的输出文档会生成水平方向的滚动条，而 PDF 文档则会丢失页面宽度以外的内容。较为通用的解决办法时用 `options()` 中的 `width` 参数控制函数输出的宽度，例如：
-
-`r import_example('examples/result-width.Rmd')`
-
-输出如图 \@ref(fig:options-width) 所示。
-
-```{r options-with, fig.cap = "用 options 控制输出宽度", echo = FALSE}
-import_example_result("examples/result-width.Rmd")
-```
-
-
-如果是 HTML 输出格式，我们也可以直接应用 css：
-
-```css
-pre code {
-  white-space: pre-wrap;
-}
-```
-
-有些 R 函数可能不会听从 `options` 的安排。我们可用 LaTeX 中的 **listing** 包做补救，在 YAML 中：
-
-```
----
 output:
-  pdf_document:
-    pandoc_args: --listings
+  html_document: 
+    css: columns.css
+  rticles::ctex: 
+    keep_tex: true
     includes:
-      in_header: preamble.tex
+      in_header: columns.tex
 ---
+
+# 双列布局
+
+下面的顶层 div 包含了三个 div 子元素，中间的 div 不包含内容，仅用作添加间距。
+
+:::::: {.cols data-latex=""}
+
+::: {.col data-latex="{0.55\textwidth}"}
+```{r, echo=FALSE, fig.width=5, fig.height=4}`r ''`
+par(mar = c(4, 4, .2, .1))
+plot(cars, pch = 19)
+```
+:::
+
+::: {.col data-latex="{0.05\textwidth}"}
+\ 
+<!-- 空 div -->
+:::
+
+::: {.col data-latex="{0.4\textwidth}"}
+
+`cars` 数据的散点图如左所示。
+
+这说明了什么呢？小编带大家一起看一下吧，cars 数据的散点图就是用散点画的图，好了，这就是小编给大家分享的 cars 散点图是什么。希望大家看完这篇由小编精心整理的内容后，能对相关知识有所了解，解决你的困惑。
+:::
+::::::
 ```
 
-其中，`in_header: preamble.tex` 在最终输出文档的头部加载 `preamble.tex` 文件，我们设置了
+PDF 输出效果如图 \@ref(fig:pdf-multicol) 所示。
+
+```{r pdf-multicol, fig.cap = "同时支持 HTML 和 PDF 的双列布局", echo = FALSE}
+knitr::include_graphics("images/05-pdf-multicol-layout.png")
+```
+
+其中, `columns.css` 只需要一行：
 
 ```
-\lstset{
-  breaklines=true
+.cols {
+  display: flex;
 }
 ```
 
-`\lstset{}` 指令用于设定代码输出的格式，例如可以指定字体 `basicstyle=\ttfamily`。最终结果如 图 \@ref(fig:result-listings) 所示。读者可以在 <https://ctan.org/pkg/listings> 了解 listing 包的其他选项。
+`columns.tex` 则需要定义 `col` 环境，覆盖 Pandoc 默认的一个容器一行的设置：
 
-```{r result-listings, echo = FALSE, fig.cap = "用 listings 包控制输出宽度"}
-knitr::include_graphics("images/05-result-with-listings.jpg")
 ```
+\newenvironment{cols}[1][]{}{}
 
+\newenvironment{col}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
 
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
 
-## 为代码段添加行号
-
-## 多列布局
-
-
->>>>>>> master
+\makeatletter
+\def\ignorespacesandallpars{%
+  \@ifnextchar\par
+    {\expandafter\ignorespacesandallpars\@gobble}%
+    {}%
+}
+\makeatother
+```

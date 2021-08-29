@@ -64,7 +64,7 @@ plot(cars, pch = 19)
 
 对于已有的，非代码块生成的图片，有两种插入方法:
 
-- 使用 `knitr::include_graphics()` 函数，例如 
+- 使用 `knitr::include_graphics()` 函数，例如
 
 
 ````
@@ -113,7 +113,7 @@ knitr::include_graphics(rep("images/knit-logo.png", 3))
 - `longtable`: 把较长的表格拆分至多页 (PDF, 需要 LaTeX 包 `longtable`)
 
 ```{r}
-knitr::kable(head(mtcars[, 1:8], 10), 
+knitr::kable(head(mtcars[, 1:8], 10),
              caption = "mtcars 数据的前 10 行", booktabs = TRUE)
 ```
 
@@ -129,7 +129,7 @@ knitr::kable(
 )
 ```
 
-[kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable` 基础上提供了 `kableExtra::kbl` 函数作为 `kable` 的升级版，带有更多定制表格外观的参数,  。我们可以用很少的代码创作出外形美观，意义丰富的表格。 
+[kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable` 基础上提供了 `kableExtra::kbl` 函数作为 `kable` 的升级版，带有更多定制表格外观的参数,  。我们可以用很少的代码创作出外形美观，意义丰富的表格。
 
 
 ```{r kableExtra-example}
@@ -195,12 +195,12 @@ $$X = \begin{bmatrix}1 & x_{1}\\
 1 & x_{3}
 \end{bmatrix}$$
 
-## 主题和模板
+## 主题和模板 {#theme-templates}
 
 对于 rmarkdown 包提供的 HTML 输出格式，我们可以用 YAML 元数据中的 `theme` 选项设置输出的外观主题。
 
 ```
---- 
+---
 output:
   html_document:
     toc: true
@@ -226,7 +226,7 @@ knitr::include_graphics("images/04-bootswatch.jpg")
 
 ```
 ---
-output: 
+output:
   prettydoc::html_pretty:
     theme: cayman
 ---
@@ -242,15 +242,15 @@ import_example_result("examples/prettydoc.Rmd")
 `html_pretty` 可选的主题包括：
 
   - `cayman`: 修改自 [Cayman](https://github.com/jasonlong/cayman-theme) 主题
-  
+
   - `tactile`: 修改自 [Tactile](https://github.com/jasonlong/tactile-theme) 主题
-  
+
   - `architect`: 修改自 [Architect](https://github.com/jasonlong/architect-theme) 主题
-  
+
   - `leonids`: 修改自 [Leonids](https://github.com/renyuanz/leonids) 主题
-  
+
   - `hpstr`: 修改自 [HPSTR](https://github.com/mmistakes/jekyll-theme-hpstr) 主题
-  
+
 我们还可以提供其他 YAML 选项：
 
 
@@ -359,7 +359,7 @@ import_example_result("examples/cross-reference.Rmd")
 import_example_result("examples/pandoc-attributes.Rmd")
 ```
 
-读者还需注意，对没有编号的标题使用交叉引用时，只能用 Markdown 链接 `[文字](#label)`,  而不能用 `\@ref(label)`，后者是基于编号的引用。 
+读者还需注意，对没有编号的标题使用交叉引用时，只能用 Markdown 链接 `[文字](#label)`,  而不能用 `\@ref(label)`，后者是基于编号的引用。
 
 
 
@@ -440,7 +440,7 @@ nocite: '@*'
 
 ### 引用 R 包
 
-参考"文献"还可以包括文章使用的软件包。knitr 提供了 `write_bib` 函数为 R 包生成 `.bib` 格式的参考条目： 
+参考"文献"还可以包括文章使用的软件包。knitr 提供了 `write_bib` 函数为 R 包生成 `.bib` 格式的参考条目：
 
 
 ```{r}
@@ -494,7 +494,7 @@ library(htmlwidgets)
 ```{r leaflet-example, fig.cap = "用 leaflet 包插入交互地图"}
 library(leaflet)
 leaflet() %>%
-  addTiles() %>%  
+  addTiles() %>%
   setView(174.768, -36.852, zoom = 16) %>%
   addPopups(lng = 174.768, lat = -36.852, popup="<b>R</b> 的诞生地")
 ```
@@ -532,13 +532,13 @@ library(DiagrammeR)
 
 grViz("digraph {
   graph [layout = dot, rankdir = TB]
-  
-  node [shape = rectangle]        
+
+  node [shape = rectangle]
   rec1 [label = 'Step 1. 起床']
   rec2 [label = 'Step 2. 写代码']
   rec3 [label =  'Step 3. ???']
   rec4 [label = 'Step 4. 赚钱']
-  
+
   # edge definitions with the node IDs
   rec1 -> rec2 -> rec3 -> rec4
   }",
@@ -554,19 +554,19 @@ grViz("digraph {
 ```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值"}
 DiagrammeR::grViz("
   digraph graph2 {
-  
+
   graph [layout = dot, rankdir = LR]
-  
+
   # node definitions with substituted label text
   node [shape = oval]
   a [label = '@@1']
   b [label = '@@2']
   c [label = '@@3']
   d [label = '@@4']
-  
+
   a -> b -> c -> d
   }
-  
+
   [1]: names(iris)[1]
   [2]: names(iris)[2]
   [3]: names(iris)[3]
@@ -638,7 +638,7 @@ output:
 # The first section
 
 \newpage
-  
+
 ___
 
 # The second section
