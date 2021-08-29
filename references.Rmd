@@ -18,7 +18,7 @@ knitr::write_bib(c(
   'kableExtra',
   'flextable',
   'huxtable',
-  'gt',F
+  'gt',
   'gtsummary',
   'formattable',
   'DT',

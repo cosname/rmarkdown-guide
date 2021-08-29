@@ -433,7 +433,7 @@ output:
 `\lstset{}` 命令用于设定代码输出的格式，例如可以指定字体 `basicstyle=\ttfamily`。这里 `breaklines=true` 让输出会自动适应页面宽度换行。最终结果如图 \@ref(fig:result-listings) 所示。读者可以在 <https://ctan.org/pkg/listings> 了解 listing 包的其他选项。
 
 ```{r result-listings, echo = FALSE, fig.cap = "用 listings 包控制输出宽度"}
-import_example_result("examples/result-witdth-listings.Rmd")
+import_example_result("examples/result-width-listings.Rmd")
 ```
 
 ## 多列布局 {#multi-col-layout}
