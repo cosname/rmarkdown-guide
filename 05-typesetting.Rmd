@@ -6,13 +6,11 @@
 
 由此见得，Markdown 并不希望成为某个完备的排版解决方案。我们不是想用 `#`, `*`, `-` 等表示可穷尽的样式，而是用简单易记的语法满足最常见的格式需要，仅此而已。这意味着 Markdown 不能满足较为复杂的排版需求，例如：
 
-- 改变字体大小
+- 设置文字的大小，颜色和段落对齐
 
-- 设置字体颜色
+- 改变输出图片，表格等的背景，边框样式
 
-- 调整段落对齐
-
-- 设置复杂的文字和图片布局
+- 创建较复杂的布局，如文字环绕和多列结构
 
 本章介绍了突破 Markdown 排版限制的解决办法。我们首先介绍 HTML 和 PDF 格式下通用的排版策略，随后探讨几个解决特定问题的技巧，读者可以按需选择性阅读。但在追求复杂排版效果之前，读者应首先考虑它们是否是必需的，以及达成的效果是否值得花费额外时间。
 
@@ -21,7 +19,7 @@
 
 ### CSS 基础 {#css-basics}
 
-CSS (层叠样式表) 是一种设置 HTML 网页的布局与样式的语言，以 `.css` 文件存储。一个 CSS 文件包含了针对不同网页元素的排版规则，例如下面的 CSS 样式表
+CSS (层叠样式表) 是一种设置 HTML 网页的布局与样式的语言，以 `.css` 文件存储。一个 CSS 文件包含了针对不同网页元素的排版规则，例如下面的 CSS 样式表：
 
 ```css
 h1 {
@@ -40,8 +38,10 @@ p span {
 1. 对所有 <h1> 元素，设置它们的字体颜色为红色 (red)，大小为 5 倍默认字体的大小
 
 2. 对所有 <p> 元素包含的 <span> 元素，设置它们的字体颜色为蓝色 (blue)
-
 ```
+
+上面的 `h1` 和 `p span` 被称为类型选择器 (type selector)，因为它选择了所有同类型的元素。 选择器还可以精确到元素的属性，例如 `<p id = "id"></p>` 可以用 ID 选择器 (ID selector) `p#id`，`<div class = "class"></div>` 可以用类选择器 (class selector) `div.class`。一般，在元素类型是 `div` 时，可省略选择器中的元素类型，例如 `.class`。
+
 
 除了颜色，大小，对齐等等简单属性外，CSS 还可用于设计复杂的布局，假设有如下网页结构：
 
@@ -63,7 +63,7 @@ p span {
 knitr::include_graphics("images/05-without-flexbox.jpg")
 ```
 
-我们可以用 CSS 调整 `.container` 和 `.sub-container` 中各元素的排布，添加 CSS：
+我们可以用 CSS 调整 `.container` 和 `.sub-container` 中各元素的排布，例如：
 
 ```css
 .container {
@@ -80,13 +80,23 @@ knitr::include_graphics("images/05-without-flexbox.jpg")
 }
 ```
 
-`display: flex` 为容器设置了 flexbox 布局, 突破了常规文档流的默认布局限制。`justify-content` 和 `align-items` 等属性进一步自定义了 flexbox 布局的效果，如图 \@ref(fig:flexbox) 所示。
+`display: flex` 为容器设置了 flexbox 布局，也称为弹性布局。设置了 `display: flex` 的元素被称为弹性容器，所有弹性容器的子元素默认被放置在同一行，但也可以通过设置`justify-content` 和 `align-items` 等属性在任何方向上创建多行多列的排布，这就突破了常规文档流的默认布局限制， 如图 \@ref(fig:flexbox) 所示。
 
 ```{r flexbox, fig.cap = "添加 CSS 布局后", echo = FALSE}
 knitr::include_graphics("images/05-flexbox.jpg")
 ```
 
-我们不再深入 CSS 选择器的语法和属性设置。读者可以在 [MDN 文档](https://developer.mozilla.org/zh-CN/docs/Learn/CSS) 学习更多 CSS 知识。
+在上面的例子中，`container` 是最顶层的弹性容器，子元素 `.sub-container` 和 `#three` 被放在同一行上。而 `.sub-container` 本身也是弹性容器，且设置了 ` flex-direction: column`，故它的两个子元素 `#one` 和 `#two` 被放在同一列。
+
+除了 flexbox 外，还有一种重要的布局是网格布局 (grid)，可以看作是 flexbox 的二维版本。网格布局几乎可以达成任何平面布局效果，如图 \@ref(fig:grid-layout)所示。有兴趣的读者可以参考 <https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout>。
+
+```{r grid-layout, echo = FALSE, fig.cap = "网格布局示例"}
+knitr::include_graphics("images/05-grid-layout.jpg")
+```
+
+
+
+我们不再深入 CSS。读者可以在 [MDN 文档](https://developer.mozilla.org/zh-CN/docs/Learn/CSS) 学习更多知识。
 
 ### 在 R Markdown 中使用 CSS {#css-rmarkdown}
 
@@ -102,7 +112,7 @@ output:
 ---
 ```
 
-随后，我们可以在对应的 CSS 文件中添加规则，这需要知道想控制元素对应的 CSS 选择器，常见文档元素对应的选择器如表 \@ref(tab:selectors) 所示。
+随后，我们在对应的 CSS 文件中添加样式规则，这需要知道想控制元素对应的 CSS 选择器，常见文档元素对应的选择器如表 \@ref(tab:selectors) 所示。
 
 ```{r selectors, echo = FALSE}
 library(huxtable)
@@ -400,31 +410,30 @@ pre code {
 }
 ```
 
-有些 R 函数可能不会听从 `options` 的安排。我们可用 LaTeX 中的 **listing** 包做补救，在 YAML 中：
+有些 R 函数可能不会听从 `options` 的安排。我们可用 LaTeX 中的 **listing** 包做补救。listings 是 tinytex 自动安装的包，无需额外下载，直接在 YAML 中设置：
 
 ```
 ---
 output:
-  pdf_document:
+  rticles::ctex:
     pandoc_args: --listings
     includes:
-      in_header: preamble.tex
+      in_header: listings.tex
 ---
 ```
 
-我们在  `preamble.tex` 设置了 ：
+我们在  `listings.tex` 设置了：
 
 ```tex
-\usepackage{listings}
 \lstset{
   breaklines=true
 }
 ```
 
-`\lstset{}` 指令用于设定代码输出的格式，例如可以指定字体 `basicstyle=\ttfamily`。最终结果如 图 \@ref(fig:result-listings) 所示。读者可以在 <https://ctan.org/pkg/listings> 了解 listing 包的其他选项。
+`\lstset{}` 命令用于设定代码输出的格式，例如可以指定字体 `basicstyle=\ttfamily`。这里 `breaklines=true` 让输出会自动适应页面宽度换行。最终结果如图 \@ref(fig:result-listings) 所示。读者可以在 <https://ctan.org/pkg/listings> 了解 listing 包的其他选项。
 
 ```{r result-listings, echo = FALSE, fig.cap = "用 listings 包控制输出宽度"}
-knitr::include_graphics("images/05-result-with-listings.jpg")
+import_example_result("examples/result-witdth-listings.Rmd")
 ```
 
 ## 多列布局 {#multi-col-layout}
@@ -433,13 +442,13 @@ knitr::include_graphics("images/05-result-with-listings.jpg")
 
 `r import_example("examples/multicol-html.Rmd")`
 
-最顶层的 `::::` 定义了 flexbox 布局的父容器，它包含的两个 div 平分父容器的宽度。效果如图 \@ref(fig:html-multicol) 所示。 
+最顶层的 `::::` 定义了一个弹性容器，它包含的两个 div 平分父容器的宽度。效果如图 \@ref(fig:html-multicol) 所示。 
 
 ```{r html-multicol, echo = FALSE, fig.cap = "用 flexbox 在 HTML 输出中创建多列布局"}
 knitr::include_graphics("images/05-html-multicol-layout.jpg")
 ```
 
-我们可以 flexbox 实现任意列数的布局，只许在设置了 `display:flex` 的 div 中添加更多的子 div 即可，但双列已经能满足大部分文档需求。
+我们可以用 flexbox 实现任意列数的布局，只需在弹性容器中添加更多的子 div 即可，但双列已经能满足大部分文档需求。
 
 如果想同时支持 HTML 和 PDF 格式，需要添加额外的 `.tex` 配置文件，源文档为：
 

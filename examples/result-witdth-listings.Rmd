@@ -1,0 +1,15 @@
+---
+title: '用 listings 包控制输出宽度'
+geometry: "left=3cm,right=3cm,top=0.5cm,bottom=1.5cm"
+documentclass: ctexart
+output: 
+  rticles::ctex:
+    pandoc_args: --listings
+    includes:
+      in_header: listings.tex
+---
+
+```{r}
+matrix(runif(100), ncol = 20)
+```
+

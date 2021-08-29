@@ -13,13 +13,13 @@ source("utils.R")
 
 - 插入并运行不同编程语言的代码块
 
-最后。我们用案例研究展示了如何运用 R Markdown 作为 SQL，Python 和 R 共存的数据分析环境。
+最后，我们用案例研究展示了如何运用 R Markdown 作为 SQL，Python 和 R 共存的数据分析环境。
 
 
 
 ## R Markdown 的编译过程
 
-在 \@ref(create-first-rmd) 节中，我们编译了 `first-rmd.Rmd` 源文档，生成了对应的网页输出结果。点击 `Knit` 按钮后，R 启动一个新的进程，依次执行需要运行的代码块，对源文档添加适当的格式，最终生成指定格式的输出文档，这便是 R Markdown 的编译过程。 我们提到，`Knit` 是对 rmarkdown 包中 `render()` 函数的封装。因此，理解 R Markdown 的编译就是理解 `render()` 调用了什么方法工具完成文档格式的转换。
+在 \@ref(create-first-rmd) 节中，我们编译了 `first-rmd.Rmd` 源文档，生成了对应的网页输出结果。点击 `Knit` 按钮后，R 启动一个新的进程，依次执行需要运行的代码块，对源文档添加适当的格式，最终生成指定格式的输出文档，这便是 R Markdown 的编译过程。 我们提到，`Knit` 是对 rmarkdown 包中 `render()` 函数的封装。因此，理解 R Markdown 的编译就是理解 `render()` 调用了什么方法和工具完成文档格式的转换。
 
 直接给出答案之前，我们不妨先观察 `first-rmd.Rmd` 和 `first-rmd.html` HTML 文件的差异 (图 \@ref(fig:first-rmarkdown))，看看 `render()` 需要为我们做怎样的转换工作。
 
@@ -34,7 +34,7 @@ output: html_document
 ---
 ```
 
-这样的部分在 R Markdown 中称为 YAML 头部。YAML 是一种简单的标记语言，可以用键值对 (key-value pairs) 表示配置文件。读者可能会猜到，YAML 头部以元数据的形式参与到了 R Markdown 的编译中。最直接地，`title` 的对应值 `"Untitled"` 是 `first-rmd.html` 的第一行对应的标题。类似的键包括 `author` (作者), `date` (日期), `subtitle` (副标题), `abstract` (摘要) 等，添加这些键后，R Markdown 会将它们对应的值添加到文档中。
+这样的部分在 R Markdown 中称为 YAML 头部。YAML 是一种简单的标记语言，用键值对 (key-value pairs) 表示配置文件。读者可能会猜到，YAML 头部以元数据的形式参与到了 R Markdown 的编译中。最直接地，`title` 的对应值 `"Untitled"` 是 `first-rmd.html` 的第一行对应的标题。类似的键包括 `author` (作者), `date` (日期), `subtitle` (副标题), `abstract` (摘要) 等，添加这些键后，R Markdown 会将它们对应的值添加到文档中。
 
 `output` 的对应值 `html_document` 则告诉 R Markdown 我们希望源文档转换至的格式是 HTML。举一反三，如果第二行更改为 `output: pdf_document`，R Markdown 就会生成对应的 PDF 文档。
 
@@ -71,25 +71,18 @@ output: html_document
 
 不难发现，上面的代码块与源文档 `first-rmd.Rmd` 之间存在明确的文本对应关系。例如，在 R Markdown 文档 `## R Markdown` 后的前两个段落中，我们有：
 
-
-
 ```markdown
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 ```
 
-
 在 HTML 文件中对应的段落为：
-
-
 
 ```html
 <p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
 <p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
 ```
-
-
 
 我们注意到，HTML 文件中的文本并不是照搬 R Markdown 文件，而是做了相应的替换。最显著的变化是，HTML 文件在两个段落的前后分别添加了 `<p>` 标签，这在 HTML 语法中表示一个单独的段落，而 R Markdown 文件中只在两个段落之间添加了空行，没有做其他额外标识。再例如， R Markdown 中的 `**Knit**` 在 HTML 中变成了 `<strong>Knit</strong>`, `*` 号变为在 HTML 中标识粗体的 `<strong>` 标签。对 PDF 编译感兴趣的读者如果查看输出的 `.tex` 文件，会发现 `**Knit**` 被转换为了 `\textbf{Knit}`，即 TeX 中粗体的表示方法。
 
@@ -119,7 +112,7 @@ summary(cars)
 
 同理，当下一个代码块 `plot(pressure)` 的输出结果是图片时，R Markdown 也能自动地运用 HTML 标准中对应的 `<img>` 标签。读者还可能发现该段代码没有出现在 HTML 网页中，只有生成的图片被留了下来。这是因为我们在 `` ```{r} `` 中制定了 `echo = FALSE` 选项，它告诉 R Markdown 仅保留该段代码的输出结果，而隐藏代码本身。本书的后续章节将介绍更多类似的代码块选项，进一步定制 R Markdown 文档的输出。
 
-通过以上观察，我们可以总结出 R Markdown 编译中的三个主要工作：
+通过以上观察，我们可以总结出 `rmarkdown::render` 编译中的三个主要工作：
 
 - 读取 YAML 头部，统领编译的全局设定
 
@@ -157,14 +150,11 @@ rmarkdown::pandoc_version()
 
 - 代码: 运行并保存输出结果
 
-
 我们可以把 R Markdown 文档想象为从上到下的一系列章节，如图 \@ref(fig:document-flow)。YAML 元数据位于头部，确定了文档的输出和元数据。标题之后是正文的各个章节，每个章节包含任意 Markdown 文字和代码块，还可能有类似的子章节。
 
 ```{r document-flow, echo = FALSE, fig.cap = "R Markdown 文档示例"}
 knitr::include_graphics("images/03-document-flow.png")
 ```
-
-
 
 下面，我们对它们做逐一介绍。
 
@@ -173,14 +163,11 @@ knitr::include_graphics("images/03-document-flow.png")
 
 YAML 元数据一般位于 R Markdown 文档的开头，前后各用三个减号作为分隔标志。最重要的一个域是 `output` 所指定的输出格式，我们在下一个小节集中介绍相关知识。这里介绍除输出格式之外的三个常见选项，`title`, `author` 和 `date`，它们的值将直接被插入输出为文档。
 
-
-
 `title` 设定了输出文档的顶级标题。标题一般不宜过长，更多的描述文字可以考虑放在 `subtitle`, `abstract` 等中。还要注意的是，YAML 不要求为字符串添加引号。但如果字符串中包含空格或特殊字符，就需要放在双引号或单引号中。推荐涉及中文字符时总是使用引号，例如：
 
 ```
 title: 'bookdown: 用 R Markdown 撰写书籍和技术文档'
 ```
-
 
 `author` 设定文档的作者信息。需要插入多个作者时，我们可以使用 YAML 中的复合结构，如：
 
@@ -196,13 +183,11 @@ YAML 中，我们用两个空格表示层级关系，`-` 是数组元素的标�
 author <- c("张三", "李四")
 ```
 
-
 `date`: 设定文档的日期信息。在 \@ref(r-code) 中，我们将学习如何自动更新日期为源文档的编译时间。
 
 ```{r, include = FALSE}
 library(distill)
 ```
-
 
 除了字符串和数组外，YAML 还支持数值型, 布尔 (`true` 和 `false`) 以及更复杂的数据结构。例如，在 **distill** [@R-distill] 包的 `distill_article` 输出格式中，`author` 支持 YAML 里的字典结构，与 R 中的列表类似，可以为作者添加更多个人信息：
 
@@ -237,17 +222,11 @@ author <- c(
 )
 ```
 
-
 读者对 YAML 语法不熟悉时，可以安装 [ymlthis](https://github.com/r-lib/ymlthis) 包，它会提供一个在 R Markdown 中插入 YAML 数据的图形化界面，可以在 RStudio 的 `Tools --> Addins --> Browse Addins` 中找到。启动后如图 \@ref(fig:ymlthis) 所示。
 
 ```{r ymlthis, echo = FALSE, fig.cap = "ymlthis 包提供图形化输入 YAML 元数据的插件"}
 knitr::include_graphics("images/03-ymlthis.jpg")
 ```
-
-
-
-
-
 
 ### 输出格式
 
@@ -289,8 +268,6 @@ knitr::include_graphics("images/03-tufte.jpg")
 
 R Markdown 也支持输出 MS Word 文档，在输出中指定 `output: word_document`，读者可以在第 \@ref(word) 章了解更多输出 Word 文档的知识。
 
-
-
 ### 总结 
 
 最后，我们再用一个例子总结并扩展 YAML 元数据的相关知识。源文档为
@@ -312,14 +289,11 @@ R Markdown 也支持输出 MS Word 文档，在输出中指定 `output: word_doc
 knitr::include_graphics("images/03-yaml-test.jpg")
 ```
 
-
-
-
 ## Markdown 语法 {#markdown-syntax}
 
 Markdown 由 John Gruber 于 2004 年创建，以易读，可移植，跨平台等优势成为技术写作中最受欢迎的标记语言之一。在 R Markdown 之外，我们能发现 Markdown 更广泛的应用，例如记笔记，撰写技术文档，创作演示文稿，设计网站主题等。
 
-R Markdown 输出文档中的文字排版是通过 Markdown 标记语言实现的。借助 Markdown，我们可以在纯文本文档中用特殊的标记符号表示格式，例如用井号表示标题，用星号表示加粗等。这样的统一中介使我们不必为某一个特定的输出格式设置格式。
+R Markdown 输出文档中的文字排版是通过 Markdown 标记语言实现的。借助 Markdown，我们可以在纯文本文档中用特殊的标记符号表示格式，例如用井号 `#` 表示标题，用 `*` 星号表示加粗等。这样的统一中介使我们不必逐个为特定输出格式设置排版方案。
 
 ### 简单段内格式
 
@@ -364,13 +338,6 @@ R is a free software environment for statistical computing and graphics.
 
 It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. 
 ```
-
-
-
-
-
-
-
 
 ### 段落格式
 
@@ -448,7 +415,6 @@ lapply(x, mean)
 ````
 
 显示为：
-
 
 ```
 x <- list(a = 1:10, 
@@ -594,10 +560,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 ````
 
+`label` 和 `include` 被称为该代码块的 knitr 选项。knitr 选项可以定制 knitr 包运行代码块时的相关行为。`label` 为代码块设置了唯一的标签，利于后续引用。而 `include = FALSE` 使 knitr 仅在转换过程中运行该段代码，不在输出中显示代码块内容和相关的输出结果。 `include = TRUE` 是所有代码块的默认设置。
 
-`label` 和 `include` 被称为该代码块的 knitr 选项。knitr 选项可以定制 knitr 包运行代码块时的相关行为。`label` 为代码块设置了唯一的标签，利于后续引用。而 `include=FALSE` 使 knitr 仅在转换过程中运行该段代码，不在输出中显示代码块内容和相关的输出结果。 `include=TRUE` 是所有代码块的默认设置。
-
-读者可以在 https://yihui.org/knitr/options/ 查看所有 knitr 选项和它们的含义，这里列出一些常见选项：
+读者可以
+在 <https://yihui.org/knitr/options/> 查看所有 knitr 选项和它们的含义，这里列出一些常见选项：
 
 - `eval`: 是否运行该代码块
 
@@ -605,7 +571,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - `results`：如何处理代码块和生成结果
 
-  - `'hide'`: 隐藏代码块的输出结果。`results='hide'` 加上 `echo=FALSE` 等价于 `include = FALSE`
+  - `'hide'`: 隐藏代码块的输出结果。`results = 'hide'` 加上 `echo = FALSE` 等价于 `include = FALSE`
   - `'asis'`: 按原样输出结果。默认情况下，knitr 在生成 `.md` 文件时会将代码的文字输出在放在 Markdown 的代码块中
   - `'markup'` 默认设置
   
@@ -615,7 +581,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - `collapse`: 为 `true` 时，在输出文档中将代码块和结果放到同一个块中
 
-- `fig.width` 和 `fig.height`: 调整代码块生成图形时图形设备 (graphical device)的大小。这是因为 kntir 首先通过图形设备将图片存储为文件 (例如 png, jpg)，随后在输出文档中引用这些文件。默认情况下 `fig.width=7, fig.height=5`, 我们不需要知道操作图形设备的底层细节，按照需要调整大小即可。两个类似的选项是 `out.width` 和 `out.height`, 通常取值为百分比，表示图片占据一页的比例。例如, `out.height = '80%'` 表示图片占据页面高度的 80%。
+- `fig.width` 和 `fig.height`: 调整代码块生成图形时图形设备 (graphical device)的大小。这是因为 kntir 首先通过图形设备将图片存储为文件 (例如 png, jpg)，随后在输出文档中引用这些文件。默认情况下 `fig.width = 7, fig.height = 5`, 我们不需要知道操作图形设备的底层细节，按照需要调整大小即可。两个类似的选项是 `out.width` 和 `out.height`, 通常取值为百分比，表示图片占据一页的比例。例如, `out.height = '80%'` 表示图片占据页面高度的 80%。
 
 - `fig.cap`: 代码块生成图片的标题
 
@@ -632,7 +598,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ---
 title: "全局设置 knitr 选项"
 ---
-
 
 ```{r, include = FALSE}`r ''`
 knitr::opts_chunk$set(
@@ -651,13 +616,11 @@ knitr::opts_chunk$set(
 plot(mtcars)
 ```
 
-
 ```{r, fig.width = 7}`r ''`
 # 更改 fig.width 为 7，其他选项不变
 plot(mtcars)
 ```
 ````
-
 
 之前的例子没有涉及行内代码 (inline expression)，但它是另外一种插入 R 代码的重要方式。行内代码直接把 R 代码的运行结果插入至文本中，语法是 `` `r ` ``。例如：
 
