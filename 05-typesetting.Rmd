@@ -6,7 +6,7 @@
 
 由此见得，Markdown 并不希望成为某个完备的排版解决方案。我们不是想用 `#`, `*`, `-` 等表示可穷尽的样式，而是用简单易记的语法满足最常见的格式需要，仅此而已。这意味着 Markdown 不能满足较为复杂的排版需求，例如：
 
-- 改变某个段落的字体大小
+- 改变字体大小
 
 - 设置字体颜色
 
@@ -184,10 +184,10 @@ $warning:       $yellow !default;
 $danger:        $red !default;
 ```
 
-随后，在 CSS/SCSS 中使用 `primary`, `secondary`, `success` 等变量，就可以应用该主题到网页上。如果想要应用另一套配色方案/主题，更改这些变量的值即可。每个基于 bootstrap 生成的网页由类似如下的颜色设置：
+随后，在 CSS/SCSS 中使用 `primary`, `secondary`, `success` 等变量，就可以应用该主题到网页上。如果想要应用另一套配色方案/主题，更改这些变量的值即可。每个基于 bootstrap 生成的网页有类似如下的颜色设置：
 
 
-```scss
+```css
 selector-1 {
   color: $secondary;
   background-color: $primary；
@@ -201,7 +201,7 @@ selector-2 {
 }
 ```
 
-因此，我们可以通过改变 bootstrap 的 SCSS 变量值来定义 R Markdown HTML 输出的样式。这些变量不限于颜色，还包括大小，间距，字体等。**bslib** 包 [@R-bslib] 允许直接在 R Markdown 的 YAML 选项中定义 bootstrap 变量，例如： 
+因此，我们可以通过改变 bootstrap 的 SCSS 变量值来定义 R Markdown HTML 的输出样式。这些变量不限于颜色，还包括大小，间距，字体等。**bslib** 包 [@R-bslib] 允许直接在 R Markdown 的 YAML 选项中定义 bootstrap 的 SCSS 变量，例如： 
 
 ```
 ---
@@ -218,7 +218,7 @@ output:
 ---
 ```
 
-效果如图 \@ref(fig:bslib-demo) 所示。读者还可以用 [thematic](https://rstudio.github.io/thematic/) 包让 R 生成的图片自适应当前主题的配色。
+效果如图 \@ref(fig:bslib-demo) 所示。注意，bslib 包无法改变 R 生成图片的样式，因为它们在 Pandoc 转换 HTML 之前已经被 knitr 存储为静态文件了。有兴趣的读者还可以用 [thematic](https://rstudio.github.io/thematic/) 包让 R 生成的图片自适应当前主题的配色。
 
 ```{r bslib-demo, fig.cap = "用 bslib 定义 bootstrap SASS 变量", echo = FALSE}
 import_example_result("examples/bslib-demo.Rmd")
@@ -240,7 +240,7 @@ output:
 
 对基于 LaTeX 的 PDF 输出格式，进阶的排版设置稍复杂些。但大部分问题都可通过 "搜索 + 引入 LaTeX 包" 解决。
 
-例如，默认生成的 PDF 中链接与其他文字颜色相同，不易区分。我们希望自定义各类链接的颜色，在搜索引擎中搜索 "latex href color"，可以在 stackoverflow 上看到问题 <https://tex.stackexchange.com/questions/61015/how-to-use-different-colors-for-different-href-commands>，第一个回答给出了 LaTeX 命令：
+例如，默认生成的 PDF 中链接与其他文字颜色相同，不易区分。我们希望自定义各类链接的颜色，在搜索引擎中搜索 "latex href color"，可以在 stackoverflow 上看到问题 <https://tex.stackexchange.com/questions/61015/how-to-use-different-colors-for-different-href-commands>，一个回答给出了 LaTeX 命令：
 
 ```tex
 \documentclass{article}

@@ -1,5 +1,6 @@
 ---
 title: 'Colored Links'
+geometry: "left=3cm,right=3cm,top=0.5cm,bottom=1.5cm"
 output: 
   bookdown::pdf_document2:
     toc: true
@@ -9,7 +10,6 @@ output:
 
 # Section 1
 
-This will be an empty chapter and I will put some text here
 
 $$
 (\#eq:1)
@@ -24,3 +24,11 @@ For further references see <http://www.overleaf.com> or go to the next this [lin
 ## Section 2
 
 # Section 3
+
+This is section \@ref(section-3). 
+
+```{r cars-plot, fig.cap = "cars plot", fig.height = 3.5, fig.align="center"}
+plot(cars)
+```
+
+See figure \@ref(fig:cars-plot) for a plot.

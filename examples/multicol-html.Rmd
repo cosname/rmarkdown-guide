@@ -2,7 +2,6 @@
 output: html_document
 ---
 
-
 :::: {style="display: flex;"}
 
 ::: {}
