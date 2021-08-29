@@ -34,10 +34,6 @@
 knitr::include_graphics(paste0("examples/", c("three-output-html.png", "three-output-pdf.png", "three-output-word.jpg")))
 ```
 
-
-
-
-
 除了多样的输出格式外，R Markdown 驱动的数据分析报告还解决了很多数据分析报告写作中的痛点：
 
 - 之前在使用 R 或者其他数据分析工具时，经常需要在 Word 里写结论，在脚本里敲代码，在图表区生成图，将它们复制粘贴到一起后，还要操心格式问题，有没有什么自动化的方法？
@@ -56,7 +52,7 @@ arrests <- datasets::USArrests
 arrests$State <- rownames(arrests)
 ```
 
-```{python}
+```{python, fig.cap = "在 R Markdown 中用 seaborn 包作图"}
 # Python 部分，导入 R 数据，提取谋杀率最高的 10 个州，并用 seaborn 包作柱形图
 import pandas as pd
 import seaborn as sns
@@ -96,9 +92,9 @@ knitr::include_graphics("images/01-notebook-preview2.jpg")
 
 ## 个人简历
 
-一些 R Markdown 扩展包提供了适用于个人简历和 CV 的输出格式。例如基于 **pagedown** 包 [@R-pagedown]  的[简历模板](https://pagedown.rbind.io/html-resume)，和 [vitae](https://pkg.mitchelloharawild.com/vitae/) 下多种 CV 模板。
+一些 R Markdown 扩展包提供了适用于个人简历和 CV 的输出格式。例如基于 **pagedown** 包 [@R-pagedown] 的[简历模板](https://pagedown.rbind.io/html-resume)，和 [vitae](https://pkg.mitchelloharawild.com/vitae/) 提供的 CV 模板。
 
-除了提供模板外， R Markdown 还能让你的简历变得更加"数据驱动"。[datadrivencv](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，我们可以仅维护这张数据表，R Markdown 负责简历的格式。我们还可以插入 R 代码生成的交互图表，让我们的简历动起来。图 \@ref(ns-cv) 是 datadrivencv 包的作者 Nick Strayer 结合 **pagedown** 包 [@R-pagedown] 制作的个人简历。
+除了提供模板外， R Markdown 还能让你的简历变得更加"数据驱动"。[datadrivencv](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，我们可以仅维护这张数据表，R Markdown 负责简历的格式。我们还可以插入 R 代码生成的交互图表，让我们的简历动起来。图 \@ref(fig:ns-cv) 是 datadrivencv 包的作者 Nick Strayer 结合 **pagedown** 包制作的个人简历。
 
 ```{r ns-cv, echo = FALSE, fig.cap = "(ref:ns-cv)"}
 knitr::include_graphics("images/01-resume.png")

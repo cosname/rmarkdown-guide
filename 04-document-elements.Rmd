@@ -27,7 +27,7 @@
 
 ### 用 knitr 选项操作图片
 
-默认设置下，代码块生成的图片被直接插入到输出文档中该段代码的后面，靠左对齐，没有标题, 尺寸默认大小。我们可以用 `fig.align`, `fig.cap`, `fig.width`, `fig.height`, `out.width`, `out.height` 等 knitr 选项操作图片。例如：
+默认设置下，代码块生成的图片被直接插入到输出文档中该段代码的后面，靠左对齐，没有标题, 尺寸默认大小。我们可以用 `fig.align`, `fig.cap`, `fig.width`, `fig.height`, `out.width`, `out.height` 等 knitr 选项操作图片。例如下面的代码块生成图 \@ref(fig:cars-plot) 所示的散点图。
 
 ````
 ```{r, out.width = '70%', fig.align = 'center', fig.cap = 'cars 散点图'}`r ''`
@@ -35,13 +35,12 @@ plot(cars)
 ```
 ````
 
-生成：
 
-```{r, out.width = '70%', fig.align = 'center', fig.cap = 'cars 散点图', echo = FALSE}
+```{r cars-plot, out.width = '70%', fig.cap = 'cars 散点图', echo = FALSE}
 plot(cars)
 ```
 
-`fig.cap` 是图片的重要属性，它不仅为图片设置了标题，还确保图片被置于独立的环境中。对 HTML 输出，图片对应的 `<img>` 标签被放在一个 `.figure` 类 div 容器中。对 PDF 输出，Pandoc 会创建 `\begin{figure}` 环境，而不是仅插入 `\includegraphics{}` 指令。添加标题可以让我们的文档更有组织性，并支持交叉引用 (见 \@ref(cross-reference) 节)。
+`fig.cap` 是重要的图片属性，它不仅为图片设置了标题，还确保图片被置于独立的环境中。对 HTML 输出，图片对应的 `<img>` 标签被放在一个 `.figure` 类 div 容器中。对 PDF 输出，Pandoc 会创建 `\begin{figure}` 环境，而不是仅插入 `\includegraphics{}` 指令。添加标题可以让我们的文档更有组织性，并支持交叉引用 (见 \@ref(cross-reference) 节)。
 
 我们可以把多个图片放置在同一个环境中。knitr 选项 `fig.show = 'hold'` 把同一个代码块生成的多个图片放到同一个图片环境中。我们可以进一步设置 `out.wdith` 使多个图片并排放置。例如，`out.width = '50%'` 可以让一个代码块生成的两张图片位于一行。类似的，如果想并排 3 张图片，可以设置 `out.width = '33%'`。注意，这个技巧同时要求 `fig.align = 'default'`。图 \@ref(fig:plots-side-by-side) 是用 `fig.show = "hold"` 和 `out.width = '50%'` 并排两张图片的例子。
 
@@ -80,9 +79,9 @@ knitr::include_graphics("<image-path>")
 - 对于 PDF 输出，`include_graphics` 能自动采用质量更高的 PDF 格式图片，例如用 `foo/bar.pdf` 取代 `foo/bar.png`。knitr 选项 `auto_pdf = TRUE` 可以启动这项功能，或设置全局选项 `options(knitr.graphics.auto_pdf = TRUE)。`
 
 
-`include_graphics` 可以一次插入多个图片，下面的代码块插入了三张图片，并设置 `out.width = '30%'` 和 `fig.show = "hold"`：
+`include_graphics` 可以一次插入多个图片，下面的代码块插入了三张图片，并设置 `out.width = '30%'` 和 `fig.show = "hold"`，效果如图 \@ref(fig:include-graphics-multi) 所示。
 
-```{r, out.width = "33%", fig.show = "hold", fig.align="dafault"}
+```{r include-graphics-multi, out.width = "33%", fig.show = "hold", fig.align="dafault", fig.cap = "用 include_graphics 插入多张图片"}
 knitr::include_graphics(rep("images/knit-logo.png", 3))
 ```
 
@@ -94,7 +93,7 @@ knitr::include_graphics(rep("images/knit-logo.png", 3))
 
 ## 表格
 
-使用 `knitr::kable` 是在 R Markdown 中插入表格的最简单方式，它提供了一些修饰表格的参数：
+使用 `knitr::kable` 是在 R Markdown 中插入表格的最简单方式，它把 R 中的数据框转换为 Markdown 表格。它还提供了一些修饰表格的参数：
 
 - `caption`: 标题
 
@@ -108,7 +107,7 @@ knitr::include_graphics(rep("images/knit-logo.png", 3))
 
 ```{r}
 knitr::kable(head(mtcars[, 1:8], 10),
-             caption = "mtcars 数据的前 10 行", booktabs = TRUE)
+             caption = "用 kable 插入表格", booktabs = TRUE)
 ```
 
 与图片类似，带标题的表格将获得独立的环境。我们可以把多个表格放入同一个环境，如表 \@ref(tab:two-tables-same-env) 所示。
@@ -208,13 +207,13 @@ output:
 import_example_result("examples/theme-united.Rmd")
 ```
 
-`html_document` 中 `theme` 的取值包括 `united`, `journal`, `flatly` 等 。这些名字来自 UI 框架 bootstrap 的主题扩展 [bootswatch](https://bootswatch.com/)。rmarkdown 的 HTML 输出格式基于 bootstrap 框架，而 bootswatch 为 bootstrap 提供了一系列扩展主题。读者可以在 bootswatch 网站上看到每个主题的效果。Andrew Zieffler 在[博客](https://www.datadreaming.org/post/r-markdown-theme-gallery/)中同样列举了所有主题的效果。
+`html_document` 中 `theme` 的取值包括 `united`, `journal`, `flatly` 等 。这些名字来自 UI 框架 bootstrap 的主题扩展 [bootswatch](https://bootswatch.com/)。rmarkdown 的 HTML 输出格式基于 bootstrap 框架，而 bootswatch 为 bootstrap 提供了一系列扩展主题。读者可以在 bootswatch 网站上看到每个主题的效果。Andrew Zieffler 在[博客](https://www.datadreaming.org/post/r-markdown-theme-gallery/)中也列举了各主题的外观。
 
-```{r boots-theme, fig.cap = "bootswatch 网站", echo = FALSE}
+```{r bootswatch-theme, fig.cap = "bootswatch 主题", echo = FALSE}
 knitr::include_graphics("images/04-bootswatch.jpg")
 ```
 
-除了 `theme` 提供的主题选择外，读者还可以使用其他包提供的 R Markdown 模板。一个例子是 [prettydoc](https://github.com/yixuan/prettydoc) 包 [@R-prettydoc]。prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如：
+除 `theme` 提供的主题选择外，读者还可以使用其他包提供的 R Markdown 模板。一个例子是 [prettydoc](https://github.com/yixuan/prettydoc) 包 [@R-prettydoc]。prettydoc 为 R Markdown 文档提供了额外的输出格式 `html_pretty`, 我们可以在该格式对应的 `theme` 选项设置主题，例如：
 
 ```
 ---
@@ -330,7 +329,7 @@ import_example_result("examples/cross-reference.Rmd")
 
 ## 章节编号
 
-绝大多数输出格式在 YAML 元数据中支持 `number_sections` 属性，值为 `true` 时，各章节标题按照层级自动编号。
+绝大多数输出格式在 YAML 元数据中支持 `number_sections` 属性，值为 `true` 时，各章节标题按照顺序和层级自动编号。
 
 我们可以用 Pandoc 的标题属性 `.unnumbered` 省略某个章节的编号，细节见 <https://pandoc.org/MANUAL.html#extension-header_attributes>。例如：
 
