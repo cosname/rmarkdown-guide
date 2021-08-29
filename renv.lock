@@ -749,6 +749,13 @@
       "Repository": "CRAN",
       "Hash": "06c85365a03fdaf699966cc1d3cf53ea"
     },
+    "rticles": {
+      "Package": "rticles",
+      "Version": "0.20",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a0b62c15b48a96f748a492b7173c7861"
+    },
     "rvest": {
       "Package": "rvest",
       "Version": "1.0.1",

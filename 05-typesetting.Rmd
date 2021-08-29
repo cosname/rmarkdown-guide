@@ -1,5 +1,4 @@
-
-# 排版 {#typesetting}
+# 排版{#typesetting}
 
 迄今为止，我们在 R Markdown 中的排版效果都是通过 Markdown 实现的。Markdown 的核心设计原则是用简洁的标记表示必需的格式，让新手也能快速上手。正如 Markdown 的作者 John Gruber 所言：
 
@@ -15,17 +14,12 @@
 
 - 设置复杂的文字和图片布局
 
-本章介绍了突破 Markdown 排版限制的解决办法。我们首先介绍 HTML 和 PDF 格式下通用的排版解决策略，随后探讨如何应对一些常见的具体问题。但在追求复杂排版效果之前，读者应首先考虑它们是否是必需的，以及达成的效果是否值得花费额外时间。
+本章介绍了突破 Markdown 排版限制的解决办法。我们首先介绍 HTML 和 PDF 格式下通用的排版策略，随后探讨几个解决特定问题的技巧，读者可以按需选择性阅读。但在追求复杂排版效果之前，读者应首先考虑它们是否是必需的，以及达成的效果是否值得花费额外时间。
 
 
+## HTML {#html-typesetting}
 
-
-## 通用方案
-
-
-### HTML
-
-#### CSS 基础
+### CSS 基础 {#css-basics}
 
 CSS (层叠样式表) 是一种设置 HTML 网页的布局与样式的语言，以 `.css` 文件存储。一个 CSS 文件包含了针对不同网页元素的排版规则，例如下面的 CSS 样式表
 
@@ -48,9 +42,6 @@ p span {
 2. 对所有 <p> 元素包含的 <span> 元素，设置它们的字体颜色为蓝色 (blue)
 
 ```
-
-
-
 
 除了颜色，大小，对齐等等简单属性外，CSS 还可用于设计复杂的布局，假设有如下网页结构：
 
@@ -91,15 +82,13 @@ knitr::include_graphics("images/05-without-flexbox.jpg")
 
 `display: flex` 为容器设置了 flexbox 布局, 突破了常规文档流的默认布局限制。`justify-content` 和 `align-items` 等属性进一步自定义了 flexbox 布局的效果，如图 \@ref(fig:flexbox) 所示。
 
-
 ```{r flexbox, fig.cap = "添加 CSS 布局后", echo = FALSE}
 knitr::include_graphics("images/05-flexbox.jpg")
 ```
 
-
 我们不再深入 CSS 选择器的语法和属性设置。读者可以在 [MDN 文档](https://developer.mozilla.org/zh-CN/docs/Learn/CSS) 学习更多 CSS 知识。
 
-#### 在 R Markdown 中使用 CSS
+### 在 R Markdown 中使用 CSS {#css-rmarkdown}
 
 我们可以在 HTML 输出格式的 YAML 选项中引用根目录下 CSS 文件，例如：
 
@@ -115,7 +104,6 @@ output:
 
 随后，我们可以在对应的 CSS 文件中添加规则，这需要知道想控制元素对应的 CSS 选择器，常见文档元素对应的选择器如表 \@ref(tab:selectors) 所示。
 
-
 ```{r selectors, echo = FALSE}
 library(huxtable)
 t <- readr::read_csv("data/selectors.csv")
@@ -130,7 +118,6 @@ p {
   line-height: 120%;
 }
 ```
-
 除了引用 CSS 文件外，我们还可以直接在 R Markdown 中运行 CSS 代码块，改变当前文档的 CSS 样式，例如下面的源文档：
 
 `r import_example("examples/css-chunk.Rmd")`
@@ -177,7 +164,7 @@ Pandoc 将以上语法渲染为 HTML 元素：
 
 随后我们可以在 CSS 中使用 `#special`, `.special` 和 `.special div` 等选择器选择以上三个 div 元素，应用 CSS 样式。
 
-#### 用 bslib 包自定义 bootstrap 主题
+### 用 bslib 包自定义 bootstrap 主题 {#bslib-customization}
 
 我们在第 \@ref(theme-templates) 节提到 R Markdown 的 HTML 输出基于 bootstrap 框架，采用了 bootstrap 提供的大量 CSS 样式。对于这样的大型前端框架，样式往往是通过 SCSS 变量的方式实现的。SCSS 是 CSS 的一种扩展，增加了变量，嵌套，导入等特性。例如，我们在下面用 SCSS 变量定义了一套配色方案：
 
@@ -233,10 +220,9 @@ output:
 
 效果如图 \@ref(fig:bslib-demo) 所示。读者还可以用 [thematic](https://rstudio.github.io/thematic/) 包让 R 生成的图片自适应当前主题的配色。
 
-```{r bslib-demo, fig.cap = "用 bslib 定义 bootstrap Sass 变量", echo = FALSE}
+```{r bslib-demo, fig.cap = "用 bslib 定义 bootstrap SASS 变量", echo = FALSE}
 import_example_result("examples/bslib-demo.Rmd")
 ```
-
 
 
 我们还可以直接选择 bootswatch 主题：
@@ -250,13 +236,13 @@ output:
 ---
 ```
 
-### LaTeX
+## PDF {#pdf-typesetting}
 
 对基于 LaTeX 的 PDF 输出格式，进阶的排版设置稍复杂些。但大部分问题都可通过 "搜索 + 引入 LaTeX 包" 解决。
 
 例如，默认生成的 PDF 中链接与其他文字颜色相同，不易区分。我们希望自定义各类链接的颜色，在搜索引擎中搜索 "latex href color"，可以在 stackoverflow 上看到问题 <https://tex.stackexchange.com/questions/61015/how-to-use-different-colors-for-different-href-commands>，第一个回答给出了 LaTeX 命令：
 
-```
+```tex
 \documentclass{article}
 \usepackage[colorlinks = true,
             linkcolor = blue,
@@ -268,9 +254,9 @@ Here is \href{http://www.google.com}{Google} and \href{http://www.yahoo.com}{Yah
 \end{document}
 ```
 
-R Markdown 用户需要在上面的答案中截取颜色设置的部分。LaTeX 中，`\documentclass{article}` 定义了文档类型 \begin{document}` 和 `\end{document}` 中包含正文内容，在 `\begin{document}` 上方引入包和依赖定义样式。前两者 knitr 会在编译后自动生成，我们仅需要颜色设置的部分：
+R Markdown 用户需要在上面的答案中截取颜色设置的部分。LaTeX 中，`\documentclass{article}` 定义了文档类型 `\begin{document}` 和 `\end{document}` 中包含正文内容，在 `\begin{document}` 上方引入包和依赖定义样式。前两者 knitr 会在编译后自动生成，我们仅需要颜色设置的部分：
 
-```
+```tex
 \usepackage[colorlinks = true,
             linkcolor = blue,
             urlcolor  = blue,
@@ -281,7 +267,7 @@ R Markdown 用户需要在上面的答案中截取颜色设置的部分。LaTeX 
 `\usepackage[]{}` 是 LaTeX 中引入包的命令，类似于 R 中的 `library`，其中 `{}` 包含包的名称，`[]`
  中包含该包的初始化指令。上面的设置等价于：
  
-```
+```tex
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -329,10 +315,7 @@ output:
 此时得到的 `.tex` 文件已经包含了基础 Markdown 格式和代码运行结果，读者可以在此基础上添加 LaTeX 排版命令，然后用任意 LaTeX 发行版编译。尽管这样的二次编辑未必是使用 R Markdown 的初衷了。
 
 
-
-
-
-## 字体颜色
+## 字体颜色 {#fnot-color}
 
 Markdown 没有提供控制字体颜色的语法。我们需要用 HTML 或 LaTeX 语法改变特定片段的颜色：
 
@@ -373,10 +356,10 @@ colorize <- function(x, color) {
 Red is `r '\x60r colorize("red", "red")\x60'`, blue is `r '\x60r colorize("blue", "blue")\x60'`
 ```
 
-我们可以用 Pandoc 的 Lua 过滤器功能实现更进阶的自定义颜色语法。有兴趣的读者可以在 [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/font-color.html#lua-color) 看到一个例子。
+Pandoc 的 Lua 过滤器功能支持更进阶的自定义颜色语法。有兴趣的读者可以在 [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/font-color.html#lua-color) 看到一个例子。
 
 
-## 缩进
+## 缩进 {#indentation}
 
 大部分时候，Markdown 会无视文本中的空格。但表示诗歌或地址等信息时，我们可能希望用空格表示缩进。这时可以在行首添加 `|`，Markdown 会保留紧跟在垂直线后的空格和换行符。例如：
 
@@ -397,10 +380,7 @@ Red is `r '\x60r colorize("red", "red")\x60'`, blue is `r '\x60r colorize("blue"
 > |   "众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。"此第三境也。
 。
 
-
-
-
-## 控制输出宽度
+## 控制输出宽度 {#output-width}
 
 有时 R 代码生成的文字输出宽度过长，容易溢出当前页面宽度。HTML 格式的输出文档会生成水平方向的滚动条，而 PDF 文档则会丢失页面宽度以外的内容。较为通用的解决办法时用 `options()` 中的 `width` 参数控制函数输出的宽度，例如：
 
@@ -412,8 +392,7 @@ Red is `r '\x60r colorize("red", "red")\x60'`, blue is `r '\x60r colorize("blue"
 import_example_result("examples/result-width.Rmd")
 ```
 
-
-如果是 HTML 输出格式，我们也可以直接应用 css：
+如果是 HTML 输出格式，我们也可以直接应用 CSS：
 
 ```css
 pre code {
@@ -433,9 +412,9 @@ output:
 ---
 ```
 
-我们在  `preamble.tex` 设置了 
+我们在  `preamble.tex` 设置了 ：
 
-```
+```tex
 \usepackage{listings}
 \lstset{
   breaklines=true
@@ -448,35 +427,11 @@ output:
 knitr::include_graphics("images/05-result-with-listings.jpg")
 ```
 
-
-
-## 多列布局
+## 多列布局 {#multi-col-layout}
 
 我们可以再次使用 flexbox 布局和 Pandoc 的 "fenced div" 语法在 HTML 输出中实现多列布局：
 
-````
-:::: {style="display: flex;"}
-
-::: {}
-
-这是第一个 div
-
-```{r}
-str(iris)
-```
-:::
-
-::: {style="margin-left:2rem;"}
-
-这是第二个 div
-
-```{r}
-plot(iris[, -5])
-```
-:::
-
-::::
-````
+`r import_example("examples/multicol-html.Rmd")`
 
 最顶层的 `::::` 定义了 flexbox 布局的父容器，它包含的两个 div 平分父容器的宽度。效果如图 \@ref(fig:html-multicol) 所示。 
 
@@ -484,49 +439,11 @@ plot(iris[, -5])
 knitr::include_graphics("images/05-html-multicol-layout.jpg")
 ```
 
-
 我们可以 flexbox 实现任意列数的布局，只许在设置了 `display:flex` 的 div 中添加更多的子 div 即可，但双列已经能满足大部分文档需求。
 
 如果想同时支持 HTML 和 PDF 格式，需要添加额外的 `.tex` 配置文件，源文档为：
 
-```
----
-documentclass: ctexart
-output:
-  html_document: 
-    css: columns.css
-  rticles::ctex: 
-    keep_tex: true
-    includes:
-      in_header: columns.tex
----
-
-# 双列布局
-
-下面的顶层 div 包含了三个 div 子元素，中间的 div 不包含内容，仅用作添加间距。
-
-:::::: {.cols data-latex=""}
-
-::: {.col data-latex="{0.55\textwidth}"}
-```{r, echo=FALSE, fig.width=5, fig.height=4}`r ''`
-par(mar = c(4, 4, .2, .1))
-plot(cars, pch = 19)
-```
-:::
-
-::: {.col data-latex="{0.05\textwidth}"}
-\ 
-<!-- 空 div -->
-:::
-
-::: {.col data-latex="{0.4\textwidth}"}
-
-`cars` 数据的散点图如左所示。
-
-这说明了什么呢？小编带大家一起看一下吧，cars 数据的散点图就是用散点画的图，好了，这就是小编给大家分享的 cars 散点图是什么。希望大家看完这篇由小编精心整理的内容后，能对相关知识有所了解，解决你的困惑。
-:::
-::::::
-```
+`r import_example("examples/multicol.Rmd")`
 
 PDF 输出效果如图 \@ref(fig:pdf-multicol) 所示。
 
@@ -536,7 +453,7 @@ knitr::include_graphics("images/05-pdf-multicol-layout.png")
 
 其中, `columns.css` 只需要一行：
 
-```
+```css
 .cols {
   display: flex;
 }
@@ -544,7 +461,7 @@ knitr::include_graphics("images/05-pdf-multicol-layout.png")
 
 `columns.tex` 则需要定义 `col` 环境，覆盖 Pandoc 默认的一个容器一行的设置：
 
-```
+```tex
 \newenvironment{cols}[1][]{}{}
 
 \newenvironment{col}[1]{\begin{minipage}{#1}\ignorespaces}{%
