@@ -36,6 +36,8 @@ knitr::include_graphics(paste0("examples/", c("three-output-html.png", "three-ou
 
 
 
+
+
 除了多样的输出格式外，R Markdown 驱动的数据分析报告还解决了很多数据分析报告写作中的痛点：
 
 - 之前在使用 R 或者其他数据分析工具时，经常需要在 Word 里写结论，在脚本里敲代码，在图表区生成图，将它们复制粘贴到一起后，还要操心格式问题，有没有什么自动化的方法？

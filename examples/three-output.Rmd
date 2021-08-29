@@ -1,5 +1,5 @@
 ---
-title: "R Markdown 文案的三种格式"
+title: "R Markdown 文档的三种格式"
 documentclass: ctexart
 geometry: "left=2cm,right=2cm,top=0.5cm,bottom=1.5cm"
 output: 
