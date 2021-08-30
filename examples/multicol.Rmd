@@ -1,9 +1,9 @@
 ---
 documentclass: ctexart
 output:
-  html_document: 
+  html_document:
     css: columns.css
-  rticles::ctex: 
+  rticles::ctex:
     keep_tex: true
     includes:
       in_header: columns.tex
@@ -23,7 +23,7 @@ plot(cars, pch = 19)
 :::
 
 ::: {.col data-latex="{0.05\textwidth}"}
-\ 
+\
 <!-- 空 div -->
 :::
 

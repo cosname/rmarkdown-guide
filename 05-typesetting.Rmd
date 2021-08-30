@@ -211,7 +211,7 @@ selector-2 {
 }
 ```
 
-因此，我们可以通过改变 bootstrap 的 SCSS 变量值来定义 R Markdown HTML 的输出样式。这些变量不限于颜色，还包括大小，间距，字体等。**bslib** 包 [@R-bslib] 允许直接在 R Markdown 的 YAML 选项中定义 bootstrap 的 SCSS 变量，例如： 
+因此，我们可以通过改变 bootstrap 的 SCSS 变量值来定义 R Markdown HTML 的输出样式。这些变量不限于颜色，还包括大小，间距，字体等。**bslib** 包 [@R-bslib] 允许直接在 R Markdown 的 YAML 选项中定义 bootstrap 的 SCSS 变量，例如：
 
 ```
 ---
@@ -268,10 +268,10 @@ LaTeX 中，`\documentclass{article}` 定义了文档类型，`\begin{document}`
 
 下面的任务是从答案中辨别负责链接颜色的部分。一个技巧是关注 `\usepackage{}` 指令，是 LaTeX 中引入包的命令，类似于 R 中的 `library()`。例如 `\usepackage{hyperref}` 会引入 `hyperref` 包。`\usepackage{}` 还有一种变体形式 `\usepackage[]{}`，其中 `{}` 依旧是包的名称，`[]`
  中包含该包的初始化指令。因此，上面的答案引入了 `hyperref` 包。知道答案引入了哪些包后，我们就可以再次搜索 "LaTeX + 包名" 了解到该包的用途。例如 hyperref 包的描述为：
- 
+
  > The hyperref package is used to handle cross-referencing commands in LATEX to produce hypertext links in the document.
- 
-看起来 hyperref 正是用于设计链接样式的包，那么我们就定位到了答案中真正对 R Markdown 有用的部分： 
+
+看起来 hyperref 正是用于设计链接样式的包，那么我们就定位到了答案中真正对 R Markdown 有用的部分：
 
 ```tex
 \usepackage[colorlinks = true,
@@ -282,13 +282,13 @@ LaTeX 中，`\documentclass{article}` 定义了文档类型，`\begin{document}`
 ```
 
 上面的 LaTeX 代码同时等价于：
- 
+
 ```tex
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=blue,      
+    filecolor=blue,
     urlcolor=blue,
 }
  ```
@@ -445,7 +445,7 @@ import_example_result("examples/result-width-listings.Rmd")
 
 `r import_example("examples/multicol-html.Rmd")`
 
-最顶层的 `::::` 定义了一个弹性容器，它包含的两个 div 平分父容器的宽度。效果如图 \@ref(fig:html-multicol) 所示。 
+最顶层的 `::::` 定义了一个弹性容器，它包含的两个 div 平分父容器的宽度。效果如图 \@ref(fig:html-multicol) 所示。
 
 ```{r html-multicol, echo = FALSE, fig.cap = "用 flexbox 在 HTML 输出中创建多列布局"}
 knitr::include_graphics("images/05-html-multicol-layout.jpg")

@@ -122,7 +122,11 @@ knitr::kable(
 )
 ```
 
+<<<<<<< HEAD
 [kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable()` 基础上提供了 `kableExtra::kbl()` 函数作为 `kable` 的升级版，带有更多定制表格外观的参数, 。我们可以用很少的代码创作出外形美观，意义丰富的表格，如表 \@ref(tab:kableExtra-example) 所示。
+=======
+[kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable` 基础上提供了 `kableExtra::kbl` 函数作为 `kable` 的升级版，带有更多定制表格外观的参数,  。我们可以用很少的代码创作出外形美观，意义丰富的表格。
+>>>>>>> master
 
 ```{r kableExtra-example}
 library(kableExtra)

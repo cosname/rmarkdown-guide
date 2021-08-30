@@ -4,7 +4,11 @@
 
 **rmarkdown** [@R-rmarkdown] 一个是 R 语言的扩展包，提供了以 `.Rmd` 文件格式为中心的数据科学写作框架。它的核心思想是创作包含文本和代码的动态文档，让数据与叙事并进，最终提供易重复，易共享的数据分析环境。
 
+<<<<<<< HEAD
 本章从 R Markdown 的应用开始，遴选了不同场合 R Markdown 的用例和解决的问题。包括：
+=======
+本章从 R Markdown 的应用开始，遴选了不同场合 R Markdown 的用例和解决的问题。包括
+>>>>>>> master
 
 - 撰写数据分析报告
 
@@ -22,17 +26,27 @@
 
 最后，我们回顾了 R Markdown 的技术渊源和发展。
 
+<<<<<<< HEAD
 > TODO: rmarkdown 包和 R Markdown 生态的关系
 
+=======
+>>>>>>> master
 话不多说，我们在以下各小节中快速浏览一些 R Markdown 文档的用例，它们有些直接基于原生的 R Markdown 包，有些来自 R Markdown 的扩展包。越来越多的扩展为 R Markdown 文档增加了新的输出格式，为生态体系提供了更丰富的功能覆盖。读者可以挑选自己最感兴趣的使用场合深入后面对应章节的阅读，也可以在 [Github](https://github.com) 上以 R Markdown 为关键词探索各式各样的输出格式。
 
 
 ## 数据分析报告
 
+<<<<<<< HEAD
 从诞生开始，R 便是一门致力于交互式数据分析的语言，R 用户便时常有着制作数据分析报告的需求，这也是 R Markdown 最常见的用途。它支持 HTML, PDF, Word, EPUB 等多种输出格式，以及与之配套开箱即用的主题系统。用户可以将创作重心放在内容上，写作完成后一键输出不同格式，让 R Markdown 的自动化的编译机制代劳形式上的调整。例如，只需要几行代码，同一个 R Markdown 文档就可以生成图 \@ref(fig:three-output) 中 HTML，PDF 和 Word 三种格式的文档。
 
 
 ```{r three-output, fig.show = "hold", fig.align='default', out.width = "33%", echo = FALSE, fig.cap = "同一个 R Markdown 文档可以生成多种格式的输出"}
+=======
+从诞生开始，R 便是一门致力于交互式数据分析的语言，R 用户便时常有着制作数据分析报告的需求，这也是 R Markdown 最常见的用途。它支持 HTML, PDF, Word, EPUB 等多种输出格式，以及与之配套开箱即用的主题系统。用户可以将创作重心放在内容上，写作完成后一键输出不同格式，让 R Markdown 的自动化的编译机制代劳形式上的调整。例如，只需要几行代码，同一个 R Markdown 文档就可以生成图 \@ref(fig:three-output) HTML，PDF 和 Word 三种格式的文档。
+
+
+```{r three-output, fig.show = "hold", fig.align='default', out.width = "33%", echo = FALSE, fig.cap = ""}
+>>>>>>> master
 knitr::include_graphics(paste0("examples/", c("three-output-html.png", "three-output-pdf.png", "three-output-word.jpg")))
 ```
 
