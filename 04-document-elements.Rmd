@@ -118,17 +118,21 @@ knitr::kable(
     head(iris[, 1:2], 3),
     head(mtcars[, 1:3], 5)
   ),
-  caption = 'A Tale of Two Tables.', booktabs = TRUE
+  caption = '用 kable() 并列两个表格', booktabs = TRUE
 )
 ```
 
+<<<<<<< HEAD
+[kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable()` 基础上提供了 `kableExtra::kbl()` 函数作为 `kable` 的升级版，带有更多定制表格外观的参数, 。我们可以用很少的代码创作出外形美观，意义丰富的表格，如表 \@ref(tab:kableExtra-example) 所示。
+=======
 [kableExtra](https://github.com/haozhu233/kableExtra) 包 [@R-kableExtra] 在 `knitr::kable` 基础上提供了 `kableExtra::kbl` 函数作为 `kable` 的升级版，带有更多定制表格外观的参数,  。我们可以用很少的代码创作出外形美观，意义丰富的表格。
+>>>>>>> master
 
 ```{r kableExtra-example}
 library(kableExtra)
 
 mtcars[1:8, 1:8] %>%
-  kbl() %>%
+  kbl(caption = "用 kableExtra 包创建表格") %>%
   kable_paper(full_width = F) %>%
   column_spec(2, color = spec_color(mtcars$mpg[1:8]),
               link = "https://haozhu233.github.io/kableExtra/") %>%

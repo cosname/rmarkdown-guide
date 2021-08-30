@@ -1,4 +1,4 @@
-# 排版{#typesetting}
+# 排版 {#typesetting}
 
 迄今为止，我们在 R Markdown 中的排版效果都是通过 Markdown 实现的。Markdown 的核心设计原则是用简洁的标记表示必需的格式，让新手也能快速上手。正如 Markdown 的作者 John Gruber 所言：
 
@@ -211,7 +211,7 @@ selector-2 {
 }
 ```
 
-因此，我们可以通过改变 bootstrap 的 SCSS 变量值来定义 R Markdown HTML 的输出样式。这些变量不限于颜色，还包括大小，间距，字体等。**bslib** 包 [@R-bslib] 允许直接在 R Markdown 的 YAML 选项中定义 bootstrap 的 SCSS 变量，例如： 
+因此，我们可以通过改变 bootstrap 的 SCSS 变量值来定义 R Markdown HTML 的输出样式。这些变量不限于颜色，还包括大小，间距，字体等。**bslib** 包 [@R-bslib] 允许直接在 R Markdown 的 YAML 选项中定义 bootstrap 的 SCSS 变量，例如：
 
 ```
 ---
@@ -264,7 +264,14 @@ Here is \href{http://www.google.com}{Google} and \href{http://www.yahoo.com}{Yah
 \end{document}
 ```
 
-R Markdown 用户需要在上面的答案中截取颜色设置的部分。LaTeX 中，`\documentclass{article}` 定义了文档类型 `\begin{document}` 和 `\end{document}` 中包含正文内容，在 `\begin{document}` 上方引入包和依赖定义样式。前两者 knitr 会在编译后自动生成，我们仅需要颜色设置的部分：
+LaTeX 中，`\documentclass{article}` 定义了文档类型，`\begin{document}` 和 `\end{document}` 中包含正文内容，作者一般在 `\begin{document}` 的上方引入 LaTeX 包，初始化指令以及其他任意排版命令。对 R Markdown 用户来说，knitr 和 Pandoc 会负责生成正文内容和默认加载的 LaTeX 引用，随后交给 tinytex 完成 PDF 编译。如果我们能额外给 tinytex 传递链接颜色设置有关的命令，最终的 PDF 输出就能反映这些设置。
+
+下面的任务是从答案中辨别负责链接颜色的部分。一个技巧是关注 `\usepackage{}` 指令，是 LaTeX 中引入包的命令，类似于 R 中的 `library()`。例如 `\usepackage{hyperref}` 会引入 `hyperref` 包。`\usepackage{}` 还有一种变体形式 `\usepackage[]{}`，其中 `{}` 依旧是包的名称，`[]`
+ 中包含该包的初始化指令。因此，上面的答案引入了 `hyperref` 包。知道答案引入了哪些包后，我们就可以再次搜索 "LaTeX + 包名" 了解到该包的用途。例如 hyperref 包的描述为：
+
+ > The hyperref package is used to handle cross-referencing commands in LATEX to produce hypertext links in the document.
+
+看起来 hyperref 正是用于设计链接样式的包，那么我们就定位到了答案中真正对 R Markdown 有用的部分：
 
 ```tex
 \usepackage[colorlinks = true,
@@ -274,26 +281,25 @@ R Markdown 用户需要在上面的答案中截取颜色设置的部分。LaTeX 
             anchorcolor = blue]{hyperref}
 ```
 
-`\usepackage[]{}` 是 LaTeX 中引入包的命令，类似于 R 中的 `library`，其中 `{}` 包含包的名称，`[]`
- 中包含该包的初始化指令。上面的设置等价于：
- 
+上面的 LaTeX 代码同时等价于：
+
 ```tex
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=blue,      
+    filecolor=blue,
     urlcolor=blue,
 }
  ```
 
-我们下面的任务是把这段代码引入 R Markdown 中，首先用 tinytex 包安装 `hyperref`：
+在思考如何把这段代码引入 R Markdown 中之前。我们应该首先用 tinytex 安装所需的包，这样插入的命令才有意义。tinytex 包提供了 `tlmgr_install()` 函数负责 LaTeX 包的安装：
 
 ```{r, eval = FALSE}
 tinytex::tlmgr_install("hyperref")
 ```
 
-随后使用 PDF 输出的 `includes` YAML 选项：
+下面，我们可以使用 PDF 输出的 `includes` YAML 选项。它负责把对应的文件安插到中间文档的不同部分：
 
 ```
 output:
@@ -302,15 +308,13 @@ output:
       in_header: preamble.tex
 ```
 
-`in_header` 会把 `preamble.tex` 中的 LaTeX 指令放置在生成的中间 `.tex` 文件的头部，随后 tinytex 就能看到颜色指令。这样，我们只需要在 `preabmle.tex` 中使用从答案中截取的代码。最终效果如图 \@ref(fig:hyperref-demo) 所示。
-
+`in_header` 会把 `preamble.tex` 中的 LaTeX 指令放置在生成的中间 `.tex` 文件的头部，随后 tinytex 就能看到链接颜色指令。这样，我们只需要在 `preabmle.tex` 中使用从答案中截取的代码。最终效果如图 \@ref(fig:hyperref-demo) 所示。
 
 ```{r hyperref-demo, echo = FALSE, fig.cap = "引入 hyperref 包设置 PDF 链接颜色"}
 import_example_result("examples/latex-typesetting-hyperref.Rmd")
 ```
 
-
-排版问题是没有穷尽的，但希望读者从上面的例子中掌握了解决相似问题的思路。我们首先知道要引入什么 LaTeX 包，做哪些初始化设置，一些包需要用 tinytex 额外安装，然后在 `in_header` 引入写好的 `.tex` 配置文件，让 tinytex 解决剩下的问题。这种办法足以解决 R Markdown PDF 排版中的绝大部分问题。
+排版问题是没有穷尽的，但希望读者从上面的例子中掌握了解决相似问题的思路。我们首先知道要引入什么 LaTeX 包，做哪些初始化设置，一些包需要用 tinytex 额外安装，然后在 `in_header` 引入写好的 `.tex` 配置文件，让 tinytex 解决剩下的问题。这种办法足以解决 R Markdown PDF 排版中的绝大部分问题。有时我们也可以把搜索范围缩小到 R Markdown 的 PDF 设置上，这样便不用自行辨别需要引入的 LaTeX 代码，但直接搜索 LaTeX 的排版设置是最通用的办法。
 
 此外，对于硬核 LaTeX 用户，可以在 YAML 中设置 `keep_tex` 选项：
 
@@ -441,7 +445,7 @@ import_example_result("examples/result-width-listings.Rmd")
 
 `r import_example("examples/multicol-html.Rmd")`
 
-最顶层的 `::::` 定义了一个弹性容器，它包含的两个 div 平分父容器的宽度。效果如图 \@ref(fig:html-multicol) 所示。 
+最顶层的 `::::` 定义了一个弹性容器，它包含的两个 div 平分父容器的宽度。效果如图 \@ref(fig:html-multicol) 所示。
 
 ```{r html-multicol, echo = FALSE, fig.cap = "用 flexbox 在 HTML 输出中创建多列布局"}
 knitr::include_graphics("images/05-html-multicol-layout.jpg")
