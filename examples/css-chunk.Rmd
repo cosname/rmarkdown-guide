@@ -1,0 +1,77 @@
+---
+title: '运行 CSS 代码块'
+output: html_document
+---
+
+在文档开始应用 CSS 样式：
+
+```{css, echo = FALSE}
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&family=Noto+Sans+SC:wght@300&display=swap');
+
+body {
+  background-color: #DEE4E7
+}
+
+.section h1, .section h2 {
+  color: #0462a1;
+}
+
+p {
+  font-family: "Noto Sans", serif
+}
+
+code, pre{
+  font-family: 'Fira Code', monospace;
+}
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+
+p code {
+  white-space: inherit;
+}
+
+pre {
+  word-break: normal;
+  word-wrap: normal;
+  -webkit-box-shadow: 0px 8px 5px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 8px 5px -8px rgba(0,0,0,0.75);
+  box-shadow: 0px 8px 5px -8px rgba(0,0,0,0.75);
+}
+
+pre code {
+  white-space: inherit;
+}
+```
+
+# 一级标题
+
+**注意**：CSS 代码块只适合规则较少时使用。
+
+`代码` 段样式：
+
+```{r}
+print("hello world")
+```
+
+
+```{r, eval = FALSE}
+function_that_does_nothing <- function() {
+  x <- 1 
+  x <- 1
+  x <- 2
+  x <- 3
+  x <- 5
+  x <- 8
+  x
+}
+function_that_does_nothing()
+```
+
+## 二级标题一
+
+## 二级标题二
+
+

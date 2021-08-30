@@ -1,18 +1,14 @@
 
 # 安装 {#installation}
 
-```{r, echo = FALSE}
-source("utils.R")
-```
-
 
 本章介绍安装 R Markdown 相关依赖包的方法，并编译第一个 R Markdown 源文档，输出为 HTML 和 PDF 两种格式。
 
 
 
-## 安装 R Markdown 
+## 安装 R Markdown
 
-编译 R Markdown 文档需要安装 **rmarkdown** [@R-rmarkdown] 包，在 RStudio 的控制台中运行
+编译 R Markdown 文档需要安装 **rmarkdown** [@R-rmarkdown] 包，在 RStudio 的控制台中运行：
 
 ```{r, eval = FALSE}
 install.packages("rmarkdown")
@@ -23,16 +19,16 @@ install.packages("rmarkdown")
 中国大陆的读者可能有下载速度过慢的问题，这时可以在 RStudio 的 `Tools --> Global Options --> Packages` 将 Primary Cran Repository 更改为国内的镜像。也可以在 `install.packages` 中设置 `repos` 参数。
 
 ```{r, eval = FALSE}
-install.packages("rmarkdown", repos = <某镜像>)
+install.packages("rmarkdown", repos = <镜像网址>)
 ```
 
 
 
 ## 创建第一个 R Markdown 文档 {#create-first-rmd}
 
-安装完成后，我们可以开始创建第一个 R Markdown 文档。在 RStudio 中选择 `File --> New File --> R Markdown`, 弹出图 \@ref(fig:create-rmd-prompt) 所示的提示框。
+安装完成后，我们可以开始创建第一个 R Markdown 文档。在 RStudio 中选择 `File --> New File --> R Markdown`, 弹出图 \@ref(fig:rmd-prompt) 所示的提示框。
 
-```{r create-rmd-prompt, echo = FALSE, fig.cap = "RStudio 创建 R Markdown 文档时的提示框"}
+```{r rmd-prompt, echo = FALSE, fig.cap = "RStudio 创建 R Markdown 文档时的提示框"}
 knitr::include_graphics("images/02-first-rmd-prompt.png")
 ```
 
@@ -42,17 +38,21 @@ knitr::include_graphics("images/02-first-rmd-prompt.png")
 
 `r import_example("first-rmd.Rmd")`
 
-
 在编辑器内保存该文件，我们可以发现根目录下增加了 `first-rmd.Rmd` 文件，这种后缀为 `.Rmd` 的文件即是 R Markdown 的源文档。在源文件中，我们定义了 R Markdown 输出文件的形式和内容。本书后续章节对文本和代码的编辑以及日常使用均是围绕类似这样的源文档展开的。
 
-点击源文档顶部的 **Knit** 按钮，RStudio 首先提示应保存源文档，读者可以在不更改 `.Rmd` 文件后缀的情况下任意选择保存名称, 但最好不要包含中文。保存后，R Markdown 包开始将源文档编译为输出。几秒后弹出以下界面说明编译成功，同时 R Markdown 包安装无误，可以开始快乐的写作了。 
+如图 \@ref(fig:knit-button) 所示，点击源文档顶部的 **Knit** 按钮 (或用快捷键 `Ctrl+Shift+K`)，RStudio 首先提示应保存源文档，读者可以在不更改 `.Rmd` 文件后缀的情况下任意选择保存名称, 但最好不要包含中文。保存后，R Markdown 包开始将源文档编译为输出。几秒后弹出以下界面说明编译成功，同时 R Markdown 包安装无误，可以开始快乐的写作了。
+
+```{r knit-button, echo = FALSE, fig.cap = "文档上方的编译按钮"}
+knitr::include_graphics("images/02-knit-button.png")
+```
+
 
 ```{r first-rmarkdown, echo = FALSE, fig.cap = "first-rmd.Rmd 文件输出的 HTML 文档"}
 import_example_result("first-rmd.Rmd")
 ```
 
 
-图 \@ref(fig:first-rmarkdown) 为我们新创建的 `first-rmd.Rmd` 文件的 HTML 格式输出结果。此时，与该 R Markdown 源文件同级目录下也应该出现一个 `first-rmd.html` 文件，读者可以用浏览器打开该 HTML 验证是否与 RStudio 面板中输出的结果一致。 
+图 \@ref(fig:first-rmarkdown) 为我们新创建的 `first-rmd.Rmd` 文件的 HTML 格式输出结果。此时，根目录下也应该出现一个 `first-rmd.html` 文件，读者可以用浏览器打开该 HTML文件， 验证是否与 RStudio 面板中输出的结果一致。
 
 一些读者可能会疑惑，之前点击 Knit 时，为什么我们没有用 `library(rmarkdown)` 导入 `rmarkdown` 包，也没有在源文档中运行相关的函数，编译仍能成功呢？当我们点击 Knit 的时候，RStudio 自行调用了 rmarkdown 包中的 `render()` 函数。
 
@@ -64,7 +64,32 @@ rmarkdown::render("first-rmd.Rmd", output_format = "html_document")
 读者不妨自己在控制台内运行一遍以上代码，看结果与点击 Knit 是否相同。^[在控制台中调用 `render()` 时，R 会在当前进程运行源文档的代码，而 Knit 按钮会新建一个空白的环境完成编译。为了确保当前 R 进程不对 R Markdown 造成干扰，最好清空当前环境或重启 R 后使用 `render()`。]
 
 
-## 安装 Tinytex 
+
+### 发布
+
+我们在 \@ref(rmd-notebook) 中提到了 RPubs, bookdown 等免费发布 R Markdown 文档的服务。得到 `fist-rmd.html` 后，我们就可以把它上传到这些平台上。以 RPubs 为例，首先需要在 <https://rpubs.com/users/new> 注册账号。
+
+在 RPubs 上创建好账号后，我们重新编译 `first.rmd` 源文档，点击源文档上方的 Knit 按钮，在编译成功后弹出窗口的右上角可以看到 **Publish** 按钮，点击后如图 \@ref(fig:publish-button) 所示。
+
+```{r publish-button, fig.cap = "编译成功后，点击弹出窗口右上角的 Publish 按钮", echo = FALSE}
+knitr::include_graphics("images/02-publish-button.jpg")
+```
+
+对于 RPubs，我们无需在 RStudio 中额外关联账户，直接点击 Publish Document，随后选择 RPubs，浏览器弹出图 \@ref(fig:rpubs-signin) 所示的登录界面。
+
+```{r rpubs-signin, fig.cap = "点击发布后弹出 RPubs 登录界面", echo = FALSE}
+knitr::include_graphics("images/02-rpubs-signin.jpg")
+```
+
+确认登陆后，我们可以选择发布文档的标题，描述和网址。随后，RPubs 部署 `first.html` 并生成指定的网址，例如 <https://rpubs.com/Maxine/802744>。以上便是发布 R Markdown 输出文档的全过程，读者可以尝试类比发布到 bookdown 网站上。
+
+除了在输出文档点击 Publish 外，我们还可以用 **rsconnect** 包提供的 API。源文档右上角也有一个发布按钮，如图 \@ref(fig:src-publish) 所示。这个按钮不需要事先有输出结果，发布时会首先编译源文档。
+
+```{r src-publish, fig.cap = "源文档中的发布按钮", echo = FALSE}
+knitr::include_graphics("images/02-src-publish.png")
+```
+
+## 安装 Tinytex
 
 对于需要生成 PDF 文档的读者，还需要安装 **tinytex** 包：
 
@@ -87,7 +112,7 @@ knitr::include_graphics(rep(c("images/02-first-rmd-pdf1.png", "images/02-first-r
 tinytex:::install_prebuilt('~/Downloads/TinyTeX-v2021.01.zip')
 ```
 
-熟悉 LaTeX 的用户可能会好奇 TinyTeX 的工作机制。TinyTeX 是一个基于 TeX Live 的自定义轻量级 LaTeX 套件，特别为 R Markdown 用户设计了许多定制化的 PDF 编译功能。例如，它可以自动安装编译过程中缺少的宏包。大部分情况下，我们不需要直接使用 TinyTeX 包，R Markdown 已经与之高度集成。此外，建议在安装 TinyTeX 之前卸载系统中已有的 LaTeX 套件，例如 Tex Live，MiKTeX，Mac—TeX 等，否则可能产生冲突。更多信息请参照[文档](https://yihui.org/tinytex/cn/)。 
+熟悉 LaTeX 的用户可能会好奇 TinyTeX 的工作机制。TinyTeX 是一个基于 TeX Live 的自定义轻量级 LaTeX 套件，特别为 R Markdown 用户设计了许多定制化的 PDF 编译功能。例如，它可以自动安装编译过程中缺少的宏包。大部分情况下，我们不需要直接使用 TinyTeX 包，R Markdown 已经与之高度集成。此外，建议在安装 TinyTeX 之前卸载系统中已有的 LaTeX 套件，例如 Tex Live，MiKTeX，Mac—TeX 等，否则可能产生冲突。更多信息请参照[文档](https://yihui.org/tinytex/cn/)。
 
 
 ## 使用 RStudio 项目文件
@@ -113,4 +138,4 @@ learn-rmarkdown.Rproj
 
 此时，如果需要在 `ch1` 文件夹中的 `first-rmd.Rmd` 中引用 `images` 文件夹中的 my-picture.png ，可以使用相对路径 `../images/my-picture.png`。无论后续我们在 images 中添加多少文件，都只需要在相对路径中改变图片的名称。同理，读写数据等的 I/O 操作也只需要使用相对于 `.Rproj` 根目录的相对路径。一些读者可能习惯使用 `setwd()` 解决类似的问题，但它往往导致他人难以重复使用的绝对路径。
 
-除易于启动和路径引用上的好处外，RStudio 项目内还有更好的快捷键支持，读者可用 Alt+Shift+K 浏览全部项目快捷键。博客 [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)更深入讨论了使用项目或脚本方式的优劣。 
+除易于启动和路径引用上的好处外，RStudio 项目内还有更好的快捷键支持，读者可用 Alt+Shift+K 浏览全部项目快捷键。博客 [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)更深入讨论了使用项目或脚本方式的优劣。

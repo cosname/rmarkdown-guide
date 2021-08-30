@@ -7,7 +7,7 @@
 # 自动生成 R 包的参考文献
 knitr::write_bib(c(
   .packages(),
-  'bookdown', 
+  'bookdown',
   'knitr',
   'rmarkdown',
   'reticulate',
@@ -69,7 +69,9 @@ knitr::write_bib(c(
   "shiny",
   "dygraphs",
   "DT",
-  "distill"
+  "distill",
+  "pagedown",
+  "bslib"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {

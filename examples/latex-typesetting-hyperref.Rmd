@@ -1,0 +1,34 @@
+---
+title: 'Colored Links'
+geometry: "left=3cm,right=3cm,top=0.5cm,bottom=1.5cm"
+output: 
+  bookdown::pdf_document2:
+    toc: true
+    includes:
+      in_header: preamble.tex
+---
+
+# Section 1
+
+
+$$
+(\#eq:1)
+\sum_{i=0}^{\infty} a_i x^i
+$$
+
+The equation \@ref(eq:1) shows a sum that is divergent. This formula 
+will later be used in the section \@ref(section-2).
+
+For further references see <http://www.overleaf.com> or go to the next this [link](http://www.overleaf.com).
+
+## Section 2
+
+# Section 3
+
+This is section \@ref(section-3). 
+
+```{r cars-plot, fig.cap = "cars plot", fig.height = 3.5, fig.align="center"}
+plot(cars)
+```
+
+See figure \@ref(fig:cars-plot) for a plot.

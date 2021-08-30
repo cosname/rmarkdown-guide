@@ -10,6 +10,7 @@ packages.bib
 css/box.css
 latex/blackbox.tex
 latex/infobox.tex
+rmarkdown-guide.Rmd
 
 # OS generated files #
 ######################
@@ -26,3 +27,4 @@ examples/listings-settings.tex
 # renv files
 renv/*
 !renv/activate.R
+

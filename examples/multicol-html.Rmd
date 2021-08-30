@@ -1,0 +1,25 @@
+---
+output: html_document
+---
+
+:::: {style="display: flex;"}
+
+::: {}
+
+这是第一个 div
+
+```{r}
+str(iris)
+```
+:::
+
+::: {style="margin-left:2rem;"}
+
+这是第二个 div
+
+```{r}
+plot(iris[, -5])
+```
+:::
+
+::::

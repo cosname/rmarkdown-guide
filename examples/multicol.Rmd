@@ -1,0 +1,36 @@
+---
+documentclass: ctexart
+output:
+  html_document: 
+    css: columns.css
+  rticles::ctex: 
+    keep_tex: true
+    includes:
+      in_header: columns.tex
+---
+
+# 双列布局
+
+下面的顶层 div 包含了三个 div 子元素，中间的 div 不包含内容，仅用作添加间距。
+
+:::::: {.cols data-latex=""}
+
+::: {.col data-latex="{0.55\textwidth}"}
+```{r, echo=FALSE, fig.width=5, fig.height=4}`r ''`
+par(mar = c(4, 4, .2, .1))
+plot(cars, pch = 19)
+```
+:::
+
+::: {.col data-latex="{0.05\textwidth}"}
+\ 
+<!-- 空 div -->
+:::
+
+::: {.col data-latex="{0.4\textwidth}"}
+
+`cars` 数据的散点图如左所示。
+
+这说明了什么呢？小编带大家一起看一下吧，cars 数据的散点图就是用散点画的图，好了，这就是小编给大家分享的 cars 散点图是什么。希望大家看完这篇由小编精心整理的内容后，能对相关知识有所了解，解决你的困惑。
+:::
+::::::
