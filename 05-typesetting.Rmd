@@ -1,4 +1,4 @@
-# 排版{#typesetting}
+# 排版 {#typesetting}
 
 迄今为止，我们在 R Markdown 中的排版效果都是通过 Markdown 实现的。Markdown 的核心设计原则是用简洁的标记表示必需的格式，让新手也能快速上手。正如 Markdown 的作者 John Gruber 所言：
 
