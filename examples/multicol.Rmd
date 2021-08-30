@@ -16,7 +16,7 @@ output:
 :::::: {.cols data-latex=""}
 
 ::: {.col data-latex="{0.55\textwidth}"}
-```{r, echo=FALSE, fig.width=5, fig.height=4}`r ''`
+```{r, echo=FALSE, fig.width=5, fig.height=4}
 par(mar = c(4, 4, .2, .1))
 plot(cars, pch = 19)
 ```
