@@ -94,7 +94,7 @@ knitr::include_graphics("images/01-notebook-preview2.jpg")
 
 一些 R Markdown 扩展包提供了适用于个人简历和 CV 的输出格式。例如基于 **pagedown** 包 [@R-pagedown] 的[简历模板](https://pagedown.rbind.io/html-resume)，和 [vitae](https://pkg.mitchelloharawild.com/vitae/) 提供的 CV 模板。
 
-除了提供模板外， R Markdown 还能让你的简历变得更加"数据驱动"。[datadrivencv](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，我们可以仅维护这张数据表，R Markdown 负责简历的格式。我们还可以插入 R 代码生成的交互图表，让我们的简历动起来。图 \@ref(fig:ns-cv) 是 datadrivencv 包的作者 Nick Strayer 结合 **pagedown** 包制作的个人简历。
+除了提供模板外， R Markdown 还能让你的简历变得更加“数据驱动”。[datadrivencv](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，我们可以仅维护这张数据表，R Markdown 负责简历的格式。我们还可以插入 R 代码生成的交互图表，让我们的简历动起来。图 \@ref(fig:ns-cv) 是 datadrivencv 包的作者 Nick Strayer 结合 **pagedown** 包制作的个人简历。
 
 ```{r ns-cv, echo = FALSE, fig.cap = "(ref:ns-cv)"}
 knitr::include_graphics("images/01-resume.png")
