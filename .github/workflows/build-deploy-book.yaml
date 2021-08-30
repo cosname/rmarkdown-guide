@@ -41,7 +41,6 @@ jobs:
           R -e 'renv::restore()'
           R -e 'reticulate::install_miniconda()'
           R -e 'reticulate::py_install(c("seaborn", "pandas"))'
-          R -e 'tinytex::install_tinytex()'
 
       - name: Build book
         run: make gitbook
