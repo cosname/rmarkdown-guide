@@ -150,7 +150,7 @@ rmarkdown::pandoc_version()
 
 - 代码: 运行并保存输出结果
 
-我们可以把 R Markdown 文档想象为从上到下的一系列章节，如图 \@ref(fig:document-flow)。YAML 元数据位于头部，确定了文档的输出和元数据。标题之后是正文的各个章节，每个章节包含任意 Markdown 文字和代码块，还可能有类似的子章节。
+与其他文本文档相同，R Markdown 文档也是由章节，段落，图片，表格等元素组成的，只不过格式编辑使用了 Markdown 语言，一些元素交由代码块来输出而已，如图 \@ref(fig:document-flow) 所示。YAML 元数据位于头部，确定了文档的输出和元数据。标题之后是正文的各个章节，每个章节包含任意 Markdown 文字和代码块，还可能有类似的子章节。
 
 ```{r document-flow, echo = FALSE, fig.cap = "R Markdown 文档示例"}
 knitr::include_graphics("images/03-document-flow.png")
@@ -825,13 +825,17 @@ ts.rolling(5).mean().plot()
 
 ## 使用 RStudio 图形化编辑器
 
-[RStudio 1.4](https://blog.rstudio.com/2021/04/06/rstudio-1-4-a-quick-tour/) 版本及以上为 R Markdown 文档添加了图形编辑模式。在源文档的上方最右侧点击类似 "A" 的按钮进入可视化编辑器，如图 \@ref(fig:visual-editing) 所示。 
+[RStudio 1.4](https://blog.rstudio.com/2021/04/06/rstudio-1-4-a-quick-tour/) 版本及以上为 R Markdown 文档添加了图形编辑模式。打开任意源文档，可以在最右侧发现类似 "A" 的按钮 (图 \@ref(fig:visual-mode-button))，点击可进入可视化编辑器，界面如图 \@ref(fig:visual-editing) 所示。 
+
+```{r visual-mode-button, echo = FALSE, fig.cap = "R Markdown 编辑模式切换按钮"}
+knitr::include_graphics("images/04-visual-mode-button.png")
+```
 
 ```{r visual-editing, echo = FALSE, fig.cap = "R Markdown 图形编辑模式"}
 knitr::include_graphics("images/04-visual-editing.png")
 ```
 
-图形化编辑器还提供了丰富的菜单栏选项，用于插入常见文档元素。如图 \@ref(fig:visual-editing-insert-menu) 所示。
+图形化编辑器提供了丰富的菜单栏选项，用于可视化地插入常见文档元素。如图 \@ref(fig:visual-editing-insert-menu) 所示。
 
 ```{r visual-editing-insert-menu, fig.cap = "图形化编辑器提供了很多菜单栏选项", echo = FALSE}
 knitr::include_graphics("images/04-visual-editing-insert-menu.png")

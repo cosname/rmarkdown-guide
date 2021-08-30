@@ -310,7 +310,7 @@ import_example_result("examples/latex-typesetting-hyperref.Rmd")
 ```
 
 
-排版问题是没有穷尽的，但希望读者从上面的例子中掌握了解决相似问题的思路。我们首先知道要引入什么 LaTeX 包，做哪些初始化设置，一些包需要用 tinytex 额外安装，然后在 `in_header` 引入写好的 `.tex` 配置文件，让 tinytex 解决剩下的问题。简单的思路足以解决 R Markdown PDF 排版中的绝大部分问题。
+排版问题是没有穷尽的，但希望读者从上面的例子中掌握了解决相似问题的思路。我们首先知道要引入什么 LaTeX 包，做哪些初始化设置，一些包需要用 tinytex 额外安装，然后在 `in_header` 引入写好的 `.tex` 配置文件，让 tinytex 解决剩下的问题。这种办法足以解决 R Markdown PDF 排版中的绝大部分问题。
 
 此外，对于硬核 LaTeX 用户，可以在 YAML 中设置 `keep_tex` 选项：
 
