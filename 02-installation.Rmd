@@ -8,7 +8,7 @@
 
 ## 安装 R Markdown
 
-编译 R Markdown 文档需要安装 **rmarkdown** [@R-rmarkdown] 包，在 RStudio 的控制台中运行：
+编译 R Markdown 文档需要安装 **rmarkdown** 包 [@R-rmarkdown]，在 RStudio 的控制台或 R GUI 中运行：
 
 ```{r, eval = FALSE}
 install.packages("rmarkdown")
@@ -21,8 +21,6 @@ install.packages("rmarkdown")
 ```{r, eval = FALSE}
 install.packages("rmarkdown", repos = <镜像网址>)
 ```
-
-
 
 ## 创建第一个 R Markdown 文档 {#create-first-rmd}
 

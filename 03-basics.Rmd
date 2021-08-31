@@ -266,6 +266,9 @@ knitr::include_graphics("images/03-multi-outputs.jpg")
 knitr::include_graphics("images/03-tufte.jpg")
 ```
 
+
+读者可能对类似 `tufte::tufte_handout` 的写法有些眼熟，这正是我们显示引用 R 包函数的语法。例如，如果我们要使用 `dplyr` 包中的 `filter()` 函数，我们可以首先 `library(dplyr)` 然后在余下代码使用 `filter()`。另外一种方式是显示的使用 `filter`，声明它属于哪个包，例如 `dplyr::filter()`，这样可以不用 `library(dplyr)`，但必须每次都在 `filter()` 之前添加 `dplyr::`。回到 R Markdown 中 `tufte::tufte_handout` 的话题，这样的写法体现了输出格式的本质，它就是一个包里的函数！例如，读者可以在控制台中输入 `?tufte::tufte_handout` 看到它的函数文档。`html_document` 和`pdf_document` 等输出格式是 rmarkdown 包中的函数，因此不需要 `::` 语法。但其他包的输出格式都需要如此显示引用，
+  
 R Markdown 也支持输出 MS Word 文档，在输出中指定 `output: word_document`即可。读者可以在第 \@ref(word) 章了解更多输出 Word 文档的知识。
 
 目前，rmarkdown 包中的输出格式包含：
@@ -506,8 +509,8 @@ Markdown 还支持插入表格，语法如下
 
 不过对于 R Markdown 用户，直接使用表格语法通常是不必要的。knitr 中的 `kable()` 函数提供了更完善的表格功能，如表 \@ref(tab:kable-example) 所示。
 
-```{r kable-example, fig.cap = "用 knitr::kable() 创建表格"}
-knitr::kable(head(iris))
+```{r kable-example}
+knitr::kable(head(iris), caption = "用 knitr::kable() 创建表格")
 ```
 
 
@@ -759,7 +762,7 @@ glimpse(babynames)
 
 - 进入前 100 名时，平均占比更大
 
-我们可以关注两个统计量，每个名字历年的平均排名 (我们预先截取了每年前 100 名的名字，未出现的名字按最后一名处理) 和平均占比。用 R 中的 **dplyr** [@R-ggplot2] 和 **ggplot2** [@R-ggplot2] 作数据处理和可视化。当然这里的重点不是代码写法，而是展示 R Markdown 中数据分析的流程。
+我们可以关注两个统计量，每个名字历年的平均排名 (我们预先截取了每年前 100 名的名字，未出现的名字按最后一名处理) 和平均占比。用 R 中的 **dplyr** [@R-ggplot2] 和 **ggplot2** [@R-ggplot2] 作数据处理和可视化。读者不必关注具体代码写法，而着重观察 R Markdown 中数据分析的流程。
 
 ```{r}
 library(tidyr)
