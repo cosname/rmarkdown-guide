@@ -22,8 +22,6 @@ install.packages("rmarkdown")
 install.packages("rmarkdown", repos = <镜像网址>)
 ```
 
-
-
 ## 创建第一个 R Markdown 文档 {#create-first-rmd}
 
 安装完成后，我们可以开始创建第一个 R Markdown 文档。在 RStudio 中选择 `File --> New File --> R Markdown`, 弹出图 \@ref(fig:rmd-prompt) 所示的提示框。
