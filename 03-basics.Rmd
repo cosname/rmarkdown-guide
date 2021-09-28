@@ -573,7 +573,7 @@ if (format(Sys.Date(), "%Y") == 2021) {
 
 生成：
 
-```{r}
+```{r, include = FALSE}
 x <- seq(1, 5)
 for (i in x) {
   print("R Markdown 真不错")
