@@ -138,7 +138,7 @@ rmarkdown::pandoc_version()
 
 作为总结，对于 HTML 格式，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步： tinytex 包或其他 LaTeX 发行版编译 Pandoc 生成的 `.tex` 文件，生成 PDF 文档。
 
-本节对编译过程的简介意在让读者对 knitr 和 Pandoc 工具有基础认识。实际写作中，我们几乎从不需要在底层与 knitr 或 Pandoc 做直接交互，而是 `.Rmd` 文档中发出这些指令。但理解它们在 R Markdown 编译中的角色有利于在编译失败时排错，和掌握更进阶的排版技巧。
+本节对编译过程的简介意在让读者对 knitr 和 Pandoc 工具有基础认识。实际写作中，我们几乎从不需要在底层与 knitr 或 Pandoc 做直接交互，而是 `.Rmd` 文档中发出这些指令。但理解它们在 R Markdown 编译中的角色有利于在编译失败时的排错和检索，同时为掌握更进阶的排版技巧打好基础。
 
 ## R Markdown 的基本元素
 
@@ -551,13 +551,95 @@ knitr::include_graphics("images/03-dillinger.jpg")
 
 在 R Markdown 中，有两种使用 R 代码的形式: 代码块和行内代码。
 
-代码块是一系列可运行代码形成的段落。例如，在本书创建的第一个 R Markdown 文档 `first-rmd.Rmd` 中，第一个代码块是：
+代码块是包含代码和注释的段落，R 代码块以 ` ```{r} ` 开始，` ``` ` 结束。R Markdown 在编译时遇到这样的标记时，会停下来运行其中包含的代码，把输出结果插入到该代码段的下方，例如：
+
+
+````
+```{r}`r ''`
+x <- seq(1, 5)
+for (i in x) {
+  print("R Markdown 真不错")
+}
+
+plot(cars)
+
+if (format(Sys.Date(), "%Y") == 2021) {
+  knitr::kable(head(mtcars))
+} else {
+  knitr::kable(head(iris))
+}
+```
+````
+
+生成：
+
+```{r, echo = FALSE}
+x <- seq(1, 5)
+for (i in x) {
+  print("R Markdown 真不错")
+}
+
+plot(cars)
+
+if (format(Sys.Date(), "%Y") == 2021) {
+  knitr::kable(head(mtcars))
+} else {
+  knitr::kable(head(iris))
+}
+```
+
+
+以上代码段产生了三个输出结果：`print()` 生成的文字, `plot()` 生成的图片和 `kable()` 生成的表格，正好对应了 R Markdown 中三种典型输出类型：文字，图片，和表格。我们在  \@ref(document-elements) 中分别介绍了三种输出类型的排版方案。
+
+虽然我们可以在同一个代码块中插入任意长度的代码，但 R Markdown 的最佳实践是让每个代码块自成逻辑，避免把不相关的代码放到同一代码块中。
+
+
+我们在之前的例子中没有使用过行内代码 (inline expression)，也称为行内表达式，它是另外一种插入 R 代码的重要方式。行内代码直接把 R 代码的运行结果插入至文本中，语法是 `` `r ` ``。例如：
+
+```
+半径为 5 的圆面积为 `r '\x60r pi*5^2\x60'`
+```
+
+显示为: 半径为 5 的圆面积为 `r pi*5^2`。
+
+
+行内代码通常用于动态地生成报告，节省手动更新文字内容的时间。例如，数据源 `data` 改变时，下面的文档重新编译后能自动得出新的结果： 
+
+````
+
+```{r}`r ''`
+mod <- lm(y ~ x, data = data)
+```
+
+线性模型的 R^2 值为 `r '\x60r summary(mod)$r.squared\x60'`
+````
+
+另一个行内代码经常出现的地方是 YAML 元数据，下面的 YAML 设置可以自动更新文档的日期为最近一次编译的日期。
+
+```
+---
+title: “自动更新日期”
+date: `r '\x60r Sys.Date()\x60'`
+---
+
+正常文档内容
+...
+```
+
+通常，我们用独立的代码段执行较为复杂的计算，用行内代码生成动态的文字内容。
+
+## 代码块选项
+
+我们可以用代码块选项 (chunk options) 控制代码块及其输出结果的显示方案，读者可以把代码块选项看作是代码块的元数据 (metadata)。
+
+例如，在本书创建的第一个 R Markdown 文档 `first-rmd.Rmd` 中，第一个代码块是：
 
 ````
 ```{r setup, include=FALSE}`r ''`
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ````
+
 
 我们已经知道 ` ```{r} ` 和 ` ``` ` 是插入 R 代码的格式，但没有解释 `setup` 和 `include=FALSE` 的含义。这里的 `setup` 是设置代码块标签的简写，上面的代码块等价于：
 
@@ -629,42 +711,42 @@ plot(mtcars)
 ```
 ````
 
-之前的例子没有涉及行内代码 (inline expression)，但它是另外一种插入 R 代码的重要方式。行内代码直接把 R 代码的运行结果插入至文本中，语法是 `` `r ` ``。例如：
-
-```
-半径为 5 的圆面积为 `r '\x60r pi*5^2\x60'`
-```
-
-显示为: 半径为 5 的圆面积为 `r pi*5^2`。
-
-
-行内代码通常用于动态地生成报告，节省手动更新文字内容的时间。例如，数据源 `data` 改变时，下面的文档重新编译后能自动得出新的结果： 
+[knitr 1.35](https://github.com/yihui/knitr/blob/master/NEWS.md#changes-in-knitr-version-135) 及以后版本支持在代码块内部用 `#|` 符号 设置代码块选项，例如：
 
 ````
-
 ```{r}`r ''`
-mod <- lm(y ~ x, data = data)
-```
+#| echo = FALSE, fig.width = 10,
+#| fig.cap = "这是一个很长很长很长的标题"
 
-线性模型的 R^2 值为 `r '\x60r summary(mod)$r.squared\x60'`
+plot(cars)
+```
 ````
 
-另一个行内代码经常出现的地方是 YAML 元数据，下面的 YAML 设置可以自动更新文档的日期为最近一次编译的日期。
+一些读者可能更喜欢 YAML 语法而不是用逗号分隔各选项，`#|` 实现了这一点：
 
-```
----
-title: “自动更新日期”
-date: `r '\x60r Sys.Date()\x60'`
----
+````
+```{r}`r ''`
+#| echo: false
+#| fig.width: 10
 
-正常文档内容
-...
+plot(cars)
 ```
+````
+
+需要注意的是，代码块内的选项优先级比常规选项更高，例如下面的代码段最终的选项为 `echo = FALSE` 和 `collapse = FALSE`
+
+````
+```{r, echo = FALSE, collapse = TRUE}`r ''`
+#| collapse = FALSE
+```
+````
+
+
 
 ## 在 R Markdown 中使用其他语言 {#basic-other-languages}
 
 
-R Markdown 脱胎于 R 语言的生态体系，但不熟悉的 R 的读者也不必因此感到束缚。一些包在 R 中提供了对其他语言的接口，我们可以轻松在 R Markdown 种使用其他编程语言。例如, **reticulate** [@R-reticulate] 包提供了 R 对 Python 的接口。首先安装 reticulate 包。
+R Markdown 脱胎于 R 语言的生态体系，但不熟悉的 R 的读者也不必因此感到束缚。一些包在 R 中提供了对其他语言的接口，我们可以轻松在 R Markdown 种使用其他编程语言。例如, **reticulate** [@R-reticulate] 包提供了 R 对 Python 的接口。首先安装 reticulate 包：
 
 ```r
 install.packages("reticulate")
