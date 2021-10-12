@@ -1,0 +1,13 @@
+# 基于 R Markdown 工作与学习 {#rmarkdown-working}
+
+## 发邮件：blastula {#rmarkdown-email}
+
+## 制作 R 包：fusen {#rmarkdown-package}
+
+## 制作简历：datadrivencv {#rmarkdown-cv}
+
+## 写书和记学习笔记：bookdown {#rmarkdown-bookdown}
+
+## 制作网站：blogdown {#rmarkdown-blogdown}
+
+## 制作科技论文的支撑材料 {#rmarkdown-paper}

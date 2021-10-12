@@ -1,0 +1,33 @@
+# (PART) R Markdown进阶操作 {.unnumbered}
+
+# 使用 R Markdown 创建动态交互文档 {#rmarkdown-interaction}
+
+## Web交互界面：Shiny小程序 {#rmarkdown-shiny}
+
+### Shiny 入门指南 {#shiny-intro}
+
+### Shiny 的部署 {#shiny-deploy}
+
+### 嵌入 Shiny 应用程序	{#shiny-app}
+
+### Shiny 小部件 {#shiny-widget}
+
+### Shiny 文档间的链接 {#shiny-link}
+
+### Shiny 文档的渲染 {#shiny-render}
+
+## 交互式仪表盘：Dashboards {#rmarkdown-dashboards}
+
+### Dashboards 入门 {#dashboards-intro}
+
+### Dashboards 排版 {#dashboards-layout}
+
+### Dashboards 组件 {#dashboards-module}
+
+### Dashboards 与 Shiny {#dashboards-shiny}
+
+## 在 R package 中使用 R Markdown {#package-rmd}
+
+### 写软件包的文档 {#rmd-vignettes}
+
+### 定义一个自动化报告函数 {#rmd-auto}

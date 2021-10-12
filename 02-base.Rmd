@@ -1,0 +1,61 @@
+# R Markdown 的基础知识 {#rmarkdown-base}
+
+## R Studio 相关的配置 {#rstudio-config}
+
+## R Markdown 的安装 {#rmarkdown-install}
+
+### 安装 R Markdown {#install-rmd}
+
+### 安装 Tinytex	{#install-tinytex}
+
+### 安装 Git（*）	{#install-git}
+
+### 安装 RStudio 图形化编辑器	 {#install-graph}
+
+### 创建第一个 R Markdown 文档 {#create-rmd}
+
+## R Markdown 的编译过程 {#rmarkdown-compile}
+
+## R Markdown 的基本元素 {#rmarkdown-element}
+
+### YAML 头部 {#yaml}
+
+### Markdown 语法 {#markdown}
+
+### 代码区块和行内代码 {#block-inline}
+
+## 页面设置和布局 {#page-layout}
+
+### 控制输出宽度 {#output-width}
+
+### 换行符号 {#line-break}
+
+### 分页符和分割线 {#page-break}
+
+### 目录 {#catalog}
+
+### 章节编号 {#chapter-number}
+
+### 图表的索引 {#plottable-index}
+
+### 参考文献 {#reference-index}
+
+## R Markdown 的文档元素 {#document-element}
+
+### 图片 {#element-plot}
+
+### 表格 {#element-table}
+
+### 公式 {#element-equation}
+
+### 引用 {#element-quote}
+
+### 字体颜色 {#element-textcol}
+
+### 动态交互元件 {#element-dynamic}
+
+### 音频和视频 {#element-video}
+
+### 流程图 {#element-flow}
+
+### 甘特图 {#element-gantt}
