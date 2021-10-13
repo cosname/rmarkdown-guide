@@ -14,10 +14,6 @@
 
 ## PDF 文档 {#rmarkdown-pdf}
 
-### 安装 TinyTex {#pdf-tinytex}
-
-（好像和2.2.2 重复了，可以看一下是否有差异）
-
 ### 从 R Markdown 到 PDF 文档 {#pdf-rmd}
 
 ### 在 PDF 文档中使用中文的注意事项 {#pdf-chinese}
