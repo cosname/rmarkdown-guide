@@ -1,0 +1,45 @@
+# (PART) 基于R Markdown的应用 {.unnumbered}
+
+# 使用 R Markdown 创建常用文档 {#rmarkdown-document}
+
+## HTML 文档 {#rmarkdown-html}
+
+### 目录和标题 {#html-title}
+
+### 主题和样式 {#html-theme}
+
+### 图片和数据框 {#html-pic}
+
+### 组件和内容 {#html-module}
+
+## PDF 文档 {#rmarkdown-pdf}
+
+### 从 R Markdown 到 PDF 文档 {#pdf-rmd}
+
+### 在 PDF 文档中使用中文的注意事项 {#pdf-chinese}
+
+### LaTeX 选项 {#pdf-latex}
+
+## PPT幻灯片 {#rmarkdown-ppt}
+
+### R Markdown 基础幻灯片 {#ppt-rmd}
+
+### Xaringan 幻灯片 {#ppt-xaringan}
+
+## Word 文档 {#rmarkdown-word}
+
+### 创建 Word 模板 {#word-template}
+
+### 自定义 Word 模板 {#word-custom-template}
+
+### R Markdown 和 Word 之间的双向工作流程 {#word-rmd}
+
+### 个人风格元素 {#word-style}
+
+## 创建新的文档格式 {#rmarkdown-new}
+
+### 从现有文档格式衍生新格式 {#new-existing}
+
+### 完全的自定义输出格式 {#new-new}
+
+### 使用新的文档输出格式 {#new-using}

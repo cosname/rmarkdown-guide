@@ -1,0 +1,87 @@
+# R Markdown 的操作技巧 {#rmarkdown-operation}
+
+## 表格操作进阶 {#table-advanced}
+
+### 利用函数 knitr::kable() 生成复杂的表格 {#table-complex}
+
+### 利用kableExtra弥补knitr::kable()的缺陷 {#kable-extra}
+
+### 其它生成表格的包及功能介绍 {#else-table}
+
+## 块选项 {#chunk-options}
+
+### 在块选项中使用变量 {#chunk-variable}
+
+### 如何在遇到 error 的时候继续编译 {#chunk-error}
+
+### 缓存代码块 {#chunk-cache}
+
+### 通过 asis 引擎有条件地执行内容 {#chunk-asis}
+
+### 执行 Shell 脚本 {#chunk-shell}
+
+### 控制输出 {#chunk-output}
+
+### 重新格式化源代码 {#chunk-reformat}
+
+### 删除文本输出中的前导符号 {#chunk-leading}
+
+### 为文本输出块添加属性 (*) {#chunk-property}
+
+### 同一张图的多种图像输出格式 {#chunk-multiplot}
+
+### 图像的后期加工 (*) {#chunk-process}
+
+### 输出高质量的图像 (*) {#chunk-highquality}
+
+### 带有低级绘图功能的逐步绘图 (*) {#chunk-step-plot}
+
+### 在代码块中自定义对象的打印格式 (*) {#chunk-print}
+
+### 选项钩子 (*) {#option-hook}
+
+## 与其他语言的结合 {#other-language}
+
+### 注册自定义语言引擎 (*) {#register-language}
+
+### 运行 Python 代码并与 Python 交互 {#python-rmd}
+
+### 通过 cat 引擎将块内容写入文件 {#cat-file}
+
+### 运行 SAS 代码 {#sas-rmd}
+
+### 运行 Stata 代码 {#stata-rmd}
+
+### 用渐近线 Asymptote 创建图形 {#asymptote-plot}
+
+### 使用 Sass/SCSS 构建 HTML 页面 {#sass-scss}
+
+## 输出钩子 (*) {#output-hook}
+
+### 编辑源代码 {#edit-source}
+
+### 向源代码中添加行号 {#source-index}
+
+### 可滚动的文本输出 {#scrollable-output}
+
+### 截断文本输出 {#truncated-output}
+
+### 以HTML5格式输出图像 {#html5-plot}
+
+## 其它使用 knitr 的小技巧 (*) {#other-trick}
+
+### 重复使用代码块 {#reuse-chunk}
+
+### 在创建对象之前使用它 (*) {#use-creat}
+
+### 提前退出编译 {#compile-exit}
+
+### 生成一个图像并在其他地方显示 {#plot-show-else}
+
+### 修改前一个代码块中的图像 {#modify-before}
+
+### 保存一组块选项并重复使用它们 (*) {#reuse-option}
+
+### 使用 knitr::knit_expand() 来生成 Rmd 源代码 {#knit-expand}
+
+### 允许代码块中的标签重复 (*) {#repeat-label}

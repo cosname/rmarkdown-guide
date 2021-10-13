@@ -1,0 +1,33 @@
+# 使用R Markdown开展项目工作 {#rmarkdown-project}
+
+## 使用 R Markdown 在工作中管理项目 {#project-manage}
+
+### 来自外部的 R 脚本 {#external-r}
+
+### 将外部脚本读取到一个块中 {#external-read}
+
+### 从外部脚本读取多个代码块 (*) {#external-multi}
+
+### 子文档 (*) {#child-document}
+
+### 保留图像文件 {#keep-plot}
+
+### R 代码块的工作目录 {#chunk-directory}
+
+## 使用 R Markdown 实现工作流 {#work-flow}
+
+### 使用 RStudio 键盘快捷键 {#rstudio-shortcut}
+
+### R Markdown 的拼写检查 {#spell-check}
+
+### 用 rmarkdown::render() 呈现 R Markdown {#render-rmd}
+
+### 参数化的报告 {#parameterized-reports}
+
+### 自定义 Knit 按钮 (*)	{#customize-button}
+
+### 通过 Google Drive 对 Rmd 文档进行协作	{#google-drive}
+
+### 用 workflowr 将R Markdown项目组织到一个研究网站上 {#workflowr-web}
+
+### 使用 GitHub Actions 实现自动化部署{#github-actions}
