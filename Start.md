@@ -2,55 +2,55 @@
 
 写作的过程应当包括以下几个步骤：
 
-- 从官方源 Fork 一个自己的分支；
+- **从官方源 Fork 一个自己的分支**；
 
-这一步在 GitHub 项目网页（<https://github.com/cosname/rmarkdown-guide>）中完成。
+  这一步在 GitHub 项目网页（<https://github.com/cosname/rmarkdown-guide>）中完成。
 
-- 将自己的 Fork 克隆到本地电脑中；
+- **将自己的 Fork 克隆到本地电脑中**；
 
-```
-# 以自己的 Fork 为例，将 `username` 替换为自己的用户名
-git clone https://github.com/<username>/rmarkdown-guide
-```
+  ```
+  # 以自己的 Fork 为例，将 `username` 替换为自己的用户名
+  git clone https://github.com/<username>/rmarkdown-guide
+  ```
 
-- 创建一个新的 branch，并切换到这个分支上进行创作；
+- **创建一个新的 branch，并切换到这个分支上进行创作**；
 
-```
-# branch-name 使用一个 reasonable 的单词拼写
-git branch chapter3
-git checkout chapter3
-```
+  ```
+  # branch-name 使用一个 reasonable 的单词拼写
+  git branch chapter3
+  git checkout chapter3
+  ```
 
-- 在新的本地分支上写作内容（:writing_hand:）；
+- **在新的本地分支上写作内容（:writing_hand:）**；
 
-- 将内容 commit 到本地的 git 仓库中；
+- **将内容 commit 到本地的 git 仓库中**；
 
-```
-git add chapter3.Rmd
-git commit -m "Update Chapter 3"
-```
+  ```
+  git add chapter3.Rmd
+  git commit -m "Update Chapter 3"
+  ```
 
-- 本地 git 仓库中的内容 push 到自己的 GitHub 仓库中；
+- **本地 git 仓库中的内容 push 到自己的 GitHub 仓库中**；
 
-```
-git push --set-upstream origin chapter3
-```
+  ```
+  git push --set-upstream origin chapter3
+  ```
 
-- 在图书主体仓库提交一个 Pull request；
+- **在图书主体仓库提交一个 Pull request**；
 
 在这里提交 PR <https://github.com/cosname/rmarkdown-guide/pulls>。提交后注意检查 GitHub Action 运行的结果（一般需要等待几十分钟才能看到），如果运行不成功请先自行排查问题来源。
 
-- 管理员审核通过后，合并到主体仓库中。
+- **管理员审核通过后，合并到主体仓库中**。
 
-- 主体仓库更新后，其它的创作者在自己 Fork 的主分支中会看到一个 “Fetch Upstream” 的按钮，点击该按钮与主仓库同步。
+- **主体仓库更新后，其它的创作者在自己 Fork 的主分支中会看到一个 “Fetch Upstream” 的按钮，点击该按钮与主仓库同步**。
 
-- 同步本地的仓库。
+- **同步本地的仓库**。
 
-```
-git pull
-```
+  ```
+  git pull
+  ```
 
-- 一个新的创作从创建一个新分支开始。
+- **一个新的创作从创建一个新分支开始**。
 
 对上述步骤的详细说明如下：
 
