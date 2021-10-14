@@ -1987,7 +1987,7 @@ xaringanExtra::use_animate_all("slide_left")
 ```  
 ````
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # @TODO: 此处可以加入一个演示动画
 if (knitr::is_html_output()){
   knitr::include_graphics("")
@@ -2101,7 +2101,7 @@ xaringanExtra::use_fit_screen()
 使用快捷键 `Alt / Option + F` 使幻灯片适合屏幕，并忽略幻灯片比例（重新加载幻灯片以恢复正常）。官网给出了 gif 的[演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/fit-to-screen)。
 
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # @TODO: 此处可以加入一个演示动画
 if (knitr::is_html_output()){
   knitr::include_graphics("")
@@ -2240,7 +2240,7 @@ remotes::install_github("davidgohel/officedown")
 
 ````md
 ```{r, setup, include=FALSE}`r ''`
-library(officedown)
+library("officedown")
 ```
 ````
 
