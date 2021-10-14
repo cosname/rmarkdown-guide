@@ -7,6 +7,9 @@ on:
 
 name: build-deploy-book
 
+env:
+  RENV_PATHS_ROOT: ~/.local/share/renv
+
 jobs:
   build:
     runs-on: macos-latest
@@ -24,8 +27,8 @@ jobs:
       - name: Cache renv packages
         uses: actions/cache@v2
         with:
-          path: $HOME/.local/share/renv
-          key: r-${{ hashFiles('renv.lock') }}
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: r-${{ hashFiles('**/renv.lock') }}
           restore-keys: r-
 
       - name: Cache bookdown results
