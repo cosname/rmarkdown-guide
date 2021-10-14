@@ -95,7 +95,7 @@ cat ./.ssh/id_rsa.pub
 
 ## 管理 R 包
 
-项目采用 (renv)[https://rstudio.github.io/renv/articles/renv.html] 管理 R 包依赖，它可以基于单个项目创建 R 包的管理环境，而不是依赖全局的 R Library。克隆项目后，在 R 中运行
+项目采用 **renv**<https://rstudio.github.io/renv/articles/renv.html> 管理 R 包依赖，它可以基于单个项目创建 R 包的管理环境，而不是依赖全局的 R Library。克隆项目后，在 R 中运行
 
 ```r
 # 本地安装 renv 包
