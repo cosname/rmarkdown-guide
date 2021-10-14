@@ -2,13 +2,57 @@
 
 写作的过程应当包括以下几个步骤：
 
-- 在本地电脑上写作内容；
+- 从官方源 Fork 一个自己的分支；
+
+这一步在 GitHub 项目网页（<https://github.com/cosname/rmarkdown-guide>）中完成。
+
+- 将自己的 Fork 克隆到本地电脑中；
+
+```
+# 以自己的 Fork 为例，将 `username` 替换为自己的用户名
+git clone https://github.com/<username>/rmarkdown-guide
+```
+
+- 创建一个新的 branch，并切换到这个分支上进行创作；
+
+```
+# branch-name 使用一个 reasonable 的单词拼写
+git branch chapter3
+git checkout chapter3
+```
+
+- 在新的本地分支上写作内容（:writing_hand:）；
+
 - 将内容 commit 到本地的 git 仓库中；
+
+```
+git add chapter3.Rmd
+git commit -m "Update Chapter 3"
+```
+
 - 本地 git 仓库中的内容 push 到自己的 GitHub 仓库中；
+
+```
+git push --set-upstream origin chapter3
+```
+
 - 在图书主体仓库提交一个 Pull request；
+
+在这里提交 PR <https://github.com/cosname/rmarkdown-guide/pulls>。提交后注意检查 GitHub Action 运行的结果（一般需要等待几十分钟才能看到），如果运行不成功请先自行排查问题来源。
+
 - 管理员审核通过后，合并到主体仓库中。
 
-为了开始创作，需要进行必要的设置，主要有以下几个步骤。
+- 主体仓库更新后，其它的创作者在自己 Fork 的主分支中会看到一个 “Fetch Upstream” 的按钮，点击该按钮与主仓库同步。
+
+- 同步本地的仓库。
+
+```
+git pull
+```
+
+- 一个新的创作从创建一个新分支开始。
+
+对上述步骤的详细说明如下：
 
 ## Fork 一个自己的分支
 
@@ -20,6 +64,7 @@
 # run git in your local computer
 git clone https://github.com/gaospecial/rmarkdown-guide
 ```
+
 此时可以尝试一下 `git push` 命令，如果提示登录，则可以进行下列设置
 
 ```
@@ -47,22 +92,6 @@ cat ./.ssh/id_rsa.pub
 
 这样，以后就调用 “Git bash shell” 时，便会自动提供私钥认证，不需要输入用户名和密码了。
 
-## 设置 upstream 仓库
-
-如果主仓库中有了更新，那么怎么同步到自己的仓库中呢？
-推荐的方法是在本地仓库中添加一个 remote upstream。
-
-```
-# Add a new remote upstream repository
-git remote add upstream https://github.com/cosname/rmarkdown-guide.git
-
-# Sync your fork
-git fetch upstream
-git checkout master
-git merge upstream/master
-```
-
-同步的过程中，本地仓库会先与主仓库同步，commit change 之后，再通过 git push 命令将主仓库的修改同步到自己在 GitHub 上的分支中去。
 
 ## 管理 R 包
 
@@ -89,11 +118,4 @@ renv::snapshot()
 这样，在我们提交新的 `renv.lock` 至主仓库后，其他作者再次运行 `renv::restore()` 便可以添加这些 R 包至自己的项目环境。
 
 
-## 提交创作好的章节
-
-在 GitHub 上面发起一个 Pull Request 即可将自己的仓库中的内容同步到 `cosname/rmarkdown-guide`。待管理员审核通过后，即完成创作。
-
-## 建议
-
-- 建议每一章节单独创建一个 branch 来进行创作，以最大可能避免版本间的冲突（让冲突处理起来比较简单）。
 
