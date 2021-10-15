@@ -9,6 +9,8 @@ name: build-deploy-book
 
 env:
   RENV_PATHS_ROOT: ~/.local/share/renv
+  MINICONDA_LIB_PATH: /Users/runner/Library/r-miniconda/
+  MINICONDA_WORK_PATH: /Users/runner/work/rmarkdown-guide/
 
 jobs:
   build:
@@ -30,6 +32,20 @@ jobs:
           path: ${{ env.RENV_PATHS_ROOT }}
           key: r-${{ hashFiles('**/renv.lock') }}
           restore-keys: r-
+
+      - name: Cache Miniconda packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.MINICONDA_LIB_PATH }}
+          key: miniconda-lib-${{ hashFiles('**/renv.lock') }}
+          restore-keys: miniconda-lib-
+          
+      - name: Cache Miniconda work
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.MINICONDA_WORK_PATH }}
+          key: miniconda-work-${{ hashFiles('**/renv.lock') }}
+          restore-keys: miniconda-work-       
 
       - name: Cache bookdown results
         uses: actions/cache@v2
