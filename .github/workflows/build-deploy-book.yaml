@@ -67,6 +67,7 @@ jobs:
 
       - name: Deploy to GitHub pages 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
+        on: push
         with:
           branch: gh-pages
           folder: _book
