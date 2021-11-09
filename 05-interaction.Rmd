@@ -675,4 +675,5 @@ knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 
 ### 写软件包的文档 {#rmd-vignettes}
 
+
 ### 定义一个自动化报告函数 {#rmd-auto}
