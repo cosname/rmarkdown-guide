@@ -8,7 +8,7 @@
 
 ### 安装 Tinytex	{#install-tinytex}
 
-要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTex 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，我们建议 R Markdown 的用户使用 TinyTeX。
+要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，我们建议 R Markdown 的用户使用 TinyTeX。
 
 TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档。通过命令行模式，它的安装要简单的多。
 
@@ -16,7 +16,7 @@ TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户�
 knitr::include_graphics("images/logo-tinytex.png")
 ```
 
-要安装 `TinyTex`，只需要在 R 语言终端输入两条命令即可[^TinyTex-vs-tinytex]。
+要安装 TinyTeX，只需要在 R 语言终端输入两条命令即可[^TinyTeX-vs-tinytex]。
 
 ```{r eval=FALSE}
 # 安装 tinytex
@@ -27,12 +27,13 @@ tinytex::install_tinytex()
 ```
 
 
-[^TinyTex-vs-tinytex]: `TinyTex` 与 `tinytex` 并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护前者的 R 语言软件包。
+[^TinyTeX-vs-tinytex]: TinyTeX 与 **tinytex** 并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护前者的 R 语言软件包。
 
 
 如果 TinyTeX 本身的下载安装就很慢，或在 R 里面下载不完整，那么可以用浏览器或其它下载工具直接下载：https://github.com/yihui/tinytex-releases/releases 然后把下载的文件路径传给安装函数，比如：
 
 ```{r eval=FALSE}
+# 假设下载文件所在的位置是 ~/Downloads/TinyTeX-v2021.01.zip
 tinytex:::install_prebuilt('~/Downloads/TinyTeX-v2021.01.zip')
 ```
 
@@ -46,20 +47,20 @@ knitr::include_graphics(rep(c("images/02-first-rmd-pdf1.png", "images/02-first-r
 
 #### 安装 LaTeX 组件 {#install-latex-package}
 
-**rmarkdown** 包从版本 1.9 开始，编译 R Markdown 为 PDF 时会调用 tinytex。因此，对 R Markdown 用户来说，编译 PDF 是出错的头号原因可能在于缺失某些 LaTeX 包。
+**rmarkdown** 包从版本 1.9 开始，编译 R Markdown 为 PDF 时会调用 TinyTeX。因此，对 R Markdown 用户来说，编译 PDF 是出错的头号原因可能在于缺失某些 LaTeX 包。
 
-LaTex 包（也被称为“package”）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
+LaTeX 包（也被称为“package”）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
 
-如果你知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，对于国内的用户来说，通常需要设定一下 LaTeX 软件仓库的位置。下面的例子中，使用了清华大学的 TeX Live 镜像。
+如果知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，对于国内的用户来说，通常需要设定一下 LaTeX 软件仓库的位置。下面的例子中，使用了清华大学的 TeX Live 镜像。
 
 ```{r, install-latex-packages, eval=FALSE}
-# install required Latex package
+# 安装需要的 LaTeX 组件
 tinytex::tlmgr_repo(url = "https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet")
 tinytex::tlmgr_install(c('pgf', 'preview', 'xcolor'))
 ```
 
 
-如果不知道包的名称也没有关系，`tinytex` 也提供了相应的函数来帮助你从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 文件。如果嫌 log 太长或者找不到具体提示信息，还可以使用第二种办法。
+如果不知道包的名称也没有关系，**tinytex** 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 文件。如果嫌 log 太长或者找不到具体提示信息，还可以使用第二种办法。
 
 ```{r install-latex-package-by-errormsg, eval=FALSE}
 # 假如有相关报错信息 "! LaTeX Error: File `preview.sty' not found."
@@ -73,7 +74,7 @@ tinytex::parse_install(log = "tex.log")
 
 ### 安装 Git（*）	{#install-git}
 
-Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^linus-linux]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，我们通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里我们以 GitHub 为例进行说明。
+Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^linus-linux]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
 
 [^linus-linux]: Linus Torvalds (1969年12月28日－) 生于芬兰赫尔辛基市，拥有美国国籍，Linux 内核的最早作者，随后发起了这个开源项目，担任 Linux 内核的首要架构师与项目协调者，是当今世界最著名的电脑程序员、黑客之一。他 2005 年发布了 Git，是 Git 的主要开发者。
 
@@ -137,7 +138,7 @@ Git 常用的命令有下面几个：
   
 #### 配置 Git 远程仓库的 SSH 认证 {#git-ssh}
 
-SSH 密钥是成对的，包括公钥和私钥；公钥登记到 GitHub 网站，私钥存储在本地计算机（私有）。密钥在本地生成。点击鼠标右键，选择“Git Bash Here”，输入下列命令将生成一对 SSH 密钥。 默认情况下，私钥保存在 “`~/.ssh/id_rsa`” 文件中，公钥保存在 “~/.ssh/id_rsa.pub”文件中 （在 Windows 系统中的 Git bash 终端下，`~` 代表用户的家目录）。
+SSH 密钥是成对的，包括公钥和私钥；公钥登记到 GitHub 网站，私钥存储在本地计算机（私有）。密钥在本地生成。点击鼠标右键，选择“Git Bash Here”，输入下列命令将生成一对 SSH 密钥。 默认情况下，私钥保存在“`~/.ssh/id_rsa`”文件中，公钥保存在 “~/.ssh/id_rsa.pub”文件中 （在 Windows 系统中的 Git bash 终端下，`~` 代表用户的家目录）。
 
 ```bash
 ssh-keygen
@@ -164,7 +165,7 @@ cat ./.ssh/id_rsa.pub
 
   因为自己不具备其他用户拥有的软件仓库的编辑权限，所以无法直接通过 `push` 的方法提交修改。在这种情况下，用户可以首先在 GitHub 上 Fork 其他用户的软件仓库，并在自己的 Fork 中做相应修改后，通过 Pull Request 的方法提交给其他用户，经过管理员审核后，即可合并到对方的软件仓库中去。这也是团队协作共同维护一个项目时的常规操作。
 
-在第 \@ref(github-actions) 节，我们还将介绍使用 GitHub Actions 实现自动化完成持续性集成（**C**ontinuous **I**ntegration，CI）的功能。
+第 \@ref(github-actions) 节还将介绍使用 GitHub Actions 实现自动化完成持续性集成（**C**ontinuous **I**ntegration，CI）的功能。
 
 
 ### 安装 RStudio 图形化编辑器	 {#install-graph}
