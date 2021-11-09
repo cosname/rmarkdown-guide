@@ -319,11 +319,11 @@ the corresponding output function of your UI code.
 
 ## 交互式仪表盘：Dashboards {#rmarkdown-dashboards}
 
-在本章中，我们将介绍基于 **flexdashboard** 包 [@R-flexdashboard] 的仪表盘\index{dashboard}设计。
+本章将介绍基于 **flexdashboard** 包 [@R-flexdashboard] 的仪表盘\index{dashboard}设计。
 
 仪表盘在业务风格的报告中特别常见。它们可以用来展示报告的概要和关键内容。仪表盘的布局通常是基于网格搭建的，各个组件排列在各种大小的“盒子”中。
 
-使用 **flexdashboard** 包，你可以
+使用 **flexdashboard** 包，读者可以
 
 - 使用 R Markdown 将一组相关数据可视化作为指示盘进行发布。
 
@@ -343,14 +343,14 @@ the corresponding output function of your UI code.
 install.packages("flexdashboard")
 ```
 
-其次，通过点击  `File -> New File -> R Markdown` 对话框在 RStudio 中创建文档，并选择 "Flex Dashboard" 模板。这是我们就已经创建了一个新的 dashboard 文件了。操作界面如图 \@ref(fig:dashboard-new) 所示：
+其次，通过点击  `File -> New File -> R Markdown` 对话框在 RStudio 中创建文档，并选择 "Flex Dashboard" 模板。操作界面如图 \@ref(fig:dashboard-new) 所示：
 
 ```{r dashboard-new, echo=FALSE,fig.width=6,fig.align='center', fig.cap='创建新的dashboard文件。'}
 knitr::include_graphics('images/dashboard-new.png', dpi = NA)
 ```
 
 
-> **注**：如果你并没有使用 RStudio 进行操作，那么你也可以从 R 控制台创建一个新的 `flexdashboard` 的 R Markdown 文件，具体操作如下：
+> **注**：如果没有使用 RStudio 进行操作，那么你也可以从 R 控制台创建一个新的 `flexdashboard` 的 R Markdown 文件，具体操作如下：
 
 ```r
 rmarkdown::draft(
@@ -359,12 +359,12 @@ rmarkdown::draft(
 )
 ```
 
-本章只介绍一些基本特性和用法。如果你想更进一步了解 **flexdashboard**，可以查看它的完整文档： https://rmarkdown.rstudio.com/flexdashboard/ 。
+本章只介绍一些基本特性和用法。如果读者想更进一步了解 **flexdashboard**，可以查看它的完整文档： https://rmarkdown.rstudio.com/flexdashboard/ 。
 
 仪表盘有许多与 HTML 文档相同的特性(Section \@ref(html-document))，比如图形选项
-(Section \@ref(figure-options))，外观和风格\@ref(appearance-and-style))，MathJax 公式 \@ref(mathjax-equations))，头部和正文前后内容 (Section \@ref(includes)) 和 Pandoc 参数(Section \@ref(pandoc-arguments))，等等。建议大家有时间的话，把前面提到的几节内容也看一下。除此之外，我们也建议你浏览 R 帮助页面 `?flexdashboard::flex_dashboard` 来了解更多 `flexdashboard` 选项和其特性。
+(Section \@ref(figure-options))，外观和风格\@ref(appearance-and-style))，MathJax 公式 \@ref(mathjax-equations))，头部和正文前后内容 (Section \@ref(includes)) 和 Pandoc 参数(Section \@ref(pandoc-arguments))，等等。建议大家有时间的话，把前面提到的几节内容也看一下。除此之外，也建议浏览 R 帮助页面 `?flexdashboard::flex_dashboard` 来了解更多 `flexdashboard` 选项和其特性。
 
-当然Rstudio官网也给出了该包的[视频介绍](https://www.bing.com/search?q=flexdashboard&qs=n&form=QBLHCN&sp=-1&pq=flexdashboard&sc=9-13&sk=&cvid=B285D5FEF77A401AAE80C9FCB1E4DDDE)以及一些案例，你可以通过学习案例对应的代码实现快速入门。
+当然 Rstudio 官网也给出了该包的[视频介绍](https://www.bing.com/search?q=flexdashboard&qs=n&form=QBLHCN&sp=-1&pq=flexdashboard&sc=9-13&sk=&cvid=B285D5FEF77A401AAE80C9FCB1E4DDDE)以及一些案例，你可以通过学习案例对应的代码实现快速入门。
 
 ### Dashboards 排版 {#dashboards-layout}
 
@@ -398,13 +398,13 @@ Column 1
 
 > 我们使用了一系列的破折号，只是为了让第二节在源文档中更为显眼罢了。
 
-默认情况下，二级标题在仪表板上生成列，三级标题在列中垂直堆叠。所以在默认情况下，你不必在仪表盘上设置列，因为它默认会一列一列的垂直堆放显示。
+默认情况下，二级标题在仪表板上生成列，三级标题在列中垂直堆叠。所以在默认情况下，不必在仪表盘上设置列，因为它默认会一列一列的垂直堆放显示。
 
 > **注**：二级标题的内容将不会显示在输出中。二级标题仅用于布局（例如，例子中的Column 1不会现实在输出中），因此标题的实际内容一点都不重要。相比之下，一级标题和三级标题更加重要。
 
 图 \@ref(fig:dashboard-start) 显示了上述示例的结果，一共是两列，第一列为 “Chart A”，第二列为 “Chart B” 和 “Chart C”。
 
-> **注**：在这个例子中，我们没有在代码块中加入任何 R 代码，所以所有的框都是空的。当然在实际使用中，你可以编写任意的 R 代码来生成 R 图、HTML 小部件或 \@ref(dashboard-components) 节中介绍的各种其他组件，并将其加入到这些“盒子”中。
+> **注**：在这个例子中，作者没有在代码块中加入任何 R 代码，所以所有的框都是空的。当然在实际使用中，读者可以编写任意的 R 代码来生成 R 图、HTML 小部件或 \@ref(dashboard-components) 节中介绍的各种其他组件，并将其加入到这些“盒子”中。
 
 
 ```{r dashboard-start, echo=FALSE,fig.width=6,fig.align='center', fig.cap='简单仪表盘布局示例。'}
@@ -421,7 +421,7 @@ output:
     orientation: rows
 ```
 
-这时二级结构中将会按照行进行排列，三级结构中会按照行中的列进行堆叠。我们将上述例子修改后，输出结果如图 \@ref(fig:dashboard-rows) 所示：
+这时二级结构中将会按照行进行排列，三级结构中会按照行中的列进行堆叠。将上述例子修改后，输出结果如图 \@ref(fig:dashboard-rows) 所示：
 
 ```{r dashboard-rows, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于行布局的结果。'}
 knitr::include_graphics('images/dashboard-rows.png', dpi = NA)
@@ -470,15 +470,15 @@ knitr::include_graphics('images/dashboard-pages.png', dpi = NA)
 
 > **注**：一系列等号是一级标题的另一种 Markdown 语法（也可以使用单个井号 `#`表示）。
 
-从图 \@ref(fig:dashboard-pages) 我们可以看到：
+从图 \@ref(fig:dashboard-pages) 可以看到：
 页面标题显示在仪表盘顶部的导航菜单中。一级结构单独构成一个页面。
 
-本例中，我们还做了一个小拓展，通过 `data-icon` 属性将图标应用于页面标题中。当然，你可以从该网址 https://fontawesome.com 找到其他可用的图标。
+本例中，还做了一个小拓展，通过 `data-icon` 属性将图标应用于页面标题中。当然也可以从该网址 https://fontawesome.com 找到其他可用的图标。
 
 
 #### 故事板
 
-除了基于列或行布局外，你还可以通过故事板（"storyboard"）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：
+除了基于列或行布局外，还可以通过故事板（"storyboard"）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：
 
 ````markdown
 `r xfun::file_string('examples/dashboard/03-storyboard.Rmd')`
@@ -488,7 +488,7 @@ knitr::include_graphics('images/dashboard-pages.png', dpi = NA)
 knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 ```
 
-如图 \@ref(fig:dashboard-story) 所示，你可以通过顶部的左右导航按钮来浏览所有故事板内容。
+如图 \@ref(fig:dashboard-story) 所示，可以通过顶部的左右导航按钮来浏览所有故事板内容。
 
 ### Dashboards 组件 {#dashboards-module}
 
@@ -508,11 +508,11 @@ knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 
 1. 导航栏（提供与仪表盘相关的更多链接）。
 
-> **注**：无论输出格式如何，前三个组件在大多数 R Markdown 文档中均可使用。 而后四个组件是仪表盘特有的，本节我们主要介绍后四个组件。
+> **注**：无论输出格式如何，前三个组件在大多数 R Markdown 文档中均可使用。 而后四个组件是仪表盘特有的，本节主要介绍后四个组件。
 
 #### 数值框
 
-如果你希望在仪表盘中包含一个或多个数值，那么你可以使用 **flexdashboard** 包中的 `valueBox()` 函数来实现这个需求。下面给出一个简单的例子：
+如果希望在仪表盘中包含一个或多个数值，那么读者可以使用 **flexdashboard** 包中的 `valueBox()` 函数来实现这个需求。下面给出一个简单的例子：
 
 
 ````markdown
@@ -523,12 +523,12 @@ knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 ```
 
-图 \@ref(fig:dashboard-valueboxes) 展示了三个并排的仪表，每个仪表都显示了一个数值和标题。这里我们重点解释下第三个代码块（`### Spam per Day`）。这里的 `valueBox()` 函数定义了一个值( `spam` )和一个图标( `icon = "fa-trash"` )。并使用 `color` 设置参数框的颜色。内部使用了一个 `ifelse()` 语句，使得不同值表示不同的颜色。当然，可用的颜色还包括： `"info"`, `"success"` 和 `"danger"`（默认值为： `"primary"`）。你也可以指定任何有效的 CSS 颜色（例如：`"#ffffff"`， `"rgb(100, 100, 100)"` 等）。
+图 \@ref(fig:dashboard-valueboxes) 展示了三个并排的仪表，每个仪表都显示了一个数值和标题。这里重点解释下第三个代码块（`### Spam per Day`）。这里的 `valueBox()` 函数定义了一个值( `spam` )和一个图标( `icon = "fa-trash"` )。并使用 `color` 设置参数框的颜色。内部使用了一个 `ifelse()` 语句，使得不同值表示不同的颜色。当然，可用的颜色还包括： `"info"`, `"success"` 和 `"danger"`（默认值为： `"primary"`）。也可以指定任何有效的 CSS 颜色（例如：`"#ffffff"`， `"rgb(100, 100, 100)"` 等）。
 
 
 #### 仪表
 
-仪表：在指定数值范围内显示仪表上的数值。例如，下面展示了三个仪表并排的结果（见图 \@ref(fig:dashboard-gauges)）
+在指定数值范围内显示仪表上的数值。例如，下面展示了三个仪表并排的结果（见图 \@ref(fig:dashboard-gauges)）
 
 ````markdown
 `r xfun::file_string('examples/dashboard/05-gauges.Rmd')`
@@ -549,7 +549,7 @@ knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 
 #### 文本注释
 
-你可以通过以下方式在仪表盘中包含额外的叙述说明：
+可以通过以下方式在仪表盘中包含额外的叙述说明：
 
 1. 在页面顶部加入相应文本内容。
 
@@ -571,7 +571,7 @@ knitr::include_graphics('images/dashboard-text.png', dpi = NA)
 
 #### 导航栏
 
-默认情况下，仪表盘的导航栏包括：标题（`title`）、作者（`author`）和日期（`date`）。当仪表盘有多个页面时(第\@ref(multiple-pages)节)，导航条左侧还包含指向各个页面的链接。当然，你也在可以仪表盘上添加社交链接。
+默认情况下，仪表盘的导航栏包括：标题（`title`）、作者（`author`）和日期（`date`）。当仪表盘有多个页面时(第\@ref(multiple-pages)节)，导航条左侧还包含指向各个页面的链接。当然，也在可以仪表盘上添加社交链接。
 
 除此之外，使用 `navbar` 选项可以在导航栏中添加自定义链接。例如，在导航栏中添加 "About" 链接：
 
@@ -595,7 +595,7 @@ knitr::include_graphics('images/dashboard-about.png', dpi = NA)
 
 > **注**：导航栏必须包括标题或图标(或两者都包含)。你还可以使用 `href` 作为导航目标。如果想调整文本对齐方式，可以使用 `align` 参数 (默认情况下为右对齐)。
 
-除此之外，你可以通过 `social` 选项添加社交链接。例如，下面的仪表盘包括了 Twitter 和 Facebook 链接，以及一个包含更多服务的下拉菜单：
+除此之外，可以通过 `social` 选项添加社交链接。例如，下面的仪表盘包括了 Twitter 和 Facebook 链接，以及一个包含更多服务的下拉菜单：
 
 ```yaml
 ---
@@ -654,9 +654,9 @@ knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 
 #### 输入栏
 
-通过添加 `{.sidebar}` 属性设置一个默认布局为左对齐，250像素宽度的左侧边栏。
+通过添加 `{.sidebar}` 属性设置一个默认布局为左对齐，250 像素宽度的左侧边栏。
 
-在搭建多个页面的仪表盘时，如果你想创建一个应用于所有页面的工具条。这时，你可以使用一级结构来定义侧边栏。
+在搭建多个页面的仪表盘时，如果想创建一个应用于所有页面的工具条。这时，可以使用一级结构来定义侧边栏。
 
 
 #### 拓展
@@ -669,7 +669,7 @@ knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 1. Shiny 网站上的文章“[Introduction to Interactive Documents](http://shiny.rstudio.com/articles/interactive-docs.html)”，这是一个很好的入门指南。
 
 
-1. 关于部署交互式文档，你可以使用 Shiny Server 或 RStudio Connect：https://www.rstudio.com/products/shiny/shiny-server/。
+1. 关于部署交互式文档，读者可以使用 Shiny Server 或 RStudio Connect：https://www.rstudio.com/products/shiny/shiny-server/。
 
 ## 在 R package 中使用 R Markdown {#package-rmd}
 
