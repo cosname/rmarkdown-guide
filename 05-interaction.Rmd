@@ -4,27 +4,672 @@
 
 ## Web交互界面：Shiny小程序 {#rmarkdown-shiny}
 
-### Shiny 入门指南 {#shiny-intro}
+Shiny 包是由 R 驱动的交互式 Web 应用程序。如果读者想从 R Markdown 文档中调用 Shiny 代码，只需在 YAML 元数据中添加 `runtime: shiny` 即可。由于 Shiny 构建 Web 应用程序功能十分强大，本书只介绍部分的 Shiny 知识。在阅读本章之前，如果不了解该包，可以先通过以下网站 https://shiny.rstudio.com 进行大致了解。
+
+> 一张图片胜过千言万语，当你与它互动时，一份 Shiny 文档可能会向你展示上千张图片。读者不再被报告中固定的分析和结论所束缚。可能探索出新的发现或得出不同的结论。
+
+### 入门指南 {#shiny-start}
+
+在 YAML 元数据中加入 `runtime: shiny`，可以将任何基于 html 的 R Markdown 文档变成 Shiny 文档，例如：
+
+```yaml
+---
+title: "Shiny Document"
+output: html_document
+runtime: shiny
+---
+```
+
+注意，R Markdown 文档的输出格式必须是 HTML 格式。也就是说，文档最后生成的是一个 web 页面（`*.html` 文件）。
+
+> **注意：** 非 `html` 格式，如 `pdf_document` 和 `word_document` 将不能与 Shiny 同时运行。另外，一些演示格式也是 HTML 格式，比如`ioslides_presentation` 和 `slidy_presentation`，它们是可以与 Shiny 相结合的。
+
+当然，也可以通过 RStudio 构建一个新的 Shiny 文档。步骤如下：File -> new File -> R Markdown 并选择 Shiny，具体见图 \@ref(fig:shiny-new-document)。
+
+```{r shiny-new-document, echo=FALSE, fig.width=6,fig.align='center',fig.cap=' 在 RStudio 中创建一个新的 Shiny 文档。'}
+knitr::include_graphics('images/shiny-new-document.png', dpi = NA)
+```
+
+如果读者想在 RStudio 中运行 Shiny 文档，需要单击工具栏上的 "Run Document" 按钮（当 RStudio 检测到这是 Shiny 文档时，它会自动将 Knit 按钮替换为 run document）。如果读者没有使用 RStudio，或者想在 R 控制台运行文档进行故障排除，可以调用函数 `rmarkdown::run()` 并将文件名传递给它。
+
+可以在文档中嵌入 Shiny 的输入和输出。如果输入发生变化时，输出将自动更新。例如，创建一个名称为 `rows` 的数字输入（ `numericInput` ），然后在输出中通过 `input$rows` 引用其值：
+
+````markdown
+```{r, echo=FALSE}`r ''`
+numericInput("rows", "How many cars?", 5)
+
+renderTable({
+  head(cars, input$rows)
+})
+```
+````
+
+```{r shiny-table, echo=FALSE, fig.width=6,fig.align='center',fig.cap='增加 Shiny 文档中表中的行数。'}
+knitr::include_graphics('images/shiny-table.png', dpi = NA)
+```
+
+在上面的示例中，输出代码包含在 `renderTable()` 中。 Shiny 中还有许多其他渲染功能，可用于图片、结果输出等。 下面使用 `renderPlot()` 输出可交互柱状图：
+
+````markdown
+```{r, echo=FALSE} `r ''`
+sliderInput("bins", "Number of bins:", 30, min = 1, max = 50)
+
+renderPlot({
+  x    = faithful[, 2]  # Old Faithful Geyser data
+  bins = seq(min(x), max(x), length.out = input$bins + 1)
+
+  # 用指定的格子大小绘制可交互的直方图
+  hist(x, breaks = bins, col = 'darkgray', border = 'white')
+})
+```
+````
+
+```{r shiny-plot, echo=FALSE,fig.width=6,fig.align='center', fig.cap=' Shiny 文档输出可交互的直方图。'}
+knitr::include_graphics('images/shiny-plot.png', dpi = NA)
+```
 
 ### Shiny 的部署 {#shiny-deploy}
 
+
+如果在本地运行一个 Shiny 文档时，默认情况下它会使用本地 R 会话，并且只有运行的人能与该文档进行交互。如果希望与没有安装 R 的用户共享文档，或者不希望在本地运行文档，则必须将文档部署到服务器上，并共享文档的 URL。那么其他人只需要一个 web 浏览器就可以访问你的文档。
+
+有两种方法可以部署 Shiny 文档。1. 使用 RStudio 提供的托管服务；2. 搭载到自己的服务器上。
+
+<!-- 第一种方法从技术上来说比较容易，但是有时你可能不被允许使用外部托管服务，因此读者必须在自己的服务器上安装必需的软件（Shiny Server 或 RStudio Connect）\index{Shiny Server}\index{RStudio Connect}才能部署 Shiny 文档。 -->
+
+
+#### ShinyApps.io
+
+读者可以把 Shiny 文档发布到 ShinyApps (https://shinyapps.io) 进行托管。
+
+需要满足以下两个条件：
+
+1. 在 ShinyApps 上注册账号。
+
+2. 安装了最新版本的 **rsconnect** 包。安装方式如下：
+
+```r
+install.packages("rsconnect")
+```
+
+然后，对需要部署的 Shiny 文档所对应的工作目录中执行以下语句：
+```r
+rsconnect::deployApp()
+```
+
+如果使用的是 RStudio，在运行 Shiny 文档时，也可以使用窗口右上角的 `Publish` 按钮(图 \@ref(fig:shiny-deploy))。
+
+```{r shiny-deploy, echo=FALSE, fig.width=6,fig.align='center',fig.cap='部署 Shiny 文档到 ShinyApps.io. 上。'}
+knitr::include_graphics('images/shiny-deploy.png', dpi = NA)
+```
+
+如果目录中有一个名为 `index.Rmd` 的文件，它将用作该目录的默认文档。如果想访问 Rmd 文档，则应在 URL 中指定 Rmd 文件的显式路径。
+
+例如，部署到 ShinyApps 的 `index.Rmd` 的 URL 可以采用以下形式 `https://example.shinyapps.io/appName/`，而 `test.Rmd` 的 URL 可以采用以下形式 `https://example.shinyapps.io/appName/test.Rmd`。
+
+#### Shiny Server / RStudio Connect
+
+除此之外，Shiny Server （https://www.rstudio.com/products/shiny/shiny-server/） 和 RStudio Connect（https://www.rstudio.com/products/connect/） 都可以发布 Shiny 文档，但是读者需要熟悉有关 Linux 的知识。由于该内容较为复杂与丰富，超过了本文读者的需求，所以在此不做过多介绍。
+
+
 ### 嵌入 Shiny 应用程序	{#shiny-app}
+
+除了在 R Markdown 中嵌入单个 Shiny 的输入和输出外，还可以在文档中嵌入一个独立的 Shiny 应用程序。有两种方法可以做到这一点：
+
+1. 使用 `shinyApp()` 函数内部定义应用程序;
+
+2. 使用 `shinyApp()` 函数引用外部应用程序。
+
+> **注意**：这两个函数在 **shiny** 包中，当在 YAML 元数据指定 `runtime: shiny` 时，它们会被自动加载。因此，你不必调用 `library(shiny)` 来加载 shiny。
+
+
+#### 内部定义应用程序 {#shiny-embed-inline}
+
+下面例子将 Shiny 应用程序写在了 Rmarkdown 内部中：
+
+````markdown
+```{r, echo=FALSE} `r ''`
+shinyApp(
+
+  ui = fluidPage(
+    selectInput("region", "Region:",
+                choices = colnames(WorldPhones)),
+    plotOutput("phonePlot")
+  ),
+
+  server = function(input, output) {
+    output$phonePlot = renderPlot({
+      barplot(WorldPhones[,input$region]*1000,
+              ylab = "Number of Telephones", xlab = "Year")
+    })
+  },
+
+  options = list(height = 500)
+)
+```
+````
+
+注意，使用 `height` 参数来确定嵌入式应用程序应该占用多少高度。
+
+#### 外联应用程序
+
+下面例子展示嵌入了一个定义在另一个目录中的 Shiny 应用程序。
+
+````markdown
+```{r, echo = FALSE} `r ''`
+shinyAppDir(
+  system.file("examples/06_tabsets", package="shiny"),
+  options = list(width = "100%", height = 700)
+)
+```
+````
+
+> **注意**：在上面的所有代码块中，都使用了 `echo = FALSE` 的选项。这是防止代码块中的 R 代码与 Shiny 组件一起呈现到输出文档中。
 
 ### Shiny 小部件 {#shiny-widget}
 
+Shiny 小部件\index{Shiny widget}使你能够使用一个函数调用创建包含在 R Markdown 文档中的可重复使用的 Shiny 组件。还可以直接从控制台调用 Shiny 小部件(在创作过程中很有用)，并在 RStudio Viewer 窗格或外部 web 浏览器中显示它们的输出。
+
+
+#### `shinyApp()` 函数
+
+Shiny 窗口小部件的核心是使用 `shinyApp()` 函数创建的微型应用程序。 你无需像经典的 Shiny 应用程序那样创建 `ui.R` 和 `server.R`（或 `app.R`），而是将 UI 和服务器定义作为参数传递给  `shinyApp()` 函数。 我们在第 \@ref(shiny-embed-inline) 节中给出了一个示例。
+
+最简单的 Shiny 小部件类型只是一个返回 `shinyApp()` 的 R 函数。
+
+#### 例子：k - means 聚类
+
+**rmdexamples** 包 (https://github.com/rstudio/rmdexamples) 包括一个以上面所诉形式实现的 Shiny 小部件示例。 `kmeans_cluster()` 函数接受单个数据集（`dataset`）参数，并返回一个小部件来显示 k-Means 聚类的结果。读者可以在 R Markdown 文档中使用它：
+
+
+````markdown
+```{r, echo = FALSE} `r ''`
+library(rmdexamples)
+kmeans_cluster(iris)
+```
+````
+
+图 \@ref(fig:shiny-widget-kmeans)  展示了在运行文档时小部件的样子。
+
+
+```{r shiny-widget-kmeans, echo=FALSE,fig.width=6,fig.align='center', fig.cap=' 在数据集上应用 k-Means 聚类的 Shiny 小部件。'}
+knitr::include_graphics('images/shiny-widget-kmeans.png', dpi = NA)
+```
+
+下面是 `kmeans_cluster()` 函数的源代码：
+
+```r
+kmeans_cluster = function(dataset) {
+
+  library(shiny)  
+  vars = names(dataset)
+
+  shinyApp(
+    ui = fluidPage(
+      fluidRow(style = "padding-bottom: 20px;",
+        column(4, selectInput('xcol', 'X Variable', vars)),
+        column(4, selectInput('ycol', 'Y Variable', vars,
+                              selected = vars[2])),
+        column(4, numericInput('clusters', 'Cluster count', 3,
+                               min = 1, max = 9))
+      ),
+      fluidRow(
+        plotOutput('kmeans', height = "400px")  
+      )
+    ),
+    server = function(input, output, session) {
+      #  将选定的变量组合到一个新的数据框中
+      selectedData = reactive({
+        dataset[, c(input$xcol, input$ycol)]
+      })
+      clusters = reactive({
+        kmeans(selectedData(), input$clusters)
+      })
+      output$kmeans = renderPlot(height = 400, {
+        res = clusters()
+        par(mar = c(5.1, 4.1, 0, 1))
+        plot(selectedData(),
+             col = res$cluster, pch = 20, cex = 3)
+        points(res$centers, pch = 4, cex = 4, lwd = 4)
+      })
+    },
+    options = list(height = 500)
+  )
+}
+```
+
+#### 小部件的大小和布局
+
+Shiny 小部件可以嵌入在不同的地方，包括标准的全宽页面、页面内的小列，甚至在 HTML5 幻灯片中。为了让小部件的大小和布局在上文所述的文档中稳定工作，作者建议小部件的总高度不高于 500 像素。当然，你还可以在创建小部件的函数中添加一个显式的 height 参数（默认值为 500）。
+
 ### Shiny 文档间的链接 {#shiny-link}
+
+你可以使用 Markdown 链接语法并指定文档的**相对**路径，链接到其他 Shiny 文档上，例如： `[另一个Shiny文档]（another.Rmd）`。如果在一个页面上单击指向另一个 Rmd 文档的链接，该 Rmd 文档将作为当前交互式 Shiny 文档启动。 
+
+
+默认情况下，只能链接到调用 `rmarkdown::run()` 的文件所在目录中的 R Markdown 文件(例如，你无法连接到 `../foo.Rmd`)。 但是，你可以使用 `rmarkdown::run()` 的 `dir` 参数来定义根目录。
 
 ### Shiny 文档的渲染 {#shiny-render}
 
+#### 延迟渲染 {#shiny-delay}
+
+Shiny 文档通常在每次 Rmarkdown 文档渲染时都会显示。这时，较大或计算量较大的文档可能需要一些时间来加载。
+
+如果文档包含不需要立即渲染的交互式 Shiny 组件，你可以在 `rmarkdown::render_delayed()` 函数中封装 Shiny 代码。这个函数保存它的参数，直到文档呈现完成并显示给用户，然后计算它，并在计算完成时将其注入输出文档。
+
+例如，以下代码中，首先渲染出数值输入的结果，加载完文档并显示给用户之后， `render_delayed()` 才会执行内部代码，并将其加载到文档中。
+
+````markdown
+```{r, echo = FALSE} `r ''`
+numericInput("rows", "How many cars?", 5)
+
+rmarkdown::render_delayed({
+  renderTable({
+    head(cars, input$rows)
+  })
+})
+```
+````
+
+#### 渲染函数的输出参数 {#shiny-args}
+
+在一个典型的 Shiny 应用程序中，读者可以使用 `plotOutput()` 和 `verbatimTextOutput()` 等函数在 UI 中指定输出元素，并使用 `renderPlot()` 和 `renderPrint()` 等函数呈现其内容。
+
+相比之下，在 Shiny 文档中，UI 元素通常是在调用 `renderXXX()` 函数时隐式和自动创建的。例如，使用 `renderPlot()` 函数，而预先没有创建对应的 `plotOutput()`。在这种情况下，Shiny 将相应的输出对象与每个 `renderXXX()` 函数关联起来，使得可以在一个完整的 Shiny 应用程序之外使用 Shiny 代码。但是，在这个过程中可能会丢失一些功能。尤其是，`plotOutput()` 可以接受一些可选参数来设置宽度和高度等内容。
+
+要将选项从 `renderXXX()` 传递到 `xxxOutput()`，可以使用 `outputArgs` 参数。 例如：要绘制一张宽度为 200px，高度为 100px 的图形时。 你可以设定为如下形式：
+
+````markdown
+```{r, echo = FALSE} `r ''`
+renderPlot({
+  plot(yourData)
+}, outputArgs = list(width = "200px", height = "100px")
+)
+```
+````
+
+无论想设置多少个输出参数，`outputArgs` 总是设定为一个列表(默认是一个空列表，它不设置输出参数)。如果试图传入一个不存在的参数，那么将得到以下的错误提示信息(例如在本例中，试图设置一个名为 `not_an_argument` 的参数)：
+
+```markdown
+**Error**: Unused argument: in `outputArgs`, `not_an_argument`
+is not an valid argument for the output function
+```
+
+读者如果想查看运行中的 `outputArgs`，请运行下面的 R Markdown 文档或访问在线版 <https://gallery.shinyapps.io/output-args/>。
+
+````markdown
+`r xfun::file_string('examples/shiny-output-args.Rmd')`
+````
+
+#### 附加说明{#shiny-extra}
+
+需要强调的是，读者只能在一个 Shiny 的 R Markdown 文档中使用这个功能。也就是说，你必须在 YAML 元数据中设置 `runtime: shiny` 。但即使是这样，这也只适用于在 UI 中没有相应的显式输出元素的情况下呈现输出的 Shiny 代码片段。如果读者想在文档中嵌入一个完整的 Shiny 的应用程序，并尝试使用 `outputArgs` ，这时它将被忽略，并将以下警告输出到 R Markdown 控制台中 （在这种情况下，你的 `ui` 函数将类似于 `ui = plotOutput("plot")` ）：
+
+```markdown
+Warning in `output$plot`(...) :
+Unused argument: outputArgs. The argument outputArgs is only
+meant to be used when embedding snippets of Shiny code in an
+R Markdown code chunk (using runtime: shiny). When running a
+full Shiny app, please set the output arguments directly in
+the corresponding output function of your UI code.
+```
+
+如果你尝试在上文所述的任意文档中使用 `outputArgs`，例如：在常用的（即非嵌入式）Shiny 应用程序内部使用 `outputArgs`，也会发生同样的情况。
+
+
 ## 交互式仪表盘：Dashboards {#rmarkdown-dashboards}
+
+在本章中，我们将介绍基于 **flexdashboard** 包 [@R-flexdashboard] 的仪表盘\index{dashboard}设计。
+
+仪表盘在业务风格的报告中特别常见。它们可以用来展示报告的概要和关键内容。仪表盘的布局通常是基于网格搭建的，各个组件排列在各种大小的“盒子”中。
+
+使用 **flexdashboard** 包，你可以
+
+- 使用 R Markdown 将一组相关数据可视化作为指示盘进行发布。
+
+- 嵌入各种各样的组件，包括 HTML 小部件、R 图形、表格数据和文本注释等内容。
+
+- 可以指定按行或列进行布局(各组件会自动调整大小以填满浏览器，并且在移动设备上也十分适配)。
+
+- 可以创建故事板来呈现可视化图形和相关注释。
+
+- 使用 Shiny 驱动动态可视化图表。
 
 ### Dashboards 入门 {#dashboards-intro}
 
+首先，安装 `flexdashboard` 包：
+
+```
+install.packages("flexdashboard")
+```
+
+其次，通过点击  `File -> New File -> R Markdown` 对话框在 RStudio 中创建文档，并选择 "Flex Dashboard" 模板。这是我们就已经创建了一个新的 dashboard 文件了。操作界面如图 \@ref(fig:dashboard-new) 所示：
+
+```{r dashboard-new, echo=FALSE,fig.width=6,fig.align='center', fig.cap='创建新的dashboard文件。'}
+knitr::include_graphics('images/dashboard-new.png', dpi = NA)
+```
+
+
+> **注**：如果你并没有使用 RStudio 进行操作，那么你也可以从 R 控制台创建一个新的 `flexdashboard` 的 R Markdown 文件，具体操作如下：
+
+```r
+rmarkdown::draft(
+  "dashboard.Rmd", template = "flex_dashboard",
+  package = "flexdashboard"
+)
+```
+
+本章只介绍一些基本特性和用法。如果你想更进一步了解 **flexdashboard**，可以查看它的完整文档： https://rmarkdown.rstudio.com/flexdashboard/ 。
+
+仪表盘有许多与 HTML 文档相同的特性(Section \@ref(html-document))，比如图形选项
+(Section \@ref(figure-options))，外观和风格\@ref(appearance-and-style))，MathJax 公式 \@ref(mathjax-equations))，头部和正文前后内容 (Section \@ref(includes)) 和 Pandoc 参数(Section \@ref(pandoc-arguments))，等等。建议大家有时间的话，把前面提到的几节内容也看一下。除此之外，我们也建议你浏览 R 帮助页面 `?flexdashboard::flex_dashboard` 来了解更多 `flexdashboard` 选项和其特性。
+
+当然Rstudio官网也给出了该包的[视频介绍](https://www.bing.com/search?q=flexdashboard&qs=n&form=QBLHCN&sp=-1&pq=flexdashboard&sc=9-13&sk=&cvid=B285D5FEF77A401AAE80C9FCB1E4DDDE)以及一些案例，你可以通过学习案例对应的代码实现快速入门。
+
 ### Dashboards 排版 {#dashboards-layout}
+
+关于仪表盘布局的总体规则是：
+
+- 一级标题：生成页面；
+
+- 二级标题：生成列（或行）；
+
+- 三级标题：生成框（包含一个或多个仪表盘组件）。
+
+下面给出一个简单的例子：
+
+
+````markdown
+`r xfun::file_string('examples/dashboard/01-start.Rmd')`
+````
+
+请注意，第一行文本（Coluumn 1）下的一系列破折号是第二级标题的另一种 Markdown 语法形式，即：
+
+```markdown
+Column 1
+--------------------------------------------------
+```
+
+等同于
+
+```markdown
+## Column 1
+```
+
+> 我们使用了一系列的破折号，只是为了让第二节在源文档中更为显眼罢了。
+
+默认情况下，二级标题在仪表板上生成列，三级标题在列中垂直堆叠。所以在默认情况下，你不必在仪表盘上设置列，因为它默认会一列一列的垂直堆放显示。
+
+> **注**：二级标题的内容将不会显示在输出中。二级标题仅用于布局（例如，例子中的Column 1不会现实在输出中），因此标题的实际内容一点都不重要。相比之下，一级标题和三级标题更加重要。
+
+图 \@ref(fig:dashboard-start) 显示了上述示例的结果，一共是两列，第一列为 “Chart A”，第二列为 “Chart B” 和 “Chart C”。
+
+> **注**：在这个例子中，我们没有在代码块中加入任何 R 代码，所以所有的框都是空的。当然在实际使用中，你可以编写任意的 R 代码来生成 R 图、HTML 小部件或 \@ref(dashboard-components) 节中介绍的各种其他组件，并将其加入到这些“盒子”中。
+
+
+```{r dashboard-start, echo=FALSE,fig.width=6,fig.align='center', fig.cap='简单仪表盘布局示例。'}
+knitr::include_graphics('images/dashboard-start.png', dpi = NA)
+```
+
+#### 基于行的布局
+
+通过修改 `orientation` 选项将默认以列导向的布局改为以行导向的布局，例如：
+
+```yaml
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+```
+
+这时二级结构中将会按照行进行排列，三级结构中会按照行中的列进行堆叠。我们将上述例子修改后，输出结果如图 \@ref(fig:dashboard-rows) 所示：
+
+```{r dashboard-rows, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于行布局的结果。'}
+knitr::include_graphics('images/dashboard-rows.png', dpi = NA)
+```
+
+#### 节属性
+
+二级结构头部还可以加入一些属性，例如：设置列宽度为350：
+
+```markdown
+A narrow column {data-width=350}
+--------------------------------
+```
+
+在基于行布局的情况下，可以为行设置 `data-height` 属性。而基于列布局的情况下，可以使用 `{.tabset}` 使得三级结构以制表符的形式排列，例如：
+
+
+```markdown
+Two tabs {.tabset}
+------------------
+
+### Tab A
+
+### Tab B
+```
+
+所得结果如图 \@ref(fig:dashboard-tab) 所示：
+
+```{r dashboard-tab, echo=FALSE,fig.width=6,fig.align='center', fig.cap='以制表符的形式排列所得到的结果。', out.width='100%'}
+knitr::include_graphics('images/dashboard-tab.png', dpi = NA)
+```
+
+
+#### 多页
+
+如果 rmd 文档中有多个一级结构的内容时，这时仪表盘会将每个一节结构分别显示为单独页面。下面给出一个简单的例子：
+
+
+````markdown
+`r xfun::file_string('examples/dashboard/02-pages.Rmd')`
+````
+
+```{r dashboard-pages, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的多个页面情况。'}
+knitr::include_graphics('images/dashboard-pages.png', dpi = NA)
+```
+
+> **注**：一系列等号是一级标题的另一种 Markdown 语法（也可以使用单个井号 `#`表示）。
+
+从图 \@ref(fig:dashboard-pages) 我们可以看到：
+页面标题显示在仪表盘顶部的导航菜单中。一级结构单独构成一个页面。
+
+本例中，我们还做了一个小拓展，通过 `data-icon` 属性将图标应用于页面标题中。当然，你可以从该网址 https://fontawesome.com 找到其他可用的图标。
+
+
+#### 故事板
+
+除了基于列或行布局外，你还可以通过故事板（"storyboard"）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：
+
+````markdown
+`r xfun::file_string('examples/dashboard/03-storyboard.Rmd')`
+````
+
+```{r dashboard-story, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于故事板布局的结果。'}
+knitr::include_graphics('images/dashboard-story.png', dpi = NA)
+```
+
+如图 \@ref(fig:dashboard-story) 所示，你可以通过顶部的左右导航按钮来浏览所有故事板内容。
 
 ### Dashboards 组件 {#dashboards-module}
 
+仪表盘布局中可以包含各种各样的组件，包括：
+
+1. 基于 HTML 小部件的交互式 JavaScript 数据可视化图形。
+
+1. R 图形，包括基础、栅栏和网格图形；
+
+1. 表格（可选选项包括：排序，过滤和分页等）；
+
+1. 数值框（展示重要数据）；
+
+1. 仪表盘；
+
+1. 文本注释；
+
+1. 导航栏（提供与仪表盘相关的更多链接）。
+
+> **注**：无论输出格式如何，前三个组件在大多数 R Markdown 文档中均可使用。 而后四个组件是仪表盘特有的，本节我们主要介绍后四个组件。
+
+#### 数值框
+
+如果你希望在仪表盘中包含一个或多个数值，那么你可以使用 **flexdashboard** 包中的 `valueBox()` 函数来实现这个需求。下面给出一个简单的例子：
+
+
+````markdown
+`r xfun::file_string('examples/dashboard/04-valueboxes.Rmd')`
+````
+
+```{r dashboard-valueboxes, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上并排的三个值。'}
+knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
+```
+
+图 \@ref(fig:dashboard-valueboxes) 展示了三个并排的仪表，每个仪表都显示了一个数值和标题。这里我们重点解释下第三个代码块（`### Spam per Day`）。这里的 `valueBox()` 函数定义了一个值( `spam` )和一个图标( `icon = "fa-trash"` )。并使用 `color` 设置参数框的颜色。内部使用了一个 `ifelse()` 语句，使得不同值表示不同的颜色。当然，可用的颜色还包括： `"info"`, `"success"` 和 `"danger"`（默认值为： `"primary"`）。你也可以指定任何有效的 CSS 颜色（例如：`"#ffffff"`， `"rgb(100, 100, 100)"` 等）。
+
+
+#### 仪表
+
+仪表：在指定数值范围内显示仪表上的数值。例如，下面展示了三个仪表并排的结果（见图 \@ref(fig:dashboard-gauges)）
+
+````markdown
+`r xfun::file_string('examples/dashboard/05-gauges.Rmd')`
+````
+
+```{r dashboard-gauges, echo=FALSE,fig.width=6,fig.align='center', fig.cap='三个仪表并排放在仪表盘上。'}
+knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
+```
+
+这个示例需要解释以下几点：
+
+1. 通过 `gauge()` 函数设置一个仪表盘。其内部三个参数需要确定：`value`， `min` 和 `max` （可以是任何数值）。
+
+1. 可以指定一个可选的符号（`symbol`）和值一起显示(在示例中， "`%`" 用来表示百分比)。
+
+1. 可以使用 `gaugeSectors()` 函数指定一组自定义的颜色扇区，默认颜色为绿色。扇区选项（`sectors`）可以指定三个值的范围(`success`, `warning` 和 `danger`) 使得仪表盘的颜色根据它的值变化而变化。
+
+
+#### 文本注释
+
+你可以通过以下方式在仪表盘中包含额外的叙述说明：
+
+1. 在页面顶部加入相应文本内容。
+
+1. 定义不包含图表，而是仅包含任意内容(文本、图像和方程等)的指示板。
+
+如图 \@ref(fig:dashboard-text) 所示，顶部包含了一些内容说明和右下角包含了一个只有内容的指示板：
+
+````markdown
+`r xfun::file_string('examples/dashboard/06-text.Rmd')`
+````
+
+```{r dashboard-text, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的文本注释。'}
+knitr::include_graphics('images/dashboard-text.png', dpi = NA)
+```
+
+> **注**：仪表盘中的每个组件都可以包括标题和注释部分。三级结构 (`###`) 后面的文本为标题；`>` 开头的文本是注释。
+
+<!-- 通过将 `.no-title` 属性应用于一个节标题，你可以完全排除该标题。 -->
+
+#### 导航栏
+
+默认情况下，仪表盘的导航栏包括：标题（`title`）、作者（`author`）和日期（`date`）。当仪表盘有多个页面时(第\@ref(multiple-pages)节)，导航条左侧还包含指向各个页面的链接。当然，你也在可以仪表盘上添加社交链接。
+
+除此之外，使用 `navbar` 选项可以在导航栏中添加自定义链接。例如，在导航栏中添加 "About" 链接：
+
+
+```yaml
+---
+title: "Navigation Bar"
+output:
+  flexdashboard::flex_dashboard:
+    navbar:
+      - { title: "About", href: "https://example.com/about" }
+---
+```
+
+这时得到的界面如图 \@ref(fig:dashboard-about) 所示：
+
+```{r dashboard-about, echo=FALSE,fig.width=6,fig.align='center', fig.cap='导航栏中添加自定义链接。'}
+knitr::include_graphics('images/dashboard-about.png', dpi = NA)
+```
+
+
+> **注**：导航栏必须包括标题或图标(或两者都包含)。你还可以使用 `href` 作为导航目标。如果想调整文本对齐方式，可以使用 `align` 参数 (默认情况下为右对齐)。
+
+除此之外，你可以通过 `social` 选项添加社交链接。例如，下面的仪表盘包括了 Twitter 和 Facebook 链接，以及一个包含更多服务的下拉菜单：
+
+```yaml
+---
+title: "Social Links"
+output:
+  flexdashboard::flex_dashboard:
+    social: [ "twitter", "facebook", "menu" ]
+---
+```
+
+这时得到的界面如图\@ref(fig:dashboard-social)下所示：
+
+```{r dashboard-social, echo=FALSE,fig.width=6,fig.align='center', fig.cap='导航栏中添加社交选项。'}
+knitr::include_graphics('images/dashboard-social.png', dpi = NA)
+```
+
+
+社交链接选项还包括：`"facebook"`, `"twitter"`, `"google-plus"`, `"linkedin"` 和 `"pinterest"`。
+
 ### Dashboards 与 Shiny {#dashboards-shiny}
+
+在仪表盘中添加 Shiny\index{Shiny}，可以利用 viewers 更改参数，并显示实时结果。或者当仪表盘的数据发生变化时，让仪表盘进行实时更新(请参阅 **shiny** 包中的 `reactiveFileReader()` 和 `reactivePoll()` 函数)。这是通过将 `runtime: shiny` 添加到标准仪表盘文档来实现的，然后添加一个或多个输入控件或响应式表达式来动态驱动仪表板内组件的外观。
+
+在 **flexdashboard** 中使用 Shiny 可以将一个静态的 R Markdown 报告变成一个交互式文档。需要注意的是，交互式文档需要部署到 Shiny 的服务器上，以便广泛共享(而静态 R Markdown 文档是可以附加到电子邮件或从任何标准 web 服务器提供的独立 web 页面)。
+
+注意， [**shinydashboard**](https://rstudio.github.io/shinydashboard/) 包提供了用 Shiny 创建仪表板的另一种方法。
+
+
+#### 入门指南
+
+在仪表盘中添加 Shiny 组件的步骤如下：
+
+1. 在文档顶部 YAML 元数据中添加 `runtime: shiny`。
+
+1. 在仪表盘第一列添加 `{.sidebar}` 属性，使其成为 Shiny 控件输入的控制台（**注**：这一步不是必须的，但这是基于 Shiny 仪表盘的经典布局）。
+
+1. 根据需求，添加 Shiny 的输入和输出。
+
+1. 当代码中包含绘图函数时（例如：`hist()`），得将它们封装在 `renderPlot()` 中。这有利于界面在布局更改时，自动调整尺寸大小。
+
+####  Shiny 仪表盘的一个示例
+
+图 \@ref(fig:dashboard-shiny) 给出了 Shiny 仪表盘的一个示例：
+
+````markdown
+`r xfun::file_string('examples/dashboard/07-shiny.Rmd')`
+````
+
+```{r dashboard-shiny, echo=FALSE, fig.width=6,fig.align='center',fig.cap='基于 Shiny 的交互式仪表盘。'}
+knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
+```
+
+其中，仪表盘的第一列包含了 `{.sidebar}` 属性和两个 Shiny 的输入控件；第二列包含了绘制图表的 Shiny 代码。
+
+> **注**：文档顶部标记为 `global` 的 R 代码块在全局环境中都可以被调用。这将为用户带来更好的启动性能，强烈推荐大家使用。
+
+#### 输入栏
+
+通过添加 `{.sidebar}` 属性设置一个默认布局为左对齐，250像素宽度的左侧边栏。
+
+在搭建多个页面的仪表盘时，如果你想创建一个应用于所有页面的工具条。这时，你可以使用一级结构来定义侧边栏。
+
+
+#### 拓展
+
+下面给出一些学习 Shiny 和创建交互式文档的资源：
+
+1.  Shiny 官方网站( http://shiny.rstudio.com) ：包含大量的文章、教程和示例。
+
+
+1. Shiny 网站上的文章“[Introduction to Interactive Documents](http://shiny.rstudio.com/articles/interactive-docs.html)”，这是一个很好的入门指南。
+
+
+1. 关于部署交互式文档，你可以使用 Shiny Server 或 RStudio Connect：https://www.rstudio.com/products/shiny/shiny-server/。
 
 ## 在 R package 中使用 R Markdown {#package-rmd}
 
