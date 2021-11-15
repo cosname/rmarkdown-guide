@@ -8,7 +8,7 @@
 
 ### 安装 Tinytex	{#install-tinytex}
 
-要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，我们建议 R Markdown 的用户使用 TinyTeX。
+要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，建议 R Markdown 的用户使用 TinyTeX。
 
 TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档。通过命令行模式，它的安装要简单的多。
 
@@ -67,7 +67,7 @@ tinytex::tlmgr_install(c('pgf', 'preview', 'xcolor'))
 tinytex::parse_install(text = "! LaTeX Error: File `preview.sty' not found.")
 
 
-# 假如我们有一个错误 log 名为 tex.log 
+# 假如错误 log 名为 tex.log 
 tinytex::parse_install(log = "tex.log")
 ```
 
