@@ -8,22 +8,24 @@ source("utils.R")
 
 Markdown 在发明之初的主要目的就是简化 HTML 内容的书写方式。例如要表示一个无序列表中的项，用 HTML 来写是 `<ul><li>text</li></ul>`，而用 Markdown 来写则只需要 `- text`；又如要表示一段引用文字，用 HTML 来写是 `<blockquote>text</blockquote>`，用 Markdown 来写则只需要 `> text`。
 
-Pandoc 大大扩展了 Markdown 的语法。更重要的是，Pandoc 使得将 Markdown 文档转换为多种输出格式成为可能。在本章中，我们将介绍各种文档输出格式的功能。在接下来的两章中，我们将分别介绍幻灯片格式和其他 R Markdown 扩展。
+Pandoc 大大扩展了 Markdown 的语法。更重要的是，Pandoc 使得将 Markdown 文档转换为多种输出格式成为可能。尽管这些文档大体可以按照背后的实现方式，分为 HTML、PDF 和 Microsoft Office 等 3 大类型，但是根据应用场景的差异，会有多种多样的具体样式。
+
+鉴于每种样式通常会通过不同的 R Markdown 扩展软件包来实现，所以其设置和使用方面会有自身的特点。因此，在接下来的一部分内容中将依次介绍常用文档格式的使用方法。而本章则主要介绍将 R Markdown 源文件输出为各种常用文档格式的功能。
 
 简单说来，要论从 R Markdown 到各种文档之间总共分几步？答案是 2 步。
 
-1. R Markdown --> Markdown，由 `knitr` 完成；
+1. R Markdown --> Markdown，由 **knitr** [@R-knitr] 完成；
 2. Markdown  --> 不同格式文档，由 Pandoc 完成。
 
 ## HTML 文档 {#rmarkdown-html}
 
-因为 Markdown 技术在设计之初的输出格式就是 HTML，所以 HTML 文档不仅仅是最常用 R Markdown 输出格式，同时也拥有最丰富的功能。
+HTML 即超文本标记语言（Hyper Text Markup Language），该技术是互联网最重要的基础设施之一，是网上精彩纷呈内容的主要依托。HTML 文档不仅能够展示文字、图片、表格、公式等常规页面元素，而且还可以呈现音乐、视频、交互动画等丰富多样的多媒体内容。而同样的任务则是其它常见的文档格式如 PDF、Microsoft Word 等所不能完成的。因为 Markdown 技术在设计之初的输出格式就是 HTML，所以 HTML 文档不仅仅是最常用 R Markdown 输出格式，同时也拥有最丰富的功能，因此是在学习 R Markdown 技术的过程中首先需要了解这一部分内容。
 
-HTML 技术是网络上精彩纷呈内容的呈现者，她不仅能够表现文字、图片、表格、公式等通用元素，还可以表达音乐、视频、交互动画等其它文档格式不能呈现的内容。严格意义上说，采用 HTML 技术呈现的文字、网站、幻灯片等都是 HTML 文档。不过这里，我们首先介绍的是如何通过 R Markdown 来生成一份独立的 **`.html`** 格式的文件。
+严格意义上说，采用 R Markdown 和 HTML 技术呈现的网站、幻灯片等也都属于 HTML 格式的文档，不过这些形式的内容通常包含了多个 `.html` 格式的文件，而这里介绍如何通过 R Markdown 源文件生成一份**独立**的 `.html` 格式的文件。
 
-前面提过，R Markdown 生成 HTML 文档的过程有一个中间步骤，就是 Markdown + HTML 模板。HTML 模板包括预定义的文档结构、 CSS 样式表和 JavaScript 动态网页功能等，所以最终渲染得到的 HTML 文档的一些功能可能依赖于特定 HTML 模板才能实现。
+前面提过，R Markdown 生成 HTML 文档的过程有一个中间步骤，就是 Markdown + HTML 模板。HTML 模板包括预定义的文档结构、 CSS 样式表和 JavaScript 动态网页功能等，所以最终渲染得到的 HTML 文档的一些功能可能依赖于特定 HTML 模板才能实现。对于一般用户而言，不了解这方面的知识并不影响正常使用 R Markdown 创建 HTML 文档。但是如果用户对此有所了解，那将有利于了解 HTML 文档的实现途径。
 
-默认情况下，R Markdown 的 HTML 文档使用 `rmarkdown::html_document` 模板。除此之外， `rmarkdown` 之外的其它软件包也提供了各种不同类型的 HTML 模板文件（如 `bookdown::html_document2`，`pagedown::html_paged` 等）。因此，在这一部分我们先从 R Markdown 到 `html_document` 文档开始。
+默认情况下，R Markdown 的 HTML 文档使用 `rmarkdown::html_document` 模板。除此之外， **rmarkdown** 之外的其它软件包也提供了各种不同类型的 HTML 模板文件（如 `bookdown::html_document2`，`pagedown::html_paged` 等）。因此，在这一部分将首先从 R Markdown 到 `html_document` 文档开始。
 
 要创建一个 `html_document`，只需要在 R Markdown 的开头加入 YAML 格式的元数据。
 
@@ -36,9 +38,22 @@ output: html_document
 ---
 ```
 
-在元数据中，还可以加入各种各样设置，从而改变文档的格式。
+在元数据中，还可以加入各种各样设置，从而改变文档的格式。例如下面的设置将为文档添加一个自动目录。
+
+``` {.yaml}
+---
+title: "文档标题"
+author: "作者"
+date: "创建时间"
+output: 
+  html_document:
+  toc: true
+---
+```
 
 ### 目录和标题 {#html-title}
+
+R Markdown 文件中使用的目录都是自动目录，是根据文档的层次结构（一级标题、二级标题等）自动生成的。这一部分介绍如何在 HTML 文档中设置自动目录。
 
 #### 显示目录 {#html-toc}
 
@@ -58,7 +73,7 @@ output:
 
 #### 悬停目录 {#html-toc-float}
 
-当把 `toc_float` 设为 `true` 的时候，目录会在侧边栏悬停。这样你就可以随时借助目录在一篇比较长的文档中跳转了。
+当把 `toc_float` 设为 `true` 的时候，目录会在侧边栏悬停。这样就可以随时借助目录在一篇比较长的文档中跳转了。
 
 ``` {.yaml}
 ---
@@ -106,24 +121,24 @@ output:
 在 HTML 文档中使用标签页非常简单，只需要在标题后附加 `{.tabset}` 标签即可。
 
 ``` {.markdown}
-## Quarterly Results {.tabset}
+## 季度报表（应用 `.tabset` 标签） {.tabset}
 
-### By Product
+### 按产品汇总
 
-(tab content)
+（具体的报表内容）
 
-### By Region
+### 按区域汇总
 
-(tab content)
+（具体的报表内容）
 ```
 
 在此基础上，添加相关的额外标签还可以控制标签的样式和行为。其中：
 
 -   `.tabset-fade` 将为标签切换过程加入淡入淡出的动画效果；
--   `.tabset-pills` 将为标签文字加上预设的 "pill"样式（图 \@ref(fig:html-tabset)）。
+-   `.tabset-pills` 将为标签文字加上预设的 `.tabset-pills` 样式（图 \@ref(fig:html-tabset)）。
 
-```{r html-tabset, fig.cap="标签的默认样式及“pill”样式", echo = FALSE, out.width="70%", fig.align="center"}
-knitr::include_graphics(xfun::magic_path("tabset.png"))
+```{r html-tabset, fig.cap="标签的默认样式及 `.tabset-pills` 样式", echo = FALSE, out.width="70%", fig.align="center"}
+import_example_result(xfun::magic_path("tabset-example.Rmd"))
 ```
 
 
@@ -141,18 +156,25 @@ theme_link <- function(name = "", base_url = "https://bootswatch.com/3/"){
 
 为了满足颜值党的差异化需求，`html_document` 自带了多个不同的主题。这些主题来自于 [Bootswatch](https://bootswatch.com/3/)\index{Bootswatch}。可用的主题名称包括 `r theme_link("default")`，`r theme_link("cerulean")`，`r theme_link("journal")`，`r theme_link("flatly")`，`r theme_link("darkly")`，`r theme_link("readable")`，`r theme_link("spacelab")`，`r theme_link("united")`，`r theme_link("cosmo")`，`r theme_link("lumen")`，`r theme_link("paper")`，`r theme_link("sandstone")`，`r theme_link("simplex")` 和 `r theme_link("yeti")` 等等。
 
-主题使用 `theme` 参数来指定，例如：
+主题使用 `theme` 参数来指定，这里以 `darkly` 作为一个例子，感兴趣的读者可以自行尝试其它样式（图 \@ref(fig:first-rmd-theme-darkly）：
 
 ``` {.yaml}
 ---
 title: "标题"
 output:
   html_document:
-    theme: united
+    theme: darkly
 ---
 ```
 
-如果设置为 `theme: null`，那么将不会应用任何主题，此时你可以通过指定自定义的 CSS 样式表来进行格式化。
+(ref:figcap-first-rmd-theme-darkly) 应用 `r theme_link("darkly")` 主题后的文档样式
+
+```{r first-rmd-theme-darkly, fig.cap="(ref:figcap-first-rmd-theme-darkly)", echo = FALSE}
+import_example_result(xfun::magic_path("first-rmd-theme-darkly.Rmd"))
+```
+
+
+如果设置为 `theme: null`，那么将不会应用任何主题，此时可以通过指定自定义的 CSS 样式表来进行格式化。
 
 ``` {.yaml}
 ---
@@ -168,7 +190,7 @@ output:
 
 代码高亮也有可选的多种样式，包括 `default`，`tango`，`pygments`，`kate`，`monchrome`，`espresso`，`zenburn`，`haddock`，`breezedark` 和 `textmate` 等。
 
-在元数据中，使用 `highlight` 参数指定代码高亮样式。
+在元数据中，使用 `highlight` 参数指定代码高亮样式。下面的示例中将代码高亮设为 `tango`，更多的代码高亮样式见图 \@ref(fig:html-code-highlight-example)。
 
 ``` {.yaml}
 ---
@@ -179,11 +201,19 @@ output:
 ---
 ```
 
+(ref:figcap-html-code-highlight-example) 可选的代码高亮样式
+
+```{r html-code-highlight-example, fig.cap="(ref:figcap-html-code-highlight-example)", fig.show="hold", out.width="70%"}
+code_highlight_examples = list.files("examples/", "code-highlight-example.*\\.Rmd", full.names = TRUE)
+success = lapply(code_highlight_examples, import_example_result)
+```
+
+
 跟上面的 `theme` 属性一样，`highlight` 也可以设为 `null`，这样的话代码将不显示高亮。
 
 #### 自定义样式表 {#html-style-css}
 
-不论有没有应用主题和代码高亮，你都可以使用 `css` 参数指定附加样式表。附加样式表中的定义可以被应用到特定元素上去。
+不论有没有应用主题和代码高亮，用户都可以使用 `css` 参数指定附加样式表。附加样式表中的定义优先级更高，当被应用到特定元素上去之后，可以改变元素的外观。
 
 ``` {.yaml}
 ---
@@ -196,7 +226,7 @@ output:
 ---
 ```
 
-在 `styley.css` 中，假设我们定义了两个新样式如下：
+如果在 `styley.css` 中定义了两个名为 `#nextsteps` 和 `.emphasized` 的新样式，分别用于指定 HTML 文档中 `id = "nextsteps"` 和 `class = "emphasized"` 这两种元素的外观。
 
 ``` {.css}
 #nextsteps {
@@ -208,7 +238,7 @@ output:
 }
 ```
 
-则可以通过下列方式应用这个样式：
+那么，就可以通过在行尾大括号中添加元素 id 和 CSS 类的方法，对某个二级标题（此处为“这里强调一下下一步”）应用这个样式：
 
 ``` {.markdown}
 ## 这里强调一下下一步 {#nextsteps .emphasized}
@@ -225,7 +255,7 @@ output:
 
 #### 通过 CSS 代码块定义样式 {#html-css-source}
 
-除了像上面那样导入一个预定义的样式表，你还可以直接在 R Markdown 中添加新的 CSS 定义。这种方法非常适合于个别定义。如果你的 CSS 代码很多，或者想要在其它 R Markdown 中使用同样的定义，可能放在自定义的样式表文件中更加合适（参见 \@ref(html-style-css)）。
+除了像上面那样导入一个预定义的样式表，还可以直接在 R Markdown 中添加新的 CSS 定义。不过这种方法只适合针对个别元素进行个性化设置，如果 CSS 代码有很多行，或者想要在其它 R Markdown 文件中中交叉使用同样的定义，那么将其放在自定义样式表文件中会更加合适（参见 \@ref(html-style-css)）。
 
 `r import_example("chunk-custom.Rmd")`
 
@@ -235,47 +265,50 @@ import_example_result("chunk-custom.Rmd", vheight = 300)
 
 #### 使用丰富多样的内置 CSS 样式 {#html-css-list}
 
-大多数时候，你并不需要自己定义 CSS 样式，因为 HTML 内置的主题中已经包含了丰富且高级的内置样式。
+大多数时候，用户并不需要自己定义 CSS 样式，因为 HTML 内置的主题中已经包含了丰富且高级的内置样式。
 
-默认情况下，R Markdown 输出的 HTML 文档中，已经内嵌了 Bootstrap 框架\index{Bootstrap}，因此可以使用一系列预定义的 CSS 样式。其中，可用的背景样式就包括 `"bg-primary"`，`"bg-success"`，`"bg-info"`，`"bg-warning"` 和 `"bg-danger"` 等。 
+默认情况下，R Markdown 输出的 HTML 文档中，已经内嵌了 Bootstrap 框架\index{Bootstrap}[^about-bootstrap]，因此可以使用一系列预定义的 CSS 样式。其中，可用的背景样式就包括 `"bg-primary"`，`"bg-success"`，`"bg-info"`，`"bg-warning"` 和 `"bg-danger"` 等。 
 
+[^about-bootstrap]: Bootstrap是一组用于网站和网络应用程序开发的开源前端框架，包括 HTML、CSS 及 JavaScript 的框架，提供字体排印、窗体、按钮、导航及其他各种组件及 Javascript 扩展，旨在使动态网页和 Web 应用的开发更加容易。
 
-只需要像上面那样，在代码块属性中使用 `class.source` 标签，就可以应用这些预定义的 CSS 样式。
+只需要在代码块属性中使用 `class.source` 标签，就可以应用这些预定义的 CSS 样式。
 
 `r import_example("chunk-style.Rmd")`
 
-以上内容生成 HTML 文档后的样子如下图所示：
+以上内容生成 HTML 文档后的样子如图 \@ref(fig:chunk-style-example) 所示：
 
-```{r echo = FALSE, fig.cap="在代码块上应用内置 CSS 样式", out.width="70%", fig.align="center"}
+```{r chunk-style-example, echo = FALSE, fig.cap="在代码块上应用内置 CSS 样式", out.width="70%", fig.align="center"}
 import_example_result("chunk-style.Rmd", vheight = 400, vwidth = 600)
 ```
 
 #### 代码折叠 {#html-code-folding}
 
 当 **Knitr** 的代码块参数 `echo = TRUE` 时，R 代码将会输出到最终生成的文档中。
-如果你不需要显示源代码，可以直接设为 `echo = FALSE`。
-如果你既想要保留代码但又让其默认不显示，
+如果不需要显示源代码，可以直接设为 `echo = FALSE`。
+如果既想要保留代码但又让其默认不显示，
 则可以通过 `code_folding: hide` 参数来实现。 
 
 ````markdown
 ---
-title: "Habits"
+title: "代码折叠"
 output:
   html_document:
     code_folding: hide
 ---
 ````
 
-`code_folding: hide` 将折叠所有的代码块，用户可以通过点击来查看折叠的代码。如果想让部分代码块在一开始就显示，则可以在代码块选项中使用 `class.source = 'fold-show'`。
+`code_folding: hide` 将折叠所有的代码块，用户可以通过点击来查看折叠的代码。如果想让部分代码块在一开始就显示，则可以在代码块选项中使用 `class.source = 'fold-show'`（图 \@ref(fig:fold-show)）。
 
 `r import_example("fold-show.Rmd")`
 
-```{r fold-show, fig.cap="代码块的折叠和显示",out.width="70%",fig.align="center", echo=FALSE}
+(ref:figcap-fold-show) 代码块的折叠和显示。图中每个代码区块旁边都有一个按钮，可以控制相应代码区块的显示方式；文档的右上角也有一个按钮，可以控制文档中全部代码区块的显示方式。
+
+```{r fold-show, fig.cap="(ref:figcap-fold-show)",out.width="70%",fig.align="center", echo=FALSE}
 import_example_result("fold-show.Rmd", vwidth = 800)
 ```
 
 
-这种操作也可以反向进行，如下配置即可：
+这种操作也可以反向进行，即默认显示全部的代码区块，然后再将部分代码区块设为折叠。如下配置即可：
 
 ````md
 ---
@@ -297,18 +330,16 @@ output:
 
 #### 设置代码块内容可滚动 {#html-code-scroll}
 
-如果你想限制代码块的高度，特别是代码执行过程中输出内容的高度，还可以从相应内容的 CSS 样式上着手，即通过 `class-output` 和 `class-source` 来定义内容的高度。
+如果想限制代码块的高度，特别是代码执行过程中输出内容的高度，还可以从相应内容的 CSS 样式上着手，即通过 `class-output` 和 `class-source` 来定义内容的高度。
 
-下面是一个例子：
+下面是一个限制设定代码区块高度后，再通过滚动查看完整内容的例子：
 
 `r import_example("html-scroll.Rmd")`
 
 
-因为代码块是位于 `<pre class="sourcecode">` 标签内的，所以 `pre[class]` 操作符将限制代码块的高度为不超过 100 像素。 而将 `class.output ` 设为 `scroll-100` 则限制输出部分的高度为不超过 100 像素。 
+因为代码块是位于 `<pre class="sourcecode">` 标签内的，所以 `pre[class]` 操作符将限制代码块的高度为不超过 100 像素。 而将 `class.output ` 设为 `scroll-100` 则限制输出部分的高度为不超过 100 像素。最终效果如图 \@ref(fig:html-scroll-example) 所示。
 
-最终效果如下图所示：
-
-```{r out.width="70%", fig.align="center", fig.cap="可以滚动的代码块",echo=FALSE}
+```{r html-scroll-example, out.width="70%", fig.align="center", fig.cap="可以滚动的代码块",echo=FALSE}
 import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
 ```
 
@@ -318,10 +349,10 @@ import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
 
 下列参数可以调整生成的 HTML 文档中图片的属性：
 
--   `fig_width`，`fig_height` 指定图片显示时的宽和高（默认为 7 × 5，单位英寸）。
--   `fig_retina` 开启视网膜屏幕优化（默认为 2，设为 `null` 时关闭优化）。
--   `fig_caption` 控制是否渲染图注。
--   `dev` 设置图片输出设备，默认为 `png`。你可以设置多个图片输出设备。
+-   `fig_width`，`fig_height` 指定图片显示时的宽和高（默认为 7 × 5，单位英寸）；
+-   `fig_retina` 开启视网膜屏幕优化（默认为 2，设为 `null` 时关闭优化）；
+-   `fig_caption` 控制是否渲染图注；
+-   `dev` 设置图片输出设备，默认为 `png`。可以设置多个图片输出设备。
 
 ``` {.yaml}
 ---
@@ -335,11 +366,11 @@ output:
 ---
 ```
 
-在代码框属性中，你仍然可以通过 `fig.height`，`fig.width`，`fig.asp` 等参数来指定生成图片的高度、宽度和宽高比。
+在代码框属性中，仍然可以通过 `fig.height`，`fig.width`，`fig.asp` 等参数来指定生成图片的高度、宽度和宽高比。
 
 #### 插入外源图片 {#html-include-graphics}
 
-虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是我们推荐使用 `knitr::include_graphics()` 来插入外源图片。例如：
+虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是推荐使用 `knitr::include_graphics()` 的方式来完成这一操作。例如：
 
 ```` {.md}
 ```{r}`r ''`
@@ -347,9 +378,9 @@ knitr::include_graphics("https://r-project.org/Rlogo.png")
 ```
 ````
 
-使用这种方法插入外源图片，可以方便的添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性。
+使用这种方法插入外源图片，可以方便地添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性（图 \@ref(fig:include-graphics-example)）。
 
-```{r echo = FALSE, fig.cap="插入外源图片的推荐方式"}
+```{r include-graphics-example, echo = FALSE, fig.cap="插入外源图片的推荐方式"}
 knitr::include_graphics("images/Rlogo.png")
 ```
 
@@ -357,9 +388,9 @@ knitr::include_graphics("images/Rlogo.png")
 
 #### 输出数据框 {#html-df-print}
 
-通过 `df_print` 参数，你可以调整数据框的输出格式。可用的参数如表 \@ref(tab:df-print) 所示。
+数据框是常见的数据结构，通过设置 `df_print` 参数，可以调整数据框的输出格式。可用的参数如表 \@ref(tab:df-print) 所示。
 
-Table: (\#tab:df-print) `html_document` 可以被设置的 `df_print` 参数及其对应的含义。
+表： (\#tab:df-print) `html_document` 可以被设置的 `df_print` 参数及其对应的含义。
 
 | 取值 | 说明         |
 |-------|--------------|
@@ -367,6 +398,8 @@ Table: (\#tab:df-print) `html_document` 可以被设置的 `df_print` 参数及�
 |kable  |使用 `knitr::kable` 函数          |
 | tibble| 使用 `tibble::print.tbl_df` 函数 |
 | paged | 使用 `rmarkdown::paged_table` 来创建一个分页的表格|
+
+
 
 #### 分页打印数据框时的附加参数 {html-df-print-paged}
 
@@ -423,7 +456,7 @@ mtcars
 
 默认情况下，R Markdown 输出的 HTML 文档是一个单一的 `.html` 文件。这是由 `self_contained: true` 控制的。`.html` 文件中，会使用 `data:` 存储包括 JavaScript、CSS、图片和视频在内的全部资料。这样的一个封装，使得用户可以像分享 PDF 或 Word 文档那样分享文件，同时享受超链接、动态效果等一系列 HTML 特性。
 
-如果你指定 `self_contained: false`，那么 HTML 文档将会将自身的依赖文件单独存放。
+如果指定 `self_contained: false`，那么 HTML 文档将会将自身的依赖文件单独存放。
 
 
 ```yaml
@@ -465,9 +498,9 @@ output:
 
 依赖文件的内容会随配置变化，例如当在 YAML 配置中加入 `df_print: paged` 之后，依赖文件中会多一个 `pagedtable-1.1` 的子文件夹出来。
 
-显然，存放依赖的子文件夹依据 **库名** + **版本号** 的规则命名。要弄清楚库文件的全部特性，可能要对库本身有相当的理解才行。而 R Markdown 则是把最常用的功能整合提供给了我们。
+显然，存放依赖的子文件夹依据 **库名** + **版本号** 的规则命名。要弄清楚库文件的全部特性，可能要对库本身有相当的理解才行。而 R Markdown 则是把最常用的功能整合提供给了用户。
 
-当文档的内容比较少，同时又有多个类似的文档的时候，库文件所占的存储空间可能比你自己编写的内容还要大得多。这种情况下，将库文件统一存储在指定的 `libs` 文件夹，可以实现库文件公用。
+当文档的内容比较少，同时又有多个类似的文档的时候，库文件所占的存储空间可能比自己编写的内容还要大得多。这种情况下，将库文件统一存储在指定的 `libs` 文件夹，可以实现库文件公用。
 
 另外，有些库文件不常用，或者文件太大，还可以通过库文件的服务器调用。例如下面要讲的 MathJax 库。
 
@@ -566,7 +599,7 @@ Pandoc 模板遵循特定的格式，有关的进一步信息可以在 [Pandoc �
 
 这其中包括一些变量，如 `$title$`，`$body$` 等。这些变量由 Pandoc 定义，完整的变量列表可以 [参见 Pandoc 的官方文档](https://pandoc.org/MANUAL.html#templates)\index{Pandoc template}。
 
-这样的 HTML 模板使得高度定制化的输出成为可能。例如，你可以在 `<head>` 区域加入任意的 CSS 样式， JavaScript 代码，以及其它的开源库。 另外，还可以定义一些新变量来控制文档的格式化。例如，定义一个布尔值 `draft` 来确定文档是一个草稿还是最终版本。
+这样的 HTML 模板使得高度定制化的输出成为可能。例如，可以在 `<head>` 区域加入任意的 CSS 样式， JavaScript 代码，以及其它的开源库。 另外，还可以定义一些新变量来控制文档的格式化。例如，定义一个布尔值 `draft` 来确定文档是一个草稿还是最终版本。
 
 
 ```html
@@ -636,7 +669,7 @@ output:
 <div class="footer">Copyright &copy; R Markdown 指南 2021</div>
 ```
 
-除了以上几种常用的位置，你还可以在任意地方插入 HTML 内容。实现这一功能的途径至少有两种。
+除了以上几种常用的位置，还可以在任意地方插入 HTML 内容。实现这一功能的途径至少有两种。
 
 一是使用 `htmltools::includeHTML()` 方法：
 
@@ -748,7 +781,7 @@ output:
 #### 允许下载源文件 {#html-code-download}
 
 
-当你分享一个 R Markdown 生成的 HTML 文档给他人的时候，对方可能还想找你索取 `.Rmd` 源文件。在头文件中配置 `code_download` 参数可以在 HTML 文档中嵌入源文件。
+当分享一个 R Markdown 生成的 HTML 文档给他人的时候，对方可能还需要提供 `.Rmd` 源文件。在头文件中配置 `code_download` 参数可以在 HTML 文档中嵌入源文件。
 
 ```yaml
 output:
@@ -772,7 +805,7 @@ xfun::pkg_load2(c('htmltools', 'mime'))
 
 `r import_example("embed-file.Rmd")`
 
-不仅如此，你还可以编程技巧嵌入所需的文件。
+不仅如此，还可以编程技巧嵌入所需的文件。
 
 ```{r eval=FALSE}
 # 嵌入当前目录下所有的 Rmd 和 csv 文件
@@ -796,12 +829,12 @@ xfun::embed_files(list.files('.', '[.](Rmd|csv)$'))
 
 R Markdown 并不能直接输出 PDF 文档，而是会输出 LaTeX 文件，LaTeX 文件经过处理后生成 PDF。因此，使用 R Markdown 输出 PDF 文件时，可以充分发挥 LaTeX 的优势。在需要的时候，可以直接使用 LaTeX 代码编写内容，应用 LaTeX 的包和模板，添加标题、脚注、子图等。
 
-不过，LaTeX 技术对于大多数人可能都还比较陌生，而在生成 PDF 文档的过程中，很多问题都跟 LaTeX 的配置有关。这几乎是不可避免的，因此在开始正式的内容前，我们需要确保已经安装了 **TinyTex** 以及一些依赖的 LaTeX 组件。具体的安装步骤和疑难解答请参见前文（\@ref(install-tinytex)），此处不再赘述。
+不过，LaTeX 技术对于大多数人可能都还比较陌生，而在生成 PDF 文档的过程中，很多问题都跟 LaTeX 的配置有关。这几乎是不可避免的，因此在开始正式的内容前，需要确保已经安装了 **TinyTex** 以及一些依赖的 LaTeX 组件。具体的安装步骤和疑难解答请参见前文（\@ref(install-tinytex)），此处不再赘述。
 
 
 ### 从 R Markdown 到 PDF 文档 {#pdf-rmd}
 
-接下来我们进入正题。要输出 PDF 文档，只需要在 R Markdown 开头的 YAML 配置中指定
+要输出 PDF 文档，只需要在 R Markdown 开头的 YAML 配置中指定
 `pdf_document` 即可。
 
 ``` yaml
@@ -810,7 +843,7 @@ output: pdf_document
 ---
 ```
 
-只需要这样一个改动，你就可以得到一份 PDF 文档。
+只需要这样一个改动，就可以得到一份 PDF 文档。
 
 ### 在 PDF 文档中使用中文的注意事项 {#pdf-chinese}
 
@@ -872,9 +905,9 @@ output:
 
 - `fig_width` 和 `fig_height` 用于控制图片默认的宽和高（默认为 6.5 x 4.5 英寸）。
 
-- `fig_crop` 控制 `pdfcrop` 的效果，功能是帮助我们去掉图片边缘的空白（默认为 `true`）。
+- `fig_crop` 控制 `pdfcrop` 的效果，功能是去掉图片边缘的空白（默认为 `true`）。
 
-  `pdfcrop` 是一个 LaTeX 组件，默认并没有被 `tinytex` 安装。我们推荐用户运行 `tinytex::tlmgr_install("pdfcrop")` 来安装它。同时，`pdfcrop` 依赖于系统中的存在的 `ghostscript`，因此还需要安装 [`ghostscript`](https://www.ghostscript.com/) \index{GhostScript}才能正常使用 `pdfcrop`。
+  `pdfcrop` 是一个 LaTeX 组件，默认并没有被 `tinytex` 安装。推荐用户运行 `tinytex::tlmgr_install("pdfcrop")` 来安装它。同时，`pdfcrop` 依赖于系统中的存在的 `ghostscript`，因此还需要安装 [`ghostscript`](https://www.ghostscript.com/) \index{GhostScript}才能正常使用 `pdfcrop`。
   
 - `fig_caption` 控制是否为图片添加图注（默认为 `true`）。
 
@@ -953,7 +986,7 @@ output:
 \end{document}
 ```
 
-在这个文档中，你首先通过 `\documentclass{}` 指定了文档的类，然后在 preamble 部分导入一些 LaTeX 的包（组件）和进行必要的设置，接下来在 `\begin{document}` 后开始文档的主体内容。
+在这个文档中，首先通过 `\documentclass{}` 指定了文档的类，然后在 preamble 部分导入一些 LaTeX 的包（组件）和进行必要的设置，接下来在 `\begin{document}` 后开始文档的主体内容。
 一个 R Markdown 文档基本上都是在配置 body 部分的内容。
 
 如果需要在 preamble 部分加入一些内容，则可以使用 `includes` 选项。该选项包括 3 个
@@ -962,7 +995,7 @@ output:
 
 
 举例来说，下面的一个小技巧可以将正文中的链接地址以脚注的形式显示在 PDF 文档中，
-这对于打印出来的文本而言，避免了无法看到链接地址的尴尬。我们将这几行代码保存为 `tex` 文件，
+这对于打印出来的文本而言，避免了无法看到链接地址的尴尬。将这几行代码保存为 `tex` 文件，
 导入到 `preamble` 部分，就可以实现这一功能。
 
 ```tex
@@ -1082,12 +1115,12 @@ output:
 
 本章讲述使用 R Markdown 生成幻灯片（俗称“PPT”）的技巧。
 
-幻灯片可以被看做一个精简的文档，它的基本单位是单独的一页，每页含有标题、内容和其它元素。R Markdown 文档可以直接输出为 HTML 或者 PDF 格式的幻灯片，并且可以通过额外的软件包丰富幻灯片的具体样式。在这一部分，我们首先介绍 R Markdown 基础幻灯片的使用，然后介绍如何使用 **xaringan** 软件包创建更加具有科技感的幻灯片。
+幻灯片可以被看做一个精简的文档，它的基本单位是单独的一页，每页含有标题、内容和其它元素。R Markdown 文档可以直接输出为 HTML 或者 PDF 格式的幻灯片，并且可以通过额外的软件包丰富幻灯片的具体样式。这一部分将首先介绍 R Markdown 基础幻灯片的使用，然后介绍如何使用 **xaringan** 软件包创建更加具有科技感的幻灯片。
 
 使用基础幻灯片不需要安装额外的包。
 
 R Markdown 支持 4 种不同样式的幻灯片，分别是 **ioslides**，**Slidy**，**Beamer** 和 **PowerPoint**。
-在 RStudio 中，你可以通过菜单中的 “New File -> R Markdown...” 打开如下一个窗口（图 \@ref(fig:rmd-presentation-popup)），然后选择 “OK” 后即可新建一个幻灯片。
+在 RStudio 中，可以通过菜单中的 “New File -> R Markdown...” 打开如下一个窗口（图 \@ref(fig:rmd-presentation-popup)），然后选择 “OK” 后即可新建一个幻灯片。
 
 以上介绍的 5 种幻灯片格式中（含 **xaringan**），**ioslides**、**Slidy** 和 **xaringan** 都是基于 HTML 技术实现的（文档扩展名为 `.html`），**Beamer** 是基于 LaTeX 实现的（文档扩展名为 `.pdf`），PowerPoint 则是基于微软 Office 的文档格式实现的（文档扩展名为 `.pptx`）。
 
@@ -1097,7 +1130,7 @@ knitr::include_graphics("images/rmd-presentation-popup.png")
 
 ### ioslides 幻灯片 {#ioslides-presentation}
 
-我们首先看 ioslides 幻灯片。新建的幻灯片，也是一个 R Markdown 文档，在它的头部 YAML 中，
+首先看 ioslides 幻灯片。新建的幻灯片，也是一个 R Markdown 文档，在它的头部 YAML 中，
 `output: ioslides_presentation` 设定了其输出格式。
 
 ```{r}
@@ -1219,7 +1252,7 @@ output:
 
 
 这些配置来自于 CSS 中图片的属性，`background`，`background-size`，`background-position`，
-以及 `background-repeat` 等。你可能需要对 CSS 有所了解，才能准确把握这些属性的用途。
+以及 `background-repeat` 等。用户可能需要对 CSS 有所了解，才能准确把握这些属性的用途。
 
 #### 使用自定义 CSS {#ioslides-style-css}
 
@@ -1439,7 +1472,7 @@ Slidy 幻灯片继承了 HTML 文档中的多数功能（\@ref(rmarkdown-html)�
 
 [Beamer](https://www.overleaf.com/learn/latex/beamer) 是一个功能强大且灵活的 LaTeX 类，用于创建美观的幻灯片。
 
-要从 R Markdown 创建 Beamer 幻灯片，只需要在 YAML 头文件中将输出格式设定为 `beamer_presentation` 即可。你可以使用一级标题 `#` 和二级标题 `##` 新建幻灯片
+要从 R Markdown 创建 Beamer 幻灯片，只需要在 YAML 头文件中将输出格式设定为 `beamer_presentation` 即可。可以使用一级标题 `#` 和二级标题 `##` 新建幻灯片
 （使用 `---` 也可以创建一张新的没有标题的幻灯片）。例如：
 
 ```{r}
@@ -1488,7 +1521,7 @@ Beamer 支持数十个主题和颜色样式，在 [这里](https://hartwork.org/
 
 #### Beamer 幻灯片的边界 {#beamer-boundary}
 
-`slide_level` 参数用来指定一张幻灯片开始的位置。默认情况下，二级标题会被识别为一张幻灯片的开始，但是你可以将它改为其它的大纲等级。
+`slide_level` 参数用来指定一张幻灯片开始的位置。默认情况下，二级标题会被识别为一张幻灯片的开始，但是可以将它改为其它的大纲等级。
 
 ```yaml
 ---
@@ -1559,7 +1592,7 @@ PowerPoint 幻灯片的模板可以用 `reference_doc` 来设置。
 
 ```yaml
 ---
-title: "使用你喜欢的 PowerPoint 模板"
+title: "使用自己喜欢的 PowerPoint 模板"
 output:
   powerpoint_presentation:
     reference_doc: my-styles.pptx
@@ -1619,7 +1652,7 @@ if (!requireNamespace("xaringan"))
 knitr::include_graphics("images/xaringan-new.png")
 ```
 
-然后点击 Knit 按钮编译文档，或者点击 RStudio 插件 “Infinite Moon Reader” 在 RStudio 里实时预览幻灯片（每次你保存文档的时候，它会自动重新编译）。 
+然后点击 Knit 按钮编译文档，或者点击 RStudio 插件 “Infinite Moon Reader” 在 RStudio 里实时预览幻灯片（每次保存文档的时候，它会自动重新编译）。 
 
 > **原理：** xaringan 将 R Markdown 的查克拉注入了 remark.js。浏览器中的幻灯片是 remark.js 渲染出来的，而它的 Markdown 源文档是从 R Markdown 生成的（实际上主要是 knitr）。
 
@@ -1675,7 +1708,7 @@ knitr::include_graphics("images/xaringan-new-screan.png")
 
 Aden-Buie 写了一个叫做 **xaringanthemer** 包\index{R package-xaringanthemer}[@R-xaringanthemer]的包，可以更改写轮眼幻灯片的主题，使用起来也非常方便，接下来看教程。
 
-你可以从 CRAN 或者 Github安装 **xaringanthemer** 包。
+可以从 CRAN 或者 Github安装 **xaringanthemer** 包。
 
 ```markdown
 # 通过 CRAN 安装
@@ -1687,7 +1720,7 @@ remotes::install_github("gadenbuie/xaringanthemer")
 ```
 
 
-1. 创建完新文档后，我们将 `xaringan-themer.css` 文件添加到 xaringan 幻灯片的 YAML 中。
+1. 创建完新文档后，将 `xaringan-themer.css` 文件添加到 xaringan 幻灯片的 YAML 中。
 
 ```markdown
 output:  
@@ -1696,7 +1729,7 @@ output:
 ```    
 
 
-2. 然后，在 chunck 中加载 **xaringanthemer** 并 [设置主题](https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html#themes) 即可。下面给出一个简单的例子（图 \@ref(fig:xaringan-themer-sample-view)）， 展示了设置主题后的界面预览。当然该包还给出了很多其他主题，我们将在下面给出一些主题模板预览。
+2. 然后，在 chunck 中加载 **xaringanthemer** 并 [设置主题](https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html#themes) 即可。下面给出一个简单的例子（图 \@ref(fig:xaringan-themer-sample-view)）， 展示了设置主题后的界面预览。当然该包还给出了很多其他主题，下面给出一些主题模板预览。
 
 ```markdown
 library(xaringanthemer)  
@@ -1751,7 +1784,7 @@ if (knitr::is_html_output()){
 
 #### Xaringanthemer 提供的可选主题 {#xaringanthemer-other-themes}
 
-该包提供各式各样的主题模板，你可以根据喜好选择自己想要的主题，在正文开头加入以下代码，就会得到相应的模板了！这里给出 6 个模板函数以及对应的界面预览图，更多模板可见<https://pkg.garrickadenbuie.com/xaringanthemer/articles/themes.html>。
+该包提供各式各样的主题模板，可以根据喜好选择自己想要的主题，在正文开头加入以下代码，就会得到相应的模板了！这里给出 6 个模板函数以及对应的界面预览图，更多模板可见<https://pkg.garrickadenbuie.com/xaringanthemer/articles/themes.html>。
 
 > 记得在使用以下函数前，先加载 **xaringanthemer** 包。
 
@@ -1879,14 +1912,14 @@ xaringanExtra::use_tile_view()
 knitr::include_graphics("images/xaringan-extra-1.png")
 ```
 
-> 该功能类似 PowerPoint 中的幻灯片浏览模式。黄色的框表示你当前所在的位置，你可以通过鼠标直接切换到你想要的位置。这个功能非常方便实用，而且操作简单，只要加入前面的代码就可以了。
+> 该功能类似 PowerPoint 中的幻灯片浏览模式。黄色的框表示当前所在的位置，可以通过鼠标直接切换到想要的位置。这个功能非常方便实用，而且操作简单，只要加入前面的代码就可以了。
 
 
 #### 在线编辑 Xaringan 幻灯片 {#xaringan-can-edit}
 
-这个功能无敌！你可以在放映的幻灯片上直接书写内容，实时更新。主要是使用 `.can-edit [...]` 实现。
+这个功能无敌！可以在放映的幻灯片上直接书写内容，实时更新。主要是使用 `.can-edit [...]` 实现。
 
-**使用方法**：你只需将下面代码加入你创建的 rmd 文档中：
+**使用方法**：只需将下面代码加入创建的 rmd 文档中：
 
 
 ````markdown
@@ -1938,9 +1971,9 @@ xaringanExtra::use_scribble()
 ```  
 ````
 
-单击铅笔图标或按 `S` 键进行绘图。按 `S` 或启动绘图模式切换涂鸦工具箱。你也可以使用橡皮擦来删除线条或单击“清除（trash）”按钮清除当前幻灯片上的所有涂鸦。
+单击铅笔图标或按 `S` 键进行绘图。按 `S` 或启动绘图模式切换涂鸦工具箱。也可以使用橡皮擦来删除线条或单击“清除（trash）”按钮清除当前幻灯片上的所有涂鸦。
 
-> **注意**，当你更改幻灯片时，图纸将保持在每张幻灯片上。在绘图模式下不能更改幻灯片。事实上，你可以使用 `←` 和` →` 键来撤消或重做您的图纸。
+> **注意**，当更改幻灯片时，图纸将保持在每张幻灯片上。在绘图模式下不能更改幻灯片。事实上，可以使用 `←` 和` →` 键来撤消或重做您的图纸。
 
 如果想将幻灯片与涂鸦一起保存，最好的方法是从浏览器中打印演示文稿，官方给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/scribble)。
 
@@ -1979,7 +2012,7 @@ class: animated slideInRight fadeOutLeft
 - and fades out to the left on exit  
 ```
 
-这时，该张幻灯片将从右边滑入。如果你想使所有幻灯片使用同一个转化形式，可以使用：`use_animate_all()`，代码如下（建议加到正文前部）。除此之外，官方给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/animate-css)。
+这时，该张幻灯片将从右边滑入。如果想使所有幻灯片使用同一个转化形式，可以使用：`use_animate_all()`，代码如下（建议加到正文前部）。除此之外，官方给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/animate-css)。
 
 ````markdown
 ```{r xaringan-animate-all, echo=FALSE}  `r ''` 
@@ -2086,7 +2119,7 @@ xaringanExtra::use_webcam()
 knitr::include_graphics("images/xaringan-extra-4.png")
 ```
 
-> 当你通过视频会议进行陈述时，包括你的视频，或者当你在录制一节课或讲座时，这个真的非常好用！
+> 当通过视频会议进行陈述时，包括演讲者的视频，或者在录制一节课或讲座时，这个功能真的非常好用！
 
 #### 调整  Xaringan 幻灯片的大小 {#xaringan-fit-screen}
 
@@ -2129,7 +2162,7 @@ output:
 
 3. 如何更改单个文档元素的样式？
 
-本章我们将对以上问题进行一一解答。
+本章将一一解答以上问题。
 
 ### 创建 word 模板  {#word-template}
 
@@ -2150,14 +2183,14 @@ output: word_document
 ---
 ```
 
-之后你就可以在这个模板下，将正文部分进行修改，并通过 **Knit** 进行编译。之后会跳出编译好的结果，通过你的系统默认应用打开。这就是基于 word 模板的工作流程。
+之后就可以在这个模板下，将正文部分进行修改，并通过 **Knit** 进行编译。之后会跳出编译好的结果，通过系统默认应用打开。这就是基于 word 模板的工作流程。
 
 
 ### 自定义 Word 模板 {#word-custom-template}
 
-你可以将 Word 模板\index{template!Word} 文档中定义的样式应用到从 R Markdown 生成的新 Word 文档。 这种模板文档也称为“参考样式文档”。 
+可以将 Word 模板\index{template!Word} 文档中定义的样式应用到从 R Markdown 生成的新 Word 文档。 这种模板文档也称为“参考样式文档”。 
 
-> **关键之处**：你必须先通过 Pandoc 创建此模板文档，再更改其中的样式定义。 然后将此模板的路径传递给 `word_document`\index{output option!reference\_docx} 的 `reference_docx` 选项，例如：
+> **关键之处**：必须先通过 Pandoc 创建此模板文档，再更改其中的样式定义。 然后将此模板的路径传递给 `word_document`\index{output option!reference\_docx} 的 `reference_docx` 选项，例如：
 
 
 ```yaml
@@ -2168,24 +2201,24 @@ output:
 ---
 ```
 
-正如我们刚刚所说的， `template.docx` 文档必须从 Pandoc 生成。 你可以从具有 `word_document` 输出格式的任意 R Markdown 文档创建此模板（该文档的实际内容无关紧要，但它应该包含你想要设置样式的元素类型）。 然后打开`.docx` 文件，并编辑样式。
+`template.docx` 文档必须从 Pandoc 生成。 可以从具有 `word_document` 输出格式的任意 R Markdown 文档创建此模板（该文档的实际内容无关紧要，但它应该包含想要设置样式的元素类型）。 然后打开`.docx` 文件，并编辑样式。
 
 ```{r, word-template-1, echo=FALSE,fig.width=6,fig.align='center', fig.cap='查找特定文档元素的样式。'}
 knitr::include_graphics('images/word-template-1.png', dpi = NA)
 ```
 
-图 \@ref(fig:word-template-1) 说明了你可以通过 Word 中的“主页”选项卡打开“样式”窗口。当你将光标移动到文档中的特定元素时，样式列表中的项目将被突出显示。如果你想修改任何类型元素的样式，可以单击突出显示项的下拉菜单，你将看到如图 \@ref(fig:word-template-2)  的对话框。
+图 \@ref(fig:word-template-1) 说明了可以通过 Word 中的“主页”选项卡打开“样式”窗口。当将光标移动到文档中的特定元素时，样式列表中的项目将被突出显示。如果想修改任何类型元素的样式，可以单击突出显示项的下拉菜单，将看到如图 \@ref(fig:word-template-2)  的对话框。
 
 
 ```{r, word-template-2, echo=FALSE, fig.cap=' 修改 Word 文档中元素的样式。', out.width='100%'}
 knitr::include_graphics('images/word-template-2.png', dpi = NA)
 ```
 
-修改完样式后，你可以保存文档（使用一个不会被意外覆盖的文件名），并将其作为以后 Word 文档的模板。 当 Pandoc 使用该参考模板，并渲染出新的 Word 文档时，它会读取模板中的样式并将它们应用到新文档中。
+修改完样式后，可以保存文档（使用一个不会被意外覆盖的文件名），并将其作为以后 Word 文档的模板。 当 Pandoc 使用该参考模板，并渲染出新的 Word 文档时，它会读取模板中的样式并将它们应用到新文档中。
 
-> 如果你想了解更多关于如何创建自定义样式 Word 模板的详细教程的话。你可以观看一段短视频 <https://vimeo.com/110804387>，或者阅读这篇文章 <https://rmarkdown.rstudio.com/articles_docx.html>。
+> 如果想了解更多关于如何创建自定义样式 Word 模板的详细教程的话。可以观看一段短视频 <https://vimeo.com/110804387>，或者阅读这篇文章 <https://rmarkdown.rstudio.com/articles_docx.html>。
 
-有时，查找元素的样式名称并不简单，可能有多种样式应用于同一个元素，并且你只会在样式列表中看到其中一个突出显示。这时，你可能需要通过猜测或在线搜索才能确定你要修改的实际样式。例如：你需要点击“管理样式”按钮 （图\@ref(fig:word-template-1) 中样式列表底部从左到右的第三个按钮）。之后找到对应的样式并进行修改，例如，添加边框 （见图 \@ref(fig:word-table)）。
+有时，查找元素的样式名称并不简单，可能有多种样式应用于同一个元素，并且只会在样式列表中看到其中一个突出显示。这时，可能需要通过猜测或在线搜索才能确定要修改的实际样式。例如：需要点击“管理样式”按钮 （图\@ref(fig:word-template-1) 中样式列表底部从左到右的第三个按钮）。之后找到对应的样式并进行修改，例如，添加边框 （见图 \@ref(fig:word-table)）。
 
 ```{r, word-table, echo=FALSE, fig.cap='修改 Word 文档中的表格样式。',fig.width=6,fig.align='center'}
 knitr::include_graphics('images/word-table.png', dpi = NA)
@@ -2193,9 +2226,9 @@ knitr::include_graphics('images/word-table.png', dpi = NA)
 
 ### R Markdown 和 Word 之间的双向工作流程 {#word-rmd}
 
-虽然从 R Markdown\index{Word!port to and from Rmd} 生成 Word 文档很容易，但当其他人编辑 Word 文档并且你必须手动将更改移植回原始 R Markdown 时，事情会变得特别痛苦。幸运的是，Noam Ross 为这个问题提供了一个非常不错的解决方案。 **redoc** 包\index{R package!redoc} (<https://github.com/noamross/redoc>) 允许你生成和修改一个 Word 文档，并将修改后的 Word 文档转换回 R Markdown。 
+虽然从 R Markdown\index{Word!port to and from Rmd} 生成 Word 文档很容易，但当其他人编辑 Word 文档并且必须手动将更改移植回原始 R Markdown 时，事情会变得特别痛苦。幸运的是，Noam Ross 为这个问题提供了一个非常不错的解决方案。 **redoc** 包\index{R package!redoc} (<https://github.com/noamross/redoc>) 允许生成和修改一个 Word 文档，并将修改后的 Word 文档转换回 R Markdown。 
 
-> 注意，截至撰写本文时（2020 年 6 月），**redoc** 包仍处于测试阶段，并且作者已暂停开发。如果你想尝试一下，可以从 GitHub 安装这个包：
+> 注意，截至撰写本文时（2020 年 6 月），**redoc** 包仍处于测试阶段，并且作者已暂停开发。如果想尝试一下，可以从 GitHub 安装这个包：
 
 ```r
 remotes::install_github("noamross/redoc")
@@ -2211,22 +2244,22 @@ output: redoc::redoc
 
 这种输出格式会生成一个 Word 文档，实际上存储的是原始 Rmd 文档，因此可以将 Word 文档转换回 Rmd。 Word 中的跟踪更改将转换为使用 CriticMarkup 语法\index{CriticMarkup} (http://criticmarkup.com) 编写的文本。 例如，`{++ important ++}` 表示在文本中插入“重要”一词。
 
-你可以通过 `redoc::dedoc()` 函数将 `redoc::redoc` 生成的 Word 文档转换为 Rmd，例如 `redoc::dedoc("file.docx")` 会生成 `file.Rmd`。 在此过程中，你可以通过“track_changes”参数决定如何处理 Word 中的跟踪更改，例如，你可以接受或拒绝更改，或将跟踪更改转换为 CriticMarkup。 建议你使用 `track_changes = 'criticmarkup'` 以避免跟踪更改的永久丢失。
+可以通过 `redoc::dedoc()` 函数将 `redoc::redoc` 生成的 Word 文档转换为 Rmd，例如 `redoc::dedoc("file.docx")` 会生成 `file.Rmd`。 在此过程中，可以通过“track_changes”参数决定如何处理 Word 中的跟踪更改，例如，可以接受或拒绝更改，或将跟踪更改转换为 CriticMarkup。 建议使用 `track_changes = 'criticmarkup'` 以避免跟踪更改的永久丢失。
 
-在编辑 Word 文档时，你应该编辑_不是_由 R Markdown 中的代码块或内联 R 表达式自动生成的部分。 例如，如果表是由代码块中的 `knitr::kable()` 自动生成的，则你不能编辑它，因为当你通过 `dedoc()` 将 Word 转换为 Rmd 时，此类更改将丢失。为避免意外编辑代码块的自动结果，你可以在 `redoc::redoc` 格式中将选项 `highlight_outputs` 设置为 `true`，这意味着自动输出的内容将在 Word 中突出显示（带有背景颜色）。 换句话说，就是告诉你的合作者，他们不应触碰 Word 文档中这些突出显示的部分。
+在编辑 Word 文档时，应该编辑_不是_由 R Markdown 中的代码块或内联 R 表达式自动生成的部分。 例如，如果表是由代码块中的 `knitr::kable()` 自动生成的，则不能编辑它，因为当通过 `dedoc()` 将 Word 转换为 Rmd 时，此类更改将丢失。为避免意外编辑代码块的自动结果，可以在 `redoc::redoc` 格式中将选项 `highlight_outputs` 设置为 `true`，这意味着自动输出的内容将在 Word 中突出显示（带有背景颜色）。 换句话说，就是告诉的合作者，他们不应触碰 Word 文档中这些突出显示的部分。
 
-> **注意**： **redoc** 包仍处于测试阶段，目前还不清楚它的未来，所以这里的介绍较为简短。如有疑问，建议你阅读 GitHub 上的文档。
+> **注意**： **redoc** 包仍处于测试阶段，目前还不清楚它的未来，所以这里的介绍较为简短。如有疑问，建议阅读 GitHub 上的文档。
 
 
 ### 个人风格元素 {#word-style}
 
-由于 Markdown 的简单性，你可以将一些全局样式应用到 Word 文档中（参见 \@ref(word-template) 部分），但是对单个元素进行样式设置并不简单，例如：更改单词的颜色、段落居中。
+由于 Markdown 的简单性，可以将一些全局样式应用到 Word 文档中（参见 \@ref(word-template) 部分），但是对单个元素进行样式设置并不简单，例如：更改单词的颜色、段落居中。
 
 为了在 R 中处理 Office 文档更加容易，David Gohel 于 2018 年开始开发 **officedown** 包\index{R package!officedown} [@R-officedown]，目的是在 R Markdown 中加入一些 **officer**\index{R package!officer} [@R-officer] 特性。 
 
 > 在撰写本文时，该软件包原始版本已在 CRAN 上发布，但仍处于测试阶段。 
 
-你可以从 CRAN 或 GitHub 安装它：
+可以从 CRAN 或 GitHub 安装它：
 
 ```r
 # 通过 CRAN 来安装
@@ -2244,11 +2277,11 @@ library("officedown")
 ```
 ````
 
-**officedown** 包中输出格式为 `rdocx_document`，默认情况下，是基于 `rmarkdown::word_document` 并具有其他一些功能，例如：样式表和绘图。该包还允许你通过 **officer** 包设置特定 Word 元素的样式。 例如，你可以通过 `officer::fp_text()` 函数 创建样式，并通过内联 R 表达式 `ftext()` 将样式应用于一段文本：
+**officedown** 包中输出格式为 `rdocx_document`，默认情况下，是基于 `rmarkdown::word_document` 并具有其他一些功能，例如：样式表和绘图。该包还允许通过 **officer** 包设置特定 Word 元素的样式。 例如，可以通过 `officer::fp_text()` 函数 创建样式，并通过内联 R 表达式 `ftext()` 将样式应用于一段文本：
 
 `r import_example('officer.Rmd')`
 
-除了 **officer** 中的功能，**officedown** 还允许你使用一些特殊的 HTML 注释来执行 **officer** 任务。 例如，函数 `officer::block_pour_docx()` 可用于将外部 Word 文档\index{Word!import external} 导入当前文档，或者你可以使用 R Markdown 中的 HTML 注释：
+除了 **officer** 中的功能，**officedown** 还允许使用一些特殊的 HTML 注释来执行 **officer** 任务。 例如，函数 `officer::block_pour_docx()` 可用于将外部 Word 文档\index{Word!import external} 导入当前文档，或者可以使用 R Markdown 中的 HTML 注释：
 
 ```html
 <!---BLOCK_POUR_DOCX{file: 'my-file.docx'}--->
@@ -2260,7 +2293,7 @@ library("officedown")
 `r knitr::inline_expr("block_pour_docx(file = 'my-file.docx')")`
 ```
 
-当然，通过使用 **officedown** 和 **officer** 包，你还可以进行其他操作：
+通过使用 **officedown** 和 **officer** 包还可以进行其他操作：
 
 - 插入分页符；
 
@@ -2272,17 +2305,17 @@ library("officedown")
 
 - 更改页面方向（横向或纵向）。
 
-如果你想了解更多有关 **officedown** 的信息，可以通过以下文档 https://davidgohel.github.io/officedown/ 查阅信息。
+如果想了解更多有关 **officedown** 的信息，可以通过以下文档 https://davidgohel.github.io/officedown/ 查阅信息。
 
 
 ## 创建新的文档格式 {#rmarkdown-new}
 
 
 作为实现 R Markdown 技术最重要的软件包之一，**rmarkdown** 软件包中已经包括了很多
-文档和演示文稿的输出格式。这些文档格式的背后，本质上仍然是一些 R 语言的函数。当你
+文档和演示文稿的输出格式。这些文档格式的背后，本质上仍然是一些 R 语言的函数。当
 在 YAML 区块中指定输出格式的时候，实际上是在调用相应的函数并将函数的参数传递给它。
 
-因此，我们也可以通过自定义一个新的函数来创建新的文档格式。新文档格式的函数通常需要
+因此，也可以通过自定义一个新的函数来创建新的文档格式。新文档格式的函数通常需要
 整合到新的 R Markdown 文档模板中去（参见第 \@ref(document-templates) 章）。这是因为
 文档模板是通过 R 语言软件包创建的，原本就可以加入新的函数。于是，通过 R 语言的软件包，
 就实现了文档格式和模板的分发。这也是现有的 R Markdown 文档格式、模板的一贯做法[^rmarkdown-new]。
@@ -2295,7 +2328,7 @@ library("officedown")
 内嵌的文档格式都是高度可定制的，包含众多可用参数。只需要为这些参数赋值，就可以创建
 出一个新的文档格式出来。
 
-在下面的例子中，我们创建了一个新的文档格式函数 `quarterly_report` 以进行季度报告。
+下面的例子创建了一个新的文档格式函数 `quarterly_report` 以进行季度报告。
 这个函数是基于 **rmarkdown** 的内嵌函数 `html_document` 工作的。
 
 ```{r, eval=FALSE, tidy=FALSE}
@@ -2338,8 +2371,8 @@ quarterly_report = function(toc = TRUE) {
 
 ### 完全的自定义输出格式 {#new-new}
 
-在基于现有格式衍生新输出格式之外，我们也可以从底层出发创建出一个完全的新格式。
-为此我们需要了解文档格式的底层工作原理，简单来说 R Markdown 的输出格式
+在基于现有格式衍生新输出格式之外，也可以从底层出发创建出一个完全的新格式。
+为此需要了解文档格式的底层工作原理，简单来说 R Markdown 的输出格式
 由下列几个部分构成：
 
 1. 一系列的参数来确保 **knitr** 将 Rmd 文件正确的编译为 Markdown 格式的文档；
@@ -2348,7 +2381,7 @@ quarterly_report = function(toc = TRUE) {
 
 3. 其它的一些标记或过滤器（通常用于处理输出格式的支持文件）。
 
-你可以使用 **rmarkdown** 软件包中的函数 `output_format()` 来创建一个新的输出格式。
+可以使用 **rmarkdown** 软件包中的函数 `output_format()` 来创建一个新的输出格式。
 下面是一个例子：
 
 ```{r, eval=FALSE, tidy=FALSE}
@@ -2370,20 +2403,20 @@ simple_html_format = function() {
 `output_format()` 函数中还有一个 `base_format` 参数用来指定一个原有的输出格式，
 并在此基础上进行配置（相当于衍生格式）。
 
-如果你有其它的一些支持文件无法通过 `includes` 参数指定，那么还需要使用 `output_format()`
-中的其它参数来帮助你处理这些文件（例如，使用 `intermediates_generator` 来讲它们拷贝
+如果有其它的一些支持文件无法通过 `includes` 参数指定，那么还需要使用 `output_format()`
+中的其它参数来帮助处理这些文件（例如，使用 `intermediates_generator` 来讲它们拷贝
 到文档的输出目录中去）。
 
 学习创建一个新的文档输出格式最好的方法可能是阅读原有格式的源代码。从 **rmarkdown**
 的 `html_document` 和 `pdf_document` 开始是个不错的主意，其源代码的位置在
-https://github.com/rstudio/rmarkdown/tree/master/R。如果你的新格式需要用到 Pandoc
+https://github.com/rstudio/rmarkdown/tree/master/R。如果新格式需要用到 Pandoc
 模板，则请参见 \@ref(template-pandoc) 及 Pandoc 的使用手册。
 
 ### 使用新的文档输出格式 {#new-using}
 
-新的文档格式在创建完成后，需要安装到你的本地环境中去（参见 \@ref(template-share)）。
-这样新的输出格式便可以通过 YAML 区块来应用。加入我们的 `quarterly_report` 位于一个
-名为 **mypackage** 的软件包中且该软件包已经安装成功，那么：
+新的文档格式在创建完成后，需要安装到用户的本地环境中去（参见 \@ref(template-share)）。
+这样新的输出格式便可以通过 YAML 区块来应用。加入一个
+名为 **mypackage** 的软件包中的 `quarterly_report` （假设该软件包已经安装成功），那么：
 
 ```markdown
 ---

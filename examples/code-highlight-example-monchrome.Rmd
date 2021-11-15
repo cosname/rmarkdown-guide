@@ -1,0 +1,21 @@
+---
+title: "可选的代码高亮样式"
+output: 
+  html_document:
+    highlight: espresso
+---
+
+
+```{css echo=FALSE}
+.title {
+ display: none
+}
+```
+
+**`highlight: espresso`**
+
+```{r results="hide"}
+# 随机生成 x 的值
+x <- rnorm(50)
+summary(x)
+```
