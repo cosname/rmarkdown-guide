@@ -1,0 +1,17 @@
+---
+title: df-print params
+params:
+  subtitle: default
+---
+
+```{css echo=FALSE}
+.title {
+ display: none
+}
+```
+
+## `r params$subtitle`
+
+```{r cars}
+cars
+```

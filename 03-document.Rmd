@@ -399,6 +399,22 @@ knitr::include_graphics("images/Rlogo.png")
 | tibble| 使用 `tibble::print.tbl_df` 函数 |
 | paged | 使用 `rmarkdown::paged_table` 来创建一个分页的表格|
 
+```{r echo=FALSE}
+# @TODO: 截图修改完善
+template = xfun::magic_path("df-print-example.Rmd")
+outfile = xfun::with_ext(template, ".html")
+snapshots = lapply(c("default","kable","tibble","paged"), function(x){
+  rmarkdown::render(template, 
+                    rmarkdown::html_document(df_print = x),
+                    params = list(subtitle = x),
+                    envir = new.env(),
+                    quiet = TRUE)
+  html_screenshot(outfile, outfile = xfun::with_ext(template,paste0(x,".png")))
+})
+unlink(outfile)
+knitr::include_graphics(unlist(snapshots))
+```
+
 
 
 #### 分页打印数据框时的附加参数 {html-df-print-paged}
@@ -407,7 +423,7 @@ knitr::include_graphics("images/Rlogo.png")
 
 ````markdown
 ---
-title: "Motor Trend Car Road Tests"
+title: "发动机测试和汽车道路测试"
 output:
   html_document:
     df_print: paged
@@ -422,7 +438,7 @@ mtcars
 knitr::include_graphics('images/paged.png', dpi = NA)
 ```
 
-表 \@ref(tab:paged) 列出了这种情况下可以使用的附加参数。
+表 \@ref(#tab:paged) 列出了这种情况下可以使用的附加参数。
 
 Table: (\#tab:paged) 分页 HTML 表格的附加可用参数。
 
@@ -432,7 +448,7 @@ Table: (\#tab:paged) 分页 HTML 表格的附加可用参数。
 | rows.print      | 一页显示的行数                        |
 | cols.print      | 一页显示的列数                     |
 | cols.min.print  | 最少显示几列             |
-| pages.print     | 下方显示几个页面导航的链接 |
+| pages.print     | 下方显示页面导航链接的数目 |
 | paged.print     | 设为 `FALSE` 则不输出分页的表格          |
 | rownames.print  | 设为 `FALSE` 时不显示行的名称              |
 
@@ -450,9 +466,9 @@ mtcars
 
 #### 理解 HTML 文档的依赖关系 {#html-dependency}
 
-前面已经提过，R Markdown 输出的 HTML 文档时，依赖于软件包提供的 HTML 模板。
+R Markdown 输出 HTML 文档时依赖于软件包提供的 HTML 模板。
 实际上，HTML 文档的样式和功能很大程度上依赖于一些 CSS 样式和 JavaScript 库的支持。
-这里面包括 [Bootstrap](https://getbootstrap.com/)，[JQuery](https://jquery.com/) 等优秀的开源项目。
+这里面包括 [Bootstrap](https://getbootstrap.com/)[^about-bootstrap]，[JQuery](https://jquery.com/) 等优秀的开源项目。前者是一个通用的网站开发框架，后者是一个通用的 JavaScript 库。
 
 默认情况下，R Markdown 输出的 HTML 文档是一个单一的 `.html` 文件。这是由 `self_contained: true` 控制的。`.html` 文件中，会使用 `data:` 存储包括 JavaScript、CSS、图片和视频在内的全部资料。这样的一个封装，使得用户可以像分享 PDF 或 Word 文档那样分享文件，同时享受超链接、动态效果等一系列 HTML 特性。
 
@@ -461,7 +477,7 @@ mtcars
 
 ```yaml
 ---
-title: "Habits"
+title: "标题"
 output:
   html_document:
     self_contained: false
@@ -484,11 +500,11 @@ output:
 \---navigation-1.1
 ```
 
-库文件夹的位置可以由 `lib_dir: xxx` 指定，例如：
+存放这些依赖文件的文件夹位置可以由 `lib_dir: xxx` 指定，例如：
 
 ```yaml
 ---
-title: "Habits"
+title: "标题"
 output:
   html_document:
     self_contained: false
@@ -502,17 +518,19 @@ output:
 
 当文档的内容比较少，同时又有多个类似的文档的时候，库文件所占的存储空间可能比自己编写的内容还要大得多。这种情况下，将库文件统一存储在指定的 `libs` 文件夹，可以实现库文件公用。
 
-另外，有些库文件不常用，或者文件太大，还可以通过库文件的服务器调用。例如下面要讲的 MathJax 库。
+另外，有些库文件不常用，或者文件太大，还可以通过库文件的服务器调用。例如下面一节要讲的 MathJax 库。
 
 #### MathJax 库的配置 {#html-mathjax}
 
-HTML 文档需要 [MathJax](https://www.mathjax.org)\index{MathJax} 脚本来渲染 Latex 和 MathML 公式，调用 [MathJax](https://www.mathjax.org) 的方式则可以通过 `mathjax` 参数来调整。
+HTML 文档需要 [MathJax](https://www.mathjax.org)\index{MathJax} 脚本来渲染 Latex 和 MathML 公式[^about-mathml]，调用 [MathJax](https://www.mathjax.org) 的方式则可以通过 `mathjax` 参数来调整。
+
+[^about-mathml]: MathML，中文翻译为“数学标记语言”，是一种基于 XML 的标准，用来描述数学符号和公式。它的目标是把数学公式集成到互联网和其他文档中。从 2015 年开始，MathML 成为了 HTML5 的一部分和 ISO 标准。 
 
 - `"default"`：默认配置，会通过 HTTPS 链接从 RStudio 的 CDN 网络服务器上调用；
 
 - `"local"`：与 `self_contained: false` 联合使用时，会将 MathJax 库文件保存在本地目录中；
 
-- 设置一个 URL 链接，指向可用的 MathJax 库文件地址；
+- 还可以将 `mathjax` 的值设置成一个 URL 链接，指向可用的 MathJax 库文件地址；
 
 - `null`：完全不使用 MathJax。
 
@@ -521,7 +539,7 @@ HTML 文档需要 [MathJax](https://www.mathjax.org)\index{MathJax} 脚本来渲
 
 ```yaml
 ---
-title: "Habits"
+title: "标题"
 output:
   html_document:
     mathjax: local
@@ -534,7 +552,7 @@ output:
 
 ```yaml
 ---
-title: "Habits"
+title: "标题"
 output:
   html_document:
     mathjax: "http://example.com/MathJax.js"
@@ -558,7 +576,7 @@ output:
 
 ```yaml
 ---
-title: "Habits"
+title: "标题"
 output:
   html_document:
     keep_md: true
