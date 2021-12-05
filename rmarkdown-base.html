@@ -27,7 +27,7 @@
 <meta name="author" content="庄亮亮" />
 
 
-<meta name="date" content="2021-11-09" />
+<meta name="date" content="2021-12-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -406,9 +406,108 @@ div.csl-indent {
 </div>
 <div id="install-tinytex" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> 安装 Tinytex</h3>
+<p>要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，建议 R Markdown 的用户使用 TinyTeX。</p>
+<p>TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档。通过命令行模式，它的安装要简单的多。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rmarkdown-base.html#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/logo-tinytex.png&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="images/logo-tinytex.png" alt="TinyTex 是一个瘦身版的 TeX Live" width="150" />
+<p class="caption">
+图 2.1: TinyTex 是一个瘦身版的 TeX Live
+</p>
+</div>
+<p>要安装 TinyTeX，只需要在 R 语言终端输入两条命令即可<a href="references.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="rmarkdown-base.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 安装 tinytex</span></span>
+<span id="cb2-2"><a href="rmarkdown-base.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tinytex&quot;</span>)</span>
+<span id="cb2-3"><a href="rmarkdown-base.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="rmarkdown-base.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 安装 TinyTex 套件</span></span>
+<span id="cb2-5"><a href="rmarkdown-base.html#cb2-5" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div>
+<p>如果 TinyTeX 本身的下载安装就很慢，或在 R 里面下载不完整，那么可以用浏览器或其它下载工具直接下载：<a href="https://github.com/yihui/tinytex-releases/releases" class="uri">https://github.com/yihui/tinytex-releases/releases</a> 然后把下载的文件路径传给安装函数，比如：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="rmarkdown-base.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 假设下载文件所在的位置是 ~/Downloads/TinyTeX-v2021.01.zip</span></span>
+<span id="cb3-2"><a href="rmarkdown-base.html#cb3-2" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">:::</span><span class="fu">install_prebuilt</span>(<span class="st">&#39;~/Downloads/TinyTeX-v2021.01.zip&#39;</span>)</span></code></pre></div>
+<p>安装完成后，在 RStudio 中打开之前保存的 R Markdown 源文档，将第三行 <code>output_format: html_document</code> 更改为 <code>output_format: pdf_document</code>。点击 Knit 后，生成如下两页 PDF 文档，说明安装成功。</p>
+<p><img src="images/02-first-rmd-pdf1.png" width="49%" /><img src="images/02-first-rmd-pdf2.png" width="49%" /></p>
+<div id="install-latex-package" class="section level4" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> 安装 LaTeX 组件</h4>
+<p><strong>rmarkdown</strong> 包从版本 1.9 开始，编译 R Markdown 为 PDF 时会调用 TinyTeX。因此，对 R Markdown 用户来说，编译 PDF 是出错的头号原因可能在于缺失某些 LaTeX 包。</p>
+<p>LaTeX 包（也被称为“package”）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。<code>tinytex::install_tinytex()</code> 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。</p>
+<p>如果知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，对于国内的用户来说，通常需要设定一下 LaTeX 软件仓库的位置。下面的例子中，使用了清华大学的 TeX Live 镜像。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="rmarkdown-base.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 安装需要的 LaTeX 组件</span></span>
+<span id="cb4-2"><a href="rmarkdown-base.html#cb4-2" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">tlmgr_repo</span>(<span class="at">url =</span> <span class="st">&quot;https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet&quot;</span>)</span>
+<span id="cb4-3"><a href="rmarkdown-base.html#cb4-3" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">tlmgr_install</span>(<span class="fu">c</span>(<span class="st">&#39;pgf&#39;</span>, <span class="st">&#39;preview&#39;</span>, <span class="st">&#39;xcolor&#39;</span>))</span></code></pre></div>
+<p>如果不知道包的名称也没有关系，<strong>tinytex</strong> 也提供了相应的函数来帮助用户从报错信息中找到解决方法。<code>tinytex::parse_install()</code> 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 文件。如果嫌 log 太长或者找不到具体提示信息，还可以使用第二种办法。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="rmarkdown-base.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 假如有相关报错信息 &quot;! LaTeX Error: File `preview.sty&#39; not found.&quot;</span></span>
+<span id="cb5-2"><a href="rmarkdown-base.html#cb5-2" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">parse_install</span>(<span class="at">text =</span> <span class="st">&quot;! LaTeX Error: File `preview.sty&#39; not found.&quot;</span>)</span>
+<span id="cb5-3"><a href="rmarkdown-base.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="rmarkdown-base.html#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="rmarkdown-base.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 假如错误 log 名为 tex.log </span></span>
+<span id="cb5-6"><a href="rmarkdown-base.html#cb5-6" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">parse_install</span>(<span class="at">log =</span> <span class="st">&quot;tex.log&quot;</span>)</span></code></pre></div>
+</div>
 </div>
 <div id="安装-git-install-git" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> 安装 Git（*） {#install-git}</h3>
+<p>Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发<a href="references.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<a href="https://github.com" class="uri">https://github.com</a>），Gitee（<a href="https://gitee.com/" class="uri">https://gitee.com/</a>）等。在这里以 GitHub 为例进行说明。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="images/git-github.png" alt="使用 Git 和 GitHub 可以提高团队协作的效率" width="600" />
+<p class="caption">
+图 2.2: 使用 Git 和 GitHub 可以提高团队协作的效率
+</p>
+</div>
+<div id="git-config" class="section level4" number="2.2.3.1">
+<h4><span class="header-section-number">2.2.3.1</span> 配置 Git 和 GitHub</h4>
+<p>在 Windows 下面<a href="references.html#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>，安装完 Git 客户端之后，鼠标右键菜单中会多出来两个命令：“Git GUI Here”和“Git Bash Here”。前者打开一个图形界面，后者打开一个终端，通过这两个命令都可以进入 Git。</p>
+<p>首先需要配置 Git 的用户信息。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="rmarkdown-base.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 全局配置</span></span>
+<span id="cb6-2"><a href="rmarkdown-base.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.name <span class="st">&quot;your name&quot;</span> </span>
+<span id="cb6-3"><a href="rmarkdown-base.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.email <span class="st">&quot;xxx@xxx.xxx&quot;</span></span>
+<span id="cb6-4"><a href="rmarkdown-base.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 本地配置</span></span>
+<span id="cb6-5"><a href="rmarkdown-base.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config user.name <span class="st">&quot;your name&quot;</span></span>
+<span id="cb6-6"><a href="rmarkdown-base.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看配置</span></span>
+<span id="cb6-7"><a href="rmarkdown-base.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--list</span></span>
+<span id="cb6-8"><a href="rmarkdown-base.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看指定项</span></span>
+<span id="cb6-9"><a href="rmarkdown-base.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config user.name</span></code></pre></div>
+<p>为了能够使用 GitHub 提供的服务，需要先注册一个账号（<a href="https://github.com/signup" class="uri">https://github.com/signup</a>）。</p>
+</div>
+<div id="git-usage" class="section level4" number="2.2.3.2">
+<h4><span class="header-section-number">2.2.3.2</span> 使用 Git</h4>
+<p>Git 常用的命令有下面几个：</p>
+<ul>
+<li><p><code>git init sample</code></p>
+<p>在当前目录新建一个“sample”目录，在目录中启用 Git 版本控制系统。</p></li>
+<li><p><code>git clone https://github.com/cosname/rmarkdown-guide.git</code></p>
+<p>从 GitHub 克隆一个软件仓库到当前目录。这将在当前目录新建一个“rmarkdown-guide”文件夹，其中包含所有文件和版本历史。</p></li>
+<li><p><code>git status</code></p>
+<p>显示当前 Git 仓库的状态。如果有修改，新建，删除等操作，将会自动列举出来。</p></li>
+<li><p><code>git add newfile.Rmd</code></p>
+<p><code>newfile.Rmd</code> 是一个新建的文件，其中有一些新增的代码。该命令将其加入 Git 追踪的文件清单中。</p></li>
+<li><p><code>git commit</code> 或者 <code>git commit -a</code></p>
+<p>这个命令将执行一次 Commit 操作，系统会打开默认的文本编辑器，以填写本次 Commit 操作涉及的工作内容。</p></li>
+<li><p><code>git push</code></p>
+<p>将本地仓库的修改推送到远程仓库中去。要执行该命令，本地仓库需要关联一个远程仓库，并且用户对该远程仓库具有修改权限（使用 <code>git remote -v</code> 查看本地仓库关联的远程仓库地址）。</p></li>
+<li><p><code>git pull</code></p>
+<p>将本地仓库的内容与远程仓库同步（这是远程仓库的文件比本地仓库的文件版本新）。</p></li>
+</ul>
+</div>
+<div id="git-ssh" class="section level4" number="2.2.3.3">
+<h4><span class="header-section-number">2.2.3.3</span> 配置 Git 远程仓库的 SSH 认证</h4>
+<p>SSH 密钥是成对的，包括公钥和私钥；公钥登记到 GitHub 网站，私钥存储在本地计算机（私有）。密钥在本地生成。点击鼠标右键，选择“Git Bash Here”，输入下列命令将生成一对 SSH 密钥。 默认情况下，私钥保存在“<code>~/.ssh/id_rsa</code>”文件中，公钥保存在 “~/.ssh/id_rsa.pub”文件中 （在 Windows 系统中的 Git bash 终端下，<code>~</code> 代表用户的家目录）。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="rmarkdown-base.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span></span>
+<span id="cb7-2"><a href="rmarkdown-base.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ./.ssh/id_rsa.pub</span></code></pre></div>
+<p>复制这个公钥的全部内容，进入“GitHub - Setting - SSH and GPG keys”，选择“New SSH key”，将公钥粘贴进去，点击“Add SSH key”，即可完成公钥添加。</p>
+<p>这样，以后就调用 “Git Bash Here” 时，便会自动提供私钥认证，不需要输入用户名和密码了。</p>
+</div>
+<div id="github-usage" class="section level4" number="2.2.3.4">
+<h4><span class="header-section-number">2.2.3.4</span> 使用 GitHub</h4>
+<p>在 GitHub 网站中，通常主要进行下列操作：</p>
+<ul>
+<li><p>创建一个新的软件仓库；</p>
+<p>点击 GitHub 右上角的“+”，选择“Create a new repository”，按照提示操作即可。这步操作其实相当于在 GitHub 服务器上新建了一个目录。目录名称是 <code>Repository Name</code>。目录的路径就是 <code>&lt;username&gt;/&lt;repository_name&gt;</code>。对应的网址（绝对路径）是 <code>https://github.com/&lt;username&gt;/&lt;repository_name&gt;</code>。对应的 Git 地址是 <code>git://git@github.com/&lt;username&gt;/&lt;repository_name&gt;.git</code>。对应的 SSH 地址是 <code>ssh://git@github.com/&lt;username&gt;/&lt;repository_name&gt;.git</code>。</p></li>
+<li><p>从其他用户的软件仓库中新建一个分支，即 Fork；</p>
+<p>在 GitHub 项目网页中，点击“Fork”即可。</p></li>
+<li><p>为其他用户的软件仓库中贡献代码，即 Pull Request；</p>
+<p>因为自己不具备其他用户拥有的软件仓库的编辑权限，所以无法直接通过 <code>push</code> 的方法提交修改。在这种情况下，用户可以首先在 GitHub 上 Fork 其他用户的软件仓库，并在自己的 Fork 中做相应修改后，通过 Pull Request 的方法提交给其他用户，经过管理员审核后，即可合并到对方的软件仓库中去。这也是团队协作共同维护一个项目时的常规操作。</p></li>
+</ul>
+<p>第 <a href="rmarkdown-project.html#github-actions">7.2.8</a> 节还将介绍使用 GitHub Actions 实现自动化完成持续性集成（<strong>C</strong>ontinuous <strong>I</strong>ntegration，CI）的功能。</p>
+</div>
 </div>
 <div id="install-graph" class="section level3" number="2.2.4">
 <h3><span class="header-section-number">2.2.4</span> 安装 RStudio 图形化编辑器</h3>

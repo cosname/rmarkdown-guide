@@ -1,3 +1,5 @@
+fig:unnamed-chunk-4
+fig:unnamed-chunk-8
 tab:target-table
 tab:kable-cap
 tab:latex-math-escape
@@ -28,7 +30,12 @@ rstudio-config
 rmarkdown-install
 install-rmd
 install-tinytex
+install-latex-package
 安装-git-install-git
+git-config
+git-usage
+git-ssh
+github-usage
 install-graph
 create-rmd
 rmarkdown-compile
