@@ -563,7 +563,7 @@ output:
 
 ```yaml
 ---
-title: "Habits"
+title: "标题"
 output:
   html_document:
     mathjax: null
@@ -590,7 +590,7 @@ output:
 
 ```yaml
 ---
-title: "Habits"
+title: "标题"
 output:
   html_document:
     template: another_template.html
@@ -632,11 +632,11 @@ Pandoc 模板遵循特定的格式，有关的进一步信息可以在 [Pandoc �
 <body>
 <div class="logo">
 $if(draft)$
-<!-- use draft.png to show that this is a draft -->
-<img src="images/draft.png" alt="Draft mode" />
+<!-- 使用 draft.png 以表明这是一份草稿 -->
+<img src="images/draft.png" alt="您正在阅读的是一份草稿" />
 $else$
-<!-- insert the formal logo if this is final -->
-<img src="images/logo.png" alt="Final version" />
+<!-- 在最终版本中插入正式 LOGO -->
+<img src="images/logo.png" alt="您正在阅读本文档的正式版本" />
 $endif$
 </div>
 
@@ -648,7 +648,7 @@ $body$
 
 ```yaml
 ---
-title: "An Important Report"
+title: "一份重要的报告"
 draft: true
 output: 
   html_document:
@@ -668,7 +668,7 @@ output:
 
 ```yaml
 ---
-title: "Habits"
+title: "标题"
 output:
   html_document:
     includes:
@@ -714,16 +714,16 @@ xfun::file_string('file.html')
   <head>  </head>
 
   <body>
-  Parent HTML file.
+  父 HTML 文件。
   
-  <!-- htmltools::includeHTML() below -->
+  <!-- htmltools::includeHTML() 将插入下列 HTML 代码 -->
     <html>
       <head>  </head>
       <body>
-      Child HTML file.
+      子 HTML 文件。
       </body>
     </html>
-  <!-- included above -->
+  <!-- 上面的内容即插入的 HTML 代码，插入后新文档的解析会出错 -->
 
   </body>
 </html>
@@ -998,26 +998,26 @@ output:
 
 ```tex
 \documentclass{article}
-% preamble
+% 序言/preamble
 \begin{document}
-% body
+% 主体/body
 \end{document}
 ```
 
-在这个文档中，首先通过 `\documentclass{}` 指定了文档的类，然后在 preamble 部分导入一些 LaTeX 的包（组件）和进行必要的设置，接下来在 `\begin{document}` 后开始文档的主体内容。
-一个 R Markdown 文档基本上都是在配置 body 部分的内容。
+在这个文档中，首先通过 `\documentclass{}` 指定了文档的类，然后在序言部分（`preamble`）导入一些 LaTeX 的包（组件）和进行必要的设置，接下来在 `\begin{document}` 后开始文档的主体内容。
+一个 R Markdown 文档基本上都是在配置主体部分（`body`）的内容。
 
-如果需要在 preamble 部分加入一些内容，则可以使用 `includes` 选项。该选项包括 3 个
+如果需要在序言部分加入一些内容，则可以使用 `includes` 选项。该选项包括 3 个
 部分：`in_header`，`before_body` 和 `after_body`。每一个都支持一个或多个文件路径。
-`in_header` 指定文件的内容将会被添加到 preamble 部分，`before_body` 和 `after_body` 指定文件的内容会分别被添加到 `body` 的前面和后面。
+`in_header` 指定文件的内容将会被添加到序言部分，`before_body` 和 `after_body` 指定文件的内容会分别被添加到文档主体的前面和后面。
 
 
 举例来说，下面的一个小技巧可以将正文中的链接地址以脚注的形式显示在 PDF 文档中，
 这对于打印出来的文本而言，避免了无法看到链接地址的尴尬。将这几行代码保存为 `tex` 文件，
-导入到 `preamble` 部分，就可以实现这一功能。
+导入到序言部分，就可以实现这一功能。
 
 ```tex
-% you may want to save a copy of \href before redefining it
+% 在添加脚注前先保存 \href 的值
 % \let\oldhref\href
 \renewcommand{\href}[2]{#2\footnote{\url{#1}}}
 ```
@@ -1170,7 +1170,7 @@ knitr::include_graphics("examples/ioslides-presentation-screenshot.png")
 另外，还可以通过 “|” 来为幻灯片添加副标题。例如下面的例子：
 
 ``` markdown
-## Getting up | What I like to do first thing
+## 起床 | 今天准备干点什么呢
 ```
 
 #### 使用快捷键控制显示模式 {#ioslides-shortcut}
@@ -1197,8 +1197,8 @@ import_example("examples/ioslides-presentation-increment-bullets.Rmd")
 添加依次呈现效果的方法，即在前面加上一个 `>` 号。
 
 ``` markdown
-> - Bullet 1
-> - Bullet 2
+> - 项目 1
+> - 项目 2
 ```
 
 
@@ -1377,7 +1377,7 @@ slides > slide:not(.nobackground):before {
 
 ```html
 <div class="centered">
-This text is centered.
+这部分文本将会居中显示。
 </div>
 ```
 
@@ -1387,9 +1387,9 @@ This text is centered.
 <div class="columns-2">
   ![](image.png)
 
-  - Bullet 1
-  - Bullet 2
-  - Bullet 3
+  - 项目 1
+  - 项目 2
+  - 项目 3
 </div>
 ```
 
@@ -1401,7 +1401,7 @@ This text is centered.
 
 ```html
 <div class="red2">
-This text is red
+这部分文本将显示为红色。
 </div>
 ```
 
@@ -1594,11 +1594,11 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 ```markdown
 :::::: {.columns}
 ::: {.column}
-Content of the left column.
+左侧栏目的内容
 :::
 
 ::: {.column}
-Content of the right column.
+右侧栏目的内容
 :::
 ::::::
 ```
@@ -1778,9 +1778,9 @@ ggplot(diamonds) +
   aes(cut, fill = cut) +  
   geom_bar(show.legend = FALSE) +  
   labs(  
-    x = "Cut",  
-    y = "Count",  
-    title = "A Fancy diamonds Plot") +  
+    x = "切割工艺质量",  
+    y = "产品数量",  
+    title = "钻石切割工艺质量与产品数量") +  
   theme_xaringan(background_color = "#FFFFFF") +  
   scale_xaringan_fill_discrete()  
 ```
@@ -1949,31 +1949,31 @@ xaringanExtra::use_editable(expires = 1)
 使用 `.can-edit[]` 使幻灯片组件可编辑。
 
 ```markdown
-## .can-edit[You can edit this slide title]  
+## .can-edit[可以在此修改幻灯片的标题]  
 ```
 
 每当将幻灯片重新加载到浏览器中时，`.can-edit` 类的可编辑字段将被重置。如果要存储已编辑并使它们在浏览器会话之间持久存在，请为每个可编辑字段提供一个 `.key-<NAME>` 类。例如：
 
 
 ```markdown
-## .can-edit.key-firstSlideTitle[Change this title and then reload the page]  
+## .can-edit.key-firstSlideTitle[可以在此修改幻灯片标题并将修改后的标题保存到当前会话中]  
 ```
 
 对于更复杂的 HTML 元素，最好仅使一部分文本可编辑，例如
 
 ```markdown
-Hello, .can-edit[world], and welcome to my talk!  
+你好 .can-edit[张三]，欢迎光临！ 
 ```
 
 或者使用占位符文本。
 
 
 ```markdown
-## A few of my favorite things  
+## 我所钟爱的东西 
   
 .can-edit.key-likes[  
-- thing one  
-- thing two  
+- 好东西甲  
+- 好东西乙  
 ]  
 ```
 
@@ -2024,10 +2024,10 @@ xaringanExtra::use_animate_css()
 ---  
 class: animated slideInRight fadeOutLeft  
   
-## This slide...  
+## 这张幻灯片将会……  
   
-- slides in from the right  
-- and fades out to the left on exit  
+- 一开始从屏幕右侧出现  
+- 并将会从屏幕左侧消失
 ```
 
 这时，该张幻灯片将从右边滑入。如果想使所有幻灯片使用同一个转化形式，可以使用：`use_animate_all()`，代码如下（建议加到正文前部）。除此之外，官方给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/animate-css)。
@@ -2060,7 +2060,7 @@ xaringanExtra::use_panelset()
 
 ````markdown
 .panel[.panel-name[NAME]  
-...content...  
+在此输入你的内容 
 ]  
 ````
 
@@ -2115,7 +2115,7 @@ xaringanExtra::use_logo(
 ```  
 ````
 
-这时，所有幻灯片右上角都加上了对应的 logo 啦！如果想在某几张不显示 logo，可以使用 `hide_logo` 隐藏特定幻灯片的徽标，具体例子如下（图 \@ref(fig:xaringan-extra-3)）：
+这时，所有幻灯片右上角都加上了对应的 LOGO 啦！如果想在某几张不显示 LOGO，可以使用 `hide_logo` 隐藏特定幻灯片的徽标，具体例子如下（图 \@ref(fig:xaringan-extra-3)）：
 
 ```{r xaringan-extra-3, echo=FALSE,fig.width=6,fig.align='center', fig.cap="给幻灯片添加全局 logo"}
 knitr::include_graphics("images/xaringan-extra-3.png")
@@ -2194,7 +2194,7 @@ knitr::include_graphics("images/word-new1.png")
 
 ```yaml
 ---
-title: "Untitled"
+title: "标题"
 author: "张三"
 date: "6/26/2021"
 output: word_document
