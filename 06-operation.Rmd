@@ -1079,6 +1079,12 @@ head(iris)
 ````
 
 最终得到的结果见表 \@ref(tab:print-render)
+```{r, echo=FALSE}
+if (system.file(package = "pander") == ''){
+  install.packages("pander")
+}
+```
+
 ```{r, print-render,echo=FALSE, render=pander::pander}
 head(iris)
 ```
