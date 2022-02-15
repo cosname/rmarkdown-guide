@@ -3,7 +3,7 @@ title: 可以滚动的代码和输出
 output: html_document
 ---
 
-```{css, echo=FALSE}
+```{css, echo = TRUE}
 pre {
   max-height: 300px;
   overflow-y: auto;
