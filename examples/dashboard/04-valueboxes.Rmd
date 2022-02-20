@@ -1,5 +1,5 @@
 ---
-title: "Dashboard Value Boxes"
+title: "Dashboard 数值框"
 output:
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -7,27 +7,27 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
-# these computing functions are only toy examples
+# 这些计算函数只是简单的例子
 computeArticles = function(...) return(45)
 computeComments = function(...) return(126)
 computeSpam = function(...) return(15)
 ```
 
-### Articles per Day
+### 每天的文章
 
 ```{r}
 articles = computeArticles()
 valueBox(articles, icon = "fa-pencil")
 ```
 
-### Comments per Day
+### 每天的评论
 
 ```{r}
 comments = computeComments()
 valueBox(comments, icon = "fa-comments")
 ```
 
-### Spam per Day
+### 每天的垃圾邮件
 
 ```{r}
 spam = computeSpam()
