@@ -475,7 +475,7 @@ knitr::include_graphics('images/dashboard-pages.png', dpi = NA)
 本例中，还做了一个小拓展，通过 `data-icon` 属性将图标应用于页面标题中。当然也可以从该网址 https://fontawesome.com 找到其他可用的图标。例如，图 \@ref(fig:dashboard-icon) 给出部分可用标。
 
 ```{r dashboard-icon, echo=FALSE,fig.width=6,fig.align='center', fig.cap='网站中部分可用图标。'}
-knitr::include_graphics('images/data-icon.png', dpi = NA)
+knitr::include_graphics('images/dashboard-icon.png', dpi = NA)
 ```
 
 #### 故事板
