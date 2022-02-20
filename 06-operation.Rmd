@@ -570,7 +570,7 @@ kable(grade4,
 
 - **flextable** [@R-flextable] 和 **huxtable** [@R-huxtable]：**flextable** 和 **huxtable** 支持多种表格输出格式的包。它们都支持 HTML、LaTeX 以及 Office 格式，并且包含最常见的表格特性（例如条件格式化）。更多关于 **flextable** 的信息可参见：https://davidgohel.github.io/flextable/，**huxtable** 的说明文档则在：https://hughjonesd.github.io/huxtable/。
 
-- **gt** [@R-gt]：这个R包允许用户将表格的不同部分组合在一起，例如表头（标题和副标题）、列标签、表格主体、行组标签以及表格的脚注，从而组成一个完整的表格，其中有些部分是可选择性添加的。还可以格式化数字，并为单元格添加背景阴影。目前 **gt** 主要支持 HTML 输出。^[如果需要支持其他输出格式，如 LaTeX 和 Word，**gtsummary** 包[@R-gtsummary]已经做了一些基于 **gt** 的扩展，可参见：https://github.com/ddsjoberg/gtsummary.]更多关于 **gt** 的信息可参见：https://gt.rstudio.com。
+- **gt** [@R-gt]：这个 R 包允许用户将表格的不同部分组合在一起，例如表头（标题和副标题）、列标签、表格主体、行组标签以及表格的脚注，从而组成一个完整的表格，其中有些部分是可选择性添加的。还可以格式化数字，并为单元格添加背景阴影。目前 **gt** 主要支持 HTML 输出。^[如果需要支持其他输出格式，如 LaTeX 和 Word，**gtsummary** 包[@R-gtsummary]已经做了一些基于 **gt** 的扩展，可参见：https://github.com/ddsjoberg/gtsummary.]更多关于 **gt** 的信息可参见：https://gt.rstudio.com。
 
 - **formattable** [@R-formattable]：这个 R 包提供了一些格式化数字的工具函数（如 `percent()` 和 `accounting()`），以及对列进行样式化的函数（如格式化文本，用背景阴影或颜色条注释数字，或在单元格中添加图标等等）。和 **gt** 相同，**formattable** 包也主要支持HTML格式。更多信息可参见GitHub项目：https://github.com/renkun-ken/formattable/。
 
