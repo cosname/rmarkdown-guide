@@ -1,8 +1,8 @@
 ---
-title: 使用使用自定义的 `knit_print` 方法来打印数据框
+title: 使用自定义的 `knit_print` 方法来打印数据框
 ---
 
-首先，我们定义一个`knit_print`方法，并且注册它：
+首先，定义一个 `knit_print` 方法，并注册它：
 
 ```{r}
 knit_print.data.frame = function(x, ...) {
@@ -16,8 +16,8 @@ registerS3method(
 )
 ```
 
-现在我们可以在数据框上测试这个自定义的打印方法。
-注意，你不再需要显式地调用`knitr::kable()`了。
+现在可以在数据框上测试这个自定义的打印方法。
+需要注意的是，之后不再需要显式地调用 `knitr::kable()` 了。
 
 ```{r}
 head(iris)

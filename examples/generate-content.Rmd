@@ -2,7 +2,9 @@
 title: 以编程的方式生成内容
 ---
 
-通过代码块选项`results = 'asis'`，你可以将文本作为原始的Markdown内容写出来，同时也可以与图片混合。
+通过代码块选项 `results = 'asis'`，可以将文本作为原始的 Markdown 内容写出来，
+
+同时也可以与图片混合。
 
 ```{r, mtcars-plots, results='asis'}
 for (i in names(mtcars)) {
