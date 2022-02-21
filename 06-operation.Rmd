@@ -623,9 +623,11 @@ kable(grade4,
 
 ## 与其他语言的结合 {#other-language}
 
-除 R 语言外， **knitr** 软件包在 R Markdown 中还支持许多其他的语言。在三个反引号后的花括号中的第一个单词表示语言名称。 例如， ```` ```{r}```` 中的小 `r` 表示该代码块为 R 代码块，而  ```` ```{python}```` 是指该代码块为 Python 代码块。本章我们会介绍一些你可能不熟悉的语言。
+在 R Markdown 中，**knitr** 软件包除了支持 R 语言外，还支持许多其他语言。
 
-在 knitr 中，每种语言都通过**语言引擎**得到支持。语言引擎本质上是一些函数，它们以源代码和块的选项作为输入，最后输出一个字符串。并通过 `knitr::knit_engines` 进行管理。你可以使用以下方式检查现有引擎：
+不同语言代码块表示方式类似，只需修改代码块中三个反引号后的花括号中的第一个单词即可。例如，```` ```{r}```` 中的小 `r` 表示该代码块为 R 代码块，而  ```` ```{python}```` 是指该代码块为 Python 代码块。本节将介绍一些读者可能不太熟悉的语言。
+
+在 knitr 中，每种语言都通过**语言引擎**得到支持。语言引擎本质上是一些函数，它们以源代码和块的选项作为输入，最后输出一个字符串。并通过 `knitr::knit_engines` 进行管理。可以使用以下方式检查现有引擎：
 ```{r, eval=FALSE}
 names(knitr::knit_engines$get())
 ```
@@ -637,6 +639,7 @@ if (!is.na(i)) engs = head(engs, i - 1)
 engs
 ```
 
+<<<<<<< Updated upstream
 目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录(通过 `cd` )不会跨不同的 bash 块持久存在。只有 R、Python 和 Julia 代码块在同一个会话中执行。请注意，所有的 R 代码块都在同一个 R 会话中执行，所有的 Python 代码块都在同一个 Python 会话中执行，等等。R 会话和 Python 会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象(参见[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节)。
 
 *R Markdown 权威指南* ([Xie, Allaire, and Grolemund 2018](https://bookdown.org/yihui/rmarkdown-cookbook/other-languages.html#ref-rmarkdown2018)) 的 [2.7 节](https://bookdown.org/yihui/rmarkdown/language-engines.html) 展示了如何在 R Markdown 中使用 Python, Shell, SQL, Rcpp, Stan, JavaScript, CSS, Julia, C，和 Fortran 代码。在本节中，将展示更多的语言引擎，读者可以在下面的库中找到更多的例子： https://github.com/yihui/knitr-examples （查找包含单词引擎的文件名）。
@@ -657,6 +660,25 @@ knitr::knit_engines$set(foo = function(options){
 这样就已经注册了 `foo` 引擎，现在可以使用以 ```` ```{foo}```` 开头的代码块了。
 
 这个引擎函数中有一个 `options` 参数，它是代码块的块选项列表。读者可以在 `options$code` 中以字符向量的形式访问块的源代码。例如，对于代码块：
+=======
+目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录（通过 `cd` ）在其他 bash 代码块中不会一直存在。只有 R、Python 和 Julia 代码块在同一个会话中执行。并且 R 会话和 Python 会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象(参见[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节)。
+
+**R Markdown权威指南** ([Xie, Allaire, and Grolemund 2018](https://bookdown.org/yihui/rmarkdown-cookbook/other-languages.html#ref-rmarkdown2018)) 的[2.7节](https://bookdown.org/yihui/rmarkdown/language-engines.html) 展示了如何在 R Markdown 中使用 Python, Shell, SQL, Rcpp, Stan, JavaScript, CSS, Julia, C，和 Fortran 代码。这里就不做进一步介绍，本节主要重点介绍更多的语言引擎。读者可以在下面的库中找到更多的例子： https://github.com/yihui/knitr-examples （查找包含单词引擎的文件名）。
+
+首先，通过注册一个自定义语言引擎来说明语言引擎是如何工作的。
+
+### 注册自定义语言引擎 (\*) {#register-language}
+
+使用 `knitr::knit engines$set()` 注册一个自定义语言引擎。它接受一个函数作为输入，例如：
+
+```{r }
+knitr::knit_engines$set(foo = function(options) {
+  # 源代码在options$code
+})
+```
+
+这样就已经注册了 `foo` 引擎，现在读者可以使用以 ```` ```{foo}```` 开头的代码块了。该引擎函数中的 `options` 参数是代码块的块选项列表。可以在 `options$code` 中以字符向量的形式访问块的源代码。例如，对于代码块：
+>>>>>>> Stashed changes
 
 ````md
 ```{foo}`r ''`
@@ -665,7 +687,11 @@ knitr::knit_engines$set(foo = function(options){
 ```
 ````
 
+<<<<<<< Updated upstream
 `options` 的代码元素是一个字符向量 `c('1 + 1', '2 + 2')`。语言引擎实际上不必处理计算机语言，但可以处理代码块中的任何文本。首先，展示一个简单的引擎示例，该引擎将代码块的内容转换为大写：
+=======
+`options` 的代码元素是一个字符向量 `c('1 + 1', '2 + 2')`。语言引擎实际上并不需要处理计算机语言，但可以处理代码块中的任何文本。首先，来展示一个简单的引擎示例，该引擎将代码块的内容转换为大写：
+>>>>>>> Stashed changes
 
 ```{r}
 knitr::knit_engines$set(upper = function(options) {
@@ -674,7 +700,13 @@ knitr::knit_engines$set(upper = function(options) {
 })
 ```
 
+<<<<<<< Updated upstream
 关键是将 `toupper` 函数应用于代码，并以单个字符串的形式返回结果(通过`\n`连接所有代码行)。注意 `toupper()` 仅在 chunk 选项 `eval = TRUE`\index{chunk option!eval} 时才应用，否则返回原始字符串。这里向读者展示了如何在引擎函数中使用 `eval` 之类的块选项。类似地，读者可以考虑在函数体中添加 `if (options$results == 'hide') return()` 来隐藏 chunk 选项时的输出 `results = 'hide'`\index{chunk option!results} 。下面是一个使用 `upper` 引擎及其输出的示例块
+=======
+将 `toupper` 函数应用于代码，并以单个字符串的形式返回结果（通过`\n`连接所有代码行）。注意 `toupper()` 仅在 chunk 选项 `eval = TRUE`\index{chunk option!eval} 时才应用，否则返回原始字符串。
+
+以上已经向读者们展示了如何在引擎函数中使用 `eval` 之类的块选项。类似地，考虑在函数体中添加 `if (options$results == 'hide') return()` 来隐藏 chunk 选项时的输出 `results = 'hide'`\index{chunk option!results} 。下面是一个使用 `upper` 引擎及其输出的示例块
+>>>>>>> Stashed changes
 
 > ````md
 > ```{upper}`r ''`
@@ -944,6 +976,39 @@ unlink('sine.csv')
 
 
 ### 使用 Sass/SCSS 构建 HTML 页面 {#sass-scss}
+
+Sass (https://sass-lang.com) 是一种 CSS 扩展语言，它允许你以比普通 CSS 更灵活的方式创建 CSS 规则\index{CSS!Sass}\index{Sass}。如果你有兴趣学习它，请查看它的官方文档。
+
+**sass** [@R-sass] \index{R package!sass} (Cheng et al. 2020)包可以用来编译 Sass 到 CSS。基于 **sass** 包，**knitr** 包含两个语言引擎： `sass`\index{language engine!sass}和 `scss`\index{language engine!scss} (分别对应于 Sass 和 SCSS 语法)，将代码块编译为 CSS。下面是一个 `scss` 代码块，头部块为```` ```{scss}````：
+
+```{scss}
+$font-stack: "Comic Sans MS", cursive, sans-serif;
+$primary-color: #00FF00;
+
+.book.font-family-1 {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+```
+
+你还可以使用 `sass` 引擎，并且 Sass 语法与 SCSS 语法略有不同，例如:
+
+````md
+```{sass}`r ''`
+$font-stack: "Comic Sans MS", cursive, sans-serif
+$primary-color: #00FF00
+
+.book.font-family-1
+  font: 100% $font-stack
+  color: $primary-color
+```
+````
+
+如果你正在阅读[本节的HTML版本](https://bookdown.org/yihui/rmarkdown-cookbook/eng-sass.html)，你会注意到该页的字体已被更改为 Comic Sans，这可能会令人吃惊，但请不要恐慌，[你并没有中风](https://twitter.com/andrewheiss/status/1250438044542361600))。
+
+
+`sass`/`scss` 代码块是通过`sass::sass()`函数编译而成的。目前，你可以通过chunk选项 `engine.opts` 定制 CSS 代码的输出样式，例如：`engine.opts = list(style = "expanded")`。默认的样式是 "compressed"。如果你不确定这意味着什么，请参阅帮助页面 `?sass::sass_options`并寻找 `output_style` 对应的参数。
+
 
 ## 输出钩子 (\*) {#output-hook}
 

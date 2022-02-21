@@ -177,7 +177,7 @@ Shiny 窗口小部件的核心是使用 `shinyApp()` 函数创建的微型应用
 
 接下来，先给出最简单的 Shiny 小部件类型———返回 `shinyApp()` 的 R 函数。
 
-#### 例子：k - means 聚类
+#### 例子：k-means 聚类
 
 **rmdexamples** 包 (https://github.com/rstudio/rmdexamples) 包含以上形式实现的 Shiny 小部件示例。 `kmeans_cluster()` 函数接受单个数据集（`dataset`）参数，并返回一个小部件来显示 k-Means 聚类的结果。读者可以在 R Markdown 文档中使用它：
 
