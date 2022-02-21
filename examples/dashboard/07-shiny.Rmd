@@ -1,5 +1,5 @@
 ---
-title: "Old Faithful Eruptions"
+title: "间歇泉喷发"
 output: flexdashboard::flex_dashboard
 runtime: shiny
 ---
@@ -10,29 +10,27 @@ library(datasets)
 data(faithful)
 ```
 
-Column {.sidebar}
+列 {.sidebar}
 --------------------------------------------------
 
-Waiting time between eruptions and the duration of the eruption
-for the Old Faithful geyser in Yellowstone National Park,
-Wyoming, USA.
+美国怀俄明州黄石国家公园的 Old Faithful  间歇泉在喷发和喷发之间的等待时间。
 
 ```{r}
 selectInput(
-  "n_breaks", label = "Number of bins:",
+  "n_breaks", label = "条形数：",
   choices = c(10, 20, 35, 50), selected = 20
 )
 
 sliderInput(
-  "bw_adjust", label = "Bandwidth adjustment:",
+  "bw_adjust", label = "带宽调整：",
   min = 0.2, max = 2, value = 1, step = 0.2
 )
 ```
 
-Column
+列
 --------------------------------------------------
 
-### Geyser Eruption Duration
+### 间歇泉喷发持续时间
 
 ```{r}
 renderPlot({
