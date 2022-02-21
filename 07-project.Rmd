@@ -6,9 +6,9 @@
 
 ### 将外部脚本读取到一个块中 {#external-read}
 
-### 从外部脚本读取多个代码块 (*) {#external-multi}
+### 从外部脚本读取多个代码块 (\*) {#external-multi}
 
-### 子文档 (*) {#child-document}
+### 子文档 (\*) {#child-document}
 
 ### 保留图像文件 {#keep-plot}
 
@@ -24,7 +24,7 @@
 
 ### 参数化的报告 {#parameterized-reports}
 
-### 自定义 Knit 按钮 (*)	{#customize-button}
+### 自定义 Knit 按钮 (\*)	{#customize-button}
 
 ### 通过 Google Drive 对 Rmd 文档进行协作	{#google-drive}
 

@@ -72,7 +72,7 @@ tinytex::parse_install(log = "tex.log")
 ```
 
 
-### 安装 Git（*）	{#install-git}
+### 安装 Git (\*)	{#install-git}
 
 Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^linus-linux]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
 
