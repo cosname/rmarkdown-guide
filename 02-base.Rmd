@@ -8,7 +8,165 @@
 
 ### 安装 Tinytex	{#install-tinytex}
 
-### 安装 Git（*）	{#install-git}
+要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，建议 R Markdown 的用户使用 TinyTeX。
+
+TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档。通过命令行模式，它的安装要简单的多。
+
+```{r fig.cap="TinyTex 是一个瘦身版的 TeX Live"}
+knitr::include_graphics("images/logo-tinytex.png")
+```
+
+要安装 TinyTeX，只需要在 R 语言终端输入两条命令即可[^TinyTeX-vs-tinytex]。
+
+```{r eval=FALSE}
+# 安装 tinytex
+install.packages("tinytex")
+
+# 安装 TinyTex 套件
+tinytex::install_tinytex()
+```
+
+
+[^TinyTeX-vs-tinytex]: TinyTeX 与 **tinytex** 并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护前者的 R 语言软件包。
+
+
+如果 TinyTeX 本身的下载安装就很慢，或在 R 里面下载不完整，那么可以用浏览器或其它下载工具直接下载：https://github.com/yihui/tinytex-releases/releases 然后把下载的文件路径传给安装函数，比如：
+
+```{r eval=FALSE}
+# 假设下载文件所在的位置是 ~/Downloads/TinyTeX-v2021.01.zip
+tinytex:::install_prebuilt('~/Downloads/TinyTeX-v2021.01.zip')
+```
+
+
+安装完成后，在 RStudio 中打开之前保存的 R Markdown 源文档，将第三行 `output_format: html_document` 更改为 `output_format: pdf_document`。点击 Knit 后，生成如下两页 PDF 文档，说明安装成功。
+
+```{r, fig.align='default', out.width = "49%", fig.show="hold", echo = FALSE}
+knitr::include_graphics(rep(c("images/02-first-rmd-pdf1.png", "images/02-first-rmd-pdf2.png"), 1))
+```
+
+
+#### 安装 LaTeX 组件 {#install-latex-package}
+
+**rmarkdown** 包从版本 1.9 开始，编译 R Markdown 为 PDF 时会调用 TinyTeX。因此，对 R Markdown 用户来说，编译 PDF 是出错的头号原因可能在于缺失某些 LaTeX 包。
+
+LaTeX 包（也被称为“package”）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
+
+如果知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，对于国内的用户来说，通常需要设定一下 LaTeX 软件仓库的位置。下面的例子中，使用了清华大学的 TeX Live 镜像。
+
+```{r, install-latex-packages, eval=FALSE}
+# 安装需要的 LaTeX 组件
+tinytex::tlmgr_repo(url = "https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet")
+tinytex::tlmgr_install(c('pgf', 'preview', 'xcolor'))
+```
+
+
+如果不知道包的名称也没有关系，**tinytex** 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 文件。如果嫌 log 太长或者找不到具体提示信息，还可以使用第二种办法。
+
+```{r install-latex-package-by-errormsg, eval=FALSE}
+# 假如有相关报错信息 "! LaTeX Error: File `preview.sty' not found."
+tinytex::parse_install(text = "! LaTeX Error: File `preview.sty' not found.")
+
+
+# 假如错误 log 名为 tex.log 
+tinytex::parse_install(log = "tex.log")
+```
+
+
+### 安装 Git (\*)	{#install-git}
+
+Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^linus-linux]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
+
+[^linus-linux]: Linus Torvalds (1969年12月28日－) 生于芬兰赫尔辛基市，拥有美国国籍，Linux 内核的最早作者，随后发起了这个开源项目，担任 Linux 内核的首要架构师与项目协调者，是当今世界最著名的电脑程序员、黑客之一。他 2005 年发布了 Git，是 Git 的主要开发者。
+
+```{r fig.cap="使用 Git 和 GitHub 可以提高团队协作的效率", echo=FALSE}
+knitr::include_graphics("images/git-github.png")
+```
+
+#### 配置 Git 和 GitHub {#git-config}
+
+在 Windows 下面[^git-cli]，安装完 Git 客户端之后，鼠标右键菜单中会多出来两个命令：“Git GUI Here”和“Git Bash Here”。前者打开一个图形界面，后者打开一个终端，通过这两个命令都可以进入 Git。
+
+[^git-cli]: 命令行对于 Linux/Mac 用户应该并不陌生，此处和以下不再另行介绍。
+
+首先需要配置 Git 的用户信息。
+
+```bash
+# 全局配置
+$ git config --global user.name "your name" 
+$ git config --global user.email "xxx@xxx.xxx"
+# 本地配置
+$ git config user.name "your name"
+# 查看配置
+$ git config --list
+# 查看指定项
+$ git config user.name
+```
+
+为了能够使用 GitHub 提供的服务，需要先注册一个账号（<https://github.com/signup>）。
+
+#### 使用 Git {#git-usage}
+
+Git 常用的命令有下面几个：
+
+- `git init sample`
+
+  在当前目录新建一个“sample”目录，在目录中启用 Git 版本控制系统。
+
+- `git clone https://github.com/cosname/rmarkdown-guide.git`
+
+  从 GitHub 克隆一个软件仓库到当前目录。这将在当前目录新建一个“rmarkdown-guide”文件夹，其中包含所有文件和版本历史。
+
+- `git status`
+
+  显示当前 Git 仓库的状态。如果有修改，新建，删除等操作，将会自动列举出来。
+
+- `git add newfile.Rmd`
+
+  `newfile.Rmd` 是一个新建的文件，其中有一些新增的代码。该命令将其加入 Git 追踪的文件清单中。
+
+- `git commit` 或者 `git commit -a`
+  
+  这个命令将执行一次 Commit 操作，系统会打开默认的文本编辑器，以填写本次 Commit 操作涉及的工作内容。
+  
+- `git push`
+
+  将本地仓库的修改推送到远程仓库中去。要执行该命令，本地仓库需要关联一个远程仓库，并且用户对该远程仓库具有修改权限（使用 `git remote -v` 查看本地仓库关联的远程仓库地址）。
+  
+- `git pull`
+
+  将本地仓库的内容与远程仓库同步（这是远程仓库的文件比本地仓库的文件版本新）。
+  
+#### 配置 Git 远程仓库的 SSH 认证 {#git-ssh}
+
+SSH 密钥是成对的，包括公钥和私钥；公钥登记到 GitHub 网站，私钥存储在本地计算机（私有）。密钥在本地生成。点击鼠标右键，选择“Git Bash Here”，输入下列命令将生成一对 SSH 密钥。 默认情况下，私钥保存在“`~/.ssh/id_rsa`”文件中，公钥保存在 “~/.ssh/id_rsa.pub”文件中 （在 Windows 系统中的 Git bash 终端下，`~` 代表用户的家目录）。
+
+```bash
+ssh-keygen
+cat ./.ssh/id_rsa.pub
+```
+
+复制这个公钥的全部内容，进入“GitHub - Setting - SSH and GPG keys”，选择“New SSH key”，将公钥粘贴进去，点击“Add SSH key”，即可完成公钥添加。
+
+这样，以后就调用 “Git Bash Here” 时，便会自动提供私钥认证，不需要输入用户名和密码了。
+
+#### 使用 GitHub {#github-usage}
+
+在 GitHub 网站中，通常主要进行下列操作：
+
+- 创建一个新的软件仓库；
+
+  点击 GitHub 右上角的“+”，选择“Create a new repository”，按照提示操作即可。这步操作其实相当于在 GitHub 服务器上新建了一个目录。目录名称是 `Repository Name`。目录的路径就是 `<username>/<repository_name>`。对应的网址（绝对路径）是 `https://github.com/<username>/<repository_name>`。对应的 Git 地址是 `git://git@github.com/<username>/<repository_name>.git`。对应的 SSH 地址是 `ssh://git@github.com/<username>/<repository_name>.git`。
+
+- 从其他用户的软件仓库中新建一个分支，即 Fork；
+
+  在 GitHub 项目网页中，点击“Fork”即可。
+
+- 为其他用户的软件仓库中贡献代码，即 Pull Request；
+
+  因为自己不具备其他用户拥有的软件仓库的编辑权限，所以无法直接通过 `push` 的方法提交修改。在这种情况下，用户可以首先在 GitHub 上 Fork 其他用户的软件仓库，并在自己的 Fork 中做相应修改后，通过 Pull Request 的方法提交给其他用户，经过管理员审核后，即可合并到对方的软件仓库中去。这也是团队协作共同维护一个项目时的常规操作。
+
+第 \@ref(github-actions) 节还将介绍使用 GitHub Actions 实现自动化完成持续性集成（**C**ontinuous **I**ntegration，CI）的功能。
+
 
 ### 安装 RStudio 图形化编辑器	 {#install-graph}
 

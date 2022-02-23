@@ -364,6 +364,7 @@ rmarkdown::draft(
 
 当然 RStudio 官网也给出了该包 [介绍](https://pkgs.rstudio.com/flexdashboard/) 与案例，读者可以基于案例到学习实现快速入门。
 
+
 ### Dashboards 排版 {#dashboards-layout}
 
 关于仪表盘布局的总体规则是：
@@ -394,7 +395,9 @@ rmarkdown::draft(
 ## 第一列
 ```
 
-> 这里使用一系列破折号，只是为了让二级标题在源文档中更为显眼罢了。读者可以根据自身喜好，选择任意一种语法形式。
+
+> 这里使用一系列减号，只是为了让二级标题在源文档中更为显眼罢了。读者可以根据自身喜好，选择任意一种语法形式。
+
 
 默认情况下，二级标题在仪表板上生成列，三级标题在列中自上而下排列。所以在默认情况下，不必在仪表盘上设置列，因为它默认一列一列自上而下排列显示。
 
@@ -594,26 +597,6 @@ knitr::include_graphics('images/dashboard-about.png', dpi = NA)
 
 
 > **注意**：导航栏必须包括标题或图标（或两者都包含）。还可以使用 `href` 作为导航目标。如果想调整文本对齐方式，可以使用 `align` 参数 （默认情况下为右对齐）。
-
-<!-- 除此之外，可以通过 `social` 选项添加社交链接。例如，下面的仪表盘包括了 Twitter 和 Facebook 链接，以及一个包含更多服务的下拉菜单： -->
-
-<!-- ```yaml -->
-<!-- --- -->
-<!-- title: "Social Links" -->
-<!-- output: -->
-<!--   flexdashboard::flex_dashboard: -->
-<!--     social: [ "twitter", "facebook", "menu" ] -->
-<!-- --- -->
-<!-- ``` -->
-
-<!-- 这时，所得界面如图 \@ref(fig:dashboard-social) 所示： -->
-
-<!-- ```{r dashboard-social, echo=FALSE,fig.width=6,fig.align='center', fig.cap='导航栏中添加社交选项。'} -->
-<!-- knitr::include_graphics('images/dashboard-social.png', dpi = NA) -->
-<!-- ``` -->
-
-
-<!-- 社交链接选项还包括：`"facebook"`, `"twitter"`, `"google-plus"`, `"linkedin"` 和 `"pinterest"`。 -->
 
 ### Dashboards 与 Shiny {#dashboards-shiny}
 
