@@ -1327,6 +1327,7 @@ knitr::opts_chunk$set(
 
 ### 通过 `asis` 引擎有条件地执行内容 {#chunk-asis}
 
+
 正如其名，`asis` 引擎\index{language engine!asis}会按原样（as is）输出块的内容。使用此引擎的优点在于，用户可以有条件地包含一些内容，块的内容的显示由块选项 `echo` 决定。当 `echo = FALSE` 时，数据块将被隐藏。下面是一个简单的例子：
 
 ````md
@@ -1352,9 +1353,11 @@ getRandomNumber <- function() {
 ls *.Rmd | head -n 5
 ```
 
+
 ```{r echo = FALSE}
 head(list.files(pattern = "*.Rmd"), n=5)
 ```
+
 
 注意，bash是用 R 函数 `system2()` 调用的。它将忽略配置文件，例如 `~/.bash_profile` 和 `~/.bash_login`，其中可能定义了命令别名或修改过的环境变量(如 `PATH` 变量)。如果你想要这些配置文件像你使用终端时一样被执行，你可以通过引擎将参数 `-l` 传递给 `bash`。例如：
 
@@ -1606,7 +1609,6 @@ $primary-color: #00FF00
 
 
 `sass`/`scss` 代码块是通过`sass::sass()`函数编译而成的。目前，块选项 `engine.opts` 可以定制 CSS 代码的输出样式，例如：`engine.opts = list(style = "expanded")`。默认的样式是 "compressed"。请参阅帮助页面 `?sass::sass_options` 了解更多 `output_style` 可用的参数。
-
 
 
 ## 输出钩子 (\*) {#output-hook}
