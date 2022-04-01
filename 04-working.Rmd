@@ -14,15 +14,15 @@
 
 在当今的互联网时代世界，无论从事什么职业，个人网站几乎成为了一张人手必备的的“电子名片”。谢益辉开发的 blogdown 包提供了一种功能全面，且设置简单快速的个人网站架设途径。
 
-blogdown 是一种基于 Hugo 设计的静态网站。不同于多数现有的网站架设方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，blogdown 依赖 R Markdown 文件为基础来生成网站。而R Markdown 文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对LaTeX的支持），数据分析，交互性插件（如交互性图表）等。
+基于 Rmarkdown 的 blogdown 包为个人用户提供一种轻便快速的建立个人静态网站的方案。不同于市面上多数的网站建立方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，blogdown 依赖 R Markdown 文件为基础来生成网站。而 R Markdown  文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对 $LaTeX$ 的支持），数据分析，交互性插件（如交互性图表）等。
 
-次书的本小节将通过一个对新手十分友好的案例来手把手的展示如何快速建立一个可满足用户基本需求的网站，以便用户可快速上手 blogdown，并根据自身需求在后期不断建设自己的个人网站。
+本书的这个小节将通过一个对新手十分友好的案例来手把手的展示如何快速建立一个可满足日常基本需求的网站，以便用户可快速上手 R 的 blogdown 包。
 
 ### 具体操作 {#blogdown-steps}
 
 #### 安装 blogdown {#steps-install}
 
-在开始之前，使用者需要确认个人主机已经安装最新版本的 R 和 RStudio。
+在开始之前，用户需要确认个人主机已经安装最新版本的 R 和 RStudio。
 
 首先，通过以下一行命令从 CRAN 安装 blogdown 包：
 ```{r, eval=FALSE}
@@ -43,11 +43,11 @@ knitr::include_graphics("images/blog1.png")
 knitr::include_graphics("images/blog2.png")
 ```
 
-设置好目录名，只需点击创建项目（`Create Project`），RStudio 即会通过 blogdown 包来自动生成一个属于你的网站项目。
+设置好目录名，只需点击创建项目（`Create Project`），RStudio 即会通过 blogdown 包来自动生成一个网站项目。
 
 #### 网站铺设 {#steps-serve}
 
-用户可以便捷的通过 RStudio 的基础功能在本地浏览自己的网页项目。你既可以直接在控制台 （Console） 键入 `blogdown::serve_site()`，或在 RStudio 上方的插件 （`Addins`） 选项选择铺设网站 （`Serve Site`）。
+用户可以便捷的通过 RStudio 的基础功能在本地浏览自己的网页项目。用户既可以直接在控制台 （Console） 键入 `blogdown::serve_site()`，或在 RStudio 上方的插件 （`Addins`） 选项选择铺设网站 （`Serve Site`）。
 
 ```{r fig.cap="通过控制台在本地浏览你的网站", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog3.png")
@@ -57,19 +57,19 @@ knitr::include_graphics("images/blog3.png")
 knitr::include_graphics("images/blog4.png")
 ```
 
-然后你的 RStudio 应显示与下图相似的页面。
+然后 RStudio 应会显示与下图相似的页面。
 
 ```{r fig.cap="在本地铺设网站", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog5.png")
 ```
 
-显示本地铺设成功后，你还可以点击在本地浏览器打开（在 RStudio 右上角的 `Show in new window`）来通过你的本地浏览器在本地浏览你的网页。只要网页项目在在本地浏览器中被打开后，任何在源文件上的改动都会自动在浏览器中实时进行加载，所以你不需要在每次改动后重复点击铺设网站。
+显示本地铺设成功后，用户既可以通过图形交互页面，点击在本地浏览器打开（在 RStudio 右上角的 `Show in new window`）来通过本地浏览器在本地浏览刚刚编辑好的网页。只要网页项目在本地浏览器中被打开后，之后任何在源文件上的改动都会自动在浏览器中进行实时加载，所以并不需要在每次改动后重复点击铺设 (`knit`) 网站。
 
 #### 内容编辑 {#steps-edit}
 
-位于 RStudio 的右下角，用户可以通过进入内容 `content` 文件夹来查看并编辑当下网站项目的所有内容页。作为一个初始例子，我们首先打开 2020 年 12 月 01 日的一个文件 `content/post/2020-12-01-r-rmarkdown/index.Rmd`。 可以注意到，打开的 `Rmarkdown/Rmd` 文件的最上方是含有标题 `title`，作者 `author` 等字眼的代码部分，而这个部分被称为 YAML 代码区 （用于设定网页形态）。 当编辑具体网页内容时，用户只需要在 YAML 下方的空白部分进行编写即可。
+位于 RStudio 的右下角，用户可以通过进入内容 `content` 文件夹来查看并编辑当下网站项目的所有内容页。作为一个初始例子，这里首先打开 2020 年 12 月 01 日的一个文件 `content/post/2020-12-01-r-rmarkdown/index.Rmd`。 可以注意到，打开的 `Rmarkdown/Rmd` 文件的最上方是含有标题 `title`，作者 `author` 等字眼的代码部分，而这个部分被称为 YAML 代码区 （用于设定网页形态）。 当编辑具体网页内容时，用户只需要在 YAML 代码区下方的空白部分进行编写即可。
 
-接下来，让我们来尝试一下在网页中添加一些代码，你只需添加一个 R 代码块，然后输入以下内容：
+接下来，这里展示如何在网页中添加代码。如下图所示，只需添加一个 R 代码块，然后输入以下内容，代码就会自动展示在网页上。
 
 ```{r, fig.show='hide'}
 library(ggplot2)
@@ -84,7 +84,7 @@ ggplot(Orange, aes(x = age,
   theme_bw()
 ```
 
-此时，如果你的网站项目已经在本地浏览器中打开，你只需要点击左上角的保存，几秒后你即可在浏览器内看到类似下图的内容。如果此时你没有在本地浏览你的网页，点击编译 `knit`，你的网站便会在本地的 RStudio 自动生成。
+此时，如果编辑中的网站项目已经在本地浏览器中打开，用户只需要点击左上角的保存，几秒后即可在浏览器内看到如下图的内容。如果此时用户并没有在本地浏览网页，点击编译 `knit`，网站便会在本地的 RStudio 自动生成。
 
 ```{r fig.cap="给 Rmd 文件添加 R 代码", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog6.png")
@@ -95,7 +95,7 @@ knitr::include_graphics("images/blog6.png")
 
 除了通过编辑 `Rmd` 文件来实现网站内容的编辑外，用户还可以通过修改 `config.yaml` 文件内的设定来自定义自己的网站。
 
-例如，打开 `config.yaml` 文件后，你可能会看到如下内容：
+例如，打开 `config.yaml` 文件后，用户可能会看到如下内容：
 
 ```{r, eval = FALSE}
 baseurl: /
@@ -126,21 +126,21 @@ menu:
 
 #### 小结 {#steps-summary}
 
-目前为止，你已经成功掌握了创建并编辑一个个人化 blogdown 网站的三条基本知识：
+目前为止，此节已经展示了如何创建并编辑一个个人化 blogdown 网站的三条基本知识：
 
 1. 通过 RStudio 的铺设 `Serve Site` 功能 或在控制台内键入 `blogdown::serve_site()` 来在本地浏览自己的网站。
 2. 通过编辑 `config.yaml` 文件来自定义自己的网站（标题，菜单栏，主题等）。
-3. 通过编辑处于目录夹中 `content` 文件夹内的 `Rmd` 文件来编辑具体的网页信息。通过进阶的学习，你还可以通过修改自定义 `Rmd` 文件的位置来改变他们在网站上显示的结构。
+3. 通过编辑处于目录夹中 `content` 文件夹内的 `Rmd` 文件来编辑具体的网页信息。通过进阶的学习，用户还可以通过修改自定义 `Rmd` 文件的位置来改变他们在网站上显示的结构。
 
 #### 部署 {#steps-deploy}
 
-那么下一步是什么？答案有很多，但最重要的自然是通过部署，以便让他人可以通过互联网直接浏览我们的网站。
+那么下一步是什么？选择自然有很多，但最重要的莫过于通过部署编辑完成的网站，以便让他人可以通过互联网直接浏览网站上的内容。
 
-就像之前简短提到过的，因为静态网站本质上就是一个文件夹，所以静态网站与大多数动态网站相比较的一个重要优点就是部署更加简单且快速。那么我们如何选择用于部署的服务器呢？权衡过上手友好度以及性价比后，Netlify (https://www.netlify.com/) 是一个很不错的选择。
+就像之前简短提到过的，因为静态网站本质上就是一个文件夹，所以静态网站与大多数动态网站相比较的一个重要优点就是部署更加简单且快速。那么如何选择用于部署的服务器呢？权衡过上手友好度以及性价比后，Netlify (https://www.netlify.com/) 是一个很不错的选择。
 
 #### Netlify {#steps-netlify}
 
-Netlify提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，你只需创建一个 Github 账户，并使用此账户注册并登陆你的 Netlify 账户。登陆成功后，只需将你网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入你的 Netlify 部署页面即可。
+Netlify提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 Github 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
 
 ```{r fig.cap="在网站项目文件夹中找到名为Public的文件夹", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog7.png")
@@ -150,14 +150,14 @@ knitr::include_graphics("images/blog7.png")
 knitr::include_graphics("images/blog8.png")
 ```
 
-一般只需几秒钟，你的网站就会被成功部署在 Netlify 的服务器上，并可以通过一个格式为 `random-word-12345.netlify.com` 的域名访问。此域名是 Netlify 自动生成的一个子域名，并支持通过设置修改至自己偏好的字眼。Netlify 提供的一体化部署服务省去了用户在其他服务器上实现自定义设置时往往需要面对的许多麻烦。
+一般只需几秒钟，网站就会被成功部署在 Netlify 的服务器上，并可以通过一个格式为 `random-word-12345.netlify.com` 的域名访问。此域名是 Netlify 自动生成的一个子域名，并支持通过设置修改至自己偏好的字眼。Netlify 提供的一体化部署服务省去了用户在其他服务器上实现自定义设置时往往需要面对的许多麻烦。
 
-不过需要注意的是，每次在本地的 RStudio 编辑完你的个人网站后，你需要在控制台输入以下代码来更新你的公共文件夹  `Public/`。只有在更新完成后，你才可以通过在 Netlify 上次最新版本的 `Public/` 文件夹来部署你改动过后的网站。
+不过需要注意的是，每次在本地的 RStudio 编辑完个人网站后，你需要在控制台输入以下代码来更新你的公共文件夹  `Public/`。只有在更新完成后，才可以通过在 Netlify 上次最新版本的 `Public/` 文件夹来部署你改动过后的网站。
 
 ```{r, eval=FALSE}
 blogdown::build_site()
 ```
 
-讲通过Git的自动部署
+
 
 ## 制作科技论文的支撑材料 {#rmarkdown-paper}
