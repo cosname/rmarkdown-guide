@@ -140,7 +140,7 @@ menu:
 
 #### Netlify {#steps-netlify}
 
-Netlify提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 Github 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
+Netlify 提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 Github 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
 
 ```{r fig.cap="在网站项目文件夹中找到名为Public的文件夹", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog7.png")
@@ -152,7 +152,7 @@ knitr::include_graphics("images/blog8.png")
 
 一般只需几秒钟，网站就会被成功部署在 Netlify 的服务器上，并可以通过一个格式为 `random-word-12345.netlify.com` 的域名访问。此域名是 Netlify 自动生成的一个子域名，并支持通过设置修改至自己偏好的字眼。Netlify 提供的一体化部署服务省去了用户在其他服务器上实现自定义设置时往往需要面对的许多麻烦。
 
-不过需要注意的是，每次在本地的 RStudio 编辑完个人网站后，你需要在控制台输入以下代码来更新你的公共文件夹  `Public/`。只有在更新完成后，才可以通过在 Netlify 上次最新版本的 `Public/` 文件夹来部署你改动过后的网站。
+不过需要注意的是，每次在本地的 RStudio 编辑完个人网站后，用户需要在控制台输入以下代码来更新你的公共文件夹  `Public/`。只有在更新完成后，才可以通过在 Netlify 上次最新版本的 `Public/` 文件夹来部署你改动过后的网站。
 
 ```{r, eval=FALSE}
 blogdown::build_site()
