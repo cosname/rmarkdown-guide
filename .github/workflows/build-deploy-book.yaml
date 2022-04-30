@@ -7,6 +7,11 @@ on:
 
 name: build-deploy-book
 
+env:
+  RENV_PATHS_ROOT: ~/.local/share/renv
+  MINICONDA_LIB_PATH: /Users/runner/Library/r-miniconda/
+  MINICONDA_WORK_PATH: /Users/runner/work/rmarkdown-guide/
+
 jobs:
   build:
     runs-on: macos-latest
@@ -24,9 +29,23 @@ jobs:
       - name: Cache renv packages
         uses: actions/cache@v2
         with:
-          path: $HOME/.local/share/renv
-          key: r-${{ hashFiles('renv.lock') }}
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: r-${{ hashFiles('**/renv.lock') }}
           restore-keys: r-
+
+      - name: Cache Miniconda packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.MINICONDA_LIB_PATH }}
+          key: miniconda-lib-${{ hashFiles('**/renv.lock') }}
+          restore-keys: miniconda-lib-
+          
+      - name: Cache Miniconda work
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.MINICONDA_WORK_PATH }}
+          key: miniconda-work-${{ hashFiles('**/renv.lock') }}
+          restore-keys: miniconda-work-       
 
       - name: Cache bookdown results
         uses: actions/cache@v2
@@ -39,18 +58,16 @@ jobs:
         run: |
           R -e 'install.packages("renv")'
           R -e 'renv::restore()'
-          R -e 'reticulate::install_miniconda()'
-          R -e 'reticulate::py_install(c("seaborn", "pandas"))'
+          R -e 'if (!reticulate:::miniconda_exists()) reticulate::install_miniconda()'
+          R -e 'if (!reticulate:::miniconda_exists()) reticulate::py_install(c("seaborn", "pandas"))'
 
-      - name: Build book
-        run: make gitbook
 
-      - name: Checkout the gh-pages branch
-        uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-          path: book-output
+      - name: Build site
+        run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
 
-      - name: Deploy book
+      - name: Deploy to GitHub pages 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.4
         if: ${{ github.ref == 'refs/heads/master' }}
-        run: ./_deploy.sh
+        with:
+          branch: gh-pages
+          folder: _book

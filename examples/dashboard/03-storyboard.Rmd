@@ -1,11 +1,11 @@
 ---
-title: "Storyboard Commentary"
+title: "故事板"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
 ---
 
-### A nice scatterplot here
+### 散点图
 
 ```{r}
 plot(cars, pch = 20)
@@ -14,9 +14,9 @@ grid()
 
 ---
 
-Some commentary about Frame 1.
+可以添加一些评论。
 
-### A beautiful histogram on this board
+### 直方图
 
 ```{r}
 hist(faithful$eruptions, col = 'gray', border = 'white', main = '')
@@ -24,4 +24,5 @@ hist(faithful$eruptions, col = 'gray', border = 'white', main = '')
 
 ---
 
-Some commentary about Frame 2.
+可以添加一些评论。
+

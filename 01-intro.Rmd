@@ -1,3 +1,5 @@
+\mainmatter
+
 # (PART) 初识 R Markdown {.unnumbered}
 
 # R Markdown概述 {#rmarkdown-intro}
@@ -43,7 +45,7 @@ knitr 是 CRAN 中依赖最多的包之一（<https://blog.csdn.net/qq_18055167/
 
 ### 交互笔记本 {#example-note}
 
-### 个人简历 {#example-report}
+### 个人简历 {#example-cv}
 
 ### 网站 {#example-resume}
 

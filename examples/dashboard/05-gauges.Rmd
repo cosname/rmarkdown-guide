@@ -1,5 +1,5 @@
 ---
-title: "Dashboard Gauges"
+title: "仪表"
 output:
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -9,7 +9,7 @@ output:
 library(flexdashboard)
 ```
 
-### Contact Rate
+### 接触率
 
 ```{r}
 gauge(91, min = 0, max = 100, symbol = '%', gaugeSectors(
@@ -17,7 +17,7 @@ gauge(91, min = 0, max = 100, symbol = '%', gaugeSectors(
 ))
 ```
 
-### Average Rating 
+### 平均额定值
 
 ```{r}
 gauge(37.4, min = 0, max = 50, gaugeSectors(
@@ -25,7 +25,7 @@ gauge(37.4, min = 0, max = 50, gaugeSectors(
 ))
 ```
 
-### Cancellations
+### 取消数
 
 ```{r}
 gauge(7, min = 0, max = 10, gaugeSectors(

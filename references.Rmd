@@ -71,7 +71,8 @@ knitr::write_bib(c(
   "DT",
   "distill",
   "pagedown",
-  "bslib"
+  "bslib",
+  "formatR"
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {
