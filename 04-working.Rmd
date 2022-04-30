@@ -12,9 +12,9 @@
 
 ### blogdown 简介 {#blogdown-intro}
 
-在当今的互联网时代世界，无论从事什么职业，个人网站几乎成为了一张人手必备的的“电子名片”。谢益辉开发的 blogdown 包提供了一种功能全面，且设置简单快速的个人网站架设途径。
+在当今的互联网时代世界，无论从事什么职业，个人网站几乎成为了一张人手必备的的"电子名片"。谢益辉开发的 blogdown 包提供了一种功能全面，且设置简单快速的个人网站架设途径。
 
-基于 Rmarkdown 的 blogdown 包为个人用户提供一种轻便快速的建立个人静态网站的方案。不同于市面上多数的网站建立方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，blogdown 依赖 R Markdown 文件为基础来生成网站。而 R Markdown  文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对 $LaTeX$ 的支持），数据分析，交互性插件（如交互性图表）等。
+基于 Rmarkdown 的 blogdown 包为个人用户提供一种轻便快速的建立个人静态网站的方案。不同于市面上多数的网站建立方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，blogdown 依赖 R Markdown 文件为基础来生成网站。而 R Markdown 文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对 $LaTeX$ 的支持），数据分析，交互性插件（如交互性图表）等。
 
 本书的这个小节将通过一个对新手十分友好的案例来手把手的展示如何快速建立一个可满足日常基本需求的网站，以便用户可快速上手 R 的 blogdown 包。
 
@@ -25,6 +25,7 @@
 在开始之前，用户需要确认个人主机已经安装最新版本的 R 和 RStudio。
 
 首先，通过以下一行命令从 CRAN 安装 blogdown 包：
+
 ```{r, eval=FALSE}
 # 安装 blogdown
 install.packages("blogdown")
@@ -37,7 +38,6 @@ install.packages("blogdown")
 ```{r fig.cap="在 RStudio 中创建一个新网页项目", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog1.png")
 ```
-
 
 ```{r fig.cap="基于 blogdown 创建一个新网页项目", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog2.png")
@@ -90,7 +90,6 @@ ggplot(Orange, aes(x = age,
 knitr::include_graphics("images/blog6.png")
 ```
 
-
 #### 网站配置 {#steps-configure}
 
 除了通过编辑 `Rmd` 文件来实现网站内容的编辑外，用户还可以通过修改 `config.yaml` 文件内的设定来自定义自己的网站。
@@ -121,22 +120,22 @@ menu:
 
 只需在相应的部分进行编辑，用户就可以根据个人的需求自定义自己的网站，如：
 
-- `title: 我的网站` ：将网站标题修改为“我的网站”
-- `name: Weibo` `url: 你的微博url` ：在菜单中添加个人 Weibo 信息页面的链接
+-   `title: 我的网站` ：将网站标题修改为"我的网站"
+-   `name: Weibo` `url: 你的微博url` ：在菜单中添加个人 Weibo 信息页面的链接
 
 #### 小结 {#steps-summary}
 
 目前为止，此节已经展示了如何创建并编辑一个个人化 blogdown 网站的三条基本知识：
 
-1. 通过 RStudio 的铺设 `Serve Site` 功能 或在控制台内键入 `blogdown::serve_site()` 来在本地浏览自己的网站。
-2. 通过编辑 `config.yaml` 文件来自定义自己的网站（标题，菜单栏，主题等）。
-3. 通过编辑处于目录夹中 `content` 文件夹内的 `Rmd` 文件来编辑具体的网页信息。通过进阶的学习，用户还可以通过修改自定义 `Rmd` 文件的位置来改变他们在网站上显示的结构。
+1.  通过 RStudio 的铺设 `Serve Site` 功能 或在控制台内键入 `blogdown::serve_site()` 来在本地浏览自己的网站。
+2.  通过编辑 `config.yaml` 文件来自定义自己的网站（标题，菜单栏，主题等）。
+3.  通过编辑处于目录夹中 `content` 文件夹内的 `Rmd` 文件来编辑具体的网页信息。通过进阶的学习，用户还可以通过修改自定义 `Rmd` 文件的位置来改变他们在网站上显示的结构。
 
 #### 部署 {#steps-deploy}
 
 那么下一步是什么？选择自然有很多，但最重要的莫过于通过部署编辑完成的网站，以便让他人可以通过互联网直接浏览网站上的内容。
 
-就像之前简短提到过的，因为静态网站本质上就是一个文件夹，所以静态网站与大多数动态网站相比较的一个重要优点就是部署更加简单且快速。那么如何选择用于部署的服务器呢？权衡过上手友好度以及性价比后，Netlify (https://www.netlify.com/) 是一个很不错的选择。
+就像之前简短提到过的，因为静态网站本质上就是一个文件夹，所以静态网站与大多数动态网站相比较的一个重要优点就是部署更加简单且快速。那么如何选择用于部署的服务器呢？权衡过上手友好度以及性价比后，Netlify (<https://www.netlify.com/>) 是一个很不错的选择。
 
 #### Netlify {#steps-netlify}
 
@@ -152,12 +151,86 @@ knitr::include_graphics("images/blog8.png")
 
 一般只需几秒钟，网站就会被成功部署在 Netlify 的服务器上，并可以通过一个格式为 `random-word-12345.netlify.com` 的域名访问。此域名是 Netlify 自动生成的一个子域名，并支持通过设置修改至自己偏好的字眼。Netlify 提供的一体化部署服务省去了用户在其他服务器上实现自定义设置时往往需要面对的许多麻烦。
 
-不过需要注意的是，每次在本地的 RStudio 编辑完个人网站后，用户需要在控制台输入以下代码来更新你的公共文件夹  `Public/`。只有在更新完成后，才可以通过在 Netlify 上次最新版本的 `Public/` 文件夹来部署你改动过后的网站。
+不过需要注意的是，每次在本地的 RStudio 编辑完个人网站后，用户需要在控制台输入以下代码来更新你的公共文件夹 `Public/`。只有在更新完成后，才可以通过在 Netlify 上次最新版本的 `Public/` 文件夹来部署你改动过后的网站。
 
 ```{r, eval=FALSE}
 blogdown::build_site()
 ```
 
-
-
 ## 制作科技论文的支撑材料 {#rmarkdown-paper}
+
+数据驱动是当前科学研究的重要发展趋势。中国科学院生化所吴家睿教授认为，数据驱动的研究范式不仅能够避免研究者可能的主观偏见，而且可以帮助其发现在假设或者现有理论范围之外的全新知识。这种方式不需要假设，主要目的是去获取研究对象的相关信息，克服了假设驱动的研究范式对决定论和因果关系的偏执，进而形成了开放式研究的认识论新体系。
+
+在这样的背景下，越来越多的期刊都鼓励或者要求作者开放研究中使用的原始数据和分析过程，给了 R Markdown 一个新的用武之处。
+
+### 建议文件结构
+
+论文的支撑材料通常存放在 GitHub 这一类的开源网站上，其文件结构通常是：
+
+    |--+ data：子文件夹，用于存放分析使用的数据；
+    |--+ figures：子文件夹，用于存放生成的图片；
+    |--+ functions：子文件夹，用于存放一些需要重复调用的函数；
+    |- supplementary.Rproj：R 项目文件；
+    |- README.md：使用 Markdown 语法的 README 文件，用于说明项目相关信息；
+    |- analysis.Rmd：使用 R Markdown 语法的分析文件（可以有多个）。
+
+`analysis.Rmd` 是支撑材料中的核心文件。它是一个常规的 R Markdown 文档。举例来说，下面的头文件中分别指定了 3 种不同的输出样式。
+
+``` yaml
+---
+title: Your Title
+author: "your@email.com"
+date: "2022-5-15"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+  md_document:
+    variant: markdown_github
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+---
+```
+
+为了让生成的图片能够妥善的存放到 `figures` 文件夹，需要在头文件后面添加一些设置。
+
+```` r
+```{r setup}
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp=0.618,
+  dpi = 300,
+  warning = FALSE,
+  fig.path = "figures/Figure-"
+)
+```
+````
+
+这里将图片的默认宽度和比例分别设置为 8 英寸和 0.618（黄金分割比例），并设置图片分辨率为 300 dpi；与此同时，不显示 R 运行过程中的警告信息；此外，还将图片输出的路径指定到 `figures` 文件夹中。
+
+### 分析报告的正文
+
+报告的正文仁者见仁智者见智，不过通常会包含以下几个部分。
+
+```
+## Required Packages
+
+## Data Processing
+
+## Main Results
+
+## Supporting Results
+
+```
+
+这基本上是按照数据分析的逻辑组织的，所以就不再赘述了。
+
+如果文档中不涉及动态网页内容，那么把 R Markdown 文档输出为 Markdown 是非常推荐的，因为这样读者可以更加方便的看到相应的结果（GitHub 网站可以渲染 Markdown）。
+
+```{r eval=FALSE}
+rmarkdown::render("analysis.Rmd",md_document(variant = "markdown_github"))
+```
