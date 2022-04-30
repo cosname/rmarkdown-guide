@@ -23,6 +23,8 @@ examples/*.html
 examples/*/*.pdf
 examples/*/*.html
 examples/listings-settings.tex
+examples/*.log
+examples/*/*.log
 
 # renv files
 renv/*

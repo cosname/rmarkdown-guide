@@ -93,3 +93,4 @@ use_examples <- function(names, dir = "exmaples", open_path = NULL) {
   }
   invisible(open_path)
 }
+
