@@ -42,7 +42,7 @@ import_example_result <- function(file, redo = FALSE, vwidth = 700, vheight = 40
 
     }
   }
-  tryCatch(knitr::include_graphics(webshot), error = function(e) paste0("unable to load png: ", webshot))
+  tryCatch(knitr::include_graphics(webshot, dpi = NA), error = function(e) paste0("unable to load png: ", webshot))
 }
 
 rmd_html_screenshot <- function(file, fmt = "html_document", outfile = xfun::with_ext(file, "png"), ...){
