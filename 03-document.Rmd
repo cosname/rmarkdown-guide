@@ -877,7 +877,7 @@ import_example("examples/PDF-document-in-chinese.Rmd")
 将这份 R Markdown 编译后，将会生成一份 PDF 文档。
 
 ```{r}
-import_example_result("examples/PDF-document-in-chinese.Rmd")
+knitr::include_graphics("examples/PDF-document-in-chinese.png", dpi = NA)
 ```
 
 ### 与 HTML 文档中相通的一些设置 {#pdf-general-setting}
