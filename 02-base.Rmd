@@ -13,7 +13,7 @@
 TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档。通过命令行模式，它的安装要简单的多。
 
 ```{r fig.cap="TinyTex 是一个瘦身版的 TeX Live"}
-knitr::include_graphics("images/logo-tinytex.png")
+knitr::include_graphics("images/logo-tinytex.png", dpi = NA)
 ```
 
 要安装 TinyTeX，只需要在 R 语言终端输入两条命令即可[^TinyTeX-vs-tinytex]。
