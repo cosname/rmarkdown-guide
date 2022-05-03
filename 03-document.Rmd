@@ -412,7 +412,7 @@ snapshots = lapply(c("default","kable","tibble","paged"), function(x){
   html_screenshot(outfile, outfile = xfun::with_ext(template,paste0(x,".png")))
 })
 unlink(outfile)
-knitr::include_graphics(unlist(snapshots))
+knitr::include_graphics(unlist(snapshots), dpi = NA)
 ```
 
 
