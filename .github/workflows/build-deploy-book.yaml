@@ -61,6 +61,7 @@ jobs:
           R -e 'if (!reticulate:::miniconda_exists()) reticulate::install_miniconda()'
           R -e 'if (!reticulate:::miniconda_exists()) reticulate::py_install(c("seaborn", "pandas"))'
           R -e 'webshot::install_phantomjs()'
+          R -e 'tinytex::install_tinytex()'
 
 
       - name: Build site
