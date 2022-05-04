@@ -138,7 +138,7 @@ output:
 -   `.tabset-pills` 将为标签文字加上预设的 `.tabset-pills` 样式（图 \@ref(fig:html-tabset)）。
 
 ```{r html-tabset, fig.cap="标签的默认样式及 `.tabset-pills` 样式", echo = FALSE, out.width="70%", fig.align="center"}
-import_example_result(xfun::magic_path("tabset-example.Rmd"))
+knitr::include_graphics("examples/tabset-example.png", dpi = NA)
 ```
 
 
@@ -170,7 +170,7 @@ output:
 (ref:figcap-first-rmd-theme-darkly) 应用 `r theme_link("darkly")` 主题后的文档样式
 
 ```{r first-rmd-theme-darkly, fig.cap="(ref:figcap-first-rmd-theme-darkly)", echo = FALSE}
-import_example_result(xfun::magic_path("first-rmd-theme-darkly.Rmd"))
+knitr::include_graphics("examples/first-rmd-theme-darkly.png", dpi = NA)
 ```
 
 
@@ -204,8 +204,8 @@ output:
 (ref:figcap-html-code-highlight-example) 可选的代码高亮样式
 
 ```{r html-code-highlight-example, fig.cap="(ref:figcap-html-code-highlight-example)", fig.show="hold", out.width="70%"}
-code_highlight_examples = list.files("examples/", "code-highlight-example.*\\.Rmd", full.names = TRUE)
-success = lapply(code_highlight_examples, import_example_result)
+code_highlight_examples = list.files("examples/", "code-highlight-example.*\\.png", full.names = TRUE)
+knitr::include_graphics(path = code_highlight_examples, dpi = NA)
 ```
 
 
@@ -260,7 +260,8 @@ output:
 `r import_example("chunk-custom.Rmd")`
 
 ```{r chunk-border, echo = FALSE, out.width="70%", fig.align="center",  fig.cap = "一个具有浅红色背景和深红色边框的代码块"}
-import_example_result("chunk-custom.Rmd", vheight = 300)
+# import_example_result("chunk-custom.Rmd", vheight = 300)
+knitr::include_graphics("examples/chunk-custom.png", dpi = NA)
 ```
 
 #### 使用丰富多样的内置 CSS 样式 {#html-css-list}
@@ -278,7 +279,8 @@ import_example_result("chunk-custom.Rmd", vheight = 300)
 以上内容生成 HTML 文档后的样子如图 \@ref(fig:chunk-style-example) 所示：
 
 ```{r chunk-style-example, echo = FALSE, fig.cap="在代码块上应用内置 CSS 样式", out.width="70%", fig.align="center"}
-import_example_result("chunk-style.Rmd", vheight = 400, vwidth = 600)
+# import_example_result("chunk-style.Rmd", vheight = 400, vwidth = 600)
+knitr::include_graphics("examples/chunk-style.png", dpi = NA)
 ```
 
 #### 代码折叠 {#html-code-folding}
@@ -304,7 +306,8 @@ output:
 (ref:figcap-fold-show) 代码块的折叠和显示。图中每个代码区块旁边都有一个按钮，可以控制相应代码区块的显示方式；文档的右上角也有一个按钮，可以控制文档中全部代码区块的显示方式。
 
 ```{r fold-show, fig.cap="(ref:figcap-fold-show)",out.width="70%",fig.align="center", echo=FALSE}
-import_example_result("fold-show.Rmd", vwidth = 800)
+# import_example_result("fold-show.Rmd", vwidth = 800)
+knitr::include_graphics("examples/fold-show.png", dpi = NA)
 ```
 
 
@@ -340,7 +343,8 @@ output:
 因为代码块是位于 `<pre class="sourcecode">` 标签内的，所以 `pre[class]` 操作符将限制代码块的高度为不超过 100 像素。 而将 `class.output ` 设为 `scroll-100` 则限制输出部分的高度为不超过 100 像素。最终效果如图 \@ref(fig:html-scroll-example) 所示。
 
 ```{r html-scroll-example, out.width="70%", fig.align="center", fig.cap="可以滚动的代码块",echo=FALSE}
-import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
+# import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
+knitr::include_graphics('examples/html-scroll.png', dpi = NA)
 ```
 
 ### 图片和数据框 {#html-pic}
@@ -1529,7 +1533,7 @@ output:
 
 
 ```{r beamer-presentation-theme,  echo=FALSE,fig.align='center',  fig.cap="应用主题后的 Beamer 幻灯片"}
-import_example_result("examples/beamer-presentation-theme.Rmd")
+knitr::include_graphics("examples/beamer-presentation-theme.png", dpi = NA)
 ```
 
 Beamer 支持数十个主题和颜色样式，在 [这里](https://hartwork.org/beamer-theme-matrix/) 可以查看可用的选项。
@@ -1650,7 +1654,7 @@ knitr::include_graphics("images/xaringan-hex.png", dpi = NA)
 与其它工具相比，`xaringan` 创建的幻灯片样式更加精美，功能更加丰富，且具有高度的可定制性（图 \@ref(fig:xaringan-screenshot)）。
 
 ```{r xaringan-screenshot, fig.cap="`xaringan` 幻灯片的实例",fig.width=6,fig.align='center', echo=FALSE}
-knitr::include_graphics("images/xaringan-scrennshot.png")
+knitr::include_graphics("images/xaringan-scrennshot.png", dpi = NA)
 ```
 
 <!-- 这一小节的下列内容事实上是由庄亮亮完成的 -->
