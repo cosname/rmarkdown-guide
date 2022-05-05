@@ -215,7 +215,7 @@ knitr::opts_chunk$set(
 
 ### 分析报告的正文
 
-报告的正文仁者见仁智者见智，不过通常会包含以下几个部分。
+报告的正文仁者见仁智者见智，不过通常会包含以下几个部分（因为研究论文更多的发表在英文期刊上，所以这里的报告示例使用了英文标题）。
 
 ```
 ## Required Packages
@@ -230,8 +230,15 @@ knitr::opts_chunk$set(
 
 这基本上是按照数据分析的逻辑组织的，所以就不再赘述了。
 
-如果文档中不涉及动态网页内容，那么把 R Markdown 文档输出为 Markdown 是非常推荐的，因为这样读者可以更加方便的看到相应的结果（GitHub 网站可以渲染 Markdown）。
+如果文档中不涉及动态网页内容，推荐把 R Markdown 文档输出为 Markdown ，因为这样读者可以直接在 GitHub 网站查看相应的结果。
+
+具体做法：
+
+- 在头文件中加入 `output: github_document`；
+- 使用下面的命令将 Rmd 文件编译为 Markdown 文件。注意这里指定了 GitHub Flavored Markdown（gfm）作为输出格式。
 
 ```{r eval=FALSE}
-rmarkdown::render("analysis.Rmd",md_document(variant = "markdown_github"))
+library(rmarkdown)
+render("analysis.Rmd",md_document(variant = "gfm"))
 ```
+
