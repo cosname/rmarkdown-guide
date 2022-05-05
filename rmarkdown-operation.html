@@ -2903,12 +2903,6 @@ div.csl-indent {
 <span id="cb317-2"><a href="rmarkdown-operation.html#cb317-2" aria-hidden="true" tabindex="-1"></a><span class="in">head(iris)</span></span>
 <span id="cb317-3"><a href="rmarkdown-operation.html#cb317-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>最终得到的结果见表 <a href="#tab:print-render"><strong>??</strong></a></p>
-<pre><code>## Retrieving &#39;https://cran.rstudio.com/bin/macosx/contrib/4.2/pander_0.6.5.tgz&#39; ...
-##  OK [downloaded 1.1 Mb in 0.2 secs]
-## Installing pander [0.6.5] ...
-##  OK [installed binary]
-## Moving pander [0.6.5] into the cache ...
-##  OK [moved to cache in 1.3 milliseconds]</code></pre>
 <table style="width:94%;">
 <colgroup>
 <col width="20%" />
@@ -2976,69 +2970,69 @@ div.csl-indent {
 <div id="option-hook" class="section level3 hasAnchor" number="6.3.9">
 <h3><span class="header-section-number">6.3.9</span> 选项钩子 (*)<a href="rmarkdown-operation.html#option-hook" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>有时候，用户可能需要根据其他块选项的值，来动态地改变某个块选项，例如设定图像宽不小于高。实际上，可以使用对象 <code>opts_hooks</code> 来设置一个选项钩子（option hook）来实现这个功能。选项钩子是一个与该选项相关的函数，会在对应的块选项不是 <code>NULL</code> 时自动执行。这个函数将当前代码块的选项列表作为输入参数，并且会返回一个（可能是修改过的）列表。例如，对于图像宽和高的限制，可以调整<code>fig.width</code>选项，使它总是不小于<code>fig.height</code>：</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="rmarkdown-operation.html#cb319-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width =</span> <span class="cf">function</span>(options) {</span>
-<span id="cb319-2"><a href="rmarkdown-operation.html#cb319-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (options<span class="sc">$</span>fig.width <span class="sc">&lt;</span> options<span class="sc">$</span>fig.height) {</span>
-<span id="cb319-3"><a href="rmarkdown-operation.html#cb319-3" aria-hidden="true" tabindex="-1"></a>    options<span class="sc">$</span>fig.width <span class="ot">=</span> options<span class="sc">$</span>fig.height</span>
-<span id="cb319-4"><a href="rmarkdown-operation.html#cb319-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb319-5"><a href="rmarkdown-operation.html#cb319-5" aria-hidden="true" tabindex="-1"></a>  options</span>
-<span id="cb319-6"><a href="rmarkdown-operation.html#cb319-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="rmarkdown-operation.html#cb318-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width =</span> <span class="cf">function</span>(options) {</span>
+<span id="cb318-2"><a href="rmarkdown-operation.html#cb318-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (options<span class="sc">$</span>fig.width <span class="sc">&lt;</span> options<span class="sc">$</span>fig.height) {</span>
+<span id="cb318-3"><a href="rmarkdown-operation.html#cb318-3" aria-hidden="true" tabindex="-1"></a>    options<span class="sc">$</span>fig.width <span class="ot">=</span> options<span class="sc">$</span>fig.height</span>
+<span id="cb318-4"><a href="rmarkdown-operation.html#cb318-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb318-5"><a href="rmarkdown-operation.html#cb318-5" aria-hidden="true" tabindex="-1"></a>  options</span>
+<span id="cb318-6"><a href="rmarkdown-operation.html#cb318-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>因为 <code>fig.width</code> 永远不会是 <code>NULL</code>，所以这个钩子函数总是在代码块之前执行，以更新它的块选项。对于下面的代码块，如果设置了上述的选项钩子，则 <code>fig.width</code> 的实际值将是 6 而不是最初定义的 5：</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb320-1"><a href="rmarkdown-operation.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.width = 5, fig.height = 6}</span></span>
-<span id="cb320-2"><a href="rmarkdown-operation.html#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot(1:10)</span></span>
-<span id="cb320-3"><a href="rmarkdown-operation.html#cb320-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb319-1"><a href="rmarkdown-operation.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.width = 5, fig.height = 6}</span></span>
+<span id="cb319-2"><a href="rmarkdown-operation.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot(1:10)</span></span>
+<span id="cb319-3"><a href="rmarkdown-operation.html#cb319-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>另外，第 <a href="rmarkdown-operation.html#chunk-leading">6.2.5</a> 节的最后一个例子介绍了如何将输出格式调整成类似于 R 控制台（console）的格式，这一功能也可以用选项钩子实现，从而可以使用一个单独的块选项 <code>console = TRUE</code> 来代替 <code>comment = ""</code> 和 <code>prompt = TRUE</code>。需要注意的是，<code>console</code> 不是一个内置的 <strong>knitr</strong> 块选项，而是一个自定义的任意的选项名，它的默认值是 <code>NULL</code>。下面是一个完整的例子：</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb321-1"><a href="rmarkdown-operation.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
-<span id="cb321-2"><a href="rmarkdown-operation.html#cb321-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_hooks$set(console = function(options) {</span></span>
-<span id="cb321-3"><a href="rmarkdown-operation.html#cb321-3" aria-hidden="true" tabindex="-1"></a><span class="in">  if (isTRUE(options$console)) {</span></span>
-<span id="cb321-4"><a href="rmarkdown-operation.html#cb321-4" aria-hidden="true" tabindex="-1"></a><span class="in">    options$comment &lt;- &#39;&#39;; options$prompt &lt;- TRUE</span></span>
-<span id="cb321-5"><a href="rmarkdown-operation.html#cb321-5" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb321-6"><a href="rmarkdown-operation.html#cb321-6" aria-hidden="true" tabindex="-1"></a><span class="in">  options</span></span>
-<span id="cb321-7"><a href="rmarkdown-operation.html#cb321-7" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
-<span id="cb321-8"><a href="rmarkdown-operation.html#cb321-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb321-9"><a href="rmarkdown-operation.html#cb321-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-10"><a href="rmarkdown-operation.html#cb321-10" aria-hidden="true" tabindex="-1"></a>默认输出为：</span>
-<span id="cb321-11"><a href="rmarkdown-operation.html#cb321-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-12"><a href="rmarkdown-operation.html#cb321-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb321-13"><a href="rmarkdown-operation.html#cb321-13" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
-<span id="cb321-14"><a href="rmarkdown-operation.html#cb321-14" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
-<span id="cb321-15"><a href="rmarkdown-operation.html#cb321-15" aria-hidden="true" tabindex="-1"></a><span class="in">  2 + 2</span></span>
-<span id="cb321-16"><a href="rmarkdown-operation.html#cb321-16" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb321-17"><a href="rmarkdown-operation.html#cb321-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb321-18"><a href="rmarkdown-operation.html#cb321-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-19"><a href="rmarkdown-operation.html#cb321-19" aria-hidden="true" tabindex="-1"></a>设置 <span class="in">`console = TRUE`</span> 时的输出为：</span>
-<span id="cb321-20"><a href="rmarkdown-operation.html#cb321-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-21"><a href="rmarkdown-operation.html#cb321-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, console=TRUE}</span></span>
-<span id="cb321-22"><a href="rmarkdown-operation.html#cb321-22" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
-<span id="cb321-23"><a href="rmarkdown-operation.html#cb321-23" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
-<span id="cb321-24"><a href="rmarkdown-operation.html#cb321-24" aria-hidden="true" tabindex="-1"></a><span class="in">  2 + 2</span></span>
-<span id="cb321-25"><a href="rmarkdown-operation.html#cb321-25" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb321-26"><a href="rmarkdown-operation.html#cb321-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb320-1"><a href="rmarkdown-operation.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb320-2"><a href="rmarkdown-operation.html#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_hooks$set(console = function(options) {</span></span>
+<span id="cb320-3"><a href="rmarkdown-operation.html#cb320-3" aria-hidden="true" tabindex="-1"></a><span class="in">  if (isTRUE(options$console)) {</span></span>
+<span id="cb320-4"><a href="rmarkdown-operation.html#cb320-4" aria-hidden="true" tabindex="-1"></a><span class="in">    options$comment &lt;- &#39;&#39;; options$prompt &lt;- TRUE</span></span>
+<span id="cb320-5"><a href="rmarkdown-operation.html#cb320-5" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb320-6"><a href="rmarkdown-operation.html#cb320-6" aria-hidden="true" tabindex="-1"></a><span class="in">  options</span></span>
+<span id="cb320-7"><a href="rmarkdown-operation.html#cb320-7" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb320-8"><a href="rmarkdown-operation.html#cb320-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb320-9"><a href="rmarkdown-operation.html#cb320-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb320-10"><a href="rmarkdown-operation.html#cb320-10" aria-hidden="true" tabindex="-1"></a>默认输出为：</span>
+<span id="cb320-11"><a href="rmarkdown-operation.html#cb320-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb320-12"><a href="rmarkdown-operation.html#cb320-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb320-13"><a href="rmarkdown-operation.html#cb320-13" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb320-14"><a href="rmarkdown-operation.html#cb320-14" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
+<span id="cb320-15"><a href="rmarkdown-operation.html#cb320-15" aria-hidden="true" tabindex="-1"></a><span class="in">  2 + 2</span></span>
+<span id="cb320-16"><a href="rmarkdown-operation.html#cb320-16" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb320-17"><a href="rmarkdown-operation.html#cb320-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb320-18"><a href="rmarkdown-operation.html#cb320-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb320-19"><a href="rmarkdown-operation.html#cb320-19" aria-hidden="true" tabindex="-1"></a>设置 <span class="in">`console = TRUE`</span> 时的输出为：</span>
+<span id="cb320-20"><a href="rmarkdown-operation.html#cb320-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb320-21"><a href="rmarkdown-operation.html#cb320-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, console=TRUE}</span></span>
+<span id="cb320-22"><a href="rmarkdown-operation.html#cb320-22" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb320-23"><a href="rmarkdown-operation.html#cb320-23" aria-hidden="true" tabindex="-1"></a><span class="in">if (TRUE) {</span></span>
+<span id="cb320-24"><a href="rmarkdown-operation.html#cb320-24" aria-hidden="true" tabindex="-1"></a><span class="in">  2 + 2</span></span>
+<span id="cb320-25"><a href="rmarkdown-operation.html#cb320-25" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb320-26"><a href="rmarkdown-operation.html#cb320-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>本节第三个例子介绍了如何自动向输出块中添加行号，输出块可以包括源代码块、文本输出、提示信息、警告以及报错。下面的例子使用单个的块选项 <code>numberLines</code> 来控制想要添加行号的输出块。首先定义相关函数：</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="rmarkdown-operation.html#cb322-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_hooks<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb322-2"><a href="rmarkdown-operation.html#cb322-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numberLines =</span> <span class="cf">function</span>(options) {</span>
-<span id="cb322-3"><a href="rmarkdown-operation.html#cb322-3" aria-hidden="true" tabindex="-1"></a>    attrs <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;attr.&quot;</span>, options<span class="sc">$</span>numberLines)</span>
-<span id="cb322-4"><a href="rmarkdown-operation.html#cb322-4" aria-hidden="true" tabindex="-1"></a>    options[attrs] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(options[attrs], c, <span class="st">&quot;.numberLines&quot;</span>)</span>
-<span id="cb322-5"><a href="rmarkdown-operation.html#cb322-5" aria-hidden="true" tabindex="-1"></a>    options</span>
-<span id="cb322-6"><a href="rmarkdown-operation.html#cb322-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb322-7"><a href="rmarkdown-operation.html#cb322-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb322-8"><a href="rmarkdown-operation.html#cb322-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb322-9"><a href="rmarkdown-operation.html#cb322-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb322-10"><a href="rmarkdown-operation.html#cb322-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">numberLines =</span> <span class="fu">c</span>(</span>
-<span id="cb322-11"><a href="rmarkdown-operation.html#cb322-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;source&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;message&quot;</span>, <span class="st">&quot;warning&quot;</span>, <span class="st">&quot;error&quot;</span></span>
-<span id="cb322-12"><a href="rmarkdown-operation.html#cb322-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb322-13"><a href="rmarkdown-operation.html#cb322-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="rmarkdown-operation.html#cb321-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_hooks<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb321-2"><a href="rmarkdown-operation.html#cb321-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numberLines =</span> <span class="cf">function</span>(options) {</span>
+<span id="cb321-3"><a href="rmarkdown-operation.html#cb321-3" aria-hidden="true" tabindex="-1"></a>    attrs <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;attr.&quot;</span>, options<span class="sc">$</span>numberLines)</span>
+<span id="cb321-4"><a href="rmarkdown-operation.html#cb321-4" aria-hidden="true" tabindex="-1"></a>    options[attrs] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(options[attrs], c, <span class="st">&quot;.numberLines&quot;</span>)</span>
+<span id="cb321-5"><a href="rmarkdown-operation.html#cb321-5" aria-hidden="true" tabindex="-1"></a>    options</span>
+<span id="cb321-6"><a href="rmarkdown-operation.html#cb321-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb321-7"><a href="rmarkdown-operation.html#cb321-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb321-8"><a href="rmarkdown-operation.html#cb321-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-9"><a href="rmarkdown-operation.html#cb321-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb321-10"><a href="rmarkdown-operation.html#cb321-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">numberLines =</span> <span class="fu">c</span>(</span>
+<span id="cb321-11"><a href="rmarkdown-operation.html#cb321-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;source&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;message&quot;</span>, <span class="st">&quot;warning&quot;</span>, <span class="st">&quot;error&quot;</span></span>
+<span id="cb321-12"><a href="rmarkdown-operation.html#cb321-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb321-13"><a href="rmarkdown-operation.html#cb321-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>选项钩子 <code>numberLines</code> 会将属性 <code>.numberLines</code> 附加到输出块上，并且通过 <code>opts_chunk$set()</code> 来设置块选项 <code>numberLines</code>，从而确保选项钩子会被执行。</p>
 <p>通过以上设置，用户可以在代码块上使用选项 <code>numberLines</code> 来决定哪些输出块将具有行号，例如 <code>numberLines = c('source', 'output')</code> 代表给源代码和文本输出添加行号；而设定 <code>numberLines = NULL</code> 则将完全删除行号。</p>
 <p>除了使用选项钩子外，还可以直接设置块选项 <code>、attr.source = '.numberLines'</code> 来实现目的。本节介绍的选项钩子的优点是，它们只在块选项中附加属性 <code>.numberLines</code>，这意味着它们不会覆盖现有的块选项值，例如，下面代码块中的源代码块将被编号（使用上面的设置），并且编号会从第二行开始：</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb323-1"><a href="rmarkdown-operation.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, attr.source=&#39;startFrom=&quot;2&quot;&#39;}</span></span>
+<div class="sourceCode" id="cb322"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb322-1"><a href="rmarkdown-operation.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, attr.source=&#39;startFrom=&quot;2&quot;&#39;}</span></span>
+<span id="cb322-2"><a href="rmarkdown-operation.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 这行注释不会被编号</span></span>
+<span id="cb322-3"><a href="rmarkdown-operation.html#cb322-3" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb322-4"><a href="rmarkdown-operation.html#cb322-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>这等价于：</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb323-1"><a href="rmarkdown-operation.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, attr.source=c(&#39;startFrom=&quot;2&quot;&#39;, &#39;.numberLines&#39;}</span></span>
 <span id="cb323-2"><a href="rmarkdown-operation.html#cb323-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 这行注释不会被编号</span></span>
 <span id="cb323-3"><a href="rmarkdown-operation.html#cb323-3" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
 <span id="cb323-4"><a href="rmarkdown-operation.html#cb323-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>这等价于：</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb324-1"><a href="rmarkdown-operation.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, attr.source=c(&#39;startFrom=&quot;2&quot;&#39;, &#39;.numberLines&#39;}</span></span>
-<span id="cb324-2"><a href="rmarkdown-operation.html#cb324-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 这行注释不会被编号</span></span>
-<span id="cb324-3"><a href="rmarkdown-operation.html#cb324-3" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
-<span id="cb324-4"><a href="rmarkdown-operation.html#cb324-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
 <div id="python-rmd" class="section level3 hasAnchor" number="6.3.10">
 <h3><span class="header-section-number">6.3.10</span> 运行 Python 代码并与 Python 交互<a href="rmarkdown-operation.html#python-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -3046,37 +3040,37 @@ div.csl-indent {
 <div id="chunk-asis" class="section level3 hasAnchor" number="6.3.11">
 <h3><span class="header-section-number">6.3.11</span> 通过 <code>asis</code> 引擎有条件地执行内容<a href="rmarkdown-operation.html#chunk-asis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>正如其名，<code>asis</code> 引擎会按原样（as is）输出块的内容。使用此引擎的优点在于，用户可以有条件地包含一些内容，块的内容的显示由块选项 <code>echo</code> 决定。当 <code>echo = FALSE</code> 时，数据块将被隐藏。下面是一个简单的例子：</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb325-1"><a href="rmarkdown-operation.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb325-2"><a href="rmarkdown-operation.html#cb325-2" aria-hidden="true" tabindex="-1"></a><span class="in">getRandomNumber &lt;- function() {</span></span>
-<span id="cb325-3"><a href="rmarkdown-operation.html#cb325-3" aria-hidden="true" tabindex="-1"></a><span class="in">  sample(1:6, 1)</span></span>
-<span id="cb325-4"><a href="rmarkdown-operation.html#cb325-4" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb325-5"><a href="rmarkdown-operation.html#cb325-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb325-6"><a href="rmarkdown-operation.html#cb325-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb325-7"><a href="rmarkdown-operation.html#cb325-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{asis, echo = getRandomNumber() == 4}</span></span>
-<span id="cb325-8"><a href="rmarkdown-operation.html#cb325-8" aria-hidden="true" tabindex="-1"></a><span class="in">根据 https://xkcd.com/221/,  刚生成的是一个**真**随机数!</span></span>
-<span id="cb325-9"><a href="rmarkdown-operation.html#cb325-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb324-1"><a href="rmarkdown-operation.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb324-2"><a href="rmarkdown-operation.html#cb324-2" aria-hidden="true" tabindex="-1"></a><span class="in">getRandomNumber &lt;- function() {</span></span>
+<span id="cb324-3"><a href="rmarkdown-operation.html#cb324-3" aria-hidden="true" tabindex="-1"></a><span class="in">  sample(1:6, 1)</span></span>
+<span id="cb324-4"><a href="rmarkdown-operation.html#cb324-4" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb324-5"><a href="rmarkdown-operation.html#cb324-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb324-6"><a href="rmarkdown-operation.html#cb324-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb324-7"><a href="rmarkdown-operation.html#cb324-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{asis, echo = getRandomNumber() == 4}</span></span>
+<span id="cb324-8"><a href="rmarkdown-operation.html#cb324-8" aria-hidden="true" tabindex="-1"></a><span class="in">根据 https://xkcd.com/221/,  刚生成的是一个**真**随机数!</span></span>
+<span id="cb324-9"><a href="rmarkdown-operation.html#cb324-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>只有当条件 <code>getRandomNumber() == 4</code> （随机）为真时， <code>asis</code> 块中的文本才会显示。</p>
 </div>
 <div id="chunk-shell" class="section level3 hasAnchor" number="6.3.12">
 <h3><span class="header-section-number">6.3.12</span> 执行 Shell 脚本<a href="rmarkdown-operation.html#chunk-shell" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>【之后再修改】
 你可以根据你的喜好，使用 <code>bash</code>、 <code>sh</code> 或 <code>zsh</code> 任何一种引擎运行 Shell 脚本。下面是一个带有 chunk 头 <code>```{bash}</code> 的 bash 示例：</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb326-1"><a href="rmarkdown-operation.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>.Rmd <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 5</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb325-1"><a href="rmarkdown-operation.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>.Rmd <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 5</span></code></pre></div>
 <pre><code>## [1] &quot;01-intro.Rmd&quot;       &quot;02-base.Rmd&quot;        &quot;03-document.Rmd&quot;   
 ## [4] &quot;04-working.Rmd&quot;     &quot;05-interaction.Rmd&quot;</code></pre>
 <p>注意，bash是用 R 函数 <code>system2()</code> 调用的。它将忽略配置文件，例如 <code>~/.bash_profile</code> 和 <code>~/.bash_login</code>，其中可能定义了命令别名或修改过的环境变量(如 <code>PATH</code> 变量)。如果你想要这些配置文件像你使用终端时一样被执行，你可以通过引擎将参数 <code>-l</code> 传递给 <code>bash</code>。例如：</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb328-1"><a href="rmarkdown-operation.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash, engine.opts=&#39;-l&#39;}</span></span>
-<span id="cb328-2"><a href="rmarkdown-operation.html#cb328-2" aria-hidden="true" tabindex="-1"></a><span class="in">echo $PATH</span></span>
-<span id="cb328-3"><a href="rmarkdown-operation.html#cb328-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb327-1"><a href="rmarkdown-operation.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash, engine.opts=&#39;-l&#39;}</span></span>
+<span id="cb327-2"><a href="rmarkdown-operation.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="in">echo $PATH</span></span>
+<span id="cb327-3"><a href="rmarkdown-operation.html#cb327-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>如果你想对所有 <code>bash</code> 块全局启用 <code>-l</code> 参数，你可以在文档开头的 global chunk 选项中设置为：</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="rmarkdown-operation.html#cb329-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.opts =</span> <span class="fu">list</span>(<span class="at">bash =</span> <span class="st">&#39;-l&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="rmarkdown-operation.html#cb328-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.opts =</span> <span class="fu">list</span>(<span class="at">bash =</span> <span class="st">&#39;-l&#39;</span>))</span></code></pre></div>
 <p>还可以将其他参数作为字符向量提供给 chunk 选项<code>engine.opts</code>，从而传递给 <code>bash</code>。</p>
 </div>
 <div id="cat-file" class="section level3 hasAnchor" number="6.3.13">
 <h3><span class="header-section-number">6.3.13</span> 通过 cat 引擎将块内容写入文件<a href="rmarkdown-operation.html#cat-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>有时将代码块的内容写入外部文件，然后在其他代码块中使用此文件可能会很有用。当然，可以通过 <code>writeLines()</code> 等 R 函数来实现这一点，但问题是，当内容相对较长或包含特殊字符时，传递给 <code>writeLines()</code> 的字符串可能看起来很笨拙。下面是将长字符串写入文件 <code>my-file.txt</code> 的示例：</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="rmarkdown-operation.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;这是一个长字符串。它有多条线。记得要避免双引号 </span><span class="sc">\&quot;\&quot;</span><span class="st">, 但是‘单引号’是可以的。</span></span>
-<span id="cb330-2"><a href="rmarkdown-operation.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="st">希望思考关于需要多少反斜杠时，不要失去理智。例如，到底是 &#39;</span><span class="sc">\t</span><span class="st">&#39;、&#39;</span><span class="sc">\\</span><span class="st">t&#39; 还是 &#39;</span><span class="sc">\\\\</span><span class="st">t&#39;?&quot;</span>, <span class="at">con =</span> <span class="st">&quot;my-file.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="rmarkdown-operation.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;这是一个长字符串。它有多条线。记得要避免双引号 </span><span class="sc">\&quot;\&quot;</span><span class="st">, 但是‘单引号’是可以的。</span></span>
+<span id="cb329-2"><a href="rmarkdown-operation.html#cb329-2" aria-hidden="true" tabindex="-1"></a><span class="st">希望思考关于需要多少反斜杠时，不要失去理智。例如，到底是 &#39;</span><span class="sc">\t</span><span class="st">&#39;、&#39;</span><span class="sc">\\</span><span class="st">t&#39; 还是 &#39;</span><span class="sc">\\\\</span><span class="st">t&#39;?&quot;</span>, <span class="at">con =</span> <span class="st">&quot;my-file.txt&quot;</span>)</span></code></pre></div>
 <p>自 R 4.0.0 以来，这个问题已经大大缓解了，因为 R 开始支持 <code>r"( )"</code> 中的原始字符串（参见帮助页面 <code>?Quotes</code>），而且读者不需要记住所有关于特殊字符的规则。即使使用原始字符串，在代码块中显式地将长字符串写入文件仍然会让读者分心。</p>
 <p><strong>knitr</strong> 中的 <code>cat</code> 引擎为读者提供了一种在代码块中呈现文本内容或将其写入外部文件的方法，而无需考虑有关 R 字符串的所有规则（例如，当需要字面上的反斜杠时，读者需要使用双反斜杠）。</p>
 <p>要将块内容写入文件，请在块选项 <code>engine.opts</code> 中指定文件路径，例如 <code>engine.opts = list(file = 'path/to/file')</code>。在引擎盖下，在 <code>engine.opts</code> 中指定的值列表将传递给该函数 <code>base::cat()</code> 并且 <code>file</code> 是 <code>base::cat()</code> 的参数之一。</p>
@@ -3086,79 +3080,79 @@ div.csl-indent {
 <!-- \@ref(chunk-styling) -->
 <p>第一种方法是在 R Markdown 文档中嵌入一个 <code>css</code> 代码块，以使用 CSS 样式化元素。另一种方法是通过一些 R Markdown 输出格式(如，<code>html_document</code>)的 CSS 选项为 Pandoc 提供一个定制的 CSS 文件。 <code>cat</code> 引擎可以用来从 Rmd 编写这个 CSS 文件。</p>
 <p>下面的例子展示了如何从文档中的块生成 <code>custom.css</code> 文件，并将文件路径传递给 <code>html_document</code> 格式的 <code>css</code> 选项。</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb331-1"><a href="rmarkdown-operation.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb331-2"><a href="rmarkdown-operation.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;从代码块中创建一个 CSS 文件&quot;</span></span>
-<span id="cb331-3"><a href="rmarkdown-operation.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
-<span id="cb331-4"><a href="rmarkdown-operation.html#cb331-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document:</span></span>
-<span id="cb331-5"><a href="rmarkdown-operation.html#cb331-5" aria-hidden="true" tabindex="-1"></a><span class="co">    css: custom.css</span></span>
-<span id="cb331-6"><a href="rmarkdown-operation.html#cb331-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb331-7"><a href="rmarkdown-operation.html#cb331-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb331-8"><a href="rmarkdown-operation.html#cb331-8" aria-hidden="true" tabindex="-1"></a>下面的 chunck 中将写入 <span class="in">`custom.css`</span>，它将在 Pandoc 转换期间使用。</span>
-<span id="cb331-9"><a href="rmarkdown-operation.html#cb331-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{cat, engine.opts = list(file = &quot;custom.css&quot;)}</span></span>
-<span id="cb331-10"><a href="rmarkdown-operation.html#cb331-10" aria-hidden="true" tabindex="-1"></a><span class="in">h2 {</span></span>
-<span id="cb331-11"><a href="rmarkdown-operation.html#cb331-11" aria-hidden="true" tabindex="-1"></a><span class="in">  color: blue;</span></span>
-<span id="cb331-12"><a href="rmarkdown-operation.html#cb331-12" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb331-13"><a href="rmarkdown-operation.html#cb331-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb331-14"><a href="rmarkdown-operation.html#cb331-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb331-15"><a href="rmarkdown-operation.html#cb331-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 标题会变蓝</span></span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb330-1"><a href="rmarkdown-operation.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb330-2"><a href="rmarkdown-operation.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;从代码块中创建一个 CSS 文件&quot;</span></span>
+<span id="cb330-3"><a href="rmarkdown-operation.html#cb330-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb330-4"><a href="rmarkdown-operation.html#cb330-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document:</span></span>
+<span id="cb330-5"><a href="rmarkdown-operation.html#cb330-5" aria-hidden="true" tabindex="-1"></a><span class="co">    css: custom.css</span></span>
+<span id="cb330-6"><a href="rmarkdown-operation.html#cb330-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb330-7"><a href="rmarkdown-operation.html#cb330-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-8"><a href="rmarkdown-operation.html#cb330-8" aria-hidden="true" tabindex="-1"></a>下面的 chunck 中将写入 <span class="in">`custom.css`</span>，它将在 Pandoc 转换期间使用。</span>
+<span id="cb330-9"><a href="rmarkdown-operation.html#cb330-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{cat, engine.opts = list(file = &quot;custom.css&quot;)}</span></span>
+<span id="cb330-10"><a href="rmarkdown-operation.html#cb330-10" aria-hidden="true" tabindex="-1"></a><span class="in">h2 {</span></span>
+<span id="cb330-11"><a href="rmarkdown-operation.html#cb330-11" aria-hidden="true" tabindex="-1"></a><span class="in">  color: blue;</span></span>
+<span id="cb330-12"><a href="rmarkdown-operation.html#cb330-12" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb330-13"><a href="rmarkdown-operation.html#cb330-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb330-14"><a href="rmarkdown-operation.html#cb330-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-15"><a href="rmarkdown-operation.html#cb330-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 标题会变蓝</span></span></code></pre></div>
 <p><code>css</code> 代码块方法与此方法之间的唯一区别是，前一种方法将 CSS 代码写在输出文档的 <code>&lt;body&gt;</code> 标记内的位置（即，在代码块的位置），并且将 CSS 代码写在输出文档的 <code>&lt;body&gt;</code> 标记内。 后一种方法将 CSS 写入输出文档的 <code>&lt;body&gt;</code> 区域。输出文档中不会有任何实际的视觉差异。</p>
 </div>
 <div id="write-latex" class="section level4 hasAnchor" number="6.3.13.2">
 <h4><span class="header-section-number">6.3.13.2</span> 在序言中包含 LaTeX 代码<a href="rmarkdown-operation.html#write-latex" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <!-- \@ref(latex-preamble) -->
 <p>在 6.1 节中，我们介绍了如何将 LaTeX 代码添加到序言中，这需要一个外部 <code>.tex</code> 文件。也可以从 Rmd 生成此文件，这是一个示例：</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb332-1"><a href="rmarkdown-operation.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb332-2"><a href="rmarkdown-operation.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;从代码块中创建一个 .tex 文件&quot;</span></span>
-<span id="cb332-3"><a href="rmarkdown-operation.html#cb332-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Jane Doe&quot;</span></span>
-<span id="cb332-4"><a href="rmarkdown-operation.html#cb332-4" aria-hidden="true" tabindex="-1"></a><span class="an">classoption:</span><span class="co"> twoside</span></span>
-<span id="cb332-5"><a href="rmarkdown-operation.html#cb332-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
-<span id="cb332-6"><a href="rmarkdown-operation.html#cb332-6" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf_document:</span></span>
-<span id="cb332-7"><a href="rmarkdown-operation.html#cb332-7" aria-hidden="true" tabindex="-1"></a><span class="co">    includes:</span></span>
-<span id="cb332-8"><a href="rmarkdown-operation.html#cb332-8" aria-hidden="true" tabindex="-1"></a><span class="co">      in_header: preamble.tex</span></span>
-<span id="cb332-9"><a href="rmarkdown-operation.html#cb332-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb332-10"><a href="rmarkdown-operation.html#cb332-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-11"><a href="rmarkdown-operation.html#cb332-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># 它是如何运作的</span></span>
-<span id="cb332-12"><a href="rmarkdown-operation.html#cb332-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-13"><a href="rmarkdown-operation.html#cb332-13" aria-hidden="true" tabindex="-1"></a>将代码块写入文件 <span class="in">`preamble.tex`</span> 以定义 PDF 输出文档的页眉和页脚：</span>
-<span id="cb332-14"><a href="rmarkdown-operation.html#cb332-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-15"><a href="rmarkdown-operation.html#cb332-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{cat, engine.opts=list(file = &#39;preamble.tex&#39;)}</span></span>
-<span id="cb332-16"><a href="rmarkdown-operation.html#cb332-16" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage{fancyhdr}</span></span>
-<span id="cb332-17"><a href="rmarkdown-operation.html#cb332-17" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage{lipsum}</span></span>
-<span id="cb332-18"><a href="rmarkdown-operation.html#cb332-18" aria-hidden="true" tabindex="-1"></a><span class="in">\pagestyle{fancy}</span></span>
-<span id="cb332-19"><a href="rmarkdown-operation.html#cb332-19" aria-hidden="true" tabindex="-1"></a><span class="in">\fancyhead[CO,CE]{This is fancy header}</span></span>
-<span id="cb332-20"><a href="rmarkdown-operation.html#cb332-20" aria-hidden="true" tabindex="-1"></a><span class="in">\fancyfoot[CO,CE]{And this is a fancy footer}</span></span>
-<span id="cb332-21"><a href="rmarkdown-operation.html#cb332-21" aria-hidden="true" tabindex="-1"></a><span class="in">\fancyfoot[LE,RO]{\thepage}</span></span>
-<span id="cb332-22"><a href="rmarkdown-operation.html#cb332-22" aria-hidden="true" tabindex="-1"></a><span class="in">\fancypagestyle{plain}{\pagestyle{fancy}}</span></span>
-<span id="cb332-23"><a href="rmarkdown-operation.html#cb332-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb332-24"><a href="rmarkdown-operation.html#cb332-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-25"><a href="rmarkdown-operation.html#cb332-25" aria-hidden="true" tabindex="-1"></a>\lipsum<span class="co">[</span><span class="ot">1-15</span><span class="co">]</span></span>
-<span id="cb332-26"><a href="rmarkdown-operation.html#cb332-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-27"><a href="rmarkdown-operation.html#cb332-27" aria-hidden="true" tabindex="-1"></a><span class="fu"># 更多随机内容</span></span>
-<span id="cb332-28"><a href="rmarkdown-operation.html#cb332-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-29"><a href="rmarkdown-operation.html#cb332-29" aria-hidden="true" tabindex="-1"></a>\lipsum<span class="co">[</span><span class="ot">16-30</span><span class="co">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb331-1"><a href="rmarkdown-operation.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb331-2"><a href="rmarkdown-operation.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;从代码块中创建一个 .tex 文件&quot;</span></span>
+<span id="cb331-3"><a href="rmarkdown-operation.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Jane Doe&quot;</span></span>
+<span id="cb331-4"><a href="rmarkdown-operation.html#cb331-4" aria-hidden="true" tabindex="-1"></a><span class="an">classoption:</span><span class="co"> twoside</span></span>
+<span id="cb331-5"><a href="rmarkdown-operation.html#cb331-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb331-6"><a href="rmarkdown-operation.html#cb331-6" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf_document:</span></span>
+<span id="cb331-7"><a href="rmarkdown-operation.html#cb331-7" aria-hidden="true" tabindex="-1"></a><span class="co">    includes:</span></span>
+<span id="cb331-8"><a href="rmarkdown-operation.html#cb331-8" aria-hidden="true" tabindex="-1"></a><span class="co">      in_header: preamble.tex</span></span>
+<span id="cb331-9"><a href="rmarkdown-operation.html#cb331-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb331-10"><a href="rmarkdown-operation.html#cb331-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-11"><a href="rmarkdown-operation.html#cb331-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># 它是如何运作的</span></span>
+<span id="cb331-12"><a href="rmarkdown-operation.html#cb331-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-13"><a href="rmarkdown-operation.html#cb331-13" aria-hidden="true" tabindex="-1"></a>将代码块写入文件 <span class="in">`preamble.tex`</span> 以定义 PDF 输出文档的页眉和页脚：</span>
+<span id="cb331-14"><a href="rmarkdown-operation.html#cb331-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-15"><a href="rmarkdown-operation.html#cb331-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{cat, engine.opts=list(file = &#39;preamble.tex&#39;)}</span></span>
+<span id="cb331-16"><a href="rmarkdown-operation.html#cb331-16" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage{fancyhdr}</span></span>
+<span id="cb331-17"><a href="rmarkdown-operation.html#cb331-17" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage{lipsum}</span></span>
+<span id="cb331-18"><a href="rmarkdown-operation.html#cb331-18" aria-hidden="true" tabindex="-1"></a><span class="in">\pagestyle{fancy}</span></span>
+<span id="cb331-19"><a href="rmarkdown-operation.html#cb331-19" aria-hidden="true" tabindex="-1"></a><span class="in">\fancyhead[CO,CE]{This is fancy header}</span></span>
+<span id="cb331-20"><a href="rmarkdown-operation.html#cb331-20" aria-hidden="true" tabindex="-1"></a><span class="in">\fancyfoot[CO,CE]{And this is a fancy footer}</span></span>
+<span id="cb331-21"><a href="rmarkdown-operation.html#cb331-21" aria-hidden="true" tabindex="-1"></a><span class="in">\fancyfoot[LE,RO]{\thepage}</span></span>
+<span id="cb331-22"><a href="rmarkdown-operation.html#cb331-22" aria-hidden="true" tabindex="-1"></a><span class="in">\fancypagestyle{plain}{\pagestyle{fancy}}</span></span>
+<span id="cb331-23"><a href="rmarkdown-operation.html#cb331-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb331-24"><a href="rmarkdown-operation.html#cb331-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-25"><a href="rmarkdown-operation.html#cb331-25" aria-hidden="true" tabindex="-1"></a>\lipsum<span class="co">[</span><span class="ot">1-15</span><span class="co">]</span></span>
+<span id="cb331-26"><a href="rmarkdown-operation.html#cb331-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-27"><a href="rmarkdown-operation.html#cb331-27" aria-hidden="true" tabindex="-1"></a><span class="fu"># 更多随机内容</span></span>
+<span id="cb331-28"><a href="rmarkdown-operation.html#cb331-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-29"><a href="rmarkdown-operation.html#cb331-29" aria-hidden="true" tabindex="-1"></a>\lipsum<span class="co">[</span><span class="ot">16-30</span><span class="co">]</span></span></code></pre></div>
 <p>在上面的 <code>cat</code> 代码块中的 LaTeX 代码中，我们定义了 PDF 文档的页眉和页脚。如果我们还想在页脚中显示作者姓名，我们可以用选项<code>engine.opts = list(file = 'preamble.tex', append = TRUE)</code> 和 <code>code = sprintf('\\fancyfoot[LO,RE]{%s}', rmarkdown::metadata$author)</code>将作者信息附加到另一个 <code>cat</code> 代码块中的 <code>preamble.tex</code> 中。要理解这是如何工作的，请回忆一下我们在本节前面提到的：<code>engine.opts</code> 被传递给 <code>base::cat()</code>。(因此 <code>append = TRUE</code> 被传递给 <code>cat()</code>)，你可以通过阅读 16.2 节来理解 chunk 选项代码。
 <!-- \@ref(option-code) --></p>
 </div>
 <div id="yaml-input" class="section level4 hasAnchor" number="6.3.13.3">
 <h4><span class="header-section-number">6.3.13.3</span> 将 YAML 数据写入文件并显示它<a href="rmarkdown-operation.html#yaml-input" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>默认情况下，<code>cat</code> 代码块的内容不会显示在输出文档中。如果还想在写出它之后显示它，则将块选项 <code>class.source</code> 设置为语言名称。语言名称用于语法高亮显示。在下面的例子中，我们指定为 <code>yaml</code> 语言：</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb333-1"><a href="rmarkdown-operation.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{cat, engine.opts=list(file=&#39;demo.yml&#39;), class.source=&#39;yaml&#39;}</span></span>
-<span id="cb333-2"><a href="rmarkdown-operation.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="in">a:</span></span>
-<span id="cb333-3"><a href="rmarkdown-operation.html#cb333-3" aria-hidden="true" tabindex="-1"></a><span class="in">  aa: &quot;something&quot;</span></span>
-<span id="cb333-4"><a href="rmarkdown-operation.html#cb333-4" aria-hidden="true" tabindex="-1"></a><span class="in">  bb: 1</span></span>
-<span id="cb333-5"><a href="rmarkdown-operation.html#cb333-5" aria-hidden="true" tabindex="-1"></a><span class="in">b:</span></span>
-<span id="cb333-6"><a href="rmarkdown-operation.html#cb333-6" aria-hidden="true" tabindex="-1"></a><span class="in">  aa: &quot;something else&quot;</span></span>
-<span id="cb333-7"><a href="rmarkdown-operation.html#cb333-7" aria-hidden="true" tabindex="-1"></a><span class="in">  bb: 2</span></span>
-<span id="cb333-8"><a href="rmarkdown-operation.html#cb333-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb332-1"><a href="rmarkdown-operation.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{cat, engine.opts=list(file=&#39;demo.yml&#39;), class.source=&#39;yaml&#39;}</span></span>
+<span id="cb332-2"><a href="rmarkdown-operation.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="in">a:</span></span>
+<span id="cb332-3"><a href="rmarkdown-operation.html#cb332-3" aria-hidden="true" tabindex="-1"></a><span class="in">  aa: &quot;something&quot;</span></span>
+<span id="cb332-4"><a href="rmarkdown-operation.html#cb332-4" aria-hidden="true" tabindex="-1"></a><span class="in">  bb: 1</span></span>
+<span id="cb332-5"><a href="rmarkdown-operation.html#cb332-5" aria-hidden="true" tabindex="-1"></a><span class="in">b:</span></span>
+<span id="cb332-6"><a href="rmarkdown-operation.html#cb332-6" aria-hidden="true" tabindex="-1"></a><span class="in">  aa: &quot;something else&quot;</span></span>
+<span id="cb332-7"><a href="rmarkdown-operation.html#cb332-7" aria-hidden="true" tabindex="-1"></a><span class="in">  bb: 2</span></span>
+<span id="cb332-8"><a href="rmarkdown-operation.html#cb332-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>其输出显示在下面，并且还生成了一个文件 <code>demo.yml</code>。</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode yaml yaml"><code class="sourceCode yaml"><span id="cb334-1"><a href="rmarkdown-operation.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">a</span><span class="kw">:</span></span>
-<span id="cb334-2"><a href="rmarkdown-operation.html#cb334-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">aa</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;something&quot;</span></span>
-<span id="cb334-3"><a href="rmarkdown-operation.html#cb334-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bb</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb334-4"><a href="rmarkdown-operation.html#cb334-4" aria-hidden="true" tabindex="-1"></a><span class="fu">b</span><span class="kw">:</span></span>
-<span id="cb334-5"><a href="rmarkdown-operation.html#cb334-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">aa</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;something else&quot;</span></span>
-<span id="cb334-6"><a href="rmarkdown-operation.html#cb334-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bb</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode yaml yaml"><code class="sourceCode yaml"><span id="cb333-1"><a href="rmarkdown-operation.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">a</span><span class="kw">:</span></span>
+<span id="cb333-2"><a href="rmarkdown-operation.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">aa</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;something&quot;</span></span>
+<span id="cb333-3"><a href="rmarkdown-operation.html#cb333-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bb</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb333-4"><a href="rmarkdown-operation.html#cb333-4" aria-hidden="true" tabindex="-1"></a><span class="fu">b</span><span class="kw">:</span></span>
+<span id="cb333-5"><a href="rmarkdown-operation.html#cb333-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">aa</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;something else&quot;</span></span>
+<span id="cb333-6"><a href="rmarkdown-operation.html#cb333-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bb</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span></code></pre></div>
 <p>为了显示文件 <code>demo.yml</code> 确实已经生成，我们可以尝试使用 <strong>yaml</strong> 包 <span class="citation">(<a href="#ref-R-yaml" role="doc-biblioref">Garbett et al. 2022</a>)</span> 将其读入 R。</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="rmarkdown-operation.html#cb335-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">tree</span>(yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">&#39;demo.yml&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="rmarkdown-operation.html#cb334-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">tree</span>(yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">&#39;demo.yml&#39;</span>))</span></code></pre></div>
 <pre><code>## List of 2
 ##  |-a:List of 2
 ##  |  |-aa: chr &quot;something&quot;
@@ -3171,42 +3165,42 @@ div.csl-indent {
 <div id="sas-rmd" class="section level3 hasAnchor" number="6.3.14">
 <h3><span class="header-section-number">6.3.14</span> 运行 SAS 代码<a href="rmarkdown-operation.html#sas-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>你可以使用 <code>sas</code> 引擎运行 SAS (<a href="https://www.sas.com" class="uri">https://www.sas.com</a>) 代码。你需要确保 SAS 可执行文件在你的环境变量 <code>PATH</code> 中，或者(如果你不知道 <code>PATH</code> 是什么意思)通过 chunk 选项 <code>engine.path</code> 来提供 SAS 可执行文件的完整路径，例如：<code>engine.path = "C:\\Program Files\\SASHome\\x86\\SASFoundation\\9.3\\sas.exe"</code>。下面是一个输出 “Hello World” 的示例：</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb337-1"><a href="rmarkdown-operation.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}</span></span>
-<span id="cb337-2"><a href="rmarkdown-operation.html#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="in">data _null_;</span></span>
-<span id="cb337-3"><a href="rmarkdown-operation.html#cb337-3" aria-hidden="true" tabindex="-1"></a><span class="in">put &#39;Hello, world!&#39;;</span></span>
-<span id="cb337-4"><a href="rmarkdown-operation.html#cb337-4" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
-<span id="cb337-5"><a href="rmarkdown-operation.html#cb337-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb336-1"><a href="rmarkdown-operation.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}</span></span>
+<span id="cb336-2"><a href="rmarkdown-operation.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="in">data _null_;</span></span>
+<span id="cb336-3"><a href="rmarkdown-operation.html#cb336-3" aria-hidden="true" tabindex="-1"></a><span class="in">put &#39;Hello, world!&#39;;</span></span>
+<span id="cb336-4"><a href="rmarkdown-operation.html#cb336-4" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb336-5"><a href="rmarkdown-operation.html#cb336-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
 <div id="stata-rmd" class="section level3 hasAnchor" number="6.3.15">
 <h3><span class="header-section-number">6.3.15</span> 运行 Stata 代码<a href="rmarkdown-operation.html#stata-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>如果你安装了 Stata，你可以通过 <code>stata</code> 引擎 Stata (<a href="https://www.stata.com" class="uri">https://www.stata.com</a>) 来运行 Stata (<a href="https://www.stata.com" class="uri">https://www.stata.com</a>) 代码。除非可以通过环境变量 <code>PATH</code> 找到 <code>stata</code> 可执行文件，否则你需要通过 chunk 选项 <code>engine.path</code> 指定到可执行文件的完整路径，例如：<code>engine.path = "C:/Program Files (x86)/Stata15/StataSE-64.exe"</code>。下面给出一个例子：</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb338-1"><a href="rmarkdown-operation.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb338-2"><a href="rmarkdown-operation.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="in">sysuse auto</span></span>
-<span id="cb338-3"><a href="rmarkdown-operation.html#cb338-3" aria-hidden="true" tabindex="-1"></a><span class="in">summarize</span></span>
-<span id="cb338-4"><a href="rmarkdown-operation.html#cb338-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb337-1"><a href="rmarkdown-operation.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb337-2"><a href="rmarkdown-operation.html#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="in">sysuse auto</span></span>
+<span id="cb337-3"><a href="rmarkdown-operation.html#cb337-3" aria-hidden="true" tabindex="-1"></a><span class="in">summarize</span></span>
+<span id="cb337-4"><a href="rmarkdown-operation.html#cb337-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>在 <strong>knitr</strong> 中的 <code>stata</code> 引擎是相当有限的。Doug Hemken 已经通过 <strong>Statamarkdown</strong> 包 中对其进行了实质性的扩展，该包可以通过Github中获得，地址为： <a href="https://github.com/Hemken/Statamarkdown。通过在线搜索" class="uri">https://github.com/Hemken/Statamarkdown。通过在线搜索</a> “Stata R Markdown”，你可以找到关于这个包的教程。</p>
 </div>
 <div id="asymptote-plot" class="section level3 hasAnchor" number="6.3.16">
 <h3><span class="header-section-number">6.3.16</span> 用渐近线 Asymptote 创建图形<a href="rmarkdown-operation.html#asymptote-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>渐近线 Asymptote (<a href="https://asymptote.sourceforge.io" class="uri">https://asymptote.sourceforge.io</a>) 是矢量图形的强大语言。如果你已经安装了 Asymptote，那么可以使用 <code>asy</code> 引擎在 R Markdown 中编写并运行 Asymptote 代码(有关安装的说明，请参阅其网站)。下面是从仓库 <a href="https://github.com/vectorgraphics/asymptote" class="uri">https://github.com/vectorgraphics/asymptote</a> 中复制的示例，其输出如图 <a href="#fig:elevation"><strong>??</strong></a> 所示：</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb339-1"><a href="rmarkdown-operation.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> graph3<span class="op">;</span></span>
-<span id="cb339-2"><a href="rmarkdown-operation.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> grid3<span class="op">;</span></span>
-<span id="cb339-3"><a href="rmarkdown-operation.html#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> palette<span class="op">;</span></span>
-<span id="cb339-4"><a href="rmarkdown-operation.html#cb339-4" aria-hidden="true" tabindex="-1"></a>settings<span class="op">.</span>prc <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb339-5"><a href="rmarkdown-operation.html#cb339-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-6"><a href="rmarkdown-operation.html#cb339-6" aria-hidden="true" tabindex="-1"></a>currentprojection<span class="op">=</span>orthographic<span class="op">(</span><span class="fl">0.8</span><span class="op">,</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">);</span></span>
-<span id="cb339-7"><a href="rmarkdown-operation.html#cb339-7" aria-hidden="true" tabindex="-1"></a>size<span class="op">(</span><span class="dv">500</span><span class="op">,</span><span class="dv">400</span><span class="op">,</span>IgnoreAspect<span class="op">);</span></span>
-<span id="cb339-8"><a href="rmarkdown-operation.html#cb339-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-9"><a href="rmarkdown-operation.html#cb339-9" aria-hidden="true" tabindex="-1"></a>real f<span class="op">(</span>pair z<span class="op">)</span> <span class="op">{</span><span class="cf">return</span> cos<span class="op">(</span><span class="dv">2</span><span class="op">*</span>pi<span class="op">*</span>z<span class="op">.</span>x<span class="op">)*</span>sin<span class="op">(</span><span class="dv">2</span><span class="op">*</span>pi<span class="op">*</span>z<span class="op">.</span>y<span class="op">);}</span></span>
-<span id="cb339-10"><a href="rmarkdown-operation.html#cb339-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-11"><a href="rmarkdown-operation.html#cb339-11" aria-hidden="true" tabindex="-1"></a>surface s<span class="op">=</span>surface<span class="op">(</span>f<span class="op">,(-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">,-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">),(</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">,</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">),</span><span class="dv">50</span><span class="op">,</span>Spline<span class="op">);</span></span>
-<span id="cb339-12"><a href="rmarkdown-operation.html#cb339-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-13"><a href="rmarkdown-operation.html#cb339-13" aria-hidden="true" tabindex="-1"></a>surface S<span class="op">=</span>planeproject<span class="op">(</span>unitsquare3<span class="op">)*</span>s<span class="op">;</span></span>
-<span id="cb339-14"><a href="rmarkdown-operation.html#cb339-14" aria-hidden="true" tabindex="-1"></a>S<span class="op">.</span>colors<span class="op">(</span>palette<span class="op">(</span>s<span class="op">.</span>map<span class="op">(</span>zpart<span class="op">),</span>Rainbow<span class="op">()));</span></span>
-<span id="cb339-15"><a href="rmarkdown-operation.html#cb339-15" aria-hidden="true" tabindex="-1"></a>draw<span class="op">(</span>S<span class="op">,</span>nolight<span class="op">);</span></span>
-<span id="cb339-16"><a href="rmarkdown-operation.html#cb339-16" aria-hidden="true" tabindex="-1"></a>draw<span class="op">(</span>s<span class="op">,</span>lightgray<span class="op">+</span>opacity<span class="op">(</span><span class="fl">0.7</span><span class="op">));</span></span>
-<span id="cb339-17"><a href="rmarkdown-operation.html#cb339-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-18"><a href="rmarkdown-operation.html#cb339-18" aria-hidden="true" tabindex="-1"></a>grid3<span class="op">(</span>XYZgrid<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb338-1"><a href="rmarkdown-operation.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> graph3<span class="op">;</span></span>
+<span id="cb338-2"><a href="rmarkdown-operation.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> grid3<span class="op">;</span></span>
+<span id="cb338-3"><a href="rmarkdown-operation.html#cb338-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> palette<span class="op">;</span></span>
+<span id="cb338-4"><a href="rmarkdown-operation.html#cb338-4" aria-hidden="true" tabindex="-1"></a>settings<span class="op">.</span>prc <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb338-5"><a href="rmarkdown-operation.html#cb338-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb338-6"><a href="rmarkdown-operation.html#cb338-6" aria-hidden="true" tabindex="-1"></a>currentprojection<span class="op">=</span>orthographic<span class="op">(</span><span class="fl">0.8</span><span class="op">,</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb338-7"><a href="rmarkdown-operation.html#cb338-7" aria-hidden="true" tabindex="-1"></a>size<span class="op">(</span><span class="dv">500</span><span class="op">,</span><span class="dv">400</span><span class="op">,</span>IgnoreAspect<span class="op">);</span></span>
+<span id="cb338-8"><a href="rmarkdown-operation.html#cb338-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb338-9"><a href="rmarkdown-operation.html#cb338-9" aria-hidden="true" tabindex="-1"></a>real f<span class="op">(</span>pair z<span class="op">)</span> <span class="op">{</span><span class="cf">return</span> cos<span class="op">(</span><span class="dv">2</span><span class="op">*</span>pi<span class="op">*</span>z<span class="op">.</span>x<span class="op">)*</span>sin<span class="op">(</span><span class="dv">2</span><span class="op">*</span>pi<span class="op">*</span>z<span class="op">.</span>y<span class="op">);}</span></span>
+<span id="cb338-10"><a href="rmarkdown-operation.html#cb338-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb338-11"><a href="rmarkdown-operation.html#cb338-11" aria-hidden="true" tabindex="-1"></a>surface s<span class="op">=</span>surface<span class="op">(</span>f<span class="op">,(-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">,-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">),(</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">,</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">),</span><span class="dv">50</span><span class="op">,</span>Spline<span class="op">);</span></span>
+<span id="cb338-12"><a href="rmarkdown-operation.html#cb338-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb338-13"><a href="rmarkdown-operation.html#cb338-13" aria-hidden="true" tabindex="-1"></a>surface S<span class="op">=</span>planeproject<span class="op">(</span>unitsquare3<span class="op">)*</span>s<span class="op">;</span></span>
+<span id="cb338-14"><a href="rmarkdown-operation.html#cb338-14" aria-hidden="true" tabindex="-1"></a>S<span class="op">.</span>colors<span class="op">(</span>palette<span class="op">(</span>s<span class="op">.</span>map<span class="op">(</span>zpart<span class="op">),</span>Rainbow<span class="op">()));</span></span>
+<span id="cb338-15"><a href="rmarkdown-operation.html#cb338-15" aria-hidden="true" tabindex="-1"></a>draw<span class="op">(</span>S<span class="op">,</span>nolight<span class="op">);</span></span>
+<span id="cb338-16"><a href="rmarkdown-operation.html#cb338-16" aria-hidden="true" tabindex="-1"></a>draw<span class="op">(</span>s<span class="op">,</span>lightgray<span class="op">+</span>opacity<span class="op">(</span><span class="fl">0.7</span><span class="op">));</span></span>
+<span id="cb338-17"><a href="rmarkdown-operation.html#cb338-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb338-18"><a href="rmarkdown-operation.html#cb338-18" aria-hidden="true" tabindex="-1"></a>grid3<span class="op">(</span>XYZgrid<span class="op">);</span></span></code></pre></div>
 <p>注意，对于 PDF 输出，可能需要一些额外的 LaTeX 包，否则可能会出现如下错误：</p>
 <pre><code>! LaTeX Error: File `ocgbase.sty&#39; not found.</code></pre>
 <!-- \@ref(install-latex-pkgs) -->
@@ -3215,57 +3209,57 @@ div.csl-indent {
 <div id="asym-r" class="section level4 hasAnchor" number="6.3.16.1">
 <h4><span class="header-section-number">6.3.16.1</span> 在 R 中生成数据并通过 Asymptote 读取<a href="rmarkdown-operation.html#asym-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>现在我们展示一个示例，其中我们首先将在 R 中生成的数据保存到 CSV 文件中(下面是一个 R 代码块)：</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="rmarkdown-operation.html#cb341-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">l =</span> <span class="dv">100</span>)</span>
-<span id="cb341-2"><a href="rmarkdown-operation.html#cb341-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">sin</span>(x)</span>
-<span id="cb341-3"><a href="rmarkdown-operation.html#cb341-3" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="fu">paste</span>(x, y, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>), <span class="st">&#39;sine.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="rmarkdown-operation.html#cb340-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">l =</span> <span class="dv">100</span>)</span>
+<span id="cb340-2"><a href="rmarkdown-operation.html#cb340-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">sin</span>(x)</span>
+<span id="cb340-3"><a href="rmarkdown-operation.html#cb340-3" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="fu">paste</span>(x, y, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>), <span class="st">&#39;sine.csv&#39;</span>)</span></code></pre></div>
 <p>然后通过 Asymptote 读取，并根据图 <a href="#fig:sine-curve"><strong>??</strong></a> 所示的数据绘制图表(下面是一个 <code>asy</code> 的代码块)：</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb342-1"><a href="rmarkdown-operation.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> graph<span class="op">;</span></span>
-<span id="cb342-2"><a href="rmarkdown-operation.html#cb342-2" aria-hidden="true" tabindex="-1"></a>size<span class="op">(</span><span class="dv">400</span><span class="op">,</span><span class="dv">300</span><span class="op">,</span>IgnoreAspect<span class="op">);</span></span>
-<span id="cb342-3"><a href="rmarkdown-operation.html#cb342-3" aria-hidden="true" tabindex="-1"></a>settings<span class="op">.</span>prc <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb342-4"><a href="rmarkdown-operation.html#cb342-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-5"><a href="rmarkdown-operation.html#cb342-5" aria-hidden="true" tabindex="-1"></a><span class="co">// import data from csv file</span></span>
-<span id="cb342-6"><a href="rmarkdown-operation.html#cb342-6" aria-hidden="true" tabindex="-1"></a>file in<span class="op">=</span>input<span class="op">(</span><span class="st">&quot;sine.csv&quot;</span><span class="op">).</span>line<span class="op">().</span>csv<span class="op">();</span></span>
-<span id="cb342-7"><a href="rmarkdown-operation.html#cb342-7" aria-hidden="true" tabindex="-1"></a>real<span class="op">[][]</span> a<span class="op">=</span>in<span class="op">.</span>dimension<span class="op">(</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">);</span></span>
-<span id="cb342-8"><a href="rmarkdown-operation.html#cb342-8" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>transpose<span class="op">(</span>a<span class="op">);</span></span>
-<span id="cb342-9"><a href="rmarkdown-operation.html#cb342-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-10"><a href="rmarkdown-operation.html#cb342-10" aria-hidden="true" tabindex="-1"></a><span class="co">// generate a path</span></span>
-<span id="cb342-11"><a href="rmarkdown-operation.html#cb342-11" aria-hidden="true" tabindex="-1"></a>path rpath <span class="op">=</span> graph<span class="op">(</span>a<span class="op">[</span><span class="dv">0</span><span class="op">],</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
-<span id="cb342-12"><a href="rmarkdown-operation.html#cb342-12" aria-hidden="true" tabindex="-1"></a>path lpath <span class="op">=</span> <span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">0</span><span class="op">)--(</span><span class="dv">5</span><span class="op">,</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb342-13"><a href="rmarkdown-operation.html#cb342-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-14"><a href="rmarkdown-operation.html#cb342-14" aria-hidden="true" tabindex="-1"></a><span class="co">// find intersection</span></span>
-<span id="cb342-15"><a href="rmarkdown-operation.html#cb342-15" aria-hidden="true" tabindex="-1"></a>pair pA<span class="op">=</span>intersectionpoint<span class="op">(</span>rpath<span class="op">,</span>lpath<span class="op">);</span></span>
-<span id="cb342-16"><a href="rmarkdown-operation.html#cb342-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-17"><a href="rmarkdown-operation.html#cb342-17" aria-hidden="true" tabindex="-1"></a><span class="co">// draw all</span></span>
-<span id="cb342-18"><a href="rmarkdown-operation.html#cb342-18" aria-hidden="true" tabindex="-1"></a>draw<span class="op">(</span>rpath<span class="op">,</span>red<span class="op">);</span></span>
-<span id="cb342-19"><a href="rmarkdown-operation.html#cb342-19" aria-hidden="true" tabindex="-1"></a>draw<span class="op">(</span>lpath<span class="op">,</span>dashed <span class="op">+</span> blue<span class="op">);</span></span>
-<span id="cb342-20"><a href="rmarkdown-operation.html#cb342-20" aria-hidden="true" tabindex="-1"></a>dot<span class="op">(</span><span class="st">&quot;$</span><span class="er">\d</span><span class="st">elta$&quot;</span><span class="op">,</span>pA<span class="op">,</span>NE<span class="op">);</span></span>
-<span id="cb342-21"><a href="rmarkdown-operation.html#cb342-21" aria-hidden="true" tabindex="-1"></a>xaxis<span class="op">(</span><span class="st">&quot;$x$&quot;</span><span class="op">,</span>BottomTop<span class="op">,</span>LeftTicks<span class="op">);</span></span>
-<span id="cb342-22"><a href="rmarkdown-operation.html#cb342-22" aria-hidden="true" tabindex="-1"></a>yaxis<span class="op">(</span><span class="st">&quot;$y$&quot;</span><span class="op">,</span>LeftRight<span class="op">,</span>RightTicks<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb341-1"><a href="rmarkdown-operation.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> graph<span class="op">;</span></span>
+<span id="cb341-2"><a href="rmarkdown-operation.html#cb341-2" aria-hidden="true" tabindex="-1"></a>size<span class="op">(</span><span class="dv">400</span><span class="op">,</span><span class="dv">300</span><span class="op">,</span>IgnoreAspect<span class="op">);</span></span>
+<span id="cb341-3"><a href="rmarkdown-operation.html#cb341-3" aria-hidden="true" tabindex="-1"></a>settings<span class="op">.</span>prc <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb341-4"><a href="rmarkdown-operation.html#cb341-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-5"><a href="rmarkdown-operation.html#cb341-5" aria-hidden="true" tabindex="-1"></a><span class="co">// import data from csv file</span></span>
+<span id="cb341-6"><a href="rmarkdown-operation.html#cb341-6" aria-hidden="true" tabindex="-1"></a>file in<span class="op">=</span>input<span class="op">(</span><span class="st">&quot;sine.csv&quot;</span><span class="op">).</span>line<span class="op">().</span>csv<span class="op">();</span></span>
+<span id="cb341-7"><a href="rmarkdown-operation.html#cb341-7" aria-hidden="true" tabindex="-1"></a>real<span class="op">[][]</span> a<span class="op">=</span>in<span class="op">.</span>dimension<span class="op">(</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb341-8"><a href="rmarkdown-operation.html#cb341-8" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>transpose<span class="op">(</span>a<span class="op">);</span></span>
+<span id="cb341-9"><a href="rmarkdown-operation.html#cb341-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-10"><a href="rmarkdown-operation.html#cb341-10" aria-hidden="true" tabindex="-1"></a><span class="co">// generate a path</span></span>
+<span id="cb341-11"><a href="rmarkdown-operation.html#cb341-11" aria-hidden="true" tabindex="-1"></a>path rpath <span class="op">=</span> graph<span class="op">(</span>a<span class="op">[</span><span class="dv">0</span><span class="op">],</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb341-12"><a href="rmarkdown-operation.html#cb341-12" aria-hidden="true" tabindex="-1"></a>path lpath <span class="op">=</span> <span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">0</span><span class="op">)--(</span><span class="dv">5</span><span class="op">,</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb341-13"><a href="rmarkdown-operation.html#cb341-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-14"><a href="rmarkdown-operation.html#cb341-14" aria-hidden="true" tabindex="-1"></a><span class="co">// find intersection</span></span>
+<span id="cb341-15"><a href="rmarkdown-operation.html#cb341-15" aria-hidden="true" tabindex="-1"></a>pair pA<span class="op">=</span>intersectionpoint<span class="op">(</span>rpath<span class="op">,</span>lpath<span class="op">);</span></span>
+<span id="cb341-16"><a href="rmarkdown-operation.html#cb341-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-17"><a href="rmarkdown-operation.html#cb341-17" aria-hidden="true" tabindex="-1"></a><span class="co">// draw all</span></span>
+<span id="cb341-18"><a href="rmarkdown-operation.html#cb341-18" aria-hidden="true" tabindex="-1"></a>draw<span class="op">(</span>rpath<span class="op">,</span>red<span class="op">);</span></span>
+<span id="cb341-19"><a href="rmarkdown-operation.html#cb341-19" aria-hidden="true" tabindex="-1"></a>draw<span class="op">(</span>lpath<span class="op">,</span>dashed <span class="op">+</span> blue<span class="op">);</span></span>
+<span id="cb341-20"><a href="rmarkdown-operation.html#cb341-20" aria-hidden="true" tabindex="-1"></a>dot<span class="op">(</span><span class="st">&quot;$</span><span class="er">\d</span><span class="st">elta$&quot;</span><span class="op">,</span>pA<span class="op">,</span>NE<span class="op">);</span></span>
+<span id="cb341-21"><a href="rmarkdown-operation.html#cb341-21" aria-hidden="true" tabindex="-1"></a>xaxis<span class="op">(</span><span class="st">&quot;$x$&quot;</span><span class="op">,</span>BottomTop<span class="op">,</span>LeftTicks<span class="op">);</span></span>
+<span id="cb341-22"><a href="rmarkdown-operation.html#cb341-22" aria-hidden="true" tabindex="-1"></a>yaxis<span class="op">(</span><span class="st">&quot;$y$&quot;</span><span class="op">,</span>LeftRight<span class="op">,</span>RightTicks<span class="op">);</span></span></code></pre></div>
 </div>
 </div>
 <div id="sass-scss" class="section level3 hasAnchor" number="6.3.17">
 <h3><span class="header-section-number">6.3.17</span> 使用 Sass/SCSS 构建 HTML 页面<a href="rmarkdown-operation.html#sass-scss" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Sass (<a href="https://sass-lang.com" class="uri">https://sass-lang.com</a>) 是一种 CSS 扩展语言，它使用比普通 CSS 更灵活的方式创建 CSS 规则。</p>
 <p><strong>sass</strong> <span class="citation">(<a href="#ref-R-sass" role="doc-biblioref">Cheng et al. 2022</a>)</span> (Cheng et al. 2020) 包可以用来编译 Sass 到 CSS。基于 <strong>sass</strong> 包，<strong>knitr</strong> 包含两个语言引擎： <code>sass</code>和 <code>scss</code> (分别对应于 Sass 和 SCSS 语法)，将代码块编译为 CSS。下面是一个 <code>scss</code> 代码块，头部块为<code>```{scss}</code>：</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb343-1"><a href="rmarkdown-operation.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="va">$font-stack</span>: <span class="st">&quot;Comic Sans MS&quot;</span><span class="op">,</span> <span class="dv">cursive</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
-<span id="cb343-2"><a href="rmarkdown-operation.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="va">$primary-color</span>: <span class="cn">#00FF00</span><span class="op">;</span></span>
-<span id="cb343-3"><a href="rmarkdown-operation.html#cb343-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-4"><a href="rmarkdown-operation.html#cb343-4" aria-hidden="true" tabindex="-1"></a><span class="fu">.book.font-family-1</span> {</span>
-<span id="cb343-5"><a href="rmarkdown-operation.html#cb343-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font</span>: <span class="dv">100</span><span class="dt">%</span> <span class="va">$font-stack</span><span class="op">;</span></span>
-<span id="cb343-6"><a href="rmarkdown-operation.html#cb343-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="va">$primary-color</span><span class="op">;</span></span>
-<span id="cb343-7"><a href="rmarkdown-operation.html#cb343-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb342-1"><a href="rmarkdown-operation.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="va">$font-stack</span>: <span class="st">&quot;Comic Sans MS&quot;</span><span class="op">,</span> <span class="dv">cursive</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb342-2"><a href="rmarkdown-operation.html#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="va">$primary-color</span>: <span class="cn">#00FF00</span><span class="op">;</span></span>
+<span id="cb342-3"><a href="rmarkdown-operation.html#cb342-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb342-4"><a href="rmarkdown-operation.html#cb342-4" aria-hidden="true" tabindex="-1"></a><span class="fu">.book.font-family-1</span> {</span>
+<span id="cb342-5"><a href="rmarkdown-operation.html#cb342-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font</span>: <span class="dv">100</span><span class="dt">%</span> <span class="va">$font-stack</span><span class="op">;</span></span>
+<span id="cb342-6"><a href="rmarkdown-operation.html#cb342-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="va">$primary-color</span><span class="op">;</span></span>
+<span id="cb342-7"><a href="rmarkdown-operation.html#cb342-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <style type="text/css">
 .book.font-family-1{font:100% "Comic Sans MS",cursive,sans-serif;color:lime}
 </style>
 <p>Sass 语法与 SCSS 语法略有不同，例如:</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb344-1"><a href="rmarkdown-operation.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sass}</span></span>
-<span id="cb344-2"><a href="rmarkdown-operation.html#cb344-2" aria-hidden="true" tabindex="-1"></a><span class="in">$font-stack: &quot;Comic Sans MS&quot;, cursive, sans-serif</span></span>
-<span id="cb344-3"><a href="rmarkdown-operation.html#cb344-3" aria-hidden="true" tabindex="-1"></a><span class="in">$primary-color: #00FF00</span></span>
-<span id="cb344-4"><a href="rmarkdown-operation.html#cb344-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb344-5"><a href="rmarkdown-operation.html#cb344-5" aria-hidden="true" tabindex="-1"></a><span class="in">.book.font-family-1</span></span>
-<span id="cb344-6"><a href="rmarkdown-operation.html#cb344-6" aria-hidden="true" tabindex="-1"></a><span class="in">  font: 100% $font-stack</span></span>
-<span id="cb344-7"><a href="rmarkdown-operation.html#cb344-7" aria-hidden="true" tabindex="-1"></a><span class="in">  color: $primary-color</span></span>
-<span id="cb344-8"><a href="rmarkdown-operation.html#cb344-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb343-1"><a href="rmarkdown-operation.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sass}</span></span>
+<span id="cb343-2"><a href="rmarkdown-operation.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="in">$font-stack: &quot;Comic Sans MS&quot;, cursive, sans-serif</span></span>
+<span id="cb343-3"><a href="rmarkdown-operation.html#cb343-3" aria-hidden="true" tabindex="-1"></a><span class="in">$primary-color: #00FF00</span></span>
+<span id="cb343-4"><a href="rmarkdown-operation.html#cb343-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-5"><a href="rmarkdown-operation.html#cb343-5" aria-hidden="true" tabindex="-1"></a><span class="in">.book.font-family-1</span></span>
+<span id="cb343-6"><a href="rmarkdown-operation.html#cb343-6" aria-hidden="true" tabindex="-1"></a><span class="in">  font: 100% $font-stack</span></span>
+<span id="cb343-7"><a href="rmarkdown-operation.html#cb343-7" aria-hidden="true" tabindex="-1"></a><span class="in">  color: $primary-color</span></span>
+<span id="cb343-8"><a href="rmarkdown-operation.html#cb343-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>由于上面这一语句的作用，在<a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-sass.html">本节的HTML版本</a>中，当前页面的英文字体会被更改为 Comic Sans。</p>
 <p><code>sass</code>/<code>scss</code> 代码块是通过<code>sass::sass()</code>函数编译而成的。目前，块选项 <code>engine.opts</code> 可以定制 CSS 代码的输出样式，例如：<code>engine.opts = list(style = "expanded")</code>。默认的样式是 “compressed”。请参阅帮助页面 <code>?sass::sass_options</code> 了解更多 <code>output_style</code> 可用的参数。</p>
 </div>
@@ -3296,161 +3290,161 @@ div.csl-indent {
 <p>对于一个被缓存了的代码块，它的输出以及变量对象将从上一次的运行中自动加载，就像该代码块被再次执行了一样。当加载结果比计算结果快得多时，缓存操作通常是有用的。然而，天下没有免费的午餐，有的时候 <strong>knitr</strong> 会令缓存失效或是部分失效，如外部文件内容的改变可能没有体现在报告中等等。更多关于如何缓存，特别是缓存失效的相关知识可参见：<a href="https://yihui.org/en/2018/06/cache-invalidation/" class="uri">https://yihui.org/en/2018/06/cache-invalidation/</a>。</p>
 <p>缓存的一个典型应用场景是保存和重新加载那些需要很长时间才能在代码块中计算的 R 对象。需要注意的是，代码需要没有任何“副产物”，否则建议不要进行缓存。例如在使用 <code>options()</code> 更改全局 R 选项时，产生的更改不会被缓存。</p>
 <p>正如前文提到的，缓存依赖于代码或块选项。如果改变了任何块选项（除了 <code>include</code> 选项），缓存将会失效。此特性可用于解决一个常见的问题，即当代码需要读取外部数据文件时，应在更新数据文件时使缓存失效，那仅仅像下面这样简单地使用 <code>cache = TRUE</code> 是不够的：</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb345-1"><a href="rmarkdown-operation.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r import-data, cache=TRUE}</span></span>
-<span id="cb345-2"><a href="rmarkdown-operation.html#cb345-2" aria-hidden="true" tabindex="-1"></a><span class="in">d &lt;- read.csv(&#39;数据.csv&#39;)</span></span>
-<span id="cb345-3"><a href="rmarkdown-operation.html#cb345-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb344-1"><a href="rmarkdown-operation.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r import-data, cache=TRUE}</span></span>
+<span id="cb344-2"><a href="rmarkdown-operation.html#cb344-2" aria-hidden="true" tabindex="-1"></a><span class="in">d &lt;- read.csv(&#39;数据.csv&#39;)</span></span>
+<span id="cb344-3"><a href="rmarkdown-operation.html#cb344-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>必须要让 <strong>knitr</strong> 知道数据文件是否已被更改。一种方法是添加另一个块选项 <code>cache.extra = file.mtime('数据.csv')</code>，或者更严格的方式：<code>cache.extra = tools::md5sum('数据.csv')</code>。前者意味着如果文件的修改时间发生了变化，就需要使缓存失效；而后者的意思是，如果文件的内容被修改，就更新缓存。需要注意的是，<code>cache.extra</code>不是一个内置的 <strong>knitr</strong> 代码选项，可以为该选项使用任何其他名称，只要它不与内置选项名称冲突。</p>
 <p>类似地，还可以将缓存与其他信息相关联，比如R的版本（<code>cache.extra = getRversion()</code>）、时间（<code>cache.extra = Sys.Date()</code>）或是操作系统（<code>cache.extra = Sys.info()[['sysname']]</code>），当这些条件改变时，可以使缓存正确地失效。</p>
 <p>需要注意的是，本书不建议在文档中设置全局块选项 <code>cache = TRUE</code>，因为缓存可能相当棘手。相反的，可以只在个别耗时很久的代码块上启用缓存，这样并不会产生副产物。</p>
 <p>如果对 <strong>knitr</strong> 的缓存设计不满意，还可以选择自己缓存对象，下面是一个简单的例子：</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="rmarkdown-operation.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(<span class="st">&#39;结果.rds&#39;</span>)) {</span>
-<span id="cb346-2"><a href="rmarkdown-operation.html#cb346-2" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">&#39;结果.rds&#39;</span>)</span>
-<span id="cb346-3"><a href="rmarkdown-operation.html#cb346-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb346-4"><a href="rmarkdown-operation.html#cb346-4" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">compute_it</span>()  <span class="co"># 一个很耗时的函数</span></span>
-<span id="cb346-5"><a href="rmarkdown-operation.html#cb346-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(res, <span class="st">&#39;结果.rds&#39;</span>)</span>
-<span id="cb346-6"><a href="rmarkdown-operation.html#cb346-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="rmarkdown-operation.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(<span class="st">&#39;结果.rds&#39;</span>)) {</span>
+<span id="cb345-2"><a href="rmarkdown-operation.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">&#39;结果.rds&#39;</span>)</span>
+<span id="cb345-3"><a href="rmarkdown-operation.html#cb345-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb345-4"><a href="rmarkdown-operation.html#cb345-4" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">compute_it</span>()  <span class="co"># 一个很耗时的函数</span></span>
+<span id="cb345-5"><a href="rmarkdown-operation.html#cb345-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(res, <span class="st">&#39;结果.rds&#39;</span>)</span>
+<span id="cb345-6"><a href="rmarkdown-operation.html#cb345-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>在这一例子中，使缓存失效的唯一（也是简单的）方法就是删除文件<code>results.rds</code>。如果对这个简单的缓存机制感兴趣，可以使用在<a href="rmarkdown-operation.html#cache-rds">6.5.4</a>节中介绍的函数<code>xfun::cache_rds()</code>。</p>
 </div>
 <div id="cache-path" class="section level3 hasAnchor" number="6.5.2">
 <h3><span class="header-section-number">6.5.2</span> 为多种输出格式缓存代码块<a href="rmarkdown-operation.html#cache-path" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>当通过块选项 <code>cache = TRUE</code>启用缓存时，<strong>knitr</strong> 将把在代码块中生成的 R 对象写入缓存数据库，以便下次重新加载它们。缓存数据库的路径由块选项 <code>cache.path</code> 决定。默认情况下，R Markdown 对不同的输出格式会使用不同的缓存路径，这意味着对于每种输出格式都将完全执行一次这个（耗时的）代码块。这可能很不方便，但这种默认的行为是有原因的，即代码块的输出可能依赖于特定的输出格式。例如，生成图像，当输出格式为<code>word_document</code>时，图像的输出可能是像 <code>![text](path/to/image.png)</code> 这样的标记代码；而或者当输出格式为 <code>html_document</code> 时，输出的HTML代码则类似 <code>&lt;img src="path/to/image.png" /&gt;</code>。</p>
 <p>当代码块没有任何副产物（如图像）时，对所有输出格式使用相同的缓存数据库是安全的，还可以节省时间。例如，当读取一个大型数据对象或运行一个比较耗时的模型时，若结果不依赖于输出格式，就可以使用相同的缓存数据库。可以通过块选项 <code>cache.path</code> ，例如：</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb347-1"><a href="rmarkdown-operation.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r important-computing, cache=TRUE, cache.path=&quot;cache/&quot;}</span></span>
-<span id="cb347-2"><a href="rmarkdown-operation.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb346-1"><a href="rmarkdown-operation.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r important-computing, cache=TRUE, cache.path=&quot;cache/&quot;}</span></span>
+<span id="cb346-2"><a href="rmarkdown-operation.html#cb346-2" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>实际上，在 R Markdown 中，<code>cache.path</code> 的默认设置为 <code>cache.path = "INPUT_cache/FORMAT/"</code>，其中 <code>INPUT</code> 代表输入的文件名，<code>FORMAT</code> 为输出格式（如 <code>html</code>、<code>latex</code> 或 <code>docx</code>），这就导致了不同的输出格式对应不同的缓存路径。</p>
 </div>
 <div id="cache-lazy" class="section level3 hasAnchor" number="6.5.3">
 <h3><span class="header-section-number">6.5.3</span> 缓存大型的对象<a href="rmarkdown-operation.html#cache-lazy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>当设定块选项 <code>cache = TRUE</code> 时，缓存的对象将被延迟加载到 R 中，这意味着对象将不会从缓存数据库中读取，直到它在代码中被实际使用。当不是所有对象都在文档中稍后被使用时，这一操作可以节省一些内存。例如，如果读取了一个大型的数据对象，但在后续的分析中只使用了其中的一个子集，那么原始的数据对象将不会从缓存数据库中加载：</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb348-1"><a href="rmarkdown-operation.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, read-data, cache=TRUE}</span></span>
-<span id="cb348-2"><a href="rmarkdown-operation.html#cb348-2" aria-hidden="true" tabindex="-1"></a><span class="in">full &lt;- read.csv(&quot;大型数据集.csv&quot;)</span></span>
-<span id="cb348-3"><a href="rmarkdown-operation.html#cb348-3" aria-hidden="true" tabindex="-1"></a><span class="in">rows &lt;- subset(full, price &gt; 100)</span></span>
-<span id="cb348-4"><a href="rmarkdown-operation.html#cb348-4" aria-hidden="true" tabindex="-1"></a><span class="in"># 之后只使用 `rows` 数据集</span></span>
-<span id="cb348-5"><a href="rmarkdown-operation.html#cb348-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb348-6"><a href="rmarkdown-operation.html#cb348-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-7"><a href="rmarkdown-operation.html#cb348-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb348-8"><a href="rmarkdown-operation.html#cb348-8" aria-hidden="true" tabindex="-1"></a><span class="in">plot(rows)</span></span>
-<span id="cb348-9"><a href="rmarkdown-operation.html#cb348-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb347-1"><a href="rmarkdown-operation.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, read-data, cache=TRUE}</span></span>
+<span id="cb347-2"><a href="rmarkdown-operation.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="in">full &lt;- read.csv(&quot;大型数据集.csv&quot;)</span></span>
+<span id="cb347-3"><a href="rmarkdown-operation.html#cb347-3" aria-hidden="true" tabindex="-1"></a><span class="in">rows &lt;- subset(full, price &gt; 100)</span></span>
+<span id="cb347-4"><a href="rmarkdown-operation.html#cb347-4" aria-hidden="true" tabindex="-1"></a><span class="in"># 之后只使用 `rows` 数据集</span></span>
+<span id="cb347-5"><a href="rmarkdown-operation.html#cb347-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb347-6"><a href="rmarkdown-operation.html#cb347-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-7"><a href="rmarkdown-operation.html#cb347-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb347-8"><a href="rmarkdown-operation.html#cb347-8" aria-hidden="true" tabindex="-1"></a><span class="in">plot(rows)</span></span>
+<span id="cb347-9"><a href="rmarkdown-operation.html#cb347-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>然而，当一个对象太大时，可能会遇到这样的报错：</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="rmarkdown-operation.html#cb349-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">lazyLoadDBinsertVariable</span>(vars[i], ... </span>
-<span id="cb349-2"><a href="rmarkdown-operation.html#cb349-2" aria-hidden="true" tabindex="-1"></a>  long vectors not supported yet<span class="sc">:</span> ...</span>
-<span id="cb349-3"><a href="rmarkdown-operation.html#cb349-3" aria-hidden="true" tabindex="-1"></a>Execution halted</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="rmarkdown-operation.html#cb348-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">lazyLoadDBinsertVariable</span>(vars[i], ... </span>
+<span id="cb348-2"><a href="rmarkdown-operation.html#cb348-2" aria-hidden="true" tabindex="-1"></a>  long vectors not supported yet<span class="sc">:</span> ...</span>
+<span id="cb348-3"><a href="rmarkdown-operation.html#cb348-3" aria-hidden="true" tabindex="-1"></a>Execution halted</span></code></pre></div>
 <p>如果出现这个问题，可以尝试通过块选项 <code>cache.lazy = FALSE</code> 来关闭延迟加载，这样该代码块中的所有对象都将立即被加载到内存中。</p>
 </div>
 <div id="cache-rds" class="section level3 hasAnchor" number="6.5.4">
 <h3><span class="header-section-number">6.5.4</span> 一个更透明的缓存机制<a href="rmarkdown-operation.html#cache-rds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>如果在使用的过程中，觉得前文介绍的基于 <strong>knitr</strong> 的缓存机过于复杂，可以考虑使用基于函数 <code>xfun::cache_rds()</code> 的一个更简单的缓存机制，例如：</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="rmarkdown-operation.html#cb350-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb350-2"><a href="rmarkdown-operation.html#cb350-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 在这里编写你的耗时代码</span></span>
-<span id="cb350-3"><a href="rmarkdown-operation.html#cb350-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="rmarkdown-operation.html#cb349-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb349-2"><a href="rmarkdown-operation.html#cb349-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 在这里编写你的耗时代码</span></span>
+<span id="cb349-3"><a href="rmarkdown-operation.html#cb349-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>关于 <strong>knitr</strong> 缓存，其棘手之处在于如何决定何时使缓存失效，而使用 <code>xfun::cache_rds()</code> 则要清楚得多：第一次将 R 表达式传递给这个函数时，它会计算表达式并将结果保存到 <code>.rds</code> 文件中；下次再次运行 <code>cache_rds()</code> 时，它会读取 <code>.rds</code> 文件，并立即返回结果，而不再次计算表达式。使缓存无效的最明显的方法是删除 <code>.rds</code> 的文件。如果不想手动删除它，则可以用参数 <code>rerun = TRUE</code> 来调用 <code>xfun::cache_rds()</code>。</p>
 <p>当 <code>xfun::cache_rds()</code> 在 <strong>knitr</strong> 源文档的一个代码块中被调用时，<code>.rds</code> 文件的路径由块选项 <code>cache.path</code> 和块标签决定。例如，对于在 Rmd 文档 <code>input.Rmd</code> 中带有块标签 <code>foo</code> 的代码块：</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb351-1"><a href="rmarkdown-operation.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, foo}</span></span>
-<span id="cb351-2"><a href="rmarkdown-operation.html#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="in">res &lt;- xfun::cache_rds({</span></span>
-<span id="cb351-3"><a href="rmarkdown-operation.html#cb351-3" aria-hidden="true" tabindex="-1"></a><span class="in">  Sys.sleep(3)</span></span>
-<span id="cb351-4"><a href="rmarkdown-operation.html#cb351-4" aria-hidden="true" tabindex="-1"></a><span class="in">  1:10</span></span>
-<span id="cb351-5"><a href="rmarkdown-operation.html#cb351-5" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
-<span id="cb351-6"><a href="rmarkdown-operation.html#cb351-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb350-1"><a href="rmarkdown-operation.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, foo}</span></span>
+<span id="cb350-2"><a href="rmarkdown-operation.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="in">res &lt;- xfun::cache_rds({</span></span>
+<span id="cb350-3"><a href="rmarkdown-operation.html#cb350-3" aria-hidden="true" tabindex="-1"></a><span class="in">  Sys.sleep(3)</span></span>
+<span id="cb350-4"><a href="rmarkdown-operation.html#cb350-4" aria-hidden="true" tabindex="-1"></a><span class="in">  1:10</span></span>
+<span id="cb350-5"><a href="rmarkdown-operation.html#cb350-5" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb350-6"><a href="rmarkdown-operation.html#cb350-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p><code>.rds</code> 文件的路径格式为 <code>input_cache/FORMAT/foo_HASH.rds</code>，其中 <code>FORMAT</code> 是 Pandoc 输出格式名称（例如 <code>html</code> 或 <code>latex</code>）， <code>HASH</code> 是一个MD5哈希值，包含了 32 个十六进制数字（a-f 和 0-9），例如 <code>input_cache/html/foo_7a3f22c4309d400eff95de0e8bddac71.rds</code>。</p>
 <p>如帮助页面 <code>?xfun::cache_rds</code> 所述，通常在两种的情况下可能想要使缓存失效：（1）待求值表达式中的代码发生了变化；（2）代码使用了一个外部变量，并且该变量的值已经改变。本节接下来将解释这两种情况下缓存是如何失效的，以及如何将缓存的多个副本保存到对应于不同版本的代码中。</p>
 <div id="通过更改表达式中的代码使缓存失效" class="section level4 hasAnchor" number="6.5.4.1">
 <h4><span class="header-section-number">6.5.4.1</span> 通过更改表达式中的代码使缓存失效<a href="rmarkdown-operation.html#通过更改表达式中的代码使缓存失效" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>当改变 <code>cache_rds()</code>中的代码时（例如，从 <code>cache_rds({x + 1})</code> 改为 <code>cache_rds({x + 2})</code>），缓存将自动失效，表达式将被重新计算。但是需要注意的是，空格或注释的变化是不重要的，或者一般来说，只要更改不影响已解析的表达式，缓存就不会失效。例如，下面传递给 <code>cache_rds()</code> 的两个表达式在本质上是相同的：</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="rmarkdown-operation.html#cb352-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb352-2"><a href="rmarkdown-operation.html#cb352-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">3</span>);</span>
-<span id="cb352-3"><a href="rmarkdown-operation.html#cb352-3" aria-hidden="true" tabindex="-1"></a>  x<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>;  <span class="co"># 分号不影响</span></span>
-<span id="cb352-4"><a href="rmarkdown-operation.html#cb352-4" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">+</span><span class="dv">1</span>;</span>
-<span id="cb352-5"><a href="rmarkdown-operation.html#cb352-5" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb352-6"><a href="rmarkdown-operation.html#cb352-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb352-7"><a href="rmarkdown-operation.html#cb352-7" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb352-8"><a href="rmarkdown-operation.html#cb352-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">3</span>)</span>
-<span id="cb352-9"><a href="rmarkdown-operation.html#cb352-9" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>  <span class="co"># 一个注释</span></span>
-<span id="cb352-10"><a href="rmarkdown-operation.html#cb352-10" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span></span>
-<span id="cb352-11"><a href="rmarkdown-operation.html#cb352-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>  <span class="co"># 可以随意修改空格部分</span></span>
-<span id="cb352-12"><a href="rmarkdown-operation.html#cb352-12" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="rmarkdown-operation.html#cb351-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb351-2"><a href="rmarkdown-operation.html#cb351-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">3</span>);</span>
+<span id="cb351-3"><a href="rmarkdown-operation.html#cb351-3" aria-hidden="true" tabindex="-1"></a>  x<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>;  <span class="co"># 分号不影响</span></span>
+<span id="cb351-4"><a href="rmarkdown-operation.html#cb351-4" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">+</span><span class="dv">1</span>;</span>
+<span id="cb351-5"><a href="rmarkdown-operation.html#cb351-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb351-6"><a href="rmarkdown-operation.html#cb351-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-7"><a href="rmarkdown-operation.html#cb351-7" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb351-8"><a href="rmarkdown-operation.html#cb351-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">3</span>)</span>
+<span id="cb351-9"><a href="rmarkdown-operation.html#cb351-9" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>  <span class="co"># 一个注释</span></span>
+<span id="cb351-10"><a href="rmarkdown-operation.html#cb351-10" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span></span>
+<span id="cb351-11"><a href="rmarkdown-operation.html#cb351-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>  <span class="co"># 可以随意修改空格部分</span></span>
+<span id="cb351-12"><a href="rmarkdown-operation.html#cb351-12" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>因此，如果对第一个表达式执行 <code>cache_rds()</code> ，那么第二个表达式将能够调用缓存的结果。这一特性非常有用，因为其允许在代码中进行修饰性更改，而不会使缓存失效。</p>
 <p>如果不确定两个版本的代码是否相等，则可以尝试下面的 <code>parse_code()</code> 函数：</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="rmarkdown-operation.html#cb353-1" aria-hidden="true" tabindex="-1"></a>parse_code <span class="ot">&lt;-</span> <span class="cf">function</span>(expr) {</span>
-<span id="cb353-2"><a href="rmarkdown-operation.html#cb353-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">deparse</span>(<span class="fu">substitute</span>(expr))</span>
-<span id="cb353-3"><a href="rmarkdown-operation.html#cb353-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb353-4"><a href="rmarkdown-operation.html#cb353-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 空格或分号不影响</span></span>
-<span id="cb353-5"><a href="rmarkdown-operation.html#cb353-5" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_code</span>({x<span class="sc">+</span><span class="dv">1</span>})</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="rmarkdown-operation.html#cb352-1" aria-hidden="true" tabindex="-1"></a>parse_code <span class="ot">&lt;-</span> <span class="cf">function</span>(expr) {</span>
+<span id="cb352-2"><a href="rmarkdown-operation.html#cb352-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">deparse</span>(<span class="fu">substitute</span>(expr))</span>
+<span id="cb352-3"><a href="rmarkdown-operation.html#cb352-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb352-4"><a href="rmarkdown-operation.html#cb352-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 空格或分号不影响</span></span>
+<span id="cb352-5"><a href="rmarkdown-operation.html#cb352-5" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_code</span>({x<span class="sc">+</span><span class="dv">1</span>})</span></code></pre></div>
 <pre><code>## [1] &quot;{&quot;         &quot;    x + 1&quot; &quot;}&quot;</code></pre>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="rmarkdown-operation.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_code</span>({ x   <span class="sc">+</span>    <span class="dv">1</span>; })</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="rmarkdown-operation.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_code</span>({ x   <span class="sc">+</span>    <span class="dv">1</span>; })</span></code></pre></div>
 <pre><code>## [1] &quot;{&quot;         &quot;    x + 1&quot; &quot;}&quot;</code></pre>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="rmarkdown-operation.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 左箭头和右箭头是等价的</span></span>
-<span id="cb357-2"><a href="rmarkdown-operation.html#cb357-2" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">parse_code</span>({x <span class="ot">&lt;-</span> <span class="dv">1</span>}), <span class="fu">parse_code</span>({<span class="dv">1</span> <span class="ot">-&gt;</span> x}))</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="rmarkdown-operation.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 左箭头和右箭头是等价的</span></span>
+<span id="cb356-2"><a href="rmarkdown-operation.html#cb356-2" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">parse_code</span>({x <span class="ot">&lt;-</span> <span class="dv">1</span>}), <span class="fu">parse_code</span>({<span class="dv">1</span> <span class="ot">-&gt;</span> x}))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="通过更改全局变量使缓存失效" class="section level4 hasAnchor" number="6.5.4.2">
 <h4><span class="header-section-number">6.5.4.2</span> 通过更改全局变量使缓存失效<a href="rmarkdown-operation.html#通过更改全局变量使缓存失效" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>通常情况下，表达式中有两种类型的变量：全局变量和局部变量。全局变量是在表达式外部创建的，局部变量则是在表达式内部创建的。如果表达式中全局变量的值发生了变化，那么缓存的结果和再次运行的结果之间可能会产生差异。例如，在下面的表达式中，如果 <code>y</code> 发生了变化，需要想要使缓存失效并重新运行表达式，否则仍然会得到根据 <code>y</code> 之前的值计算得到的结果：</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="rmarkdown-operation.html#cb359-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb359-2"><a href="rmarkdown-operation.html#cb359-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb359-3"><a href="rmarkdown-operation.html#cb359-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb359-4"><a href="rmarkdown-operation.html#cb359-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb359-5"><a href="rmarkdown-operation.html#cb359-5" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
-<span id="cb359-6"><a href="rmarkdown-operation.html#cb359-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="rmarkdown-operation.html#cb358-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb358-2"><a href="rmarkdown-operation.html#cb358-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb358-3"><a href="rmarkdown-operation.html#cb358-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb358-4"><a href="rmarkdown-operation.html#cb358-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb358-5"><a href="rmarkdown-operation.html#cb358-5" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
+<span id="cb358-6"><a href="rmarkdown-operation.html#cb358-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>如果要使缓存在 <code>y</code> 发生变化时失效，则需要通过 <code>hash</code> 参数，让 <code>cache_rds()</code> 在决定缓存是否应该失效时知道需要考虑 <code>y</code>：</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="rmarkdown-operation.html#cb359-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb359-2"><a href="rmarkdown-operation.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb359-3"><a href="rmarkdown-operation.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
+<span id="cb359-4"><a href="rmarkdown-operation.html#cb359-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(y))</span></code></pre></div>
+<p>当 <code>hash</code> 参数的值改变时，缓存文件名中的 32 位哈希值（如前所述）会相应地改变，导致缓存失效。这提供了一种方法来指定缓存与其他 R 对象的依赖关系。例如，如果想要使缓存依赖于 <code>y</code> 以及 R 的版本，可以这样指定依赖：</p>
 <div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="rmarkdown-operation.html#cb360-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
 <span id="cb360-2"><a href="rmarkdown-operation.html#cb360-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
 <span id="cb360-3"><a href="rmarkdown-operation.html#cb360-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
-<span id="cb360-4"><a href="rmarkdown-operation.html#cb360-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(y))</span></code></pre></div>
-<p>当 <code>hash</code> 参数的值改变时，缓存文件名中的 32 位哈希值（如前所述）会相应地改变，导致缓存失效。这提供了一种方法来指定缓存与其他 R 对象的依赖关系。例如，如果想要使缓存依赖于 <code>y</code> 以及 R 的版本，可以这样指定依赖：</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="rmarkdown-operation.html#cb361-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb361-2"><a href="rmarkdown-operation.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb361-3"><a href="rmarkdown-operation.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
-<span id="cb361-4"><a href="rmarkdown-operation.html#cb361-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(y, <span class="fu">getRversion</span>()))</span></code></pre></div>
+<span id="cb360-4"><a href="rmarkdown-operation.html#cb360-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(y, <span class="fu">getRversion</span>()))</span></code></pre></div>
 <p>或者如果想让缓存依赖于 <code>y</code> 以及数据文件最后一次修改的时间，可以这样做：</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="rmarkdown-operation.html#cb362-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb362-2"><a href="rmarkdown-operation.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;数据.csv&quot;</span>)</span>
-<span id="cb362-3"><a href="rmarkdown-operation.html#cb362-3" aria-hidden="true" tabindex="-1"></a>  x[[<span class="dv">1</span>]] <span class="sc">+</span> y</span>
-<span id="cb362-4"><a href="rmarkdown-operation.html#cb362-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(y, <span class="fu">file.mtime</span>(<span class="st">&quot;数据.csv&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="rmarkdown-operation.html#cb361-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb361-2"><a href="rmarkdown-operation.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;数据.csv&quot;</span>)</span>
+<span id="cb361-3"><a href="rmarkdown-operation.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  x[[<span class="dv">1</span>]] <span class="sc">+</span> y</span>
+<span id="cb361-4"><a href="rmarkdown-operation.html#cb361-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(y, <span class="fu">file.mtime</span>(<span class="st">&quot;数据.csv&quot;</span>)))</span></code></pre></div>
 <p>如果不想为 <code>hash</code> 参数提供全局变量的列表，则可以尝试 <code>hash = "auto"</code>，它将使 <code>cache_rds()</code> 自动找出所有的全局变量，并将它们作为 <code>hash</code> 参数的值，例如：</p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="rmarkdown-operation.html#cb362-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb362-2"><a href="rmarkdown-operation.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb362-3"><a href="rmarkdown-operation.html#cb362-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y <span class="sc">+</span> z  <span class="co"># y 和 z 是全局变量</span></span>
+<span id="cb362-4"><a href="rmarkdown-operation.html#cb362-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="st">&quot;auto&quot;</span>)</span></code></pre></div>
+<p>这等价于：</p>
 <div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="rmarkdown-operation.html#cb363-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
 <span id="cb363-2"><a href="rmarkdown-operation.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
 <span id="cb363-3"><a href="rmarkdown-operation.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y <span class="sc">+</span> z  <span class="co"># y 和 z 是全局变量</span></span>
-<span id="cb363-4"><a href="rmarkdown-operation.html#cb363-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="st">&quot;auto&quot;</span>)</span></code></pre></div>
-<p>这等价于：</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="rmarkdown-operation.html#cb364-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb364-2"><a href="rmarkdown-operation.html#cb364-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb364-3"><a href="rmarkdown-operation.html#cb364-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y <span class="sc">+</span> z  <span class="co"># y 和 z 是全局变量</span></span>
-<span id="cb364-4"><a href="rmarkdown-operation.html#cb364-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(<span class="at">y =</span> y, <span class="at">z =</span> z))</span></code></pre></div>
+<span id="cb363-4"><a href="rmarkdown-operation.html#cb363-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(<span class="at">y =</span> y, <span class="at">z =</span> z))</span></code></pre></div>
 <p>当 <code>hash = "auto"</code> 时，全局变量由 <code>codetools::findGlobals()</code> 识别，这可能不是完全可靠的，所以如果需要完全确定哪些变量可以使缓存失效，本书建议在 <code>hash</code> 参数中亲自给定变量列表。</p>
 </div>
 <div id="保留缓存的多个副本" class="section level4 hasAnchor" number="6.5.4.3">
 <h4><span class="header-section-number">6.5.4.3</span> 保留缓存的多个副本<a href="rmarkdown-operation.html#保留缓存的多个副本" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>由于缓存通常用于非常耗时的代码，在使其失效时应当保守一些。有的时候可能会因过早或主动地使缓存失效而后悔，因为如果再次需要一个旧版本的缓存时，则将不得不等待很长的时间才能重新完成计算。</p>
 <p>若将 <code>cache_rds()</code> 中的 <code>clean</code> 参数设置为 <code>FALSE</code>，则将允许保留旧的缓存副本。也可以设置全局 R 选项 <code>options(xfun.cache_rds.clean = FALSE)</code> 来使其成为文档的默认行为。在默认情况下，<code>clean = TRUE</code> 和 <code>cache_rds()</code> 每次都会尝试删除旧的缓存。如果还在进行代码测试，那么设置 <code>clean = FALSE</code> 会很有用。例如，可以缓存一个线性模型的两个版本：</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="rmarkdown-operation.html#cb365-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb365-2"><a href="rmarkdown-operation.html#cb365-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
-<span id="cb365-3"><a href="rmarkdown-operation.html#cb365-3" aria-hidden="true" tabindex="-1"></a>}, <span class="at">clean =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb365-4"><a href="rmarkdown-operation.html#cb365-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb365-5"><a href="rmarkdown-operation.html#cb365-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb365-6"><a href="rmarkdown-operation.html#cb365-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(dist <span class="sc">~</span> speed <span class="sc">+</span> <span class="fu">I</span>(speed<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> cars)</span>
-<span id="cb365-7"><a href="rmarkdown-operation.html#cb365-7" aria-hidden="true" tabindex="-1"></a>}, <span class="at">clean =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="rmarkdown-operation.html#cb364-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb364-2"><a href="rmarkdown-operation.html#cb364-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
+<span id="cb364-3"><a href="rmarkdown-operation.html#cb364-3" aria-hidden="true" tabindex="-1"></a>}, <span class="at">clean =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb364-4"><a href="rmarkdown-operation.html#cb364-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb364-5"><a href="rmarkdown-operation.html#cb364-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb364-6"><a href="rmarkdown-operation.html#cb364-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(dist <span class="sc">~</span> speed <span class="sc">+</span> <span class="fu">I</span>(speed<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> cars)</span>
+<span id="cb364-7"><a href="rmarkdown-operation.html#cb364-7" aria-hidden="true" tabindex="-1"></a>}, <span class="at">clean =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>在决定使用哪个模型之后，可以再次设置 <code>clean = TRUE</code>，或者删除 <code>clean</code> 参数（默认为 <code>TRUE</code>）。</p>
 </div>
 <div id="与-knitr-的缓存比较" class="section level4 hasAnchor" number="6.5.4.4">
 <h4><span class="header-section-number">6.5.4.4</span> 与 <strong>knitr</strong> 的缓存比较<a href="rmarkdown-operation.html#与-knitr-的缓存比较" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>那么什么时候使用 <strong>knitr</strong> 的缓存（例如，设置块选项 <code>cache = TRUE</code>），什么时候在 <strong>knitr</strong> 源文档中使用 <code>xfun::cache_rds()</code>呢？后者最大的缺点是它不缓存副产物（而只缓存表达式的值），而 <strong>knitr</strong> 却可以。有的时候，一些副产物是有用的，比如打印的输出或图像。例如，在下面的代码中，当使用 <code>cache_rds()</code> 加载缓存时，文本输出和图像将会丢失，只会返回 <code>1:10</code>：</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="rmarkdown-operation.html#cb366-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
-<span id="cb366-2"><a href="rmarkdown-operation.html#cb366-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Hello world!&quot;</span>)</span>
-<span id="cb366-3"><a href="rmarkdown-operation.html#cb366-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(cars)</span>
-<span id="cb366-4"><a href="rmarkdown-operation.html#cb366-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb366-5"><a href="rmarkdown-operation.html#cb366-5" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="rmarkdown-operation.html#cb365-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
+<span id="cb365-2"><a href="rmarkdown-operation.html#cb365-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Hello world!&quot;</span>)</span>
+<span id="cb365-3"><a href="rmarkdown-operation.html#cb365-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(cars)</span>
+<span id="cb365-4"><a href="rmarkdown-operation.html#cb365-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb365-5"><a href="rmarkdown-operation.html#cb365-5" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>相比之下，对于设定选项为 <code>cache = TRUE</code> 的代码块，所有的内容都将被缓存：</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb367-1"><a href="rmarkdown-operation.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, cache=TRUE}</span></span>
-<span id="cb367-2"><a href="rmarkdown-operation.html#cb367-2" aria-hidden="true" tabindex="-1"></a><span class="in">print(&quot;Hello world!&quot;)</span></span>
-<span id="cb367-3"><a href="rmarkdown-operation.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars)</span></span>
-<span id="cb367-4"><a href="rmarkdown-operation.html#cb367-4" aria-hidden="true" tabindex="-1"></a><span class="in">1:10</span></span>
-<span id="cb367-5"><a href="rmarkdown-operation.html#cb367-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb366-1"><a href="rmarkdown-operation.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, cache=TRUE}</span></span>
+<span id="cb366-2"><a href="rmarkdown-operation.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="in">print(&quot;Hello world!&quot;)</span></span>
+<span id="cb366-3"><a href="rmarkdown-operation.html#cb366-3" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars)</span></span>
+<span id="cb366-4"><a href="rmarkdown-operation.html#cb366-4" aria-hidden="true" tabindex="-1"></a><span class="in">1:10</span></span>
+<span id="cb366-5"><a href="rmarkdown-operation.html#cb366-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>但 <strong>knitr</strong> 的缓存最大的缺点（同时也是用户最常抱怨的）是缓存可能会在不经意间失效，因为缓存由太多的因素所决定。例如，任何块选项的改变都会使缓存失效<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>，但有些块选项可能与计算无关。例如在下面的代码块中，改变块选项 <code>fig.width = 6</code> 到 <code>fig.width = 10</code> 会导致缓存失效，但实际上却不需要重新运行一次代码：</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb368-1"><a href="rmarkdown-operation.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, cache=TRUE, fig.width=6}</span></span>
-<span id="cb368-2"><a href="rmarkdown-operation.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 这个块没有生成图像</span></span>
-<span id="cb368-3"><a href="rmarkdown-operation.html#cb368-3" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- rnorm(1000)</span></span>
-<span id="cb368-4"><a href="rmarkdown-operation.html#cb368-4" aria-hidden="true" tabindex="-1"></a><span class="in">mean(x)</span></span>
-<span id="cb368-5"><a href="rmarkdown-operation.html#cb368-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb367-1"><a href="rmarkdown-operation.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, cache=TRUE, fig.width=6}</span></span>
+<span id="cb367-2"><a href="rmarkdown-operation.html#cb367-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 这个块没有生成图像</span></span>
+<span id="cb367-3"><a href="rmarkdown-operation.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- rnorm(1000)</span></span>
+<span id="cb367-4"><a href="rmarkdown-operation.html#cb367-4" aria-hidden="true" tabindex="-1"></a><span class="in">mean(x)</span></span>
+<span id="cb367-5"><a href="rmarkdown-operation.html#cb367-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>实际上，<strong>knitr</strong> 的缓存非常强大且灵活，它的行为可以通过多种方式进行调整。它的作者也经常怀疑是否值得介绍这些不太为人所知的特性，因为可能会导致用户花更多的时间来学习和理解缓存如何工作，而非运行实际的代码。</p>
 <p>在不清楚用哪个的情况下，<code>xfun::cache_rds()</code> 是缓存计算结果的通用方法，它可以在任何地方使用，而 <strong>knitr</strong> 的缓存只能在 <strong>knitr</strong> 文档中使用。</p>
 </div>
