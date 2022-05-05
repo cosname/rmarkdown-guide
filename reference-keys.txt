@@ -2,6 +2,7 @@ fig:unnamed-chunk-4
 fig:unnamed-chunk-8
 fig:html-tabset
 fig:first-rmd-theme-darkly
+fig:html-code-highlight-example
 fig:chunk-border
 fig:chunk-style-example
 fig:fold-show

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 5 章 使用 R Markdown 创建动态交互文档 | R Markdown 指南</title>
   <meta name="description" content="第 5 章 使用 R Markdown 创建动态交互文档 | R Markdown 指南" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 5 章 使用 R Markdown 创建动态交互文档 | R Markdown 指南" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="第 5 章 使用 R Markdown 创建动态交互文档 | R Markdown 指南" />
   <meta name="github-repo" content="cosname/rmarkdown-guide" />
@@ -28,7 +27,7 @@
 <meta name="author" content="杨晓龙" />
 
 
-<meta name="date" content="2022-04-02" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,15 +36,15 @@
   
 <link rel="prev" href="rmarkdown-working.html"/>
 <link rel="next" href="rmarkdown-operation.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -54,11 +53,11 @@
 
 
 
-
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/kePrint/kePrint.js"></script>
-<link href="libs/lightable/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -421,14 +420,14 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rmarkdown-interaction" class="section level1" number="5">
-<h1><span class="header-section-number">第 5 章</span> 使用 R Markdown 创建动态交互文档</h1>
-<div id="rmarkdown-shiny" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Web 交互界面：Shiny 小程序</h2>
+<div id="rmarkdown-interaction" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">第 5 章</span> 使用 R Markdown 创建动态交互文档<a href="rmarkdown-interaction.html#rmarkdown-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rmarkdown-shiny" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Web 交互界面：Shiny 小程序<a href="rmarkdown-interaction.html#rmarkdown-shiny" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Shiny 小程序是由 R 驱动的交互式 Web 应用程序。基于 Shiny 的 Web 应用程序（Shiny App）用途十分广泛，功能也很强大，实现的方式也多种多样。本书主要介绍与 R Markdown 文档应用相关的一部分知识，欲了解更多请参见 <a href="https://shiny.rstudio.com/">Shiny 官网</a>。</p>
 <p>Shiny 包是由 R 驱动的交互式 Web 应用程序。如果读者想从 R Markdown 文档中调用 Shiny 代码，只需在 YAML 元数据中添加 <code>runtime: shiny</code> 即可。由于 Shiny 构建 Web 应用程序功能十分强大，本书只介绍部分的 Shiny 知识。在阅读本章之前，如果不了解该包，可以先通过以下网站 <a href="https://shiny.rstudio.com" class="uri">https://shiny.rstudio.com</a> 进行大致了解。</p>
-<div id="shiny-start" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> 入门指南</h3>
+<div id="shiny-start" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> 入门指南<a href="rmarkdown-interaction.html#shiny-start" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在 YAML 元数据中加入 <code>runtime: shiny</code>，可以将任何基于 html 的 R Markdown 文档变成 Shiny 文档，例如：</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb163-1"><a href="rmarkdown-interaction.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb163-2"><a href="rmarkdown-interaction.html#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Shiny Document&quot;</span></span>
@@ -480,13 +479,13 @@ div.csl-indent {
 </p>
 </div>
 </div>
-<div id="shiny-deploy" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Shiny 部署</h3>
+<div id="shiny-deploy" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Shiny 部署<a href="rmarkdown-interaction.html#shiny-deploy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>如果在本地运行一个 Shiny 文档时，默认情况下它会使用本地 R 会话，并且只有运行的人能与该文档进行交互。如果希望与没有安装 R 的用户共享文档，或者不希望在本地运行文档，则必须将文档部署到服务器上，并共享文档的 URL。那么其他人只需要一个 web 浏览器就可以访问你的文档。</p>
 <p>有两种方法可以部署 Shiny 文档。1. 使用 RStudio 提供的托管服务；2. 搭载到自己的服务器上。</p>
 <!-- 第一种方法从技术上来说比较容易，但是有时你可能不被允许使用外部托管服务，因此读者必须在自己的服务器上安装必需的软件（Shiny Server 或 RStudio Connect）\index{Shiny Server}\index{RStudio Connect}才能部署 Shiny 文档。 -->
-<div id="shinyapps.io" class="section level4" number="5.1.2.1">
-<h4><span class="header-section-number">5.1.2.1</span> ShinyApps.io</h4>
+<div id="shinyapps.io" class="section level4 hasAnchor" number="5.1.2.1">
+<h4><span class="header-section-number">5.1.2.1</span> ShinyApps.io<a href="rmarkdown-interaction.html#shinyapps.io" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>读者可以把 Shiny 文档发布到 ShinyApps (<a href="https://shinyapps.io" class="uri">https://shinyapps.io</a>) 进行托管。</p>
 <p>需要满足以下两个条件：</p>
 <ol style="list-style-type: decimal">
@@ -506,13 +505,13 @@ div.csl-indent {
 <p>如果目录中有一个名为 <code>index.Rmd</code> 的文件，它将用作该目录的默认文档。如果想访问 Rmd 文档，则应在 URL 中指定 Rmd 文件的显式路径。</p>
 <p>例如，部署到 ShinyApps 的 <code>index.Rmd</code> 的 URL 可以采用以下形式 <code>https://example.shinyapps.io/appName/</code>，而 <code>test.Rmd</code> 的 URL 可以采用以下形式 <code>https://example.shinyapps.io/appName/test.Rmd</code>。</p>
 </div>
-<div id="shiny-server-rstudio-connect" class="section level4" number="5.1.2.2">
-<h4><span class="header-section-number">5.1.2.2</span> Shiny Server / RStudio Connect</h4>
+<div id="shiny-server-rstudio-connect" class="section level4 hasAnchor" number="5.1.2.2">
+<h4><span class="header-section-number">5.1.2.2</span> Shiny Server / RStudio Connect<a href="rmarkdown-interaction.html#shiny-server-rstudio-connect" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>除此之外，Shiny Server （<a href="https://www.rstudio.com/products/shiny/shiny-server/" class="uri">https://www.rstudio.com/products/shiny/shiny-server/</a>） 和 RStudio Connect（<a href="https://www.rstudio.com/products/connect/" class="uri">https://www.rstudio.com/products/connect/</a>） 都可以发布 Shiny 文档，但是读者需要熟悉有关 Linux 的知识。由于该内容较为复杂与丰富，超出本书读者的需求，所以在此不做过多介绍。</p>
 </div>
 </div>
-<div id="shiny-app" class="section level3" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> 嵌入 Shiny 应用程序</h3>
+<div id="shiny-app" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> 嵌入 Shiny 应用程序<a href="rmarkdown-interaction.html#shiny-app" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>除了在 R Markdown 中嵌入单个 Shiny 的输入和输出外，还可以在文档中嵌入一个独立的 Shiny 应用程序。有两种方法可以做到这一点：</p>
 <ol style="list-style-type: decimal">
 <li><p>使用 <code>shinyApp()</code> 函数内部定义应用程序;</p></li>
@@ -521,8 +520,8 @@ div.csl-indent {
 <blockquote>
 <p><strong>注意</strong>：这两个函数在 <strong>shiny</strong> 包中，当在 YAML 元数据指定 <code>runtime: shiny</code> 时，它们会被自动加载。因此，读者不必调用 <code>library(shiny)</code> 来加载 shiny。</p>
 </blockquote>
-<div id="shiny-embed-inline" class="section level4" number="5.1.3.1">
-<h4><span class="header-section-number">5.1.3.1</span> 内部定义应用程序</h4>
+<div id="shiny-embed-inline" class="section level4 hasAnchor" number="5.1.3.1">
+<h4><span class="header-section-number">5.1.3.1</span> 内部定义应用程序<a href="rmarkdown-interaction.html#shiny-embed-inline" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>下面例子将 Shiny 应用程序写在了 Rmarkdown 内部中：</p>
 <div class="sourceCode" id="cb168"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb168-1"><a href="rmarkdown-interaction.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE} </span></span>
 <span id="cb168-2"><a href="rmarkdown-interaction.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(</span></span>
@@ -547,8 +546,8 @@ div.csl-indent {
 <p><strong>注意</strong>：使用 <code>height</code> 参数来确定嵌入式应用程序应该占用多少高度。</p>
 </blockquote>
 </div>
-<div id="外联应用程序" class="section level4" number="5.1.3.2">
-<h4><span class="header-section-number">5.1.3.2</span> 外联应用程序</h4>
+<div id="外联应用程序" class="section level4 hasAnchor" number="5.1.3.2">
+<h4><span class="header-section-number">5.1.3.2</span> 外联应用程序<a href="rmarkdown-interaction.html#外联应用程序" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>下面例子展示嵌入了一个定义在另一个目录中的 Shiny 应用程序。</p>
 <div class="sourceCode" id="cb169"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb169-1"><a href="rmarkdown-interaction.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
 <span id="cb169-2"><a href="rmarkdown-interaction.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="in">shinyAppDir(</span></span>
@@ -561,16 +560,16 @@ div.csl-indent {
 </blockquote>
 </div>
 </div>
-<div id="shiny-widget" class="section level3" number="5.1.4">
-<h3><span class="header-section-number">5.1.4</span> Shiny 小部件</h3>
+<div id="shiny-widget" class="section level3 hasAnchor" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> Shiny 小部件<a href="rmarkdown-interaction.html#shiny-widget" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Shiny 小部件使你能够使用一个函数调用创建包含在 R Markdown 文档中的可重复使用的 Shiny 组件。还可以直接从控制台调用 Shiny 小部件(在创作过程中很有用)，并在 RStudio Viewer 窗格或外部 Web 浏览器中显示它们的输出。</p>
-<div id="shinyapp-函数" class="section level4" number="5.1.4.1">
-<h4><span class="header-section-number">5.1.4.1</span> <code>shinyApp()</code> 函数</h4>
+<div id="shinyapp-函数" class="section level4 hasAnchor" number="5.1.4.1">
+<h4><span class="header-section-number">5.1.4.1</span> <code>shinyApp()</code> 函数<a href="rmarkdown-interaction.html#shinyapp-函数" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Shiny 窗口小部件的核心是使用 <code>shinyApp()</code> 函数创建的微型应用程序。 你无需像传统的 Shiny 应用程序那样，既要创建用户界面（UI），又要创建服务器端（Server）。而是将 UI 和 Server 定义作为参数传递给 <code>shinyApp()</code> 函数。 本书会在第 <a href="rmarkdown-interaction.html#shiny-embed-inline">5.1.3.1</a> 节中给出了一个示例。</p>
 <p>接下来，先给出最简单的 Shiny 小部件类型———返回 <code>shinyApp()</code> 的 R 函数。</p>
 </div>
-<div id="例子k-means-聚类" class="section level4" number="5.1.4.2">
-<h4><span class="header-section-number">5.1.4.2</span> 例子：k-means 聚类</h4>
+<div id="例子k-means-聚类" class="section level4 hasAnchor" number="5.1.4.2">
+<h4><span class="header-section-number">5.1.4.2</span> 例子：k-means 聚类<a href="rmarkdown-interaction.html#例子k-means-聚类" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>rmdexamples</strong> 包 (<a href="https://github.com/rstudio/rmdexamples" class="uri">https://github.com/rstudio/rmdexamples</a>) 包含以上形式实现的 Shiny 小部件示例。 <code>kmeans_cluster()</code> 函数接受单个数据集（<code>dataset</code>）参数，并返回一个小部件来显示 k-Means 聚类的结果。读者可以在 R Markdown 文档中使用它：</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb170-1"><a href="rmarkdown-interaction.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
 <span id="cb170-2"><a href="rmarkdown-interaction.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(rmdexamples)</span></span>
@@ -622,20 +621,20 @@ div.csl-indent {
 <span id="cb171-36"><a href="rmarkdown-interaction.html#cb171-36" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb171-37"><a href="rmarkdown-interaction.html#cb171-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="小部件的大小和布局" class="section level4" number="5.1.4.3">
-<h4><span class="header-section-number">5.1.4.3</span> 小部件的大小和布局</h4>
+<div id="小部件的大小和布局" class="section level4 hasAnchor" number="5.1.4.3">
+<h4><span class="header-section-number">5.1.4.3</span> 小部件的大小和布局<a href="rmarkdown-interaction.html#小部件的大小和布局" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Shiny 小部件可以嵌入在不同的地方，包括标准的全宽页面、页面内的小列，甚至在 HTML5 幻灯片中。为了让小部件的大小和布局在上文所述的文档中稳定工作，作者建议小部件的总高度不高于 500 像素。当然，还可以在创建小部件的函数中添加一个显式的 height 参数（默认值为 500）。</p>
 </div>
 </div>
-<div id="shiny-link" class="section level3" number="5.1.5">
-<h3><span class="header-section-number">5.1.5</span> Shiny 文档间的链接</h3>
+<div id="shiny-link" class="section level3 hasAnchor" number="5.1.5">
+<h3><span class="header-section-number">5.1.5</span> Shiny 文档间的链接<a href="rmarkdown-interaction.html#shiny-link" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>可以使用 Markdown 链接语法并指定文档的<strong>相对</strong>路径，链接到其他 Shiny 文档上，例如： <code>[另一个Shiny文档](another.Rmd)</code>。如果在一个页面上单击指向另一个 Rmd 文档的链接，该 Rmd 文档将作为当前交互式 Shiny 文档启动。</p>
 <p>默认情况下，只能链接到调用 <code>rmarkdown::run()</code> 的文件所在目录中的 R Markdown 文件(例如，你无法连接到 <code>../foo.Rmd</code>)。 但是，可以使用 <code>rmarkdown::run()</code> 的 <code>dir</code> 参数来定义根目录。</p>
 </div>
-<div id="shiny-render" class="section level3" number="5.1.6">
-<h3><span class="header-section-number">5.1.6</span> Shiny 文档的渲染</h3>
-<div id="shiny-delay" class="section level4" number="5.1.6.1">
-<h4><span class="header-section-number">5.1.6.1</span> 延迟渲染</h4>
+<div id="shiny-render" class="section level3 hasAnchor" number="5.1.6">
+<h3><span class="header-section-number">5.1.6</span> Shiny 文档的渲染<a href="rmarkdown-interaction.html#shiny-render" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="shiny-delay" class="section level4 hasAnchor" number="5.1.6.1">
+<h4><span class="header-section-number">5.1.6.1</span> 延迟渲染<a href="rmarkdown-interaction.html#shiny-delay" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Shiny 文档通常在每次 R Markdown 文档渲染时都会显示。这时，较大或计算量较大的文档可能需要一些时间来加载。</p>
 <p>如果文档包含不需要立即渲染的交互式 Shiny 组件，你可以在 <code>rmarkdown::render_delayed()</code> 函数中封装 Shiny 代码。这个函数保存它的参数，直到文档呈现完成并显示给用户，然后计算它，并在计算完成时将其注入输出文档。</p>
 <p>例如，以下代码中，首先渲染出数值输入的结果，加载完文档并显示给用户之后， <code>render_delayed()</code> 才会执行内部代码，并将其加载到文档中。</p>
@@ -742,8 +741,8 @@ renderPlot({
 </div>
 </div>
 </div>
-<div id="rmarkdown-dashboards" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> 交互式仪表盘：Dashboards</h2>
+<div id="rmarkdown-dashboards" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> 交互式仪表盘：Dashboards<a href="rmarkdown-interaction.html#rmarkdown-dashboards" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>本节将介绍通过 <strong>flexdashboard</strong> 包 <span class="citation">(<a href="#ref-R-flexdashboard" role="doc-biblioref">Iannone, Allaire, and Borges 2020</a>)</span> 设计一个仪表盘的方法。</p>
 <p>仪表盘在业务风格的报告中特别常见。它们可以用来展示报告的概要和关键内容。仪表盘的布局通常是基于网格搭建的，各个组件排列在各种大小的“盒子”中。</p>
 <p>使用 <strong>flexdashboard</strong> 包，读者可以</p>
@@ -754,8 +753,8 @@ renderPlot({
 <li><p>可以创建区域来呈现可视化图形和相关注释。</p></li>
 <li><p>使用 Shiny 驱动动态可视化图表。</p></li>
 </ul>
-<div id="dashboards-intro" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Dashboards 入门</h3>
+<div id="dashboards-intro" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Dashboards 入门<a href="rmarkdown-interaction.html#dashboards-intro" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>首先，安装 <code>flexdashboard</code> 包：</p>
 <pre><code>install.packages(&quot;flexdashboard&quot;)</code></pre>
 <p>其次，通过点击 <code>File -&gt; New File -&gt; R Markdown</code> 对话框在 RStudio 中创建文档，并选择 “Flex Dashboard” 模板。操作界面如图 <a href="rmarkdown-interaction.html#fig:dashboard-new">5.6</a> 所示：</p>
@@ -776,8 +775,8 @@ renderPlot({
 <p>仪表盘有许多与 HTML 文档相同的特性，比如图形选项，外观和风格，MathJax 公式，头部和正文前后内容和 Pandoc 参数，等等。除此之外，也建议浏览 R 帮助页面 <code>?flexdashboard::flex_dashboard</code> 来了解更多 <code>flexdashboard</code> 选项和其特性。</p>
 <p>当然 RStudio 官网也给出了该包 <a href="https://pkgs.rstudio.com/flexdashboard/">介绍</a> 与案例，读者可以基于案例到学习实现快速入门。</p>
 </div>
-<div id="dashboards-layout" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Dashboards 排版</h3>
+<div id="dashboards-layout" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Dashboards 排版<a href="rmarkdown-interaction.html#dashboards-layout" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>关于仪表盘布局的总体规则是：</p>
 <ul>
 <li><p>一级标题：生成页面；</p></li>
@@ -836,8 +835,8 @@ renderPlot({
 图 5.7: 简单仪表盘布局示例。
 </p>
 </div>
-<div id="基于行的布局" class="section level4" number="5.2.2.1">
-<h4><span class="header-section-number">5.2.2.1</span> 基于行的布局</h4>
+<div id="基于行的布局" class="section level4 hasAnchor" number="5.2.2.1">
+<h4><span class="header-section-number">5.2.2.1</span> 基于行的布局<a href="rmarkdown-interaction.html#基于行的布局" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>通过修改 <code>orientation</code> 选项将默认布局（列导向）改为以行导向的布局，例如：</p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb178-1"><a href="rmarkdown-interaction.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb178-2"><a href="rmarkdown-interaction.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="at">  flexdashboard:</span><span class="fu">:flex_dashboard</span><span class="kw">:</span></span>
@@ -850,8 +849,8 @@ renderPlot({
 </p>
 </div>
 </div>
-<div id="节属性" class="section level4" number="5.2.2.2">
-<h4><span class="header-section-number">5.2.2.2</span> 节属性</h4>
+<div id="节属性" class="section level4 hasAnchor" number="5.2.2.2">
+<h4><span class="header-section-number">5.2.2.2</span> 节属性<a href="rmarkdown-interaction.html#节属性" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>二级结构头部还可以加入一些属性，例如：设置列宽度为 350。</p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb179-1"><a href="rmarkdown-interaction.html#cb179-1" aria-hidden="true" tabindex="-1"></a>窄栏 {data-width=350}</span>
 <span id="cb179-2"><a href="rmarkdown-interaction.html#cb179-2" aria-hidden="true" tabindex="-1"></a>--------------------------------</span></code></pre></div>
@@ -870,8 +869,8 @@ renderPlot({
 </p>
 </div>
 </div>
-<div id="multiple-pages" class="section level4" number="5.2.2.3">
-<h4><span class="header-section-number">5.2.2.3</span> 多页</h4>
+<div id="multiple-pages" class="section level4 hasAnchor" number="5.2.2.3">
+<h4><span class="header-section-number">5.2.2.3</span> 多页<a href="rmarkdown-interaction.html#multiple-pages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果 R Markdown 文档中有多个一级结构的内容时，这时仪表盘会将每个一节结构分别显示为单独页面。下面给出一个简单的例子：</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb181-1"><a href="rmarkdown-interaction.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb181-2"><a href="rmarkdown-interaction.html#cb181-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;多页显示&quot;</span></span>
@@ -922,8 +921,8 @@ renderPlot({
 </p>
 </div>
 </div>
-<div id="故事板" class="section level4" number="5.2.2.4">
-<h4><span class="header-section-number">5.2.2.4</span> 故事板</h4>
+<div id="故事板" class="section level4 hasAnchor" number="5.2.2.4">
+<h4><span class="header-section-number">5.2.2.4</span> 故事板<a href="rmarkdown-interaction.html#故事板" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>除了基于列或行布局外，还可以通过故事板（storyboard）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：</p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb182-1"><a href="rmarkdown-interaction.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb182-2"><a href="rmarkdown-interaction.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;故事板&quot;</span></span>
@@ -961,8 +960,8 @@ renderPlot({
 <p>如图 <a href="rmarkdown-interaction.html#fig:dashboard-story">5.12</a> 所示，读者可以通过顶部的左右导航按钮来浏览所有故事板内容。</p>
 </div>
 </div>
-<div id="dashboards-module" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Dashboards 组件</h3>
+<div id="dashboards-module" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Dashboards 组件<a href="rmarkdown-interaction.html#dashboards-module" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>仪表盘布局中可以包含各种各样的组件，包括：</p>
 <ol style="list-style-type: decimal">
 <li><p>基于 HTML 小部件的交互式 JavaScript 数据可视化图形。</p></li>
@@ -976,8 +975,8 @@ renderPlot({
 <blockquote>
 <p><strong>注</strong>：无论输出格式如何，前三个组件在大多数 R Markdown 文档中均可使用。 而后四个组件是仪表盘特有的，本节主要介绍后四个组件。</p>
 </blockquote>
-<div id="数值框" class="section level4" number="5.2.3.1">
-<h4><span class="header-section-number">5.2.3.1</span> 数值框</h4>
+<div id="数值框" class="section level4 hasAnchor" number="5.2.3.1">
+<h4><span class="header-section-number">5.2.3.1</span> 数值框<a href="rmarkdown-interaction.html#数值框" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果希望在仪表盘中包含一个或多个数值，那么读者可以使用 <strong>flexdashboard</strong> 包中的 <code>valueBox()</code> 函数来实现这个需求。下面给出一个简单的例子：</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb183-1"><a href="rmarkdown-interaction.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb183-2"><a href="rmarkdown-interaction.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;数值框&quot;</span></span>
@@ -1025,8 +1024,8 @@ renderPlot({
 </div>
 <p>图 <a href="rmarkdown-interaction.html#fig:dashboard-valueboxes">5.13</a> 展示了三个并排的仪表，每个仪表都显示了一个数值和标题。这里重点解释下第三个代码块（<code>###  每日垃圾邮件数</code>）。这里的 <code>valueBox()</code> 函数定义了一个值( <code>spam</code> )和一个图标( <code>icon = "fa-trash"</code> )。并使用 <code>color</code> 设置参数框的颜色。内部使用了一个 <code>ifelse()</code> 语句，使得不同值表示不同的颜色。当然，可用的颜色还包括： <code>"info"</code>, <code>"success"</code> 和 <code>"danger"</code>（默认值为： <code>"primary"</code>）。也可以指定任何有效的 CSS 颜色（例如：<code>"#ffffff"</code>， <code>"rgb(100, 100, 100)"</code> 等）。</p>
 </div>
-<div id="仪表" class="section level4" number="5.2.3.2">
-<h4><span class="header-section-number">5.2.3.2</span> 仪表</h4>
+<div id="仪表" class="section level4 hasAnchor" number="5.2.3.2">
+<h4><span class="header-section-number">5.2.3.2</span> 仪表<a href="rmarkdown-interaction.html#仪表" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在指定数值范围内显示仪表上的数值。例如，下面展示了三个仪表并排的结果（见图 <a href="rmarkdown-interaction.html#fig:dashboard-gauges">5.14</a>）。</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb184-1"><a href="rmarkdown-interaction.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb184-2"><a href="rmarkdown-interaction.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;仪表&quot;</span></span>
@@ -1075,8 +1074,8 @@ renderPlot({
 <li><p>可以使用 <code>gaugeSectors()</code> 函数指定一组自定义的颜色扇区，默认颜色为绿色。扇区选项（<code>sectors</code>）可以指定三个值的范围（<code>success</code>, <code>warning</code> 和 <code>danger</code>） 使得仪表盘的颜色根据它的值变化而变化。</p></li>
 </ol>
 </div>
-<div id="文本注释" class="section level4" number="5.2.3.3">
-<h4><span class="header-section-number">5.2.3.3</span> 文本注释</h4>
+<div id="文本注释" class="section level4 hasAnchor" number="5.2.3.3">
+<h4><span class="header-section-number">5.2.3.3</span> 文本注释<a href="rmarkdown-interaction.html#文本注释" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>可以通过以下方式在仪表盘中包含额外的叙述说明：</p>
 <ol style="list-style-type: decimal">
 <li><p>在页面顶部加入相应文本内容。</p></li>
@@ -1130,8 +1129,8 @@ renderPlot({
 </blockquote>
 <!-- 通过将 `.no-title` 属性应用于一个节标题，你可以完全排除该标题。 -->
 </div>
-<div id="导航栏" class="section level4" number="5.2.3.4">
-<h4><span class="header-section-number">5.2.3.4</span> 导航栏</h4>
+<div id="导航栏" class="section level4 hasAnchor" number="5.2.3.4">
+<h4><span class="header-section-number">5.2.3.4</span> 导航栏<a href="rmarkdown-interaction.html#导航栏" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>默认情况下，仪表盘的导航栏包括：标题（<code>title</code>）、作者（<code>author</code>）和日期（<code>date</code>）。当仪表盘有多个页面时（第 <a href="rmarkdown-interaction.html#multiple-pages">5.2.2.3</a> 节），导航条左侧还包含指向各个页面的链接。当然，也在可以仪表盘上添加社交链接。</p>
 <p>除此之外，使用 <code>navbar</code> 选项可以在导航栏中添加自定义链接。例如，在导航栏中添加 “关于” 链接：</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb186-1"><a href="rmarkdown-interaction.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -1153,13 +1152,13 @@ renderPlot({
 </blockquote>
 </div>
 </div>
-<div id="dashboards-shiny" class="section level3" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> Dashboards 与 Shiny</h3>
+<div id="dashboards-shiny" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Dashboards 与 Shiny<a href="rmarkdown-interaction.html#dashboards-shiny" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在仪表盘中添加 Shiny，可以通过交互界面手动更改参数，并显示实时结果。或者当仪表盘的数据发生变化时，让仪表盘进行实时更新（请参阅 <strong>shiny</strong> 包中的 <code>reactiveFileReader()</code> 和 <code>reactivePoll()</code> 函数）。这是通过将 <code>runtime: shiny</code> 添加到标准仪表盘文档来实现的，然后添加一个或多个输入控件或响应表达式来动态驱动仪表板内组件的外观。</p>
 <p>在 <strong>flexdashboard</strong> 中使用 Shiny 可以将一个静态的 R Markdown 报告变成一个交互式文档。需要注意的是，交互式文档需要部署到 Shiny 的服务器上，以便广泛共享（而静态 R Markdown 文档是可以附加到电子邮件或从任何标准 Web 服务器提供的独立 Web 页面）。</p>
 <p>注意，<a href="https://rstudio.github.io/shinydashboard/"><strong>shinydashboard</strong></a> 包提供了用 Shiny 创建仪表板的另一种方法。</p>
-<div id="入门指南" class="section level4" number="5.2.4.1">
-<h4><span class="header-section-number">5.2.4.1</span> 入门指南</h4>
+<div id="入门指南" class="section level4 hasAnchor" number="5.2.4.1">
+<h4><span class="header-section-number">5.2.4.1</span> 入门指南<a href="rmarkdown-interaction.html#入门指南" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在仪表盘中添加 Shiny 组件的步骤如下：</p>
 <ol style="list-style-type: decimal">
 <li><p>在文档顶部 YAML 元数据中添加 <code>runtime: shiny</code>。</p></li>
@@ -1173,8 +1172,8 @@ renderPlot({
 <li><p>当代码中包含绘图函数时（例如：<code>hist()</code>），得将它们封装在 <code>renderPlot()</code> 中。这有利于界面在布局更改时，自动调整尺寸大小。</p></li>
 </ol>
 </div>
-<div id="shiny-仪表盘的一个示例" class="section level4" number="5.2.4.2">
-<h4><span class="header-section-number">5.2.4.2</span> Shiny 仪表盘的一个示例</h4>
+<div id="shiny-仪表盘的一个示例" class="section level4 hasAnchor" number="5.2.4.2">
+<h4><span class="header-section-number">5.2.4.2</span> Shiny 仪表盘的一个示例<a href="rmarkdown-interaction.html#shiny-仪表盘的一个示例" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>图 <a href="rmarkdown-interaction.html#fig:dashboard-shiny">5.17</a> 给出了 Shiny 仪表盘的一个示例：</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb187-1"><a href="rmarkdown-interaction.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb187-2"><a href="rmarkdown-interaction.html#cb187-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;间歇泉喷发&quot;</span></span>
@@ -1234,13 +1233,13 @@ renderPlot({
 <p><strong>注意</strong>：文档顶部标记为 <code>global</code> 的 R 代码块在全局环境中都可以被调用。这将为用户带来更好的启动性能，强烈推荐大家使用。</p>
 </blockquote>
 </div>
-<div id="输入栏" class="section level4" number="5.2.4.3">
-<h4><span class="header-section-number">5.2.4.3</span> 输入栏</h4>
+<div id="输入栏" class="section level4 hasAnchor" number="5.2.4.3">
+<h4><span class="header-section-number">5.2.4.3</span> 输入栏<a href="rmarkdown-interaction.html#输入栏" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>通过添加 <code>{.sidebar}</code> 属性设置一个默认布局为左对齐，250 像素宽度的左侧边栏。</p>
 <p>在搭建多个页面的仪表盘时，如果想创建一个应用于所有页面的工具条。这时，可以使用一级结构来定义侧边栏。</p>
 </div>
-<div id="拓展" class="section level4" number="5.2.4.4">
-<h4><span class="header-section-number">5.2.4.4</span> 拓展</h4>
+<div id="拓展" class="section level4 hasAnchor" number="5.2.4.4">
+<h4><span class="header-section-number">5.2.4.4</span> 拓展<a href="rmarkdown-interaction.html#拓展" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>下面给出一些学习 Shiny 和创建交互式文档的资源：</p>
 <ol style="list-style-type: decimal">
 <li><p>Shiny 官方网站( <a href="http://shiny.rstudio.com" class="uri">http://shiny.rstudio.com</a>) ：包含大量的文章、教程和示例。</p></li>
@@ -1250,18 +1249,18 @@ renderPlot({
 </div>
 </div>
 </div>
-<div id="package-rmd" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> 在 R package 中使用 R Markdown</h2>
-<div id="rmd-vignettes" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> 写软件包的文档</h3>
+<div id="package-rmd" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> 在 R package 中使用 R Markdown<a href="rmarkdown-interaction.html#package-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="rmd-vignettes" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> 写软件包的文档<a href="rmarkdown-interaction.html#rmd-vignettes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="rmd-auto" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> 定义一个自动化报告函数</h3>
+<div id="rmd-auto" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> 定义一个自动化报告函数<a href="rmarkdown-interaction.html#rmd-auto" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
 </div>
-<h3>参考文献</h3>
+<h3>参考文献<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-R-flexdashboard" class="csl-entry">
 Iannone, Richard, JJ Allaire, and Barbara Borges. 2020. <em>Flexdashboard: R Markdown Format for Flexible Dashboards</em>. <a href="http://rmarkdown.rstudio.com/flexdashboard">http://rmarkdown.rstudio.com/flexdashboard</a>.
@@ -1295,15 +1294,14 @@ Iannone, Richard, JJ Allaire, and Barbara Borges. 2020. <em>Flexdashboard: R Mar
 <a href="rmarkdown-operation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -1337,7 +1335,7 @@ gitbook.start({
 },
 "download": null,
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

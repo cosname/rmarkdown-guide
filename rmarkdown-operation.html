@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 6 章 R Markdown 的操作技巧 | R Markdown 指南</title>
   <meta name="description" content="第 6 章 R Markdown 的操作技巧 | R Markdown 指南" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 6 章 R Markdown 的操作技巧 | R Markdown 指南" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="第 6 章 R Markdown 的操作技巧 | R Markdown 指南" />
   <meta name="github-repo" content="cosname/rmarkdown-guide" />
@@ -28,7 +27,7 @@
 <meta name="author" content="杨晓龙" />
 
 
-<meta name="date" content="2022-04-02" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,15 +36,15 @@
   
 <link rel="prev" href="rmarkdown-interaction.html"/>
 <link rel="next" href="rmarkdown-project.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -54,11 +53,11 @@
 
 
 
-
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/kePrint/kePrint.js"></script>
-<link href="libs/lightable/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -421,10 +420,10 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rmarkdown-operation" class="section level1" number="6">
-<h1><span class="header-section-number">第 6 章</span> R Markdown 的操作技巧</h1>
-<div id="table-advanced" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> 表格操作进阶</h2>
+<div id="rmarkdown-operation" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">第 6 章</span> R Markdown 的操作技巧<a href="rmarkdown-operation.html#rmarkdown-operation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="table-advanced" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> 表格操作进阶<a href="rmarkdown-operation.html#table-advanced" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>在日常报告中，表格是展示结果的主要方式之一，例如下表展示了某中学某次考试的学生成绩：</p>
 <table>
 <thead>
@@ -494,15 +493,15 @@ div.csl-indent {
 <li><p>使用 <strong>kableExtra</strong> <span class="citation">(<a href="#ref-R-kableExtra" role="doc-biblioref">Zhu 2021</a>)</span> 包来展现更高级的个性化制作方法；</p></li>
 <li><p>提供其它生成表格的 R 包以供读者参考。</p></li>
 </ul>
-<div id="table-complex" class="section level3" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> 利用函数 <code>knitr::kable()</code> 生成复杂的表格</h3>
+<div id="table-complex" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> 利用函数 <code>knitr::kable()</code> 生成复杂的表格<a href="rmarkdown-operation.html#table-complex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在 R Markdown 中，通常使用 <strong>knitr</strong> 包中的函数 <code>kable()</code> 来快速创建一个表格。<code>kable()</code> 可以处理数据框、矩阵等“矩形数据”，快速生成表格，而表格的外观则可以通过修改函数参数来自定义，下面将对这些参数进行介绍：</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="rmarkdown-operation.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(x, format, <span class="at">digits =</span> <span class="fu">getOption</span>(<span class="st">&quot;digits&quot;</span>),</span>
 <span id="cb188-2"><a href="rmarkdown-operation.html#cb188-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">NA</span>, <span class="at">col.names =</span> <span class="cn">NA</span>, align, <span class="at">caption =</span> <span class="cn">NULL</span>,</span>
 <span id="cb188-3"><a href="rmarkdown-operation.html#cb188-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NULL</span>, <span class="at">format.args =</span> <span class="fu">list</span>(), <span class="at">escape =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb188-4"><a href="rmarkdown-operation.html#cb188-4" aria-hidden="true" tabindex="-1"></a>    ...)</span></code></pre></div>
-<div id="kable-formats" class="section level4" number="6.1.1.1">
-<h4><span class="header-section-number">6.1.1.1</span> 目前已支持的表的格式</h4>
+<div id="kable-formats" class="section level4 hasAnchor" number="6.1.1.1">
+<h4><span class="header-section-number">6.1.1.1</span> 目前已支持的表的格式<a href="rmarkdown-operation.html#kable-formats" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在大多数情况下，如果只需要制作一个简单表格，<code>knitr::kable(x)</code> 就足够了。其中 <code>format</code> 参数会根据 <strong>knitr</strong> 源文档自动设置。它可能的取值是 <code>pipe</code> （列与列之间由短的竖线分隔的表），<code>simple</code> （仅包含横向分割线 的简单表格），<code>latex</code> （LaTex 表格），<code>html</code> （HTML 表格），和 <code>rst</code> （reStructuredText 表格）。为了展示各个取值的不同，这里直接给出了各个取值在不同编程语言中的原始代码。</p>
 <p>对于 R Markdown 文档，<code>kable()</code> 默认使用 <code>pipe</code> 格式的表格，输出结果如下所示：</p>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="rmarkdown-operation.html#cb189-1" aria-hidden="true" tabindex="-1"></a>grade <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(姓名 <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;张三&quot;</span>,<span class="st">&quot;李四&quot;</span>,<span class="st">&quot;王五&quot;</span>),</span>
@@ -581,8 +580,8 @@ div.csl-indent {
 <span id="cb200-2"><a href="rmarkdown-operation.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (knitr<span class="sc">::</span><span class="fu">is_latex_output</span>()) <span class="st">&#39;latex&#39;</span> <span class="cf">else</span> <span class="st">&#39;pipe&#39;</span></span>
 <span id="cb200-3"><a href="rmarkdown-operation.html#cb200-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 </div>
-<div id="修改表的列名" class="section level4" number="6.1.1.2">
-<h4><span class="header-section-number">6.1.1.2</span> 修改表的列名</h4>
+<div id="修改表的列名" class="section level4 hasAnchor" number="6.1.1.2">
+<h4><span class="header-section-number">6.1.1.2</span> 修改表的列名<a href="rmarkdown-operation.html#修改表的列名" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <!-- https://stackoverflow.com/questions/51432502/replace-column-names-in-kable-r-markdown/51444998#51444998 -->
 <p>在一些情况下，在数据框（data frame）中定义的列的名称可能与想要显示给读者的内容不同，需要进行修改。在使用英文时，数据的列名通常不使用空格来分隔单词，而是使用点、下划线以及大小写来进行分隔。而在制作表格时，这样的变量名会显得有些不自然。在中文环境下，虽然空格的问题较少，但也存在变量名过长的情况，在 R 中也往往使用简化的名词或对应的英文简写来代替。在这种情况下，可以使用 <code>col.names</code> 参数将列名替换为一个包含新名称的向量，即 <code>col.names = c(...)</code>。例如，可以在上文成绩表的列名中提供更多信息：</p>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="rmarkdown-operation.html#cb201-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(grade, </span>
@@ -651,8 +650,8 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="指定列的对齐方式" class="section level4" number="6.1.1.3">
-<h4><span class="header-section-number">6.1.1.3</span> 指定列的对齐方式</h4>
+<div id="指定列的对齐方式" class="section level4 hasAnchor" number="6.1.1.3">
+<h4><span class="header-section-number">6.1.1.3</span> 指定列的对齐方式<a href="rmarkdown-operation.html#指定列的对齐方式" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果想要改变表格中列的对齐方式，可以使用由字符 <code>l</code> （left，左对齐）、<code>c</code> （center，居中）以及 <code>r</code> （right，右对齐）组成的值向量或一个多字符的字符串来进行对齐，即 <code>kable(..., align = c('c', 'l'))</code> 和 <code>kable(..., align = 'cl')</code> 是等价的。在默认情况下，数字列是右对齐的，其他列是左对齐的。例如可以对成绩表进行调整，使得前两列右对齐，后两列左对齐：</p>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="rmarkdown-operation.html#cb203-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(grade, <span class="at">align =</span> <span class="st">&#39;rrll&#39;</span>)</span></code></pre></div>
 <table>
@@ -718,8 +717,8 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="kable-caption" class="section level4" number="6.1.1.4">
-<h4><span class="header-section-number">6.1.1.4</span> 添加表格标题</h4>
+<div id="kable-caption" class="section level4 hasAnchor" number="6.1.1.4">
+<h4><span class="header-section-number">6.1.1.4</span> 添加表格标题<a href="rmarkdown-operation.html#kable-caption" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>给表格添加标题需要用到 <code>caption</code> 参数，如表 <a href="rmarkdown-operation.html#tab:kable-cap">6.2</a> 所示：</p>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="rmarkdown-operation.html#cb205-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(grade, <span class="at">caption =</span> <span class="st">&#39;考试成绩&#39;</span>)</span></code></pre></div>
 <table>
@@ -755,8 +754,8 @@ div.csl-indent {
 </table>
 <p>正如本书<a href="rmarkdown-base.html#element-quote">2.6.4</a>节所提到的那样，当一个表格有标题并且以 <strong>bookdown</strong> 来输出格式时，它可以被交叉引用，而在基础的 <code>html_document</code> 和 <code>pdf_document</code> 中则不行。</p>
 </div>
-<div id="调整数字格式" class="section level4" number="6.1.1.5">
-<h4><span class="header-section-number">6.1.1.5</span> 调整数字格式</h4>
+<div id="调整数字格式" class="section level4 hasAnchor" number="6.1.1.5">
+<h4><span class="header-section-number">6.1.1.5</span> 调整数字格式<a href="rmarkdown-operation.html#调整数字格式" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>有的时候，表格中的数字位数很长，展示的时候需要缩短，这时可以通过 <code>digits</code> 参数（会被传递给 <code>round()</code> 函数）来设置最大的小数位数，以及通过 <code>format.args</code>（会被传递给 R 中的 <code>format()</code> 函数）来设置其他格式化参数。</p>
 <p>首先是几个简单的 <code>round()</code> 和 <code>format()</code> 的例子，从而可以更好地理解之后的 <code>kable()</code> 中 <code>digits</code> 参数是如何工作的:</p>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="rmarkdown-operation.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">1.234567</span>, <span class="dv">0</span>)</span>
@@ -889,8 +888,8 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="显示缺失值" class="section level4" number="6.1.1.6">
-<h4><span class="header-section-number">6.1.1.6</span> 显示缺失值</h4>
+<div id="显示缺失值" class="section level4 hasAnchor" number="6.1.1.6">
+<h4><span class="header-section-number">6.1.1.6</span> 显示缺失值<a href="rmarkdown-operation.html#显示缺失值" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>有的时候，表中可能会存在缺失值，如该学生没有缺考或没有选修某个课。在默认情况下，R 中缺失值（如<code>NA</code>）在表格中显示为字符串<code>NA</code>，如：</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="rmarkdown-operation.html#cb211-1" aria-hidden="true" tabindex="-1"></a>grade2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(姓名 <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;张三&quot;</span>,<span class="st">&quot;李四&quot;</span>,<span class="st">&quot;王五&quot;</span>),</span>
 <span id="cb211-2"><a href="rmarkdown-operation.html#cb211-2" aria-hidden="true" tabindex="-1"></a>                     物理 <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="dv">90</span>,<span class="dv">85</span>),</span>
@@ -996,9 +995,9 @@ div.csl-indent {
 </table>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="rmarkdown-operation.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(opts)  <span class="co"># 恢复全局 R 选项</span></span></code></pre></div>
 </div>
-<div id="特殊字符的转义" class="section level4" number="6.1.1.7">
-<h4><span class="header-section-number">6.1.1.7</span> 特殊字符的转义</h4>
-<p>HTML 或者 LaTeX 对应的编程语言之中包含了一些特殊的字符，例如在 LaTeX 中输入公式可能需要的 <code>$</code> 等。为了使结果能够正常输出，<code>kable()</code> 将默认通过参数 <code>escape = TRUE</code> 来“转义”这些特殊字符，即令这些特殊字符失去其特殊含义，使得所有的字符可以逐字生成，而不会生成特殊符号（如 <code>\beta</code> 将不会自动显示为 <span class="math inline">\(\beta\)</span>）。例如对于 HTML 格式的表格，<code>&gt;</code> 将被替换为 <code>&amp;gt;</code>；而对于 LaTeX 格式的表格，<code>_</code> 将被转义为 <code>\_</code> <a href="references.html#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>。</p>
+<div id="特殊字符的转义" class="section level4 hasAnchor" number="6.1.1.7">
+<h4><span class="header-section-number">6.1.1.7</span> 特殊字符的转义<a href="rmarkdown-operation.html#特殊字符的转义" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>HTML 或者 LaTeX 对应的编程语言之中包含了一些特殊的字符，例如在 LaTeX 中输入公式可能需要的 <code>$</code> 等。为了使结果能够正常输出，<code>kable()</code> 将默认通过参数 <code>escape = TRUE</code> 来“转义”这些特殊字符，即令这些特殊字符失去其特殊含义，使得所有的字符可以逐字生成，而不会生成特殊符号（如 <code>\beta</code> 将不会自动显示为 <span class="math inline">\(\beta\)</span>）。例如对于 HTML 格式的表格，<code>&gt;</code> 将被替换为 <code>&amp;gt;</code>；而对于 LaTeX 格式的表格，<code>_</code> 将被转义为 <code>\_</code> <a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>。</p>
 <p>如果接触过这些字符，并且知道如何正确使用它们，那么可以通过 <code>escape = FALSE</code> 来禁用这个参数，但要注意必须确保特殊字符不会在 LaTeX 或 HTML 中触发语法错误。表 <a href="rmarkdown-operation.html#tab:latex-math-escape">6.3</a> 展示了转义之后的结果，表 <a href="rmarkdown-operation.html#tab:latex-math">6.4</a> 则展示了一些包含特殊字符（<code>$</code>、<code>\</code> 以及 <code>_</code>）的 LaTeX 数学表达式：</p>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="rmarkdown-operation.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 添加数学表达式</span></span>
 <span id="cb215-2"><a href="rmarkdown-operation.html#cb215-2" aria-hidden="true" tabindex="-1"></a>g_range <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(成绩范围 <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;$</span><span class="sc">\\</span><span class="st">ge 90$&quot;</span>,<span class="st">&quot;$</span><span class="sc">\\</span><span class="st">ge 80$&quot;</span>,</span>
@@ -1096,8 +1095,8 @@ div.csl-indent {
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="rmarkdown-operation.html#cb221-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">:::</span><span class="fu">escape_html</span>(<span class="fu">c</span>(<span class="st">&#39;&lt;address&gt;&#39;</span>, <span class="st">&#39;x = &quot;字符&quot;&#39;</span>, <span class="st">&#39;a &amp; b&#39;</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;&amp;lt;address&amp;gt;&quot;      &quot;x = &amp;quot;字符&amp;quot;&quot; &quot;a &amp;amp; b&quot;</code></pre>
 </div>
-<div id="多张表格并排" class="section level4" number="6.1.1.8">
-<h4><span class="header-section-number">6.1.1.8</span> 多张表格并排</h4>
+<div id="多张表格并排" class="section level4 hasAnchor" number="6.1.1.8">
+<h4><span class="header-section-number">6.1.1.8</span> 多张表格并排<a href="rmarkdown-operation.html#多张表格并排" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>有的时候，将多张表格并排放置可以便于比较，将数据框或矩阵以列表的形式传递给 <code>kable()</code> 就可以实现这一功能。例如，表 <a href="rmarkdown-operation.html#tab:two-tables">6.5</a> 包含了之前展示过的两张表：</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="rmarkdown-operation.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 数据对象 grade 和 grade2 由之前的代码块生成</span></span>
 <span id="cb223-2"><a href="rmarkdown-operation.html#cb223-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
@@ -1264,8 +1263,8 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="利用for循环生成多个表" class="section level4" number="6.1.1.9">
-<h4><span class="header-section-number">6.1.1.9</span> 利用<code>for</code>循环生成多个表 (*)</h4>
+<div id="利用for循环生成多个表" class="section level4 hasAnchor" number="6.1.1.9">
+<h4><span class="header-section-number">6.1.1.9</span> 利用<code>for</code>循环生成多个表 (*)<a href="rmarkdown-operation.html#利用for循环生成多个表" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>对于 <code>kable()</code>，有一个常见的错误认识是它不能在 <code>for</code> 循环中工作。这个问题并不特定于 <code>kable()</code>，同时也存在于许多其他的 R 包中。其背后原因较为复杂,对技术细节感兴趣的读者可以参考博文 <a href="https://yihui.org/en/2017/06/top-level-r-expressions/">“The Ghost Printer behind Top-level R Expressions.”</a>。</p>
 <p>例如，直观上下面的代码块可能可以生成三个表，但事实上它并不会：</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb225-1"><a href="rmarkdown-operation.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -1312,8 +1311,8 @@ div.csl-indent {
 <span id="cb230-8"><a href="rmarkdown-operation.html#cb230-8" aria-hidden="true" tabindex="-1"></a>李四      90     97     85</span>
 <span id="cb230-9"><a href="rmarkdown-operation.html#cb230-9" aria-hidden="true" tabindex="-1"></a>王五      85     91     97</span></code></pre></div>
 </div>
-<div id="自定义-latex-表格" class="section level4" number="6.1.1.10">
-<h4><span class="header-section-number">6.1.1.10</span> 自定义 LaTeX 表格 (*)</h4>
+<div id="自定义-latex-表格" class="section level4 hasAnchor" number="6.1.1.10">
+<h4><span class="header-section-number">6.1.1.10</span> 自定义 LaTeX 表格 (*)<a href="rmarkdown-operation.html#自定义-latex-表格" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果只需要 LaTeX 格式的输出时，可以在 <code>kable()</code> 中使用一些额外的选项。注意在其他类型的输出中（如 HTML），这些选项将被忽略。除非已经设置了全局的表格格式选项（见本书 <a href="rmarkdown-operation.html#kable-formats">6.1.1.1</a> 节），否则必须像本节的例子那样使用 <code>kable()</code> 的 <code>format</code> 参数，例如：</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="rmarkdown-operation.html#cb231-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(grade, <span class="at">format =</span> <span class="st">&#39;latex&#39;</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>当给一个表格分配一个标题时（见本书 <a href="rmarkdown-operation.html#kable-caption">6.1.1.4</a> 节）， <code>kable()</code> 将使用 <code>table</code> 环境来纳入这个表，即：</p>
@@ -1402,8 +1401,8 @@ div.csl-indent {
 <p>有的时候，表可能比一页还长。可以使用参数 <code>longtable = TRUE</code>，该参数使用 LaTeX 包 <a href="https://ctan.org/pkg/longtable"><strong>longtable</strong></a> 将表跨到多个页面。</p>
 <p>另外，当表格被包含在 <code>table</code> 环境中时（例如，当表有标题时），表格默认居中对齐。如果不想让表格居中，可以使用参数 <code>centering = FALSE</code>。</p>
 </div>
-<div id="自定义-html-表格" class="section level4" number="6.1.1.11">
-<h4><span class="header-section-number">6.1.1.11</span> 自定义 HTML 表格 (*)</h4>
+<div id="自定义-html-表格" class="section level4 hasAnchor" number="6.1.1.11">
+<h4><span class="header-section-number">6.1.1.11</span> 自定义 HTML 表格 (*)<a href="rmarkdown-operation.html#自定义-html-表格" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <!-- https://stackoverflow.com/questions/24254552/knitr-style-table-with-css -->
 <p>如果想自定义通过 <code>knitr::kable(format = "html")</code> 生成的表，除了前面提到的常见参数外，只有一个额外的参数需要注意：<code>table.attr</code>。这个参数允许用户向 <code>&lt;table&gt;</code> 标签添加任意属性。例如可以向表格中添加一个类<code>striped</code>：</p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="rmarkdown-operation.html#cb244-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(grade, <span class="at">table.attr =</span> <span class="st">&#39;class=&quot;striped&quot;&#39;</span>,</span>
@@ -1438,7 +1437,7 @@ div.csl-indent {
 <span id="cb245-28"><a href="rmarkdown-operation.html#cb245-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/tr&gt;</span></span>
 <span id="cb245-29"><a href="rmarkdown-operation.html#cb245-29" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/tbody&gt;</span></span>
 <span id="cb245-30"><a href="rmarkdown-operation.html#cb245-30" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/table&gt;</span></span></code></pre></div>
-<p>然而，类的名称不足以改变表的外观，必须定义 CSS<a href="references.html#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> 类的规则。例如，要制作奇数行和偶数行有不同颜色的条纹表，可以为偶数行或奇数行添加浅灰色背景：</p>
+<p>然而，类的名称不足以改变表的外观，必须定义 CSS<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> 类的规则。例如，要制作奇数行和偶数行有不同颜色的条纹表，可以为偶数行或奇数行添加浅灰色背景：</p>
 <div class="sourceCode" id="cb246"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb246-1"><a href="rmarkdown-operation.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.striped</span> tr<span class="in">:nth-child(even)</span> { <span class="kw">background</span>: <span class="cn">#eee</span><span class="op">;</span> }</span></code></pre></div>
 <p>上面的 CSS 规则意味着所有 <code>striped</code> 类的元素的子元素，且具有偶数行号（<code>:nth-child(even)</code>）的行（即 <code>&lt;tr&gt;</code> 标签），将它们的背景颜色设置为 <code>#eee</code>。</p>
 <p>使用一点 CSS 可以使一个普通的 HTML 表看起来好看很多。图 <a href="rmarkdown-operation.html#fig:striped-table">6.1</a> 是一个 HTML 表格的截图，其中应用了以下 CSS 规则：</p>
@@ -1458,8 +1457,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<div id="kable-extra" class="section level3" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> 利用 <strong>kableExtra</strong> 美化表格</h3>
+<div id="kable-extra" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> 利用 <strong>kableExtra</strong> 美化表格<a href="rmarkdown-operation.html#kable-extra" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>kableExtra</strong> 包<span class="citation">(<a href="#ref-R-kableExtra" role="doc-biblioref">Zhu 2021</a>)</span> 设计的目的为扩展 <code>knitr::kable()</code> 生成表格的基本功能（见第 <a href="rmarkdown-operation.html#table-complex">6.1.1</a> 节）。由于 <code>knitr::kable()</code> 的设计很简单，就像很多其他的 R 包一样，它肯定有很多缺失的功能，而 <strong>kableExtra</strong> 完美地填补了空白，可以配合 <code>knitr::kable()</code> 生成更好看的表格。最令人惊讶的是，<strong>kableExtra</strong> 的大多数表格的特性都适用于 HTML 和 PDF 格式，例如，借助 <strong>kableExtra</strong> 包可以绘制如图 <a href="rmarkdown-operation.html#fig:striped-table">6.1</a> 的条纹表。</p>
 <p>一般情况下，<strong>kableExtra</strong> 包可以通过 CRAN 安装，也可以尝试 GitHub 上的开发版本 (<a href="https://github.com/haozhu233/kableExtra" class="uri">https://github.com/haozhu233/kableExtra</a>)：</p>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="rmarkdown-operation.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 通过 CRAN 安装</span></span>
@@ -1537,8 +1536,8 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div id="设定字体尺寸" class="section level4" number="6.1.2.1">
-<h4><span class="header-section-number">6.1.2.1</span> 设定字体尺寸</h4>
+<div id="设定字体尺寸" class="section level4 hasAnchor" number="6.1.2.1">
+<h4><span class="header-section-number">6.1.2.1</span> 设定字体尺寸<a href="rmarkdown-operation.html#设定字体尺寸" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>有的时候，在展示一些表格时，需要设定字体的尺寸，如放大或缩小某些特定问题。<strong>kableExtra</strong> 包中的 <code>kable_styling()</code> 函数可以帮助用户对整个表进行样式化。例如，可以指定页面上表格的对齐方式、表格的宽度和字体大小。表 <a href="rmarkdown-operation.html#tab:little-size">6.8</a> 展示了一个使用小字体的例子：</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="rmarkdown-operation.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(grade, <span class="at">booktabs =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb250-2"><a href="rmarkdown-operation.html#cb250-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">&quot;字体较小的表格&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -1609,8 +1608,8 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="特定的行或列的样式" class="section level4" number="6.1.2.2">
-<h4><span class="header-section-number">6.1.2.2</span> 特定的行或列的样式</h4>
+<div id="特定的行或列的样式" class="section level4 hasAnchor" number="6.1.2.2">
+<h4><span class="header-section-number">6.1.2.2</span> 特定的行或列的样式<a href="rmarkdown-operation.html#特定的行或列的样式" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>有时还需要对表格的行或列的具体样式进行调整，如加粗某行等。函数 <code>row_spec()</code> 和 <code>column_spec()</code> 可分别用于样式化单独的行和列。表 <a href="rmarkdown-operation.html#tab:style-col-row">6.9</a> 将第一行文字加粗并设为斜体，将第二行添加黑色背景，同时更改字体颜色为白色并旋转，给第三行文字加下划线并更改其字体，并给第四列加删除线：</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="rmarkdown-operation.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(grade, <span class="at">align =</span> <span class="st">&#39;c&#39;</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb251-2"><a href="rmarkdown-operation.html#cb251-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">&quot;更改特定行或列的样式&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -1686,8 +1685,8 @@ div.csl-indent {
 </table>
 <p>类似地，也可以使用 <code>cell_spec()</code> 函数来给单个单元格设定样式。</p>
 </div>
-<div id="给行或列分组" class="section level4" number="6.1.2.3">
-<h4><span class="header-section-number">6.1.2.3</span> 给行或列分组</h4>
+<div id="给行或列分组" class="section level4 hasAnchor" number="6.1.2.3">
+<h4><span class="header-section-number">6.1.2.3</span> 给行或列分组<a href="rmarkdown-operation.html#给行或列分组" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>回想 Excel 里的操作，对单元格进行合并的操作可以给行或列进行分组。在 R Markdown 中，行和列可以分别通过函数 <code>pack_rows()</code> 和 <code>add_header_above()</code> 来进行分组。另外，也可以通过 <code>collapse_rows()</code> 来折叠行，这样一个单元格可以跨越多个行。表 <a href="rmarkdown-operation.html#tab:group-col-row">6.10</a> 展示了一个给标题列分组后的表格：</p>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="rmarkdown-operation.html#cb252-1" aria-hidden="true" tabindex="-1"></a>grade3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(姓名 <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;张三&quot;</span>,<span class="st">&quot;李四&quot;</span>,<span class="st">&quot;王五&quot;</span>),</span>
 <span id="cb252-2"><a href="rmarkdown-operation.html#cb252-2" aria-hidden="true" tabindex="-1"></a>                     物理 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">90</span>,<span class="dv">90</span>,<span class="dv">85</span>),</span>
@@ -1989,8 +1988,8 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="按比例缩小latex中的表格" class="section level4" number="6.1.2.4">
-<h4><span class="header-section-number">6.1.2.4</span> 按比例缩小LaTex中的表格</h4>
+<div id="按比例缩小latex中的表格" class="section level4 hasAnchor" number="6.1.2.4">
+<h4><span class="header-section-number">6.1.2.4</span> 按比例缩小LaTex中的表格<a href="rmarkdown-operation.html#按比例缩小latex中的表格" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>有一些特性是 HTML 或 LaTeX 输出格式特有的。例如，横向打印格式只在 LaTeX 中有意义，所以 <strong>kableExtra</strong> 中的 <code>landscape()</code> 函数只对 LaTeX 格式的输出有效。对于一个比较宽的表格（表 <a href="rmarkdown-operation.html#tab:no-scale-down">6.12</a>），（表 <a href="rmarkdown-operation.html#tab:scale-down">6.13</a>）展现了如何将表格按比例缩小以适应页面的宽度（否则该表格会太宽）：</p>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="rmarkdown-operation.html#cb254-1" aria-hidden="true" tabindex="-1"></a>grade4 <span class="ot">&lt;-</span> <span class="fu">merge</span>(grade, grade3, <span class="at">by =</span> <span class="st">&quot;姓名&quot;</span>)</span>
 <span id="cb254-2"><a href="rmarkdown-operation.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(grade4, </span>
@@ -2325,12 +2324,12 @@ div.csl-indent {
 <p>注意如果在浏览 HTML 版本的话，表 <a href="rmarkdown-operation.html#tab:no-scale-down">6.12</a> 和表 <a href="rmarkdown-operation.html#tab:scale-down">6.13</a> 表格是没有差异的。</p>
 </div>
 </div>
-<div id="else-table" class="section level3" number="6.1.3">
-<h3><span class="header-section-number">6.1.3</span> 其它生成表格的包及功能介绍</h3>
+<div id="else-table" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> 其它生成表格的包及功能介绍<a href="rmarkdown-operation.html#else-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>还有很多其他的R包可以用来生成表格。本节引入 <code>kable()</code> （见第 <a href="rmarkdown-operation.html#table-complex">6.1.1</a> 节）和 <strong>kableExtra</strong> （见第 <a href="rmarkdown-operation.html#kable-extra">6.1.2</a> 节）的主要原因不是它们比其他包更好，而是因为作者们只熟悉它们，而且它们的功能可以涵盖大部分的日常使用需求。接下来本节将列出一些已知的其它软件包，感兴趣的读者可以去尝试并决定哪一个最适合自己。</p>
 <ul>
 <li><p><strong>flextable</strong> <span class="citation">(<a href="#ref-R-flextable" role="doc-biblioref"><strong>R-flextable?</strong></a>)</span> 和 <strong>huxtable</strong> <span class="citation">(<a href="#ref-R-huxtable" role="doc-biblioref">Hugh-Jones 2021</a>)</span>：<strong>flextable</strong> 和 <strong>huxtable</strong> 支持多种表格输出格式的包。它们都支持 HTML、LaTeX 以及 Office 格式，并且包含最常见的表格特性（例如条件格式化）。更多关于 <strong>flextable</strong> 的信息可参见：<a href="https://davidgohel.github.io/flextable/" class="uri">https://davidgohel.github.io/flextable/</a>，<strong>huxtable</strong> 的说明文档则在：<a href="https://hughjonesd.github.io/huxtable/" class="uri">https://hughjonesd.github.io/huxtable/</a>。</p></li>
-<li><p><strong>gt</strong> <span class="citation">(<a href="#ref-R-gt" role="doc-biblioref"><strong>R-gt?</strong></a>)</span>：这个 R 包允许用户将表格的不同部分组合在一起，例如表头（标题和副标题）、列标签、表格主体、行组标签以及表格的脚注，从而组成一个完整的表格，其中有些部分是可选择性添加的。还可以格式化数字，并为单元格添加背景阴影。目前 <strong>gt</strong> 主要支持 HTML 输出。<a href="references.html#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>更多关于 <strong>gt</strong> 的信息可参见：<a href="https://gt.rstudio.com" class="uri">https://gt.rstudio.com</a>。</p></li>
+<li><p><strong>gt</strong> <span class="citation">(<a href="#ref-R-gt" role="doc-biblioref"><strong>R-gt?</strong></a>)</span>：这个 R 包允许用户将表格的不同部分组合在一起，例如表头（标题和副标题）、列标签、表格主体、行组标签以及表格的脚注，从而组成一个完整的表格，其中有些部分是可选择性添加的。还可以格式化数字，并为单元格添加背景阴影。目前 <strong>gt</strong> 主要支持 HTML 输出。<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>更多关于 <strong>gt</strong> 的信息可参见：<a href="https://gt.rstudio.com" class="uri">https://gt.rstudio.com</a>。</p></li>
 <li><p><strong>formattable</strong> <span class="citation">(<a href="#ref-R-formattable" role="doc-biblioref"><strong>R-formattable?</strong></a>)</span>：这个 R 包提供了一些格式化数字的工具函数（如 <code>percent()</code> 和 <code>accounting()</code>），以及对列进行样式化的函数（如格式化文本，用背景阴影或颜色条注释数字，或在单元格中添加图标等等）。和 <strong>gt</strong> 相同，<strong>formattable</strong> 包也主要支持HTML格式。更多信息可参见GitHub项目：<a href="https://github.com/renkun-ken/formattable/" class="uri">https://github.com/renkun-ken/formattable/</a>。</p></li>
 <li><p><strong>DT</strong> <span class="citation">(<a href="#ref-R-DT" role="doc-biblioref"><strong>R-DT?</strong></a>)</span>：它只支持 HTML 格式。<strong>DT</strong> 构建在 JavaScript 库 <strong>DataTables</strong> 之上，它可以将静态表转换为HTML页面上的交互式表。你可以对表进行排序、搜索和分页。<strong>DT</strong> 还支持格式化单元格，与 Shiny 一起构建交互式应用程序，并包含了大量的 <strong>DataTables</strong> 扩展（例如，可以将表格导出到Excel，或交互式重新排列表格的列）。更多信息可参见：<a href="https://github.com/rstudio/DT/" class="uri">https://github.com/rstudio/DT/</a>。</p></li>
 <li><p><strong>reactable</strong> <span class="citation">(<a href="#ref-R-reactable" role="doc-biblioref"><strong>R-reactable?</strong></a>)</span>：与 <strong>DT</strong> 类似，这个包也基于 JavaScript 库创建交互式表。它在某些方面比 <strong>DT</strong> 更好（比如行分组和聚合操作，以及嵌入HTML小部件），但 <strong>reactable</strong> 并不包含 <strong>DT</strong> 全部的特性。更多信息可参见：<a href="https://glin.github.io/reactable/" class="uri">https://glin.github.io/reactable/</a>。</p></li>
@@ -2342,8 +2341,8 @@ div.csl-indent {
 <p>还有一些其它生成表格的包，这里不再进一步介绍，只是在这里列出它们，以供感兴趣者参考：<strong>tables</strong> <span class="citation">(<a href="#ref-R-tables" role="doc-biblioref"><strong>R-tables?</strong></a>)</span>、<strong>pander</strong> <span class="citation">(<a href="#ref-R-pander" role="doc-biblioref">Daróczi and Tsegelskyi 2022</a>)</span>、<strong>tangram</strong> <span class="citation">(<a href="#ref-R-tangram" role="doc-biblioref"><strong>R-tangram?</strong></a>)</span>、<strong>ztable</strong> <span class="citation">(<a href="#ref-R-ztable" role="doc-biblioref"><strong>R-ztable?</strong></a>)</span> 以及 <strong>condformat</strong> <span class="citation">(<a href="#ref-R-condformat" role="doc-biblioref"><strong>R-condformat?</strong></a>)</span>。</p>
 </div>
 </div>
-<div id="chunk-options" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> 块选项</h2>
+<div id="chunk-options" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> 块选项<a href="rmarkdown-operation.html#chunk-options" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>在之前的章节中，R 包 <strong>knitr</strong> 展现了其在 R Markdown 中起到的关键作用。在本节和接下来的第 <a href="rmarkdown-operation.html#output-hook">6.4</a>、<a href="rmarkdown-operation.html#other-trick">6.6</a> 两节中，将进一步展示一些与 <strong>knitr</strong> 相关的编程技巧，从而更有效地辅助工作的开展。</p>
 <p>事实上，在 R Markdown 的代码块中，有超过 50 个块选项可以用来微调 <strong>knitr</strong> 处理代码块的方式，选项的完整列表可参阅在线文档<a href="https://yihui.org/knitr/options/" class="uri">https://yihui.org/knitr/options/</a>。</p>
 <p>需要注意的是，接下来的几节只展示了将块选项应用到单个代码块的例子，但实际上，任何块选项都可以进行全局设置，应用于整个文档，而不必在每个代码块中重复。如果要设置全局的块选项，需要在代码块（通常为文档中的第一个代码块）中调用 <code>knitr::opts_chunk$set()</code>。例如若需要对整个文档调整文本输出中的前导符号（<code>comment = "#&gt;"</code>，见第 <a href="rmarkdown-operation.html#chunk-leading">6.2.5</a> 节）、隐藏源代码（<code>echo = FALSE</code>，见第 <a href="rmarkdown-operation.html#chunk-output">6.2.3</a> 节）并控制图片大小（<code>fig.width = 6</code>，见第 <a href="rmarkdown-base.html#element-plot">2.6.1</a> 节），可以进行如下设置：</p>
@@ -2352,8 +2351,8 @@ div.csl-indent {
 <span id="cb256-3"><a href="rmarkdown-operation.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="in">  comment = &quot;#&gt;&quot;, echo = FALSE, fig.width = 6</span></span>
 <span id="cb256-4"><a href="rmarkdown-operation.html#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
 <span id="cb256-5"><a href="rmarkdown-operation.html#cb256-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<div id="chunk-variable" class="section level3" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> 在块选项中使用变量</h3>
+<div id="chunk-variable" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> 在块选项中使用变量<a href="rmarkdown-operation.html#chunk-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>通常情况下，块选项中会使用常数（如：<code>fig.width = 6</code>），但有些时候仅使用常数无法满足需求，例如应展现的图像大小可能来源于其它代码块的结果，而非一成不变，每次根据结果来手动调整就会费时又费力。</p>
 <p>实际上，块选项可以使用任意的 R 表达式，无论简单或复杂。一种特殊的情况是将变量传递给一个块选项（注意变量本身也可被视为一个 R 表达式）。例如，为了满足图像大小变化的需求，可以在文档的一个代码块中定义关于图像宽度的变量，然后在其他代码块中使用它：</p>
 <div class="sourceCode" id="cb257"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb257-1"><a href="rmarkdown-operation.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -2380,8 +2379,8 @@ div.csl-indent {
 <span id="cb259-4"><a href="rmarkdown-operation.html#cb259-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>需要注意的是，<code>require('package')</code> 只有当这个包已安装且可使用时才会返回 <code>TRUE</code>，否则会返回 <code>FALSE</code>。</p>
 </div>
-<div id="chunk-error" class="section level3" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> 如何在遇到 error 的时候继续编译</h3>
+<div id="chunk-error" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> 如何在遇到 error 的时候继续编译<a href="rmarkdown-operation.html#chunk-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在默认情况下，R Markdown 文档中代码块运行产生的错误将使程序终止。但瑕疵掩不住美玉，一次报错不妨碍整体的质量；失败是成功之母，一次报错更是珍贵的学习机会。出于种种原因，用户希望在代码块报错的时候显示错误并继续运行，可以使用块选项 <code>error = TRUE</code>，例如：</p>
 <div class="sourceCode" id="cb260"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb260-1"><a href="rmarkdown-operation.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error=TRUE}</span></span>
 <span id="cb260-2"><a href="rmarkdown-operation.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="in">1 + &quot;a&quot;</span></span>
@@ -2390,11 +2389,11 @@ div.csl-indent {
 <pre><code>Error in 1 + &quot;a&quot;: non-numeric argument to binary operator</code></pre>
 <p>实际上，在 R Markdown 中，默认设定为 <code>error = FALSE</code>，这也导致了 R 在运行代码块时，出现错误就会终止。</p>
 </div>
-<div id="chunk-output" class="section level3" number="6.2.3">
-<h3><span class="header-section-number">6.2.3</span> 控制输出</h3>
+<div id="chunk-output" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> 控制输出<a href="rmarkdown-operation.html#chunk-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>默认情况下，<strong>knitr</strong> 会显示代码块的所有可能输出，包括源代码、提示信息（message）、警告（warning）、文本输出和图像输出等，但有时处于种种目的，只需要部分输出。本节将详细介绍如何控制各类结果的输出。</p>
-<div id="hide-one" class="section level4" number="6.2.3.1">
-<h4><span class="header-section-number">6.2.3.1</span> 隐藏源代码、提示信息、警告、文本输出或图像输出</h4>
+<div id="hide-one" class="section level4 hasAnchor" number="6.2.3.1">
+<h4><span class="header-section-number">6.2.3.1</span> 隐藏源代码、提示信息、警告、文本输出或图像输出<a href="rmarkdown-operation.html#hide-one" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>对于输出结果中的各类元素，可以使用相应的块选项来单独隐藏它们：</p>
 <div class="sourceCode" id="cb262"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb262-1"><a href="rmarkdown-operation.html#cb262-1" aria-hidden="true" tabindex="-1"></a>隐藏源代码：</span>
 <span id="cb262-2"><a href="rmarkdown-operation.html#cb262-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2445,16 +2444,16 @@ div.csl-indent {
 <p>类似地，可以通过使用 <code>fig.keep</code> 选项 来选择显示或隐藏哪些图。例如，<code>fig.keep = 1:2</code> 意味着保留前两幅图。这个选项有一些快捷的方式，如 <code>fig.keep = "first"</code> 将只保留第一幅图、<code>fig.keep = "last"</code> 只保留最后的图以及 <code>fig.keep = "none"</code> 将丢弃所有的图。需要注意的是，<code>fig.keep = "none"</code> 和 <code>fig.show = "hide"</code> 这两个选项是不同的，后者将生成图像文件，只是会隐藏它们，而前者则根本不会生成图像文件。</p>
 <p>对于 <code>html_document</code> 输出中的源代码块，如果不想完全省略它们（<code>echo = FALSE</code>），可以参考<a href="rmarkdown-document.html#html-code-folding">3.1.2.6</a>节，来学习如何在页面上折叠它们，并允许报告用户通过单击展开按钮来展开它们。</p>
 </div>
-<div id="hide-all" class="section level4" number="6.2.3.2">
-<h4><span class="header-section-number">6.2.3.2</span> 隐藏代码块的所有输出</h4>
+<div id="hide-all" class="section level4 hasAnchor" number="6.2.3.2">
+<h4><span class="header-section-number">6.2.3.2</span> 隐藏代码块的所有输出<a href="rmarkdown-operation.html#hide-all" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>有的时候，可能想要执行一个代码块而根本不显示任何输出。与使用第 <a href="rmarkdown-operation.html#hide-one">6.2.3.1</a> 节中提到的单独选项不同，可以使用一个选项 <code>include = FALSE</code> 来隐藏代码块所有的输出，例如：</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb264-1"><a href="rmarkdown-operation.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
 <span id="cb264-2"><a href="rmarkdown-operation.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 任意的R代码</span></span>
 <span id="cb264-3"><a href="rmarkdown-operation.html#cb264-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>使用 <code>include=FALSE</code> 时，代码块将被运行（除非 <code>eval=FALSE</code>），但输出将被完全隐藏，报告用户将看不到任何的源代码、提示信息、警告、文本输出或图像输出等。</p>
 </div>
-<div id="opts-collapse" class="section level4" number="6.2.3.3">
-<h4><span class="header-section-number">6.2.3.3</span> 将文本输出压缩到源代码块中</h4>
+<div id="opts-collapse" class="section level4 hasAnchor" number="6.2.3.3">
+<h4><span class="header-section-number">6.2.3.3</span> 将文本输出压缩到源代码块中<a href="rmarkdown-operation.html#opts-collapse" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在 R Markdown 报告中，输出结果中的文本输出部分和源代码部分之间会存在间隔。如果想去除这些间隔，可以考虑使用块选项 <code>collapse = TRUE</code> 将文本输出压缩到源代码块中。<code>collapse = TRUE</code> 时的输出如下所示：</p>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="rmarkdown-operation.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb265-2"><a href="rmarkdown-operation.html#cb265-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span>
@@ -2466,8 +2465,8 @@ div.csl-indent {
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="rmarkdown-operation.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
-<div id="results-asis" class="section level4" number="6.2.3.4">
-<h4><span class="header-section-number">6.2.3.4</span> 将文本输出调整为原始的 Markdown 形式 (*)</h4>
+<div id="results-asis" class="section level4 hasAnchor" number="6.2.3.4">
+<h4><span class="header-section-number">6.2.3.4</span> 将文本输出调整为原始的 Markdown 形式 (*)<a href="rmarkdown-operation.html#results-asis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>默认情况下，代码块的文本输出将逐字输出，并添加两个前导符号 <code>##</code>（见第 <a href="rmarkdown-operation.html#chunk-leading">6.2.5</a> 节）。由于 <strong>knitr</strong> 将文本放在单独的代码块中，所以文本是逐字的。例如，对于代码 <code>1:5</code>，<strong>knitr</strong> 的原始输出为：</p>
 <div class="sourceCode" id="cb270"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb270-1"><a href="rmarkdown-operation.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb270-2"><a href="rmarkdown-operation.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="in">## [1] 1 2 3 4 5</span></span>
@@ -2532,10 +2531,10 @@ div.csl-indent {
 <p><code>cat()</code> 函数不是唯一可以生成文本输出的函数，另一个常用的函数是 <code>print()</code>。但需要注意的是，<code>print()</code> 经常被 <em>隐式</em> 调用来打印对象，这就是为什么在 R 控制台（console）中输入一个对象或值后会看到输出。例如，当在 R 控制台中输入 <code>1:5</code> 并按下 <code>Enter</code> 键时，会看到输出，这是因为 R 实际上隐式地调用了 <code>print(1:5)</code>。经常令人感到困惑的是，不能在表达式（例如 <code>for</code> 循环）中直接生成输出，而如果在 R 控制台上输入对象或值，它们将被正确打印出来。这个主题非常技术性，具体细节可以参看博文<a href="https://yihui.org/en/2017/06/top-level-r-expressions/">“The Ghost Printer behind Top-level R Expressions”</a>。如果对技术细节不感兴趣，只要记住这条规则即可：如果在 <code>for</code> 循环中没有看到输出，那么可能应该使用 <code>print()</code> 函数来显式地打印对象。</p>
 </div>
 </div>
-<div id="chunk-reformat" class="section level3" number="6.2.4">
-<h3><span class="header-section-number">6.2.4</span> 重新格式化源代码</h3>
+<div id="chunk-reformat" class="section level3 hasAnchor" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> 重新格式化源代码<a href="rmarkdown-operation.html#chunk-reformat" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>有的时候，因个人习惯以及代码熟练度的不同，源代码格式会有所不同，甚至有些杂乱，这会加大报告用户的阅读难度（尤其是当老师或助教阅读的时候，这会直接影响作业的分数）。本节将介绍如何通过块选项，让源代码自动地“变好看”。</p>
-<p>当设置块选项 <code>tidy = TRUE</code> 时， R 的源代码将被 <strong>formatR</strong> 包 <span class="citation">(<a href="#ref-R-formatR" role="doc-biblioref">Xie 2021a</a>)</span>的 <code>tidy_source()</code> 函数重新格式化。<code>tidy_source()</code> 可以在几个方面重新格式化代码，比如在大多数操作符周围添加空格、适当缩进代码以及用 <code>&lt;-</code> 替换赋值操作符 <code>=</code> 。块选项 <code>tidy.opts</code> 可以是传递给 <code>formatR::tidy_source()</code> 的一个参数列表，例如：</p>
+<p>当设置块选项 <code>tidy = TRUE</code> 时， R 的源代码将被 <strong>formatR</strong> 包 <span class="citation">(<a href="#ref-R-formatR" role="doc-biblioref">Xie 2022a</a>)</span>的 <code>tidy_source()</code> 函数重新格式化。<code>tidy_source()</code> 可以在几个方面重新格式化代码，比如在大多数操作符周围添加空格、适当缩进代码以及用 <code>&lt;-</code> 替换赋值操作符 <code>=</code> 。块选项 <code>tidy.opts</code> 可以是传递给 <code>formatR::tidy_source()</code> 的一个参数列表，例如：</p>
 <div class="sourceCode" id="cb279"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb279-1"><a href="rmarkdown-operation.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, tidy=TRUE, tidy.opts=list(arrow=TRUE, indent=2)}</span></span>
 <span id="cb279-2"><a href="rmarkdown-operation.html#cb279-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 混乱的 R 代码...</span></span>
 <span id="cb279-3"><a href="rmarkdown-operation.html#cb279-3" aria-hidden="true" tabindex="-1"></a><span class="in">1+            1</span></span>
@@ -2572,8 +2571,8 @@ div.csl-indent {
 <span id="cb283-5"><a href="rmarkdown-operation.html#cb283-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>在默认情况下，<code>tidy = FALSE</code> 并且 R 代码不会被重新格式化。</p>
 </div>
-<div id="chunk-leading" class="section level3" number="6.2.5">
-<h3><span class="header-section-number">6.2.5</span> 调整文本输出中的前导符号</h3>
+<div id="chunk-leading" class="section level3 hasAnchor" number="6.2.5">
+<h3><span class="header-section-number">6.2.5</span> 调整文本输出中的前导符号<a href="rmarkdown-operation.html#chunk-leading" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>默认情况下，R Markdown 会在文本输出的前面插入两个符号 <code>##</code>，那么这个符号能不能更改或者干脆删除呢？第 <a href="rmarkdown-operation.html#results-asis">6.2.3.4</a> 节介绍了通过在添加 <code>results = 'asis'</code> 选项来生成 Markdown 形式输出的方法。但如果只是想调整前导符号，而仍然想将文本放在单独的块中，则可以通过块选项 <code>comment</code> 来实现。如果要删除 <code>##</code>，可以使用空字符串，例如：</p>
 <div class="sourceCode" id="cb284"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb284-1"><a href="rmarkdown-operation.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, comment=&quot;&quot;}</span></span>
 <span id="cb284-2"><a href="rmarkdown-operation.html#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="in">1:100</span></span>
@@ -2585,30 +2584,30 @@ div.csl-indent {
 <span id="cb285-4"><a href="rmarkdown-operation.html#cb285-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span></code></pre></div>
 <p>而如果通过 <code>comment = ""</code> 删除 <code>##</code> ，通常会无法直接运行所有的代码。如下面的例子所展示的，如果直接复制这四行，就需要手动删除第二和第四行：</p>
 </div>
-<div id="chunk-property" class="section level3" number="6.2.6">
-<h3><span class="header-section-number">6.2.6</span> 为文本输出块添加属性 (*)</h3>
+<div id="chunk-property" class="section level3 hasAnchor" number="6.2.6">
+<h3><span class="header-section-number">6.2.6</span> 为文本输出块添加属性 (*)<a href="rmarkdown-operation.html#chunk-property" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="chunk-multiplot" class="section level3" number="6.2.7">
-<h3><span class="header-section-number">6.2.7</span> 同一张图的多种图像输出格式</h3>
+<div id="chunk-multiplot" class="section level3 hasAnchor" number="6.2.7">
+<h3><span class="header-section-number">6.2.7</span> 同一张图的多种图像输出格式<a href="rmarkdown-operation.html#chunk-multiplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="chunk-process" class="section level3" number="6.2.8">
-<h3><span class="header-section-number">6.2.8</span> 图像的后期加工 (*)</h3>
+<div id="chunk-process" class="section level3 hasAnchor" number="6.2.8">
+<h3><span class="header-section-number">6.2.8</span> 图像的后期加工 (*)<a href="rmarkdown-operation.html#chunk-process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="chunk-highquality" class="section level3" number="6.2.9">
-<h3><span class="header-section-number">6.2.9</span> 输出高质量的图像 (*)</h3>
+<div id="chunk-highquality" class="section level3 hasAnchor" number="6.2.9">
+<h3><span class="header-section-number">6.2.9</span> 输出高质量的图像 (*)<a href="rmarkdown-operation.html#chunk-highquality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="chunk-step-plot" class="section level3" number="6.2.10">
-<h3><span class="header-section-number">6.2.10</span> 带有低级绘图功能的逐步绘图 (*)</h3>
+<div id="chunk-step-plot" class="section level3 hasAnchor" number="6.2.10">
+<h3><span class="header-section-number">6.2.10</span> 带有低级绘图功能的逐步绘图 (*)<a href="rmarkdown-operation.html#chunk-step-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="chunk-print" class="section level3" number="6.2.11">
-<h3><span class="header-section-number">6.2.11</span> 在代码块中自定义对象的打印格式 (*)</h3>
+<div id="chunk-print" class="section level3 hasAnchor" number="6.2.11">
+<h3><span class="header-section-number">6.2.11</span> 在代码块中自定义对象的打印格式 (*)<a href="rmarkdown-operation.html#chunk-print" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="option-hook" class="section level3" number="6.2.12">
-<h3><span class="header-section-number">6.2.12</span> 选项钩子 (*)</h3>
+<div id="option-hook" class="section level3 hasAnchor" number="6.2.12">
+<h3><span class="header-section-number">6.2.12</span> 选项钩子 (*)<a href="rmarkdown-operation.html#option-hook" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="other-language" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> 与其他语言的结合</h2>
+<div id="other-language" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> 与其他语言的结合<a href="rmarkdown-operation.html#other-language" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>在 R Markdown 中，<strong>knitr</strong> 软件包除了支持 R 语言外，还支持许多其他语言。</p>
 <p>不同语言代码块表示方式类似，只需修改代码块中三个反引号后的花括号中的第一个单词即可。例如，<code>```{r}</code> 中的小 <code>r</code> 表示该代码块为 R 代码块，而 <code>```{python}</code> 是指该代码块为 Python 代码块。本节将介绍一些读者可能不太熟悉的语言。</p>
 <p>在 knitr 中，每种语言都通过<strong>语言引擎</strong>得到支持。语言引擎本质上是一些函数，它们以源代码和块的选项作为输入，最后输出一个字符串。并通过 <code>knitr::knit_engines</code> 进行管理。可以使用以下方式检查现有引擎：</p>
@@ -2618,14 +2617,15 @@ div.csl-indent {
 ## [13] &quot;Rscript&quot;   &quot;ruby&quot;      &quot;sas&quot;       &quot;scala&quot;     &quot;sed&quot;       &quot;sh&quot;       
 ## [19] &quot;stata&quot;     &quot;zsh&quot;       &quot;asis&quot;      &quot;asy&quot;       &quot;block&quot;     &quot;block2&quot;   
 ## [25] &quot;bslib&quot;     &quot;c&quot;         &quot;cat&quot;       &quot;cc&quot;        &quot;comment&quot;   &quot;css&quot;      
-## [31] &quot;dot&quot;       &quot;embed&quot;     &quot;fortran&quot;   &quot;fortran95&quot; &quot;go&quot;        &quot;highlight&quot;
-## [37] &quot;js&quot;        &quot;julia&quot;     &quot;python&quot;    &quot;R&quot;         &quot;Rcpp&quot;      &quot;sass&quot;     
-## [43] &quot;scss&quot;      &quot;sql&quot;       &quot;stan&quot;      &quot;targets&quot;   &quot;tikz&quot;      &quot;verbatim&quot;</code></pre>
+## [31] &quot;ditaa&quot;     &quot;dot&quot;       &quot;embed&quot;     &quot;exec&quot;      &quot;fortran&quot;   &quot;fortran95&quot;
+## [37] &quot;go&quot;        &quot;highlight&quot; &quot;js&quot;        &quot;julia&quot;     &quot;python&quot;    &quot;R&quot;        
+## [43] &quot;Rcpp&quot;      &quot;sass&quot;      &quot;scss&quot;      &quot;sql&quot;       &quot;stan&quot;      &quot;targets&quot;  
+## [49] &quot;tikz&quot;      &quot;verbatim&quot;</code></pre>
 <p>目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 <code>bash</code> 代码块都在各自的会话中单独执行，因此后面的 <code>bash</code> 代码块不能使用在先前 <code>bash</code> 代码块中创建的变量，更改后的工作目录（通过 <code>cd</code> ）在其他 bash 代码块中不会一直存在。只有 R、Python 和 Julia 代码块在同一个会话中执行。并且 R 会话和 Python 会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象(参见<a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python">15.2</a>节)。</p>
 <p><strong>R Markdown权威指南</strong> (<a href="https://bookdown.org/yihui/rmarkdown-cookbook/other-languages.html#ref-rmarkdown2018">Xie, Allaire, and Grolemund 2018</a>) 的<a href="https://bookdown.org/yihui/rmarkdown/language-engines.html">2.7节</a> 展示了如何在 R Markdown 中使用 Python, Shell, SQL, Rcpp, Stan, JavaScript, CSS, Julia, C，和 Fortran 代码。这里就不做进一步介绍，本节主要重点介绍更多的语言引擎。读者可以在下面的库中找到更多的例子： <a href="https://github.com/yihui/knitr-examples" class="uri">https://github.com/yihui/knitr-examples</a> （查找包含单词引擎的文件名）。</p>
 <p>首先，通过注册一个自定义语言引擎来说明语言引擎是如何工作的。</p>
-<div id="register-language" class="section level3" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> 注册自定义语言引擎 (*)</h3>
+<div id="register-language" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> 注册自定义语言引擎 (*)<a href="rmarkdown-operation.html#register-language" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>使用 <code>knitr::knit engines$set()</code> 注册一个自定义语言引擎。它接受一个函数作为输入，例如：</p>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="rmarkdown-operation.html#cb288-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_engines<span class="sc">$</span><span class="fu">set</span>(<span class="at">foo =</span> <span class="cf">function</span>(options) {</span>
 <span id="cb288-2"><a href="rmarkdown-operation.html#cb288-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 源代码在options$code</span></span>
@@ -2648,7 +2648,7 @@ div.csl-indent {
 <span id="cb291-3"><a href="rmarkdown-operation.html#cb291-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>HELLO, <strong>KNITR</strong> ENGINES!</p>
 </blockquote>
-<p>接下来，将展示一个名为 <code>py</code> 的另一种 <code>python</code> 引擎的示例<a href="references.html#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>。这个引擎是通过 R 函数 <code>system2()</code> 调用 <code>python</code> 命令来实现的：</p>
+<p>接下来，将展示一个名为 <code>py</code> 的另一种 <code>python</code> 引擎的示例<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>。这个引擎是通过 R 函数 <code>system2()</code> 调用 <code>python</code> 命令来实现的：</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="rmarkdown-operation.html#cb292-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_engines<span class="sc">$</span><span class="fu">set</span>(<span class="at">py =</span> <span class="cf">function</span>(options) {</span>
 <span id="cb292-2"><a href="rmarkdown-operation.html#cb292-2" aria-hidden="true" tabindex="-1"></a>  code <span class="ot">&lt;-</span> <span class="fu">paste</span>(options<span class="sc">$</span>code, <span class="at">collapse =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
 <span id="cb292-3"><a href="rmarkdown-operation.html#cb292-3" aria-hidden="true" tabindex="-1"></a>  out  <span class="ot">&lt;-</span> <span class="fu">system2</span>(</span>
@@ -2672,14 +2672,14 @@ div.csl-indent {
 </blockquote>
 <p>如果觉得自己的版本比现有的版本更好，读者甚至可以通过 <code>knitr::knit_engines$set()</code> 重写现有的语言引擎。但是，通常不建议读者这样做，因为这会让熟悉现有引擎的用户感到惊讶。不过无论如何都想读者意识到这种可能性。</p>
 </div>
-<div id="python-rmd" class="section level3" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> 运行 Python 代码并与 Python 交互</h3>
+<div id="python-rmd" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> 运行 Python 代码并与 Python 交互<a href="rmarkdown-operation.html#python-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R Markdown 和 <strong>knitr</strong> 支持 Python。要将 Python 代码块添加到 R Markdown 文档中，可以在块的头部变为<code>```{python}</code>，例如：</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb295-1"><a href="rmarkdown-operation.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb295-2"><a href="rmarkdown-operation.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="in">print(&quot;Hello Python!&quot;)</span></span>
 <span id="cb295-3"><a href="rmarkdown-operation.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>读者可以像往常一样在 chunk 头中添加 chunk 选项，比如 <code>echo = FALSE</code> 或 <code>eval = FALSE</code> ，并且也支持使用 Python 中的 <strong>matplotlib</strong> 包绘图。</p>
-<p>R Markdown 和 <strong>knitr</strong> 中的 Python 支持 <strong>reticulate</strong> 包 <span class="citation">(<a href="#ref-R-reticulate" role="doc-biblioref">Ushey, Allaire, and Tang 2021</a>)</span>，这个包的一个重要特性是它允许 Python 和 R 之间的双向通信。例如，可以在 R 会话中通过 <strong>reticulate</strong> 包中的 py 对象访问或创建 Python 变量：</p>
+<p>R Markdown 和 <strong>knitr</strong> 中的 Python 支持 <strong>reticulate</strong> 包 <span class="citation">(<a href="#ref-R-reticulate" role="doc-biblioref">Ushey, Allaire, and Tang 2022</a>)</span>，这个包的一个重要特性是它允许 Python 和 R 之间的双向通信。例如，可以在 R 会话中通过 <strong>reticulate</strong> 包中的 py 对象访问或创建 Python 变量：</p>
 <div class="sourceCode" id="cb296"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb296-1"><a href="rmarkdown-operation.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, setup}</span></span>
 <span id="cb296-2"><a href="rmarkdown-operation.html#cb296-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(reticulate)</span></span>
 <span id="cb296-3"><a href="rmarkdown-operation.html#cb296-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -2731,14 +2731,14 @@ div.csl-indent {
 <span id="cb299-5"><a href="rmarkdown-operation.html#cb299-5" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> }</span>
 <span id="cb299-6"><a href="rmarkdown-operation.html#cb299-6" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">4</span></span></code></pre></div>
 </div>
-<div id="chunk-property" class="section level3" number="6.3.3">
-<h3><span class="header-section-number">6.3.3</span> 为文本输出块添加属性 (*)</h3>
+<div id="chunk-property" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> 为文本输出块添加属性 (*)<a href="rmarkdown-operation.html#chunk-property" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>第 <a href="rmarkdown-document.html#html-css-list">3.1.2.5</a> 节展示了一些基于块选项 <code>class.source</code> 样式化代码块的示例。实际上，在 <strong>knitr</strong> 中有更多类似的选项，如 <code>class.output</code>、<code>class.message</code>、<code>class.warning</code> 以及 <code>class.error</code>。这些选项可以用于将类名添加到相应的文本输出块中，例如 <code>error = TRUE</code> （见第 <a href="rmarkdown-operation.html#chunk-error">6.2.2</a> 节）。就像在第 <a href="rmarkdown-document.html#html-css-list">3.1.2.5</a> 节中演示的那样，这些选项最常见的应用可能是使用根据类名定义的 CSS 规则对输出块进行样式化。</p>
 <p>通常情况下，文本输出块本质上是一个单独的代码块，它的 Markdown 源代码如下所示：</p>
 <div class="sourceCode" id="cb300"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb300-1"><a href="rmarkdown-operation.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.className}</span></span>
 <span id="cb300-2"><a href="rmarkdown-operation.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="in">输出行</span></span>
 <span id="cb300-3"><a href="rmarkdown-operation.html#cb300-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>当输出格式为 HTML 时，通常会转换为<a href="references.html#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>:</p>
+<p>当输出格式为 HTML 时，通常会转换为<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>:</p>
 <div class="sourceCode" id="cb301"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb301-1"><a href="rmarkdown-operation.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;className&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb301-2"><a href="rmarkdown-operation.html#cb301-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;code&gt;</span>输出行<span class="kw">&lt;/code&gt;</span></span>
 <span id="cb301-3"><a href="rmarkdown-operation.html#cb301-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/pre&gt;</span></span></code></pre></div>
@@ -2755,8 +2755,8 @@ div.csl-indent {
 <p>作为一个技术性拓展，块选项 <code>class.*</code> 只是 <code>attr.*</code> 的特殊情况，例如，<code>class.source = 'numberLines'</code> 等价于 <code>attr.source = '.numberLines'</code>（注意这里的前导点），但 <code>attr.source</code> 可以取任意的属性值，例如 <code>attr.source = c('.numberLines', 'startFrom="11"')</code>。</p>
 <p>这些选项对 HTML 输出非常有用。在某些情况下，这些属性可能对其他输出格式也有用，但这种情况相对较少。这些属性需要被 Pandoc 或第三方的包支持。例如 Pandoc 中，<code>.numberLines</code> 属性适用于 HTML 和 LaTeX 输出；第三方的包则通常需要通过一个 Lua 过滤器，感兴趣者请参见：<a href="https://bookdown.org/yihui/rmarkdown-cookbook/lua-filters.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/lua-filters.html</a>。</p>
 </div>
-<div id="chunk-multiplot" class="section level3" number="6.3.4">
-<h3><span class="header-section-number">6.3.4</span> 同一张图的多种图像输出格式</h3>
+<div id="chunk-multiplot" class="section level3 hasAnchor" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> 同一张图的多种图像输出格式<a href="rmarkdown-operation.html#chunk-multiplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在大多数情况下，报告可能只需要一种图像格式，例如 <code>png</code> 或 <code>tiff</code>。但有些时候，一些报告需要提交多种格式的图像，这就需要进一步了解图像格式选择的原理。</p>
 <p>图像格式由块选项 <code>dev</code> 控制，即渲染图像的图像设备，这个选项的取值可以为设备名（即输出格式）的向量，例如：</p>
 <div class="sourceCode" id="cb304"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb304-1"><a href="rmarkdown-operation.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, dev=c(&#39;png&#39;, &#39;pdf&#39;, &#39;svg&#39;, &#39;tiff&#39;)}</span></span>
@@ -2764,8 +2764,8 @@ div.csl-indent {
 <span id="cb304-3"><a href="rmarkdown-operation.html#cb304-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>输出文档中只会呈现第一种格式的图像，但其它格式的图像也会被生成。这里需要注意的是，在默认情况下，图像文件在输出文档呈现后会立即被删除，如要保存这些文件，请参见<a href="rmarkdown-project.html#keep-plot">7.1.5</a>节。</p>
 </div>
-<div id="chunk-process" class="section level3" number="6.3.5">
-<h3><span class="header-section-number">6.3.5</span> 图像的后期加工 (*)</h3>
+<div id="chunk-process" class="section level3 hasAnchor" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> 图像的后期加工 (*)<a href="rmarkdown-operation.html#chunk-process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>有的时候，可能会需要对已有的图像进行后期加工，从而实现简单的“PS”功能，这一需求可以通过块选项 <code>fig.process</code> 来实现。需要传递给该选项一个输入文件路径、返回已处理图像文件路径的函数。该函数可以有第二个可选参数 <code>options</code>，代表一个由当前块选项组成的列表。</p>
 <p>下面的例子展示了如何使用一个功能强大的 <strong>magick</strong>包 <span class="citation">(<a href="#ref-R-magick" role="doc-biblioref">Ooms 2021</a>)</span> 来在图像中添加 R logo。首先，定义一个函数 <code>add_logo()</code>：</p>
 <div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="rmarkdown-operation.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;magick&quot;</span>)</span></code></pre></div>
@@ -2805,8 +2805,8 @@ div.csl-indent {
 <span id="cb308-7"><a href="rmarkdown-operation.html#cb308-7" aria-hidden="true" tabindex="-1"></a>  path2</span>
 <span id="cb308-8"><a href="rmarkdown-operation.html#cb308-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="chunk-highquality" class="section level3" number="6.3.6">
-<h3><span class="header-section-number">6.3.6</span> 输出高质量的图像 (*)</h3>
+<div id="chunk-highquality" class="section level3 hasAnchor" number="6.3.6">
+<h3><span class="header-section-number">6.3.6</span> 输出高质量的图像 (*)<a href="rmarkdown-operation.html#chunk-highquality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>不同格式的图像往往在输出质量上有差异。<strong>rmarkdown</strong> 包为不同的输出格式设置了合理的默认图像设备。例如，对 HTML 输出格式使用 <code>png()</code> 设备，所以 <strong>knitr</strong> 将生成 png 绘图文件；而对 PDF 输出格式则使用 <code>pdf()</code> 设备。如果对默认图像设备的输出质量不满意，可以通过块选项
 <code>dev</code>
 来更改它们。<strong>knitr</strong>
@@ -2833,8 +2833,8 @@ div.csl-indent {
 <p>其次，<code>tikz</code> 设备渲染图的速度通常要慢得多，因为这个设备会生成 LaTeX 文件，并且必须将其编译成 PDF。如果觉得代码块很耗时，可以通过块选项 <code>cache = TRUE</code> 来启用缓存（见第 <a href="rmarkdown-operation.html#cache">6.5</a> 节）。</p>
 <p>图 <a href="rmarkdown-operation.html#fig:dev-tikz">6.3</a> 实际上也使用了块选项 <code>fig.process = pdf2png</code>，当输出格式不是 LaTeX时，<code>pdf2png</code> 函数可以将 PDF 图转换为 PNG，其定义见第 <a href="rmarkdown-operation.html#chunk-process">6.2.8</a>节。如果没有这一转换，可能无法在 Web 浏览器中查看该书在线版本中的 PDF 图。</p>
 </div>
-<div id="chunk-step-plot" class="section level3" number="6.3.7">
-<h3><span class="header-section-number">6.3.7</span> 带有低级绘图功能的逐步绘图 (*)</h3>
+<div id="chunk-step-plot" class="section level3 hasAnchor" number="6.3.7">
+<h3><span class="header-section-number">6.3.7</span> 带有低级绘图功能的逐步绘图 (*)<a href="rmarkdown-operation.html#chunk-step-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在 R 中，有两种类型的绘图函数可以用来画图：高级的绘图函数用于创建新图，以及低级的绘图函数用于在现有的图中添加元素，更多信息请参见R手册《<a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html"><em>An Introduction to R</em></a>》的第 12 章（“Graphical procedures”）。</p>
 <p>在默认的情况下，当使用一系列低级的绘图函数来修改以前的图像时，<strong>knitr</strong> 不会显示中间的图，只会显示所有函数执行后的最后一个图。</p>
 <p>然而有的时候，尤其是在教学过程中，展示中间的图像是很有用的。为此，可以设置块选项 <code>fig.keep = 'low'</code> 来保留各低级函数更改后的图。例如，图 <a href="rmarkdown-operation.html#fig:low-plots-1">6.4</a> 和图 <a href="rmarkdown-operation.html#fig:low-plots-2">6.5</a> 来自一个带有块选项 <code>fig.keep = 'low'</code> 的单个代码块，尽管它们很像两个代码块的输出结果。不仅如此，本节还通过块选项 <code>fig.cap=c('cars ...', '在现有的...')</code> 给它们分配了不同的标题。</p>
@@ -2856,8 +2856,8 @@ div.csl-indent {
 </div>
 <p>如果想在不同的代码块中继续修改这张图，请参阅第 <a href="rmarkdown-operation.html#modify-before">6.6.5</a> 节。</p>
 </div>
-<div id="chunk-print" class="section level3" number="6.3.8">
-<h3><span class="header-section-number">6.3.8</span> 在代码块中自定义对象的打印格式 (*)</h3>
+<div id="chunk-print" class="section level3 hasAnchor" number="6.3.8">
+<h3><span class="header-section-number">6.3.8</span> 在代码块中自定义对象的打印格式 (*)<a href="rmarkdown-operation.html#chunk-print" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在默认的情况下，代码块中的对象会通过 <code>knitr::knit_print()</code> 函数来打印，基本上就相当于 R 中的 <code>print()</code>，但这往往并不能满足用户的需求。有的时候用户可能希望直接输出表格，除了第 <a href="rmarkdown-operation.html#table-advanced">6.1</a> 节提到的方法外，还有更便捷的方法实现。</p>
 <p>本质上，<code>knit_print()</code> 函数是一个 S3 通用函数，这意味着可以通过在其上注册 S3 方法来拓展输出方式。下面的例子展示了如何通过 <code>knitr::kable()</code> 来自动将数据框打印成表格：</p>
 <div class="sourceCode" id="cb314"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb314-1"><a href="rmarkdown-operation.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -2903,12 +2903,12 @@ div.csl-indent {
 <span id="cb317-2"><a href="rmarkdown-operation.html#cb317-2" aria-hidden="true" tabindex="-1"></a><span class="in">head(iris)</span></span>
 <span id="cb317-3"><a href="rmarkdown-operation.html#cb317-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>最终得到的结果见表 <a href="#tab:print-render"><strong>??</strong></a></p>
-<pre><code>## Retrieving &#39;https://cloud.r-project.org/bin/macosx/contrib/4.1/pander_0.6.5.tgz&#39; ...
-##  OK [downloaded 1.1 Mb in 0.3 secs]
+<pre><code>## Retrieving &#39;https://cran.rstudio.com/bin/macosx/contrib/4.2/pander_0.6.5.tgz&#39; ...
+##  OK [downloaded 1.1 Mb in 0.2 secs]
 ## Installing pander [0.6.5] ...
 ##  OK [installed binary]
 ## Moving pander [0.6.5] into the cache ...
-##  OK [moved to cache in 1.1 milliseconds]</code></pre>
+##  OK [moved to cache in 1.3 milliseconds]</code></pre>
 <table style="width:94%;">
 <colgroup>
 <col width="20%" />
@@ -2973,8 +2973,8 @@ div.csl-indent {
 </table>
 <p><code>render</code>选项给了用户完全的自由来打印 R 对象。</p>
 </div>
-<div id="option-hook" class="section level3" number="6.3.9">
-<h3><span class="header-section-number">6.3.9</span> 选项钩子 (*)</h3>
+<div id="option-hook" class="section level3 hasAnchor" number="6.3.9">
+<h3><span class="header-section-number">6.3.9</span> 选项钩子 (*)<a href="rmarkdown-operation.html#option-hook" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>有时候，用户可能需要根据其他块选项的值，来动态地改变某个块选项，例如设定图像宽不小于高。实际上，可以使用对象 <code>opts_hooks</code> 来设置一个选项钩子（option hook）来实现这个功能。选项钩子是一个与该选项相关的函数，会在对应的块选项不是 <code>NULL</code> 时自动执行。这个函数将当前代码块的选项列表作为输入参数，并且会返回一个（可能是修改过的）列表。例如，对于图像宽和高的限制，可以调整<code>fig.width</code>选项，使它总是不小于<code>fig.height</code>：</p>
 <div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="rmarkdown-operation.html#cb319-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width =</span> <span class="cf">function</span>(options) {</span>
 <span id="cb319-2"><a href="rmarkdown-operation.html#cb319-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (options<span class="sc">$</span>fig.width <span class="sc">&lt;</span> options<span class="sc">$</span>fig.height) {</span>
@@ -3040,11 +3040,11 @@ div.csl-indent {
 <span id="cb324-3"><a href="rmarkdown-operation.html#cb324-3" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
 <span id="cb324-4"><a href="rmarkdown-operation.html#cb324-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
-<div id="python-rmd" class="section level3" number="6.3.10">
-<h3><span class="header-section-number">6.3.10</span> 运行 Python 代码并与 Python 交互</h3>
+<div id="python-rmd" class="section level3 hasAnchor" number="6.3.10">
+<h3><span class="header-section-number">6.3.10</span> 运行 Python 代码并与 Python 交互<a href="rmarkdown-operation.html#python-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="chunk-asis" class="section level3" number="6.3.11">
-<h3><span class="header-section-number">6.3.11</span> 通过 <code>asis</code> 引擎有条件地执行内容</h3>
+<div id="chunk-asis" class="section level3 hasAnchor" number="6.3.11">
+<h3><span class="header-section-number">6.3.11</span> 通过 <code>asis</code> 引擎有条件地执行内容<a href="rmarkdown-operation.html#chunk-asis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>正如其名，<code>asis</code> 引擎会按原样（as is）输出块的内容。使用此引擎的优点在于，用户可以有条件地包含一些内容，块的内容的显示由块选项 <code>echo</code> 决定。当 <code>echo = FALSE</code> 时，数据块将被隐藏。下面是一个简单的例子：</p>
 <div class="sourceCode" id="cb325"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb325-1"><a href="rmarkdown-operation.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb325-2"><a href="rmarkdown-operation.html#cb325-2" aria-hidden="true" tabindex="-1"></a><span class="in">getRandomNumber &lt;- function() {</span></span>
@@ -3057,8 +3057,8 @@ div.csl-indent {
 <span id="cb325-9"><a href="rmarkdown-operation.html#cb325-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>只有当条件 <code>getRandomNumber() == 4</code> （随机）为真时， <code>asis</code> 块中的文本才会显示。</p>
 </div>
-<div id="chunk-shell" class="section level3" number="6.3.12">
-<h3><span class="header-section-number">6.3.12</span> 执行 Shell 脚本</h3>
+<div id="chunk-shell" class="section level3 hasAnchor" number="6.3.12">
+<h3><span class="header-section-number">6.3.12</span> 执行 Shell 脚本<a href="rmarkdown-operation.html#chunk-shell" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>【之后再修改】
 你可以根据你的喜好，使用 <code>bash</code>、 <code>sh</code> 或 <code>zsh</code> 任何一种引擎运行 Shell 脚本。下面是一个带有 chunk 头 <code>```{bash}</code> 的 bash 示例：</p>
 <div class="sourceCode" id="cb326"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb326-1"><a href="rmarkdown-operation.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>.Rmd <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 5</span></code></pre></div>
@@ -3072,8 +3072,8 @@ div.csl-indent {
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="rmarkdown-operation.html#cb329-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.opts =</span> <span class="fu">list</span>(<span class="at">bash =</span> <span class="st">&#39;-l&#39;</span>))</span></code></pre></div>
 <p>还可以将其他参数作为字符向量提供给 chunk 选项<code>engine.opts</code>，从而传递给 <code>bash</code>。</p>
 </div>
-<div id="cat-file" class="section level3" number="6.3.13">
-<h3><span class="header-section-number">6.3.13</span> 通过 cat 引擎将块内容写入文件</h3>
+<div id="cat-file" class="section level3 hasAnchor" number="6.3.13">
+<h3><span class="header-section-number">6.3.13</span> 通过 cat 引擎将块内容写入文件<a href="rmarkdown-operation.html#cat-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>有时将代码块的内容写入外部文件，然后在其他代码块中使用此文件可能会很有用。当然，可以通过 <code>writeLines()</code> 等 R 函数来实现这一点，但问题是，当内容相对较长或包含特殊字符时，传递给 <code>writeLines()</code> 的字符串可能看起来很笨拙。下面是将长字符串写入文件 <code>my-file.txt</code> 的示例：</p>
 <div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="rmarkdown-operation.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;这是一个长字符串。它有多条线。记得要避免双引号 </span><span class="sc">\&quot;\&quot;</span><span class="st">, 但是‘单引号’是可以的。</span></span>
 <span id="cb330-2"><a href="rmarkdown-operation.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="st">希望思考关于需要多少反斜杠时，不要失去理智。例如，到底是 &#39;</span><span class="sc">\t</span><span class="st">&#39;、&#39;</span><span class="sc">\\</span><span class="st">t&#39; 还是 &#39;</span><span class="sc">\\\\</span><span class="st">t&#39;?&quot;</span>, <span class="at">con =</span> <span class="st">&quot;my-file.txt&quot;</span>)</span></code></pre></div>
@@ -3081,8 +3081,8 @@ div.csl-indent {
 <p><strong>knitr</strong> 中的 <code>cat</code> 引擎为读者提供了一种在代码块中呈现文本内容或将其写入外部文件的方法，而无需考虑有关 R 字符串的所有规则（例如，当需要字面上的反斜杠时，读者需要使用双反斜杠）。</p>
 <p>要将块内容写入文件，请在块选项 <code>engine.opts</code> 中指定文件路径，例如 <code>engine.opts = list(file = 'path/to/file')</code>。在引擎盖下，在 <code>engine.opts</code> 中指定的值列表将传递给该函数 <code>base::cat()</code> 并且 <code>file</code> 是 <code>base::cat()</code> 的参数之一。</p>
 <p>接下来，将提供三个示例来说明 <code>cat</code> 引擎的用法。</p>
-<div id="write-css" class="section level4" number="6.3.13.1">
-<h4><span class="header-section-number">6.3.13.1</span> 写入 CSS 文件</h4>
+<div id="write-css" class="section level4 hasAnchor" number="6.3.13.1">
+<h4><span class="header-section-number">6.3.13.1</span> 写入 CSS 文件<a href="rmarkdown-operation.html#write-css" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <!-- \@ref(chunk-styling) -->
 <p>第一种方法是在 R Markdown 文档中嵌入一个 <code>css</code> 代码块，以使用 CSS 样式化元素。另一种方法是通过一些 R Markdown 输出格式(如，<code>html_document</code>)的 CSS 选项为 Pandoc 提供一个定制的 CSS 文件。 <code>cat</code> 引擎可以用来从 Rmd 编写这个 CSS 文件。</p>
 <p>下面的例子展示了如何从文档中的块生成 <code>custom.css</code> 文件，并将文件路径传递给 <code>html_document</code> 格式的 <code>css</code> 选项。</p>
@@ -3103,8 +3103,8 @@ div.csl-indent {
 <span id="cb331-15"><a href="rmarkdown-operation.html#cb331-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 标题会变蓝</span></span></code></pre></div>
 <p><code>css</code> 代码块方法与此方法之间的唯一区别是，前一种方法将 CSS 代码写在输出文档的 <code>&lt;body&gt;</code> 标记内的位置（即，在代码块的位置），并且将 CSS 代码写在输出文档的 <code>&lt;body&gt;</code> 标记内。 后一种方法将 CSS 写入输出文档的 <code>&lt;body&gt;</code> 区域。输出文档中不会有任何实际的视觉差异。</p>
 </div>
-<div id="write-latex" class="section level4" number="6.3.13.2">
-<h4><span class="header-section-number">6.3.13.2</span> 在序言中包含 LaTeX 代码</h4>
+<div id="write-latex" class="section level4 hasAnchor" number="6.3.13.2">
+<h4><span class="header-section-number">6.3.13.2</span> 在序言中包含 LaTeX 代码<a href="rmarkdown-operation.html#write-latex" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <!-- \@ref(latex-preamble) -->
 <p>在 6.1 节中，我们介绍了如何将 LaTeX 代码添加到序言中，这需要一个外部 <code>.tex</code> 文件。也可以从 Rmd 生成此文件，这是一个示例：</p>
 <div class="sourceCode" id="cb332"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb332-1"><a href="rmarkdown-operation.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -3139,8 +3139,8 @@ div.csl-indent {
 <p>在上面的 <code>cat</code> 代码块中的 LaTeX 代码中，我们定义了 PDF 文档的页眉和页脚。如果我们还想在页脚中显示作者姓名，我们可以用选项<code>engine.opts = list(file = 'preamble.tex', append = TRUE)</code> 和 <code>code = sprintf('\\fancyfoot[LO,RE]{%s}', rmarkdown::metadata$author)</code>将作者信息附加到另一个 <code>cat</code> 代码块中的 <code>preamble.tex</code> 中。要理解这是如何工作的，请回忆一下我们在本节前面提到的：<code>engine.opts</code> 被传递给 <code>base::cat()</code>。(因此 <code>append = TRUE</code> 被传递给 <code>cat()</code>)，你可以通过阅读 16.2 节来理解 chunk 选项代码。
 <!-- \@ref(option-code) --></p>
 </div>
-<div id="yaml-input" class="section level4" number="6.3.13.3">
-<h4><span class="header-section-number">6.3.13.3</span> 将 YAML 数据写入文件并显示它</h4>
+<div id="yaml-input" class="section level4 hasAnchor" number="6.3.13.3">
+<h4><span class="header-section-number">6.3.13.3</span> 将 YAML 数据写入文件并显示它<a href="rmarkdown-operation.html#yaml-input" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>默认情况下，<code>cat</code> 代码块的内容不会显示在输出文档中。如果还想在写出它之后显示它，则将块选项 <code>class.source</code> 设置为语言名称。语言名称用于语法高亮显示。在下面的例子中，我们指定为 <code>yaml</code> 语言：</p>
 <div class="sourceCode" id="cb333"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb333-1"><a href="rmarkdown-operation.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{cat, engine.opts=list(file=&#39;demo.yml&#39;), class.source=&#39;yaml&#39;}</span></span>
 <span id="cb333-2"><a href="rmarkdown-operation.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="in">a:</span></span>
@@ -3151,13 +3151,13 @@ div.csl-indent {
 <span id="cb333-7"><a href="rmarkdown-operation.html#cb333-7" aria-hidden="true" tabindex="-1"></a><span class="in">  bb: 2</span></span>
 <span id="cb333-8"><a href="rmarkdown-operation.html#cb333-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>其输出显示在下面，并且还生成了一个文件 <code>demo.yml</code>。</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb334-1"><a href="rmarkdown-operation.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">a</span><span class="kw">:</span></span>
+<div class="sourceCode" id="cb334"><pre class="sourceCode yaml yaml"><code class="sourceCode yaml"><span id="cb334-1"><a href="rmarkdown-operation.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">a</span><span class="kw">:</span></span>
 <span id="cb334-2"><a href="rmarkdown-operation.html#cb334-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">aa</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;something&quot;</span></span>
 <span id="cb334-3"><a href="rmarkdown-operation.html#cb334-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bb</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
 <span id="cb334-4"><a href="rmarkdown-operation.html#cb334-4" aria-hidden="true" tabindex="-1"></a><span class="fu">b</span><span class="kw">:</span></span>
 <span id="cb334-5"><a href="rmarkdown-operation.html#cb334-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">aa</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;something else&quot;</span></span>
 <span id="cb334-6"><a href="rmarkdown-operation.html#cb334-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bb</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span></code></pre></div>
-<p>为了显示文件 <code>demo.yml</code> 确实已经生成，我们可以尝试使用 <strong>yaml</strong> 包 <span class="citation">(<a href="#ref-R-yaml" role="doc-biblioref">Stephens et al. 2020</a>)</span> 将其读入 R。</p>
+<p>为了显示文件 <code>demo.yml</code> 确实已经生成，我们可以尝试使用 <strong>yaml</strong> 包 <span class="citation">(<a href="#ref-R-yaml" role="doc-biblioref">Garbett et al. 2022</a>)</span> 将其读入 R。</p>
 <div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="rmarkdown-operation.html#cb335-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">tree</span>(yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">&#39;demo.yml&#39;</span>))</span></code></pre></div>
 <pre><code>## List of 2
 ##  |-a:List of 2
@@ -3168,8 +3168,8 @@ div.csl-indent {
 ##     |-bb: int 2</code></pre>
 </div>
 </div>
-<div id="sas-rmd" class="section level3" number="6.3.14">
-<h3><span class="header-section-number">6.3.14</span> 运行 SAS 代码</h3>
+<div id="sas-rmd" class="section level3 hasAnchor" number="6.3.14">
+<h3><span class="header-section-number">6.3.14</span> 运行 SAS 代码<a href="rmarkdown-operation.html#sas-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>你可以使用 <code>sas</code> 引擎运行 SAS (<a href="https://www.sas.com" class="uri">https://www.sas.com</a>) 代码。你需要确保 SAS 可执行文件在你的环境变量 <code>PATH</code> 中，或者(如果你不知道 <code>PATH</code> 是什么意思)通过 chunk 选项 <code>engine.path</code> 来提供 SAS 可执行文件的完整路径，例如：<code>engine.path = "C:\\Program Files\\SASHome\\x86\\SASFoundation\\9.3\\sas.exe"</code>。下面是一个输出 “Hello World” 的示例：</p>
 <div class="sourceCode" id="cb337"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb337-1"><a href="rmarkdown-operation.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}</span></span>
 <span id="cb337-2"><a href="rmarkdown-operation.html#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="in">data _null_;</span></span>
@@ -3177,8 +3177,8 @@ div.csl-indent {
 <span id="cb337-4"><a href="rmarkdown-operation.html#cb337-4" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
 <span id="cb337-5"><a href="rmarkdown-operation.html#cb337-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
-<div id="stata-rmd" class="section level3" number="6.3.15">
-<h3><span class="header-section-number">6.3.15</span> 运行 Stata 代码</h3>
+<div id="stata-rmd" class="section level3 hasAnchor" number="6.3.15">
+<h3><span class="header-section-number">6.3.15</span> 运行 Stata 代码<a href="rmarkdown-operation.html#stata-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>如果你安装了 Stata，你可以通过 <code>stata</code> 引擎 Stata (<a href="https://www.stata.com" class="uri">https://www.stata.com</a>) 来运行 Stata (<a href="https://www.stata.com" class="uri">https://www.stata.com</a>) 代码。除非可以通过环境变量 <code>PATH</code> 找到 <code>stata</code> 可执行文件，否则你需要通过 chunk 选项 <code>engine.path</code> 指定到可执行文件的完整路径，例如：<code>engine.path = "C:/Program Files (x86)/Stata15/StataSE-64.exe"</code>。下面给出一个例子：</p>
 <div class="sourceCode" id="cb338"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb338-1"><a href="rmarkdown-operation.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb338-2"><a href="rmarkdown-operation.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="in">sysuse auto</span></span>
@@ -3186,8 +3186,8 @@ div.csl-indent {
 <span id="cb338-4"><a href="rmarkdown-operation.html#cb338-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>在 <strong>knitr</strong> 中的 <code>stata</code> 引擎是相当有限的。Doug Hemken 已经通过 <strong>Statamarkdown</strong> 包 中对其进行了实质性的扩展，该包可以通过Github中获得，地址为： <a href="https://github.com/Hemken/Statamarkdown。通过在线搜索" class="uri">https://github.com/Hemken/Statamarkdown。通过在线搜索</a> “Stata R Markdown”，你可以找到关于这个包的教程。</p>
 </div>
-<div id="asymptote-plot" class="section level3" number="6.3.16">
-<h3><span class="header-section-number">6.3.16</span> 用渐近线 Asymptote 创建图形</h3>
+<div id="asymptote-plot" class="section level3 hasAnchor" number="6.3.16">
+<h3><span class="header-section-number">6.3.16</span> 用渐近线 Asymptote 创建图形<a href="rmarkdown-operation.html#asymptote-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>渐近线 Asymptote (<a href="https://asymptote.sourceforge.io" class="uri">https://asymptote.sourceforge.io</a>) 是矢量图形的强大语言。如果你已经安装了 Asymptote，那么可以使用 <code>asy</code> 引擎在 R Markdown 中编写并运行 Asymptote 代码(有关安装的说明，请参阅其网站)。下面是从仓库 <a href="https://github.com/vectorgraphics/asymptote" class="uri">https://github.com/vectorgraphics/asymptote</a> 中复制的示例，其输出如图 <a href="#fig:elevation"><strong>??</strong></a> 所示：</p>
 <div class="sourceCode" id="cb339"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb339-1"><a href="rmarkdown-operation.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> graph3<span class="op">;</span></span>
 <span id="cb339-2"><a href="rmarkdown-operation.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> grid3<span class="op">;</span></span>
@@ -3212,8 +3212,8 @@ div.csl-indent {
 <!-- \@ref(install-latex-pkgs) -->
 <p>如果出现这种错误，请参见 1.3 章节了解如何安装丢失的 LaTeX 包。</p>
 <p>在上面的 <code>asy</code> 块中，我们使用了 <code>settings.prc = false</code> 的设置。如果没有此设置，当输出格式为 PDF 时，渐近线将生成交互式 3D 图形。但是，交互图形只能在 Acrobat Reader 中查看。如果使用 Acrobat Reader，则可以与图形交互。例如，你可以用鼠标旋转图 <a href="#fig:elevation"><strong>??</strong></a> 中的 3D 表面。</p>
-<div id="asym-r" class="section level4" number="6.3.16.1">
-<h4><span class="header-section-number">6.3.16.1</span> 在 R 中生成数据并通过 Asymptote 读取</h4>
+<div id="asym-r" class="section level4 hasAnchor" number="6.3.16.1">
+<h4><span class="header-section-number">6.3.16.1</span> 在 R 中生成数据并通过 Asymptote 读取<a href="rmarkdown-operation.html#asym-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>现在我们展示一个示例，其中我们首先将在 R 中生成的数据保存到 CSV 文件中(下面是一个 R 代码块)：</p>
 <div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="rmarkdown-operation.html#cb341-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">l =</span> <span class="dv">100</span>)</span>
 <span id="cb341-2"><a href="rmarkdown-operation.html#cb341-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">sin</span>(x)</span>
@@ -3243,17 +3243,17 @@ div.csl-indent {
 <span id="cb342-22"><a href="rmarkdown-operation.html#cb342-22" aria-hidden="true" tabindex="-1"></a>yaxis<span class="op">(</span><span class="st">&quot;$y$&quot;</span><span class="op">,</span>LeftRight<span class="op">,</span>RightTicks<span class="op">);</span></span></code></pre></div>
 </div>
 </div>
-<div id="sass-scss" class="section level3" number="6.3.17">
-<h3><span class="header-section-number">6.3.17</span> 使用 Sass/SCSS 构建 HTML 页面</h3>
+<div id="sass-scss" class="section level3 hasAnchor" number="6.3.17">
+<h3><span class="header-section-number">6.3.17</span> 使用 Sass/SCSS 构建 HTML 页面<a href="rmarkdown-operation.html#sass-scss" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Sass (<a href="https://sass-lang.com" class="uri">https://sass-lang.com</a>) 是一种 CSS 扩展语言，它使用比普通 CSS 更灵活的方式创建 CSS 规则。</p>
-<p><strong>sass</strong> <span class="citation">(<a href="#ref-R-sass" role="doc-biblioref">Cheng et al. 2021</a>)</span> (Cheng et al. 2020) 包可以用来编译 Sass 到 CSS。基于 <strong>sass</strong> 包，<strong>knitr</strong> 包含两个语言引擎： <code>sass</code>和 <code>scss</code> (分别对应于 Sass 和 SCSS 语法)，将代码块编译为 CSS。下面是一个 <code>scss</code> 代码块，头部块为<code>```{scss}</code>：</p>
-<pre class="scss"><code>$font-stack: &quot;Comic Sans MS&quot;, cursive, sans-serif;
-$primary-color: #00FF00;
-
-.book.font-family-1 {
-  font: 100% $font-stack;
-  color: $primary-color;
-}</code></pre>
+<p><strong>sass</strong> <span class="citation">(<a href="#ref-R-sass" role="doc-biblioref">Cheng et al. 2022</a>)</span> (Cheng et al. 2020) 包可以用来编译 Sass 到 CSS。基于 <strong>sass</strong> 包，<strong>knitr</strong> 包含两个语言引擎： <code>sass</code>和 <code>scss</code> (分别对应于 Sass 和 SCSS 语法)，将代码块编译为 CSS。下面是一个 <code>scss</code> 代码块，头部块为<code>```{scss}</code>：</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb343-1"><a href="rmarkdown-operation.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="va">$font-stack</span>: <span class="st">&quot;Comic Sans MS&quot;</span><span class="op">,</span> <span class="dv">cursive</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb343-2"><a href="rmarkdown-operation.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="va">$primary-color</span>: <span class="cn">#00FF00</span><span class="op">;</span></span>
+<span id="cb343-3"><a href="rmarkdown-operation.html#cb343-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-4"><a href="rmarkdown-operation.html#cb343-4" aria-hidden="true" tabindex="-1"></a><span class="fu">.book.font-family-1</span> {</span>
+<span id="cb343-5"><a href="rmarkdown-operation.html#cb343-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font</span>: <span class="dv">100</span><span class="dt">%</span> <span class="va">$font-stack</span><span class="op">;</span></span>
+<span id="cb343-6"><a href="rmarkdown-operation.html#cb343-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="va">$primary-color</span><span class="op">;</span></span>
+<span id="cb343-7"><a href="rmarkdown-operation.html#cb343-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <style type="text/css">
 .book.font-family-1{font:100% "Comic Sans MS",cursive,sans-serif;color:lime}
 </style>
@@ -3270,28 +3270,28 @@ $primary-color: #00FF00;
 <p><code>sass</code>/<code>scss</code> 代码块是通过<code>sass::sass()</code>函数编译而成的。目前，块选项 <code>engine.opts</code> 可以定制 CSS 代码的输出样式，例如：<code>engine.opts = list(style = "expanded")</code>。默认的样式是 “compressed”。请参阅帮助页面 <code>?sass::sass_options</code> 了解更多 <code>output_style</code> 可用的参数。</p>
 </div>
 </div>
-<div id="output-hook" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> 输出钩子 (*)</h2>
-<div id="edit-source" class="section level3" number="6.4.1">
-<h3><span class="header-section-number">6.4.1</span> 编辑源代码</h3>
+<div id="output-hook" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> 输出钩子 (*)<a href="rmarkdown-operation.html#output-hook" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="edit-source" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> 编辑源代码<a href="rmarkdown-operation.html#edit-source" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="source-index" class="section level3" number="6.4.2">
-<h3><span class="header-section-number">6.4.2</span> 向源代码中添加行号</h3>
+<div id="source-index" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> 向源代码中添加行号<a href="rmarkdown-operation.html#source-index" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="scrollable-output" class="section level3" number="6.4.3">
-<h3><span class="header-section-number">6.4.3</span> 可滚动的文本输出</h3>
+<div id="scrollable-output" class="section level3 hasAnchor" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> 可滚动的文本输出<a href="rmarkdown-operation.html#scrollable-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="truncated-output" class="section level3" number="6.4.4">
-<h3><span class="header-section-number">6.4.4</span> 截断文本输出</h3>
+<div id="truncated-output" class="section level3 hasAnchor" number="6.4.4">
+<h3><span class="header-section-number">6.4.4</span> 截断文本输出<a href="rmarkdown-operation.html#truncated-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="html5-plot" class="section level3" number="6.4.5">
-<h3><span class="header-section-number">6.4.5</span> 以HTML5格式输出图像</h3>
+<div id="html5-plot" class="section level3 hasAnchor" number="6.4.5">
+<h3><span class="header-section-number">6.4.5</span> 以HTML5格式输出图像<a href="rmarkdown-operation.html#html5-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="cache" class="section level2" number="6.5">
-<h2><span class="header-section-number">6.5</span> 缓存 (*)</h2>
-<div id="chunk-cache" class="section level3" number="6.5.1">
-<h3><span class="header-section-number">6.5.1</span> 缓存耗时的代码块</h3>
+<div id="cache" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> 缓存 (*)<a href="rmarkdown-operation.html#cache" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="chunk-cache" class="section level3 hasAnchor" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> 缓存耗时的代码块<a href="rmarkdown-operation.html#chunk-cache" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在一个报告中，往往会有一些运行起来很费时且很关键的代码块（如数据预处理等）。为了节省时间，可以考虑通过块选项 <code>cache = TRUE</code> 来缓存该代码块的结果。当启用缓存时，如果一个代码块之前被执行过且之后没有任何变化时，<strong>knitr</strong> 将跳过这个代码块的执行，从而大大缩短编译所需的时间。而当再次修改代码块时（如修改代码或块选项），之前的缓存将自动失效，并且 <strong>knitr</strong> 将再次运行并缓存该代码块。</p>
 <p>对于一个被缓存了的代码块，它的输出以及变量对象将从上一次的运行中自动加载，就像该代码块被再次执行了一样。当加载结果比计算结果快得多时，缓存操作通常是有用的。然而，天下没有免费的午餐，有的时候 <strong>knitr</strong> 会令缓存失效或是部分失效，如外部文件内容的改变可能没有体现在报告中等等。更多关于如何缓存，特别是缓存失效的相关知识可参见：<a href="https://yihui.org/en/2018/06/cache-invalidation/" class="uri">https://yihui.org/en/2018/06/cache-invalidation/</a>。</p>
 <p>缓存的一个典型应用场景是保存和重新加载那些需要很长时间才能在代码块中计算的 R 对象。需要注意的是，代码需要没有任何“副产物”，否则建议不要进行缓存。例如在使用 <code>options()</code> 更改全局 R 选项时，产生的更改不会被缓存。</p>
@@ -3311,16 +3311,16 @@ $primary-color: #00FF00;
 <span id="cb346-6"><a href="rmarkdown-operation.html#cb346-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>在这一例子中，使缓存失效的唯一（也是简单的）方法就是删除文件<code>results.rds</code>。如果对这个简单的缓存机制感兴趣，可以使用在<a href="rmarkdown-operation.html#cache-rds">6.5.4</a>节中介绍的函数<code>xfun::cache_rds()</code>。</p>
 </div>
-<div id="cache-path" class="section level3" number="6.5.2">
-<h3><span class="header-section-number">6.5.2</span> 为多种输出格式缓存代码块</h3>
+<div id="cache-path" class="section level3 hasAnchor" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> 为多种输出格式缓存代码块<a href="rmarkdown-operation.html#cache-path" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>当通过块选项 <code>cache = TRUE</code>启用缓存时，<strong>knitr</strong> 将把在代码块中生成的 R 对象写入缓存数据库，以便下次重新加载它们。缓存数据库的路径由块选项 <code>cache.path</code> 决定。默认情况下，R Markdown 对不同的输出格式会使用不同的缓存路径，这意味着对于每种输出格式都将完全执行一次这个（耗时的）代码块。这可能很不方便，但这种默认的行为是有原因的，即代码块的输出可能依赖于特定的输出格式。例如，生成图像，当输出格式为<code>word_document</code>时，图像的输出可能是像 <code>![text](path/to/image.png)</code> 这样的标记代码；而或者当输出格式为 <code>html_document</code> 时，输出的HTML代码则类似 <code>&lt;img src="path/to/image.png" /&gt;</code>。</p>
 <p>当代码块没有任何副产物（如图像）时，对所有输出格式使用相同的缓存数据库是安全的，还可以节省时间。例如，当读取一个大型数据对象或运行一个比较耗时的模型时，若结果不依赖于输出格式，就可以使用相同的缓存数据库。可以通过块选项 <code>cache.path</code> ，例如：</p>
 <div class="sourceCode" id="cb347"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb347-1"><a href="rmarkdown-operation.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r important-computing, cache=TRUE, cache.path=&quot;cache/&quot;}</span></span>
 <span id="cb347-2"><a href="rmarkdown-operation.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>实际上，在 R Markdown 中，<code>cache.path</code> 的默认设置为 <code>cache.path = "INPUT_cache/FORMAT/"</code>，其中 <code>INPUT</code> 代表输入的文件名，<code>FORMAT</code> 为输出格式（如 <code>html</code>、<code>latex</code> 或 <code>docx</code>），这就导致了不同的输出格式对应不同的缓存路径。</p>
 </div>
-<div id="cache-lazy" class="section level3" number="6.5.3">
-<h3><span class="header-section-number">6.5.3</span> 缓存大型的对象</h3>
+<div id="cache-lazy" class="section level3 hasAnchor" number="6.5.3">
+<h3><span class="header-section-number">6.5.3</span> 缓存大型的对象<a href="rmarkdown-operation.html#cache-lazy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>当设定块选项 <code>cache = TRUE</code> 时，缓存的对象将被延迟加载到 R 中，这意味着对象将不会从缓存数据库中读取，直到它在代码中被实际使用。当不是所有对象都在文档中稍后被使用时，这一操作可以节省一些内存。例如，如果读取了一个大型的数据对象，但在后续的分析中只使用了其中的一个子集，那么原始的数据对象将不会从缓存数据库中加载：</p>
 <div class="sourceCode" id="cb348"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb348-1"><a href="rmarkdown-operation.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, read-data, cache=TRUE}</span></span>
 <span id="cb348-2"><a href="rmarkdown-operation.html#cb348-2" aria-hidden="true" tabindex="-1"></a><span class="in">full &lt;- read.csv(&quot;大型数据集.csv&quot;)</span></span>
@@ -3337,8 +3337,8 @@ $primary-color: #00FF00;
 <span id="cb349-3"><a href="rmarkdown-operation.html#cb349-3" aria-hidden="true" tabindex="-1"></a>Execution halted</span></code></pre></div>
 <p>如果出现这个问题，可以尝试通过块选项 <code>cache.lazy = FALSE</code> 来关闭延迟加载，这样该代码块中的所有对象都将立即被加载到内存中。</p>
 </div>
-<div id="cache-rds" class="section level3" number="6.5.4">
-<h3><span class="header-section-number">6.5.4</span> 一个更透明的缓存机制</h3>
+<div id="cache-rds" class="section level3 hasAnchor" number="6.5.4">
+<h3><span class="header-section-number">6.5.4</span> 一个更透明的缓存机制<a href="rmarkdown-operation.html#cache-rds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>如果在使用的过程中，觉得前文介绍的基于 <strong>knitr</strong> 的缓存机过于复杂，可以考虑使用基于函数 <code>xfun::cache_rds()</code> 的一个更简单的缓存机制，例如：</p>
 <div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="rmarkdown-operation.html#cb350-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
 <span id="cb350-2"><a href="rmarkdown-operation.html#cb350-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 在这里编写你的耗时代码</span></span>
@@ -3353,8 +3353,8 @@ $primary-color: #00FF00;
 <span id="cb351-6"><a href="rmarkdown-operation.html#cb351-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p><code>.rds</code> 文件的路径格式为 <code>input_cache/FORMAT/foo_HASH.rds</code>，其中 <code>FORMAT</code> 是 Pandoc 输出格式名称（例如 <code>html</code> 或 <code>latex</code>）， <code>HASH</code> 是一个MD5哈希值，包含了 32 个十六进制数字（a-f 和 0-9），例如 <code>input_cache/html/foo_7a3f22c4309d400eff95de0e8bddac71.rds</code>。</p>
 <p>如帮助页面 <code>?xfun::cache_rds</code> 所述，通常在两种的情况下可能想要使缓存失效：（1）待求值表达式中的代码发生了变化；（2）代码使用了一个外部变量，并且该变量的值已经改变。本节接下来将解释这两种情况下缓存是如何失效的，以及如何将缓存的多个副本保存到对应于不同版本的代码中。</p>
-<div id="通过更改表达式中的代码使缓存失效" class="section level4" number="6.5.4.1">
-<h4><span class="header-section-number">6.5.4.1</span> 通过更改表达式中的代码使缓存失效</h4>
+<div id="通过更改表达式中的代码使缓存失效" class="section level4 hasAnchor" number="6.5.4.1">
+<h4><span class="header-section-number">6.5.4.1</span> 通过更改表达式中的代码使缓存失效<a href="rmarkdown-operation.html#通过更改表达式中的代码使缓存失效" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>当改变 <code>cache_rds()</code>中的代码时（例如，从 <code>cache_rds({x + 1})</code> 改为 <code>cache_rds({x + 2})</code>），缓存将自动失效，表达式将被重新计算。但是需要注意的是，空格或注释的变化是不重要的，或者一般来说，只要更改不影响已解析的表达式，缓存就不会失效。例如，下面传递给 <code>cache_rds()</code> 的两个表达式在本质上是相同的：</p>
 <div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="rmarkdown-operation.html#cb352-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
 <span id="cb352-2"><a href="rmarkdown-operation.html#cb352-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">3</span>);</span>
@@ -3382,8 +3382,8 @@ $primary-color: #00FF00;
 <span id="cb357-2"><a href="rmarkdown-operation.html#cb357-2" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">parse_code</span>({x <span class="ot">&lt;-</span> <span class="dv">1</span>}), <span class="fu">parse_code</span>({<span class="dv">1</span> <span class="ot">-&gt;</span> x}))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-<div id="通过更改全局变量使缓存失效" class="section level4" number="6.5.4.2">
-<h4><span class="header-section-number">6.5.4.2</span> 通过更改全局变量使缓存失效</h4>
+<div id="通过更改全局变量使缓存失效" class="section level4 hasAnchor" number="6.5.4.2">
+<h4><span class="header-section-number">6.5.4.2</span> 通过更改全局变量使缓存失效<a href="rmarkdown-operation.html#通过更改全局变量使缓存失效" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>通常情况下，表达式中有两种类型的变量：全局变量和局部变量。全局变量是在表达式外部创建的，局部变量则是在表达式内部创建的。如果表达式中全局变量的值发生了变化，那么缓存的结果和再次运行的结果之间可能会产生差异。例如，在下面的表达式中，如果 <code>y</code> 发生了变化，需要想要使缓存失效并重新运行表达式，否则仍然会得到根据 <code>y</code> 之前的值计算得到的结果：</p>
 <div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="rmarkdown-operation.html#cb359-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb359-2"><a href="rmarkdown-operation.html#cb359-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -3418,8 +3418,8 @@ $primary-color: #00FF00;
 <span id="cb364-4"><a href="rmarkdown-operation.html#cb364-4" aria-hidden="true" tabindex="-1"></a>}, <span class="at">hash =</span> <span class="fu">list</span>(<span class="at">y =</span> y, <span class="at">z =</span> z))</span></code></pre></div>
 <p>当 <code>hash = "auto"</code> 时，全局变量由 <code>codetools::findGlobals()</code> 识别，这可能不是完全可靠的，所以如果需要完全确定哪些变量可以使缓存失效，本书建议在 <code>hash</code> 参数中亲自给定变量列表。</p>
 </div>
-<div id="保留缓存的多个副本" class="section level4" number="6.5.4.3">
-<h4><span class="header-section-number">6.5.4.3</span> 保留缓存的多个副本</h4>
+<div id="保留缓存的多个副本" class="section level4 hasAnchor" number="6.5.4.3">
+<h4><span class="header-section-number">6.5.4.3</span> 保留缓存的多个副本<a href="rmarkdown-operation.html#保留缓存的多个副本" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>由于缓存通常用于非常耗时的代码，在使其失效时应当保守一些。有的时候可能会因过早或主动地使缓存失效而后悔，因为如果再次需要一个旧版本的缓存时，则将不得不等待很长的时间才能重新完成计算。</p>
 <p>若将 <code>cache_rds()</code> 中的 <code>clean</code> 参数设置为 <code>FALSE</code>，则将允许保留旧的缓存副本。也可以设置全局 R 选项 <code>options(xfun.cache_rds.clean = FALSE)</code> 来使其成为文档的默认行为。在默认情况下，<code>clean = TRUE</code> 和 <code>cache_rds()</code> 每次都会尝试删除旧的缓存。如果还在进行代码测试，那么设置 <code>clean = FALSE</code> 会很有用。例如，可以缓存一个线性模型的两个版本：</p>
 <div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="rmarkdown-operation.html#cb365-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
@@ -3431,8 +3431,8 @@ $primary-color: #00FF00;
 <span id="cb365-7"><a href="rmarkdown-operation.html#cb365-7" aria-hidden="true" tabindex="-1"></a>}, <span class="at">clean =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>在决定使用哪个模型之后，可以再次设置 <code>clean = TRUE</code>，或者删除 <code>clean</code> 参数（默认为 <code>TRUE</code>）。</p>
 </div>
-<div id="与-knitr-的缓存比较" class="section level4" number="6.5.4.4">
-<h4><span class="header-section-number">6.5.4.4</span> 与 <strong>knitr</strong> 的缓存比较</h4>
+<div id="与-knitr-的缓存比较" class="section level4 hasAnchor" number="6.5.4.4">
+<h4><span class="header-section-number">6.5.4.4</span> 与 <strong>knitr</strong> 的缓存比较<a href="rmarkdown-operation.html#与-knitr-的缓存比较" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>那么什么时候使用 <strong>knitr</strong> 的缓存（例如，设置块选项 <code>cache = TRUE</code>），什么时候在 <strong>knitr</strong> 源文档中使用 <code>xfun::cache_rds()</code>呢？后者最大的缺点是它不缓存副产物（而只缓存表达式的值），而 <strong>knitr</strong> 却可以。有的时候，一些副产物是有用的，比如打印的输出或图像。例如，在下面的代码中，当使用 <code>cache_rds()</code> 加载缓存时，文本输出和图像将会丢失，只会返回 <code>1:10</code>：</p>
 <div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="rmarkdown-operation.html#cb366-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">cache_rds</span>({</span>
 <span id="cb366-2"><a href="rmarkdown-operation.html#cb366-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Hello world!&quot;</span>)</span>
@@ -3445,7 +3445,7 @@ $primary-color: #00FF00;
 <span id="cb367-3"><a href="rmarkdown-operation.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars)</span></span>
 <span id="cb367-4"><a href="rmarkdown-operation.html#cb367-4" aria-hidden="true" tabindex="-1"></a><span class="in">1:10</span></span>
 <span id="cb367-5"><a href="rmarkdown-operation.html#cb367-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>但 <strong>knitr</strong> 的缓存最大的缺点（同时也是用户最常抱怨的）是缓存可能会在不经意间失效，因为缓存由太多的因素所决定。例如，任何块选项的改变都会使缓存失效<a href="references.html#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>，但有些块选项可能与计算无关。例如在下面的代码块中，改变块选项 <code>fig.width = 6</code> 到 <code>fig.width = 10</code> 会导致缓存失效，但实际上却不需要重新运行一次代码：</p>
+<p>但 <strong>knitr</strong> 的缓存最大的缺点（同时也是用户最常抱怨的）是缓存可能会在不经意间失效，因为缓存由太多的因素所决定。例如，任何块选项的改变都会使缓存失效<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>，但有些块选项可能与计算无关。例如在下面的代码块中，改变块选项 <code>fig.width = 6</code> 到 <code>fig.width = 10</code> 会导致缓存失效，但实际上却不需要重新运行一次代码：</p>
 <div class="sourceCode" id="cb368"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb368-1"><a href="rmarkdown-operation.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, cache=TRUE, fig.width=6}</span></span>
 <span id="cb368-2"><a href="rmarkdown-operation.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 这个块没有生成图像</span></span>
 <span id="cb368-3"><a href="rmarkdown-operation.html#cb368-3" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- rnorm(1000)</span></span>
@@ -3456,45 +3456,48 @@ $primary-color: #00FF00;
 </div>
 </div>
 </div>
-<div id="other-trick" class="section level2" number="6.6">
-<h2><span class="header-section-number">6.6</span> 其它使用 knitr 的小技巧 (*)</h2>
-<div id="reuse-chunk" class="section level3" number="6.6.1">
-<h3><span class="header-section-number">6.6.1</span> 重复使用代码块</h3>
+<div id="other-trick" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> 其它使用 knitr 的小技巧 (*)<a href="rmarkdown-operation.html#other-trick" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="reuse-chunk" class="section level3 hasAnchor" number="6.6.1">
+<h3><span class="header-section-number">6.6.1</span> 重复使用代码块<a href="rmarkdown-operation.html#reuse-chunk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="use-creat" class="section level3" number="6.6.2">
-<h3><span class="header-section-number">6.6.2</span> 在创建对象之前使用它 (*)</h3>
+<div id="use-creat" class="section level3 hasAnchor" number="6.6.2">
+<h3><span class="header-section-number">6.6.2</span> 在创建对象之前使用它 (*)<a href="rmarkdown-operation.html#use-creat" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="compile-exit" class="section level3" number="6.6.3">
-<h3><span class="header-section-number">6.6.3</span> 提前退出编译</h3>
+<div id="compile-exit" class="section level3 hasAnchor" number="6.6.3">
+<h3><span class="header-section-number">6.6.3</span> 提前退出编译<a href="rmarkdown-operation.html#compile-exit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="plot-show-else" class="section level3" number="6.6.4">
-<h3><span class="header-section-number">6.6.4</span> 生成一个图像并在其他地方显示</h3>
+<div id="plot-show-else" class="section level3 hasAnchor" number="6.6.4">
+<h3><span class="header-section-number">6.6.4</span> 生成一个图像并在其他地方显示<a href="rmarkdown-operation.html#plot-show-else" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="modify-before" class="section level3" number="6.6.5">
-<h3><span class="header-section-number">6.6.5</span> 修改之前代码块中的图像</h3>
+<div id="modify-before" class="section level3 hasAnchor" number="6.6.5">
+<h3><span class="header-section-number">6.6.5</span> 修改之前代码块中的图像<a href="rmarkdown-operation.html#modify-before" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="reuse-option" class="section level3" number="6.6.6">
-<h3><span class="header-section-number">6.6.6</span> 保存一组块选项并重复使用它们 (*)</h3>
+<div id="reuse-option" class="section level3 hasAnchor" number="6.6.6">
+<h3><span class="header-section-number">6.6.6</span> 保存一组块选项并重复使用它们 (*)<a href="rmarkdown-operation.html#reuse-option" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="knit-expand" class="section level3" number="6.6.7">
-<h3><span class="header-section-number">6.6.7</span> 使用 knitr::knit_expand() 来生成 Rmd 源代码</h3>
+<div id="knit-expand" class="section level3 hasAnchor" number="6.6.7">
+<h3><span class="header-section-number">6.6.7</span> 使用 knitr::knit_expand() 来生成 Rmd 源代码<a href="rmarkdown-operation.html#knit-expand" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="repeat-label" class="section level3" number="6.6.8">
-<h3><span class="header-section-number">6.6.8</span> 允许代码块中的标签重复 (*)</h3>
+<div id="repeat-label" class="section level3 hasAnchor" number="6.6.8">
+<h3><span class="header-section-number">6.6.8</span> 允许代码块中的标签重复 (*)<a href="rmarkdown-operation.html#repeat-label" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
 </div>
-<h3>参考文献</h3>
+<h3>参考文献<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-R-sass" class="csl-entry">
-Cheng, Joe, Timothy Mastny, Richard Iannone, Barret Schloerke, and Carson Sievert. 2021. <em>Sass: Syntactically Awesome Style Sheets (Sass)</em>. <a href="https://github.com/rstudio/sass">https://github.com/rstudio/sass</a>.
+Cheng, Joe, Timothy Mastny, Richard Iannone, Barret Schloerke, and Carson Sievert. 2022. <em>Sass: Syntactically Awesome Style Sheets (Sass)</em>. <a href="https://CRAN.R-project.org/package=sass">https://CRAN.R-project.org/package=sass</a>.
 </div>
 <div id="ref-R-xtable" class="csl-entry">
 Dahl, David B., David Scott, Charles Roosen, Arni Magnusson, and Jonathan Swinton. 2019. <em>Xtable: Export Tables to LaTeX or HTML</em>. <a href="http://xtable.r-forge.r-project.org/">http://xtable.r-forge.r-project.org/</a>.
 </div>
 <div id="ref-R-pander" class="csl-entry">
 Daróczi, Gergely, and Roman Tsegelskyi. 2022. <em>Pander: An r Pandoc Writer</em>. <a href="https://rapporter.github.io/pander/">https://rapporter.github.io/pander/</a>.
+</div>
+<div id="ref-R-yaml" class="csl-entry">
+Garbett, Shawn P, Jeremy Stephens, Kirill Simonov, Yihui Xie, Zhuoer Dong, Hadley Wickham, Jeffrey Horner, et al. 2022. <em>Yaml: Methods to Convert r Data to YAML and Back</em>. <a href="https://github.com/vubiostat/r-yaml/">https://github.com/vubiostat/r-yaml/</a>.
 </div>
 <div id="ref-R-huxtable" class="csl-entry">
 Hugh-Jones, David. 2021. <em>Huxtable: Easily Create and Style Tables for LaTeX, HTML and Other Formats</em>. <a href="https://hughjonesd.github.io/huxtable/">https://hughjonesd.github.io/huxtable/</a>.
@@ -3505,21 +3508,29 @@ Ooms, Jeroen. 2021. <em>Magick: Advanced Graphics and Image-Processing in r</em>
 <div id="ref-R-tikzDevice" class="csl-entry">
 Sharpsteen, Charlie, and Cameron Bracken. 2020. <em>tikzDevice: R Graphics Output in LaTeX Format</em>. <a href="https://github.com/daqana/tikzDevice">https://github.com/daqana/tikzDevice</a>.
 </div>
-<div id="ref-R-yaml" class="csl-entry">
-Stephens, Jeremy, Kirill Simonov, Yihui Xie, Zhuoer Dong, Hadley Wickham, Jeffrey Horner, reikoch, Will Beasley, Brendan O’Connor, and Gregory R. Warnes. 2020. <em>Yaml: Methods to Convert r Data to YAML and Back</em>. <a href="https://github.com/viking/r-yaml/">https://github.com/viking/r-yaml/</a>.
-</div>
 <div id="ref-R-reticulate" class="csl-entry">
-Ushey, Kevin, JJ Allaire, and Yuan Tang. 2021. <em>Reticulate: Interface to Python</em>. <a href="https://github.com/rstudio/reticulate">https://github.com/rstudio/reticulate</a>.
+Ushey, Kevin, JJ Allaire, and Yuan Tang. 2022. <em>Reticulate: Interface to Python</em>. <a href="https://CRAN.R-project.org/package=reticulate">https://CRAN.R-project.org/package=reticulate</a>.
 </div>
 <div id="ref-R-svglite" class="csl-entry">
 Wickham, Hadley, Lionel Henry, Thomas Lin Pedersen, T Jake Luciani, Matthieu Decorde, and Vaudor Lise. 2022. <em>Svglite: An SVG Graphics Device</em>. <a href="https://CRAN.R-project.org/package=svglite">https://CRAN.R-project.org/package=svglite</a>.
 </div>
 <div id="ref-R-formatR" class="csl-entry">
-Xie, Yihui. 2021a. <em>formatR: Format r Code Automatically</em>. <a href="https://github.com/yihui/formatR">https://github.com/yihui/formatR</a>.
+Xie, Yihui. 2022a. <em>formatR: Format r Code Automatically</em>. <a href="https://github.com/yihui/formatR">https://github.com/yihui/formatR</a>.
 </div>
 <div id="ref-R-kableExtra" class="csl-entry">
 Zhu, Hao. 2021. <em>kableExtra: Construct Complex Table with Kable and Pipe Syntax</em>. <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a>.
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="16">
+<li id="fn16"><p>细心的读者可以发现，后文例子中， <code>_</code> 实际上被转义为了 <code>\\_</code>，LaTeX 中大于等于号 <code>\ge</code> 也被写为了 <code>\\ge</code>，这是因为 R 中 <code>\</code> 本身也代表转义，所以在 R 中输入文件地址时要将其替换为 <code>\\</code> 或 <code>/</code>。<a href="rmarkdown-operation.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>层叠样式表，是一种用来表现 HTML 等文件样式的计算机语言。<a href="rmarkdown-operation.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>如果需要支持其他输出格式，如 LaTeX 和 Word，<strong>gtsummary</strong> 包<span class="citation">(<a href="#ref-R-gtsummary" role="doc-biblioref"><strong>R-gtsummary?</strong></a>)</span>已经做了一些基于 <strong>gt</strong> 的扩展，可参见：<a href="https://github.com/ddsjoberg/gtsummary" class="uri">https://github.com/ddsjoberg/gtsummary</a>.<a href="rmarkdown-operation.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>实际上，读者应该改用内置的 python 引擎，该引擎基于 <strong>reticulate</strong> 软件包，并且更好地支持 Python 代码块<a href="rmarkdown-operation.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>也可以转换为 <code>&lt;div class="className"&gt;&lt;/div&gt;</code>，可以查看HTML输出文档的源代码来确定<a href="rmarkdown-operation.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>这是默认的行为，也可以进行调整。如果想了解如何使缓存更精细，而非所有块选项都会影响缓存，请参阅：<a href="https://yihui.org/knitr/demo/cache/" class="uri">https://yihui.org/knitr/demo/cache/</a>。<a href="rmarkdown-operation.html#fnref21" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 <div id="disqus_thread"></div>
 <script>
@@ -3549,15 +3560,14 @@ Zhu, Hao. 2021. <em>kableExtra: Construct Complex Table with Kable and Pipe Synt
 <a href="rmarkdown-project.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -3591,7 +3601,7 @@ gitbook.start({
 },
 "download": null,
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

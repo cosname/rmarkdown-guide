@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 1 章 R Markdown概述 | R Markdown 指南</title>
   <meta name="description" content="第 1 章 R Markdown概述 | R Markdown 指南" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 1 章 R Markdown概述 | R Markdown 指南" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="第 1 章 R Markdown概述 | R Markdown 指南" />
   <meta name="github-repo" content="cosname/rmarkdown-guide" />
@@ -28,7 +27,7 @@
 <meta name="author" content="杨晓龙" />
 
 
-<meta name="date" content="2022-04-02" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,15 +36,15 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="rmarkdown-base.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -54,11 +53,11 @@
 
 
 
-
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/kePrint/kePrint.js"></script>
-<link href="libs/lightable/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -421,39 +420,39 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rmarkdown-intro" class="section level1" number="1">
-<h1><span class="header-section-number">第 1 章</span> R Markdown概述</h1>
-<div id="rmarkdown-source" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> R Markdown 的渊源</h2>
-<div id="knitr-sweave" class="section level3" number="1.1.1">
-<h3><span class="header-section-number">1.1.1</span> knitr 和 Sweave</h3>
+<div id="rmarkdown-intro" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">第 1 章</span> R Markdown概述<a href="rmarkdown-intro.html#rmarkdown-intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rmarkdown-source" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> R Markdown 的渊源<a href="rmarkdown-intro.html#rmarkdown-source" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="knitr-sweave" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> knitr 和 Sweave<a href="rmarkdown-intro.html#knitr-sweave" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="mark-pandoc" class="section level3" number="1.1.2">
-<h3><span class="header-section-number">1.1.2</span> 标记语言和 Pandoc 转换器</h3>
+<div id="mark-pandoc" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> 标记语言和 Pandoc 转换器<a href="rmarkdown-intro.html#mark-pandoc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="rmarkdown-example" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> 以案例形式初识 R Markdown</h2>
-<div id="example-report" class="section level3" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> 数据分析报告</h3>
+<div id="rmarkdown-example" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> 以案例形式初识 R Markdown<a href="rmarkdown-intro.html#rmarkdown-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="example-report" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> 数据分析报告<a href="rmarkdown-intro.html#example-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="example-note" class="section level3" number="1.2.2">
-<h3><span class="header-section-number">1.2.2</span> 交互笔记本</h3>
+<div id="example-note" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> 交互笔记本<a href="rmarkdown-intro.html#example-note" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="example-cv" class="section level3" number="1.2.3">
-<h3><span class="header-section-number">1.2.3</span> 个人简历</h3>
+<div id="example-cv" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> 个人简历<a href="rmarkdown-intro.html#example-cv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="example-resume" class="section level3" number="1.2.4">
-<h3><span class="header-section-number">1.2.4</span> 网站</h3>
+<div id="example-resume" class="section level3 hasAnchor" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> 网站<a href="rmarkdown-intro.html#example-resume" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="example-ppt" class="section level3" number="1.2.5">
-<h3><span class="header-section-number">1.2.5</span> 幻灯片</h3>
+<div id="example-ppt" class="section level3 hasAnchor" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> 幻灯片<a href="rmarkdown-intro.html#example-ppt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="example-forms" class="section level3" number="1.2.6">
-<h3><span class="header-section-number">1.2.6</span> 交互报表</h3>
+<div id="example-forms" class="section level3 hasAnchor" number="1.2.6">
+<h3><span class="header-section-number">1.2.6</span> 交互报表<a href="rmarkdown-intro.html#example-forms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="example-dynamic" class="section level3" number="1.2.7">
-<h3><span class="header-section-number">1.2.7</span> 动态文档</h3>
+<div id="example-dynamic" class="section level3 hasAnchor" number="1.2.7">
+<h3><span class="header-section-number">1.2.7</span> 动态文档<a href="rmarkdown-intro.html#example-dynamic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
@@ -486,15 +485,14 @@ div.csl-indent {
 <a href="rmarkdown-base.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -528,7 +526,7 @@ gitbook.start({
 },
 "download": null,
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

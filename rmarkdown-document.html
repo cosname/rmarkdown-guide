@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 3 章 使用 R Markdown 创建常用文档 | R Markdown 指南</title>
   <meta name="description" content="第 3 章 使用 R Markdown 创建常用文档 | R Markdown 指南" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 3 章 使用 R Markdown 创建常用文档 | R Markdown 指南" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="第 3 章 使用 R Markdown 创建常用文档 | R Markdown 指南" />
   <meta name="github-repo" content="cosname/rmarkdown-guide" />
@@ -28,7 +27,7 @@
 <meta name="author" content="杨晓龙" />
 
 
-<meta name="date" content="2022-04-02" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,15 +36,15 @@
   
 <link rel="prev" href="rmarkdown-base.html"/>
 <link rel="next" href="rmarkdown-working.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -54,11 +53,11 @@
 
 
 
-
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/kePrint/kePrint.js"></script>
-<link href="libs/lightable/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -421,18 +420,18 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rmarkdown-document" class="section level1" number="3">
-<h1><span class="header-section-number">第 3 章</span> 使用 R Markdown 创建常用文档</h1>
+<div id="rmarkdown-document" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">第 3 章</span> 使用 R Markdown 创建常用文档<a href="rmarkdown-document.html#rmarkdown-document" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Markdown 在发明之初的主要目的就是简化 HTML 内容的书写方式。例如要表示一个无序列表中的项，用 HTML 来写是 <code>&lt;ul&gt;&lt;li&gt;text&lt;/li&gt;&lt;/ul&gt;</code>，而用 Markdown 来写则只需要 <code>- text</code>；又如要表示一段引用文字，用 HTML 来写是 <code>&lt;blockquote&gt;text&lt;/blockquote&gt;</code>，用 Markdown 来写则只需要 <code>&gt; text</code>。</p>
 <p>Pandoc 大大扩展了 Markdown 的语法。更重要的是，Pandoc 使得将 Markdown 文档转换为多种输出格式成为可能。尽管这些文档大体可以按照背后的实现方式，分为 HTML、PDF 和 Microsoft Office 等 3 大类型，但是根据应用场景的差异，会有多种多样的具体样式。</p>
 <p>鉴于每种样式通常会通过不同的 R Markdown 扩展软件包来实现，所以其设置和使用方面会有自身的特点。因此，在接下来的一部分内容中将依次介绍常用文档格式的使用方法。而本章则主要介绍将 R Markdown 源文件输出为各种常用文档格式的功能。</p>
 <p>简单说来，要论从 R Markdown 到各种文档之间总共分几步？答案是 2 步。</p>
 <ol style="list-style-type: decimal">
-<li>R Markdown –&gt; Markdown，由 <strong>knitr</strong> <span class="citation">(<a href="#ref-R-knitr" role="doc-biblioref">Xie 2021b</a>)</span> 完成；</li>
+<li>R Markdown –&gt; Markdown，由 <strong>knitr</strong> <span class="citation">(<a href="#ref-R-knitr" role="doc-biblioref">Xie 2022b</a>)</span> 完成；</li>
 <li>Markdown –&gt; 不同格式文档，由 Pandoc 完成。</li>
 </ol>
-<div id="rmarkdown-html" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> HTML 文档</h2>
+<div id="rmarkdown-html" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> HTML 文档<a href="rmarkdown-document.html#rmarkdown-html" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>HTML 即超文本标记语言（Hyper Text Markup Language），该技术是互联网最重要的基础设施之一，是网上精彩纷呈内容的主要依托。HTML 文档不仅能够展示文字、图片、表格、公式等常规页面元素，而且还可以呈现音乐、视频、交互动画等丰富多样的多媒体内容。而同样的任务则是其它常见的文档格式如 PDF、Microsoft Word 等所不能完成的。因为 Markdown 技术在设计之初的输出格式就是 HTML，所以 HTML 文档不仅仅是最常用 R Markdown 输出格式，同时也拥有最丰富的功能，因此是在学习 R Markdown 技术的过程中首先需要了解这一部分内容。</p>
 <p>严格意义上说，采用 R Markdown 和 HTML 技术呈现的网站、幻灯片等也都属于 HTML 格式的文档，不过这些形式的内容通常包含了多个 <code>.html</code> 格式的文件，而这里介绍如何通过 R Markdown 源文件生成一份<strong>独立</strong>的 <code>.html</code> 格式的文件。</p>
 <p>前面提过，R Markdown 生成 HTML 文档的过程有一个中间步骤，就是 Markdown + HTML 模板。HTML 模板包括预定义的文档结构、 CSS 样式表和 JavaScript 动态网页功能等，所以最终渲染得到的 HTML 文档的一些功能可能依赖于特定 HTML 模板才能实现。对于一般用户而言，不了解这方面的知识并不影响正常使用 R Markdown 创建 HTML 文档。但是如果用户对此有所了解，那将有利于了解 HTML 文档的实现途径。</p>
@@ -453,11 +452,11 @@ div.csl-indent {
 <span id="cb9-6"><a href="rmarkdown-document.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
 <span id="cb9-7"><a href="rmarkdown-document.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb9-8"><a href="rmarkdown-document.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<div id="html-title" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> 目录和标题</h3>
+<div id="html-title" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> 目录和标题<a href="rmarkdown-document.html#html-title" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R Markdown 文件中使用的目录都是自动目录，是根据文档的层次结构（一级标题、二级标题等）自动生成的。这一部分介绍如何在 HTML 文档中设置自动目录。</p>
-<div id="html-toc" class="section level4" number="3.1.1.1">
-<h4><span class="header-section-number">3.1.1.1</span> 显示目录</h4>
+<div id="html-toc" class="section level4 hasAnchor" number="3.1.1.1">
+<h4><span class="header-section-number">3.1.1.1</span> 显示目录<a href="rmarkdown-document.html#html-toc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在开头的元数据中，使用 <code>toc: true</code> 可以打开文档的目录。目录会从 HTML 的标题自动生成，目录的层级由 <code>toc_depth</code> 的值确定（默认为 3）。例如：</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="rmarkdown-document.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb10-2"><a href="rmarkdown-document.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
@@ -468,8 +467,8 @@ div.csl-indent {
 <span id="cb10-7"><a href="rmarkdown-document.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>在上面的例子中，目录中将包含 HTML 文档中的一级标题和二级标题。</p>
 </div>
-<div id="html-toc-float" class="section level4" number="3.1.1.2">
-<h4><span class="header-section-number">3.1.1.2</span> 悬停目录</h4>
+<div id="html-toc-float" class="section level4 hasAnchor" number="3.1.1.2">
+<h4><span class="header-section-number">3.1.1.2</span> 悬停目录<a href="rmarkdown-document.html#html-toc-float" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>当把 <code>toc_float</code> 设为 <code>true</code> 的时候，目录会在侧边栏悬停。这样就可以随时借助目录在一篇比较长的文档中跳转了。</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="rmarkdown-document.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb11-2"><a href="rmarkdown-document.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
@@ -493,8 +492,8 @@ div.csl-indent {
 <span id="cb12-8"><a href="rmarkdown-document.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">smooth_scroll</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
 <span id="cb12-9"><a href="rmarkdown-document.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="html-number-sections" class="section level4" number="3.1.1.3">
-<h4><span class="header-section-number">3.1.1.3</span> 显示标题编号</h4>
+<div id="html-number-sections" class="section level4 hasAnchor" number="3.1.1.3">
+<h4><span class="header-section-number">3.1.1.3</span> 显示标题编号<a href="rmarkdown-document.html#html-number-sections" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>使用 <code>number_sections</code> 可以在标题开头加上编号。一级标题编号为 “1 一级标题”，二级标题为”1.1 二级标题”。</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="rmarkdown-document.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb13-2"><a href="rmarkdown-document.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
@@ -504,8 +503,8 @@ div.csl-indent {
 <span id="cb13-6"><a href="rmarkdown-document.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">number_sections</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb13-7"><a href="rmarkdown-document.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="html-tabset" class="section level4" number="3.1.1.4">
-<h4><span class="header-section-number">3.1.1.4</span> 使用标签页展示小标题的内容</h4>
+<div id="html-tabset" class="section level4 hasAnchor" number="3.1.1.4">
+<h4><span class="header-section-number">3.1.1.4</span> 使用标签页展示小标题的内容<a href="rmarkdown-document.html#html-tabset" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在 HTML 文档中使用标签页非常简单，只需要在标题后附加 <code>{.tabset}</code> 标签即可。</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="rmarkdown-document.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 季度报表（应用 `.tabset` 标签） {.tabset}</span></span>
 <span id="cb14-2"><a href="rmarkdown-document.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -522,17 +521,17 @@ div.csl-indent {
 <li><code>.tabset-pills</code> 将为标签文字加上预设的 <code>.tabset-pills</code> 样式（图 <a href="rmarkdown-document.html#fig:html-tabset">3.1</a>）。</li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:html-tabset"></span>
-<img src="examples/tabset-example.png" alt="标签的默认样式及 `.tabset-pills` 样式" width="350" />
+<img src="examples/tabset-example.png" alt="标签的默认样式及 `.tabset-pills` 样式"  />
 <p class="caption">
 图 3.1: 标签的默认样式及 <code>.tabset-pills</code> 样式
 </p>
 </div>
 </div>
 </div>
-<div id="html-theme" class="section level3" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> 主题和样式</h3>
-<div id="html-theme-list" class="section level4" number="3.1.2.1">
-<h4><span class="header-section-number">3.1.2.1</span> 可选的文档主题样式</h4>
+<div id="html-theme" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> 主题和样式<a href="rmarkdown-document.html#html-theme" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="html-theme-list" class="section level4 hasAnchor" number="3.1.2.1">
+<h4><span class="header-section-number">3.1.2.1</span> 可选的文档主题样式<a href="rmarkdown-document.html#html-theme-list" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>为了满足颜值党的差异化需求，<code>html_document</code> 自带了多个不同的主题。这些主题来自于 <a href="https://bootswatch.com/3/">Bootswatch</a>。可用的主题名称包括 <a href="https://bootswatch.com/3/default">default</a>，<a href="https://bootswatch.com/3/cerulean">cerulean</a>，<a href="https://bootswatch.com/3/journal">journal</a>，<a href="https://bootswatch.com/3/flatly">flatly</a>，<a href="https://bootswatch.com/3/darkly">darkly</a>，<a href="https://bootswatch.com/3/readable">readable</a>，<a href="https://bootswatch.com/3/spacelab">spacelab</a>，<a href="https://bootswatch.com/3/united">united</a>，<a href="https://bootswatch.com/3/cosmo">cosmo</a>，<a href="https://bootswatch.com/3/lumen">lumen</a>，<a href="https://bootswatch.com/3/paper">paper</a>，<a href="https://bootswatch.com/3/sandstone">sandstone</a>，<a href="https://bootswatch.com/3/simplex">simplex</a> 和 <a href="https://bootswatch.com/3/yeti">yeti</a> 等等。</p>
 <p>主题使用 <code>theme</code> 参数来指定，这里以 <code>darkly</code> 作为一个例子，感兴趣的读者可以自行尝试其它样式（图 @ref(fig:first-rmd-theme-darkly）：</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="rmarkdown-document.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -543,7 +542,7 @@ div.csl-indent {
 <span id="cb15-6"><a href="rmarkdown-document.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:first-rmd-theme-darkly"></span>
-<img src="examples/first-rmd-theme-darkly.png" alt="应用 darkly 主题后的文档样式" width="350" />
+<img src="examples/first-rmd-theme-darkly.png" alt="应用 darkly 主题后的文档样式"  />
 <p class="caption">
 图 3.2: 应用 <a href="https://bootswatch.com/3/darkly">darkly</a> 主题后的文档样式
 </p>
@@ -557,10 +556,10 @@ div.csl-indent {
 <span id="cb16-6"><a href="rmarkdown-document.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> style.css</span></span>
 <span id="cb16-7"><a href="rmarkdown-document.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="html-code-highlight" class="section level4" number="3.1.2.2">
-<h4><span class="header-section-number">3.1.2.2</span> 可选的代码高亮样式</h4>
+<div id="html-code-highlight" class="section level4 hasAnchor" number="3.1.2.2">
+<h4><span class="header-section-number">3.1.2.2</span> 可选的代码高亮样式<a href="rmarkdown-document.html#html-code-highlight" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>代码高亮也有可选的多种样式，包括 <code>default</code>，<code>tango</code>，<code>pygments</code>，<code>kate</code>，<code>monchrome</code>，<code>espresso</code>，<code>zenburn</code>，<code>haddock</code>，<code>breezedark</code> 和 <code>textmate</code> 等。</p>
-<p>在元数据中，使用 <code>highlight</code> 参数指定代码高亮样式。下面的示例中将代码高亮设为 <code>tango</code>，更多的代码高亮样式见图 <a href="#fig:html-code-highlight-example"><strong>??</strong></a>。</p>
+<p>在元数据中，使用 <code>highlight</code> 参数指定代码高亮样式。下面的示例中将代码高亮设为 <code>tango</code>，更多的代码高亮样式见图 <a href="rmarkdown-document.html#fig:html-code-highlight-example">3.3</a>。</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="rmarkdown-document.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb17-2"><a href="rmarkdown-document.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
 <span id="cb17-3"><a href="rmarkdown-document.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -568,12 +567,18 @@ div.csl-indent {
 <span id="cb17-5"><a href="rmarkdown-document.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> tango</span></span>
 <span id="cb17-6"><a href="rmarkdown-document.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="rmarkdown-document.html#cb18-1" aria-hidden="true" tabindex="-1"></a>code_highlight_examples <span class="ot">=</span> <span class="fu">list.files</span>(<span class="st">&quot;examples/&quot;</span>, <span class="st">&quot;code-highlight-example.*</span><span class="sc">\\</span><span class="st">.Rmd&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-2"><a href="rmarkdown-document.html#cb18-2" aria-hidden="true" tabindex="-1"></a>success <span class="ot">=</span> <span class="fu">lapply</span>(code_highlight_examples, import_example_result)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="rmarkdown-document.html#cb18-1" aria-hidden="true" tabindex="-1"></a>code_highlight_examples <span class="ot">=</span> <span class="fu">list.files</span>(<span class="st">&quot;examples/&quot;</span>, <span class="st">&quot;code-highlight-example.*</span><span class="sc">\\</span><span class="st">.png&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-2"><a href="rmarkdown-document.html#cb18-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="at">path =</span> code_highlight_examples, <span class="at">dpi =</span> <span class="cn">NA</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:html-code-highlight-example"></span>
+<img src="examples/code-highlight-example-kate.png" alt="可选的代码高亮样式" width="70%" /><img src="examples/code-highlight-example-monchrome.png" alt="可选的代码高亮样式" width="70%" /><img src="examples/code-highlight-example-pygments.png" alt="可选的代码高亮样式" width="70%" /><img src="examples/code-highlight-example-tango.png" alt="可选的代码高亮样式" width="70%" /><img src="examples/code-highlight-example.png" alt="可选的代码高亮样式" width="70%" />
+<p class="caption">
+图 3.3: 可选的代码高亮样式
+</p>
+</div>
 <p>跟上面的 <code>theme</code> 属性一样，<code>highlight</code> 也可以设为 <code>null</code>，这样的话代码将不显示高亮。</p>
 </div>
-<div id="html-style-css" class="section level4" number="3.1.2.3">
-<h4><span class="header-section-number">3.1.2.3</span> 自定义样式表</h4>
+<div id="html-style-css" class="section level4 hasAnchor" number="3.1.2.3">
+<h4><span class="header-section-number">3.1.2.3</span> 自定义样式表<a href="rmarkdown-document.html#html-style-css" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>不论有没有应用主题和代码高亮，用户都可以使用 <code>css</code> 参数指定附加样式表。附加样式表中的定义优先级更高，当被应用到特定元素上去之后，可以改变元素的外观。</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="rmarkdown-document.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb19-2"><a href="rmarkdown-document.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
@@ -598,8 +603,8 @@ div.csl-indent {
 <span id="cb22-2"><a href="rmarkdown-document.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
 <span id="cb22-3"><a href="rmarkdown-document.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;style-1.css&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;style-2.css&quot;</span><span class="kw">]</span></span></code></pre></div>
 </div>
-<div id="html-css-source" class="section level4" number="3.1.2.4">
-<h4><span class="header-section-number">3.1.2.4</span> 通过 CSS 代码块定义样式</h4>
+<div id="html-css-source" class="section level4 hasAnchor" number="3.1.2.4">
+<h4><span class="header-section-number">3.1.2.4</span> 通过 CSS 代码块定义样式<a href="rmarkdown-document.html#html-css-source" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>除了像上面那样导入一个预定义的样式表，还可以直接在 R Markdown 中添加新的 CSS 定义。不过这种方法只适合针对个别元素进行个性化设置，如果 CSS 代码有很多行，或者想要在其它 R Markdown 文件中中交叉使用同样的定义，那么将其放在自定义样式表文件中会更加合适（参见 <a href="rmarkdown-document.html#html-style-css">3.1.2.3</a>）。</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb23-1"><a href="rmarkdown-document.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb23-2"><a href="rmarkdown-document.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;对代码块使用自定义的 CSS 样式&quot;</span></span>
@@ -623,16 +628,16 @@ div.csl-indent {
 <span id="cb23-20"><a href="rmarkdown-document.html#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="in">mtcars[1:5, &quot;mpg&quot;]</span></span>
 <span id="cb23-21"><a href="rmarkdown-document.html#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:chunk-border"></span>
-<img src="examples/chunk-custom.png" alt="一个具有浅红色背景和深红色边框的代码块" width="350" />
+<img src="examples/chunk-custom.png" alt="一个具有浅红色背景和深红色边框的代码块"  />
 <p class="caption">
-图 3.3: 一个具有浅红色背景和深红色边框的代码块
+图 3.4: 一个具有浅红色背景和深红色边框的代码块
 </p>
 </div>
 </div>
-<div id="html-css-list" class="section level4" number="3.1.2.5">
-<h4><span class="header-section-number">3.1.2.5</span> 使用丰富多样的内置 CSS 样式</h4>
+<div id="html-css-list" class="section level4 hasAnchor" number="3.1.2.5">
+<h4><span class="header-section-number">3.1.2.5</span> 使用丰富多样的内置 CSS 样式<a href="rmarkdown-document.html#html-css-list" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>大多数时候，用户并不需要自己定义 CSS 样式，因为 HTML 内置的主题中已经包含了丰富且高级的内置样式。</p>
-<p>默认情况下，R Markdown 输出的 HTML 文档中，已经内嵌了 Bootstrap 框架<a href="references.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>，因此可以使用一系列预定义的 CSS 样式。其中，可用的背景样式就包括 <code>"bg-primary"</code>，<code>"bg-success"</code>，<code>"bg-info"</code>，<code>"bg-warning"</code> 和 <code>"bg-danger"</code> 等。</p>
+<p>默认情况下，R Markdown 输出的 HTML 文档中，已经内嵌了 Bootstrap 框架<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>，因此可以使用一系列预定义的 CSS 样式。其中，可用的背景样式就包括 <code>"bg-primary"</code>，<code>"bg-success"</code>，<code>"bg-info"</code>，<code>"bg-warning"</code> 和 <code>"bg-danger"</code> 等。</p>
 <p>只需要在代码块属性中使用 <code>class.source</code> 标签，就可以应用这些预定义的 CSS 样式。</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb24-1"><a href="rmarkdown-document.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb24-2"><a href="rmarkdown-document.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 改变代码块的样式</span></span>
@@ -655,16 +660,16 @@ div.csl-indent {
 <span id="cb24-19"><a href="rmarkdown-document.html#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r df-drop-ok, class.source=&quot;bg-success&quot;}</span></span>
 <span id="cb24-20"><a href="rmarkdown-document.html#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="in">mtcars[1:5, &quot;mpg&quot;, drop = FALSE]</span></span>
 <span id="cb24-21"><a href="rmarkdown-document.html#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>以上内容生成 HTML 文档后的样子如图 <a href="rmarkdown-document.html#fig:chunk-style-example">3.4</a> 所示：</p>
+<p>以上内容生成 HTML 文档后的样子如图 <a href="rmarkdown-document.html#fig:chunk-style-example">3.5</a> 所示：</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:chunk-style-example"></span>
-<img src="examples/chunk-style.png" alt="在代码块上应用内置 CSS 样式" width="300" />
+<img src="examples/chunk-style.png" alt="在代码块上应用内置 CSS 样式"  />
 <p class="caption">
-图 3.4: 在代码块上应用内置 CSS 样式
+图 3.5: 在代码块上应用内置 CSS 样式
 </p>
 </div>
 </div>
-<div id="html-code-folding" class="section level4" number="3.1.2.6">
-<h4><span class="header-section-number">3.1.2.6</span> 代码折叠</h4>
+<div id="html-code-folding" class="section level4 hasAnchor" number="3.1.2.6">
+<h4><span class="header-section-number">3.1.2.6</span> 代码折叠<a href="rmarkdown-document.html#html-code-folding" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>当 <strong>Knitr</strong> 的代码块参数 <code>echo = TRUE</code> 时，R 代码将会输出到最终生成的文档中。
 如果不需要显示源代码，可以直接设为 <code>echo = FALSE</code>。
 如果既想要保留代码但又让其默认不显示，
@@ -675,7 +680,7 @@ div.csl-indent {
 <span id="cb25-4"><a href="rmarkdown-document.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document:</span></span>
 <span id="cb25-5"><a href="rmarkdown-document.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code_folding: hide</span></span>
 <span id="cb25-6"><a href="rmarkdown-document.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
-<p><code>code_folding: hide</code> 将折叠所有的代码块，用户可以通过点击来查看折叠的代码。如果想让部分代码块在一开始就显示，则可以在代码块选项中使用 <code>class.source = 'fold-show'</code>（图 <a href="rmarkdown-document.html#fig:fold-show">3.5</a>）。</p>
+<p><code>code_folding: hide</code> 将折叠所有的代码块，用户可以通过点击来查看折叠的代码。如果想让部分代码块在一开始就显示，则可以在代码块选项中使用 <code>class.source = 'fold-show'</code>（图 <a href="rmarkdown-document.html#fig:fold-show">3.6</a>）。</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb26-1"><a href="rmarkdown-document.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb26-2"><a href="rmarkdown-document.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;代码的折叠和显示&quot;</span></span>
 <span id="cb26-3"><a href="rmarkdown-document.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
@@ -696,9 +701,9 @@ div.csl-indent {
 <span id="cb26-18"><a href="rmarkdown-document.html#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fold-show"></span>
-<img src="examples/fold-show.png" alt="代码块的折叠和显示。图中每个代码区块旁边都有一个按钮，可以控制相应代码区块的显示方式；文档的右上角也有一个按钮，可以控制文档中全部代码区块的显示方式。" width="400" />
+<img src="examples/fold-show.png" alt="代码块的折叠和显示。图中每个代码区块旁边都有一个按钮，可以控制相应代码区块的显示方式；文档的右上角也有一个按钮，可以控制文档中全部代码区块的显示方式。"  />
 <p class="caption">
-图 3.5: 代码块的折叠和显示。图中每个代码区块旁边都有一个按钮，可以控制相应代码区块的显示方式；文档的右上角也有一个按钮，可以控制文档中全部代码区块的显示方式。
+图 3.6: 代码块的折叠和显示。图中每个代码区块旁边都有一个按钮，可以控制相应代码区块的显示方式；文档的右上角也有一个按钮，可以控制文档中全部代码区块的显示方式。
 </p>
 </div>
 <p>这种操作也可以反向进行，即默认显示全部的代码区块，然后再将部分代码区块设为折叠。如下配置即可：</p>
@@ -715,10 +720,10 @@ div.csl-indent {
 <span id="cb27-11"><a href="rmarkdown-document.html#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r class.source = &#39;fold-hide&#39;}</span></span>
 <span id="cb27-12"><a href="rmarkdown-document.html#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="in">2  # 这一块代码将被折叠</span></span>
 <span id="cb27-13"><a href="rmarkdown-document.html#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>如图 <a href="rmarkdown-document.html#fig:fold-show">3.5</a> 所示，在页面和每一个代码块的右上方有一个按钮。页面右上方的按钮可以控制全部代码块的显示和隐藏，代码块右上方的按钮则可以控制对应代码块的显示和隐藏。</p>
+<p>如图 <a href="rmarkdown-document.html#fig:fold-show">3.6</a> 所示，在页面和每一个代码块的右上方有一个按钮。页面右上方的按钮可以控制全部代码块的显示和隐藏，代码块右上方的按钮则可以控制对应代码块的显示和隐藏。</p>
 </div>
-<div id="html-code-scroll" class="section level4" number="3.1.2.7">
-<h4><span class="header-section-number">3.1.2.7</span> 设置代码块内容可滚动</h4>
+<div id="html-code-scroll" class="section level4 hasAnchor" number="3.1.2.7">
+<h4><span class="header-section-number">3.1.2.7</span> 设置代码块内容可滚动<a href="rmarkdown-document.html#html-code-scroll" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果想限制代码块的高度，特别是代码执行过程中输出内容的高度，还可以从相应内容的 CSS 样式上着手，即通过 <code>class.output</code> 和 <code>class.source</code> 来定义内容的高度。</p>
 <p>下面是一个限制设定代码区块高度后，再通过滚动查看完整内容的例子：</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb28-1"><a href="rmarkdown-document.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -763,19 +768,19 @@ div.csl-indent {
 <span id="cb28-40"><a href="rmarkdown-document.html#cb28-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output=&quot;scroll-100&quot;}</span></span>
 <span id="cb28-41"><a href="rmarkdown-document.html#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="in">print(mtcars)</span></span>
 <span id="cb28-42"><a href="rmarkdown-document.html#cb28-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>因为代码块是位于 <code>&lt;pre class="sourcecode"&gt;</code> 标签内的，所以 <code>pre[class]</code> 操作符将限制代码块的高度为不超过 100 像素。 而将 <code>class.output</code> 设为 <code>scroll-100</code> 则限制输出部分的高度为不超过 100 像素。最终效果如图 <a href="rmarkdown-document.html#fig:html-scroll-example">3.6</a> 所示。</p>
+<p>因为代码块是位于 <code>&lt;pre class="sourcecode"&gt;</code> 标签内的，所以 <code>pre[class]</code> 操作符将限制代码块的高度为不超过 100 像素。 而将 <code>class.output</code> 设为 <code>scroll-100</code> 则限制输出部分的高度为不超过 100 像素。最终效果如图 <a href="rmarkdown-document.html#fig:html-scroll-example">3.7</a> 所示。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:html-scroll-example"></span>
-<img src="examples/html-scroll.png" alt="可以滚动的代码块" width="400" />
+<img src="examples/html-scroll.png" alt="可以滚动的代码块"  />
 <p class="caption">
-图 3.6: 可以滚动的代码块
+图 3.7: 可以滚动的代码块
 </p>
 </div>
 </div>
 </div>
-<div id="html-pic" class="section level3" number="3.1.3">
-<h3><span class="header-section-number">3.1.3</span> 图片和数据框</h3>
-<div id="html-pic-setting" class="section level4" number="3.1.3.1">
-<h4><span class="header-section-number">3.1.3.1</span> 设置图片的属性</h4>
+<div id="html-pic" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> 图片和数据框<a href="rmarkdown-document.html#html-pic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="html-pic-setting" class="section level4 hasAnchor" number="3.1.3.1">
+<h4><span class="header-section-number">3.1.3.1</span> 设置图片的属性<a href="rmarkdown-document.html#html-pic-setting" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>下列参数可以调整生成的 HTML 文档中图片的属性：</p>
 <ul>
 <li><code>fig_width</code>，<code>fig_height</code> 指定图片显示时的宽和高（默认为 7 × 5，单位英寸）；</li>
@@ -794,22 +799,22 @@ div.csl-indent {
 <span id="cb29-9"><a href="rmarkdown-document.html#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>在代码框属性中，仍然可以通过 <code>fig.height</code>，<code>fig.width</code>，<code>fig.asp</code> 等参数来指定生成图片的高度、宽度和宽高比。</p>
 </div>
-<div id="html-include-graphics" class="section level4" number="3.1.3.2">
-<h4><span class="header-section-number">3.1.3.2</span> 插入外源图片</h4>
+<div id="html-include-graphics" class="section level4 hasAnchor" number="3.1.3.2">
+<h4><span class="header-section-number">3.1.3.2</span> 插入外源图片<a href="rmarkdown-document.html#html-include-graphics" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是推荐使用 <code>knitr::include_graphics()</code> 的方式来完成这一操作。例如：</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb30-1"><a href="rmarkdown-document.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb30-2"><a href="rmarkdown-document.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::include_graphics(&quot;https://r-project.org/Rlogo.png&quot;)</span></span>
 <span id="cb30-3"><a href="rmarkdown-document.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>使用这种方法插入外源图片，可以方便地添加图注（使用 <code>fig.cap</code> 参数），以及设置图片的宽高等属性（图 <a href="rmarkdown-document.html#fig:include-graphics-example">3.7</a>）。</p>
+<p>使用这种方法插入外源图片，可以方便地添加图注（使用 <code>fig.cap</code> 参数），以及设置图片的宽高等属性（图 <a href="rmarkdown-document.html#fig:include-graphics-example">3.8</a>）。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:include-graphics-example"></span>
-<img src="images/Rlogo.png" alt="插入外源图片的推荐方式" width="100" />
+<img src="images/Rlogo.png" alt="插入外源图片的推荐方式"  />
 <p class="caption">
-图 3.7: 插入外源图片的推荐方式
+图 3.8: 插入外源图片的推荐方式
 </p>
 </div>
 </div>
-<div id="html-df-print" class="section level4" number="3.1.3.3">
-<h4><span class="header-section-number">3.1.3.3</span> 输出数据框</h4>
+<div id="html-df-print" class="section level4 hasAnchor" number="3.1.3.3">
+<h4><span class="header-section-number">3.1.3.3</span> 输出数据框<a href="rmarkdown-document.html#html-df-print" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>数据框是常见的数据结构，通过设置 <code>df_print</code> 参数，可以调整数据框的输出格式。可用的参数如表 <a href="#tab:df-print">3.1</a> 所示。</p>
 <p>表： (#tab:df-print) <code>html_document</code> 可以被设置的 <code>df_print</code> 参数及其对应的含义。</p>
 <table>
@@ -838,11 +843,11 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p><img src="examples/df-print-example.default.png" width="496" style="display: block; margin: auto;" /><img src="examples/df-print-example.kable.png" width="496" style="display: block; margin: auto;" /><img src="examples/df-print-example.tibble.png" width="496" style="display: block; margin: auto;" /><img src="examples/df-print-example.paged.png" width="496" style="display: block; margin: auto;" /></p>
+<p><img src="examples/df-print-example.default.png" style="display: block; margin: auto;" /><img src="examples/df-print-example.kable.png" style="display: block; margin: auto;" /><img src="examples/df-print-example.tibble.png" style="display: block; margin: auto;" /><img src="examples/df-print-example.paged.png" style="display: block; margin: auto;" /></p>
 </div>
-<div id="分页打印数据框时的附加参数-html-df-print-paged" class="section level4" number="3.1.3.4">
-<h4><span class="header-section-number">3.1.3.4</span> 分页打印数据框时的附加参数 {html-df-print-paged}</h4>
-<p>若把 <code>df_print</code> 参数设为 <code>paged</code>，数据框将支持行列的分页，效果如图 <a href="rmarkdown-document.html#fig:paged">3.8</a> 所示。</p>
+<div id="分页打印数据框时的附加参数-html-df-print-paged" class="section level4 hasAnchor" number="3.1.3.4">
+<h4><span class="header-section-number">3.1.3.4</span> 分页打印数据框时的附加参数 {html-df-print-paged}<a href="rmarkdown-document.html#分页打印数据框时的附加参数-html-df-print-paged" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>若把 <code>df_print</code> 参数设为 <code>paged</code>，数据框将支持行列的分页，效果如图 <a href="rmarkdown-document.html#fig:paged">3.9</a> 所示。</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb31-1"><a href="rmarkdown-document.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb31-2"><a href="rmarkdown-document.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;发动机测试和汽车道路测试&quot;</span></span>
 <span id="cb31-3"><a href="rmarkdown-document.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
@@ -856,7 +861,7 @@ div.csl-indent {
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:paged"></span>
 <img src="images/paged.png" alt="HTML文档中分页显示的数据框"  />
 <p class="caption">
-图 3.8: HTML文档中分页显示的数据框
+图 3.9: HTML文档中分页显示的数据框
 </p>
 </div>
 <p>表 @ref(#tab:paged) 列出了这种情况下可以使用的附加参数。</p>
@@ -909,13 +914,13 @@ div.csl-indent {
 <span id="cb32-3"><a href="rmarkdown-document.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
 </div>
-<div id="html-module" class="section level3" number="3.1.4">
-<h3><span class="header-section-number">3.1.4</span> 组件和内容</h3>
-<div id="html-dependency" class="section level4" number="3.1.4.1">
-<h4><span class="header-section-number">3.1.4.1</span> 理解 HTML 文档的依赖关系</h4>
+<div id="html-module" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> 组件和内容<a href="rmarkdown-document.html#html-module" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="html-dependency" class="section level4 hasAnchor" number="3.1.4.1">
+<h4><span class="header-section-number">3.1.4.1</span> 理解 HTML 文档的依赖关系<a href="rmarkdown-document.html#html-dependency" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>R Markdown 输出 HTML 文档时依赖于软件包提供的 HTML 模板。
 实际上，HTML 文档的样式和功能很大程度上依赖于一些 CSS 样式和 JavaScript 库的支持。
-这里面包括 <a href="https://getbootstrap.com/">Bootstrap</a><a href="references.html#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>，<a href="https://jquery.com/">JQuery</a> 等优秀的开源项目。前者是一个通用的网站开发框架，后者是一个通用的 JavaScript 库。</p>
+这里面包括 <a href="https://getbootstrap.com/">Bootstrap</a><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>，<a href="https://jquery.com/">JQuery</a> 等优秀的开源项目。前者是一个通用的网站开发框架，后者是一个通用的 JavaScript 库。</p>
 <p>默认情况下，R Markdown 输出的 HTML 文档是一个单一的 <code>.html</code> 文件。这是由 <code>self_contained: true</code> 控制的。<code>.html</code> 文件中，会使用 <code>data:</code> 存储包括 JavaScript、CSS、图片和视频在内的全部资料。这样的一个封装，使得用户可以像分享 PDF 或 Word 文档那样分享文件，同时享受超链接、动态效果等一系列 HTML 特性。</p>
 <p>如果指定 <code>self_contained: false</code>，那么 HTML 文档将会将自身的依赖文件单独存放。</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb33-1"><a href="rmarkdown-document.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -949,9 +954,9 @@ div.csl-indent {
 <p>当文档的内容比较少，同时又有多个类似的文档的时候，库文件所占的存储空间可能比自己编写的内容还要大得多。这种情况下，将库文件统一存储在指定的 <code>libs</code> 文件夹，可以实现库文件公用。</p>
 <p>另外，有些库文件不常用，或者文件太大，还可以通过库文件的服务器调用。例如下面一节要讲的 MathJax 库。</p>
 </div>
-<div id="html-mathjax" class="section level4" number="3.1.4.2">
-<h4><span class="header-section-number">3.1.4.2</span> MathJax 库的配置</h4>
-<p>HTML 文档需要 <a href="https://www.mathjax.org">MathJax</a> 脚本来渲染 Latex 和 MathML 公式<a href="references.html#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>，调用 <a href="https://www.mathjax.org">MathJax</a> 的方式则可以通过 <code>mathjax</code> 参数来调整。</p>
+<div id="html-mathjax" class="section level4 hasAnchor" number="3.1.4.2">
+<h4><span class="header-section-number">3.1.4.2</span> MathJax 库的配置<a href="rmarkdown-document.html#html-mathjax" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>HTML 文档需要 <a href="https://www.mathjax.org">MathJax</a> 脚本来渲染 Latex 和 MathML 公式<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>，调用 <a href="https://www.mathjax.org">MathJax</a> 的方式则可以通过 <code>mathjax</code> 参数来调整。</p>
 <ul>
 <li><p><code>"default"</code>：默认配置，会通过 HTTPS 链接从 RStudio 的 CDN 网络服务器上调用；</p></li>
 <li><p><code>"local"</code>：与 <code>self_contained: false</code> 联合使用时，会将 MathJax 库文件保存在本地目录中；</p></li>
@@ -981,8 +986,8 @@ div.csl-indent {
 <span id="cb38-5"><a href="rmarkdown-document.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">mathjax</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
 <span id="cb38-6"><a href="rmarkdown-document.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="html-keep-md" class="section level4" number="3.1.4.3">
-<h4><span class="header-section-number">3.1.4.3</span> 是否保留 Markdown</h4>
+<div id="html-keep-md" class="section level4 hasAnchor" number="3.1.4.3">
+<h4><span class="header-section-number">3.1.4.3</span> 是否保留 Markdown<a href="rmarkdown-document.html#html-keep-md" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>knitr</strong> 处理 R Markdown 文件时，会先生成一个 Markdown 文件（<code>*.md</code>），随后再由 Pandoc 转换成 HTML 文档。如果需要保留这个 Markdown 文件，可以使用 <code>keep_md</code> 选项。</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb39-1"><a href="rmarkdown-document.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb39-2"><a href="rmarkdown-document.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
@@ -991,8 +996,8 @@ div.csl-indent {
 <span id="cb39-5"><a href="rmarkdown-document.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">keep_md</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb39-6"><a href="rmarkdown-document.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="html-template" class="section level4" number="3.1.4.4">
-<h4><span class="header-section-number">3.1.4.4</span> 使用自定义的 HTML 模板</h4>
+<div id="html-template" class="section level4 hasAnchor" number="3.1.4.4">
+<h4><span class="header-section-number">3.1.4.4</span> 使用自定义的 HTML 模板<a href="rmarkdown-document.html#html-template" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>使用 <code>template</code> 选项，可以配置 Pandoc 转换时使用的模板。</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb40-1"><a href="rmarkdown-document.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb40-2"><a href="rmarkdown-document.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
@@ -1046,9 +1051,9 @@ div.csl-indent {
 <span id="cb43-7"><a href="rmarkdown-document.html#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p><em>说明</em>：<strong>rmarkdown</strong> 软件包默认使用自带的 HTML 模板，一些方面与 Pandoc 默认的模板存在差异。如果有 <code>template: null</code> 的话，则 Pandoc 的模板会被使用。</p>
 </div>
-<div id="html-includes" class="section level4" number="3.1.4.5">
-<h4><span class="header-section-number">3.1.4.5</span> 包含其它文件</h4>
-<p>使用 <code>includes</code> 选项，可以在 HTML 文档的不同位置嵌入其它的 HTML 格式内容。可选的位置包括在 HTML 文档的 <code>header</code>、<code>body</code> 前/后等<a href="references.html#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>。</p>
+<div id="html-includes" class="section level4 hasAnchor" number="3.1.4.5">
+<h4><span class="header-section-number">3.1.4.5</span> 包含其它文件<a href="rmarkdown-document.html#html-includes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>使用 <code>includes</code> 选项，可以在 HTML 文档的不同位置嵌入其它的 HTML 格式内容。可选的位置包括在 HTML 文档的 <code>header</code>、<code>body</code> 前/后等<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>。</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb44-1"><a href="rmarkdown-document.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb44-2"><a href="rmarkdown-document.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;标题&quot;</span></span>
 <span id="cb44-3"><a href="rmarkdown-document.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -1089,8 +1094,8 @@ div.csl-indent {
 <span id="cb48-16"><a href="rmarkdown-document.html#cb48-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
 <span id="cb48-17"><a href="rmarkdown-document.html#cb48-17" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
 </div>
-<div id="html-fragments" class="section level4" number="3.1.4.6">
-<h4><span class="header-section-number">3.1.4.6</span> 生成 HTML 片段</h4>
+<div id="html-fragments" class="section level4 hasAnchor" number="3.1.4.6">
+<h4><span class="header-section-number">3.1.4.6</span> 生成 HTML 片段<a href="rmarkdown-document.html#html-fragments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>HTML 片段是一个不完整的 HTML 文件，这种片段适合用于嵌入其它的网页或者内容管理系统（如博客）中。HTML 片段也不自带主题和代码高亮，而通过继承的方式使用其嵌入文件或系统的设置。这样的 HTML 片段，也非常适合用于包含在其它文件中（参见 <a href="#include-html"><strong>??</strong></a>）。</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb49-1"><a href="rmarkdown-document.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb49-2"><a href="rmarkdown-document.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_fragment</span></span>
@@ -1123,8 +1128,8 @@ div.csl-indent {
 ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 <p><em>HTML 片段的内容到此结束。</em></p>
 </div>
-<div id="html-favicon" class="section level4" number="3.1.4.7">
-<h4><span class="header-section-number">3.1.4.7</span> 使用自定义的浏览器图标</h4>
+<div id="html-favicon" class="section level4 hasAnchor" number="3.1.4.7">
+<h4><span class="header-section-number">3.1.4.7</span> 使用自定义的浏览器图标<a href="rmarkdown-document.html#html-favicon" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>通过在 <code>in_header</code> 部位导入 HTML 内容，可以为 HTML 文档设定一个自定义的浏览器图标。</p>
 <p>将下面的内容保存到一个名为 <code>header.html</code> 的文档中。</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb51-1"><a href="rmarkdown-document.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">&quot;shortcut icon&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;{path to favicon file}&quot;</span> <span class="kw">/&gt;</span></span></code></pre></div>
@@ -1134,8 +1139,8 @@ div.csl-indent {
 <span id="cb52-3"><a href="rmarkdown-document.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span></span>
 <span id="cb52-4"><a href="rmarkdown-document.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">in_header</span><span class="kw">:</span><span class="at"> header.html</span></span></code></pre></div>
 </div>
-<div id="html-shared-yaml" class="section level4" number="3.1.4.8">
-<h4><span class="header-section-number">3.1.4.8</span> 共用 YAML 配置文件</h4>
+<div id="html-shared-yaml" class="section level4 hasAnchor" number="3.1.4.8">
+<h4><span class="header-section-number">3.1.4.8</span> 共用 YAML 配置文件<a href="rmarkdown-document.html#html-shared-yaml" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>当前目录中的 <code>_output.yml</code> 文件是一个配置文件，其中的设置可以被目录下所有的 R Markdown 文档公用。需要注意的是，该文件中的内容不需要使用<code>---</code> 和 <code>output</code> 标签。</p>
 <p>如下所示：</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb53-1"><a href="rmarkdown-document.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">html_document</span><span class="kw">:</span></span>
@@ -1151,18 +1156,18 @@ div.csl-indent {
 <span id="cb54-6"><a href="rmarkdown-document.html#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> textmate</span></span>
 <span id="cb54-7"><a href="rmarkdown-document.html#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="html-code-download" class="section level4" number="3.1.4.9">
-<h4><span class="header-section-number">3.1.4.9</span> 允许下载源文件</h4>
+<div id="html-code-download" class="section level4 hasAnchor" number="3.1.4.9">
+<h4><span class="header-section-number">3.1.4.9</span> 允许下载源文件<a href="rmarkdown-document.html#html-code-download" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>当分享一个 R Markdown 生成的 HTML 文档给他人的时候，对方可能还需要提供 <code>.Rmd</code> 源文件。在头文件中配置 <code>code_download</code> 参数可以在 HTML 文档中嵌入源文件。</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb55-1"><a href="rmarkdown-document.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb55-2"><a href="rmarkdown-document.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
 <span id="cb55-3"><a href="rmarkdown-document.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code_download</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>打开 <code>code_download</code> 选项后，页面中会出现一个下载按钮，点击下载按钮即可获得源文件。</p>
 </div>
-<div id="html-embed" class="section level4" number="3.1.4.10">
-<h4><span class="header-section-number">3.1.4.10</span> 嵌入数据或其它文件</h4>
+<div id="html-embed" class="section level4 hasAnchor" number="3.1.4.10">
+<h4><span class="header-section-number">3.1.4.10</span> 嵌入数据或其它文件<a href="rmarkdown-document.html#html-embed" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>嵌入 <code>.Rmd</code> 源文件可能还不足以重现 R Markdown 中结果，通常还会需要原始数据等其它内容。要将这些内容嵌入 HTML 文档中，也是很容易实现的。</p>
-<p>这一功能通过 <strong>xfun</strong> 软件包<span class="citation">(<a href="#ref-R-xfun" role="doc-biblioref">Xie 2021d</a>)</span> 实现，依赖于 <code>htmltools</code> 和 <code>mime</code> 软件包。要使用这一功能，首先确保这两个软件包可用。</p>
+<p>这一功能通过 <strong>xfun</strong> 软件包<span class="citation">(<a href="#ref-R-xfun" role="doc-biblioref">Xie 2022d</a>)</span> 实现，依赖于 <code>htmltools</code> 和 <code>mime</code> 软件包。要使用这一功能，首先确保这两个软件包可用。</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="rmarkdown-document.html#cb56-1" aria-hidden="true" tabindex="-1"></a>xfun<span class="sc">::</span><span class="fu">pkg_load2</span>(<span class="fu">c</span>(<span class="st">&#39;htmltools&#39;</span>, <span class="st">&#39;mime&#39;</span>))</span></code></pre></div>
 <p>现在，就可以随意嵌入各种文件了。</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb57-1"><a href="rmarkdown-document.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}</span></span>
@@ -1182,14 +1187,14 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<div id="rmarkdown-pdf" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> PDF 文档</h2>
+<div id="rmarkdown-pdf" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> PDF 文档<a href="rmarkdown-document.html#rmarkdown-pdf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>这一部分讲述将 R Markdown 输出为 PDF 的功能。PDF 是便携式文档格式（<strong>P</strong>ortable <strong>D</strong>ocument <strong>F</strong>ormat）的缩写，这是一种常见的文档格式，
 特别是在文件、学术论文中广泛使用。它具有文件体积小、保真度高和安全的特点。</p>
 <p>R Markdown 并不能直接输出 PDF 文档，而是会输出 LaTeX 文件，LaTeX 文件经过处理后生成 PDF。因此，使用 R Markdown 输出 PDF 文件时，可以充分发挥 LaTeX 的优势。在需要的时候，可以直接使用 LaTeX 代码编写内容，应用 LaTeX 的包和模板，添加标题、脚注、子图等。</p>
 <p>不过，LaTeX 技术对于大多数人可能都还比较陌生，而在生成 PDF 文档的过程中，很多问题都跟 LaTeX 的配置有关。这几乎是不可避免的，因此在开始正式的内容前，需要确保已经安装了 <strong>TinyTex</strong> 以及一些依赖的 LaTeX 组件。具体的安装步骤和疑难解答请参见前文（<a href="rmarkdown-base.html#install-tinytex">2.2.2</a>），此处不再赘述。</p>
-<div id="pdf-rmd" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> 从 R Markdown 到 PDF 文档</h3>
+<div id="pdf-rmd" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> 从 R Markdown 到 PDF 文档<a href="rmarkdown-document.html#pdf-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>要输出 PDF 文档，只需要在 R Markdown 开头的 YAML 配置中指定
 <code>pdf_document</code> 即可。</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb59-1"><a href="rmarkdown-document.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -1197,8 +1202,8 @@ div.csl-indent {
 <span id="cb59-3"><a href="rmarkdown-document.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>只需要这样一个改动，就可以得到一份 PDF 文档。</p>
 </div>
-<div id="pdf-chinese" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> 在 PDF 文档中使用中文的注意事项</h3>
+<div id="pdf-chinese" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> 在 PDF 文档中使用中文的注意事项<a href="rmarkdown-document.html#pdf-chinese" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>如果这份 PDF 中仅含有英文，那么不需要做额外的设置。
 但是对于中文用户而言，可能会出现错误。这是因为，PDF 所依赖的 LaTeX 系统对中文的支持与 HTML 不同，需要做一些合适的设置。包括导入中文语言支持的 LaTeX 模块 <strong>ctex</strong>，以及使用一个对 Unicode 支持更好的 <strong>xelatex</strong> 引擎。</p>
 <p>下面就是一份中文 PDF 文档的示例。</p>
@@ -1223,15 +1228,15 @@ div.csl-indent {
 <span id="cb61-18"><a href="rmarkdown-document.html#cb61-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-19"><a href="rmarkdown-document.html#cb61-19" aria-hidden="true" tabindex="-1"></a>我们接下来将会分别介绍这些功能。</span></code></pre></div>
 <p>将这份 R Markdown 编译后，将会生成一份 PDF 文档。</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="rmarkdown-document.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example_result</span>(<span class="st">&quot;examples/PDF-document-in-chinese.Rmd&quot;</span>)</span></code></pre></div>
-<p><img src="examples/PDF-document-in-chinese.png" width="1275" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="rmarkdown-document.html#cb62-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;examples/PDF-document-in-chinese.png&quot;</span>, <span class="at">dpi =</span> <span class="cn">NA</span>)</span></code></pre></div>
+<p><img src="examples/PDF-document-in-chinese.png" style="display: block; margin: auto;" /></p>
 </div>
-<div id="pdf-general-setting" class="section level3" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> 与 HTML 文档中相通的一些设置</h3>
+<div id="pdf-general-setting" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> 与 HTML 文档中相通的一些设置<a href="rmarkdown-document.html#pdf-general-setting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>下面的这些设置与前文介绍的 HTML 文档中相应配置的用法基本相同（参见 <a href="rmarkdown-document.html#rmarkdown-html">3.1</a>）。</p>
-<div id="pdf-toc" class="section level4" number="3.2.3.1">
-<h4><span class="header-section-number">3.2.3.1</span> 显示目录</h4>
-<p>使用 <code>toc</code> 在 PDF 文档中加入目录，<code>toc_depth</code> 控制目录的深度。这点与 HTML 文档的用法一致<a href="references.html#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>。</p>
+<div id="pdf-toc" class="section level4 hasAnchor" number="3.2.3.1">
+<h4><span class="header-section-number">3.2.3.1</span> 显示目录<a href="rmarkdown-document.html#pdf-toc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>使用 <code>toc</code> 在 PDF 文档中加入目录，<code>toc_depth</code> 控制目录的深度。这点与 HTML 文档的用法一致<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>。</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb63-1"><a href="rmarkdown-document.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb63-2"><a href="rmarkdown-document.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;五一劳动节加班三倍工资&quot;</span></span>
 <span id="cb63-3"><a href="rmarkdown-document.html#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;张三&quot;</span></span>
@@ -1254,8 +1259,8 @@ div.csl-indent {
 <span id="cb64-9"><a href="rmarkdown-document.html#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">number_sections</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb64-10"><a href="rmarkdown-document.html#cb64-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="pdf-figure" class="section level4" number="3.2.3.2">
-<h4><span class="header-section-number">3.2.3.2</span> 图片相关的配置</h4>
+<div id="pdf-figure" class="section level4 hasAnchor" number="3.2.3.2">
+<h4><span class="header-section-number">3.2.3.2</span> 图片相关的配置<a href="rmarkdown-document.html#pdf-figure" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li><p><code>fig_width</code> 和 <code>fig_height</code> 用于控制图片默认的宽和高（默认为 6.5 x 4.5 英寸）。</p></li>
 <li><p><code>fig_crop</code> 控制 <code>pdfcrop</code> 的效果，功能是去掉图片边缘的空白（默认为 <code>true</code>）。</p>
@@ -1274,8 +1279,8 @@ div.csl-indent {
 <span id="cb65-9"><a href="rmarkdown-document.html#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fig_caption</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb65-10"><a href="rmarkdown-document.html#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="pdf-df-print" class="section level4" number="3.2.3.3">
-<h4><span class="header-section-number">3.2.3.3</span> 打印数据框</h4>
+<div id="pdf-df-print" class="section level4 hasAnchor" number="3.2.3.3">
+<h4><span class="header-section-number">3.2.3.3</span> 打印数据框<a href="rmarkdown-document.html#pdf-df-print" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>通过配置 <code>df_print</code>，可以调整打印数据框的格式（表 <a href="rmarkdown-document.html#tab:df-print-pdf">3.3</a>）。</p>
 <table>
 <caption><span id="tab:df-print-pdf">表 3.3: </span> 输出 PDF 时 <code>df_print</code> 可选的值。</caption>
@@ -1317,8 +1322,8 @@ div.csl-indent {
 <span id="cb66-7"><a href="rmarkdown-document.html#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">df_print</span><span class="kw">:</span><span class="at"> kable</span></span>
 <span id="cb66-8"><a href="rmarkdown-document.html#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="pdf-code-highlight" class="section level4" number="3.2.3.4">
-<h4><span class="header-section-number">3.2.3.4</span> 代码高亮</h4>
+<div id="pdf-code-highlight" class="section level4 hasAnchor" number="3.2.3.4">
+<h4><span class="header-section-number">3.2.3.4</span> 代码高亮<a href="rmarkdown-document.html#pdf-code-highlight" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>与 HTML 文档相同，这里可用 <code>highlight</code> 参数配置代码高亮的样式（参见 <a href="#appearance-and-style"><strong>??</strong></a> 部分内容）。例如：</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb67-1"><a href="rmarkdown-document.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb67-2"><a href="rmarkdown-document.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;五一劳动节加班三倍工资&quot;</span></span>
@@ -1330,11 +1335,11 @@ div.csl-indent {
 <span id="cb67-8"><a href="rmarkdown-document.html#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
 </div>
-<div id="pdf-latex" class="section level3" number="3.2.4">
-<h3><span class="header-section-number">3.2.4</span> LaTeX 选项</h3>
+<div id="pdf-latex" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> LaTeX 选项<a href="rmarkdown-document.html#pdf-latex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>很多 LaTeX 的配置，可以通过头部 YAML 的设定传递给 PDF 文档。</p>
-<div id="pdf-includes" class="section level4" number="3.2.4.1">
-<h4><span class="header-section-number">3.2.4.1</span> 通用文档部件</h4>
+<div id="pdf-includes" class="section level4 hasAnchor" number="3.2.4.1">
+<h4><span class="header-section-number">3.2.4.1</span> 通用文档部件<a href="rmarkdown-document.html#pdf-includes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>一个 LaTeX 文档的结构大概是这样子：</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb68-1"><a href="rmarkdown-document.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
 <span id="cb68-2"><a href="rmarkdown-document.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co">% 序言/preamble</span></span>
@@ -1363,8 +1368,8 @@ div.csl-indent {
 <span id="cb71-3"><a href="rmarkdown-document.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">links-as-notes</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>在本书的 PDF 版本中，就使用了这种方法来添加页眉、页脚等内容。</p>
 </div>
-<div id="pdf-template" class="section level4" number="3.2.4.2">
-<h4><span class="header-section-number">3.2.4.2</span> 选择 LaTeX 模板</h4>
+<div id="pdf-template" class="section level4 hasAnchor" number="3.2.4.2">
+<h4><span class="header-section-number">3.2.4.2</span> 选择 LaTeX 模板<a href="rmarkdown-document.html#pdf-template" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>通过 <code>template</code> 可以指定输出 PDF 文档时采用的 LaTeX 模板。</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb72-1"><a href="rmarkdown-document.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb72-2"><a href="rmarkdown-document.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -1372,8 +1377,8 @@ div.csl-indent {
 <span id="cb72-4"><a href="rmarkdown-document.html#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">template</span><span class="kw">:</span><span class="at"> quarterly-report.tex</span></span>
 <span id="cb72-5"><a href="rmarkdown-document.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="pdf-template-setting" class="section level4" number="3.2.4.3">
-<h4><span class="header-section-number">3.2.4.3</span> 配置 LaTeX 模板的参数</h4>
+<div id="pdf-template-setting" class="section level4 hasAnchor" number="3.2.4.3">
+<h4><span class="header-section-number">3.2.4.3</span> 配置 LaTeX 模板的参数<a href="rmarkdown-document.html#pdf-template-setting" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>每个 LaTeX 模板会有很多参数，用来指定文档的语言、字体、文字大小、页边距等内容。
 表 <a href="rmarkdown-document.html#tab:latex-vars">3.4</a> 列示了常见的一些参数，完整的参数则可以在 <a href="https://pandoc.org/MANUAL.html#variables-for-latex">Pandoc 手册</a> 中查看。</p>
 <table>
@@ -1428,30 +1433,30 @@ div.csl-indent {
 <span id="cb73-6"><a href="rmarkdown-document.html#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
 </div>
-<div id="pdf-latex-citation" class="section level3" number="3.2.5">
-<h3><span class="header-section-number">3.2.5</span> 使用 LaTeX 包处理参考文献</h3>
+<div id="pdf-latex-citation" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> 使用 LaTeX 包处理参考文献<a href="rmarkdown-document.html#pdf-latex-citation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>默认情况，文档中的引用使用 <code>pandoc-citeproc</code> 来处理，这种方法不限制输出文档的类型，适用性最广。
 不过，在 LaTeX 系统中也有非常优秀的引用工具，例如 <code>natbib</code> 和 <code>biblatex</code>。
-如果想使用它们，只需要在 <code>citation_package</code> 中指定即可<a href="references.html#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>。</p>
+如果想使用它们，只需要在 <code>citation_package</code> 中指定即可<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>。</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb74-1"><a href="rmarkdown-document.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb74-2"><a href="rmarkdown-document.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb74-3"><a href="rmarkdown-document.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf_document</span><span class="kw">:</span></span>
 <span id="cb74-4"><a href="rmarkdown-document.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
 <span id="cb74-5"><a href="rmarkdown-document.html#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="pdf-latex-engine" class="section level3" number="3.2.6">
-<h3><span class="header-section-number">3.2.6</span> LaTeX 的渲染引擎</h3>
+<div id="pdf-latex-engine" class="section level3 hasAnchor" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> LaTeX 的渲染引擎<a href="rmarkdown-document.html#pdf-latex-engine" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>PDF 文档默认通过 <code>pdflatex</code> 渲染。其它可用的引擎还包括 <code>pdflatex</code>，<code>xelatex</code>和<code>lualatex</code>等。
 不同的引擎可通过 <code>latex_engine</code> 来选择。
-一般情况下，使用 <code>xelatex</code> 或者 <code>lualatex</code> 的主要理由是它们对 Unicode 的支持更加优秀，以及它们更容易使用系统中已有的字体<a href="references.html#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>。</p>
+一般情况下，使用 <code>xelatex</code> 或者 <code>lualatex</code> 的主要理由是它们对 Unicode 的支持更加优秀，以及它们更容易使用系统中已有的字体<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>。</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb75-1"><a href="rmarkdown-document.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb75-2"><a href="rmarkdown-document.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb75-3"><a href="rmarkdown-document.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf_document</span><span class="kw">:</span></span>
 <span id="cb75-4"><a href="rmarkdown-document.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">latex_engine</span><span class="kw">:</span><span class="at"> xelatex</span></span>
 <span id="cb75-5"><a href="rmarkdown-document.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="pdf-keep-tex" class="section level3" number="3.2.7">
-<h3><span class="header-section-number">3.2.7</span> 保留生成的 TeX 中间文件</h3>
+<div id="pdf-keep-tex" class="section level3 hasAnchor" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> 保留生成的 TeX 中间文件<a href="rmarkdown-document.html#pdf-keep-tex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R Markdown 首先转化为 TeX 文件，然后才能转化为 PDF 文档。默认情况下，PDF 文档生成后，TeX 文档将会被删除。通过改变 <code>keep_tex</code> 的设置，可以保留生成的 TeX 文档（可用于向某些杂志投稿）。</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb76-1"><a href="rmarkdown-document.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb76-2"><a href="rmarkdown-document.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -1460,22 +1465,22 @@ div.csl-indent {
 <span id="cb76-5"><a href="rmarkdown-document.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
 </div>
-<div id="rmarkdown-ppt" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> PPT 幻灯片</h2>
+<div id="rmarkdown-ppt" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> PPT 幻灯片<a href="rmarkdown-document.html#rmarkdown-ppt" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>本章讲述使用 R Markdown 生成幻灯片（俗称“PPT”）的技巧。</p>
 <p>幻灯片可以被看做一个精简的文档，它的基本单位是单独的一页，每页含有标题、内容和其它元素。R Markdown 文档可以直接输出为 HTML 或者 PDF 格式的幻灯片，并且可以通过额外的软件包丰富幻灯片的具体样式。这一部分将首先介绍 R Markdown 基础幻灯片的使用，然后介绍如何使用 <strong>xaringan</strong> 软件包创建更加具有科技感的幻灯片。</p>
 <p>使用基础幻灯片不需要安装额外的包。</p>
 <p>R Markdown 支持 4 种不同样式的幻灯片，分别是 <strong>ioslides</strong>，<strong>Slidy</strong>，<strong>Beamer</strong> 和 <strong>PowerPoint</strong>。
-在 RStudio 中，可以通过菜单中的 “New File -&gt; R Markdown…” 打开如下一个窗口（图 <a href="rmarkdown-document.html#fig:rmd-presentation-popup">3.9</a>），然后选择 “OK” 后即可新建一个幻灯片。</p>
+在 RStudio 中，可以通过菜单中的 “New File -&gt; R Markdown…” 打开如下一个窗口（图 <a href="rmarkdown-document.html#fig:rmd-presentation-popup">3.10</a>），然后选择 “OK” 后即可新建一个幻灯片。</p>
 <p>以上介绍的 5 种幻灯片格式中（含 <strong>xaringan</strong>），<strong>ioslides</strong>、<strong>Slidy</strong> 和 <strong>xaringan</strong> 都是基于 HTML 技术实现的（文档扩展名为 <code>.html</code>），<strong>Beamer</strong> 是基于 LaTeX 实现的（文档扩展名为 <code>.pdf</code>），PowerPoint 则是基于微软 Office 的文档格式实现的（文档扩展名为 <code>.pptx</code>）。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:rmd-presentation-popup"></span>
-<img src="images/rmd-presentation-popup.png" alt="新建 R Markdown 时可选的幻灯片格式" width="529" />
+<img src="images/rmd-presentation-popup.png" alt="新建 R Markdown 时可选的幻灯片格式"  />
 <p class="caption">
-图 3.9: 新建 R Markdown 时可选的幻灯片格式
+图 3.10: 新建 R Markdown 时可选的幻灯片格式
 </p>
 </div>
-<div id="ioslides-presentation" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> ioslides 幻灯片</h3>
+<div id="ioslides-presentation" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> ioslides 幻灯片<a href="rmarkdown-document.html#ioslides-presentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>首先看 ioslides 幻灯片。新建的幻灯片，也是一个 R Markdown 文档，在它的头部 YAML 中，
 <code>output: ioslides_presentation</code> 设定了其输出格式。</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="rmarkdown-document.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/ioslides-presentation.Rmd&quot;</span>)</span></code></pre></div>
@@ -1513,20 +1518,20 @@ div.csl-indent {
 <span id="cb78-32"><a href="rmarkdown-document.html#cb78-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pressure}</span></span>
 <span id="cb78-33"><a href="rmarkdown-document.html#cb78-33" aria-hidden="true" tabindex="-1"></a><span class="in">plot(pressure)</span></span>
 <span id="cb78-34"><a href="rmarkdown-document.html#cb78-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>这个文档经过编译后，得到的幻灯片如图 <a href="rmarkdown-document.html#fig:ioslides-presentation-screenshot">3.10</a> 所示。
+<p>这个文档经过编译后，得到的幻灯片如图 <a href="rmarkdown-document.html#fig:ioslides-presentation-screenshot">3.11</a> 所示。
 由此可见，在 R Markdown 幻灯片中，源文件中的 <code>##</code> 代表一张幻灯片的开头和标题，
 <code>##</code> 后面的内容是这一张幻灯片中的内容。R Markdown 会自动将命令和输出的内容添加到幻灯片中。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ioslides-presentation-screenshot"></span>
-<img src="examples/ioslides-presentation-screenshot.png" alt="新建文件编译后生成的 ioslides 幻灯片" width="552" />
+<img src="examples/ioslides-presentation-screenshot.png" alt="新建文件编译后生成的 ioslides 幻灯片"  />
 <p class="caption">
-图 3.10: 新建文件编译后生成的 ioslides 幻灯片
+图 3.11: 新建文件编译后生成的 ioslides 幻灯片
 </p>
 </div>
 <p>除了 <code>##</code>，使用 <code>---</code> 也能开始一张新的幻灯片，并最终生成一个不带标题的幻灯片。</p>
 <p>另外，还可以通过 “|” 来为幻灯片添加副标题。例如下面的例子：</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb79-1"><a href="rmarkdown-document.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 起床 | 今天准备干点什么呢</span></span></code></pre></div>
-<div id="ioslides-shortcut" class="section level4" number="3.3.1.1">
-<h4><span class="header-section-number">3.3.1.1</span> 使用快捷键控制显示模式</h4>
+<div id="ioslides-shortcut" class="section level4 hasAnchor" number="3.3.1.1">
+<h4><span class="header-section-number">3.3.1.1</span> 使用快捷键控制显示模式<a href="rmarkdown-document.html#ioslides-shortcut" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>ioslides 幻灯片支持以下快捷键更改播放时的模式：</p>
 <ul>
 <li><code>'f'</code>：全屏模式，幻灯片将会占满屏幕。</li>
@@ -1537,8 +1542,8 @@ div.csl-indent {
 </ul>
 <p>按下 <code>'Esc'</code> 键将会退出以上所有模式。</p>
 </div>
-<div id="ioslides-incremental" class="section level4" number="3.3.1.2">
-<h4><span class="header-section-number">3.3.1.2</span> 依次显示列表中的项目</h4>
+<div id="ioslides-incremental" class="section level4 hasAnchor" number="3.3.1.2">
+<h4><span class="header-section-number">3.3.1.2</span> 依次显示列表中的项目<a href="rmarkdown-document.html#ioslides-incremental" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>使用 <code>incremental</code> 选项可以控制列表项目依次出现，相当于添加了简单的播放动画。</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="rmarkdown-document.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/ioslides-presentation-increment-bullets.Rmd&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb81"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb81-1"><a href="rmarkdown-document.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -1615,8 +1620,8 @@ div.csl-indent {
 <div class="sourceCode" id="cb82"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb82-1"><a href="rmarkdown-document.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - 项目 1</span></span>
 <span id="cb82-2"><a href="rmarkdown-document.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - 项目 2</span></span></code></pre></div>
 </div>
-<div id="ioslides-widescreen" class="section level4" number="3.3.1.3">
-<h4><span class="header-section-number">3.3.1.3</span> 幻灯片适配宽屏幕显示器</h4>
+<div id="ioslides-widescreen" class="section level4 hasAnchor" number="3.3.1.3">
+<h4><span class="header-section-number">3.3.1.3</span> 幻灯片适配宽屏幕显示器<a href="rmarkdown-document.html#ioslides-widescreen" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在配置中使用 <code>widescreen</code> 可以将幻灯片样式改为宽屏。</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb83-1"><a href="rmarkdown-document.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb83-2"><a href="rmarkdown-document.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -1634,8 +1639,8 @@ div.csl-indent {
 其中的 `.smaller` 实际上是预定义的 CSS class。
 -->
 </div>
-<div id="ioslides-transition" class="section level4" number="3.3.1.4">
-<h4><span class="header-section-number">3.3.1.4</span> 幻灯片播放速度</h4>
+<div id="ioslides-transition" class="section level4 hasAnchor" number="3.3.1.4">
+<h4><span class="header-section-number">3.3.1.4</span> 幻灯片播放速度<a href="rmarkdown-document.html#ioslides-transition" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>ioslides 幻灯片翻页时会有淡入淡出的效果，使用 <code>transition</code> 可以控制效果的时长。
 <code>transition</code> 设置为 <code>"default"</code>，<code>"slower"</code>，<code>"faster"</code>，或者一个以秒为单位的数字（如<code>0.5</code>）均可。如下所示：</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb84-1"><a href="rmarkdown-document.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -1644,8 +1649,8 @@ div.csl-indent {
 <span id="cb84-4"><a href="rmarkdown-document.html#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">transition</span><span class="kw">:</span><span class="at"> slower</span></span>
 <span id="cb84-5"><a href="rmarkdown-document.html#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="ioslides-build" class="section level4" number="3.3.1.5">
-<h4><span class="header-section-number">3.3.1.5</span> 依次显示幻灯片元素</h4>
+<div id="ioslides-build" class="section level4 hasAnchor" number="3.3.1.5">
+<h4><span class="header-section-number">3.3.1.5</span> 依次显示幻灯片元素<a href="rmarkdown-document.html#ioslides-build" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>每一张幻灯片的标题都可以加上 <code>.build</code> 属性，这样幻灯片的内容在播放的时候将会一块块的依次显示出来。
 这一点与 <code>incremental</code> 属性有些类似，不过后者针对的是列表中的项目，而前者针对的是
 一段话，一整个列表。</p>
@@ -1661,8 +1666,8 @@ div.csl-indent {
 <span id="cb85-10"><a href="rmarkdown-document.html#cb85-10" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - 先出现这个</span></span>
 <span id="cb85-11"><a href="rmarkdown-document.html#cb85-11" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; - 然后才是这个</span></span></code></pre></div>
 </div>
-<div id="ioslides-background" class="section level4" number="3.3.1.6">
-<h4><span class="header-section-number">3.3.1.6</span> 设置幻灯片的背景图像</h4>
+<div id="ioslides-background" class="section level4 hasAnchor" number="3.3.1.6">
+<h4><span class="header-section-number">3.3.1.6</span> 设置幻灯片的背景图像<a href="rmarkdown-document.html#ioslides-background" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>幻灯片中可以使用 <code>data-background</code> 添加背景图片，并使用其它的相关属性来
 配置背景图片的行为，如 <code>data-background-size</code>， <code>data-background-position</code>，
 <code>data-background-repeat</code> 等等。</p>
@@ -1670,8 +1675,8 @@ div.csl-indent {
 <p>这些配置来自于 CSS 中图片的属性，<code>background</code>，<code>background-size</code>，<code>background-position</code>，
 以及 <code>background-repeat</code> 等。用户可能需要对 CSS 有所了解，才能准确把握这些属性的用途。</p>
 </div>
-<div id="ioslides-style-css" class="section level4" number="3.3.1.7">
-<h4><span class="header-section-number">3.3.1.7</span> 使用自定义 CSS</h4>
+<div id="ioslides-style-css" class="section level4 hasAnchor" number="3.3.1.7">
+<h4><span class="header-section-number">3.3.1.7</span> 使用自定义 CSS<a href="rmarkdown-document.html#ioslides-style-css" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>因为 ioslides 幻灯片本质上是一个 HTML 文档，所以可以像 HTML 文档一样通过自定义 CSS 来设定幻灯片中不同元素的样式。</p>
 <p>要在幻灯片中附加一个自定义样式表，可以使用 <code>css</code> 属性。</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb87-1"><a href="rmarkdown-document.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -1694,8 +1699,8 @@ div.csl-indent {
 <p>这种方式并不会影响幻灯片的标题，而是会影响这一张幻灯片中其它内容。
 最终，这张幻灯片中所有的文字都会显示为蓝色、120% 的大字号。</p>
 </div>
-<div id="ioslides-code-outline" class="section level4" number="3.3.1.8">
-<h4><span class="header-section-number">3.3.1.8</span> 突出显示部分代码</h4>
+<div id="ioslides-code-outline" class="section level4 hasAnchor" number="3.3.1.8">
+<h4><span class="header-section-number">3.3.1.8</span> 突出显示部分代码<a href="rmarkdown-document.html#ioslides-code-outline" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>为了强调关键代码的作用，可以使用特定的注释来高亮它们。例如：</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="rmarkdown-document.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="do">### &lt;b&gt;</span></span>
 <span id="cb90-2"><a href="rmarkdown-document.html#cb90-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
@@ -1703,8 +1708,8 @@ div.csl-indent {
 <span id="cb90-4"><a href="rmarkdown-document.html#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="do">### &lt;/b&gt;</span></span></code></pre></div>
 <p>在播放时，当按下键盘上的快捷键 <code>'h'</code> 时，高亮的代码将会突出显示，其它部分的代码则会变淡。</p>
 </div>
-<div id="ioslides-logo" class="section level4" number="3.3.1.9">
-<h4><span class="header-section-number">3.3.1.9</span> 添加 LOGO</h4>
+<div id="ioslides-logo" class="section level4 hasAnchor" number="3.3.1.9">
+<h4><span class="header-section-number">3.3.1.9</span> 添加 LOGO<a href="rmarkdown-document.html#ioslides-logo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>使用 <code>logo</code> 可以为幻灯片添加一个 LOGO 图片。默认情况下，这个 LOGO 将会以 85 x 85
 像素显示在标题幻灯片上，并且缩小后显示在后面每一张幻灯片的左下角。</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb91-1"><a href="rmarkdown-document.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -1730,8 +1735,8 @@ div.csl-indent {
 <span id="cb93-4"><a href="rmarkdown-document.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-size</span>: <span class="dv">150</span><span class="dt">px</span> <span class="dv">75</span><span class="dt">px</span><span class="op">;</span></span>
 <span id="cb93-5"><a href="rmarkdown-document.html#cb93-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="ioslides-layout" class="section level4" number="3.3.1.10">
-<h4><span class="header-section-number">3.3.1.10</span> 幻灯片的布局</h4>
+<div id="ioslides-layout" class="section level4 hasAnchor" number="3.3.1.10">
+<h4><span class="header-section-number">3.3.1.10</span> 幻灯片的布局<a href="rmarkdown-document.html#ioslides-layout" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果想居中显示幻灯片的内容，可以在标题后面加入 <code>.flexbox</code> 和 <code>.vcenter</code> 的属性。</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb94-1"><a href="rmarkdown-document.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 统统居中显示 {.flexbox .vcenter}</span></span></code></pre></div>
 <p>使用 CSS class 的方法为美化幻灯片非常灵活。但是在标题中应用样式不能精确到一张
@@ -1740,7 +1745,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb95"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb95-1"><a href="rmarkdown-document.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;centered&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb95-2"><a href="rmarkdown-document.html#cb95-2" aria-hidden="true" tabindex="-1"></a>这部分文本将会居中显示。</span>
 <span id="cb95-3"><a href="rmarkdown-document.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
-<p>如果要以左右两栏的形式展示某一张幻灯片中的内容，可以使用下面的语法<a href="references.html#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>。</p>
+<p>如果要以左右两栏的形式展示某一张幻灯片中的内容，可以使用下面的语法<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>。</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb96-1"><a href="rmarkdown-document.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;columns-2&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb96-2"><a href="rmarkdown-document.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  ![](image.png)</span>
 <span id="cb96-3"><a href="rmarkdown-document.html#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1749,8 +1754,8 @@ div.csl-indent {
 <span id="cb96-6"><a href="rmarkdown-document.html#cb96-6" aria-hidden="true" tabindex="-1"></a>  - 项目 3</span>
 <span id="cb96-7"><a href="rmarkdown-document.html#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 </div>
-<div id="ioslides-font-color" class="section level4" number="3.3.1.11">
-<h4><span class="header-section-number">3.3.1.11</span> 文字颜色</h4>
+<div id="ioslides-font-color" class="section level4 hasAnchor" number="3.3.1.11">
+<h4><span class="header-section-number">3.3.1.11</span> 文字颜色<a href="rmarkdown-document.html#ioslides-font-color" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>使用 HTML 语法还可以修改其它的属性，比如文字的颜色。只需要将颜色以 CSS 类的形式赋值给元素即可。例如：</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb97-1"><a href="rmarkdown-document.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;red2&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb97-2"><a href="rmarkdown-document.html#cb97-2" aria-hidden="true" tabindex="-1"></a>这部分文本将显示为红色。</span>
@@ -1761,21 +1766,21 @@ div.csl-indent {
 #### 放映模式
 ----->
 </div>
-<div id="ioslides-print-ppt" class="section level4" number="3.3.1.12">
-<h4><span class="header-section-number">3.3.1.12</span> 打印幻灯片</h4>
+<div id="ioslides-print-ppt" class="section level4 hasAnchor" number="3.3.1.12">
+<h4><span class="header-section-number">3.3.1.12</span> 打印幻灯片<a href="rmarkdown-document.html#ioslides-print-ppt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>打印幻灯片可以在浏览器中进行，目前保真度最高的浏览器可能是 Google Chrome。
 此外，使用 Chrome 中 “另存为 PDF” 的功能，还可以将幻灯片保存为一份 PDF 文档。</p>
 <p>在 R 语言终端，使用 <code>pagedown::chrome_print()</code> 函数也可以完成这一操作（便于自动化和批处理）。
 不过需要事先安装 <code>pagedown</code> 软件包<span class="citation">(<a href="#ref-R-pagedown" role="doc-biblioref"><strong>R-pagedown?</strong></a>)</span>。</p>
 </div>
-<div id="ioslides-other-features" class="section level4" number="3.3.1.13">
-<h4><span class="header-section-number">3.3.1.13</span> 其它功能</h4>
+<div id="ioslides-other-features" class="section level4 hasAnchor" number="3.3.1.13">
+<h4><span class="header-section-number">3.3.1.13</span> 其它功能<a href="rmarkdown-document.html#ioslides-other-features" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>ioslides 幻灯片中，通用的 R Markdown 语法通常可用，包括 HTML 文档输出中的配置，
 图片的属性设置，数学公式，数据库的打印，中间文件的保留，外部文档的引入等等。</p>
 </div>
 </div>
-<div id="slidy-presentation" class="section level3" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Slidy 幻灯片</h3>
+<div id="slidy-presentation" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Slidy 幻灯片<a href="rmarkdown-document.html#slidy-presentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="https://www.w3.org/Talks/Tools/Slidy2/">Slidy</a> 是 HTML 幻灯片的另一个规范。
 要通过 R Markdown 创建一个 Slidy 幻灯片，只需要将文档输出设为 <code>slidy_presentation</code> 即可。</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="rmarkdown-document.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/slidy-presentation.Rmd&quot;</span>)</span></code></pre></div>
@@ -1818,15 +1823,15 @@ div.csl-indent {
 <span id="cb99-37"><a href="rmarkdown-document.html#cb99-37" aria-hidden="true" tabindex="-1"></a><span class="in">plot(pressure)</span></span>
 <span id="cb99-38"><a href="rmarkdown-document.html#cb99-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Slidy 幻灯片的内容设置基本与 ioslides 幻灯片相似，不过其默认样式与之有异。
-一份 Slidy 幻灯片大体是这样的（图 <a href="rmarkdown-document.html#fig:slidy-presentation-screen-shot">3.11</a>）。</p>
+一份 Slidy 幻灯片大体是这样的（图 <a href="rmarkdown-document.html#fig:slidy-presentation-screen-shot">3.12</a>）。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:slidy-presentation-screen-shot"></span>
-<img src="examples/slidy-presentation-screenshot.png" alt="Slidy 幻灯片" width="480" />
+<img src="examples/slidy-presentation-screenshot.png" alt="Slidy 幻灯片"  />
 <p class="caption">
-图 3.11: Slidy 幻灯片
+图 3.12: Slidy 幻灯片
 </p>
 </div>
-<div id="slidy-shortcut" class="section level4" number="3.3.2.1">
-<h4><span class="header-section-number">3.3.2.1</span> 使用快捷键控制显示模式</h4>
+<div id="slidy-shortcut" class="section level4 hasAnchor" number="3.3.2.1">
+<h4><span class="header-section-number">3.3.2.1</span> 使用快捷键控制显示模式<a href="rmarkdown-document.html#slidy-shortcut" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Slidy 中也可以通过快捷键控制显示模式，不过其按键定义与 ioslides 不同。</p>
 <ul>
 <li><code>'c'</code>：显示幻灯片目录。Slidy 会自动生成目录，默认可以通过点击页脚左下角的 “Contents” 访问。</li>
@@ -1837,8 +1842,8 @@ div.csl-indent {
 </ul>
 <!--- Text Size 部分的功能已经不可用 --->
 </div>
-<div id="slidy-footer" class="section level4" number="3.3.2.2">
-<h4><span class="header-section-number">3.3.2.2</span> 设置页脚内容</h4>
+<div id="slidy-footer" class="section level4 hasAnchor" number="3.3.2.2">
+<h4><span class="header-section-number">3.3.2.2</span> 设置页脚内容<a href="rmarkdown-document.html#slidy-footer" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在 YAML 配置中使用 <code>footer</code> 可以为幻灯片设置页脚显示的内容。</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb100-1"><a href="rmarkdown-document.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb100-2"><a href="rmarkdown-document.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -1852,13 +1857,13 @@ div.csl-indent {
 <span id="cb101-4"><a href="rmarkdown-document.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">duration</span><span class="kw">:</span><span class="at"> </span><span class="dv">45</span></span>
 <span id="cb101-5"><a href="rmarkdown-document.html#cb101-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="slidy-other-features" class="section level4" number="3.3.2.3">
-<h4><span class="header-section-number">3.3.2.3</span> 其它功能</h4>
+<div id="slidy-other-features" class="section level4 hasAnchor" number="3.3.2.3">
+<h4><span class="header-section-number">3.3.2.3</span> 其它功能<a href="rmarkdown-document.html#slidy-other-features" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Slidy 幻灯片继承了 HTML 文档中的多数功能（<a href="rmarkdown-document.html#rmarkdown-html">3.1</a>），以及 ioslides 中的列表内容依次显示等功能（参见 <a href="rmarkdown-document.html#ioslides-presentation">3.3.1</a>）。</p>
 </div>
 </div>
-<div id="beamer-presentation" class="section level3" number="3.3.3">
-<h3><span class="header-section-number">3.3.3</span> Beamer 幻灯片</h3>
+<div id="beamer-presentation" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Beamer 幻灯片<a href="rmarkdown-document.html#beamer-presentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="https://www.overleaf.com/learn/latex/beamer">Beamer</a> 是一个功能强大且灵活的 LaTeX 类，用于创建美观的幻灯片。</p>
 <p>要从 R Markdown 创建 Beamer 幻灯片，只需要在 YAML 头文件中将输出格式设定为 <code>beamer_presentation</code> 即可。可以使用一级标题 <code>#</code> 和二级标题 <code>##</code> 新建幻灯片
 （使用 <code>---</code> 也可以创建一张新的没有标题的幻灯片）。例如：</p>
@@ -1901,19 +1906,19 @@ div.csl-indent {
 <span id="cb103-36"><a href="rmarkdown-document.html#cb103-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pressure}</span></span>
 <span id="cb103-37"><a href="rmarkdown-document.html#cb103-37" aria-hidden="true" tabindex="-1"></a><span class="in">plot(pressure)</span></span>
 <span id="cb103-38"><a href="rmarkdown-document.html#cb103-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>Beamer 幻灯片编译后的文件是一个 PDF 文档，大概像下面这个样子（图 <a href="rmarkdown-document.html#fig:beamer-presentation-screenshot">3.12</a>）。</p>
+<p>Beamer 幻灯片编译后的文件是一个 PDF 文档，大概像下面这个样子（图 <a href="rmarkdown-document.html#fig:beamer-presentation-screenshot">3.13</a>）。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:beamer-presentation-screenshot"></span>
-<img src="examples/beamer-presentation-screenshot.png" alt="Beamer 幻灯片示例" width="561" />
+<img src="examples/beamer-presentation-screenshot.png" alt="Beamer 幻灯片示例"  />
 <p class="caption">
-图 3.12: Beamer 幻灯片示例
+图 3.13: Beamer 幻灯片示例
 </p>
 </div>
-<div id="beamer-chinese" class="section level4" number="3.3.3.1">
-<h4><span class="header-section-number">3.3.3.1</span> Beamer 幻灯片的中文支持</h4>
+<div id="beamer-chinese" class="section level4 hasAnchor" number="3.3.3.1">
+<h4><span class="header-section-number">3.3.3.1</span> Beamer 幻灯片的中文支持<a href="rmarkdown-document.html#beamer-chinese" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果要生成中文的 Beamer 幻灯片，参考 <a href="rmarkdown-document.html#pdf-chinese">3.2.2</a> 中的设置。</p>
 </div>
-<div id="beamer-theme" class="section level4" number="3.3.3.2">
-<h4><span class="header-section-number">3.3.3.2</span> Beamer 幻灯片的主题</h4>
+<div id="beamer-theme" class="section level4 hasAnchor" number="3.3.3.2">
+<h4><span class="header-section-number">3.3.3.2</span> Beamer 幻灯片的主题<a href="rmarkdown-document.html#beamer-theme" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Beamer 支持多个幻灯片主题，在 R Markdown 中使用 <code>theme</code>，<code>colortheme</code> 和 <code>fonttheme</code> 设定。
 例如：</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb104-1"><a href="rmarkdown-document.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -1923,19 +1928,19 @@ div.csl-indent {
 <span id="cb104-5"><a href="rmarkdown-document.html#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">colortheme</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;dolphin&quot;</span></span>
 <span id="cb104-6"><a href="rmarkdown-document.html#cb104-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fonttheme</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;structurebold&quot;</span></span>
 <span id="cb104-7"><a href="rmarkdown-document.html#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>这样，上面的幻灯片就会变成下面这个样子（图 <a href="rmarkdown-document.html#fig:beamer-presentation-theme">3.13</a>）。
+<p>这样，上面的幻灯片就会变成下面这个样子（图 <a href="rmarkdown-document.html#fig:beamer-presentation-theme">3.14</a>）。
 这个主题为标题幻灯片添加了页眉和页脚，显示作者、主题、日期和页码等信息。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:beamer-presentation-theme"></span>
-<img src="examples/beamer-presentation-theme.png" alt="应用主题后的 Beamer 幻灯片" width="756" />
+<img src="examples/beamer-presentation-theme.png" alt="应用主题后的 Beamer 幻灯片"  />
 <p class="caption">
-图 3.13: 应用主题后的 Beamer 幻灯片
+图 3.14: 应用主题后的 Beamer 幻灯片
 </p>
 </div>
 <p>Beamer 支持数十个主题和颜色样式，在 <a href="https://hartwork.org/beamer-theme-matrix/">这里</a> 可以查看可用的选项。</p>
 <p><span class="citation">(<a href="#ref-TODO" role="doc-biblioref"><strong>TODO?</strong></a>)</span>: (此部分可以扩展)</p>
 </div>
-<div id="beamer-boundary" class="section level4" number="3.3.3.3">
-<h4><span class="header-section-number">3.3.3.3</span> Beamer 幻灯片的边界</h4>
+<div id="beamer-boundary" class="section level4 hasAnchor" number="3.3.3.3">
+<h4><span class="header-section-number">3.3.3.3</span> Beamer 幻灯片的边界<a href="rmarkdown-document.html#beamer-boundary" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><code>slide_level</code> 参数用来指定一张幻灯片开始的位置。默认情况下，二级标题会被识别为一张幻灯片的开始，但是可以将它改为其它的大纲等级。</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb105-1"><a href="rmarkdown-document.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb105-2"><a href="rmarkdown-document.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -1943,17 +1948,17 @@ div.csl-indent {
 <span id="cb105-4"><a href="rmarkdown-document.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">slide_level</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
 <span id="cb105-5"><a href="rmarkdown-document.html#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="beamer-other-features" class="section level4" number="3.3.3.4">
-<h4><span class="header-section-number">3.3.3.4</span> Beamer 幻灯片的其它功能</h4>
+<div id="beamer-other-features" class="section level4 hasAnchor" number="3.3.3.4">
+<h4><span class="header-section-number">3.3.3.4</span> Beamer 幻灯片的其它功能<a href="rmarkdown-document.html#beamer-other-features" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Beamer 幻灯片从 HTML 文档中继承了目录内容、图片属性、样式、数据框打印、组件、
 模板、Pandoc 参数和分享等功能（参加 <a href="rmarkdown-document.html#rmarkdown-html">3.1</a>），从 PDF 文档和
 ioslides 幻灯片中继承了列表动画、保留 TeX 文件等功能（参见 <a href="rmarkdown-document.html#rmarkdown-pdf">3.2</a>, <a href="rmarkdown-document.html#ioslides-presentation">3.3.1</a>）。</p>
 </div>
 </div>
-<div id="powerpoint-presentation" class="section level3" number="3.3.4">
-<h3><span class="header-section-number">3.3.4</span> PowerPoint 幻灯片</h3>
+<div id="powerpoint-presentation" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> PowerPoint 幻灯片<a href="rmarkdown-document.html#powerpoint-presentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>要制作 <strong>PowerPoint</strong> 幻灯片，只需要将输出格式设置为 <code>powerpoint_presentation</code> 即可。
-这需要满足 <strong>rmarkdown</strong> 版本 ≥ v1.9，Pandoc 版本 ≥ 2.0.5 的条件<a href="references.html#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>。</p>
+这需要满足 <strong>rmarkdown</strong> 版本 ≥ v1.9，Pandoc 版本 ≥ 2.0.5 的条件<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>。</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="rmarkdown-document.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_example</span>(<span class="st">&quot;examples/powerpoint-presentation.Rmd&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb107"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb107-1"><a href="rmarkdown-document.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb107-2"><a href="rmarkdown-document.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;PowerPoint Presentation&quot;</span></span>
@@ -1989,19 +1994,19 @@ ioslides 幻灯片中继承了列表动画、保留 TeX 文件等功能（参见
 <span id="cb107-32"><a href="rmarkdown-document.html#cb107-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pressure}</span></span>
 <span id="cb107-33"><a href="rmarkdown-document.html#cb107-33" aria-hidden="true" tabindex="-1"></a><span class="in">plot(pressure)</span></span>
 <span id="cb107-34"><a href="rmarkdown-document.html#cb107-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>R Markdown 生成的 PowerPoint 幻灯片大概长这个样子（图 <a href="rmarkdown-document.html#fig:powerpoint-presentation-screenshot">3.14</a>）：</p>
+<p>R Markdown 生成的 PowerPoint 幻灯片大概长这个样子（图 <a href="rmarkdown-document.html#fig:powerpoint-presentation-screenshot">3.15</a>）：</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:powerpoint-presentation-screenshot"></span>
-<img src="examples/powerpoint-presentation-screenshot.png" alt="PowerPoint 幻灯片" width="563" />
+<img src="examples/powerpoint-presentation-screenshot.png" alt="PowerPoint 幻灯片"  />
 <p class="caption">
-图 3.14: PowerPoint 幻灯片
+图 3.15: PowerPoint 幻灯片
 </p>
 </div>
 <p>PowerPoint 幻灯片采用的幻灯片标记与 Beamer 相同，默认为 3 级标题。使用 <code>slide_level</code> 可以控制新建一张幻灯片所需要的大纲等级。此外，使用 <code>---</code> 可以新建一张没有标题的幻灯片。另外，R Markdown 中包括的图片和表格都会自动的被放到一张新的幻灯片中。也就是说，除了幻灯片的标题、图片/表格的标注之外，其它所有元素都不能与二者共存。这一点与其它格式幻灯片的行为有明显不同。</p>
 <p>一般情况下，PowerPoint 幻灯片中的图片会被自动缩放到适合幻灯片的大小。如果自动缩放无效，那么对于静态图片可以使用 <code>width</code> 和 <code>height</code> 来分别设置，例如：<code>![caption](foo.png){width=40%}</code>。对于 R 语言生成的动态图形，则可以使用代码块的参数 <code>fig.width</code> 和 <code>fig.height</code> 来定义宽和高。</p>
 <p>PowerPoint 幻灯片中可以使用的 Markdown 标记（参见 <a href="#markdown-syntax"><strong>??</strong></a>）包括粗体、斜体，脚注，列表，LaTeX 数学表达式，
 图片，表格等。</p>
-<div id="powerpoint-layout" class="section level4" number="3.3.4.1">
-<h4><span class="header-section-number">3.3.4.1</span> 两栏布局</h4>
+<div id="powerpoint-layout" class="section level4 hasAnchor" number="3.3.4.1">
+<h4><span class="header-section-number">3.3.4.1</span> 两栏布局<a href="rmarkdown-document.html#powerpoint-layout" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>正如 Beamer 幻灯片的高级应用需要借助于 LaTeX 语法一样，
 PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 使用 Pandoc 的语法，可以设置一个多栏的布局（请参见 Pandoc 的用户手册）：</p>
@@ -2015,8 +2020,8 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb108-8"><a href="rmarkdown-document.html#cb108-8" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb108-9"><a href="rmarkdown-document.html#cb108-9" aria-hidden="true" tabindex="-1"></a>::::::</span></code></pre></div>
 </div>
-<div id="powerpoint-reference-doc" class="section level4" number="3.3.4.2">
-<h4><span class="header-section-number">3.3.4.2</span> 自定义模板</h4>
+<div id="powerpoint-reference-doc" class="section level4 hasAnchor" number="3.3.4.2">
+<h4><span class="header-section-number">3.3.4.2</span> 自定义模板<a href="rmarkdown-document.html#powerpoint-reference-doc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>PowerPoint 幻灯片的模板可以用 <code>reference_doc</code> 来设置。
 模板中的样式将会被应用到 R Markdown 生成的 PowerPoint 幻灯片中。</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb109-1"><a href="rmarkdown-document.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -2026,47 +2031,47 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb109-5"><a href="rmarkdown-document.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">reference_doc</span><span class="kw">:</span><span class="at"> my-styles.pptx</span></span>
 <span id="cb109-6"><a href="rmarkdown-document.html#cb109-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="powerpoint-other-features" class="section level4" number="3.3.4.3">
-<h4><span class="header-section-number">3.3.4.3</span> 其它功能</h4>
+<div id="powerpoint-other-features" class="section level4 hasAnchor" number="3.3.4.3">
+<h4><span class="header-section-number">3.3.4.3</span> 其它功能<a href="rmarkdown-document.html#powerpoint-other-features" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>PowerPoint 幻灯片从 HTML 文档中继承了目录内容、图片属性、样式、数据框打印、组件、
 模板、Pandoc 参数和分享等功能（参加 <a href="rmarkdown-document.html#rmarkdown-html">3.1</a>）。
 目前并不支持播放列表项目时候的动画效果。</p>
 </div>
 </div>
-<div id="ppt-xaringan" class="section level3" number="3.3.5">
-<h3><span class="header-section-number">3.3.5</span> Xaringan 幻灯片</h3>
+<div id="ppt-xaringan" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Xaringan 幻灯片<a href="rmarkdown-document.html#ppt-xaringan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>虽然 R Markdown 提供的基础幻灯片已经能够实现了基本的幻灯片功能，而且没有额外的学习成本，
 但是，善于制作精良幻灯片的“忍者”通常使用一个额外的包来创建幻灯片，这个包的名字叫做 <code>xaringan</code>。</p>
-<p><code>xaringan</code> 这个名字来源于火影忍者中的写轮眼 “Sharingan” （图 <a href="rmarkdown-document.html#fig:sharingan-icon">3.15</a>）<a href="references.html#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>。写轮眼有两大能力：</p>
+<p><code>xaringan</code> 这个名字来源于火影忍者中的写轮眼 “Sharingan” （图 <a href="rmarkdown-document.html#fig:sharingan-icon">3.16</a>）<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>。写轮眼有两大能力：</p>
 <ul>
 <li><p>洞察眼</p></li>
 <li><p>催眠眼</p></li>
 </ul>
-<p>其实做演示就是将自己的洞见传递给听众；好的演讲通常有催眠效果，因为它可以深度震撼人心<a href="references.html#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>。</p>
+<p>其实做演示就是将自己的洞见传递给听众；好的演讲通常有催眠效果，因为它可以深度震撼人心<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:sharingan-icon"></span>
-<img src="images/xaringan-hex.png" alt="幻灯忍者：写轮眼" width="180" />
+<img src="images/xaringan-hex.png" alt="幻灯忍者：写轮眼"  />
 <p class="caption">
-图 3.15: 幻灯忍者：写轮眼
+图 3.16: 幻灯忍者：写轮眼
 </p>
 </div>
-<p>与其它工具相比，<code>xaringan</code> 创建的幻灯片样式更加精美，功能更加丰富，且具有高度的可定制性（图 <a href="rmarkdown-document.html#fig:xaringan-screenshot">3.16</a>）。</p>
+<p>与其它工具相比，<code>xaringan</code> 创建的幻灯片样式更加精美，功能更加丰富，且具有高度的可定制性（图 <a href="rmarkdown-document.html#fig:xaringan-screenshot">3.17</a>）。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-screenshot"></span>
-<img src="images/xaringan-scrennshot.png" alt="`xaringan` 幻灯片的实例" width="602" />
+<img src="images/xaringan-scrennshot.png" alt="`xaringan` 幻灯片的实例"  />
 <p class="caption">
-图 3.16: <code>xaringan</code> 幻灯片的实例
+图 3.17: <code>xaringan</code> 幻灯片的实例
 </p>
 </div>
 <!-- 这一小节的下列内容事实上是由庄亮亮完成的 -->
-<div id="xaringan-basic" class="section level4" number="3.3.5.1">
-<h4><span class="header-section-number">3.3.5.1</span> Xaringan 的安装和入门</h4>
-<p>要创建“写轮眼”幻灯片，需要先安装 <strong>xaringan</strong> 软件包<span class="citation">(<a href="#ref-R-xaringan" role="doc-biblioref">Xie 2021c</a>)</span>）。</p>
+<div id="xaringan-basic" class="section level4 hasAnchor" number="3.3.5.1">
+<h4><span class="header-section-number">3.3.5.1</span> Xaringan 的安装和入门<a href="rmarkdown-document.html#xaringan-basic" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>要创建“写轮眼”幻灯片，需要先安装 <strong>xaringan</strong> 软件包<span class="citation">(<a href="#ref-R-xaringan" role="doc-biblioref">Xie 2022c</a>)</span>）。</p>
 <div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="rmarkdown-document.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;xaringan&quot;</span>))</span>
 <span id="cb110-2"><a href="rmarkdown-document.html#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;xaringan&quot;</span>)</span></code></pre></div>
-<p>安装完成之后，在 RStudio 中新建 R Markdown 文件，并在左侧选择 “From Template”，然后选择 “Ninja Presentation (Simplified Chinese)”。填写必要信息之后，即可创建一个新的“写轮眼”幻灯片（图 <a href="rmarkdown-document.html#fig:xaringan-new">3.17</a>）。</p>
+<p>安装完成之后，在 RStudio 中新建 R Markdown 文件，并在左侧选择 “From Template”，然后选择 “Ninja Presentation (Simplified Chinese)”。填写必要信息之后，即可创建一个新的“写轮眼”幻灯片（图 <a href="rmarkdown-document.html#fig:xaringan-new">3.18</a>）。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-new"></span>
-<img src="images/xaringan-new.png" alt="创建一个新文档" width="500" />
+<img src="images/xaringan-new.png" alt="创建一个新文档"  />
 <p class="caption">
-图 3.17: 创建一个新文档
+图 3.18: 创建一个新文档
 </p>
 </div>
 <p>然后点击 Knit 按钮编译文档，或者点击 RStudio 插件 “Infinite Moon Reader” 在 RStudio 里实时预览幻灯片（每次保存文档的时候，它会自动重新编译）。</p>
@@ -2074,8 +2079,8 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <p><strong>原理：</strong> xaringan 将 R Markdown 的查克拉注入了 remark.js。浏览器中的幻灯片是 remark.js 渲染出来的，而它的 Markdown 源文档是从 R Markdown 生成的（实际上主要是 knitr）。</p>
 </blockquote>
 </div>
-<div id="xaringan-autoplay" class="section level4" number="3.3.5.2">
-<h4><span class="header-section-number">3.3.5.2</span> Xaringan 幻灯片的自动播放</h4>
+<div id="xaringan-autoplay" class="section level4 hasAnchor" number="3.3.5.2">
+<h4><span class="header-section-number">3.3.5.2</span> Xaringan 幻灯片的自动播放<a href="rmarkdown-document.html#xaringan-autoplay" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
 <li><strong>播放设置</strong></li>
 </ol>
@@ -2090,43 +2095,43 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb112-3"><a href="rmarkdown-document.html#cb112-3" aria-hidden="true" tabindex="-1"></a>    nature:  </span>
 <span id="cb112-4"><a href="rmarkdown-document.html#cb112-4" aria-hidden="true" tabindex="-1"></a>      countdown: 60000  </span></code></pre></div>
 </div>
-<div id="xaringan-shortcut" class="section level4" number="3.3.5.3">
-<h4><span class="header-section-number">3.3.5.3</span> Xaringan 幻灯片的快捷键</h4>
+<div id="xaringan-shortcut" class="section level4 hasAnchor" number="3.3.5.3">
+<h4><span class="header-section-number">3.3.5.3</span> Xaringan 幻灯片的快捷键<a href="rmarkdown-document.html#xaringan-shortcut" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li>点击按键 <code>h</code> 或者 <code>?</code> 之后可以看到所有快捷键示意图（图 <a href="rmarkdown-document.html#fig:xaringan-help">3.18</a>）</li>
+<li>点击按键 <code>h</code> 或者 <code>?</code> 之后可以看到所有快捷键示意图（图 <a href="rmarkdown-document.html#fig:xaringan-help">3.19</a>）</li>
 </ul>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="rmarkdown-document.html#cb113-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/xaringan-help.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="rmarkdown-document.html#cb113-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/xaringan-help.png&quot;</span>, <span class="at">dpi =</span> <span class="cn">NA</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-help"></span>
-<img src="images/xaringan-help.png" alt="展示所有快捷键" width="500" />
+<img src="images/xaringan-help.png" alt="展示所有快捷键"  />
 <p class="caption">
-图 3.18: 展示所有快捷键
+图 3.19: 展示所有快捷键
 </p>
 </div>
 <ul>
-<li><code>p</code> 进入演讲者模式（可以看见自己写的注释，比如：提醒自己要讲的笑话，图 <a href="rmarkdown-document.html#fig:xaringan-review">3.19</a>）。</li>
+<li><code>p</code> 进入演讲者模式（可以看见自己写的注释，比如：提醒自己要讲的笑话，图 <a href="rmarkdown-document.html#fig:xaringan-review">3.20</a>）。</li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-review"></span>
-<img src="images/xaringan-review.png" alt="进入演讲者模式" width="367" />
+<img src="images/xaringan-review.png" alt="进入演讲者模式"  />
 <p class="caption">
-图 3.19: 进入演讲者模式
+图 3.20: 进入演讲者模式
 </p>
 </div>
 <ul>
-<li>点击按键 <code>c</code> 可以复制幻灯片到新窗口。演讲时可以在自己面前的屏幕上显示演讲者模式，把新窗口中正常的幻灯片拖到大屏幕投影上给观众看（见图 <a href="rmarkdown-document.html#fig:xaringan-new-screan">3.20</a>）。</li>
+<li>点击按键 <code>c</code> 可以复制幻灯片到新窗口。演讲时可以在自己面前的屏幕上显示演讲者模式，把新窗口中正常的幻灯片拖到大屏幕投影上给观众看（见图 <a href="rmarkdown-document.html#fig:xaringan-new-screan">3.21</a>）。</li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-new-screan"></span>
-<img src="images/xaringan-new-screan.png" alt="复制幻灯片到新窗口" width="500" />
+<img src="images/xaringan-new-screan.png" alt="复制幻灯片到新窗口"  />
 <p class="caption">
-图 3.20: 复制幻灯片到新窗口
+图 3.21: 复制幻灯片到新窗口
 </p>
 </div>
 <!-- 这里介绍了两个 xaringan 相关的包，但是对 xaringan 自身的介绍尚不完整 -->
 </div>
 </div>
-<div id="xaringan-extension" class="section level3" number="3.3.6">
-<h3><span class="header-section-number">3.3.6</span> Xaringan 幻灯片的扩展包</h3>
-<div id="xaringanthemer" class="section level4" number="3.3.6.1">
-<h4><span class="header-section-number">3.3.6.1</span> 配置 Xaringan 幻灯片的主题</h4>
+<div id="xaringan-extension" class="section level3 hasAnchor" number="3.3.6">
+<h3><span class="header-section-number">3.3.6</span> Xaringan 幻灯片的扩展包<a href="rmarkdown-document.html#xaringan-extension" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="xaringanthemer" class="section level4 hasAnchor" number="3.3.6.1">
+<h4><span class="header-section-number">3.3.6.1</span> 配置 Xaringan 幻灯片的主题<a href="rmarkdown-document.html#xaringanthemer" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Aden-Buie 写了一个叫做 <strong>xaringanthemer</strong> 包<span class="citation">(<a href="#ref-R-xaringanthemer" role="doc-biblioref"><strong>R-xaringanthemer?</strong></a>)</span>的包，可以更改写轮眼幻灯片的主题，使用起来也非常方便，接下来看教程。</p>
 <p>可以从 CRAN 或者 Github安装 <strong>xaringanthemer</strong> 包。</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb114-1"><a href="rmarkdown-document.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 通过 CRAN 安装</span></span>
@@ -2142,7 +2147,7 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb115-2"><a href="rmarkdown-document.html#cb115-2" aria-hidden="true" tabindex="-1"></a>  xaringan::moon_reader:  </span>
 <span id="cb115-3"><a href="rmarkdown-document.html#cb115-3" aria-hidden="true" tabindex="-1"></a>    css: xaringan-themer.css  </span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
-<li>然后，在 chunck 中加载 <strong>xaringanthemer</strong> 并 <a href="https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html#themes">设置主题</a> 即可。下面给出一个简单的例子（图 <a href="rmarkdown-document.html#fig:xaringan-themer-sample-view">3.21</a>）， 展示了设置主题后的界面预览。当然该包还给出了很多其他主题，下面给出一些主题模板预览。</li>
+<li>然后，在 chunck 中加载 <strong>xaringanthemer</strong> 并 <a href="https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html#themes">设置主题</a> 即可。下面给出一个简单的例子（图 <a href="rmarkdown-document.html#fig:xaringan-themer-sample-view">3.22</a>）， 展示了设置主题后的界面预览。当然该包还给出了很多其他主题，下面给出一些主题模板预览。</li>
 </ol>
 <div class="sourceCode" id="cb116"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb116-1"><a href="rmarkdown-document.html#cb116-1" aria-hidden="true" tabindex="-1"></a>library(xaringanthemer)  </span>
 <span id="cb116-2"><a href="rmarkdown-document.html#cb116-2" aria-hidden="true" tabindex="-1"></a>style_mono_accent(  </span>
@@ -2152,19 +2157,19 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb116-6"><a href="rmarkdown-document.html#cb116-6" aria-hidden="true" tabindex="-1"></a>  code_font_google   = google_font(&quot;Fira Mono&quot;)  </span>
 <span id="cb116-7"><a href="rmarkdown-document.html#cb116-7" aria-hidden="true" tabindex="-1"></a>)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-themer-sample-view"></span>
-<img src="images/xaringan-themer-sample-view.png" alt="主题设置后的界面预览" width="500" />
+<img src="images/xaringan-themer-sample-view.png" alt="主题设置后的界面预览"  />
 <p class="caption">
-图 3.21: 主题设置后的界面预览
+图 3.22: 主题设置后的界面预览
 </p>
 </div>
 <blockquote>
 <p><strong>注意</strong>：在 chunck 头部中设置 <code>include=FALSE, warning=FALSE</code> 可以隐藏代码。</p>
 </blockquote>
 </div>
-<div id="xaringanthemer-ggplot" class="section level4" number="3.3.6.2">
-<h4><span class="header-section-number">3.3.6.2</span> Xaringan 幻灯片自动匹配 ggplot 主题</h4>
+<div id="xaringanthemer-ggplot" class="section level4 hasAnchor" number="3.3.6.2">
+<h4><span class="header-section-number">3.3.6.2</span> Xaringan 幻灯片自动匹配 ggplot 主题<a href="rmarkdown-document.html#xaringanthemer-ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>xaringanthemer</strong> 包提供了 <code>theme_xaringan()</code> 函数，可用于修改 <code>ggplot2</code> 生成图片的主题，使图片与幻灯片主题中所配置的颜色和字体保持一致。</p>
-<p>另外，<strong>xaringanthemer</strong> 建立在 <strong>showtext</strong> 包 <span class="citation">(<a href="#ref-R-showtext" role="doc-biblioref"><strong>R-showtext?</strong></a>)</span> 的基础上，可以使用更多的字体（包括系统提供的字体和网上的字体）。有关更多详细信息，可以在 <code>?scale_xaringan</code> 和 <code>vignette(“ggplot2-themes”)</code>中找到（图 <a href="rmarkdown-document.html#fig:xaringan-themer-ggplot">3.22</a>）。</p>
+<p>另外，<strong>xaringanthemer</strong> 建立在 <strong>showtext</strong> 包 <span class="citation">(<a href="#ref-R-showtext" role="doc-biblioref"><strong>R-showtext?</strong></a>)</span> 的基础上，可以使用更多的字体（包括系统提供的字体和网上的字体）。有关更多详细信息，可以在 <code>?scale_xaringan</code> 和 <code>vignette(“ggplot2-themes”)</code>中找到（图 <a href="rmarkdown-document.html#fig:xaringan-themer-ggplot">3.23</a>）。</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb117-1"><a href="rmarkdown-document.html#cb117-1" aria-hidden="true" tabindex="-1"></a>library(ggplot2)  </span>
 <span id="cb117-2"><a href="rmarkdown-document.html#cb117-2" aria-hidden="true" tabindex="-1"></a>ggplot(diamonds) +  </span>
 <span id="cb117-3"><a href="rmarkdown-document.html#cb117-3" aria-hidden="true" tabindex="-1"></a>  aes(cut, fill = cut) +  </span>
@@ -2176,27 +2181,27 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb117-9"><a href="rmarkdown-document.html#cb117-9" aria-hidden="true" tabindex="-1"></a>  theme_xaringan(background_color = &quot;#FFFFFF&quot;) +  </span>
 <span id="cb117-10"><a href="rmarkdown-document.html#cb117-10" aria-hidden="true" tabindex="-1"></a>  scale_xaringan_fill_discrete()  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-themer-ggplot"></span>
-<img src="images/xaringan-themer-ggplot.png" alt="前面例子对应的 ggplot 配色" width="500" />
+<img src="images/xaringan-themer-ggplot.png" alt="前面例子对应的 ggplot 配色"  />
 <p class="caption">
-图 3.22: 前面例子对应的 ggplot 配色
+图 3.23: 前面例子对应的 ggplot 配色
 </p>
 </div>
 </div>
-<div id="xaringan-autocomplete" class="section level4" number="3.3.6.3">
-<h4><span class="header-section-number">3.3.6.3</span> Xaringanthemer 的自动补全功能</h4>
+<div id="xaringan-autocomplete" class="section level4 hasAnchor" number="3.3.6.3">
+<h4><span class="header-section-number">3.3.6.3</span> Xaringanthemer 的自动补全功能<a href="rmarkdown-document.html#xaringan-autocomplete" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>xaringanthemer</strong> 包对 Tab 键十分友好，该功能可以在查找每个主题中调整模板的函数。对应的 gif 演示可见<a href="https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html">官网教程</a>。</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="rmarkdown-document.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (knitr<span class="sc">::</span><span class="fu">is_html_output</span>()){</span>
-<span id="cb118-2"><a href="rmarkdown-document.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;https://raw.githubusercontent.com/gadenbuie/xaringanthemer/assets/example-rstudio-completion.gif&quot;</span>)</span>
+<span id="cb118-2"><a href="rmarkdown-document.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;https://raw.githubusercontent.com/gadenbuie/xaringanthemer/assets/example-rstudio-completion.gif&quot;</span>, <span class="at">dpi =</span> <span class="cn">NA</span>)</span>
 <span id="cb118-3"><a href="rmarkdown-document.html#cb118-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringanthemr-autocomplet"></span>
 <img src="https://raw.githubusercontent.com/gadenbuie/xaringanthemer/assets/example-rstudio-completion.gif" alt="xaringanthemer 支持自动补全功能"  />
 <p class="caption">
-图 3.23: xaringanthemer 支持自动补全功能
+图 3.24: xaringanthemer 支持自动补全功能
 </p>
 </div>
 </div>
-<div id="xaringanthemer-other-themes" class="section level4" number="3.3.6.4">
-<h4><span class="header-section-number">3.3.6.4</span> Xaringanthemer 提供的可选主题</h4>
+<div id="xaringanthemer-other-themes" class="section level4 hasAnchor" number="3.3.6.4">
+<h4><span class="header-section-number">3.3.6.4</span> Xaringanthemer 提供的可选主题<a href="rmarkdown-document.html#xaringanthemer-other-themes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>该包提供各式各样的主题模板，可以根据喜好选择自己想要的主题，在正文开头加入以下代码，就会得到相应的模板了！这里给出 6 个模板函数以及对应的界面预览图，更多模板可见<a href="https://pkg.garrickadenbuie.com/xaringanthemer/articles/themes.html" class="uri">https://pkg.garrickadenbuie.com/xaringanthemer/articles/themes.html</a>。</p>
 <blockquote>
 <p>记得在使用以下函数前，先加载 <strong>xaringanthemer</strong> 包。</p>
@@ -2206,9 +2211,9 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </ol>
 <div class="sourceCode" id="cb119"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb119-1"><a href="rmarkdown-document.html#cb119-1" aria-hidden="true" tabindex="-1"></a>style_mono_light(base_color = &quot;#23395b&quot;)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-themer-demo1"></span>
-<img src="images/xaringan-themer-demo1.png" alt="Moon Light 模板" width="681" />
+<img src="images/xaringan-themer-demo1.png" alt="Moon Light 模板"  />
 <p class="caption">
-图 3.24: Moon Light 模板
+图 3.25: Moon Light 模板
 </p>
 </div>
 <ol start="2" style="list-style-type: decimal">
@@ -2216,9 +2221,9 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </ol>
 <div class="sourceCode" id="cb120"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb120-1"><a href="rmarkdown-document.html#cb120-1" aria-hidden="true" tabindex="-1"></a>style_mono_dark(base_color = &quot;#cbf7ed&quot;)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-themer-demo2"></span>
-<img src="images/xaringan-themer-demo2.png" alt="Mono Dark 模板" width="681" />
+<img src="images/xaringan-themer-demo2.png" alt="Mono Dark 模板"  />
 <p class="caption">
-图 3.25: Mono Dark 模板
+图 3.26: Mono Dark 模板
 </p>
 </div>
 <ol start="3" style="list-style-type: decimal">
@@ -2226,9 +2231,9 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </ol>
 <div class="sourceCode" id="cb121"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb121-1"><a href="rmarkdown-document.html#cb121-1" aria-hidden="true" tabindex="-1"></a>style_mono_accent(base_color = &quot;#43418A&quot;)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-themer-demo3"></span>
-<img src="images/xaringan-themer-demo3.png" alt="Mono Accent 模板" width="681" />
+<img src="images/xaringan-themer-demo3.png" alt="Mono Accent 模板"  />
 <p class="caption">
-图 3.26: Mono Accent 模板
+图 3.27: Mono Accent 模板
 </p>
 </div>
 <ol start="4" style="list-style-type: decimal">
@@ -2236,9 +2241,9 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </ol>
 <div class="sourceCode" id="cb122"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb122-1"><a href="rmarkdown-document.html#cb122-1" aria-hidden="true" tabindex="-1"></a>style_mono_accent(base_color = &quot;#43418A&quot;)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-themer-demo4"></span>
-<img src="images/xaringan-themer-demo4.png" alt="Mono Accent Inverse 模板" width="681" />
+<img src="images/xaringan-themer-demo4.png" alt="Mono Accent Inverse 模板"  />
 <p class="caption">
-图 3.27: Mono Accent Inverse 模板
+图 3.28: Mono Accent Inverse 模板
 </p>
 </div>
 <ol start="5" style="list-style-type: decimal">
@@ -2246,9 +2251,9 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </ol>
 <div class="sourceCode" id="cb123"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb123-1"><a href="rmarkdown-document.html#cb123-1" aria-hidden="true" tabindex="-1"></a>style_duo(primary_color = &quot;#1F4257&quot;, secondary_color = &quot;#F97B64&quot;)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-themer-demo5"></span>
-<img src="images/xaringan-themer-demo5.png" alt="Duo 模板" width="1022" />
+<img src="images/xaringan-themer-demo5.png" alt="Duo 模板"  />
 <p class="caption">
-图 3.28: Duo 模板
+图 3.29: Duo 模板
 </p>
 </div>
 <ol start="6" style="list-style-type: decimal">
@@ -2256,14 +2261,14 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </ol>
 <div class="sourceCode" id="cb124"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb124-1"><a href="rmarkdown-document.html#cb124-1" aria-hidden="true" tabindex="-1"></a>style_solarized_light()  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-themer-demo6"></span>
-<img src="images/xaringan-themer-demo6.png" alt="Solarized Light 模板" width="681" />
+<img src="images/xaringan-themer-demo6.png" alt="Solarized Light 模板"  />
 <p class="caption">
-图 3.29: Solarized Light 模板
+图 3.30: Solarized Light 模板
 </p>
 </div>
 </div>
-<div id="xaringanextra" class="section level4" number="3.3.6.5">
-<h4><span class="header-section-number">3.3.6.5</span> 扩展 xaringan 幻灯片的功能</h4>
+<div id="xaringanextra" class="section level4 hasAnchor" number="3.3.6.5">
+<h4><span class="header-section-number">3.3.6.5</span> 扩展 xaringan 幻灯片的功能<a href="rmarkdown-document.html#xaringanextra" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>xaringanExtra</strong> 包<span class="citation">(<a href="#ref-R-xaringanExtra" role="doc-biblioref"><strong>R-xaringanExtra?</strong></a>)</span> 扩展了 Xaringan 幻灯片的功能，涵盖了很多写轮眼的并不具备的常用功能，具体如下所示：</p>
 <ul>
 <li><p>并列方式展示演示文稿</p></li>
@@ -2288,25 +2293,25 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <div class="sourceCode" id="cb125"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb125-1"><a href="rmarkdown-document.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># install.packages(&quot;remotes&quot;)  </span></span>
 <span id="cb125-2"><a href="rmarkdown-document.html#cb125-2" aria-hidden="true" tabindex="-1"></a>remotes::install_github(&quot;gadenbuie/xaringanExtra&quot;)  </span></code></pre></div>
 </div>
-<div id="xaringan-tile-view" class="section level4" number="3.3.6.6">
-<h4><span class="header-section-number">3.3.6.6</span> 并列方式展示 Xaringan 幻灯片</h4>
+<div id="xaringan-tile-view" class="section level4 hasAnchor" number="3.3.6.6">
+<h4><span class="header-section-number">3.3.6.6</span> 并列方式展示 Xaringan 幻灯片<a href="rmarkdown-document.html#xaringan-tile-view" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>使用方法</strong>：将以下代码块添加到幻灯片 R Markdown 文件中，之后对该 R Markdown 文件进行重新渲染。</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb126-1"><a href="rmarkdown-document.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-tile-view, echo=FALSE}  </span></span>
 <span id="cb126-2"><a href="rmarkdown-document.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_tile_view()  </span></span>
 <span id="cb126-3"><a href="rmarkdown-document.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
 <p>渲染后在幻灯片的放映界面中按 <code>O</code> 键（ Overview 的第一个字母）即可得到以下界面，再按 <code>O</code> 键即可回到默认形式。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-extra-1"></span>
-<img src="images/xaringan-extra-1.png" alt="并列方式展示演示文稿" width="500" />
+<img src="images/xaringan-extra-1.png" alt="并列方式展示演示文稿"  />
 <p class="caption">
-图 3.30: 并列方式展示演示文稿
+图 3.31: 并列方式展示演示文稿
 </p>
 </div>
 <blockquote>
 <p>该功能类似 PowerPoint 中的幻灯片浏览模式。黄色的框表示当前所在的位置，可以通过鼠标直接切换到想要的位置。这个功能非常方便实用，而且操作简单，只要加入前面的代码就可以了。</p>
 </blockquote>
 </div>
-<div id="xaringan-can-edit" class="section level4" number="3.3.6.7">
-<h4><span class="header-section-number">3.3.6.7</span> 在线编辑 Xaringan 幻灯片</h4>
+<div id="xaringan-can-edit" class="section level4 hasAnchor" number="3.3.6.7">
+<h4><span class="header-section-number">3.3.6.7</span> 在线编辑 Xaringan 幻灯片<a href="rmarkdown-document.html#xaringan-can-edit" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>这个功能无敌！可以在放映的幻灯片上直接书写内容，实时更新。主要是使用 <code>.can-edit [...]</code> 实现。</p>
 <p><strong>使用方法</strong>：只需将下面代码加入创建的 rmd 文档中：</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb127-1"><a href="rmarkdown-document.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-editable, echo = FALSE}  </span></span>
@@ -2327,8 +2332,8 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb131-6"><a href="rmarkdown-document.html#cb131-6" aria-hidden="true" tabindex="-1"></a>]  </span></code></pre></div>
 <p>官方给出了 gif 的<a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/editable">演示</a>。在教学的时候非常合适，可以增加与学生，观众的互动。</p>
 </div>
-<div id="xaringan-scribble" class="section level4" number="3.3.6.8">
-<h4><span class="header-section-number">3.3.6.8</span> 在 Xaringan 幻灯片上涂鸦</h4>
+<div id="xaringan-scribble" class="section level4 hasAnchor" number="3.3.6.8">
+<h4><span class="header-section-number">3.3.6.8</span> 在 Xaringan 幻灯片上涂鸦<a href="rmarkdown-document.html#xaringan-scribble" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>使用方法</strong>：只需在 rmd 文件中加入下面代码，重新编译即可得到这个效果。</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb132-1"><a href="rmarkdown-document.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-scribble, echo=FALSE}  </span></span>
 <span id="cb132-2"><a href="rmarkdown-document.html#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_scribble()  </span></span>
@@ -2339,15 +2344,15 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </blockquote>
 <p>如果想将幻灯片与涂鸦一起保存，最好的方法是从浏览器中打印演示文稿，官方给出了 gif <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/scribble">演示</a>。</p>
 </div>
-<div id="xaringan-slide-tone" class="section level4" number="3.3.6.9">
-<h4><span class="header-section-number">3.3.6.9</span> 切换时 Xaringan 幻灯片时播放声音提示</h4>
+<div id="xaringan-slide-tone" class="section level4 hasAnchor" number="3.3.6.9">
+<h4><span class="header-section-number">3.3.6.9</span> 切换时 Xaringan 幻灯片时播放声音提示<a href="rmarkdown-document.html#xaringan-slide-tone" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>使用方法</strong>：只需在 R Markdown 文件中加入下面代码，重新编译即可得到这个效果。当然，官方也给出了 gif <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/slide-tone">演示</a>。</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb133-1"><a href="rmarkdown-document.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-slide-tone, echo=FALSE}    </span></span>
 <span id="cb133-2"><a href="rmarkdown-document.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_slide_tone()  </span></span>
 <span id="cb133-3"><a href="rmarkdown-document.html#cb133-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
 </div>
-<div id="xaringan-animate" class="section level4" number="3.3.6.10">
-<h4><span class="header-section-number">3.3.6.10</span> Xaringan 幻灯片加入动画</h4>
+<div id="xaringan-animate" class="section level4 hasAnchor" number="3.3.6.10">
+<h4><span class="header-section-number">3.3.6.10</span> Xaringan 幻灯片加入动画<a href="rmarkdown-document.html#xaringan-animate" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>使用方法</strong>：在 R Markdown 文件中加入下面代码</p>
 <div class="sourceCode" id="cb134"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb134-1"><a href="rmarkdown-document.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-animate-css, echo=FALSE}   </span></span>
 <span id="cb134-2"><a href="rmarkdown-document.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_animate_css()  </span></span>
@@ -2368,8 +2373,8 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb136-2"><a href="rmarkdown-document.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_animate_all(&quot;slide_left&quot;)  </span></span>
 <span id="cb136-3"><a href="rmarkdown-document.html#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
 </div>
-<div id="xaringan-panelset" class="section level4" number="3.3.6.11">
-<h4><span class="header-section-number">3.3.6.11</span> 在 Xaringan 幻灯片使用选项卡</h4>
+<div id="xaringan-panelset" class="section level4 hasAnchor" number="3.3.6.11">
+<h4><span class="header-section-number">3.3.6.11</span> 在 Xaringan 幻灯片使用选项卡<a href="rmarkdown-document.html#xaringan-panelset" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>使用方法</strong>：在 R Markdown 文件中加入下面代码</p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb137-1"><a href="rmarkdown-document.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-panelset, echo=FALSE}    </span></span>
 <span id="cb137-2"><a href="rmarkdown-document.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_panelset()  </span></span>
@@ -2398,11 +2403,11 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb139-17"><a href="rmarkdown-document.html#cb139-17" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
 <span id="cb139-18"><a href="rmarkdown-document.html#cb139-18" aria-hidden="true" tabindex="-1"></a><span class="co">]  </span></span>
 <span id="cb139-19"><a href="rmarkdown-document.html#cb139-19" aria-hidden="true" tabindex="-1"></a><span class="co">]  </span></span></code></pre></div>
-<p>图 <a href="rmarkdown-document.html#fig:xaringan-extra-2">3.31</a> 给出了上面代码的结果。官网给出了 gif <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">演示</a>。</p>
+<p>图 <a href="rmarkdown-document.html#fig:xaringan-extra-2">3.32</a> 给出了上面代码的结果。官网给出了 gif <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">演示</a>。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-extra-2"></span>
-<img src="images/xaringan-extra-2.png" alt="将选项卡面板加入幻灯片中" width="500" />
+<img src="images/xaringan-extra-2.png" alt="将选项卡面板加入幻灯片中"  />
 <p class="caption">
-图 3.31: 将选项卡面板加入幻灯片中
+图 3.32: 将选项卡面板加入幻灯片中
 </p>
 </div>
 <p>要定制面板的外观，可以使用直接在幻灯片的 R 块中调用 <code>style_panelset_tabs()</code>。将下面代码加到前面的代码块下，这时代码块的颜色发生了变化。</p>
@@ -2410,41 +2415,41 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb140-2"><a href="rmarkdown-document.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::style_panelset_tabs(foreground = &quot;honeydew&quot;, background = &quot;seagreen&quot;)  </span></span>
 <span id="cb140-3"><a href="rmarkdown-document.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
 </div>
-<div id="xaringan-logo" class="section level4" number="3.3.6.12">
-<h4><span class="header-section-number">3.3.6.12</span> 给 Xaringan 幻灯片添加 LOGO</h4>
+<div id="xaringan-logo" class="section level4 hasAnchor" number="3.3.6.12">
+<h4><span class="header-section-number">3.3.6.12</span> 给 Xaringan 幻灯片添加 LOGO<a href="rmarkdown-document.html#xaringan-logo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>使用方法</strong>：在 R Markdown 文件中加入下面代码</p>
 <div class="sourceCode" id="cb141"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb141-1"><a href="rmarkdown-document.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-logo, echo=FALSE}      </span></span>
 <span id="cb141-2"><a href="rmarkdown-document.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_logo(  </span></span>
 <span id="cb141-3"><a href="rmarkdown-document.html#cb141-3" aria-hidden="true" tabindex="-1"></a><span class="in">  image_url = &quot;https://gitee.com/zhuang_liang_liang0825/other/raw/master/%E6%B8%A9%E5%B7%9E%E5%A4%A7%E5%AD%A6logo.png&quot;  </span></span>
 <span id="cb141-4"><a href="rmarkdown-document.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="in">)  </span></span>
 <span id="cb141-5"><a href="rmarkdown-document.html#cb141-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
-<p>这时，所有幻灯片右上角都加上了对应的 LOGO 啦！如果想在某几张不显示 LOGO，可以使用 <code>hide_logo</code> 隐藏特定幻灯片的徽标，具体例子如下（图 <a href="rmarkdown-document.html#fig:xaringan-extra-3">3.32</a>）：</p>
+<p>这时，所有幻灯片右上角都加上了对应的 LOGO 啦！如果想在某几张不显示 LOGO，可以使用 <code>hide_logo</code> 隐藏特定幻灯片的徽标，具体例子如下（图 <a href="rmarkdown-document.html#fig:xaringan-extra-3">3.33</a>）：</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-extra-3"></span>
-<img src="images/xaringan-extra-3.png" alt="给幻灯片添加全局 logo" width="500" />
+<img src="images/xaringan-extra-3.png" alt="给幻灯片添加全局 logo"  />
 <p class="caption">
-图 3.32: 给幻灯片添加全局 logo
+图 3.33: 给幻灯片添加全局 logo
 </p>
 </div>
 </div>
-<div id="xaringan-webcam" class="section level4" number="3.3.6.13">
-<h4><span class="header-section-number">3.3.6.13</span> 播放 Xaringan 幻灯片时使用摄像头</h4>
+<div id="xaringan-webcam" class="section level4 hasAnchor" number="3.3.6.13">
+<h4><span class="header-section-number">3.3.6.13</span> 播放 Xaringan 幻灯片时使用摄像头<a href="rmarkdown-document.html#xaringan-webcam" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>使用方法</strong>：在 R Markdown 文件中加入下面代码，然后重新渲染。</p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb142-1"><a href="rmarkdown-document.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-webcam, include = FALSE}     </span></span>
 <span id="cb142-2"><a href="rmarkdown-document.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_webcam()  </span></span>
 <span id="cb142-3"><a href="rmarkdown-document.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>  </span></code></pre></div>
-<p>之后点击 <code>w</code> 键（记得用浏览器打开哦！）就会得到以下界面（图 <a href="rmarkdown-document.html#fig:xaringan-extra-4">3.33</a>）。这里镜头的位置可以任意拖动。</p>
+<p>之后点击 <code>w</code> 键（记得用浏览器打开哦！）就会得到以下界面（图 <a href="rmarkdown-document.html#fig:xaringan-extra-4">3.34</a>）。这里镜头的位置可以任意拖动。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:xaringan-extra-4"></span>
-<img src="images/xaringan-extra-4.png" alt="添加网络摄像头进行实时视频" width="500" />
+<img src="images/xaringan-extra-4.png" alt="添加网络摄像头进行实时视频"  />
 <p class="caption">
-图 3.33: 添加网络摄像头进行实时视频
+图 3.34: 添加网络摄像头进行实时视频
 </p>
 </div>
 <blockquote>
 <p>当通过视频会议进行陈述时，包括演讲者的视频，或者在录制一节课或讲座时，这个功能真的非常好用！</p>
 </blockquote>
 </div>
-<div id="xaringan-fit-screen" class="section level4" number="3.3.6.14">
-<h4><span class="header-section-number">3.3.6.14</span> 调整 Xaringan 幻灯片的大小</h4>
+<div id="xaringan-fit-screen" class="section level4 hasAnchor" number="3.3.6.14">
+<h4><span class="header-section-number">3.3.6.14</span> 调整 Xaringan 幻灯片的大小<a href="rmarkdown-document.html#xaringan-fit-screen" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>使用方法</strong>：在 R Markdown 文件中加入下面代码，然后重新渲染。</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb143-1"><a href="rmarkdown-document.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r xaringan-fit-screen, echo=FALSE}    </span></span>
 <span id="cb143-2"><a href="rmarkdown-document.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="in">xaringanExtra::use_fit_screen()  </span></span>
@@ -2453,8 +2458,8 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </div>
 </div>
 </div>
-<div id="rmarkdown-word" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Word 文档</h2>
+<div id="rmarkdown-word" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Word 文档<a href="rmarkdown-document.html#rmarkdown-word" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>要从 R Markdown 生成 Word 文档，可以使用输出格式 <code>word_document</code>。如果希望在文档中包含交叉引用，可以考虑输出格式 <code>bookdown::word_document2</code>，详细说明可见<a href="https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref">这</a>。</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb144-1"><a href="rmarkdown-document.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb144-2"><a href="rmarkdown-document.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -2468,13 +2473,13 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <li><p>如何更改单个文档元素的样式？</p></li>
 </ol>
 <p>本章将一一解答以上问题。</p>
-<div id="word-template" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> 创建 word 模板</h3>
-<p>在 Rstudio 中打开一个新的 R 脚本并选择 Ducument 中的 Word（图 <a href="rmarkdown-document.html#fig:word-new1">3.34</a>）。</p>
+<div id="word-template" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> 创建 word 模板<a href="rmarkdown-document.html#word-template" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>在 Rstudio 中打开一个新的 R 脚本并选择 Ducument 中的 Word（图 <a href="rmarkdown-document.html#fig:word-new1">3.35</a>）。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:word-new1"></span>
-<img src="images/word-new1.png" alt="新建 R Markdown 时可选的 word 格式" width="525" />
+<img src="images/word-new1.png" alt="新建 R Markdown 时可选的 word 格式"  />
 <p class="caption">
-图 3.34: 新建 R Markdown 时可选的 word 格式
+图 3.35: 新建 R Markdown 时可选的 word 格式
 </p>
 </div>
 <p>这时对应 R Markdown 文档中的 YAML 头所包含的内容为：</p>
@@ -2486,8 +2491,8 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <span id="cb145-6"><a href="rmarkdown-document.html#cb145-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>之后就可以在这个模板下，将正文部分进行修改，并通过 <strong>Knit</strong> 进行编译。之后会跳出编译好的结果，通过系统默认应用打开。这就是基于 word 模板的工作流程。</p>
 </div>
-<div id="word-custom-template" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> 自定义 Word 模板</h3>
+<div id="word-custom-template" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> 自定义 Word 模板<a href="rmarkdown-document.html#word-custom-template" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>可以将 Word 模板 文档中定义的样式应用到从 R Markdown 生成的新 Word 文档。 这种模板文档也称为“参考样式文档”。</p>
 <blockquote>
 <p><strong>关键之处</strong>：必须先通过 Pandoc 创建此模板文档，再更改其中的样式定义。 然后将此模板的路径传递给 <code>word_document</code> 的 <code>reference_docx</code> 选项，例如：</p>
@@ -2501,30 +2506,30 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:word-template-1"></span>
 <img src="images/word-template-1.png" alt="查找特定文档元素的样式。"  />
 <p class="caption">
-图 3.35: 查找特定文档元素的样式。
+图 3.36: 查找特定文档元素的样式。
 </p>
 </div>
-<p>图 <a href="rmarkdown-document.html#fig:word-template-1">3.35</a> 说明了可以通过 Word 中的“主页”选项卡打开“样式”窗口。当将光标移动到文档中的特定元素时，样式列表中的项目将被突出显示。如果想修改任何类型元素的样式，可以单击突出显示项的下拉菜单，将看到如图 <a href="rmarkdown-document.html#fig:word-template-2">3.36</a> 的对话框。</p>
+<p>图 <a href="rmarkdown-document.html#fig:word-template-1">3.36</a> 说明了可以通过 Word 中的“主页”选项卡打开“样式”窗口。当将光标移动到文档中的特定元素时，样式列表中的项目将被突出显示。如果想修改任何类型元素的样式，可以单击突出显示项的下拉菜单，将看到如图 <a href="rmarkdown-document.html#fig:word-template-2">3.37</a> 的对话框。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:word-template-2"></span>
 <img src="images/word-template-2.png" alt=" 修改 Word 文档中元素的样式。"  />
 <p class="caption">
-图 3.36:  修改 Word 文档中元素的样式。
+图 3.37:  修改 Word 文档中元素的样式。
 </p>
 </div>
 <p>修改完样式后，可以保存文档（使用一个不会被意外覆盖的文件名），并将其作为以后 Word 文档的模板。 当 Pandoc 使用该参考模板，并渲染出新的 Word 文档时，它会读取模板中的样式并将它们应用到新文档中。</p>
 <blockquote>
 <p>如果想了解更多关于如何创建自定义样式 Word 模板的详细教程的话。可以观看一段短视频 <a href="https://vimeo.com/110804387" class="uri">https://vimeo.com/110804387</a>，或者阅读这篇文章 <a href="https://rmarkdown.rstudio.com/articles_docx.html" class="uri">https://rmarkdown.rstudio.com/articles_docx.html</a>。</p>
 </blockquote>
-<p>有时，查找元素的样式名称并不简单，可能有多种样式应用于同一个元素，并且只会在样式列表中看到其中一个突出显示。这时，可能需要通过猜测或在线搜索才能确定要修改的实际样式。例如：需要点击“管理样式”按钮 （图<a href="rmarkdown-document.html#fig:word-template-1">3.35</a> 中样式列表底部从左到右的第三个按钮）。之后找到对应的样式并进行修改，例如，添加边框 （见图 <a href="rmarkdown-document.html#fig:word-table">3.37</a>）。</p>
+<p>有时，查找元素的样式名称并不简单，可能有多种样式应用于同一个元素，并且只会在样式列表中看到其中一个突出显示。这时，可能需要通过猜测或在线搜索才能确定要修改的实际样式。例如：需要点击“管理样式”按钮 （图<a href="rmarkdown-document.html#fig:word-template-1">3.36</a> 中样式列表底部从左到右的第三个按钮）。之后找到对应的样式并进行修改，例如，添加边框 （见图 <a href="rmarkdown-document.html#fig:word-table">3.38</a>）。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:word-table"></span>
 <img src="images/word-table.png" alt="修改 Word 文档中的表格样式。"  />
 <p class="caption">
-图 3.37: 修改 Word 文档中的表格样式。
+图 3.38: 修改 Word 文档中的表格样式。
 </p>
 </div>
 </div>
-<div id="word-rmd" class="section level3" number="3.4.3">
-<h3><span class="header-section-number">3.4.3</span> R Markdown 和 Word 之间的双向工作流程</h3>
+<div id="word-rmd" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> R Markdown 和 Word 之间的双向工作流程<a href="rmarkdown-document.html#word-rmd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>虽然从 R Markdown 生成 Word 文档很容易，但当其他人编辑 Word 文档并且必须手动将更改移植回原始 R Markdown 时，事情会变得特别痛苦。幸运的是，Noam Ross 为这个问题提供了一个非常不错的解决方案。 <strong>redoc</strong> 包 (<a href="https://github.com/noamross/redoc" class="uri">https://github.com/noamross/redoc</a>) 允许生成和修改一个 Word 文档，并将修改后的 Word 文档转换回 R Markdown。</p>
 <blockquote>
 <p>注意，截至撰写本文时（2020 年 6 月），<strong>redoc</strong> 包仍处于测试阶段，并且作者已暂停开发。如果想尝试一下，可以从 GitHub 安装这个包：</p>
@@ -2541,10 +2546,10 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <p><strong>注意</strong>： <strong>redoc</strong> 包仍处于测试阶段，目前还不清楚它的未来，所以这里的介绍较为简短。如有疑问，建议阅读 GitHub 上的文档。</p>
 </blockquote>
 </div>
-<div id="word-style" class="section level3" number="3.4.4">
-<h3><span class="header-section-number">3.4.4</span> 个人风格元素</h3>
+<div id="word-style" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> 个人风格元素<a href="rmarkdown-document.html#word-style" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>由于 Markdown 的简单性，可以将一些全局样式应用到 Word 文档中（参见 <a href="rmarkdown-document.html#word-template">3.4.1</a> 部分），但是对单个元素进行样式设置并不简单，例如：更改单词的颜色、段落居中。</p>
-<p>为了在 R 中处理 Office 文档更加容易，David Gohel 于 2018 年开始开发 <strong>officedown</strong> 包 <span class="citation">(<a href="#ref-R-officedown" role="doc-biblioref">Gohel and Ross 2021</a>)</span>，目的是在 R Markdown 中加入一些 <strong>officer</strong> <span class="citation">(<a href="#ref-R-officer" role="doc-biblioref">Gohel 2021</a>)</span> 特性。</p>
+<p>为了在 R 中处理 Office 文档更加容易，David Gohel 于 2018 年开始开发 <strong>officedown</strong> 包 <span class="citation">(<a href="#ref-R-officedown" role="doc-biblioref">Gohel and Ross 2022</a>)</span>，目的是在 R Markdown 中加入一些 <strong>officer</strong> <span class="citation">(<a href="#ref-R-officer" role="doc-biblioref">Gohel 2022</a>)</span> 特性。</p>
 <blockquote>
 <p>在撰写本文时，该软件包原始版本已在 CRAN 上发布，但仍处于测试阶段。</p>
 </blockquote>
@@ -2590,17 +2595,17 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <p>如果想了解更多有关 <strong>officedown</strong> 的信息，可以通过以下文档 <a href="https://davidgohel.github.io/officedown/" class="uri">https://davidgohel.github.io/officedown/</a> 查阅信息。</p>
 </div>
 </div>
-<div id="rmarkdown-new" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> 创建新的文档格式</h2>
+<div id="rmarkdown-new" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> 创建新的文档格式<a href="rmarkdown-document.html#rmarkdown-new" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>作为实现 R Markdown 技术最重要的软件包之一，<strong>rmarkdown</strong> 软件包中已经包括了很多
 文档和演示文稿的输出格式。这些文档格式的背后，本质上仍然是一些 R 语言的函数。当
 在 YAML 区块中指定输出格式的时候，实际上是在调用相应的函数并将函数的参数传递给它。</p>
 <p>因此，也可以通过自定义一个新的函数来创建新的文档格式。新文档格式的函数通常需要
 整合到新的 R Markdown 文档模板中去（参见第 <a href="#document-templates"><strong>??</strong></a> 章）。这是因为
 文档模板是通过 R 语言软件包创建的，原本就可以加入新的函数。于是，通过 R 语言的软件包，
-就实现了文档格式和模板的分发。这也是现有的 R Markdown 文档格式、模板的一贯做法<a href="references.html#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>。</p>
-<div id="new-existing" class="section level3" number="3.5.1">
-<h3><span class="header-section-number">3.5.1</span> 从现有文档格式衍生新格式</h3>
+就实现了文档格式和模板的分发。这也是现有的 R Markdown 文档格式、模板的一贯做法<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>。</p>
+<div id="new-existing" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> 从现有文档格式衍生新格式<a href="rmarkdown-document.html#new-existing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>创建新的文档格式最简单的办法就是基于现有的文档格式衍生出新的文档格式。<strong>rmarkdown</strong>
 内嵌的文档格式都是高度可定制的，包含众多可用参数。只需要为这些参数赋值，就可以创建
 出一个新的文档格式出来。</p>
@@ -2636,8 +2641,8 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 参数。在这里，后者使用了一个 <code>rmarkdown::includes()</code> 函数，从而将这个 HTML 文档（片段）
 作为文档 <code>before_body</code> 的内容嵌入到使用该格式的文档中去。</p>
 </div>
-<div id="new-new" class="section level3" number="3.5.2">
-<h3><span class="header-section-number">3.5.2</span> 完全的自定义输出格式</h3>
+<div id="new-new" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> 完全的自定义输出格式<a href="rmarkdown-document.html#new-new" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在基于现有格式衍生新输出格式之外，也可以从底层出发创建出一个完全的新格式。
 为此需要了解文档格式的底层工作原理，简单来说 R Markdown 的输出格式
 由下列几个部分构成：</p>
@@ -2670,8 +2675,8 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 <a href="https://github.com/rstudio/rmarkdown/tree/master/R。如果新格式需要用到" class="uri">https://github.com/rstudio/rmarkdown/tree/master/R。如果新格式需要用到</a> Pandoc
 模板，则请参见 <a href="#template-pandoc"><strong>??</strong></a> 及 Pandoc 的使用手册。</p>
 </div>
-<div id="new-using" class="section level3" number="3.5.3">
-<h3><span class="header-section-number">3.5.3</span> 使用新的文档输出格式</h3>
+<div id="new-using" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> 使用新的文档输出格式<a href="rmarkdown-document.html#new-using" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>新的文档格式在创建完成后，需要安装到用户的本地环境中去（参见 <a href="#template-share"><strong>??</strong></a>）。
 这样新的输出格式便可以通过 YAML 区块来应用。加入一个
 名为 <strong>mypackage</strong> 的软件包中的 <code>quarterly_report</code> （假设该软件包已经安装成功），那么：</p>
@@ -2686,23 +2691,40 @@ PowerPoint 幻灯片的高级应用需要借助于对 Pandoc 的深入了解。
 </div>
 </div>
 </div>
-<h3>参考文献</h3>
+<h3>参考文献<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-R-officer" class="csl-entry">
-Gohel, David. 2021. <em>Officer: Manipulation of Microsoft Word and PowerPoint Documents</em>. <a href="https://CRAN.R-project.org/package=officer">https://CRAN.R-project.org/package=officer</a>.
+Gohel, David. 2022. <em>Officer: Manipulation of Microsoft Word and PowerPoint Documents</em>. <a href="https://CRAN.R-project.org/package=officer">https://CRAN.R-project.org/package=officer</a>.
 </div>
 <div id="ref-R-officedown" class="csl-entry">
-Gohel, David, and Noam Ross. 2021. <em>Officedown: Enhanced r Markdown Format for Word and PowerPoint</em>. <a href="https://CRAN.R-project.org/package=officedown">https://CRAN.R-project.org/package=officedown</a>.
+Gohel, David, and Noam Ross. 2022. <em>Officedown: Enhanced r Markdown Format for Word and PowerPoint</em>. <a href="https://CRAN.R-project.org/package=officedown">https://CRAN.R-project.org/package=officedown</a>.
 </div>
 <div id="ref-R-knitr" class="csl-entry">
-———. 2021b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+———. 2022b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
 </div>
 <div id="ref-R-xaringan" class="csl-entry">
-———. 2021c. <em>Xaringan: Presentation Ninja</em>. <a href="https://github.com/yihui/xaringan">https://github.com/yihui/xaringan</a>.
+———. 2022c. <em>Xaringan: Presentation Ninja</em>. <a href="https://github.com/yihui/xaringan">https://github.com/yihui/xaringan</a>.
 </div>
 <div id="ref-R-xfun" class="csl-entry">
-———. 2021d. <em>Xfun: Supporting Functions for Packages Maintained by Yihui Xie</em>. <a href="https://github.com/yihui/xfun">https://github.com/yihui/xfun</a>.
+———. 2022d. <em>Xfun: Supporting Functions for Packages Maintained by Yihui Xie</em>. <a href="https://github.com/yihui/xfun">https://github.com/yihui/xfun</a>.
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>Bootstrap是一组用于网站和网络应用程序开发的开源前端框架，包括 HTML、CSS 及 JavaScript 的框架，提供字体排印、窗体、按钮、导航及其他各种组件及 Javascript 扩展，旨在使动态网页和 Web 应用的开发更加容易。<a href="rmarkdown-document.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Bootstrap是一组用于网站和网络应用程序开发的开源前端框架，包括 HTML、CSS 及 JavaScript 的框架，提供字体排印、窗体、按钮、导航及其他各种组件及 Javascript 扩展，旨在使动态网页和 Web 应用的开发更加容易。<a href="rmarkdown-document.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>MathML，中文翻译为“数学标记语言”，是一种基于 XML 的标准，用来描述数学符号和公式。它的目标是把数学公式集成到互联网和其他文档中。从 2015 年开始，MathML 成为了 HTML5 的一部分和 ISO 标准。<a href="rmarkdown-document.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>这样的用法在配置 <strong>bookdown</strong> 创作的图书时非常常见（参见 <a href="rmarkdown-working.html#rmarkdown-bookdown">4.4</a>）。<a href="rmarkdown-document.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>实际上很多配置的名称都保持一致，但是也有不少会跟文档格式有关。如果发现改变了某个配置却没有效果，可能会跟配置的适用范围有关。<a href="rmarkdown-document.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>除非有使用这些工具的经验，否则不建议这么做。<a href="rmarkdown-document.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>在 <a href="https://tex.stackexchange.com/q/3393/9128" class="uri">https://tex.stackexchange.com/q/3393/9128</a> 和 <a href="https://tex.stackexchange.com/q/36/9128" class="uri">https://tex.stackexchange.com/q/36/9128</a> 这两个网页中对这一问题有更多的解释。<a href="rmarkdown-document.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>在这里，左边图片的大小要合适，才能把列表项挤到右边去。<a href="rmarkdown-document.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>分别使用 <code>packageVersion('rmarkdown')</code> 和 <code>rmarkdown::pandoc_version()</code> 来查看 <strong>rmarkdown</strong> 和 Pandoc 的版本。<a href="rmarkdown-document.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>把 “Sh” 换成了 “x” 是为了更易拼读。<a href="rmarkdown-document.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>糟糕的演讲也可以催眠听众，但显然这两种催眠完全不同。<a href="rmarkdown-document.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>这一部分的内容初学者可以安心的选择跳过，不了解这些内容并不会对 R Markdown 的日常使用造成任何困扰。<a href="rmarkdown-document.html#fnref15" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 <div id="disqus_thread"></div>
 <script>
@@ -2732,15 +2754,14 @@ Gohel, David, and Noam Ross. 2021. <em>Officedown: Enhanced r Markdown Format fo
 <a href="rmarkdown-working.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -2774,7 +2795,7 @@ gitbook.start({
 },
 "download": null,
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
