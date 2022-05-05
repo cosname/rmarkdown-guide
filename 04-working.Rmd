@@ -35,12 +35,12 @@ install.packages("blogdown")
 一个网站可被视为一个 R 项目。想要创建一个新的网站项目，只需要按照下图提示，在 RStudio 菜单栏依次选择文件，新项目，新目录 （`File -> New Project  -> New Directory`）。完成后，选择用 blogdown 建设网站 （`Website using blogdown`），即可看到一个网站项目的具体设置界面。
 
 ```{r fig.cap="在 RStudio 中创建一个新网页项目", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog1.png")
+knitr::include_graphics("images/blog1.png", dpi = NA)
 ```
 
 
 ```{r fig.cap="基于 blogdown 创建一个新网页项目", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog2.png")
+knitr::include_graphics("images/blog2.png", dpi = NA)
 ```
 
 设置好目录名，只需点击创建项目（`Create Project`），RStudio 即会通过 blogdown 包来自动生成一个网站项目。
@@ -50,17 +50,17 @@ knitr::include_graphics("images/blog2.png")
 用户可以便捷的通过 RStudio 的基础功能在本地浏览自己的网页项目。用户既可以直接在控制台 （Console） 键入 `blogdown::serve_site()`，或在 RStudio 上方的插件 （`Addins`） 选项选择铺设网站 （`Serve Site`）。
 
 ```{r fig.cap="通过控制台在本地浏览你的网站", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog3.png")
+knitr::include_graphics("images/blog3.png", dpi = NA)
 ```
 
 ```{r fig.cap="通过插件的铺设选项在本地浏览你的网站", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog4.png")
+knitr::include_graphics("images/blog4.png", dpi = NA)
 ```
 
 然后 RStudio 应会显示与下图相似的页面。
 
 ```{r fig.cap="在本地铺设网站", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog5.png")
+knitr::include_graphics("images/blog5.png", dpi = NA)
 ```
 
 显示本地铺设成功后，用户既可以通过图形交互页面，点击在本地浏览器打开（在 RStudio 右上角的 `Show in new window`）来通过本地浏览器在本地浏览刚刚编辑好的网页。只要网页项目在本地浏览器中被打开后，之后任何在源文件上的改动都会自动在浏览器中进行实时加载，所以并不需要在每次改动后重复点击铺设 (`knit`) 网站。
@@ -87,7 +87,7 @@ ggplot(Orange, aes(x = age,
 此时，如果编辑中的网站项目已经在本地浏览器中打开，用户只需要点击左上角的保存，几秒后即可在浏览器内看到如下图的内容。如果此时用户并没有在本地浏览网页，点击编译 `knit`，网站便会在本地的 RStudio 自动生成。
 
 ```{r fig.cap="给 Rmd 文件添加 R 代码", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog6.png")
+knitr::include_graphics("images/blog6.png", dpi = NA)
 ```
 
 
@@ -143,11 +143,11 @@ menu:
 Netlify 提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 Github 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
 
 ```{r fig.cap="在网站项目文件夹中找到名为Public的文件夹", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog7.png")
+knitr::include_graphics("images/blog7.png", dpi = NA)
 ```
 
 ```{r fig.cap="将此文件夹拖拽入部署页面的部署区域即可完成部署", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog8.png")
+knitr::include_graphics("images/blog8.png", dpi = NA)
 ```
 
 一般只需几秒钟，网站就会被成功部署在 Netlify 的服务器上，并可以通过一个格式为 `random-word-12345.netlify.com` 的域名访问。此域名是 Netlify 自动生成的一个子域名，并支持通过设置修改至自己偏好的字眼。Netlify 提供的一体化部署服务省去了用户在其他服务器上实现自定义设置时往往需要面对的许多麻烦。

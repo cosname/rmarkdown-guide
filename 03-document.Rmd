@@ -138,7 +138,7 @@ output:
 -   `.tabset-pills` 将为标签文字加上预设的 `.tabset-pills` 样式（图 \@ref(fig:html-tabset)）。
 
 ```{r html-tabset, fig.cap="标签的默认样式及 `.tabset-pills` 样式", echo = FALSE, out.width="70%", fig.align="center"}
-import_example_result(xfun::magic_path("tabset-example.Rmd"))
+knitr::include_graphics("examples/tabset-example.png", dpi = NA)
 ```
 
 
@@ -170,7 +170,7 @@ output:
 (ref:figcap-first-rmd-theme-darkly) 应用 `r theme_link("darkly")` 主题后的文档样式
 
 ```{r first-rmd-theme-darkly, fig.cap="(ref:figcap-first-rmd-theme-darkly)", echo = FALSE}
-import_example_result(xfun::magic_path("first-rmd-theme-darkly.Rmd"))
+knitr::include_graphics("examples/first-rmd-theme-darkly.png", dpi = NA)
 ```
 
 
@@ -204,8 +204,8 @@ output:
 (ref:figcap-html-code-highlight-example) 可选的代码高亮样式
 
 ```{r html-code-highlight-example, fig.cap="(ref:figcap-html-code-highlight-example)", fig.show="hold", out.width="70%"}
-code_highlight_examples = list.files("examples/", "code-highlight-example.*\\.Rmd", full.names = TRUE)
-success = lapply(code_highlight_examples, import_example_result)
+code_highlight_examples = list.files("examples/", "code-highlight-example.*\\.png", full.names = TRUE)
+knitr::include_graphics(path = code_highlight_examples, dpi = NA)
 ```
 
 
@@ -260,7 +260,8 @@ output:
 `r import_example("chunk-custom.Rmd")`
 
 ```{r chunk-border, echo = FALSE, out.width="70%", fig.align="center",  fig.cap = "一个具有浅红色背景和深红色边框的代码块"}
-import_example_result("chunk-custom.Rmd", vheight = 300)
+# import_example_result("chunk-custom.Rmd", vheight = 300)
+knitr::include_graphics("examples/chunk-custom.png", dpi = NA)
 ```
 
 #### 使用丰富多样的内置 CSS 样式 {#html-css-list}
@@ -278,7 +279,8 @@ import_example_result("chunk-custom.Rmd", vheight = 300)
 以上内容生成 HTML 文档后的样子如图 \@ref(fig:chunk-style-example) 所示：
 
 ```{r chunk-style-example, echo = FALSE, fig.cap="在代码块上应用内置 CSS 样式", out.width="70%", fig.align="center"}
-import_example_result("chunk-style.Rmd", vheight = 400, vwidth = 600)
+# import_example_result("chunk-style.Rmd", vheight = 400, vwidth = 600)
+knitr::include_graphics("examples/chunk-style.png", dpi = NA)
 ```
 
 #### 代码折叠 {#html-code-folding}
@@ -304,7 +306,8 @@ output:
 (ref:figcap-fold-show) 代码块的折叠和显示。图中每个代码区块旁边都有一个按钮，可以控制相应代码区块的显示方式；文档的右上角也有一个按钮，可以控制文档中全部代码区块的显示方式。
 
 ```{r fold-show, fig.cap="(ref:figcap-fold-show)",out.width="70%",fig.align="center", echo=FALSE}
-import_example_result("fold-show.Rmd", vwidth = 800)
+# import_example_result("fold-show.Rmd", vwidth = 800)
+knitr::include_graphics("examples/fold-show.png", dpi = NA)
 ```
 
 
@@ -340,7 +343,8 @@ output:
 因为代码块是位于 `<pre class="sourcecode">` 标签内的，所以 `pre[class]` 操作符将限制代码块的高度为不超过 100 像素。 而将 `class.output ` 设为 `scroll-100` 则限制输出部分的高度为不超过 100 像素。最终效果如图 \@ref(fig:html-scroll-example) 所示。
 
 ```{r html-scroll-example, out.width="70%", fig.align="center", fig.cap="可以滚动的代码块",echo=FALSE}
-import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
+# import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
+knitr::include_graphics('examples/html-scroll.png', dpi = NA)
 ```
 
 ### 图片和数据框 {#html-pic}
@@ -381,7 +385,7 @@ knitr::include_graphics("https://r-project.org/Rlogo.png")
 使用这种方法插入外源图片，可以方便地添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性（图 \@ref(fig:include-graphics-example)）。
 
 ```{r include-graphics-example, echo = FALSE, fig.cap="插入外源图片的推荐方式"}
-knitr::include_graphics("images/Rlogo.png")
+knitr::include_graphics("images/Rlogo.png", dpi = NA)
 ```
 
 
@@ -412,7 +416,7 @@ snapshots = lapply(c("default","kable","tibble","paged"), function(x){
   html_screenshot(outfile, outfile = xfun::with_ext(template,paste0(x,".png")))
 })
 unlink(outfile)
-knitr::include_graphics(unlist(snapshots))
+knitr::include_graphics(unlist(snapshots), dpi = NA)
 ```
 
 
@@ -877,7 +881,7 @@ import_example("examples/PDF-document-in-chinese.Rmd")
 将这份 R Markdown 编译后，将会生成一份 PDF 文档。
 
 ```{r}
-import_example_result("examples/PDF-document-in-chinese.Rmd")
+knitr::include_graphics("examples/PDF-document-in-chinese.png", dpi = NA)
 ```
 
 ### 与 HTML 文档中相通的一些设置 {#pdf-general-setting}
@@ -1143,7 +1147,7 @@ R Markdown 支持 4 种不同样式的幻灯片，分别是 **ioslides**，**Sli
 以上介绍的 5 种幻灯片格式中（含 **xaringan**），**ioslides**、**Slidy** 和 **xaringan** 都是基于 HTML 技术实现的（文档扩展名为 `.html`），**Beamer** 是基于 LaTeX 实现的（文档扩展名为 `.pdf`），PowerPoint 则是基于微软 Office 的文档格式实现的（文档扩展名为 `.pptx`）。
 
 ```{r rmd-presentation-popup, fig.width=6, echo=FALSE, fig.cap="新建 R Markdown 时可选的幻灯片格式",fig.align='center'}
-knitr::include_graphics("images/rmd-presentation-popup.png")
+knitr::include_graphics("images/rmd-presentation-popup.png", dpi = NA)
 ```
 
 ### ioslides 幻灯片 {#ioslides-presentation}
@@ -1162,7 +1166,7 @@ import_example("examples/ioslides-presentation.Rmd")
 
 
 ```{r ioslides-presentation-screenshot, echo=FALSE, fig.cap="新建文件编译后生成的 ioslides 幻灯片",fig.align='center'}
-knitr::include_graphics("examples/ioslides-presentation-screenshot.png")
+knitr::include_graphics("examples/ioslides-presentation-screenshot.png", dpi = NA)
 ```
 
 除了 `##`，使用 `---` 也能开始一张新的幻灯片，并最终生成一个不带标题的幻灯片。
@@ -1442,7 +1446,7 @@ Slidy 幻灯片的内容设置基本与 ioslides 幻灯片相似，不过其默�
 一份 Slidy 幻灯片大体是这样的（图 \@ref(fig:slidy-presentation-screen-shot)）。
 
 ```{r slidy-presentation-screen-shot, echo=FALSE,fig.width=6,  fig.cap="Slidy 幻灯片",fig.align='center'}
-knitr::include_graphics("examples/slidy-presentation-screenshot.png")
+knitr::include_graphics("examples/slidy-presentation-screenshot.png", dpi = NA)
 ```
 
 
@@ -1500,7 +1504,7 @@ import_example("examples/beamer-presentation.Rmd")
 Beamer 幻灯片编译后的文件是一个 PDF 文档，大概像下面这个样子（图 \@ref(fig:beamer-presentation-screenshot)）。
 
 ```{r beamer-presentation-screenshot, echo=FALSE,fig.cap="Beamer 幻灯片示例",fig.align='center'}
-knitr::include_graphics("examples/beamer-presentation-screenshot.png")
+knitr::include_graphics("examples/beamer-presentation-screenshot.png", dpi = NA)
 ```
 
 
@@ -1529,7 +1533,7 @@ output:
 
 
 ```{r beamer-presentation-theme,  echo=FALSE,fig.align='center',  fig.cap="应用主题后的 Beamer 幻灯片"}
-import_example_result("examples/beamer-presentation-theme.Rmd")
+knitr::include_graphics("examples/beamer-presentation-theme.png", dpi = NA)
 ```
 
 Beamer 支持数十个主题和颜色样式，在 [这里](https://hartwork.org/beamer-theme-matrix/) 可以查看可用的选项。
@@ -1574,7 +1578,7 @@ import_example("examples/powerpoint-presentation.Rmd")
 R Markdown 生成的 PowerPoint 幻灯片大概长这个样子（图 \@ref(fig:powerpoint-presentation-screenshot)）：
 
 ```{r powerpoint-presentation-screenshot,fig.align='center', echo=FALSE, fig.cap="PowerPoint 幻灯片"}
-knitr::include_graphics("examples/powerpoint-presentation-screenshot.png")
+knitr::include_graphics("examples/powerpoint-presentation-screenshot.png", dpi = NA)
 ```
 
 PowerPoint 幻灯片采用的幻灯片标记与 Beamer 相同，默认为 3 级标题。使用 `slide_level` 可以控制新建一张幻灯片所需要的大纲等级。此外，使用 `---` 可以新建一张没有标题的幻灯片。另外，R Markdown 中包括的图片和表格都会自动的被放到一张新的幻灯片中。也就是说，除了幻灯片的标题、图片/表格的标注之外，其它所有元素都不能与二者共存。这一点与其它格式幻灯片的行为有明显不同。
@@ -1644,13 +1648,13 @@ PowerPoint 幻灯片从 HTML 文档中继承了目录内容、图片属性、样
 [^audience-sleep]: 糟糕的演讲也可以催眠听众，但显然这两种催眠完全不同。
 
 ```{r sharingan-icon, fig.cap="幻灯忍者：写轮眼", echo=FALSE, fig.width=2, fig.height=2,fig.align='center'}
-knitr::include_graphics("images/xaringan-hex.png")
+knitr::include_graphics("images/xaringan-hex.png", dpi = NA)
 ```
 
 与其它工具相比，`xaringan` 创建的幻灯片样式更加精美，功能更加丰富，且具有高度的可定制性（图 \@ref(fig:xaringan-screenshot)）。
 
 ```{r xaringan-screenshot, fig.cap="`xaringan` 幻灯片的实例",fig.width=6,fig.align='center', echo=FALSE}
-knitr::include_graphics("images/xaringan-scrennshot.png")
+knitr::include_graphics("images/xaringan-scrennshot.png", dpi = NA)
 ```
 
 <!-- 这一小节的下列内容事实上是由庄亮亮完成的 -->
@@ -1667,7 +1671,7 @@ if (!requireNamespace("xaringan"))
 安装完成之后，在 RStudio 中新建 R Markdown 文件，并在左侧选择 “From Template”，然后选择 “Ninja Presentation (Simplified Chinese)”。填写必要信息之后，即可创建一个新的“写轮眼”幻灯片（图 \@ref(fig:xaringan-new)）。
 
 ```{r xaringan-new, echo=FALSE,fig.width=6,fig.align='center', fig.cap="创建一个新文档"}
-knitr::include_graphics("images/xaringan-new.png")
+knitr::include_graphics("images/xaringan-new.png", dpi = NA)
 ```
 
 然后点击 Knit 按钮编译文档，或者点击 RStudio 插件 “Infinite Moon Reader” 在 RStudio 里实时预览幻灯片（每次保存文档的时候，它会自动重新编译）。 
@@ -1702,20 +1706,20 @@ output:
 
 
 ```{r xaringan-help, fig.width=6,fig.align='center',fig.cap="展示所有快捷键"}
-knitr::include_graphics("images/xaringan-help.png")
+knitr::include_graphics("images/xaringan-help.png", dpi = NA)
 ```
 
 - `p` 进入演讲者模式（可以看见自己写的注释，比如：提醒自己要讲的笑话，图 \@ref(fig:xaringan-review)）。
 
 
 ```{r xaringan-review, echo=FALSE,fig.width=6,fig.align='center', fig.cap="进入演讲者模式"}
-knitr::include_graphics("images/xaringan-review.png")
+knitr::include_graphics("images/xaringan-review.png", dpi = NA)
 ```
 
 - 点击按键 `c` 可以复制幻灯片到新窗口。演讲时可以在自己面前的屏幕上显示演讲者模式，把新窗口中正常的幻灯片拖到大屏幕投影上给观众看（见图 \@ref(fig:xaringan-new-screan)）。
 
 ```{r xaringan-new-screan, fig.width=6,fig.align='center', echo=FALSE,fig.cap="复制幻灯片到新窗口"}
-knitr::include_graphics("images/xaringan-new-screan.png")
+knitr::include_graphics("images/xaringan-new-screan.png", dpi = NA)
 ```
 
 <!-- 这里介绍了两个 xaringan 相关的包，但是对 xaringan 自身的介绍尚不完整 -->
@@ -1760,7 +1764,7 @@ style_mono_accent(
 ```
 
 ```{r xaringan-themer-sample-view, echo=FALSE,fig.width=6,fig.align='center', fig.cap="主题设置后的界面预览"}
-knitr::include_graphics("images/xaringan-themer-sample-view.png")
+knitr::include_graphics("images/xaringan-themer-sample-view.png", dpi = NA)
 ```
 
 > **注意**：在 chunck 头部中设置 `include=FALSE, warning=FALSE` 可以隐藏代码。 
@@ -1786,7 +1790,7 @@ ggplot(diamonds) +
 ```
 
 ```{r xaringan-themer-ggplot, echo=FALSE,fig.width=6,fig.align='center', fig.cap="前面例子对应的 ggplot 配色"}
-knitr::include_graphics("images/xaringan-themer-ggplot.png")
+knitr::include_graphics("images/xaringan-themer-ggplot.png", dpi = NA)
 ```
 
 #### Xaringanthemer 的自动补全功能 {#xaringan-autocomplete}
@@ -1795,7 +1799,7 @@ knitr::include_graphics("images/xaringan-themer-ggplot.png")
 
 ```{r xaringanthemr-autocomplet, fig.cap="xaringanthemer 支持自动补全功能"}
 if (knitr::is_html_output()){
-  knitr::include_graphics("https://raw.githubusercontent.com/gadenbuie/xaringanthemer/assets/example-rstudio-completion.gif")
+  knitr::include_graphics("https://raw.githubusercontent.com/gadenbuie/xaringanthemer/assets/example-rstudio-completion.gif", dpi = NA)
 }
 ```
 
@@ -1813,7 +1817,7 @@ style_mono_light(base_color = "#23395b")
 ```
 
 ```{r xaringan-themer-demo1,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Moon Light 模板"}
-knitr::include_graphics("images/xaringan-themer-demo1.png")
+knitr::include_graphics("images/xaringan-themer-demo1.png", dpi = NA)
 ```
 
 2. `style_mono_dark()`
@@ -1823,7 +1827,7 @@ style_mono_dark(base_color = "#cbf7ed")
 ```
 
 ```{r xaringan-themer-demo2, fig.width=6,fig.align='center', echo=FALSE, fig.cap="Mono Dark 模板"}
-knitr::include_graphics("images/xaringan-themer-demo2.png")
+knitr::include_graphics("images/xaringan-themer-demo2.png", dpi = NA)
 ```
 
 3. `style_mono_accent()`  
@@ -1833,7 +1837,7 @@ style_mono_accent(base_color = "#43418A")
 ```
 
 ```{r xaringan-themer-demo3,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Mono Accent 模板"}
-knitr::include_graphics("images/xaringan-themer-demo3.png")
+knitr::include_graphics("images/xaringan-themer-demo3.png", dpi = NA)
 ```
 
 4. `style_mono_accent_inverse()`
@@ -1843,7 +1847,7 @@ style_mono_accent(base_color = "#43418A")
 ```
 
 ```{r xaringan-themer-demo4, fig.width=6,fig.align='center',echo=FALSE, fig.cap="Mono Accent Inverse 模板"}
-knitr::include_graphics("images/xaringan-themer-demo4.png")
+knitr::include_graphics("images/xaringan-themer-demo4.png", dpi = NA)
 ```
 
 5. `style_duo()`  
@@ -1853,7 +1857,7 @@ style_duo(primary_color = "#1F4257", secondary_color = "#F97B64")
 ```
 
 ```{r xaringan-themer-demo5,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Duo 模板"}
-knitr::include_graphics("images/xaringan-themer-demo5.png")
+knitr::include_graphics("images/xaringan-themer-demo5.png", dpi = NA)
 ```
 
 6. `style_solarized_light()`
@@ -1863,7 +1867,7 @@ style_solarized_light()
 ```
 
 ```{r xaringan-themer-demo6,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Solarized Light 模板"}
-knitr::include_graphics("images/xaringan-themer-demo6.png")
+knitr::include_graphics("images/xaringan-themer-demo6.png", dpi = NA)
 ```
 
 
@@ -1927,7 +1931,7 @@ xaringanExtra::use_tile_view()
 渲染后在幻灯片的放映界面中按 `O` 键（ Overview 的第一个字母）即可得到以下界面，再按 `O` 键即可回到默认形式。
 
 ```{r xaringan-extra-1, echo=FALSE,fig.width=6,fig.align='center', fig.cap="并列方式展示演示文稿"}
-knitr::include_graphics("images/xaringan-extra-1.png")
+knitr::include_graphics("images/xaringan-extra-1.png", dpi = NA)
 ```
 
 > 该功能类似 PowerPoint 中的幻灯片浏览模式。黄色的框表示当前所在的位置，可以通过鼠标直接切换到想要的位置。这个功能非常方便实用，而且操作简单，只要加入前面的代码就可以了。
@@ -2091,7 +2095,7 @@ library(ggplot2)
 
 
 ```{r xaringan-extra-2, echo=FALSE,fig.width=6,fig.align='center', fig.cap="将选项卡面板加入幻灯片中"}
-knitr::include_graphics("images/xaringan-extra-2.png")
+knitr::include_graphics("images/xaringan-extra-2.png", dpi = NA)
 ```
 
 要定制面板的外观，可以使用直接在幻灯片的 R 块中调用 `style_panelset_tabs()`。将下面代码加到前面的代码块下，这时代码块的颜色发生了变化。
@@ -2118,7 +2122,7 @@ xaringanExtra::use_logo(
 这时，所有幻灯片右上角都加上了对应的 LOGO 啦！如果想在某几张不显示 LOGO，可以使用 `hide_logo` 隐藏特定幻灯片的徽标，具体例子如下（图 \@ref(fig:xaringan-extra-3)）：
 
 ```{r xaringan-extra-3, echo=FALSE,fig.width=6,fig.align='center', fig.cap="给幻灯片添加全局 logo"}
-knitr::include_graphics("images/xaringan-extra-3.png")
+knitr::include_graphics("images/xaringan-extra-3.png", dpi = NA)
 ```
 
 #### 播放 Xaringan 幻灯片时使用摄像头 {#xaringan-webcam}
@@ -2134,7 +2138,7 @@ xaringanExtra::use_webcam()
 之后点击 `w` 键（记得用浏览器打开哦！）就会得到以下界面（图 \@ref(fig:xaringan-extra-4)）。这里镜头的位置可以任意拖动。
 
 ```{r xaringan-extra-4, echo=FALSE,fig.width=6,fig.align='center', fig.cap="添加网络摄像头进行实时视频"}
-knitr::include_graphics("images/xaringan-extra-4.png")
+knitr::include_graphics("images/xaringan-extra-4.png", dpi = NA)
 ```
 
 > 当通过视频会议进行陈述时，包括演讲者的视频，或者在录制一节课或讲座时，这个功能真的非常好用！
@@ -2187,7 +2191,7 @@ output:
 在 Rstudio 中打开一个新的 R 脚本并选择 Ducument 中的 Word（图 \@ref(fig:word-new1)）。
 
 ```{r word-new1, echo=FALSE,fig.width=6,fig.align='center', fig.cap="新建 R Markdown 时可选的 word 格式"}
-knitr::include_graphics("images/word-new1.png")
+knitr::include_graphics("images/word-new1.png", dpi = NA)
 ```
 
 这时对应 R Markdown 文档中的 YAML 头所包含的内容为：
