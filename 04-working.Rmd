@@ -158,6 +158,87 @@ knitr::include_graphics("images/blog8.png", dpi = NA)
 blogdown::build_site()
 ```
 
-
-
 ## 制作科技论文的支撑材料 {#rmarkdown-paper}
+
+数据驱动是当前科学研究的重要发展趋势。中国科学院生化所吴家睿教授认为，数据驱动的研究范式不仅能够避免研究者可能的主观偏见，而且可以帮助其发现在假设或者现有理论范围之外的全新知识。这种方式不需要假设，主要目的是去获取研究对象的相关信息，克服了假设驱动的研究范式对决定论和因果关系的偏执，进而形成了开放式研究的认识论新体系。
+
+在这样的背景下，越来越多的期刊都鼓励或者要求作者开放研究中使用的原始数据和分析过程，给了 R Markdown 一个新的用武之处。
+
+### 建议文件结构
+
+论文的支撑材料通常存放在 GitHub 这一类的开源网站上，其文件结构通常是：
+
+    |--+ data：子文件夹，用于存放分析使用的数据；
+    |--+ figures：子文件夹，用于存放生成的图片；
+    |--+ functions：子文件夹，用于存放一些需要重复调用的函数；
+    |- supplementary.Rproj：R 项目文件；
+    |- README.md：使用 Markdown 语法的 README 文件，用于说明项目相关信息；
+    |- analysis.Rmd：使用 R Markdown 语法的分析文件（可以有多个）。
+
+`analysis.Rmd` 是支撑材料中的核心文件。它是一个常规的 R Markdown 文档。举例来说，下面的头文件中分别指定了 3 种不同的输出样式。
+
+``` yaml
+---
+title: Your Title
+author: "your@email.com"
+date: "2022-5-15"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+  md_document:
+    variant: markdown_github
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+---
+```
+
+为了让生成的图片能够妥善的存放到 `figures` 文件夹，需要在头文件后面添加一些设置。
+
+```` r
+```{r setup}
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp=0.618,
+  dpi = 300,
+  warning = FALSE,
+  fig.path = "figures/Figure-"
+)
+```
+````
+
+这里将图片的默认宽度和比例分别设置为 8 英寸和 0.618（黄金分割比例），并设置图片分辨率为 300 dpi；与此同时，不显示 R 运行过程中的警告信息；此外，还将图片输出的路径指定到 `figures` 文件夹中。
+
+### 分析报告的正文
+
+报告的正文仁者见仁智者见智，不过通常会包含以下几个部分（因为研究论文更多的发表在英文期刊上，所以这里的报告示例使用了英文标题）。
+
+```
+## Required Packages
+
+## Data Processing
+
+## Main Results
+
+## Supporting Results
+
+```
+
+这基本上是按照数据分析的逻辑组织的，所以就不再赘述了。
+
+如果文档中不涉及动态网页内容，推荐把 R Markdown 文档输出为 Markdown ，因为这样读者可以直接在 GitHub 网站查看相应的结果。
+
+具体做法：
+
+- 在头文件中加入 `output: github_document`；
+- 使用下面的命令将 Rmd 文件编译为 Markdown 文件。注意这里指定了 GitHub Flavored Markdown（gfm）作为输出格式。
+
+```{r eval=FALSE}
+library(rmarkdown)
+render("analysis.Rmd",md_document(variant = "gfm"))
+```
+
