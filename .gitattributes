@@ -13,5 +13,3 @@
 *.png binary
 *.jpg binary
 
-# trace picture with git lfs
-*.png filter=lfs diff=lfs merge=lfs -text
