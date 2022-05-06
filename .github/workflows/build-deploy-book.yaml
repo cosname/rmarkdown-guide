@@ -16,8 +16,10 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repo & download Git-LFS files
         uses: actions/checkout@v3.0.2
+        with:
+          lfs: true
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
