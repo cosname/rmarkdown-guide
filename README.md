@@ -1,12 +1,6 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
+# R Markdown 权威指南
 
-# R Markdown 指南
-
-《R Markdown 指南》是第一本系统介绍 R Markdown 技术的中文图书。
+《R Markdown 权威指南》是第一本系统介绍 R Markdown 技术的中文图书。
 
 ## 为什么要写这样一本书？
 
@@ -33,10 +27,10 @@ Python、Bash 等其它编程语言。
 现在网络上关于 R Markdown
 的教程很多，但是对于一本图书而言，其系统、全面的优势是不可替代的。
 因此，在外文图书市场上有多部 R Markdown 技术书籍。其中，仅 Chapman &
-Hall 出版社（<https://www.crcpress.com/>） 已经先后出版了"bookdown:
-Authoring Books and Technical Documents with R Markdown"、 "R Markdown
-Cookbook"，"blogdown: Creating Websites with R Markdown"、"R Markdown:
-The Definitive Guide"等多部以 R Markdown
+Hall 出版社（<https://www.crcpress.com/>） 已经先后出版了"[bookdown:
+Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)"、 "[R Markdown
+Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)"，"[blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)"、"[R Markdown:
+The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)"等多部以 R Markdown
 技术为主要介绍对象的书籍。除此之外， 基于 R Markdown
 进行技术类图书写作也成为日益流行的创作样式，包括本书以及上述书籍
 在内都是依托 R Markdown 技术创建的。R 语言的经典教材和书籍（如"R for
@@ -49,8 +43,8 @@ Science"等）也都是如此（<https://www.bookdown.org/>）。然而，在中
 ## 本书是怎么写出来的？
 
 本书是在谢益辉（[\@yihui](https://github.com/yihui)）
-组织下，由王祎帆、闫求识、
-高春辉、庄亮亮等共同创作完成的。书籍的创作主要参考了谢益辉所著的《R
+组织下，由高春辉、王祎帆、闫求识、
+庄亮亮、杨晓龙等共同创作完成的。书籍的创作主要参考了谢益辉所著的《R
 Markdown Cookbook》 和《R Markdown: The Definitive
 Guide》等资料。但是书籍创作过程并非严格的编译，
 而是结合了作者在这一领域的经验和认识。
@@ -65,7 +59,7 @@ Guide》等资料。但是书籍创作过程并非严格的编译，
     语言手册"主编；
 -   杨晓龙：东京大学政治科学的本科三年级。
 
-如果你对参与到该项目中有兴趣，请先看[贡献者指南](Start.md)。
+~~如果你对参与到该项目中有兴趣~~，请先看[贡献者指南](Start.md)。
 
 除此之外，你还可以在阅读本书在线版本的时候留下你的评论，或者提交一个
 GitHub Issue 或者 Pull request 来帮助我们更好的完成这本书。
@@ -88,4 +82,4 @@ GitHub Issue 或者 Pull request 来帮助我们更好的完成这本书。
 
 ## 本书预计于什么时候出版？
 
-本书目前仍处于草创阶段，目前仅有网上在线版可以访问。不过，我们同时也希望寻求专业的出版机构合作，在未来推出本书的印刷版本实体书。
+本书目前可在线访问，并已经与[机械工业出版社](http://cmpbook.com/)签订了出版协议，实体书或在 2023 年推出。
