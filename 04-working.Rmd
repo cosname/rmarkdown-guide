@@ -200,7 +200,7 @@ output:
 为了让生成的图片能够妥善的存放到 `figures` 文件夹，需要在头文件后面添加一些设置。
 
 ```` r
-```{r setup}
+```{r setup_fig}
 knitr::opts_chunk$set(
   fig.width = 8,
   fig.asp=0.618,
