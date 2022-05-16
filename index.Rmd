@@ -94,11 +94,31 @@ R Markdown 是一个生产力工具。她基于流行的 R 语言，通过 **kni
 
 ## 本书主要有哪些内容？
 
-目前本书主要有五大块主体内容：
+本书章节设置如下：
 
-1.  R Markdown 基础知识
-2.  R Markdown 常用输出格式
-3.  R Markdown 操作技巧
-4.  R Markdown 进阶操作
-5.  使用 R Markdown 开展工作
+- **第一部分：初识 R Markdown**：本部分对 R Markdown 进行了简要介绍，本部分共包含两章：
+
+  - 第 \@ref(rmarkdown-intro) 章：**R Markdown 概述**：本章简单介绍 R Markdown 的发展历程（第 \@ref(rmarkdown-source) 节），并以案例的形式介绍 R Markdown 的可能应用（第 \@ref(rmarkdown-example) 节）；
+
+  - 第 \@ref(rmarkdown-base) 章：**R Markdown 的基础知识**：本章从 R Markdown 的相关配置（第 \@ref(rstudio-config) 节）、安装（第 \@ref(rmarkdown-install) 节）、编译过程（第 \@ref(rmarkdown-compile) 节），到其基本元素（第 \@ref(rmarkdown-element) 节）、页面设置布局（第 \@ref(page-layout) 节）、文档元素（第 \@ref(document-element) 节）等方面，为 R Markdown 初学者提供其相关知识；
+
+- **第二部分：基于 R Markdown 的应用**：本部分介绍了基于 R Markdown 的基础应用，在学习完本部分，读者应能够使用 R Markdown 完成简单的学习或工作任务。本部分共包含两章：
+
+  - 第 \@ref(rmarkdown-document) 章：**使用 R Markdown 创建常用文档**：本章介绍了如何使用 R Markdown 生成常用的 HTML（第 \@ref(rmarkdown-html) 节）、PDF（第 \@ref(rmarkdown-pdf) 节） 文档，甚至还包括如何生成 PPT（第 \@ref(rmarkdown-ppt) 节）、Word（第 \@ref(rmarkdown-word) 节） 以及新的文档输出格式（第 \@ref(rmarkdown-new) 节）。在学完本章后，可以正常使用 R Markdown 开展日常的很多工作。
+
+  - 第 \@ref(rmarkdown-working) 章：**基于 R Markdown 工作与学习**：本章给出了一些在工作和学习场合使用 R Markdown 完成一些可能会很繁琐的工作，包括发邮件（第 \@ref(rmarkdown-email) 节）、制作 R 包（第 \@ref(rmarkdown-package) 节）、制作简历（第 \@ref(rmarkdown-cv) 节）、写书或记笔记（第 \@ref(rmarkdown-bookdown) 节）以及制作网页（第 \@ref(rmarkdown-blogdown) 节），本章针对科研工作者还介绍了如何使用 R Markdown 制作科技论文的支撑材料（第 \@ref(rmarkdown-paper) 节），从而帮助读者更全面地了解 R Markdown 的强大之处；
+
+- 第三部分：R Markdown 进阶操作：本部分为具有一定 R Markdown 使用经验的读者提供了更丰富的内容，从而帮助读者使用 R Markdown 大大增加日常学习工作的便捷性。本部分共包含三章：
+
+  - 第 \@ref(rmarkdown-interaction) 章：**使用 R Markdown 创建动态交互文档**：本章介绍了 R Markdown 如何与 Shiny、Dashboards 结合，生成 Web 交互界面（第 \@ref(rmarkdown-shiny) 节）以及交互式仪表盘（第 \@ref(rmarkdown-dashboards) 节），甚至在 R 包中也可以加入 R Markdown（第 \@ref(package-rmd) 节）。本章为第四章提供了补充。
+
+  - 第 \@ref(rmarkdown-operation) 章：**R Markdown 的操作技巧**：本章介绍了一些 R Markdown 的进阶操作技巧，可以在很大程度上优化使用者以及报告读者的体验，包括表格的一些特殊操作（第 \@ref(table-advanced) 节）、R Markdown 中的块选项（第 \@ref(chunk-options) 节）以及与其它语言的结合（第 \@ref(other-language) 节）。另外还有三节介绍了输出钩子（第 \@ref(output-hook) 节）、缓存（第 \@ref(cache) 节）以及其它的小技巧（第 \@ref(other-trick) 节），供有一定使用经验的读者阅读。
+
+  - 第 \@ref(rmarkdown-project) 章：**使用 R Markdown 开展项目工作**：本章的内容为第四章提供了更多的补充，并主要集中在项目管理（第 \@ref(work-flow) 节）以及工作流（第 \@ref(project-manage) 节）方面，可以帮助使用者在工作中大大提升工作效率。
+
+## 阅读本书时的注意事项
+
+1. 本书在编写过程中包含了很多例子，为了使读者能够清晰地理解，本书并没有给出这些例子的编译结果，而是以源代码形式更直白地展现给读者，希望读者自行编译，也可以加深对这些例子的理解。当然，在必要的地方我们也会以各种形式给出例子的编译结果；
+
+2. 本书在编写过程中的一些内容可能并不能被所有读者轻易理解，本书在这些章节后面添加了“(\*)”。跳过这些章节也不影响整体阅读，如果想要更详细了解 R Markdown，或想提升使用 R Markdown 的能力，可以进一步阅读这些章节。
 

@@ -1,9 +1,9 @@
 ---
-title: 在标签`<figure>`中输出图像
+title: 在标签 `<figure>` 中输出图像
 output: html_document
 ---
 
-在块选项`options$fig.cap`中给定图像文件路径`x`和图像标题（caption），我们想用如下形式把图像写入HTML5的标签之中：
+在块选项 `options$fig.cap` 中给定图像文件路径 `x` 和图像标题（caption），希望使用如下形式把图像写入 HTML5 的标签之中：
 
 ```html
 <figure>
@@ -12,7 +12,7 @@ output: html_document
 </figure>
 ```
 
-现在我们重新定义`plot`钩子（仅当输出格式为HTML时）:
+现在重新定义 `plot` 钩子（仅当输出格式为 HTML 时）:
 
 ```{r}
 if (knitr::is_html_output()) knitr::knit_hooks$set(
@@ -27,7 +27,7 @@ if (knitr::is_html_output()) knitr::knit_hooks$set(
 )
 ```
 
-代码块中的图像将被放置在`<figure>`标签之中：
+代码块中的图像将被放置在 `<figure>` 标签之中：
 
 
 ```{r, fig.cap='一个`cars`数据的散点图'}
@@ -35,7 +35,7 @@ par(mar = c(4.5, 4.5, .2, .2))
 plot(cars, pch = 19, col = 'red')
 ```
 
-我们可以进一步添加一些CSS样式来让`<figure>`和`<figcaption>`标签“看”起来更好一些（`figure`有虚线边框，图像标题有浅粉色背景）：
+可以进一步添加一些 CSS 样式来让 `<figure>` 和 `<figcaption>` 标签“看”起来更好一些（`figure` 有虚线边框，图像标题有浅粉色背景）：
 
 ```{css, echo=FALSE}
 figure {
