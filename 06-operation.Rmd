@@ -41,7 +41,7 @@ knitr::kable(grade, align='cccc', caption = '考试成绩')
 
 #### 目前已支持的表的格式 {#kable-formats}
 
-在大多数情况下，如果只需要制作一个简单表格，`knitr::kable(x)` 就足够了。其中 `format` 参数会根据 **knitr** 源文档自动设置。它可能的取值是 `pipe` （列与列之间由短的竖线分隔的表），`simple` （仅包含横向分割线 的简单表格），`latex` （LaTex 表格），`html` （HTML 表格），和 `rst` （reStructuredText 表格）。为了展示各个取值的不同，这里直接给出了各个取值在不同编程语言中的原始代码。
+在大多数情况下，如果只需要制作一个简单表格，`knitr::kable(x)` 就足够了。其中 `format` 参数会根据 **knitr** 源文档自动设置。它可能的取值是 `pipe` （列与列之间由短的竖线分隔的表），`simple` （仅包含横向分割线的简单表格），`latex` （LaTex 表格），`html` （HTML 表格），和 `rst` （reStructuredText 表格）。为了展示各个取值的不同，这里直接给出了各个取值在不同编程语言中的原始代码。
 
 对于 R Markdown 文档，`kable()` 默认使用 `pipe` 格式的表格，输出结果如下所示：
 
@@ -132,7 +132,7 @@ knitr::kable(grade, align = 'c')
 knitr::kable(grade, caption = '考试成绩')
 ```
 
-正如本书\@ref(element-quote)节所提到的那样，当一个表格有标题并且以 **bookdown** 来输出格式时，它可以被交叉引用，而在基础的 `html_document` 和 `pdf_document` 中则不行。
+正如本书 \@ref(element-quote) 节所提到的那样，当一个表格有标题并且以 **bookdown** 来输出格式时，它可以被交叉引用，而在基础的 `html_document` 和 `pdf_document` 中则不行。
 
 #### 调整数字格式
 
@@ -154,13 +154,17 @@ format(10000.123, big.mark = ',')
 d = cbind(X1 = runif(3), 
           X2 = 10^c(3, 5, 7), 
           X3 = rnorm(3, 0, 1000))
+
 # 保留最多四位小数
 knitr::kable(d, digits = 4)
+
 # 每列分别设置
 knitr::kable(d, digits = c(5, 0, 2))
+
 # 不使用科学计数法
 knitr::kable(d, digits = 3, 
              format.args = list(scientific = FALSE))
+
 # 给 big numbers 添加逗号
 knitr::kable(d, digits = 3, 
              format.args = list(big.mark = ',', 
@@ -185,6 +189,7 @@ knitr::kable(grade2)  # 默认显示 NA
 # 用空值代替 NA
 opts = options(knitr.kable.NA = '')
 knitr::kable(grade2)
+
 # 用指定字符（**） 代替 NA
 options(knitr.kable.NA = '**')
 knitr::kable(grade2)
@@ -383,7 +388,9 @@ knitr::kable(grade, caption = '一个很长很长的标题！',
 knitr::kable(grade, format = 'latex', booktabs = TRUE)
 ```
 
-需要注意的是，当在 R Markdown 文档中需要额外的 LaTeX 包时（如 **booktabs**），必须在 YAML 中声明这些包（请参阅第 \@ref(pdf-latex) 节了解如何声明）。**【！！！现有目录需要补充】**
+需要注意的是，当在 R Markdown 文档中需要额外的 LaTeX 包时（如 **booktabs**），必须在 YAML 中声明这些包（请参阅第 \@ref(pdf-latex) 节了解如何声明）。
+
+<!--**【！！！现有目录需要补充】**-->
 
 参数 `booktabs` 取 `FALSE` （默认值）或 `TRUE`  时，表的外观是不同的，见表 \@ref(tab:booktabs-false) 和表 \@ref(tab:booktabs-true) 。
 
@@ -401,7 +408,7 @@ knitr::kable(grade, format = 'latex',
 
 对于 `booktabs = FALSE`：
 
-- 表的列由垂直线分隔。可以通过 `vline` 参数来删除垂直线，例如 `knitr::kable(grade, vline = "")` （默认值是`vline = "|"`）。也可以将这个选项设置为一个全局的R选项，这样就不需要为每个表设置它，例如 `options(knitr.table.vline = "")`。
+- 表的列由垂直线分隔。可以通过 `vline` 参数来删除垂直线，例如 `knitr::kable(grade, vline = "")` （默认值是`vline = "|"`）。也可以将这个选项设置为一个全局的 R 选项，这样就不需要为每个表设置它，例如 `options(knitr.table.vline = "")`。
 
 - 水平线可以通过参数 `toprule`、`midrule`、`linesep` 以及 `bottomrule` 来定义，它们的默认值都是`\hline`。
 
@@ -566,7 +573,7 @@ kable(grade4,
 
 ### 其它生成表格的包及功能介绍 {#else-table}
 
-还有很多其他的R包可以用来生成表格\index{R package!table packages}。本节引入 `kable()` （见第 \@ref(table-complex) 节）和 **kableExtra**  （见第 \@ref(kable-extra) 节）的主要原因不是它们比其他包更好，而是因为作者们只熟悉它们，而且它们的功能可以涵盖大部分的日常使用需求。接下来本节将列出一些已知的其它软件包，感兴趣的读者可以去尝试并决定哪一个最适合自己。
+还有很多其他的 R 包可以用来生成表格\index{R package!table packages}。本节引入 `kable()` （见第 \@ref(table-complex) 节）和 **kableExtra**  （见第 \@ref(kable-extra) 节）的主要原因不是它们比其他包更好，而是因为作者们只熟悉它们，而且它们的功能可以涵盖大部分的日常使用需求。接下来本节将列出一些已知的其它软件包，感兴趣的读者可以去尝试并决定哪一个最适合自己。
 
 - **flextable** [@R-flextable] 和 **huxtable** [@R-huxtable]：**flextable** 和 **huxtable** 支持多种表格输出格式的包。它们都支持 HTML、LaTeX 以及 Office 格式，并且包含最常见的表格特性（例如条件格式化）。更多关于 **flextable** 的信息可参见：https://davidgohel.github.io/flextable/，**huxtable** 的说明文档则在：https://hughjonesd.github.io/huxtable/。
 
@@ -682,6 +689,7 @@ leaflet() %>% addTiles()
 ```{r, echo=c(4, 5), message=c(1, 2), warning=2:3}`r ''`
 # 一种生成服从N(0,1)分布的随机数的方法
 x <- qnorm(runif(10))
+
 # 在实践中还可以使用
 x <- rnorm(10)
 x
@@ -821,8 +829,8 @@ cat(paste0('- `', names(iris), '`'), sep = '\n')
 ````md
 ```{r, tidy='styler', tidy.opts=list(strict=FALSE)}`r ''`
 # 对齐赋值操作符
-a   <- 1#一个变量
-abc <- 2#另一个变量
+a   <- 1 # 一个变量
+abc <- 2 # 另一个变量
 ```
 ````
 
@@ -919,14 +927,18 @@ install.packages("magick")
 add_logo = function(path, options) {
   # 代码块中创建的图像
   img = magick::image_read(path)
+  
   # R logo
   logo = file.path(R.home("doc"), "html", "logo.jpg")
   logo = magick::image_read(logo)
+  
   # 默认的重力方向为西北，用户可以通过代码块来改变它
   # option magick.gravity
   if (is.null(g <- options$magick.gravity)) g = 'northwest'
+  
   # 在图像中添加 logo
   img = magick::image_composite(img, logo, gravity = g)
+  
   # 写入新的图像中 
   magick::image_write(img, path)
   path
@@ -959,10 +971,7 @@ pdf2png = function(path) {
 
 ### 输出高质量的图像 (\*) {#chunk-highquality}
 
-不同格式的图像往往在输出质量上有差异。**rmarkdown** 包为不同的输出格式设置了合理的默认图像设备。例如，对 HTML 输出格式使用 `png()` 设备，所以 **knitr** 将生成 png 绘图文件；而对 PDF 输出格式则使用 `pdf()` 设备。如果对默认图像设备的输出质量不满意，可以通过块选项
-`dev`\index{chunk option!dev}
-来更改它们。**knitr**
-支持的设备为：`r knitr::combine_words(names(knitr:::auto_exts), before = '\x60"', after = '"\x60', sep = "，", and = "以及")`。
+不同格式的图像往往在输出质量上有差异。**rmarkdown** 包为不同的输出格式设置了合理的默认图像设备。例如，对 HTML 输出格式使用 `png()` 设备，所以 **knitr** 将生成 png 绘图文件；而对 PDF 输出格式则使用 `pdf()` 设备。如果对默认图像设备的输出质量不满意，可以通过块选项 `dev`\index{chunk option!dev} 来更改它们。**knitr** 支持的设备为：`r knitr::combine_words(names(knitr:::auto_exts), before = '\x60"', after = '"\x60', sep = "，", and = "以及")`。
 
 通常情况下，图像设备名也是函数名。更多关于图像设备\index{figure!device}的信息可以参阅 R 的帮助页面。例如，可以在 R 的控制台中输入 `?svg` 来了解关于 `svg` 设备的细节，它包含在 R 的基础包中，所以不需要额外安装。需要注意的是，`quartz_XXX` 设备是基于 `quartz()` 函数的，并且它们仅在 macOS 上可用；`CairoXXX` 设备来自的 R 包 **cairoDevice**[@R-cairoDevice]；`svglite` 设备来自 **svglite** 包 [@R-svglite]；`tikz` 设备则在 **tikzDevice** 包 [@R-tikzDevice]中。如果需要使用这些包中的图像设备，必须先安装这些包\index{R package!graphics devices}。
 
@@ -998,11 +1007,11 @@ tinytex::tlmgr_install(c('pgf', 'preview', 'xcolor'))
 
 其次，`tikz` 设备渲染图的速度通常要慢得多，因为这个设备会生成 LaTeX 文件，并且必须将其编译成 PDF。如果觉得代码块很耗时，可以通过块选项 `cache = TRUE` 来启用缓存（见第 \@ref(cache) 节）。
 
-图 \@ref(fig:dev-tikz) 实际上也使用了块选项 `fig.process = pdf2png`\index{chunk option!fig.process}，当输出格式不是 LaTeX时，`pdf2png` 函数可以将 PDF 图转换为 PNG，其定义见第 \@ref(chunk-process)节。如果没有这一转换，可能无法在 Web 浏览器中查看该书在线版本中的 PDF 图。
+图 \@ref(fig:dev-tikz) 实际上也使用了块选项 `fig.process = pdf2png`\index{chunk option!fig.process}，当输出格式不是 LaTeX时，`pdf2png` 函数可以将 PDF 图转换为 PNG，其定义见第 \@ref(chunk-process) 节。如果没有这一转换，可能无法在 Web 浏览器中查看该书在线版本中的 PDF 图。
 
 ### 带有低级绘图功能的逐步绘图 (\*) {#chunk-step-plot}
 
-在 R 中，有两种类型的绘图函数可以用来画图：高级的绘图函数用于创建新图，以及低级的绘图函数用于在现有的图中添加元素，更多信息请参见R手册《[_An Introduction to R_](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)》的第 12 章（“Graphical procedures”）。
+在 R 中，有两种类型的绘图函数可以用来画图：高级的绘图函数用于创建新图，以及低级的绘图函数用于在现有的图中添加元素，更多信息请参见 R 手册《[_An Introduction to R_](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)》的第 12 章（“Graphical procedures”）。
 
 在默认的情况下，当使用一系列低级的绘图函数\index{figure!intermediate plots}来修改以前的图像时，**knitr** 不会显示中间的图，只会显示所有函数执行后的最后一个图。
 
@@ -1032,7 +1041,7 @@ abline(fit)
 vignette('knit_print', package = 'knitr')
 ```
 
-**printr** 包\index{R package!printr} [@R-printr]提供了一些 S3 方法来自动将 R 对象打印为表格。只需要在R代码块中输入 `library(printr)`，所有的方法都将自动注册。
+**printr** 包\index{R package!printr} [@R-printr]提供了一些 S3 方法来自动将 R 对象打印为表格。只需要在 R 代码块中输入 `library(printr)`，所有的方法都将自动注册。
 
 如果觉得上述技术实现难度较大，一些 R Markdown 输出格式，如 `html_document` 和 `pdf_document` 也提供了一个选项 `df_print`，它允许用户自定义数据框的打印行为。例如，如果想通过 `knitr::kable()` 来将数据框打印为表格，可以设置选项：
 
@@ -1066,7 +1075,7 @@ if (system.file(package = "pander") == ''){
 head(iris)
 ```
 
-`render`选项给了用户完全的自由来打印 R 对象。
+`render` 选项给了用户完全的自由来打印 R 对象。
 
 ### 选项钩子 (\*) {#option-hook}
 
@@ -2029,9 +2038,11 @@ res <- xfun::cache_rds({
 parse_code <- function(expr) {
   deparse(substitute(expr))
 }
+
 # 空格或分号不影响
 parse_code({x+1})
 parse_code({ x   +    1; })
+
 # 左箭头和右箭头是等价的
 identical(parse_code({x <- 1}), parse_code({1 -> x}))
 ```
