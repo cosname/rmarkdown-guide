@@ -71,11 +71,11 @@ knitr::include_graphics('images/shiny-plot.png', dpi = NA)
 ### Shiny 部署 {#shiny-deploy}
 
 
-如果在本地运行一个 Shiny 文档时，默认情况下它会使用本地 R 会话，并且只有运行的人能与该文档进行交互。如果希望与没有安装 R 的用户共享文档，或者不希望在本地运行文档，则必须将文档部署到服务器上，并共享文档的 URL。那么其他人只需要一个 web 浏览器就可以访问你的文档。
+如果在本地运行一个 Shiny 文档时，默认情况下它会使用本地 R 会话，并且只有运行的人能与该文档进行交互。如果希望与没有安装 R 的用户共享文档，或者不希望在本地运行文档，则必须将文档部署到服务器上，并共享文档的 URL。那么其他人只需要一个 web 浏览器就可以访问文档。
 
 有两种方法可以部署 Shiny 文档。1. 使用 RStudio 提供的托管服务；2. 搭载到自己的服务器上。
 
-<!-- 第一种方法从技术上来说比较容易，但是有时你可能不被允许使用外部托管服务，因此读者必须在自己的服务器上安装必需的软件（Shiny Server 或 RStudio Connect）\index{Shiny Server}\index{RStudio Connect}才能部署 Shiny 文档。 -->
+<!-- 第一种方法从技术上来说比较容易，但是有时可能不被允许使用外部托管服务，因此读者必须在自己的服务器上安装必需的软件（Shiny Server 或 RStudio Connect）\index{Shiny Server}\index{RStudio Connect}才能部署 Shiny 文档。 -->
 
 
 #### ShinyApps.io
@@ -168,12 +168,12 @@ shinyAppDir(
 
 ### Shiny 小部件 {#shiny-widget}
 
-Shiny 小部件\index{Shiny widget}使你能够使用一个函数调用创建包含在 R Markdown 文档中的可重复使用的 Shiny 组件。还可以直接从控制台调用 Shiny 小部件(在创作过程中很有用)，并在 RStudio Viewer 窗格或外部 Web 浏览器中显示它们的输出。
+Shiny 小部件\index{Shiny widget}让使用者能够使用一个函数调用创建包含在 R Markdown 文档中的可重复使用的 Shiny 组件。还可以直接从控制台调用 Shiny 小部件(在创作过程中很有用)，并在 RStudio Viewer 窗格或外部 Web 浏览器中显示它们的输出。
 
 
 #### `shinyApp()` 函数
 
-Shiny 窗口小部件的核心是使用 `shinyApp()` 函数创建的微型应用程序。 你无需像传统的 Shiny 应用程序那样，既要创建用户界面（UI），又要创建服务器端（Server）。而是将 UI 和 Server 定义作为参数传递给  `shinyApp()` 函数。 本书会在第 \@ref(shiny-embed-inline) 节中给出了一个示例。
+Shiny 窗口小部件的核心是使用 `shinyApp()` 函数创建的微型应用程序。使用者无需像传统的 Shiny 应用程序那样，既要创建用户界面（UI），又要创建服务器端（Server）。而是将 UI 和 Server 定义作为参数传递给  `shinyApp()` 函数。 本书会在第 \@ref(shiny-embed-inline) 节中给出了一个示例。
 
 接下来，先给出最简单的 Shiny 小部件类型———返回 `shinyApp()` 的 R 函数。
 
@@ -246,7 +246,7 @@ Shiny 小部件可以嵌入在不同的地方，包括标准的全宽页面、�
 
 可以使用 Markdown 链接语法并指定文档的**相对**路径，链接到其他 Shiny 文档上，例如： `[另一个Shiny文档](another.Rmd)`。如果在一个页面上单击指向另一个 Rmd 文档的链接，该 Rmd 文档将作为当前交互式 Shiny 文档启动。 
 
-默认情况下，只能链接到调用 `rmarkdown::run()` 的文件所在目录中的 R Markdown 文件(例如，你无法连接到 `../foo.Rmd`)。 但是，可以使用 `rmarkdown::run()` 的 `dir` 参数来定义根目录。
+默认情况下，只能链接到调用 `rmarkdown::run()` 的文件所在目录中的 R Markdown 文件（例如，无法连接到 `../foo.Rmd`）。 但是，可以使用 `rmarkdown::run()` 的 `dir` 参数来定义根目录。
 
 ### Shiny 文档的渲染 {#shiny-render}
 
@@ -254,7 +254,7 @@ Shiny 小部件可以嵌入在不同的地方，包括标准的全宽页面、�
 
 Shiny 文档通常在每次 R Markdown 文档渲染时都会显示。这时，较大或计算量较大的文档可能需要一些时间来加载。
 
-如果文档包含不需要立即渲染的交互式 Shiny 组件，你可以在 `rmarkdown::render_delayed()` 函数中封装 Shiny 代码。这个函数保存它的参数，直到文档呈现完成并显示给用户，然后计算它，并在计算完成时将其注入输出文档。
+如果文档包含不需要立即渲染的交互式 Shiny 组件，可以在 `rmarkdown::render_delayed()` 函数中封装 Shiny 代码。这个函数保存它的参数，直到文档呈现完成并显示给用户，然后计算它，并在计算完成时将其注入输出文档。
 
 例如，以下代码中，首先渲染出数值输入的结果，加载完文档并显示给用户之后， `render_delayed()` 才会执行内部代码，并将其加载到文档中。
 
@@ -276,7 +276,7 @@ rmarkdown::render_delayed({
 
 <!-- 相比之下，在 Shiny 文档中，UI 元素通常是在调用 `renderXXX()` 函数时自动创建的。例如，使用 `renderPlot()` 函数，而预先没有创建对应的 `plotOutput()`。在这种情况下，Shiny 将相应的输出对象与每个 `renderXXX()` 函数关联起来，使得可以在一个完整的 Shiny 应用程序之外使用 Shiny 代码。但是，在这个过程中可能会丢失一些功能。尤其是，`plotOutput()` 可以接受一些可选参数来设置宽度和高度等内容。 -->
 
-<!-- 要将选项从 `renderXXX()` 传递到 `xxxOutput()`，可以使用 `outputArgs` 参数。 例如：要绘制一张宽度为 200px，高度为 100px 的图形时。 你可以设定为如下形式： -->
+<!-- 要将选项从 `renderXXX()` 传递到 `xxxOutput()`，可以使用 `outputArgs` 参数。 例如：要绘制一张宽度为 200px，高度为 100px 的图形时。 可以设定为如下形式： -->
 
 <!-- ````markdown -->
 <!-- ```{r, echo = FALSE} `r ''` -->
@@ -313,7 +313,7 @@ rmarkdown::render_delayed({
 <!-- the corresponding output function of your UI code. -->
 <!-- ``` -->
 
-<!-- 如果你尝试在上文所述的任意文档中使用 `outputArgs`，例如：在常用的（即非嵌入式）Shiny 应用程序内部使用 `outputArgs`，也会发生同样的情况。 -->
+<!-- 如果尝试在上文所述的任意文档中使用 `outputArgs`，例如：在常用的（即非嵌入式）Shiny 应用程序内部使用 `outputArgs`，也会发生同样的情况。 -->
 
 
 ## 交互式仪表盘：Dashboards {#rmarkdown-dashboards}
@@ -349,7 +349,7 @@ knitr::include_graphics('images/dashboard-new.png', dpi = NA)
 ```
 
 
-> **注**：如果没有使用 RStudio 进行操作，那么你也可以从 R 控制台创建一个新的 `flexdashboard` 的 R Markdown 文件，具体操作如下：
+> **注**：如果没有使用 RStudio 进行操作，那么也可以从 R 控制台创建一个新的 `flexdashboard` 的 R Markdown 文件，具体操作如下：
 
 ```r
 rmarkdown::draft(
@@ -570,7 +570,7 @@ knitr::include_graphics('images/dashboard-text.png', dpi = NA)
 
 > **注意**：仪表盘中的每个组件都可以包括标题和注释部分。三级结构 (`###`) 后面的文本为标题；`>` 开头的文本是注释。
 
-<!-- 通过将 `.no-title` 属性应用于一个节标题，你可以完全排除该标题。 -->
+<!-- 通过将 `.no-title` 属性应用于一个节标题，可以完全排除该标题。 -->
 
 #### 导航栏
 
@@ -660,5 +660,75 @@ knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 
 ### 写软件包的文档 {#rmd-vignettes}
 
+如果有开发R包的经验，或者项目中编写的自定义函数需要清晰的文档和严格的测试，那么可以考虑将项目制作成一个 R 包。如果不知道如何创建一个 R 包，则可以很容易地在 RStudio IDE 中通过点击菜单 `File -> New Project` 开始，选择项目类型为 `R Package`\index{R package!vignette}\index{vignette}。此外，第 \@ref(rmarkdown-package) 节还介绍了如何使用 R Markdown 开发 R 包，可以大大加速 R 包开发过程。
+
+使用 R 包来管理项目有很多好处。例如，可以将数据集放在 `data/` 文件夹中，在 `R/` 下写 R 代码，生成文档到 `man/`（例如，使用 **roxygen2** 包[@R-roxygen2]\index{R package!roxygen2}），并将单元测试添加到 `test/` 中。当涉及到 R Markdown 报告时，可以将它们作为 `vignettes/` 下的软件包长文档来编写。在这些长文档中，可以加载数据集并调用包中的函数。当构建包时（通过 `R CMD build` 或 RStudio 命令），长文档将被自动编译。
+
+要在 R Markdown 中创建一个包的长文档，最简单的方法是通过 RStudio 菜单 `File -> New File -> R Markdown -> From Template`\index{RStudio!vignette template}（见图\@ref(fig:package-vignette)）。然后从 **rmarkdown** 包中选择 `Package Vignette`，将得到一个长文档的模板。在更改模板的标题、作者和其他元数据之后，就可以开始编写报告的内容了。
+
+```{r, package-vignette, echo=FALSE, fig.cap='在 RStudio 中创建一个包的长文档。'}
+knitr::include_graphics('images/package-vignette.png', dpi = NA)
+```
+
+或者，也可以安装包 **usethis**\index{R package!usethis} [@R-usethis] 并使用其中的函数 `usethis::use_vignette()`\index{usethis!use\_vignette()} 来创建一个长文档框架。下面是软件包长文档的 YAML 前端内容通常情况下的样子\index{YAML!vignette frontmatter}：
+
+```yaml
+---
+title: "Vignette Title"
+author: "Vignette Author"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```
+
+需要注意的是，需要在 `title` 字段和 `\VignetteIndexEntry{}` 命令中更改长文档的标题。除了长文档中的上述信息外，还需要在包的 `DESCRIPTION` 文件中做另外两件事：
+
+1. 在 `DESCRIPTION` 文件中指定 `VignetteBuilder: knitr`。
+
+2. 在 `DESCRIPTION` 文件中添加 `Suggests: knitr, rmarkdown`。
+
+长文档的输出格式不一定非得是 HTML，也可以是 PDF，所以也可以使用 `output: pdf_document`。创建除 HTML 和 PDF 之外的任何其他输出格式也可以，比如 `beamer_presentation` 和 `tufte::tufte_html`。然而，目前 R 只识别 HTML 和 PDF 格式的长文档。
+
+### R 包中的 R Markdown 模板 {#package-template}
+
+第 \@ref(rmd-vignettes) 节的图 \@ref(fig:package-vignette) 给出了从 **rmarkdown** 包中检索可编辑的 Package Vignette（HTML）模板的过程。这个 R Markdown 文件预先填充了适用于 R 包长文档的元数据。\index{R package!R Markdown template}\index{template!R Markdown} 
+
+类似地，任何包都可以包含 R Markdown 模板，包的用户可以通过 RStudio IDE（如图 \@ref(fig:package-vignette) 所示）或使用 `rmarkdown::draft()`\index{rmarkdown!draft} 函数访问这些模板。
+
+#### 模板使用样例
+
+模板是共享自定义结构、样式和内容的有效的方法，有很多优秀的例子都体现了这一特点。
+
+许多模板通过预填充 YAML 元数据来添加结构和样式，例如 **rmarkdown** 包的 Package Vignette （HTML）模板。类似地，**rmdformats** 包[@R-rmdformats]提供了许多模板，这些模板将不同的自定义的样式函数传递给 `output` 选项。
+
+其他模板演示了包所需的文档结构。例如，**pagedown** 包[@R-pagedown]包含了许多海报、简历和其他页面布局的模板。类似地，**xaringan** 包的 Ninja Presentation 模板[@R-xaringan]展示了许多不同幻灯片格式选项的语法。
+
+模板也可以展示包的特性和语法。例如，**flexdashboard** 包[@R-flexdashboard]和 **learnr** 包[@R-learnr]都包含了带有代码块的模板，这些代码块分别调用包中的函数来创建示例仪表板或教程。
+
+类似地，模板也可以包含样板内容。例如，**rticles** 包[@R-rticles]提供了许多这样的模板，以使 R Markdown 输出符合不同学术期刊所需的风格和内容指导。样板内容在组织设置中也很有用，比如生成季度报告的团队。
+
+#### 模版设置
+
+**usethis** 包[@R-usethis]有一个创建模板的功能。运行 `usethis::use_rmarkdown_template("Template Name")`\index{usethis!use\_rmarkdown\_template()} 将自动创建所需的目录结构和文件（模板名应自己提供）。
+
+如果想手动设置模板，可以在 `inst/rmarkdown/templates` 目录下创建一个子目录。在这个目录中，需要保存至少两个文件：
+
+1. 一个名为 `template.yaml` 的文件，它为 RStudio IDE 提供了基本的元数据，比如模板的可读名称。这个文件至少应该有 `name` 和 `description` 字段，例如：
+
+    ```yaml
+    name: 模板样例
+    description: 这个模板做了什么
+    ```
+    
+    如果想在模板被选用时创建一个新目录，可以包含 `create_dir: true`，如果模板依赖于额外的资源，这也是有用的。例如，[**learnr** 包的模板](https://github.com/rstudio/learnr/blob/master/inst/rmarkdown/templates/tutorial/template.yaml) 设置了 `create_dir: true`，而 [**flexdashboard** 包的模板](https://github.com/rstudio/flexdashboard/blob/master/inst/rmarkdown/templates/flex_dashboard/template.yaml)则使用默认的 `create_dir: false`。可以尝试在 RStudio 中打开这两个模板，以注意到不同的用户提示。
+
+2. 保存在 `skeleton/skeleton.Rmd` 下 R Markdown 文档。这可能包含希望放入 R Markdown 文档中的任何内容。
+
+可供选择的是，`skeleton` 文件夹可能还包括其他资源，如模板使用的样式表或图像。这些文件将与模板一起被加载到用户的计算机中。
+
+建立自定义 R Markdown 模板的更多细节，请参阅 [RStudio 扩展](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)的网站，以及 _R Markdown Definitive Guide_ 的第十七章 [“Document Templates” ](https://bookdown.org/yihui/rmarkdown/document-templates.html)[@rmarkdown2018]。
 
 ### 定义一个自动化报告函数 {#rmd-auto}

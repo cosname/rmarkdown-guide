@@ -1,14 +1,103 @@
 # 基于 R Markdown 工作与学习 {#rmarkdown-working}
 
-## 发邮件：blastula {#rmarkdown-email}
+## 发邮件：`blastula` {#rmarkdown-email}
 
-## 制作 R 包：fusen {#rmarkdown-package}
+使用者有的时候可能需要批量发送定制版邮件，有些软件提供了相应选项，利用 R Markdown 也可以实现这一功能。具体而言，借助 **blastula** 包\index{R package!blastula}\index{email} [@R-blastula]，可以将 R Markdown 文档呈现在电子邮件正文并发送电子邮件。要将将 R Markdown 文档呈现到电子邮件中，需要在文档中使用输出格式 `blastula::blastula_email`，例如：
 
-## 制作简历：datadrivencv {#rmarkdown-cv}
+````md
+---
+title: 周报
+output: blastula::blastula_email
+--- 
 
-## 写书和记学习笔记：bookdown {#rmarkdown-bookdown}
+尊敬的客户，
 
-## 制作网站：blogdown {#rmarkdown-blogdown}
+以下是对 `iris` 数据的分析：
+
+```{r}`r ''`
+summary(iris)
+plot(iris[, -5])
+```
+
+若感兴趣请及时回复。
+
+祝好，  
+张三
+````
+
+这个将 R Markdown 文档会通过函数 `blastula::render_email()` 来呈现，输出将被传递给 `blastula::smtp_send()`，它将发送电子邮件。需要注意的是，`smtp_send()` 需要一个电子邮件服务器和使用者的凭证（credentials）。
+
+如果使用 RStudio Connect，还可以 在https://solutions.rstudio.com/examples/blastula-overview/ 上找到更多的例子，包括自动的、有条件的和参数化的电子邮件。
+
+
+## 制作 R 包：`fusen` {#rmarkdown-package}
+
+## 制作简历：`datadrivencv` {#rmarkdown-cv}
+
+## 写书和记学习笔记：`bookdown` {#rmarkdown-bookdown}
+
+用 R Markdown 还可以实现记笔记甚至写书的功能，本书的写作过程就是通过 R Markdown 进行，其中关键在于 **bookdown** 包 [@R-bookdown]\index{R package!bookdown}。这个包被设计为创建由多个 R Markdown 文档组成的长篇文档。例如，如果想写一本书，可以在自己的 R Markdown 文件中编写每个章节，并使用 **bookdown** 将这些 R Markdown 文件编译成一本书。
+
+对于 RStudio 的用户来说，最简单的开始方法是通过 `File -> New Project -> New Directory -> Book Project using bookdown`，用 IDE 创建一个 **bookdown** 项目\index{RStudio!bookdown project}，正如图 \@ref(fig:bookdown-project) 所示。
+
+如果不使用 RStudio 或者喜欢在控制台工作，也可以通过调用函数 `bookdown:::bookdown_skeleton('your-book-dir')` 产生相同的结果。
+
+```{r, bookdown-project, echo=FALSE, fig.cap='在 RStudio 中创建一个 bookdown 项目。'}
+knitr::include_graphics('images/bookdown-project.png', dpi = NA)
+```
+
+为了演示用法，下面提供了一个最小的示例，包含同一个目录中的三个文件：
+
+```md
+directory
+  |- index.Rmd
+  |- 01-intro.Rmd
+  |- 02-analysis.Rmd
+```
+
+下面将显示每个文件的内容并解释它们的作用：
+
+- **index.Rmd**:
+
+  ````md
+  ---
+  title: "一个最小的 bookdown 项目"
+  site: bookdown::bookdown_site
+  output: bookdown::gitbook
+  ---
+  
+  # 前言 {-}
+  
+  内容
+  ````
+
+第一个文件通常被称为 `index.Rmd`。它应该是提供 YAML 前端内容的唯一 R Markdown 文件，它还应该包含一个特殊的 YAML 字段 `site: bookdown::bookdown_site`，以便 **rmarkdown** 知道使用 **bookdown** 来构建所有 R Markdown 文件，而不是呈现单个 R Markdown 文件。可以使用任何 **bookdown**输出格式，例如 `bookdown::gitbook`、 `bookdown::pdf_book`、 `bookdown::word_document2` 以及  `bookdown::epub_book`。
+
+接下来的两个 R Markdown 文件是两个章节：
+
+- **01-intro.Rmd:**
+
+  ````md
+  # 第 1 章
+  
+  这是第 1 章。
+  ````
+
+- **02-analysis.Rmd**:
+
+  ```md
+  # 第 2 章
+  
+  这是第 2 章。
+  ```
+
+要呈现这些 R Markdown 文件，应该调用 `bookdown::render_book('index.Rmd')` 而不是 `rmarkdown::render()`。在底端，**bookdown** 在默认情况下会将所有 R Markdown 文件合并为单个 R Markdown 并编译它。文件按字母顺序合并。这就是为什么在上面的例子中为文件名添加数字前缀的原因。
+
+事实上，可以通过很多设置来自定义一个 **bookdown** 项目。关于 **bookdown** 的更全面的概述，可以查看 _R Markdown Definitive Guide_ 的第十八章 [“Creating New Formats”](https://bookdown.org/yihui/rmarkdown/new-formats.html) [@rmarkdown2018]。完整文档请参见书籍  [**bookdown**](https://bookdown.org/yihui/bookdown/) [@bookdown2016]。
+
+需要注意的是，本节提供例子内容为英文，若需要编译含中文的文档，则需要加入特殊的命令，如 `documentclass: ctexbook`，一个简单的中文书例子请参见： https://github.com/yihui/bookdown-chinese。
+
+## 制作网站：`blogdown` {#rmarkdown-blogdown}
 
 ### blogdown 简介 {#blogdown-intro}
 
