@@ -85,10 +85,16 @@ fig:magick-logo
 fig:dev-tikz
 fig:low-plots-1
 fig:low-plots-2
+fig:hook-scroll
+fig:hook-html5
+为什么要写这样一本书
+本书是怎么写出来的
+本书的创作理念是什么
+本书主要有哪些内容
+阅读本书时的注意事项
 rmarkdown-intro
 rmarkdown-source
-knitr-sweave
-mark-pandoc
+r-markdown-literate-programming
 rmarkdown-example
 example-report
 example-note
@@ -252,6 +258,8 @@ steps-summary
 steps-deploy
 steps-netlify
 rmarkdown-paper
+建议文件结构
+分析报告的正文
 rmarkdown-interaction
 rmarkdown-shiny
 shiny-start
@@ -356,6 +364,9 @@ cache-rds
 与-knitr-的缓存比较
 other-trick
 reuse-chunk
+embed-chunk
+same-label
+ref-label
 use-creat
 compile-exit
 plot-show-else
