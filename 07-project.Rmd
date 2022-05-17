@@ -1,4 +1,4 @@
-# 使用R Markdown开展项目工作 {#rmarkdown-project}
+# 使用 R Markdown 开展项目工作 {#rmarkdown-project}
 
 ## 使用 R Markdown 在工作中管理项目 {#project-manage}
 

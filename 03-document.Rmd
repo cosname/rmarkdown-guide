@@ -1,4 +1,4 @@
-# (PART) 基于R Markdown的应用 {.unnumbered}
+# (PART) 基于 R Markdown 的应用 {.unnumbered}
 
 ```{r echo = FALSE}
 source("utils.R")
