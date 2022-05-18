@@ -1,13 +1,333 @@
 # 基于 R Markdown 工作与学习 {#rmarkdown-working}
 
-## 发邮件：blastula {#rmarkdown-email}
+## 发邮件：`blastula` {#rmarkdown-email}
 
-## 制作 R 包：fusen {#rmarkdown-package}
+使用者有的时候可能需要批量发送定制版邮件，有些软件提供了相应选项，利用 R Markdown 也可以实现这一功能。具体而言，借助 **blastula** 包\index{R package!blastula}\index{email} [@R-blastula]，可以将 R Markdown 文档呈现在电子邮件正文并发送电子邮件。要将将 R Markdown 文档呈现到电子邮件中，需要在文档中使用输出格式 `blastula::blastula_email`，例如：
 
-## 制作简历：datadrivencv {#rmarkdown-cv}
+````md
+---
+title: 周报
+output: blastula::blastula_email
+--- 
 
-## 写书和记学习笔记：bookdown {#rmarkdown-bookdown}
+尊敬的客户，
 
-## 制作网站：blogdown {#rmarkdown-blogdown}
+以下是对 `iris` 数据的分析：
+
+```{r}`r ''`
+summary(iris)
+plot(iris[, -5])
+```
+
+若感兴趣请及时回复。
+
+祝好，  
+张三
+````
+
+这个将 R Markdown 文档会通过函数 `blastula::render_email()` 来呈现，输出将被传递给 `blastula::smtp_send()`，它将发送电子邮件。需要注意的是，`smtp_send()` 需要一个电子邮件服务器和使用者的凭证（credentials）。
+
+如果使用 RStudio Connect，还可以 在https://solutions.rstudio.com/examples/blastula-overview/ 上找到更多的例子，包括自动的、有条件的和参数化的电子邮件。
+
+
+## 制作 R 包：`fusen` {#rmarkdown-package}
+
+## 制作简历：`datadrivencv` {#rmarkdown-cv}
+
+## 写书和记学习笔记：`bookdown` {#rmarkdown-bookdown}
+
+用 R Markdown 还可以实现记笔记甚至写书的功能，本书的写作过程就是通过 R Markdown 进行，其中关键在于 **bookdown** 包 [@R-bookdown]\index{R package!bookdown}。这个包被设计为创建由多个 R Markdown 文档组成的长篇文档。例如，如果想写一本书，可以在自己的 R Markdown 文件中编写每个章节，并使用 **bookdown** 将这些 R Markdown 文件编译成一本书。
+
+对于 RStudio 的用户来说，最简单的开始方法是通过 `File -> New Project -> New Directory -> Book Project using bookdown`，用 IDE 创建一个 **bookdown** 项目\index{RStudio!bookdown project}，正如图 \@ref(fig:bookdown-project) 所示。
+
+如果不使用 RStudio 或者喜欢在控制台工作，也可以通过调用函数 `bookdown:::bookdown_skeleton('your-book-dir')` 产生相同的结果。
+
+```{r, bookdown-project, echo=FALSE, fig.cap='在 RStudio 中创建一个 bookdown 项目。'}
+knitr::include_graphics('images/bookdown-project.png', dpi = NA)
+```
+
+为了演示用法，下面提供了一个最小的示例，包含同一个目录中的三个文件：
+
+```md
+directory
+  |- index.Rmd
+  |- 01-intro.Rmd
+  |- 02-analysis.Rmd
+```
+
+下面将显示每个文件的内容并解释它们的作用：
+
+- **index.Rmd**:
+
+  ````md
+  ---
+  title: "一个最小的 bookdown 项目"
+  site: bookdown::bookdown_site
+  output: bookdown::gitbook
+  ---
+  
+  # 前言 {-}
+  
+  内容
+  ````
+
+第一个文件通常被称为 `index.Rmd`。它应该是提供 YAML 前端内容的唯一 R Markdown 文件，它还应该包含一个特殊的 YAML 字段 `site: bookdown::bookdown_site`，以便 **rmarkdown** 知道使用 **bookdown** 来构建所有 R Markdown 文件，而不是呈现单个 R Markdown 文件。可以使用任何 **bookdown**输出格式，例如 `bookdown::gitbook`、 `bookdown::pdf_book`、 `bookdown::word_document2` 以及  `bookdown::epub_book`。
+
+接下来的两个 R Markdown 文件是两个章节：
+
+- **01-intro.Rmd:**
+
+  ````md
+  # 第 1 章
+  
+  这是第 1 章。
+  ````
+
+- **02-analysis.Rmd**:
+
+  ```md
+  # 第 2 章
+  
+  这是第 2 章。
+  ```
+
+要呈现这些 R Markdown 文件，应该调用 `bookdown::render_book('index.Rmd')` 而不是 `rmarkdown::render()`。在底端，**bookdown** 在默认情况下会将所有 R Markdown 文件合并为单个 R Markdown 并编译它。文件按字母顺序合并。这就是为什么在上面的例子中为文件名添加数字前缀的原因。
+
+事实上，可以通过很多设置来自定义一个 **bookdown** 项目。关于 **bookdown** 的更全面的概述，可以查看 _R Markdown Definitive Guide_ 的第十八章 [“Creating New Formats”](https://bookdown.org/yihui/rmarkdown/new-formats.html) [@rmarkdown2018]。完整文档请参见书籍  [**bookdown**](https://bookdown.org/yihui/bookdown/) [@bookdown2016]。
+
+需要注意的是，本节提供例子内容为英文，若需要编译含中文的文档，则需要加入特殊的命令，如 `documentclass: ctexbook`，一个简单的中文书例子请参见： https://github.com/yihui/bookdown-chinese。
+
+## 制作网站：`blogdown` {#rmarkdown-blogdown}
+
+### blogdown 简介 {#blogdown-intro}
+
+在当今的互联网时代世界，无论从事什么职业，个人网站几乎成为了一张人手必备的的“电子名片”。谢益辉开发的 blogdown 包提供了一种功能全面，且设置简单快速的个人网站架设途径。
+
+基于 Rmarkdown 的 blogdown 包为个人用户提供一种轻便快速的建立个人静态网站的方案。不同于市面上多数的网站建立方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，blogdown 依赖 R Markdown 文件为基础来生成网站。而 R Markdown  文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对 $LaTeX$ 的支持），数据分析，交互性插件（如交互性图表）等。
+
+本书的这个小节将通过一个对新手十分友好的案例来手把手的展示如何快速建立一个可满足日常基本需求的网站，以便用户可快速上手 R 的 blogdown 包。
+
+### 具体操作 {#blogdown-steps}
+
+#### 安装 blogdown {#steps-install}
+
+在开始之前，用户需要确认个人主机已经安装最新版本的 R 和 RStudio。
+
+首先，通过以下一行命令从 CRAN 安装 blogdown 包：
+```{r, eval=FALSE}
+# 安装 blogdown
+install.packages("blogdown")
+```
+
+#### 创建项目 {#steps-project}
+
+一个网站可被视为一个 R 项目。想要创建一个新的网站项目，只需要按照下图提示，在 RStudio 菜单栏依次选择文件，新项目，新目录 （`File -> New Project  -> New Directory`）。完成后，选择用 blogdown 建设网站 （`Website using blogdown`），即可看到一个网站项目的具体设置界面。
+
+```{r fig.cap="在 RStudio 中创建一个新网页项目", out.width="60%", echo = FALSE}
+knitr::include_graphics("images/blog1.png", dpi = NA)
+```
+
+
+```{r fig.cap="基于 blogdown 创建一个新网页项目", out.width="60%", echo = FALSE}
+knitr::include_graphics("images/blog2.png", dpi = NA)
+```
+
+设置好目录名，只需点击创建项目（`Create Project`），RStudio 即会通过 blogdown 包来自动生成一个网站项目。
+
+#### 网站铺设 {#steps-serve}
+
+用户可以便捷的通过 RStudio 的基础功能在本地浏览自己的网页项目。用户既可以直接在控制台 （Console） 键入 `blogdown::serve_site()`，或在 RStudio 上方的插件 （`Addins`） 选项选择铺设网站 （`Serve Site`）。
+
+```{r fig.cap="通过控制台在本地浏览你的网站", out.width="60%", echo = FALSE}
+knitr::include_graphics("images/blog3.png", dpi = NA)
+```
+
+```{r fig.cap="通过插件的铺设选项在本地浏览你的网站", out.width="60%", echo = FALSE}
+knitr::include_graphics("images/blog4.png", dpi = NA)
+```
+
+然后 RStudio 应会显示与下图相似的页面。
+
+```{r fig.cap="在本地铺设网站", out.width="60%", echo = FALSE}
+knitr::include_graphics("images/blog5.png", dpi = NA)
+```
+
+显示本地铺设成功后，用户既可以通过图形交互页面，点击在本地浏览器打开（在 RStudio 右上角的 `Show in new window`）来通过本地浏览器在本地浏览刚刚编辑好的网页。只要网页项目在本地浏览器中被打开后，之后任何在源文件上的改动都会自动在浏览器中进行实时加载，所以并不需要在每次改动后重复点击铺设 (`knit`) 网站。
+
+#### 内容编辑 {#steps-edit}
+
+位于 RStudio 的右下角，用户可以通过进入内容 `content` 文件夹来查看并编辑当下网站项目的所有内容页。作为一个初始例子，这里首先打开 2020 年 12 月 01 日的一个文件 `content/post/2020-12-01-r-rmarkdown/index.Rmd`。 可以注意到，打开的 `Rmarkdown/Rmd` 文件的最上方是含有标题 `title`，作者 `author` 等字眼的代码部分，而这个部分被称为 YAML 代码区 （用于设定网页形态）。 当编辑具体网页内容时，用户只需要在 YAML 代码区下方的空白部分进行编写即可。
+
+接下来，这里展示如何在网页中添加代码。如下图所示，只需添加一个 R 代码块，然后输入以下内容，代码就会自动展示在网页上。
+
+```{r, fig.show='hide'}
+library(ggplot2)
+summary(Orange)
+
+ggplot(Orange, aes(x = age, 
+                   y = circumference, 
+                   color = Tree)) +
+  geom_point() +
+  geom_line() +
+  guides(color = FALSE) +
+  theme_bw()
+```
+
+此时，如果编辑中的网站项目已经在本地浏览器中打开，用户只需要点击左上角的保存，几秒后即可在浏览器内看到如下图的内容。如果此时用户并没有在本地浏览网页，点击编译 `knit`，网站便会在本地的 RStudio 自动生成。
+
+```{r fig.cap="给 Rmd 文件添加 R 代码", out.width="60%", echo = FALSE}
+knitr::include_graphics("images/blog6.png", dpi = NA)
+```
+
+
+#### 网站配置 {#steps-configure}
+
+除了通过编辑 `Rmd` 文件来实现网站内容的编辑外，用户还可以通过修改 `config.yaml` 文件内的设定来自定义自己的网站。
+
+例如，打开 `config.yaml` 文件后，用户可能会看到如下内容：
+
+```{r, eval = FALSE}
+baseurl: /
+title: A Hugo website
+theme: hugo-lithium
+ignoreFiles:
+  - \.Rmd$
+  - \.Rmarkdown$
+  - _cache$
+  - \.knit\.md$
+  - \.utf8\.md$
+permalinks:
+  post: /:year/:month/:day/:slug/
+menu:
+  main:
+    - name: About
+      url: /about/
+    - name: GitHub
+      url: https://github.com/rstudio/blogdown
+    - name: Twitter
+      url: https://twitter.com/rstudio
+```
+
+只需在相应的部分进行编辑，用户就可以根据个人的需求自定义自己的网站，如：
+
+- `title: 我的网站` ：将网站标题修改为“我的网站”
+- `name: Weibo` `url: 你的微博url` ：在菜单中添加个人 Weibo 信息页面的链接
+
+#### 小结 {#steps-summary}
+
+目前为止，此节已经展示了如何创建并编辑一个个人化 blogdown 网站的三条基本知识：
+
+1. 通过 RStudio 的铺设 `Serve Site` 功能 或在控制台内键入 `blogdown::serve_site()` 来在本地浏览自己的网站。
+2. 通过编辑 `config.yaml` 文件来自定义自己的网站（标题，菜单栏，主题等）。
+3. 通过编辑处于目录夹中 `content` 文件夹内的 `Rmd` 文件来编辑具体的网页信息。通过进阶的学习，用户还可以通过修改自定义 `Rmd` 文件的位置来改变他们在网站上显示的结构。
+
+#### 部署 {#steps-deploy}
+
+那么下一步是什么？选择自然有很多，但最重要的莫过于通过部署编辑完成的网站，以便让他人可以通过互联网直接浏览网站上的内容。
+
+就像之前简短提到过的，因为静态网站本质上就是一个文件夹，所以静态网站与大多数动态网站相比较的一个重要优点就是部署更加简单且快速。那么如何选择用于部署的服务器呢？权衡过上手友好度以及性价比后，Netlify (https://www.netlify.com/) 是一个很不错的选择。
+
+#### Netlify {#steps-netlify}
+
+Netlify 提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 Github 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
+
+```{r fig.cap="在网站项目文件夹中找到名为Public的文件夹", out.width="60%", echo = FALSE}
+knitr::include_graphics("images/blog7.png", dpi = NA)
+```
+
+```{r fig.cap="将此文件夹拖拽入部署页面的部署区域即可完成部署", out.width="60%", echo = FALSE}
+knitr::include_graphics("images/blog8.png", dpi = NA)
+```
+
+一般只需几秒钟，网站就会被成功部署在 Netlify 的服务器上，并可以通过一个格式为 `random-word-12345.netlify.com` 的域名访问。此域名是 Netlify 自动生成的一个子域名，并支持通过设置修改至自己偏好的字眼。Netlify 提供的一体化部署服务省去了用户在其他服务器上实现自定义设置时往往需要面对的许多麻烦。
+
+不过需要注意的是，每次在本地的 RStudio 编辑完个人网站后，用户需要在控制台输入以下代码来更新你的公共文件夹  `Public/`。只有在更新完成后，才可以通过在 Netlify 上次最新版本的 `Public/` 文件夹来部署你改动过后的网站。
+
+```{r, eval=FALSE}
+blogdown::build_site()
+```
 
 ## 制作科技论文的支撑材料 {#rmarkdown-paper}
+
+数据驱动是当前科学研究的重要发展趋势。中国科学院生化所吴家睿教授认为，数据驱动的研究范式不仅能够避免研究者可能的主观偏见，而且可以帮助其发现在假设或者现有理论范围之外的全新知识。这种方式不需要假设，主要目的是去获取研究对象的相关信息，克服了假设驱动的研究范式对决定论和因果关系的偏执，进而形成了开放式研究的认识论新体系。
+
+在这样的背景下，越来越多的期刊都鼓励或者要求作者开放研究中使用的原始数据和分析过程，给了 R Markdown 一个新的用武之处。
+
+### 建议文件结构
+
+论文的支撑材料通常存放在 GitHub 这一类的开源网站上，其文件结构通常是：
+
+    |--+ data：子文件夹，用于存放分析使用的数据；
+    |--+ figures：子文件夹，用于存放生成的图片；
+    |--+ functions：子文件夹，用于存放一些需要重复调用的函数；
+    |- supplementary.Rproj：R 项目文件；
+    |- README.md：使用 Markdown 语法的 README 文件，用于说明项目相关信息；
+    |- analysis.Rmd：使用 R Markdown 语法的分析文件（可以有多个）。
+
+`analysis.Rmd` 是支撑材料中的核心文件。它是一个常规的 R Markdown 文档。举例来说，下面的头文件中分别指定了 3 种不同的输出样式。
+
+``` yaml
+---
+title: Your Title
+author: "your@email.com"
+date: "2022-5-15"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+  md_document:
+    variant: markdown_github
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+---
+```
+
+为了让生成的图片能够妥善的存放到 `figures` 文件夹，需要在头文件后面添加一些设置。
+
+```` r
+```{r setup_fig}
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp=0.618,
+  dpi = 300,
+  warning = FALSE,
+  fig.path = "figures/Figure-"
+)
+```
+````
+
+这里将图片的默认宽度和比例分别设置为 8 英寸和 0.618（黄金分割比例），并设置图片分辨率为 300 dpi；与此同时，不显示 R 运行过程中的警告信息；此外，还将图片输出的路径指定到 `figures` 文件夹中。
+
+### 分析报告的正文
+
+报告的正文仁者见仁智者见智，不过通常会包含以下几个部分（因为研究论文更多的发表在英文期刊上，所以这里的报告示例使用了英文标题）。
+
+```
+## Required Packages
+
+## Data Processing
+
+## Main Results
+
+## Supporting Results
+
+```
+
+这基本上是按照数据分析的逻辑组织的，所以就不再赘述了。
+
+如果文档中不涉及动态网页内容，推荐把 R Markdown 文档输出为 Markdown ，因为这样读者可以直接在 GitHub 网站查看相应的结果。
+
+具体做法：
+
+- 在头文件中加入 `output: github_document`；
+- 使用下面的命令将 Rmd 文件编译为 Markdown 文件。注意这里指定了 GitHub Flavored Markdown（gfm）作为输出格式。
+
+```{r eval=FALSE}
+library(rmarkdown)
+render("analysis.Rmd",md_document(variant = "gfm"))
+```
+

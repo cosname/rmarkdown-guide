@@ -16,11 +16,15 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: Checkout repo & download Git-LFS files
+        uses: actions/checkout@v3.0.2
+        with:
+          lfs: true
 
       - name: Setup R
-        uses: r-lib/actions/setup-r@v1
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.2.0'
 
       - name: Install pandoc
         run: |
@@ -39,13 +43,13 @@ jobs:
           path: ${{ env.MINICONDA_LIB_PATH }}
           key: miniconda-lib-${{ hashFiles('**/renv.lock') }}
           restore-keys: miniconda-lib-
-          
+
       - name: Cache Miniconda work
         uses: actions/cache@v2
         with:
           path: ${{ env.MINICONDA_WORK_PATH }}
           key: miniconda-work-${{ hashFiles('**/renv.lock') }}
-          restore-keys: miniconda-work-       
+          restore-keys: miniconda-work-
 
       - name: Cache bookdown results
         uses: actions/cache@v2
@@ -60,13 +64,15 @@ jobs:
           R -e 'renv::restore()'
           R -e 'if (!reticulate:::miniconda_exists()) reticulate::install_miniconda()'
           R -e 'if (!reticulate:::miniconda_exists()) reticulate::py_install(c("seaborn", "pandas"))'
+          R -e 'webshot::install_phantomjs()'
+          R -e 'tinytex::install_tinytex()'
 
 
       - name: Build site
         run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
 
       - name: Deploy to GitHub pages 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           branch: gh-pages

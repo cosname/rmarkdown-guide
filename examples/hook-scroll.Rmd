@@ -5,7 +5,7 @@ output:
     highlight: tango
 ---
 
-我们设置了一个输出钩子，可以当块选项`max.height`已被设置时，向文本输出添加`style`属性：
+本例设置了一个输出钩子，可以当块选项 `max.height` 已被设置时，向文本输出添加 `style` 属性：
 
 ```{r, include=FALSE}
 options(width = 60)
@@ -21,19 +21,19 @@ local({
 })
 ```
 
-如果没有`max.height`，可以看到完整的输出，即：
+如果没有 `max.height`，可以看到完整的输出，即：
 
 ```{r}
 1:100
 ```
 
-现在我们设置`max.height`为`100px`，这样可以在文本输出中看到一个滚动条，因为它的高度大于100px。
+现在设置 `max.height` 为 `100px`，这样可以在文本输出中看到一个滚动条，因为它的高度大于 100px。
 
 ```{r, max.height='100px'}
 1:100
 ```
 
-本质上，`max.height`选项被转换为`attr.output`选项，并且即使`attr.output`选项是存在的，这一转换也是有效的，也就是说，它不会覆盖`attr.output`选项，例如，我们可以通过`.numberLines` 属性在文本输出的左侧显示行号：
+本质上，`max.height` 选项被转换为 `attr.output` 选项，并且即 `attr.output` 选项是存在的，这一转换也是有效的，也就是说，它不会覆盖 `attr.output` 选项，例如，可以通过 `.numberLines` 属性在文本输出的左侧显示行号：
 
 ```{r, max.height='100px', attr.output='.numberLines'}
 1:100

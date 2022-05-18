@@ -1,41 +1,37 @@
 ---
-title: "Text Annotations"
+title: "文本注释"
 output:
   flexdashboard::flex_dashboard:
     orientation: rows
 ---
 
-Monthly deaths from bronchitis, emphysema and asthma in the
-UK, 1974–1979 (Source: P. J. Diggle, 1990, Time Series: A
-Biostatistical Introduction. Oxford, table A.3)
+英国 1974-1979 年每月死于支气管炎、肺气肿和哮喘的人数 （来源于：P. J. Diggle, 1990, Time Series: A Biostatistical Introduction. Oxford, table A.3）
 
 ```{r setup, include=FALSE}
 library(dygraphs)
 ```
 
-Row {data-height=600}
+行 {data-height=600}
 -------------------------------------
 
-### All Lung Deaths
+### 总肺癌死亡数
 
 ```{r}
 dygraph(ldeaths)
 ```
 
-Row {data-height=400}
+行 {data-height=400}
 -------------------------------------
 
-### Male Deaths
+### 男性死亡人数
 
 ```{r}
 dygraph(mdeaths)
 ```
 
-> Monthly deaths from lung disease in the UK, 1974–1979
+> 1974-1979 年英国每月死于肺病的人数。
 
-### About dygraphs
+### 备注
 
-This example makes use of the dygraphs R package. The dygraphs
-package provides rich facilities for charting time-series data 
-in R. You can use dygraphs at the R console, within R Markdown
-documents, and within Shiny applications.
+本例使用了 dygraphs 包。该包为绘制时间序列数据提供了丰富的工具。
+

@@ -33,7 +33,6 @@ knitr::write_bib(c(
   'ztable',
   'condformat',
   'magick',
-  'cairoDevice',
   'svglite',
   'tikzDevice',
   'printr',
@@ -54,11 +53,9 @@ knitr::write_bib(c(
   'spelling',
   'blastula',
   'googledrive',
-  'rmdrive',
   'workflowr',
   'xaringanthemer',
   'showtext',
-  'xaringanExtra',
   'officedown',
   'flexdashboard',
   'officer',
@@ -71,7 +68,11 @@ knitr::write_bib(c(
   "DT",
   "distill",
   "pagedown",
-  "bslib"
+  "bslib",
+  "formatR",
+  'cairoDevice',
+  'rmdrive',
+  'xaringanExtra'
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {

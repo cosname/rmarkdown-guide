@@ -13,7 +13,7 @@
 TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档。通过命令行模式，它的安装要简单的多。
 
 ```{r fig.cap="TinyTex 是一个瘦身版的 TeX Live"}
-knitr::include_graphics("images/logo-tinytex.png")
+knitr::include_graphics("images/logo-tinytex.png", dpi = NA)
 ```
 
 要安装 TinyTeX，只需要在 R 语言终端输入两条命令即可[^TinyTeX-vs-tinytex]。
@@ -72,14 +72,14 @@ tinytex::parse_install(log = "tex.log")
 ```
 
 
-### 安装 Git（*）	{#install-git}
+### 安装 Git (\*)	{#install-git}
 
 Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^linus-linux]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
 
 [^linus-linux]: Linus Torvalds (1969年12月28日－) 生于芬兰赫尔辛基市，拥有美国国籍，Linux 内核的最早作者，随后发起了这个开源项目，担任 Linux 内核的首要架构师与项目协调者，是当今世界最著名的电脑程序员、黑客之一。他 2005 年发布了 Git，是 Git 的主要开发者。
 
 ```{r fig.cap="使用 Git 和 GitHub 可以提高团队协作的效率", echo=FALSE}
-knitr::include_graphics("images/git-github.png")
+knitr::include_graphics("images/git-github.png", dpi = NA)
 ```
 
 #### 配置 Git 和 GitHub {#git-config}

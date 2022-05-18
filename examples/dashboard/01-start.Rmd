@@ -1,5 +1,5 @@
 ---
-title: "Get Started"
+title: "入门例子"
 output: flexdashboard::flex_dashboard
 ---
 
@@ -7,23 +7,23 @@ output: flexdashboard::flex_dashboard
 library(flexdashboard)
 ```
 
-Column 1
+第一列
 --------------------------------------------------
 
-### Chart A
+### 图表 A
 
 ```{r}
 ```
 
-Column 2
+第二列
 --------------------------------------------------
 
-### Chart B
+### 图表 B
 
 ```{r}
 ```
 
-### Chart C
+### 图表 C
 
 ```{r}
 ```

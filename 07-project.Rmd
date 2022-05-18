@@ -1,33 +1,529 @@
-# 使用R Markdown开展项目工作 {#rmarkdown-project}
+# 使用 R Markdown 开展项目工作 {#rmarkdown-project}
 
 ## 使用 R Markdown 在工作中管理项目 {#project-manage}
 
+在工作当中，在处理比较大的项目或报告时，将所有的文本和代码都放在一个 R Markdown 文档中可能会导致单个文档过大，不便于查找或者阅读。更好的方式是把它们组织成更小的单元。本节将介绍一些方法，来帮助使用者更好地组织与 R Markdown 相关的多个文件。
+
 ### 来自外部的 R 脚本 {#external-r}
+
+如果 R Markdown 中有大量代码，则可以考虑将一些代码放入外部 R 脚本中，并通过 `source()`\index{source()} 或 `sys.source()`\index{sys.source()} 来运行它们，例如：
+
+````md
+```{r, include=FALSE}`r ''`
+source("your-script.R", local = knitr::knit_global())
+# 或 sys.source("your-script.R", envir = knitr::knit_global())
+```
+````
+
+最好显式地使用 `source()` 中的 `local` 或 `sys.source()` 中的 `envir` 来确保代码在正确的环境中被运行，即 `knitr::knit_global()`\index{knitr!knit\_global()}。否则的话，它们的默认值可能并不能提供合适的环境：可能最终会在错误的环境中创建变量，并且发现在后面的代码块中找不到某些对象。
+
+接下来，在 R Markdown 文档中，可以使用这些脚本中创建的对象（例如，数据对象或函数）。这种方法不仅可以让 R Markdown 文档更简洁，而且可以更方便地开发 R 代码（例如，使用纯 R 脚本调试 R 代码通常比使用 R Markdown 更容易）。
+
+需要注意的是，上面的例子中使用了 `include = FALSE`\index{chunk option!include}，从而只执行脚本而不显示任何输出。如果想要输出，则可以删除这个块选项，或者使用第 \@ref(hide-one) 节中的块选项来有选择地隐藏或显示不同类型的输出。
 
 ### 将外部脚本读取到一个块中 {#external-read}
 
-### 从外部脚本读取多个代码块 (*) {#external-multi}
+事实上，第 \@ref(external-r) 节中的 `source()` 方法有一个缺点：默认情况下将无法看到源代码。为了解决这个问题，可以使用 `source(..., echo = TRUE)`，但源代码将不会正确地突出显示语法。此外，如第 \@ref(external-r) 节中提到的那样，需要小心 `source()` 的 `local` 参数。本节将介绍一种没有上述问题的替代方法。
 
-### 子文档 (*) {#child-document}
+基本上，当有一个或多个外部脚本时，可以读取它们并将内容传递给 `code` 选项\index\index{chunk option!code}。`code` 选项可以接受一个字符向量，并将其作为代码块的内容。下面展示了几个例子。
+
+- `code` 选项可以接受源代码形式的字符向量。例如：
+
+    ````md
+    ```{r, code=c('1 + 1', 'if (TRUE) plot(cars)')}`r ''`
+    ```
+    ````
+
+- 也可以读取外部文件：
+
+    ````md
+    ```{r, code=xfun::read_utf8('your-script.R')}`r ''`
+    ```
+    ````
+
+- 可以读取任意数量的脚本：
+
+    ````md
+    ```{r, include=FALSE}`r ''`
+    read_files <- function(files) {
+      unlist(lapply(files, xfun::read_utf8))
+    }
+    ```
+
+    ```{r, code=read_files(c('one.R', 'two.R'))}`r ''`
+    ```
+    ````
+
+也可以读取其他语言的脚本。在 R Markdown 中如何使用其他语言，请参阅 第 \@ref(other-language) 节。下面是关于非 R 代码的一些示例。
+
+- 读取Python脚本：
+
+    ````md
+    ```{python, code=xfun::read_utf8('script.py')}`r ''`
+    ```
+    ````
+
+- 读取C++文件：
+
+    ````md
+    ```{Rcpp, code=xfun::read_utf8('file.cpp')}`r ''`
+    ```
+    ````
+
+借助 `code` 选项，可以在任何编辑器中开发复杂的代码，并将其读到一个 R Markdown 文档的代码块中。
+
+### 从外部脚本读取多个代码块 (\*) {#external-multi}
+
+第 \@ref(external-read) 节介绍了一种将代码读取到单个代码块的方法。本节则将介绍一种从外部脚本中读取多个代码块的方法。该方法的关键点在于需要标记脚本中的代码，进而可以在 R Markdown 文档的代码块中使用相同的标签，所以外部脚本中的代码可以通过函数 `knitr::read_chunk()`\index{knitr!read\_chunk()} 映射到代码块。若要给脚本中的代码块贴上标签，可以在 `## ----` 后面写标签，还可以在该行的末尾添加一系列破折号。一个脚本可以包含多个已被标记的代码块，例如：
+
+```r
+## ---- test-a --------
+1 + 1
+
+## ---- test-b --------
+if (TRUE) {
+  plot(cars)
+}
+```
+
+假设上面脚本的文件名是 `test.R`。在 R Markdown 文档中，可以通过 `knitr::read_chunk()` 来读取它，并使用带有标签的代码块中的代码，例如：
+
+````md
+读取外部脚本：
+
+```{r, include=FALSE, cache=FALSE}`r ''`
+knitr::read_chunk('test.R')
+```
+
+现在可以使用被标记的代码，即：
+
+```{r, test-a, echo=FALSE}`r ''`
+```
+
+```{r, test-b, fig.height=4}`r ''`
+```
+````
+
+需要注意的是，使用 `knitr::read_chunk()` 时请确保调用这个函数的代码块没有被缓存（见第 \@ref(cache) 节的解释）。
+
+与第 \@ref(external-r) 节和第 \@ref(external-read) 节中引入的方法一样，该方法也为在独立环境中开发代码提供了灵活性。
+
+### 子文档 (\*) {#child-document}
+
+如果觉得一个 R Markdown 文档太长，可以考虑把它分成更短的文档，并通过块选项 `child`\index{chunk option!child} 将它们设置为主文档的子文档（child document\index{child documents}）。在 `child` 选项中需要以字符向量的形式给定子文档的路径，例如：
+
+````md
+```{r, child=c('one.Rmd', 'two.Rmd')}`r ''`
+```
+````
+
+因为 **knitr** 块选项可以从任意的 R 表达式中获取值，故 `child` 选项的一个应用就是有条件地包含文档。例如，如果报告中有一个附录，其中包含了特定读者（如老板）可能不感兴趣的技术细节，则可以使用一个变量来控制这个附录是否包含在报告中：
+
+````md
+
+如果特定读者（如老板）阅读这份报告，则将 `BOSS_MODE` 改为 `TRUE`：
+
+```{r, include=FALSE}`r ''`
+BOSS_MODE <- FALSE
+```
+
+有条件地包含附录：
+
+```{r, child=if (!BOSS_MODE) 'appendix.Rmd'}`r ''`
+```
+````
+
+或者如果正在写一篇关于一场尚未发生的足球比赛的新闻报道（例如德国和巴西之间的比赛），则可以根据结果包含不同的子文档，例如，`child = if (winner == 'brazil') 'brazil.Rmd' else 'germany.Rmd'`。然后，一旦比赛结束，就可以立即发表报告。
+
+另一种编译子文档的方法是函数 `knitr::knit_child()`\index{knitr!knit\_child()}。使用者可以在一个 R 代码块或一个行内 R 表达式中调用这个函数，例如：
+
+````md
+```{r, echo=FALSE, results='asis'}`r ''`
+res <- knitr::knit_child('child.Rmd', quiet = TRUE)
+cat(res, sep = '\n')
+```
+````
+
+函数 `knit_child()` 返回已编译输出的字符向量，可以使用 `cat()` 和块选项 `results = 'asis'`\index{chunk option!results} 来将其写回主文档。
+
+甚至可以使用子文档作为模板，并使用不同的参数重复调用 `knit_child()`。下面的例子使用 `mpg` 作为响应变量，而 `mtcars` 数据中的其他变量作为解释变量进行回归：
+
+````md
+```{r, echo=FALSE, results='asis'}`r ''`
+res <- lapply(setdiff(names(mtcars), 'mpg'), function(x) {
+  knitr::knit_child(text = c(
+    '## 对 "`r knitr::inline_expr('x')`" 跑回归 ',
+    '',
+    '```{r}',
+    'lm(mpg ~ ., data = mtcars[, c("mpg", x)])',
+    '```',
+    ''
+  ), envir = environment(), quiet = TRUE)
+})
+cat(unlist(res), sep = '\n')
+```
+````
+
+为了使上面的示例自成一体，上例使用 `knit_child()` 的 `text` 参数而不是文件输入来传递要编译的 R Markdown 内容。当然可以将内容写入一个文件，并将路径传递给 `knit_child()`。例如，可以将下面的内容保存到一个名为 `template.Rmd` 的文件中：
+
+````md
+## 对 "`r knitr::inline_expr('x')`" 跑回归
+
+```{r}`r ''`
+lm(mpg ~ ., data = mtcars[, c("mpg", x)])
+```
+````
+
+然后编译这个文件：
+
+```{r, eval=FALSE, tidy=FALSE}
+res <- lapply(setdiff(names(mtcars), 'mpg'), function(x) {
+  knitr::knit_child(
+    'template.Rmd', envir = environment(), quiet = TRUE
+  )
+})
+cat(unlist(res), sep = '\n')
+```
+
 
 ### 保留图像文件 {#keep-plot}
 
+大多数 R Markdown 输出格式默认使用选项 `self_contained = TRUE`\index{output option!self\_contained}。这将导致 R 的图像会直接被嵌入到输出文档中，所以在查看输出文档时不需要这些中间产物（图像文件）。因此，图像文件夹（通常带有后缀 `_files`）将在 R Markdown 文档编译完成后被删除。
+
+然而，有的时候可能需要保留图像文件。例如，一些学术期刊要求作者单独提交数据文件。对于 R Markdown 来说，有三种方法可以避免自动删除这些文件：
+
+1. 如果输出格式支持，请使用选项 `self_contained = FALSE`，例如：
+
+    ```yaml
+    output:
+      html_document:
+        self_contained: false
+    ```
+
+    但是，这意味着图像文件不会被嵌入到输出文档中。如果不想这样，则可以考虑下面两种方法。
+    
+2. 为至少一个代码块启用缓存（见第 \@ref(cache) 节）。当启用缓存时，R Markdown 将不会删除 plot 文件夹。
+
+3. 如果输出格式支持，请使用选项 `keep_md = TRUE`\index{output option!keep\_md}，例如：
+
+    ```yaml
+    output:
+      word_document:
+        keep_md: true
+    ```
+
+    当要求 R Markdown 保存中间的 Markdown 输出文件时，它也将保存图像文件夹。
+
+
 ### R 代码块的工作目录 {#chunk-directory}
+
+在默认情况下，R 代码块的工作目录（working directory）\index{working directory}是包含 R Markdown 文档的目录。例如，如果一个 R Markdown 文件的路径是 `~/Downloads/foo.Rmd`，计算 R 代码块的工作目录是 `~/Downloads/`。这意味着当在代码块中引用具有相对路径的外部文件时，需要知道这些路径是相对于 R Markdown 文件的目录的。例如 `read.csv("data/iris.csv")` 在代码块中意味着读取 CSV 文件 `~/Downloads/data/iris.csv`。
+
+当有报错或其它问题时，可以将 `getwd()` 添加到代码块中，编译文档，并检查 `getwd()` 的输出。
+
+有的时候，可能希望使用另一个目录作为工作目录。通常改变工作目录的方法是 `setwd()`，但是需要注意的是，`setwd()` 在 R Markdown（或其他类型的 **knitr** 源文档）中并不是持久的，即 `setwd()` 仅对当前代码块有效，工作目录将在此代码块计算后恢复。
+
+如果想改变所有代码块的工作目录，则可以通过在文档开头的 `setup` 代码块来设置：\index{knitr!root.dir}\index{knitr!opts\_knit}
+
+````md
+```{r, setup, include=FALSE}`r ''`
+knitr::opts_knit$set(root.dir = '/tmp')
+```
+````
+
+这将改变所有后续代码块的工作目录。
+
+如果使用 RStudio 来编译 R Markdown，也可以从菜单 `Tools -> Global Options -> R Markdown` 中选择工作目录（见图 \@ref(fig:rmd-wd)）。默认工作目录的是 R Markdown 的目录文件，并且还有另外两个可能的选择：可以使用 R 控制台的当前工作目录（选项 `Current`），或者使用包含这个 R Markdown 文件的项目的根目录（选项 `Project`）作为工作目录。
+
+```{r, rmd-wd, echo=FALSE, fig.cap='在 RStudio 中改变所有 R Markdown 文档的默认工作目录。', fig.align='center'}
+knitr::include_graphics('images/rmd-wd.png', dpi = NA)
+```
+
+在 RStudio 中，也可以编译一个带有特定工作目录的独立 R Markdown 文档，如图 \@ref(fig:knit-wd) 所示。在改变 `Knit Directory` 并点击 `Knit` 按钮后，**knitr** 将使用新的工作目录来编译代码块。所有这些设置都可以归结为前面提到的 `knitr::opts_knit$set(root.dir = ...)`，所以如果不满意上述更改工作目录方式的任何一个，也可以自己用 `knitr::opts_knit$set()` 指定一个目录。
+
+```{r, knit-wd, echo=FALSE, fig.cap='在 R Studio 中用其它可能的工作目录编译一个 Rmd 文档。', fig.align='center'}
+knitr::include_graphics('images/knit-wd.png', dpi = NA)
+```
+
+更改工作目录各方式的选择没有哪种绝对正确，每种选择都有其优缺点：
+
+- 如果使用 R Markdown 文档目录作为代码块的工作目录（**knitr** 的默认值），则需假定文件路径是相对于 R Markdown 文档的。这类似于 web 浏览器如何处理相对路径，例如，对于在 HTML 页面 `https://www.example.org/path/to/page.html`的一个图像 `<img src="foo/bar.png" />`，web 浏览器将尝试从 `https://www.example.org/path/to/foo/bar.png` 获取图像。换句话说，相对路径 `foo/bar.png` 是相对于 HTML 文件的目录，即 `https://www.example.org/path/to/`。
+
+    这种方法的优点是，可以自由地将 R Markdown 文件与其引用的文件一起移动到任何地方，只要它们的相对位置保持不变。对于上面的 HTML 页面和图像示例，文件 `page.html` 和 `foo/bar.png` 可以一起移动到不同的目录，如 `https://www.example.org/another/path/`，使用者将不需要更新 `<img />` 的 `src` 属性中的相对路径。
+  
+    一些用户喜欢将 R Markdown 文档中的相对路径看作是“相对于 R 控制台的工作目录”，而不是“相对于 R Markdown 文件”。因此，**knitr** 的默认工作目录让人感到困惑。事实上，当设计者在设计 **knitr** 时，没有使用 R 控制台的工作目录作为默认目录的原因是，用户可以使用 `setwd()` 随时更改工作目录。这个工作目录不能保证是稳定的。每当用户在控制台中调用 `setwd()` 时，就存在 R Markdown 文档中的文件路径可能失效的风险，因为这在 R Markdown 文件的控制之外。当考虑相对路径时，如果将 R Markdown 文件视为“宇宙的中心”，那么 R Markdown 文件中的路径可能更稳定。
+
+    此外，如果不想过多地考虑相对路径，则可以使用 RStudio 的自动填充功能在 RStudio 中输入一个路径，如图 \@ref(fig:rmd-relative) 所示。RStudio 将尝试自动完成一个相对于 R Markdown 文件的路径。
+    
+- 使用 R 控制台的工作目录可以是一个很好的选择，可以以编程方式或交互式方式编译文档。例如，可以在循环中多次编译一个文档，并每次使用不同的工作目录来读取该目录中的不同数据文件（具有相同的文件名）。这种类型的工作目录是由 **ezknitr** 包\index{R package!ezknitr} [@R-ezknitr]实现的，其本质上是使用 `knitr::opts_knit$set(root.dir)` 来改变 **knitr** 中的代码块的工作目录。
+
+- 使用项目目录作为工作目录需要一个明显的假设：首先必须使用一个项目（例如，RStudio 项目或版本控制项目），这可能是这种方法的一个缺点。这种类型的工作目录的优点是，任何 R Markdown 文档中的所有相对路径都是相对于项目根目录的，因此不需要考虑 R Markdown 文件在项目中的位置，也不需要相应地调整其他文件的相对路径。这种类型的工作目录是由 **here**\index{R package!here} [@R-here]实现的，它提供了函数 `here::here()`，通过解析传递给它的相对路径来返回绝对路径（需要注意的是，相对路径是相对于项目根的）。然而，该方法的缺点是，当引用的文件和 R Markdown 文件一起移动到项目中的另一个位置时，需要更新 R Markdown 文档中的引用路径。当与其他人共享 R Markdown 文件时，也必须共享整个项目。
+    
+    这些类型的路径类似于 HTML 中没有协议（protocol）或域（domain）的绝对路径。例如，`https://www.example.org/path/to/page.html` 页面上的 `<img src="/foo/bar.png" />` 图像是指网站根目录下的图像，即 `https://www.example.org/foo/bar.png`。图像 `src` 属性中的 `/` 表示网站的根目录。如果想了解更多关于 HTML 中绝对路径和相对路径的知识，请参阅[附录 B.1 -- **blogdown** 书](https://bookdown.org/yihui/blogdown/html.html) [@blogdown2017]。
+
+工作目录之苦主要来自于处理相对路径时的这个问题： _相对于什么？_正如之前提到的，不同的人有不同的偏好，没有绝对正确的答案。
+
+```{r, rmd-relative, echo=FALSE, fig.cap='在 RStudio 中自动填充 Rmd 文档中的文件路径。', fig.align='center'}
+knitr::include_graphics('images/rmd-relative.png', dpi = NA)
+```
 
 ## 使用 R Markdown 实现工作流 {#work-flow}
 
+本节将介绍一些处理 R Markdown 文档以及运行 R Markdown 项目的技巧。在学习完本节后，可以对上述工作有初步的了解，想要更详细地了解也可以查看 _R for Data Science_ 的第三十章 [“R Markdown workflow”](https://r4ds.had.co.nz/r-markdown-workflow.html)[@wickham2016]，该书简要介绍了一些使用分析笔记本的技巧（包括 R Markdown 文档）。Nicholas Tierney在书[_R Markdown for Scientists_](https://rmd4sci.njtierney.com/workflow.html) 中也讨论了工作流。
+
 ### 使用 RStudio 键盘快捷键 {#rstudio-shortcut}
+
+R Markdown 格式可以与任何编辑器一起使用，只要安装了 R、**rmarkdown** 包以及 Pandoc。然而，RStudio\index{RStudio!keyboard shortcuts} 与 R Markdown 深度集成，所以可以在 RStudio 中利用 R Markdown 顺利地开展工作。
+
+与任何 IDE（集成开发环境，Integrated Development Environment）一样，RStudio 也有键盘快捷键。完整的列表可以在菜单 `Tools -> Keyboard Shortcuts Help` 下找到。一些与 R Markdown 相关的最有用的快捷方式总结可见表 \@ref(tab:shortcuts)。
+
+```{r, include = FALSE}
+ks_win <- function(letters, ctrl = TRUE, alt = TRUE, shift = FALSE, enter = FALSE) {
+  paste0(
+    if (ctrl) "Ctrl+",
+    if (alt) "Alt+",
+    if (shift) "Shift+",
+    if (enter) "Enter+",
+    letters
+  )
+}
+ks_mac <- function(letters, cmd = TRUE, opt = TRUE, shift = FALSE, enter = FALSE) {
+  paste0(
+    if (cmd) "Command+",
+    if (opt) "Option+",
+    if (shift) "Shift+",
+    if (enter) "Enter+",
+    letters
+  )
+}
+```
+
+```{r shortcuts, echo = FALSE}
+keyboard_table <- tibble::tribble(
+  ~ "任务"             , ~ "Windows & Linux"                    , ~ "macOS",
+  "插入 R 块"            , ks_win("I")                            , ks_mac("I"),
+  "HTML预览"              , ks_win("K", alt = FALSE, shift = TRUE) , ks_mac("K", opt = FALSE, shift = TRUE),
+  "编译文档（knitr）"    , ks_win("K", alt = FALSE, shift = TRUE) , ks_mac("K", opt = FALSE, shift = TRUE),
+  "编译Notebook"          , ks_win("K", alt = FALSE, shift = TRUE) , ks_mac("K", opt = FALSE, shift = TRUE),
+  "编译PDF"               , ks_win("K", alt = FALSE, shift = TRUE) , ks_mac("K", opt = FALSE, shift = TRUE),
+  "运行上面的所有块、"      , ks_win("P")                            , ks_mac("P"),
+  "运行当前的块"         , ks_win("C")                            , ks_mac("C"),
+  "运行当前的块"         , ks_win("Enter", TRUE, FALSE, TRUE)     , ks_mac("Enter", TRUE, FALSE, TRUE),
+  "运行下一个块"            , ks_win("N")                            , ks_mac("N"),
+  "运行所有的块"            , ks_win("R")                            , ks_mac("R"),
+  "转到下一个块/标题"    , ks_win("PgDown", alt = FALSE)          , ks_mac("PgDown", opt = FALSE),
+  "转到上一个块/标题", ks_win("PgUp", alt = FALSE)            , ks_mac("PgUp", opt = FALSE),
+  "显示/隐藏文档大纲", ks_win("O", TRUE, FALSE, TRUE)         , ks_mac("O", TRUE, FALSE, TRUE),
+  "Build书、网站..."  , ks_win("B", TRUE, FALSE, TRUE)         , ks_mac("B", TRUE, FALSE, TRUE)
+)
+knitr::kable(keyboard_table, caption = "与R Markdown相关的RStudio键盘快捷键。", booktabs = TRUE)
+```
+
+此外，还可以通过 `Ctrl + Alt + F10`（或 macOS 中的`Command + Option + F10`）来重新启动 R 会话。定期重新启动有助于保证结果的再现性，因为如果结果是从一个新的 R 会话计算出来的，那么其更有可能再现。这也可以通过工具栏上 `Run` 按钮后面的下拉菜单 `Restart R and Run All Chunks` 来完成。
 
 ### R Markdown 的拼写检查 {#spell-check}
 
-### 用 rmarkdown::render() 呈现 R Markdown {#render-rmd}
+如果使用 RStudio IDE\index{RStudio!spellcheck}，可以按 `F7` 键或点击菜单 `Edit -> Check Spelling` 对 R Markdown 文档进行拼写检查。实时拼写检查在 RStudio v1.3 中已经可以使用了，所以在这个版本或更高版本的 RStudio 中，不再需要手动触发拼写检查。
+
+如果不使用 RStudio，则 **spelling** 包\index{R package!spelling} [@R-spelling]提供一个函数 `spell_check_files()`，可以检查常见文档格式的拼写，包括 R Markdown。当拼写检查 R Markdown 文档时，它将跳过代码块，只检查普通文本。
+
+### 用 `rmarkdown::render()` 呈现 R Markdown {#render-rmd}
+
+如果不使用 RStudio 或任何其他 IDE，则需要知道一个事实：R Markdown 文档是通过函数 `rmarkdown::render()`\index{rmarkdown!render()} 来呈现的。这意味着可以在任何 R 脚本中以编程方式呈现 R Markdown 文档。例如，可以在 `for` 循环中为一个国家的每个城市呈现一系列报告：
+
+```{r, eval=FALSE, tidy=FALSE}
+for (city in city.name) {
+  rmarkdown::render(
+    'input.Rmd', output_file = paste0(city, '.html')
+  )
+}
+```
+
+这样的话，每个城市的输出文件名是不同的。还可以在文档 `input.Rmd` 中使用 `city` 变量，例如：
+
+
+````md
+---
+title: "`r knitr::inline_expr('city')` 的一个报告"
+output: html_document
+---
+
+`r knitr::inline_expr('city')` 的面积是 `r knitr::inline_expr('city.area[city.name == city]')` 平方公里。
+````
+
+可以阅读帮助页面 `?rmarkdown::render` 以了解其他可能的参数。这里本节只提到其中两个关键的参数：`clean` 和 `envir` 参数。
+
+当 Pandoc 转换出现任何问题时，`clean` 参数将特别有助于调试。如果调用 `rmarkdown::render(..., clean = FALSE)` ，所有中间文件将被保留，包括编译 `.Rmd` 文件得到的中间文件 `.md`。如果 Pandoc 发出错误信号，则可以从 `.md` 文件开始调试。
+
+当调用 `rmarkdown::render(..., envir = new.env())` 时，`envir` 参数可以保证空白的新环境下呈现文档，因此在代码块中创建的对象将留在该环境中，而不会影响当前的全局环境。另一方面，如果倾向于在一个新的 R 会话中呈现 R Markdown 文档，以便当前 R 会话中的对象不会影响 R Markdown 文档，则可以在 `xfun::Rscript_call()` 中调用 `rmarkdown::render`，例如：
+
+```{r, eval=FALSE, tidy=FALSE}
+xfun::Rscript_call(
+  rmarkdown::render,
+  list(input = 'my-file.Rmd', output_format = 'pdf_document')
+)
+```
+
+这个方法类似于点击 RStudio的 `Knit` 按钮\index{RStudio!Knit button}，它也在可以新的 R 会话中呈现 R Markdown 文档。考虑到使用者可能需要在一个 R Markdown 文档内呈现另一个 R Markdown 文档，本书强烈建议使用者使用这种方法，而不是在代码块中直接调用 `rmarkdown::render()`，因为 `rmarkdown::render()` 会产生并依赖于其内部的很多“副产物”，这可能会影响在同一个 R 会话中呈现其他的 R Markdown 文件。
+
+`xfun::Rscript_call()` 的第二个参数接受传递给 `rmarkdown::render()` 的参数列表。事实上，`xfun::Rscript_call` 是一个通用的函数，用于在新的 R 会话中调用任何 R 函数。感兴趣者可以查看它的帮助页面。
 
 ### 参数化的报告 {#parameterized-reports}
 
-### 自定义 Knit 按钮 (*)	{#customize-button}
+第 \@ref(render-rmd) 节提到了一种在 `for` 循环中呈现一系列报告的方法。实际上，`rmarkdown::render()`\index{rmarkdown!render()} 有一个叫 `params` 的参数，是专门为这个任务设计的。使用者可以通过这个参数来参数化其产生的报告。当为报表指定参数时，可以在报表中使用变量 `params`。例如，如果调用：
+
+```{r, eval=FALSE, tidy=FALSE}
+for (city in city.name) {
+  rmarkdown::render('input.Rmd', params = list(city = city))
+}
+```
+
+那么在 `input.Rmd` 中，`params` 对象会是一个包含 `city` 变量的列表：
+
+````md
+---
+title: "`r knitr::inline_expr('params$city')` 的一个报告"
+output: html_document
+---
+
+`r knitr::inline_expr('params$city')` 的面积是 `r knitr::inline_expr('city.area[city.name == params$city]')` 平方公里。
+
+````
+
+另一种为报告指定参数的方法是使用 YAML 字段 `params`，例如：
+
+```yaml
+---
+title: 参数化的报告
+output: html_document
+params:
+  city: Beijing
+  year: 2022
+---
+```
+
+需要注意的是，使用者可以在 YAML 字段 `params`\index{YAML!params} 或 `rmarkdown::render()` 的参数 `params` 中包含尽可能多的参数。如果 YAML 字段 `params` 和参数 `params` 同时存在，则参数 `params` 中的参数值将覆盖 YAML 字段 `params` 中相应的参数。例如，当在前面有 YAML 字段 `params` 的例子中调用 `rmarkdown::render(..., params = list(city = 'Shanghai', year = 2020)`，则在 R Markdown 文档中，`params$city` 将变成 `Shanghai`（而不是`Beijing`）， `params$year` 将变成`2020`（而不是`2022`）
+
+当用相同的 R Markdown 文档呈现一系列报告时，需要调整 `rmarkdown::render()` 的 `output_file` 参数，以确保每个报告都有其唯一的文件名。否则，可能将意外地覆盖某些报告文件。例如，可以编写一个函数来生成每个城市每年的报告：
+
+
+```{r, eval=FALSE, tidy=FALSE}
+render_one <- function(city, year) {
+  # 假设 input.Rmd 的输出格式是 PDF
+  rmarkdown::render(
+    'input.Rmd',
+    output_file = paste0(city, '-', year, '.pdf'),
+    params = list(city = city, year = year),
+    envir = parent.frame()
+  )
+}
+```
+
+之后可以使用嵌套的 `for` 循环来生成所有的报告：
+
+```{r, eval=FALSE}
+for (city in city.name) {
+  for (year in 2000:2022) {
+    render_one(city, year)
+  }
+}
+```
+
+最后，可以得到一系列的报告文件，如`Beijing-2000.pdf`，`Beijing-2001.pdf`，...，`Shanghai-2021.pdf`，以及`Shanghai-2022.pdf`。
+
+对于参数化的报告，还可以通过一个由 Shiny 创建的图形用户界面（Graphical User Interface，GUI）来交互式地输入参数。这需要在 YAML 中提供一个 `params` 字段，**rmarkdown** 将为每个参数使用适当的输入部件自动创建 GUI，例如，将为布尔（Boolean）参数提供一个复选框。
+
+如果不使用 RStudio，也可以用 `params = 'ask'` 调用 `rmarkdown::render()` 来启动 GUI：
+
+```{r, eval=FALSE}
+rmarkdown::render('input.Rmd', params = 'ask')
+```
+
+如果使用 RStudio，则可以点击 `Knit` 按钮后面的菜单 `Knit with Parameters`\index{RStudio!Knit with Parameters}。图 \@ref(fig:params-shiny) 展示了一个参数的 GUI 示例。
+
+```{r, params-shiny, echo=FALSE, fig.cap='使用者可以从 GUI 输入的参数编译一个 R Markdown 文档。'}
+knitr::include_graphics('images/params-shiny.png', dpi = NA)
+```
+
+有关参数化报告的更多信息，请阅读 _R Markdown Definitive Guide_ 的第十五章 [“Parameterized reports”](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html)[@rmarkdown2018]。
+
+### 自定义 `Knit` 按钮 (\*)	{#customize-button}
+
+当点击 RStudio 的 `Knit`\index{RStudio!Knit button} 按钮时，它将在一个新的 R 会话中调用 `rmarkdown::render()` 函数，并输出一个与输入文件的基本名相同的文件。例如，编译输出格式为 `html_document` 的 `example.Rmd` ，将得到一个输出文件 `example.html`。
+
+在某些情况下，使用者可能需要自定义文档的呈现方式。例如，可能希望呈现的文档包含当前日期，或者希望将编译后的报告输出到不同的目录中。尽管可以通过使用适当的 `output_file` 参数调用 `rmarkdown::render()`（请参阅第 \@ref(render-rmd) 节）来实现这些目标，但依赖自定义调用 `rmarkdown::render()` 来编译报告可能会很不方便。
+
+另外，可以通过在文档的 YAML frontmatter 中提供 `knit` 字段来控制 `Knit` 按钮的行为。该字段接受一个主参数为 `input`（输入 R Markdown 文档的路径）和其他当前被忽略的参数的函数。使用者可以直接在 `knit` 字段中编写函数的源代码，也可以把函数放在其他地方（例如，在 R 包中），然后在 `knit` 字段中调用函数。如果经常需要自定义的 `knit`功能，则建议把它放在一个包中，而不是在每个 R Markdown 文档中都重复它的源代码。
+
+如果直接将代码存储在 YAML 中，则必须将整个函数包装在括号中。如果源代码有多行，则必须缩进所有行（第一行除外）至少两个空格。例如，如果想要输出文件名包含它呈现的日期，可以使用如下的 YAML 代码\index{YAML!knit}：
+
+```yaml
+---
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_file = paste0(
+        xfun::sans_ext(input), '-', Sys.Date(), '.html'
+      ),
+      envir = globalenv()
+    )
+  })
+---
+``` 
+
+例如，如果在 2022-02-08 编译 `example.Rmd`，则输出的文件名将为 `example-2022-02-08.html`。
+
+虽然上面的方法看起来足够简单和直接，但直接在 YAML 中嵌入函数可能会使维护它变得困难，除非该函数只在单个 R Markdown 文档中使用一次。一般而言，建议使用 R 包来维护这样的函数，例如，可以在包中创建一个函数 `knit_with_date()`：
+
+```{r, eval=FALSE, tidy=FALSE}
+#' 为 RStudio 自定义编译功能
+#'
+#' @export
+knit_with_date <- function(input, ...) {
+  rmarkdown::render(
+    input,
+    output_file = paste0(
+        xfun::sans_ext(input), '-', Sys.Date(), '.',
+        xfun::file_ext(input)
+    ),
+    envir = globalenv()
+  )
+}
+```
+
+如果将上面的代码添加到一个名为 **myPackage** 的包中，则将能够使用以下 YAML 设置来引用自定义的 `knit` 函数：
+
+```yaml
+---
+knit: myPackage::knit_with_date
+---
+```
+
+可以参考帮助页面 `?rmarkdown::render` 来找到更多关于如何在 RStudio 中自定义 `Knit` 按钮后 `knit` 函数的方法。
 
 ### 通过 Google Drive 对 Rmd 文档进行协作	{#google-drive}
 
-### 用 workflowr 将R Markdown项目组织到一个研究网站上 {#workflowr-web}
+基于 **googledrive** 包\index{R package!googledrive} [@R-googledrive]， Emily Kothe 在 **rmdrive** 包\index{R package!rmdrive} 中提供了一些包装函数，该包目前只能从 GitHub上获得（https://github.com/ekothe/rmdrive）。在撰写本书时，它仍然缺乏丰富的文档，所以建议尝试 Janosch Linkersdörfer 的分支：https://github.com/januz/rmdrive，该分支基于 Ben Marwick 的分支（对于尚未学会 Git 的读者，可能会被这些自由分支和改进其他人 Git 库的例子所激励）。
+
+使用 **rmdrive** 进行工作的流程可被概述如下：
+
+1. 假设有一个项目的主要作者或贡献者，他能够使用像 Git 这样的版本控制工具。主要作者编写 R
+Markdown 文档的初始版本，并通过 `upload_rmd()` 函数将其上传到 Google Drive；
+
+1. Google Drive 中的 R Markdown 文档可以与其他合作者共享，他们可以对 Google Document 进行更改或提出更改建议；
+
+1. 主要作者可以接受建议的修改，并通过 `render_rmd()` 在本地下载或预览 R Markdown 文档。如果其他合作者有修改过的代码块，并且希望看到新的结果，他们也可以自己完成这项工作；
+
+1. 如果满意，主作者可以将更改提交到 Git 存储库。
+
+在 Google Drive 中，协作编辑可以是同步的，也可以是异步的。多人可以同时编辑同一文档，也可以等待其他人先完成编辑。
+
+包中还有一个 `udpate_rmd()` 函数，它允许在本地编辑 R Markdown 文档，并将本地 R Markdown 文档上传到 Google Drive。事实上，使用者可能永远都不应该运行这个函数，因为它将完全覆盖 Google Drive 中的文档。主要作者需要提前警告合作者。理想情况下，所有协作者应该只在 Google Drive 中编辑文档，而不是在本地。可以通过 `render_rmd()` 在本地预览编辑的文档，不过需要注意的是，`render_rmd()` 会在呈现之前自动下载文档。
+
+### 用 `workflowr` 将 R Markdown 项目组织到一个研究网站上 {#workflowr-web}
+
+为了更好地完成 R Markdown 项目，有的时候使用者会想将其组织到一个网站上。**workflowr** 包\index{R package!workflowr} [@R-workflowr; @workflowr2019]可以帮助使用者用项目模板和版本控制工具 Git 组织一个（数据分析）的项目。每次对项目做出更改时，可以记录更改，**workflowr** 可以建立一个与项目的特定版本相对应的网站。这意味着将能够查看分析结果的完整历史记录。尽管这个包使用 Git 作为版本控制的后端，但其实并不需要真正熟悉 Git。这个包提供了 R 函数，这些函数在底层执行 Git 操作，所以只需要调用这些 R 函数即可。此外，**workflowr** 自动化了可重复性代码的最优方法。每次 R Markdown 文档被呈现时，**workflowr** 会自动使用 `set.seed()` 设置一个种子，使用 `sessionInfo()` 记录会话信息，并扫描绝对文件路径等。请参阅[**workflowr** 包的文档](https://jdblischak.github.io/workflowr/)来了解如何开始并获取更多信息。
+
+**workflowr** 的主要作者 John Blischak 也整理了一个与 R 项目工作流相关的 R 包和指南的非详尽列表，可见 GitHub 仓库： https://github.com/jdblischak/r-project-workflows。
 
 ### 使用 GitHub Actions 实现自动化部署{#github-actions}
