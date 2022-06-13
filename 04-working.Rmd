@@ -2,7 +2,7 @@
 
 ## 发邮件：`blastula` {#rmarkdown-email}
 
-使用者有的时候可能需要批量发送定制版邮件，有些软件提供了相应选项，利用 R Markdown 也可以实现这一功能。具体而言，借助 **blastula** 包\index{R package!blastula}\index{email} [@R-blastula]，可以将 R Markdown 文档呈现在电子邮件正文并发送电子邮件。要将将 R Markdown 文档呈现到电子邮件中，需要在文档中使用输出格式 `blastula::blastula_email`，例如：
+使用者有的时候可能需要批量发送定制版邮件，有些软件提供了相应选项，利用 R Markdown 也可以实现这一功能。具体而言，借助 `blastula` 包\index{R package!blastula}\index{email} [@R-blastula]，可以将 R Markdown 文档呈现在电子邮件正文并发送电子邮件。要将将 R Markdown 文档呈现到电子邮件中，需要在文档中使用输出格式 `blastula::blastula_email`，例如：
 
 ````md
 ---
@@ -32,7 +32,185 @@ plot(iris[, -5])
 
 ## 制作 R 包：`fusen` {#rmarkdown-package}
 
+R 语言的日常使用离不开 R 包，而对于很多使用者来说，亲手制作 R 包无疑是一项有趣的工作，它不仅可以封装一些自己常用的函数，大大加速日常的工作，还可以将自己的创意通过 GitHub 或者 CRAN 发布，让更多的人了解并使用，从而给自己带来极大的成就感，甚至于获得实质性的成就[^fusen]。
+
+[^fusen]: 2019 年 7 月 31 日，在国际统计学年会（JSM）上，统计学会会长委员会（COPSS）将当年的考普斯会长奖（COPSS Presidents’ Award）颁发给了 RStudio 公司的首席科学家、R 语言软件包开发者 Hadley Wickham，以表彰他在统计应用领域做出的卓越贡献。考普斯会长奖是统计学领域的最高奖项，由美国统计协会（ASA）、加拿大统计学会（SSC）、国际数理统计学会（IMS）、国际生物统计学会北美东部地区（ENAR）、国际生物统计学会北美西部地区（WNAR）发起，被誉为“统计学界的诺贝尔奖”，每年颁发一次，授予一位在统计学领域作出杰出贡献的青年学者。考普斯会长奖此前几乎都颁发给统计学界的基础研究、应用研究学者，而 Hadley Wickham 是第一位 作为软件开发者的获奖者。Hadley 在 R 语言圈是个如雷贯耳的名字，他创建并发布了很多流行的 R 包，包括著名图形可视化软件包 `ggplot2` ，以及其他著名的软件包 `dplyr`、`tidyverse`等。
+
+相信有着很多制作 R 包经验的使用者都被其繁琐的制作流程所困扰。通常情况下，制作一个 R 包需要完成如下几个内容：
+
+- R 函数
+- 函数注释
+- 函数示例
+- DESCRIPTION 文件
+- NAMESPACE 文件
+- vignette 文档（可选）
+
+很多高级开发人员厌倦了在 R 文件、测试文件、vignette 文件之间频繁切换，特别是在更改函数参数的时候，开发者需要更改示例，并在多个地方进行单元测试，很容易漏了某一个地方。而使用 `fusen`\index{R package!fusen}\index{Rpackage} [@R-fusen] 制作 R 包则减少了这些困扰，使用者只需要在同一个文件中完成 R 包，与一个函数相关的所有内容都在一个地方，减少了遗漏的风险。
+
+而对于更多未曾接触过 R 包制作的人来说，制作 R 包这个任务初听起来似乎较为复杂，会“劝退”很多人。`fusen` 则为那些以前从未写过 R 包但知道如何使用 R Markdown 的使用者提供了亲手创建 R 包的机会，这个包可以帮助他们迈出第一步。
+
+使用 `fusen` 制作 R 包需要以下几个步骤：
+
+1. 通过 R Studio 选项 `File > New Project > New directory > Package using {fusen}` 来创建项目；
+
+2. 选择模板：对于第一次使用的人，可以选择模板 `teaching`，或者直接使用函数 `create_fusen("path/to/new/project", template = "teaching")`；对于多次使用的人，可以选择模板 `full`。
+
+3. 编写并运行模板内的对应内容。
+
+下面以 `teaching` 模板为例进行详细介绍，而 `full` 模板在 `teaching` 模板的基础上添加了诸如发布到 GitHub、包含数据文件等功能，原理上是相同的，模板内部也有详细的解释可供阅读。
+
+在选择模板 `teaching` 后，会自动生成 Rmd 文件 `flat_teaching.Rmd`，其中第一个代码框为：
+
+```{r development, include=FALSE}
+library(testthat)
+```
+
+调用 `testthat` 包\index{R package!testthat}\index{testthat} [@R-testthat] 可以帮助使用者更好地测试代码。
+
+下一个代码框可以帮助使用者对创建的包进行描述并进行授权，其中包含了标题（`Title`）、描述（`Description`）以及作者信息（`Authors`）等内容，一个简化的内容如下：
+
+```{r description, eval=FALSE}
+fill_description(fields = list(Title = "My Awesome Package"))
+usethis::use_mit_license("Sébastien Rochette")
+```
+
+接下来需要按照模板的引导来编写函数，例如模板提供了示例函数：
+
+````md
+```{r function-add_one}
+#' Add one to any value
+#' 
+#' @param value A numeric value
+#'
+#' @return Numeric. value + 1
+#' @export
+
+add_one <- function(value) {
+  result <- value + 1
+  return(result)
+}
+```
+
+````
+
+其中一开始以 `#'` 开头的部分代表了这个函数的一些特征，其中包括：
+
+- `@param`：函数涉及的参数，书写的格式为 `@param 参数 参数解释`，每个参数对应一个 `@param`；
+
+- `@return`：函数输出内容的解释；
+
+- `@export`：输出以上内容所必须的命令。
+
+除此之外，常用的其它参数包括：
+
+- `@title`：函数的详细名称；
+
+- `@description`：函数功能的解释；
+
+- `@details`：使用函数的细节；
+
+- `@examples`：函数的示例，但是使用 `fusen` 制作 R 包时可以直接在对应函数下方添加以 `examples` 为名称的代码框：
+
+````md
+```{r examples-add_one}
+add_one(12)
+add_one(56)
+```
+````
+
+这样就会自动在其上方的函数描述中加入对应的示例。在示例后面还需要加入测试函数来确保函数可以正常运行，这里的 `test_that()` 函数就来自于一开始调用的 `testthat` 包：
+
+````md
+```{r tests-add_one}
+test_that("add_one works", {
+  expect_equal(add_one(12), 13)
+  expect_equal(add_one(56), 57)
+})
+```
+````
+
+需要注意的是，如果想一个包中包含多个函数，则需要对每个函数都添加 `function`、`examples` 和 `tests` 代码框，并将其放入不同的章节中（即在模板中新添加一个以 `#` 为开头的章节，如 `# Add two to any value`）。另外，由于相应功能的代码框会在名称部分加以区分，所以对于不同函数，需要在代码框名称后面添加标记，例如本节例子中的 `function-add_one`、`examples-add_one` 和 `tests-add_one`。
+
+最后，需要运行以下代码来将 Rmd 文件转化成一个完整的包。
+
+```{r development-inflate, eval=FALSE}
+fusen::inflate(
+  flat_file = "dev/flat_teaching.Rmd",
+  vignette_name = "Get started",
+  check = TRUE
+)
+```
+
+更多关于 `fusen` 包的细节请参见 https://github.com/ThinkR-open/fusen/。
+
 ## 制作简历：`datadrivencv` {#rmarkdown-cv}
+
+无论是在找工作、申请高校，还是在制作个人网站时，简历都是必不可少的，一个形式简洁、内容丰富的简历可以让读者在短时间内了解一个人。但是在制作简历时，往往会在寻找模板、调整格式上下很多功夫，尤其是在更新简历时，往往需要进行大量的调整，甚至于从头再来。
+
+就像 R Markdown 制作的初衷是帮助使用者将注意力集中于内容上一样，`datadrivencv` 包\index{R package!datadrivencv}\index{datadrivencv} [@R-datadrivencv] 的目标也是将内容与输出分离，利用 R Markdown 的特性，可以使用相同的代码同时生成简历的交互式 HTML 以及 PDF 版本，这将大大减轻制作以及维护简历的工作量。
+
+由于 `datadrivencv` 包目前没有发布到 CRAN 上，只能通过 GitHub 来下载：
+
+```{r eval=FALSE}
+# install.packages("devtools")
+# 可能需要安装的依赖包：remotes::install_github('mitchelloharawild/icons@v0.1.0')
+devtools::install_github("nstrayer/datadrivencv")
+```
+
+使用 `datadrivencv` 包的第一步是使用 `use_data_driven_cv()` 函数：
+
+```{r eval=FALSE}
+datadrivencv::use_datadriven_cv(
+  full_name = "Nick Strayer",
+  data_location = "https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc",
+  pdf_location = "https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf",
+  html_location = "nickstrayer.me/cv/",
+  source_location = "https://github.com/nstrayer/cv"
+)
+```
+
+其中的参数有：
+
+- `full_name`：使用者的姓名；
+
+- `data_location`：保存所有数据的电子表格的路径。可以是指向包含四种数据类型的多个工作表的谷歌工作表的 URL，也可以是指向包含四个包含必要数据的 `.csv` 文件夹的路径，例如 `data_location = "data/cv_data/"` 。这四个文件夹命名需要分别为 `entries.csv`、`language_skills.csv`、`text_blocks.csv`以及`contact_info.csv`，分别包含作者的工作经历、编程语言能力、简历不同模块的简介以及联系方式。这四个文件的模板可以从 https://github.com/cosname/rmarkdown-guide/tree/master/data/cv_data 中下载；
+
+- `pdf_location`：发布简历 PDF 版本的网址；
+
+- `html_location`：发布简历 HTML 版本的网址；
+
+- `source_location`：构建简历的代码的位置，填写作者提供的 `https://github.com/nstrayer/cv` 即可。
+
+函数的更多细节可以通过运行 `?datadrivencv::use_datadriven_cv` 来查看。当运行这个函数时，会在当前工作目录中添加一系列文件：
+
+- `cv.rmd`：一个 R Markdown 文件，其中包含了制作简历的各个部分。可以通过编辑这个文件来满足具体的个人需求；
+
+- `dd_cv.css`：建立在默认 `Pagedown` “resume” 模板上的一组自定义 CSS 样式，可以根据需要进行编辑；
+
+- `render_cv.r`：同时构建 PDF 和 HTML 两种格式的简历的脚本；
+
+- `cv_printing_functions.r`：执行将电子表格数据转换为 markdown 或 HTML 并使输出用于 PDF 打印的一系列函数。
+
+在得到上述四个文件，并且按照模板填写完毕相应的 `.csv` 文件夹后，用 RStudio 打开 `cv.rmd` 并点击 `Knit` 即可得到 HTML 格式的简历。如果想进一步生成 PDF 格式的简历，运行 `render_cv.r` 中的相应函数即可：
+
+```{r eval=FALSE}
+# 编译 HTML 版本的简历
+rmarkdown::render("cv.rmd",
+                  params = list(pdf_mode = FALSE),
+                  output_file = "cv.html")
+
+# 编译 PDF 版本的简历到 HTML 版本中，从而可以在 HTML 版本中下载
+tmp_html_cv_loc <- fs::file_temp(ext = ".html")
+rmarkdown::render("cv.rmd",
+                  params = list(pdf_mode = TRUE),
+                  output_file = tmp_html_cv_loc)
+
+# 用 Pagedown 将 HTML 转换至 PDF，生成 PDF 文件
+pagedown::chrome_print(input = tmp_html_cv_loc,
+                       output = "cv.pdf")
+```
+
+现在这个包还存在着诸多问题，例如提供的简历模板较少、对中文的支持较差等问题，有待进一步优化，但也给了使用者更自由的空间。更多细节请参考 https://github.com/nstrayer/datadrivencv。
 
 ## 写书和记学习笔记：`bookdown` {#rmarkdown-bookdown}
 
@@ -103,7 +281,7 @@ directory
 
 在当今的互联网时代世界，无论从事什么职业，个人网站几乎成为了一张人手必备的的“电子名片”。谢益辉开发的 blogdown 包提供了一种功能全面，且设置简单快速的个人网站架设途径。
 
-基于 Rmarkdown 的 blogdown 包为个人用户提供一种轻便快速的建立个人静态网站的方案。不同于市面上多数的网站建立方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，blogdown 依赖 R Markdown 文件为基础来生成网站。而 R Markdown  文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对 $LaTeX$ 的支持），数据分析，交互性插件（如交互性图表）等。
+基于 R Markdown 的 blogdown 包为个人用户提供一种轻便快速的建立个人静态网站的方案。不同于市面上多数的网站建立方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，blogdown 依赖 R Markdown 文件为基础来生成网站。而 R Markdown  文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对 $LaTeX$ 的支持），数据分析，交互性插件（如交互性图表）等。
 
 本书的这个小节将通过一个对新手十分友好的案例来手把手的展示如何快速建立一个可满足日常基本需求的网站，以便用户可快速上手 R 的 blogdown 包。
 
@@ -229,7 +407,7 @@ menu:
 
 #### Netlify {#steps-netlify}
 
-Netlify 提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 Github 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
+Netlify 提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 GitHub 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
 
 ```{r fig.cap="在网站项目文件夹中找到名为Public的文件夹", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog7.png", dpi = NA)
@@ -288,7 +466,7 @@ output:
 
 为了让生成的图片能够妥善的存放到 `figures` 文件夹，需要在头文件后面添加一些设置。
 
-```` r
+````r
 ```{r setup_fig}
 knitr::opts_chunk$set(
   fig.width = 8,
