@@ -1,0 +1,15 @@
+```{r, include=FALSE}
+fetch_sales_data <- function(date = Sys.Date()) {
+    day <- as.integer(format(date, "%d"))
+    sales_dat <- data.frame(
+        region = rep(LETTERS, each = 10),
+        sales = rpois(26 * 10, day)
+    )
+    sales_dat
+}
+
+top_n_regions <- function(sales_dat, n) {
+    sales_sum <- aggregate(sales ~ region, data = sales_dat, sum)
+    head(sales_sum[order(-sales_sum$sales), ], n)
+}
+```
