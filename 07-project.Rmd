@@ -526,4 +526,165 @@ Markdown 文档的初始版本，并通过 `upload_rmd()` 函数将其上传到 
 
 **workflowr** 的主要作者 John Blischak 也整理了一个与 R 项目工作流相关的 R 包和指南的非详尽列表，可见 GitHub 仓库： https://github.com/jdblischak/r-project-workflows。
 
-### 使用 GitHub Actions 实现自动化部署{#github-actions}
+### 使用 GitHub Actions 实现自动化部署 {#github-actions}
+
+使用 R Markdown 输出特定的文件格式后，一个自然的问题是如何与他人共享结果，一些使用场景包括在公司内部发布数据分析报告，发表 blogdown 博客，更新 bookdown 电子书籍等。最直接的做法是在本地执行编译，随后分享输出文件。例如执行在控制台 `rmarkdown::render()` 函数后，上传更新后的 HTML 文件到网络服务器上，或者在 Github 中上传 Markdown 文件。本地手动编译不仅需要重复的人力劳动，如果输出结果依赖于特定的系统环境，也难以保证结果的可重复性。为了使部署过程更高效可靠，包括 Github Actions, Gitlab Pipeline 等在内的持续集成 (continuous integration) 工具被广泛应用在 R Markdown 工作流的自动化部署中。本节以 Github 平台的 Github Actions 为例讲解 R Markdown 的自动化部署方法。
+
+尽管 Github Actions 持续集成工具的用途非常广泛，具体在 R Markdown 的语境内，读者可以把它想象为一系列执行 R Markdown 编译的指令，可以是终端的 shell 命令，也可以调用 R 语言或任意工具的命令行接口。用户可以自行定义这些指令的触发条件，例如每周一上午十点运行一次，或每次 Github 仓库有新的代码提交时运行。当这些条件被触发时，Github 会创建一个专属的虚拟环境运行定义好的代码，其中便可以包括用于发布 R Markdown 输出文档的命令。
+
+新建任意项目目录，在其中创建 `index.Rmd` 文件，包含如下内容:
+
+````{r, echo = FALSE}
+import_example("rmd-ci.Rmd")
+````
+
+本地编译结果如下 (需要安装 **prettydoc** [@R-prettydoc] 包)：
+
+```{r, echo = FALSE}
+import_example_result("examples/rmd-ci.Rmd")
+```
+
+
+本地验证代码运行无误后，开始设置自动化部署。首先在 Github 上新建对应的仓库，在本地目录下 `git init`  初始化 git 并 `git remote add origin <url>` 添加该仓库。希望实现的效果为，每次更新 main 分支后，Github Actions 自动编译 `index.Rmd` 并更新至仓库对应的 Github Pages 网页端。
+
+Github Actions 使用 yaml 文件定义命令，在根目录下新建 `.github/workflows/deploy.yml` 文件。
+
+此时文档结构为：
+
+```markdown
+├── .github
+│   └── workflows
+│       └── deploy.yml
+└── index.Rmd
+```
+
+其中，`.github/workflows/` 是固定的前缀路径，Github 在此路径下搜索 yaml 文件，每个文件称为一个 workflow，不同的 workflow 通常代表自动化部署的不同任务，例如有的负责获取数据，有的负责更新网页。`deploy.yml` 是本案例使用的唯一 workflow 文件，名称可以自定义，其中内容为：
+
+```yaml
+on:
+  push:
+    branches: main
+
+name: Render
+
+jobs:
+  render:
+    name: Render index.Rmd
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: r-lib/actions/setup-r@v2
+      
+      - uses: r-lib/actions/setup-pandoc@v1
+      
+      - name: Install rmarkdown
+        run: Rscript -e 'install.packages(c("rmarkdown", "prettydoc"))'
+        
+      - name: Render index.Rmd
+        run: Rscript -e 'rmarkdown::render("index.Rmd")'
+        
+      - name: Commit results
+        run: |
+          git add index.html
+          git commit -m 'Re-build index.Rmd'
+          git push origin
+```
+
+`on` 定义了该 workflow 的触发条件，这里为 main 分支收到新提交 (push) 时触发。它的语法通常包括动作与分支，例如 "main 和 release 分支收到 pull request 时触发" 可以表示为
+
+```markdown
+on:
+  pull_request:
+    # 可包含多个触发分支
+    branches:    
+      - main
+      - releases
+```
+
+。`on` 还支持 cron 语法，例如
+
+```markdown
+# 每天 5:30 and 17:30 UTC 触发 workflow
+on:
+  schedule:
+    - cron:  '30 5,17 * * *'
+```
+
+`name` 代表 Github 网页端显示的 workflow 名称。
+
+`jobs` 是 workflow 中的核心内容，代表需要执行的一系列指令，可以分为不同的子任务，该文件中包含一个 `render` 子任务，指定运行环境为 `macOS-latest`，其他可选环境包括 windows，linux 等不同版本的机型。`render` 中的每一项代表一组独立的指令。由于每次 workflow 触发时均运行在全新的环境中，必须重新安装项目所需的依赖项，前三个 `uses` 指令是 Github 社区提供的模版，分别在环境中克隆所需的仓库，安装 R 和安装 pandoc。
+
+```markdown
+# 预定义模版搜索 https://github.com/marketplace?type=actions
+- uses: actions/checkout@v2
+- uses: r-lib/actions/setup-r@v2
+- uses: r-lib/actions/setup-pandoc@v1
+```
+
+
+随后，两个自定义的终端命令为
+
+```markdown
+- name: Install rmarkdown
+  run: Rscript -e 'install.packages(c("rmarkdown", "prettydoc"))'
+  
+- name: Render index.Rmd
+  run: Rscript -e 'rmarkdown::render("index.Rmd")'
+```
+
+`name` 定义该步骤的 UI 名称, `run` 代表该步骤执行的 shell 命令，这两步安装了 rmarkdown 和 prettydoc 包，并编译 `index.Rmd`。`Rscript` 是 R 提供的命令行接口，另外一种写法是：
+
+```markdown 
+- name: Install rmarkdown
+  shell: Rscript {0}
+  run: |
+    install.packages(c("rmarkdown", "prettydoc"))
+```
+
+最后，workflow 需要把虚拟环境中生成的输出文件同步到主仓库中。这样，每次 main 分支收到更新，Github Actions 便会重新编译 `index.Rmd`  文档，同步输出文件 `index.html` 至仓库，实现自动化编译。
+
+```markdown
+# 同步输出文件至仓库
+- name: Commit results
+  run: |
+    git add index.html
+    git commit -m 'Re-build index.Rmd'
+    git push origin
+```
+
+案例的最后一步是启动 Github Pages 服务，该服务将自动识别仓库内的 `index.html` 文件，基于个人 Github 账号生成公开的网页地址。启动方法为点击仓库的 `settings -> pages` 并选择 Source 为 main 分支下的 root 目录。
+
+```{r, echo = FALSE, fig.cap = "为仓库启用 Github Pages，生成地址见 https://qiushiyan.github.io/rmd-ci/"}
+knitr::include_graphics("images/rmd-ci-github-pages.png")
+```
+
+真实生产环境中，应使主文档 `index.Rmd` 尽可能简洁抽象，可以运用 \@ref(child-document) 节学习的子文档知识，将业务逻辑封装为函数放入子文档 `functions.Rmd` 中，`functions.Rmd` 的内容为: 
+
+```{r, echo = FALSE}
+import_example("rmd-ci-functions.Rmd")
+```
+
+
+随后在主文档 `index.Rmd` 中引用子文档: 
+
+````{verbatim, lang="markdown"}
+```{r, child = "template.Rmd", include = FALSE}
+```
+
+
+```{r}
+sales_dat <- fetch_sales_data()
+knitr::kable(head(sales_dat, 20))
+```
+
+
+```{r}
+top_10_regions <- top_n_regions(sales_dat, 10)
+
+barplot(sales ~ region, data = top_10_regions)
+```
+````
+
+读者可以在 [Github Actions 文档](https://github.com/features/actions) 学习更多语法知识，此外 [rlib/actions](https://github.com/r-lib/actions) 仓库汇集了诸多 R 社区为各项自动化任务定制的 workflow 文件，大部分情况下可以直接复制使用，或仅需要修改少量配置。
+

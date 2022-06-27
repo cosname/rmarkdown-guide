@@ -1,0 +1,53 @@
+---
+title: "用 Github Actions 实现自动化部署"
+author: "张三"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+
+## 数据概览
+
+`r Sys.Date()` 日各地区销售情况
+
+```{r}
+day <- as.integer(format(Sys.Date(), "%d"))
+sales_dat <- data.frame(
+    region = rep(LETTERS, each = 10), 
+    sales = rpois(26 * 10, day)
+)
+
+knitr::kable(head(sales_dat, 20))
+```
+
+## 描述性分析
+
+本日销售量最多对前 10 个地区为：
+
+```{r}
+sales_sum <- aggregate(sales ~ region, data = sales_dat, sum)
+
+top_10_regions <- head(sales_sum[order(-sales_sum$sales), ], 10)
+
+barplot(sales ~ region, data = top_10_regions)
+``` 
+
+
+## 线性模型
+
+用简单线性模型探究地区对销售量对影响，公式为: 
+
+$$
+销售量 = \beta_o + \beta_1地区A + \beta_1地区B + \cdots + \beta_1地区Z
+$$
+
+```{r}
+mod <- lm(sales ~ region, data = sales_dat)
+
+region_coefs <- mod$coefficients[-1]
+max_idx <- which.max(region_coefs)
+```
+
+所有 `r length(unique(sales_dat$region))` 个地区中，回归系数绝对值最大的是 `r LETTERS[max_idx]`，为 `r  region_coefs[max_idx]` 
