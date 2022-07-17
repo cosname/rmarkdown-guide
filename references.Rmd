@@ -72,7 +72,10 @@ knitr::write_bib(c(
   "formatR",
   'cairoDevice',
   'rmdrive',
-  'xaringanExtra'
+  'xaringanExtra',
+  'fusen',
+  'testthat',
+  'datadrivencv'
 ), 'packages.bib')
 
 # lapply(pkgs, function(pkg) {
