@@ -82,7 +82,7 @@ knitr::include_graphics(paste0("examples/", c("three-output-html.png", "three-ou
 
 同时，R Markdown 还为 R 语言之外的几十种编程语言提供了一定程度的支持，例如 Python，C++，Julia，Bash，SQL 等，这意味着用户可以在一篇报告中混用多种编程语言。例如，Python 是数据分析的另一大利器，在 **reticulate** 包 [@R-reticulate] 的帮助下，用户可以在 R Markdown 文档中流畅地并用 Python 和 R[^knitr-python-install]。在下面的例子中，本书先用 R 导入数据并作数据预处理，随后将 R 中的数据传递到 Python 环境中，生成 **pandas** 格式的 `DataFrame`, 并用 **seaborn** 包进行可视化。
 
-[^knitr-python-install]: 用户在安装好 reticulate 包后需使用 `py_install("package")` 样式的代码来安装需要使用的 Python 程序包。如 `py_install("pandas")` 代码会安装 pandas 程序包。再以下的例子中，用户需要提前安装 pandas 和 seaborn 两个 Python 安装包，否则 R 会报错。
+[^knitr-python-install]: 用户在安装好 reticulate 包后需使用 `py_install("package")` 样式的代码来安装需要使用的 Python 程序包。如 `py_install("pandas")` 代码会安装 pandas 程序包。在文中的例子中，用户需要提前安装 pandas 和 seaborn 两个 Python 程序包，否则 R 会报错。
 
 ```{r}
 # R 部分: 导入和预处理美国各州犯罪数据
@@ -90,7 +90,8 @@ arrests <- datasets::USArrests
 arrests$State <- rownames(arrests)
 ```
 
-```{python, fig.cap = "在 R Markdown 中用 seaborn 包作图"}
+
+```{python, eval = FALSE}
 # Python 部分，导入 R 数据，提取谋杀率最高的 10 个州，并用 seaborn 包作柱形图
 import pandas as pd
 import seaborn as sns
