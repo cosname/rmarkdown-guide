@@ -27,7 +27,7 @@
 <meta name="author" content="杨晓龙" />
 
 
-<meta name="date" content="2022-06-27" />
+<meta name="date" content="2022-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -189,6 +189,7 @@ div.csl-indent {
 <li class="chapter" data-level="1.2.6" data-path="rmarkdown-intro.html"><a href="rmarkdown-intro.html#example-forms"><i class="fa fa-check"></i><b>1.2.6</b> 交互报表</a></li>
 <li class="chapter" data-level="1.2.7" data-path="rmarkdown-intro.html"><a href="rmarkdown-intro.html#example-dynamic"><i class="fa fa-check"></i><b>1.2.7</b> 动态文档</a></li>
 </ul></li>
+<li class="chapter" data-level="1.3" data-path="rmarkdown-intro.html"><a href="rmarkdown-intro.html#r-markdown-的渊源与发展"><i class="fa fa-check"></i><b>1.3</b> R Markdown 的渊源与发展</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html"><i class="fa fa-check"></i><b>2</b> R Markdown 的基础知识</a>
 <ul>
@@ -432,11 +433,11 @@ div.csl-indent {
 <div id="shiny-start" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> 入门指南<a href="rmarkdown-interaction.html#shiny-start" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在 YAML 元数据中加入 <code>runtime: shiny</code>，可以将任何基于 html 的 R Markdown 文档变成 Shiny 文档，例如：</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb181-1"><a href="rmarkdown-interaction.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb181-2"><a href="rmarkdown-interaction.html#cb181-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Shiny Document&quot;</span></span>
-<span id="cb181-3"><a href="rmarkdown-interaction.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span>
-<span id="cb181-4"><a href="rmarkdown-interaction.html#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="fu">runtime</span><span class="kw">:</span><span class="at"> shiny</span></span>
-<span id="cb181-5"><a href="rmarkdown-interaction.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb183-1"><a href="rmarkdown-interaction.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb183-2"><a href="rmarkdown-interaction.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Shiny Document&quot;</span></span>
+<span id="cb183-3"><a href="rmarkdown-interaction.html#cb183-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span>
+<span id="cb183-4"><a href="rmarkdown-interaction.html#cb183-4" aria-hidden="true" tabindex="-1"></a><span class="fu">runtime</span><span class="kw">:</span><span class="at"> shiny</span></span>
+<span id="cb183-5"><a href="rmarkdown-interaction.html#cb183-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>注意，R Markdown 文档的输出格式必须是 HTML 格式。也就是说，文档最后生成的是一个 Web 页面（<code>*.html</code> 文件）。</p>
 <blockquote>
 <p><strong>注意：</strong> 非 <code>html</code> 格式，如 <code>pdf_document</code> 和 <code>word_document</code> 将不能与 Shiny 同时运行。另外，一些演示格式也是 HTML 格式，比如<code>ioslides_presentation</code> 和 <code>slidy_presentation</code>，它们是可以与 Shiny 相结合的。</p>
@@ -450,13 +451,13 @@ div.csl-indent {
 </div>
 <p>如果读者想在 RStudio 中运行 Shiny 文档，需要单击工具栏上的 “Run Document” 按钮（当 RStudio 检测到这是 Shiny 文档时，它会自动将 Knit 按钮替换为 Run Document）。如果读者没有使用 RStudio，或者想在 R 控制台运行文档进行故障排除，可以调用函数 <code>rmarkdown::run()</code> 并将文件名传递给它。</p>
 <p>可以在文档中嵌入 Shiny 的输入和输出。如果输入发生变化时，输出将自动更新。例如，创建一个名称为 <code>rows</code> 的数字输入（ <code>numericInput</code> ），然后在输出中通过 <code>input$rows</code> 引用其值：</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb182-1"><a href="rmarkdown-interaction.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb182-2"><a href="rmarkdown-interaction.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="in">numericInput(&quot;rows&quot;, &quot;How many cars?&quot;, 5)</span></span>
-<span id="cb182-3"><a href="rmarkdown-interaction.html#cb182-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb182-4"><a href="rmarkdown-interaction.html#cb182-4" aria-hidden="true" tabindex="-1"></a><span class="in">renderTable({</span></span>
-<span id="cb182-5"><a href="rmarkdown-interaction.html#cb182-5" aria-hidden="true" tabindex="-1"></a><span class="in">  head(cars, input$rows)</span></span>
-<span id="cb182-6"><a href="rmarkdown-interaction.html#cb182-6" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
-<span id="cb182-7"><a href="rmarkdown-interaction.html#cb182-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb184-1"><a href="rmarkdown-interaction.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb184-2"><a href="rmarkdown-interaction.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="in">numericInput(&quot;rows&quot;, &quot;How many cars?&quot;, 5)</span></span>
+<span id="cb184-3"><a href="rmarkdown-interaction.html#cb184-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-4"><a href="rmarkdown-interaction.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="in">renderTable({</span></span>
+<span id="cb184-5"><a href="rmarkdown-interaction.html#cb184-5" aria-hidden="true" tabindex="-1"></a><span class="in">  head(cars, input$rows)</span></span>
+<span id="cb184-6"><a href="rmarkdown-interaction.html#cb184-6" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb184-7"><a href="rmarkdown-interaction.html#cb184-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:shiny-table"></span>
 <img src="images/shiny-table.png" alt="增加 Shiny 文档中表中的行数。"  />
 <p class="caption">
@@ -464,17 +465,17 @@ div.csl-indent {
 </p>
 </div>
 <p>在上面的示例中，输出代码包含在 <code>renderTable()</code> 中。 Shiny 中还有许多其他渲染功能，可用于图片、结果输出等。 下面使用 <code>renderPlot()</code> 输出可交互柱状图：</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb183-1"><a href="rmarkdown-interaction.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE} </span></span>
-<span id="cb183-2"><a href="rmarkdown-interaction.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="in">sliderInput(&quot;bins&quot;, &quot;Number of bins:&quot;, 30, min = 1, max = 50)</span></span>
-<span id="cb183-3"><a href="rmarkdown-interaction.html#cb183-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-4"><a href="rmarkdown-interaction.html#cb183-4" aria-hidden="true" tabindex="-1"></a><span class="in">renderPlot({</span></span>
-<span id="cb183-5"><a href="rmarkdown-interaction.html#cb183-5" aria-hidden="true" tabindex="-1"></a><span class="in">  x    = faithful[, 2]  # Old Faithful Geyser data</span></span>
-<span id="cb183-6"><a href="rmarkdown-interaction.html#cb183-6" aria-hidden="true" tabindex="-1"></a><span class="in">  bins = seq(min(x), max(x), length.out = input$bins + 1)</span></span>
-<span id="cb183-7"><a href="rmarkdown-interaction.html#cb183-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-8"><a href="rmarkdown-interaction.html#cb183-8" aria-hidden="true" tabindex="-1"></a><span class="in">  # 用指定的格子大小绘制可交互的直方图</span></span>
-<span id="cb183-9"><a href="rmarkdown-interaction.html#cb183-9" aria-hidden="true" tabindex="-1"></a><span class="in">  hist(x, breaks = bins, col = &#39;darkgray&#39;, border = &#39;white&#39;)</span></span>
-<span id="cb183-10"><a href="rmarkdown-interaction.html#cb183-10" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
-<span id="cb183-11"><a href="rmarkdown-interaction.html#cb183-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb185-1"><a href="rmarkdown-interaction.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE} </span></span>
+<span id="cb185-2"><a href="rmarkdown-interaction.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="in">sliderInput(&quot;bins&quot;, &quot;Number of bins:&quot;, 30, min = 1, max = 50)</span></span>
+<span id="cb185-3"><a href="rmarkdown-interaction.html#cb185-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-4"><a href="rmarkdown-interaction.html#cb185-4" aria-hidden="true" tabindex="-1"></a><span class="in">renderPlot({</span></span>
+<span id="cb185-5"><a href="rmarkdown-interaction.html#cb185-5" aria-hidden="true" tabindex="-1"></a><span class="in">  x    = faithful[, 2]  # Old Faithful Geyser data</span></span>
+<span id="cb185-6"><a href="rmarkdown-interaction.html#cb185-6" aria-hidden="true" tabindex="-1"></a><span class="in">  bins = seq(min(x), max(x), length.out = input$bins + 1)</span></span>
+<span id="cb185-7"><a href="rmarkdown-interaction.html#cb185-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-8"><a href="rmarkdown-interaction.html#cb185-8" aria-hidden="true" tabindex="-1"></a><span class="in">  # 用指定的格子大小绘制可交互的直方图</span></span>
+<span id="cb185-9"><a href="rmarkdown-interaction.html#cb185-9" aria-hidden="true" tabindex="-1"></a><span class="in">  hist(x, breaks = bins, col = &#39;darkgray&#39;, border = &#39;white&#39;)</span></span>
+<span id="cb185-10"><a href="rmarkdown-interaction.html#cb185-10" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb185-11"><a href="rmarkdown-interaction.html#cb185-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:shiny-plot"></span>
 <img src="images/shiny-plot.png" alt=" Shiny 文档输出可交互的直方图。"  />
 <p class="caption">
@@ -495,9 +496,9 @@ div.csl-indent {
 <li><p>在 ShinyApps 上注册账号。</p></li>
 <li><p>安装了最新版本的 <strong>rsconnect</strong> 包。安装方式如下：</p></li>
 </ol>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="rmarkdown-interaction.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rsconnect&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="rmarkdown-interaction.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rsconnect&quot;</span>)</span></code></pre></div>
 <p>然后，对需要部署的 Shiny 文档所对应的工作目录中执行以下语句：</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="rmarkdown-interaction.html#cb185-1" aria-hidden="true" tabindex="-1"></a>rsconnect<span class="sc">::</span><span class="fu">deployApp</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="rmarkdown-interaction.html#cb187-1" aria-hidden="true" tabindex="-1"></a>rsconnect<span class="sc">::</span><span class="fu">deployApp</span>()</span></code></pre></div>
 <p>如果使用的是 RStudio，在运行 Shiny 文档时，也可以使用窗口右上角的 <code>Publish</code> 按钮(图 <a href="rmarkdown-interaction.html#fig:shiny-deploy">5.4</a>)。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:shiny-deploy"></span>
 <img src="images/shiny-deploy.png" alt="部署 Shiny 文档到 ShinyApps.io. 上。"  />
@@ -526,25 +527,25 @@ div.csl-indent {
 <div id="shiny-embed-inline" class="section level4 hasAnchor" number="5.1.3.1">
 <h4><span class="header-section-number">5.1.3.1</span> 内部定义应用程序<a href="rmarkdown-interaction.html#shiny-embed-inline" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>下面例子将 Shiny 应用程序写在了 Rmarkdown 内部中：</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb186-1"><a href="rmarkdown-interaction.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE} </span></span>
-<span id="cb186-2"><a href="rmarkdown-interaction.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(</span></span>
-<span id="cb186-3"><a href="rmarkdown-interaction.html#cb186-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-4"><a href="rmarkdown-interaction.html#cb186-4" aria-hidden="true" tabindex="-1"></a><span class="in">  ui = fluidPage(</span></span>
-<span id="cb186-5"><a href="rmarkdown-interaction.html#cb186-5" aria-hidden="true" tabindex="-1"></a><span class="in">    selectInput(&quot;region&quot;, &quot;Region:&quot;,</span></span>
-<span id="cb186-6"><a href="rmarkdown-interaction.html#cb186-6" aria-hidden="true" tabindex="-1"></a><span class="in">                choices = colnames(WorldPhones)),</span></span>
-<span id="cb186-7"><a href="rmarkdown-interaction.html#cb186-7" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput(&quot;phonePlot&quot;)</span></span>
-<span id="cb186-8"><a href="rmarkdown-interaction.html#cb186-8" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
-<span id="cb186-9"><a href="rmarkdown-interaction.html#cb186-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-10"><a href="rmarkdown-interaction.html#cb186-10" aria-hidden="true" tabindex="-1"></a><span class="in">  server = function(input, output) {</span></span>
-<span id="cb186-11"><a href="rmarkdown-interaction.html#cb186-11" aria-hidden="true" tabindex="-1"></a><span class="in">    output$phonePlot = renderPlot({</span></span>
-<span id="cb186-12"><a href="rmarkdown-interaction.html#cb186-12" aria-hidden="true" tabindex="-1"></a><span class="in">      barplot(WorldPhones[,input$region]*1000,</span></span>
-<span id="cb186-13"><a href="rmarkdown-interaction.html#cb186-13" aria-hidden="true" tabindex="-1"></a><span class="in">              ylab = &quot;Number of Telephones&quot;, xlab = &quot;Year&quot;)</span></span>
-<span id="cb186-14"><a href="rmarkdown-interaction.html#cb186-14" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
-<span id="cb186-15"><a href="rmarkdown-interaction.html#cb186-15" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
-<span id="cb186-16"><a href="rmarkdown-interaction.html#cb186-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-17"><a href="rmarkdown-interaction.html#cb186-17" aria-hidden="true" tabindex="-1"></a><span class="in">  options = list(height = 500)</span></span>
-<span id="cb186-18"><a href="rmarkdown-interaction.html#cb186-18" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb186-19"><a href="rmarkdown-interaction.html#cb186-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb188-1"><a href="rmarkdown-interaction.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE} </span></span>
+<span id="cb188-2"><a href="rmarkdown-interaction.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(</span></span>
+<span id="cb188-3"><a href="rmarkdown-interaction.html#cb188-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-4"><a href="rmarkdown-interaction.html#cb188-4" aria-hidden="true" tabindex="-1"></a><span class="in">  ui = fluidPage(</span></span>
+<span id="cb188-5"><a href="rmarkdown-interaction.html#cb188-5" aria-hidden="true" tabindex="-1"></a><span class="in">    selectInput(&quot;region&quot;, &quot;Region:&quot;,</span></span>
+<span id="cb188-6"><a href="rmarkdown-interaction.html#cb188-6" aria-hidden="true" tabindex="-1"></a><span class="in">                choices = colnames(WorldPhones)),</span></span>
+<span id="cb188-7"><a href="rmarkdown-interaction.html#cb188-7" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput(&quot;phonePlot&quot;)</span></span>
+<span id="cb188-8"><a href="rmarkdown-interaction.html#cb188-8" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb188-9"><a href="rmarkdown-interaction.html#cb188-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-10"><a href="rmarkdown-interaction.html#cb188-10" aria-hidden="true" tabindex="-1"></a><span class="in">  server = function(input, output) {</span></span>
+<span id="cb188-11"><a href="rmarkdown-interaction.html#cb188-11" aria-hidden="true" tabindex="-1"></a><span class="in">    output$phonePlot = renderPlot({</span></span>
+<span id="cb188-12"><a href="rmarkdown-interaction.html#cb188-12" aria-hidden="true" tabindex="-1"></a><span class="in">      barplot(WorldPhones[,input$region]*1000,</span></span>
+<span id="cb188-13"><a href="rmarkdown-interaction.html#cb188-13" aria-hidden="true" tabindex="-1"></a><span class="in">              ylab = &quot;Number of Telephones&quot;, xlab = &quot;Year&quot;)</span></span>
+<span id="cb188-14"><a href="rmarkdown-interaction.html#cb188-14" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb188-15"><a href="rmarkdown-interaction.html#cb188-15" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
+<span id="cb188-16"><a href="rmarkdown-interaction.html#cb188-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-17"><a href="rmarkdown-interaction.html#cb188-17" aria-hidden="true" tabindex="-1"></a><span class="in">  options = list(height = 500)</span></span>
+<span id="cb188-18"><a href="rmarkdown-interaction.html#cb188-18" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb188-19"><a href="rmarkdown-interaction.html#cb188-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <blockquote>
 <p><strong>注意</strong>：使用 <code>height</code> 参数来确定嵌入式应用程序应该占用多少高度。</p>
 </blockquote>
@@ -552,12 +553,12 @@ div.csl-indent {
 <div id="外联应用程序" class="section level4 hasAnchor" number="5.1.3.2">
 <h4><span class="header-section-number">5.1.3.2</span> 外联应用程序<a href="rmarkdown-interaction.html#外联应用程序" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>下面例子展示嵌入了一个定义在另一个目录中的 Shiny 应用程序。</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb187-1"><a href="rmarkdown-interaction.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
-<span id="cb187-2"><a href="rmarkdown-interaction.html#cb187-2" aria-hidden="true" tabindex="-1"></a><span class="in">shinyAppDir(</span></span>
-<span id="cb187-3"><a href="rmarkdown-interaction.html#cb187-3" aria-hidden="true" tabindex="-1"></a><span class="in">  system.file(&quot;examples/06_tabsets&quot;, package=&quot;shiny&quot;),</span></span>
-<span id="cb187-4"><a href="rmarkdown-interaction.html#cb187-4" aria-hidden="true" tabindex="-1"></a><span class="in">  options = list(width = &quot;100%&quot;, height = 700)</span></span>
-<span id="cb187-5"><a href="rmarkdown-interaction.html#cb187-5" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb187-6"><a href="rmarkdown-interaction.html#cb187-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb189-1"><a href="rmarkdown-interaction.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
+<span id="cb189-2"><a href="rmarkdown-interaction.html#cb189-2" aria-hidden="true" tabindex="-1"></a><span class="in">shinyAppDir(</span></span>
+<span id="cb189-3"><a href="rmarkdown-interaction.html#cb189-3" aria-hidden="true" tabindex="-1"></a><span class="in">  system.file(&quot;examples/06_tabsets&quot;, package=&quot;shiny&quot;),</span></span>
+<span id="cb189-4"><a href="rmarkdown-interaction.html#cb189-4" aria-hidden="true" tabindex="-1"></a><span class="in">  options = list(width = &quot;100%&quot;, height = 700)</span></span>
+<span id="cb189-5"><a href="rmarkdown-interaction.html#cb189-5" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb189-6"><a href="rmarkdown-interaction.html#cb189-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <blockquote>
 <p><strong>注意</strong>：在上面的所有代码块中，都使用了 <code>echo = FALSE</code> 的选项。这是防止代码块中的 R 代码与 Shiny 组件一起呈现到输出文档中。</p>
 </blockquote>
@@ -574,10 +575,10 @@ div.csl-indent {
 <div id="例子k-means-聚类" class="section level4 hasAnchor" number="5.1.4.2">
 <h4><span class="header-section-number">5.1.4.2</span> 例子：k-means 聚类<a href="rmarkdown-interaction.html#例子k-means-聚类" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>rmdexamples</strong> 包 (<a href="https://github.com/rstudio/rmdexamples" class="uri">https://github.com/rstudio/rmdexamples</a>) 包含以上形式实现的 Shiny 小部件示例。 <code>kmeans_cluster()</code> 函数接受单个数据集（<code>dataset</code>）参数，并返回一个小部件来显示 k-Means 聚类的结果。读者可以在 R Markdown 文档中使用它：</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb188-1"><a href="rmarkdown-interaction.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
-<span id="cb188-2"><a href="rmarkdown-interaction.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(rmdexamples)</span></span>
-<span id="cb188-3"><a href="rmarkdown-interaction.html#cb188-3" aria-hidden="true" tabindex="-1"></a><span class="in">kmeans_cluster(iris)</span></span>
-<span id="cb188-4"><a href="rmarkdown-interaction.html#cb188-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb190-1"><a href="rmarkdown-interaction.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
+<span id="cb190-2"><a href="rmarkdown-interaction.html#cb190-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(rmdexamples)</span></span>
+<span id="cb190-3"><a href="rmarkdown-interaction.html#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="in">kmeans_cluster(iris)</span></span>
+<span id="cb190-4"><a href="rmarkdown-interaction.html#cb190-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>图 <a href="rmarkdown-interaction.html#fig:shiny-widget-kmeans">5.5</a> 展示了在运行文档时小部件的样子。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:shiny-widget-kmeans"></span>
 <img src="images/shiny-widget-kmeans.png" alt=" 在数据集上应用 k-Means 聚类的 Shiny 小部件。"  />
@@ -586,43 +587,43 @@ div.csl-indent {
 </p>
 </div>
 <p>下面是 <code>kmeans_cluster()</code> 函数的源代码：</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="rmarkdown-interaction.html#cb189-1" aria-hidden="true" tabindex="-1"></a>kmeans_cluster <span class="ot">=</span> <span class="cf">function</span>(dataset) {</span>
-<span id="cb189-2"><a href="rmarkdown-interaction.html#cb189-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb189-3"><a href="rmarkdown-interaction.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(shiny)  </span>
-<span id="cb189-4"><a href="rmarkdown-interaction.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  vars <span class="ot">=</span> <span class="fu">names</span>(dataset)</span>
-<span id="cb189-5"><a href="rmarkdown-interaction.html#cb189-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb189-6"><a href="rmarkdown-interaction.html#cb189-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
-<span id="cb189-7"><a href="rmarkdown-interaction.html#cb189-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb189-8"><a href="rmarkdown-interaction.html#cb189-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fluidRow</span>(<span class="at">style =</span> <span class="st">&quot;padding-bottom: 20px;&quot;</span>,</span>
-<span id="cb189-9"><a href="rmarkdown-interaction.html#cb189-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">selectInput</span>(<span class="st">&#39;xcol&#39;</span>, <span class="st">&#39;X Variable&#39;</span>, vars)),</span>
-<span id="cb189-10"><a href="rmarkdown-interaction.html#cb189-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">selectInput</span>(<span class="st">&#39;ycol&#39;</span>, <span class="st">&#39;Y Variable&#39;</span>, vars,</span>
-<span id="cb189-11"><a href="rmarkdown-interaction.html#cb189-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">selected =</span> vars[<span class="dv">2</span>])),</span>
-<span id="cb189-12"><a href="rmarkdown-interaction.html#cb189-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">numericInput</span>(<span class="st">&#39;clusters&#39;</span>, <span class="st">&#39;Cluster count&#39;</span>, <span class="dv">3</span>,</span>
-<span id="cb189-13"><a href="rmarkdown-interaction.html#cb189-13" aria-hidden="true" tabindex="-1"></a>                               <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">9</span>))</span>
-<span id="cb189-14"><a href="rmarkdown-interaction.html#cb189-14" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb189-15"><a href="rmarkdown-interaction.html#cb189-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fluidRow</span>(</span>
-<span id="cb189-16"><a href="rmarkdown-interaction.html#cb189-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plotOutput</span>(<span class="st">&#39;kmeans&#39;</span>, <span class="at">height =</span> <span class="st">&quot;400px&quot;</span>)  </span>
-<span id="cb189-17"><a href="rmarkdown-interaction.html#cb189-17" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb189-18"><a href="rmarkdown-interaction.html#cb189-18" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb189-19"><a href="rmarkdown-interaction.html#cb189-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb189-20"><a href="rmarkdown-interaction.html#cb189-20" aria-hidden="true" tabindex="-1"></a>      <span class="co">#  将选定的变量组合到一个新的数据框中</span></span>
-<span id="cb189-21"><a href="rmarkdown-interaction.html#cb189-21" aria-hidden="true" tabindex="-1"></a>      selectedData <span class="ot">=</span> <span class="fu">reactive</span>({</span>
-<span id="cb189-22"><a href="rmarkdown-interaction.html#cb189-22" aria-hidden="true" tabindex="-1"></a>        dataset[, <span class="fu">c</span>(input<span class="sc">$</span>xcol, input<span class="sc">$</span>ycol)]</span>
-<span id="cb189-23"><a href="rmarkdown-interaction.html#cb189-23" aria-hidden="true" tabindex="-1"></a>      })</span>
-<span id="cb189-24"><a href="rmarkdown-interaction.html#cb189-24" aria-hidden="true" tabindex="-1"></a>      clusters <span class="ot">=</span> <span class="fu">reactive</span>({</span>
-<span id="cb189-25"><a href="rmarkdown-interaction.html#cb189-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">kmeans</span>(<span class="fu">selectedData</span>(), input<span class="sc">$</span>clusters)</span>
-<span id="cb189-26"><a href="rmarkdown-interaction.html#cb189-26" aria-hidden="true" tabindex="-1"></a>      })</span>
-<span id="cb189-27"><a href="rmarkdown-interaction.html#cb189-27" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>kmeans <span class="ot">=</span> <span class="fu">renderPlot</span>(<span class="at">height =</span> <span class="dv">400</span>, {</span>
-<span id="cb189-28"><a href="rmarkdown-interaction.html#cb189-28" aria-hidden="true" tabindex="-1"></a>        res <span class="ot">=</span> <span class="fu">clusters</span>()</span>
-<span id="cb189-29"><a href="rmarkdown-interaction.html#cb189-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">4.1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb189-30"><a href="rmarkdown-interaction.html#cb189-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(<span class="fu">selectedData</span>(),</span>
-<span id="cb189-31"><a href="rmarkdown-interaction.html#cb189-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> res<span class="sc">$</span>cluster, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb189-32"><a href="rmarkdown-interaction.html#cb189-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">points</span>(res<span class="sc">$</span>centers, <span class="at">pch =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
-<span id="cb189-33"><a href="rmarkdown-interaction.html#cb189-33" aria-hidden="true" tabindex="-1"></a>      })</span>
-<span id="cb189-34"><a href="rmarkdown-interaction.html#cb189-34" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb189-35"><a href="rmarkdown-interaction.html#cb189-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(<span class="at">height =</span> <span class="dv">500</span>)</span>
-<span id="cb189-36"><a href="rmarkdown-interaction.html#cb189-36" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb189-37"><a href="rmarkdown-interaction.html#cb189-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="rmarkdown-interaction.html#cb191-1" aria-hidden="true" tabindex="-1"></a>kmeans_cluster <span class="ot">=</span> <span class="cf">function</span>(dataset) {</span>
+<span id="cb191-2"><a href="rmarkdown-interaction.html#cb191-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-3"><a href="rmarkdown-interaction.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(shiny)  </span>
+<span id="cb191-4"><a href="rmarkdown-interaction.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  vars <span class="ot">=</span> <span class="fu">names</span>(dataset)</span>
+<span id="cb191-5"><a href="rmarkdown-interaction.html#cb191-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-6"><a href="rmarkdown-interaction.html#cb191-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb191-7"><a href="rmarkdown-interaction.html#cb191-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb191-8"><a href="rmarkdown-interaction.html#cb191-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fluidRow</span>(<span class="at">style =</span> <span class="st">&quot;padding-bottom: 20px;&quot;</span>,</span>
+<span id="cb191-9"><a href="rmarkdown-interaction.html#cb191-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">selectInput</span>(<span class="st">&#39;xcol&#39;</span>, <span class="st">&#39;X Variable&#39;</span>, vars)),</span>
+<span id="cb191-10"><a href="rmarkdown-interaction.html#cb191-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">selectInput</span>(<span class="st">&#39;ycol&#39;</span>, <span class="st">&#39;Y Variable&#39;</span>, vars,</span>
+<span id="cb191-11"><a href="rmarkdown-interaction.html#cb191-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">selected =</span> vars[<span class="dv">2</span>])),</span>
+<span id="cb191-12"><a href="rmarkdown-interaction.html#cb191-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">numericInput</span>(<span class="st">&#39;clusters&#39;</span>, <span class="st">&#39;Cluster count&#39;</span>, <span class="dv">3</span>,</span>
+<span id="cb191-13"><a href="rmarkdown-interaction.html#cb191-13" aria-hidden="true" tabindex="-1"></a>                               <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">9</span>))</span>
+<span id="cb191-14"><a href="rmarkdown-interaction.html#cb191-14" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb191-15"><a href="rmarkdown-interaction.html#cb191-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fluidRow</span>(</span>
+<span id="cb191-16"><a href="rmarkdown-interaction.html#cb191-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plotOutput</span>(<span class="st">&#39;kmeans&#39;</span>, <span class="at">height =</span> <span class="st">&quot;400px&quot;</span>)  </span>
+<span id="cb191-17"><a href="rmarkdown-interaction.html#cb191-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb191-18"><a href="rmarkdown-interaction.html#cb191-18" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb191-19"><a href="rmarkdown-interaction.html#cb191-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb191-20"><a href="rmarkdown-interaction.html#cb191-20" aria-hidden="true" tabindex="-1"></a>      <span class="co">#  将选定的变量组合到一个新的数据框中</span></span>
+<span id="cb191-21"><a href="rmarkdown-interaction.html#cb191-21" aria-hidden="true" tabindex="-1"></a>      selectedData <span class="ot">=</span> <span class="fu">reactive</span>({</span>
+<span id="cb191-22"><a href="rmarkdown-interaction.html#cb191-22" aria-hidden="true" tabindex="-1"></a>        dataset[, <span class="fu">c</span>(input<span class="sc">$</span>xcol, input<span class="sc">$</span>ycol)]</span>
+<span id="cb191-23"><a href="rmarkdown-interaction.html#cb191-23" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb191-24"><a href="rmarkdown-interaction.html#cb191-24" aria-hidden="true" tabindex="-1"></a>      clusters <span class="ot">=</span> <span class="fu">reactive</span>({</span>
+<span id="cb191-25"><a href="rmarkdown-interaction.html#cb191-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">kmeans</span>(<span class="fu">selectedData</span>(), input<span class="sc">$</span>clusters)</span>
+<span id="cb191-26"><a href="rmarkdown-interaction.html#cb191-26" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb191-27"><a href="rmarkdown-interaction.html#cb191-27" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>kmeans <span class="ot">=</span> <span class="fu">renderPlot</span>(<span class="at">height =</span> <span class="dv">400</span>, {</span>
+<span id="cb191-28"><a href="rmarkdown-interaction.html#cb191-28" aria-hidden="true" tabindex="-1"></a>        res <span class="ot">=</span> <span class="fu">clusters</span>()</span>
+<span id="cb191-29"><a href="rmarkdown-interaction.html#cb191-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">4.1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb191-30"><a href="rmarkdown-interaction.html#cb191-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(<span class="fu">selectedData</span>(),</span>
+<span id="cb191-31"><a href="rmarkdown-interaction.html#cb191-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> res<span class="sc">$</span>cluster, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb191-32"><a href="rmarkdown-interaction.html#cb191-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">points</span>(res<span class="sc">$</span>centers, <span class="at">pch =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb191-33"><a href="rmarkdown-interaction.html#cb191-33" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb191-34"><a href="rmarkdown-interaction.html#cb191-34" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb191-35"><a href="rmarkdown-interaction.html#cb191-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(<span class="at">height =</span> <span class="dv">500</span>)</span>
+<span id="cb191-36"><a href="rmarkdown-interaction.html#cb191-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb191-37"><a href="rmarkdown-interaction.html#cb191-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="小部件的大小和布局" class="section level4 hasAnchor" number="5.1.4.3">
 <h4><span class="header-section-number">5.1.4.3</span> 小部件的大小和布局<a href="rmarkdown-interaction.html#小部件的大小和布局" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -641,15 +642,15 @@ div.csl-indent {
 <p>Shiny 文档通常在每次 R Markdown 文档渲染时都会显示。这时，较大或计算量较大的文档可能需要一些时间来加载。</p>
 <p>如果文档包含不需要立即渲染的交互式 Shiny 组件，可以在 <code>rmarkdown::render_delayed()</code> 函数中封装 Shiny 代码。这个函数保存它的参数，直到文档呈现完成并显示给用户，然后计算它，并在计算完成时将其注入输出文档。</p>
 <p>例如，以下代码中，首先渲染出数值输入的结果，加载完文档并显示给用户之后， <code>render_delayed()</code> 才会执行内部代码，并将其加载到文档中。</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb190-1"><a href="rmarkdown-interaction.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
-<span id="cb190-2"><a href="rmarkdown-interaction.html#cb190-2" aria-hidden="true" tabindex="-1"></a><span class="in">numericInput(&quot;rows&quot;, &quot;How many cars?&quot;, 5)</span></span>
-<span id="cb190-3"><a href="rmarkdown-interaction.html#cb190-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-4"><a href="rmarkdown-interaction.html#cb190-4" aria-hidden="true" tabindex="-1"></a><span class="in">rmarkdown::render_delayed({</span></span>
-<span id="cb190-5"><a href="rmarkdown-interaction.html#cb190-5" aria-hidden="true" tabindex="-1"></a><span class="in">  renderTable({</span></span>
-<span id="cb190-6"><a href="rmarkdown-interaction.html#cb190-6" aria-hidden="true" tabindex="-1"></a><span class="in">    head(cars, input$rows)</span></span>
-<span id="cb190-7"><a href="rmarkdown-interaction.html#cb190-7" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
-<span id="cb190-8"><a href="rmarkdown-interaction.html#cb190-8" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
-<span id="cb190-9"><a href="rmarkdown-interaction.html#cb190-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb192-1"><a href="rmarkdown-interaction.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE} </span></span>
+<span id="cb192-2"><a href="rmarkdown-interaction.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="in">numericInput(&quot;rows&quot;, &quot;How many cars?&quot;, 5)</span></span>
+<span id="cb192-3"><a href="rmarkdown-interaction.html#cb192-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-4"><a href="rmarkdown-interaction.html#cb192-4" aria-hidden="true" tabindex="-1"></a><span class="in">rmarkdown::render_delayed({</span></span>
+<span id="cb192-5"><a href="rmarkdown-interaction.html#cb192-5" aria-hidden="true" tabindex="-1"></a><span class="in">  renderTable({</span></span>
+<span id="cb192-6"><a href="rmarkdown-interaction.html#cb192-6" aria-hidden="true" tabindex="-1"></a><span class="in">    head(cars, input$rows)</span></span>
+<span id="cb192-7"><a href="rmarkdown-interaction.html#cb192-7" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb192-8"><a href="rmarkdown-interaction.html#cb192-8" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb192-9"><a href="rmarkdown-interaction.html#cb192-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <!-- #### 渲染函数的输出参数 {#shiny-args} -->
 <!-- 在一个经典的 Shiny 应用程序中，读者可以使用 `plotOutput()` 和 `verbatimTextOutput()` 等函数在 UI 中指定输出元素，并使用 `renderPlot()` 和 `renderPrint()` 等函数呈现其内容。 -->
 <!-- 相比之下，在 Shiny 文档中，UI 元素通常是在调用 `renderXXX()` 函数时自动创建的。例如，使用 `renderPlot()` 函数，而预先没有创建对应的 `plotOutput()`。在这种情况下，Shiny 将相应的输出对象与每个 `renderXXX()` 函数关联起来，使得可以在一个完整的 Shiny 应用程序之外使用 Shiny 代码。但是，在这个过程中可能会丢失一些功能。尤其是，`plotOutput()` 可以接受一些可选参数来设置宽度和高度等内容。 -->
@@ -770,10 +771,10 @@ renderPlot({
 <blockquote>
 <p><strong>注</strong>：如果没有使用 RStudio 进行操作，那么也可以从 R 控制台创建一个新的 <code>flexdashboard</code> 的 R Markdown 文件，具体操作如下：</p>
 </blockquote>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="rmarkdown-interaction.html#cb192-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">draft</span>(</span>
-<span id="cb192-2"><a href="rmarkdown-interaction.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;dashboard.Rmd&quot;</span>, <span class="at">template =</span> <span class="st">&quot;flex_dashboard&quot;</span>,</span>
-<span id="cb192-3"><a href="rmarkdown-interaction.html#cb192-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">&quot;flexdashboard&quot;</span></span>
-<span id="cb192-4"><a href="rmarkdown-interaction.html#cb192-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="rmarkdown-interaction.html#cb194-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">draft</span>(</span>
+<span id="cb194-2"><a href="rmarkdown-interaction.html#cb194-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;dashboard.Rmd&quot;</span>, <span class="at">template =</span> <span class="st">&quot;flex_dashboard&quot;</span>,</span>
+<span id="cb194-3"><a href="rmarkdown-interaction.html#cb194-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">&quot;flexdashboard&quot;</span></span>
+<span id="cb194-4"><a href="rmarkdown-interaction.html#cb194-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>本章只介绍一些基本特性和用法。如果读者想更进一步了解 <strong>flexdashboard</strong>，可以查看它的完整文档： <a href="https://rmarkdown.rstudio.com/flexdashboard/" class="uri">https://rmarkdown.rstudio.com/flexdashboard/</a> 。</p>
 <p>仪表盘有许多与 HTML 文档相同的特性，比如图形选项，外观和风格，MathJax 公式，头部和正文前后内容和 Pandoc 参数，等等。除此之外，也建议浏览 R 帮助页面 <code>?flexdashboard::flex_dashboard</code> 来了解更多 <code>flexdashboard</code> 选项和其特性。</p>
 <p>当然 RStudio 官网也给出了该包 <a href="https://pkgs.rstudio.com/flexdashboard/">介绍</a> 与案例，读者可以基于案例到学习实现快速入门。</p>
@@ -787,40 +788,40 @@ renderPlot({
 <li><p>三级标题：生成框（包含一个或多个仪表盘组件）。</p></li>
 </ul>
 <p>下面给出一个简单的例子：</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb193-1"><a href="rmarkdown-interaction.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb193-2"><a href="rmarkdown-interaction.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;入门例子&quot;</span></span>
-<span id="cb193-3"><a href="rmarkdown-interaction.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
-<span id="cb193-4"><a href="rmarkdown-interaction.html#cb193-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb193-5"><a href="rmarkdown-interaction.html#cb193-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-6"><a href="rmarkdown-interaction.html#cb193-6" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb193-7"><a href="rmarkdown-interaction.html#cb193-7" aria-hidden="true" tabindex="-1"></a><span class="in">library(flexdashboard)</span></span>
-<span id="cb193-8"><a href="rmarkdown-interaction.html#cb193-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb193-9"><a href="rmarkdown-interaction.html#cb193-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-10"><a href="rmarkdown-interaction.html#cb193-10" aria-hidden="true" tabindex="-1"></a>第一列</span>
-<span id="cb193-11"><a href="rmarkdown-interaction.html#cb193-11" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span>
-<span id="cb193-12"><a href="rmarkdown-interaction.html#cb193-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-13"><a href="rmarkdown-interaction.html#cb193-13" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图表 A</span></span>
-<span id="cb193-14"><a href="rmarkdown-interaction.html#cb193-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-15"><a href="rmarkdown-interaction.html#cb193-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb193-16"><a href="rmarkdown-interaction.html#cb193-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb193-17"><a href="rmarkdown-interaction.html#cb193-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-18"><a href="rmarkdown-interaction.html#cb193-18" aria-hidden="true" tabindex="-1"></a>第二列</span>
-<span id="cb193-19"><a href="rmarkdown-interaction.html#cb193-19" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span>
-<span id="cb193-20"><a href="rmarkdown-interaction.html#cb193-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-21"><a href="rmarkdown-interaction.html#cb193-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图表 B</span></span>
-<span id="cb193-22"><a href="rmarkdown-interaction.html#cb193-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-23"><a href="rmarkdown-interaction.html#cb193-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb193-24"><a href="rmarkdown-interaction.html#cb193-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb193-25"><a href="rmarkdown-interaction.html#cb193-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-26"><a href="rmarkdown-interaction.html#cb193-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图表 C</span></span>
-<span id="cb193-27"><a href="rmarkdown-interaction.html#cb193-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-28"><a href="rmarkdown-interaction.html#cb193-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb193-29"><a href="rmarkdown-interaction.html#cb193-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb195-1"><a href="rmarkdown-interaction.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb195-2"><a href="rmarkdown-interaction.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;入门例子&quot;</span></span>
+<span id="cb195-3"><a href="rmarkdown-interaction.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
+<span id="cb195-4"><a href="rmarkdown-interaction.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb195-5"><a href="rmarkdown-interaction.html#cb195-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-6"><a href="rmarkdown-interaction.html#cb195-6" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb195-7"><a href="rmarkdown-interaction.html#cb195-7" aria-hidden="true" tabindex="-1"></a><span class="in">library(flexdashboard)</span></span>
+<span id="cb195-8"><a href="rmarkdown-interaction.html#cb195-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb195-9"><a href="rmarkdown-interaction.html#cb195-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-10"><a href="rmarkdown-interaction.html#cb195-10" aria-hidden="true" tabindex="-1"></a>第一列</span>
+<span id="cb195-11"><a href="rmarkdown-interaction.html#cb195-11" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span>
+<span id="cb195-12"><a href="rmarkdown-interaction.html#cb195-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-13"><a href="rmarkdown-interaction.html#cb195-13" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图表 A</span></span>
+<span id="cb195-14"><a href="rmarkdown-interaction.html#cb195-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-15"><a href="rmarkdown-interaction.html#cb195-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb195-16"><a href="rmarkdown-interaction.html#cb195-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb195-17"><a href="rmarkdown-interaction.html#cb195-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-18"><a href="rmarkdown-interaction.html#cb195-18" aria-hidden="true" tabindex="-1"></a>第二列</span>
+<span id="cb195-19"><a href="rmarkdown-interaction.html#cb195-19" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span>
+<span id="cb195-20"><a href="rmarkdown-interaction.html#cb195-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-21"><a href="rmarkdown-interaction.html#cb195-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图表 B</span></span>
+<span id="cb195-22"><a href="rmarkdown-interaction.html#cb195-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-23"><a href="rmarkdown-interaction.html#cb195-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb195-24"><a href="rmarkdown-interaction.html#cb195-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb195-25"><a href="rmarkdown-interaction.html#cb195-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-26"><a href="rmarkdown-interaction.html#cb195-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图表 C</span></span>
+<span id="cb195-27"><a href="rmarkdown-interaction.html#cb195-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-28"><a href="rmarkdown-interaction.html#cb195-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb195-29"><a href="rmarkdown-interaction.html#cb195-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>注意，第一行文本（第一列）下的一系列破折号是二级标题的另一种 Markdown 语法形式，即：</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb194-1"><a href="rmarkdown-interaction.html#cb194-1" aria-hidden="true" tabindex="-1"></a>第一列</span>
-<span id="cb194-2"><a href="rmarkdown-interaction.html#cb194-2" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb196-1"><a href="rmarkdown-interaction.html#cb196-1" aria-hidden="true" tabindex="-1"></a>第一列</span>
+<span id="cb196-2"><a href="rmarkdown-interaction.html#cb196-2" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span></code></pre></div>
 <p>等同于</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb195-1"><a href="rmarkdown-interaction.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 第一列</span></span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb197-1"><a href="rmarkdown-interaction.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 第一列</span></span></code></pre></div>
 <blockquote>
 <p>这里使用一系列减号，只是为了让二级标题在源文档中更为显眼罢了。读者可以根据自身喜好，选择任意一种语法形式。</p>
 </blockquote>
@@ -841,9 +842,9 @@ renderPlot({
 <div id="基于行的布局" class="section level4 hasAnchor" number="5.2.2.1">
 <h4><span class="header-section-number">5.2.2.1</span> 基于行的布局<a href="rmarkdown-interaction.html#基于行的布局" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>通过修改 <code>orientation</code> 选项将默认布局（列导向）改为以行导向的布局，例如：</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb196-1"><a href="rmarkdown-interaction.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb196-2"><a href="rmarkdown-interaction.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="at">  flexdashboard:</span><span class="fu">:flex_dashboard</span><span class="kw">:</span></span>
-<span id="cb196-3"><a href="rmarkdown-interaction.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orientation</span><span class="kw">:</span><span class="at"> rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb198-1"><a href="rmarkdown-interaction.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb198-2"><a href="rmarkdown-interaction.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="at">  flexdashboard:</span><span class="fu">:flex_dashboard</span><span class="kw">:</span></span>
+<span id="cb198-3"><a href="rmarkdown-interaction.html#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orientation</span><span class="kw">:</span><span class="at"> rows</span></span></code></pre></div>
 <p>此时，二级结构将会按照行进行排列，三级结构会按照行中的列进行排放。将上述例子修改后，输出结果如图 <a href="rmarkdown-interaction.html#fig:dashboard-rows">5.8</a> 所示：</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-rows"></span>
 <img src="images/dashboard-rows.png" alt="基于行布局的结果。"  />
@@ -855,15 +856,15 @@ renderPlot({
 <div id="节属性" class="section level4 hasAnchor" number="5.2.2.2">
 <h4><span class="header-section-number">5.2.2.2</span> 节属性<a href="rmarkdown-interaction.html#节属性" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>二级结构头部还可以加入一些属性，例如：设置列宽度为 350。</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb197-1"><a href="rmarkdown-interaction.html#cb197-1" aria-hidden="true" tabindex="-1"></a>窄栏 {data-width=350}</span>
-<span id="cb197-2"><a href="rmarkdown-interaction.html#cb197-2" aria-hidden="true" tabindex="-1"></a>--------------------------------</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb199-1"><a href="rmarkdown-interaction.html#cb199-1" aria-hidden="true" tabindex="-1"></a>窄栏 {data-width=350}</span>
+<span id="cb199-2"><a href="rmarkdown-interaction.html#cb199-2" aria-hidden="true" tabindex="-1"></a>--------------------------------</span></code></pre></div>
 <p>在基于行布局的情况下，可以为行设置 <code>data-height</code> 属性。而基于列布局的情况下，可以使用 <code>{.tabset}</code> 使得三级结构以制表符的形式排列，例如：</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb198-1"><a href="rmarkdown-interaction.html#cb198-1" aria-hidden="true" tabindex="-1"></a>两个选项卡 {.tabset}</span>
-<span id="cb198-2"><a href="rmarkdown-interaction.html#cb198-2" aria-hidden="true" tabindex="-1"></a>------------------</span>
-<span id="cb198-3"><a href="rmarkdown-interaction.html#cb198-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-4"><a href="rmarkdown-interaction.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="fu">### 选项卡 A</span></span>
-<span id="cb198-5"><a href="rmarkdown-interaction.html#cb198-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-6"><a href="rmarkdown-interaction.html#cb198-6" aria-hidden="true" tabindex="-1"></a><span class="fu">### 选项卡 B</span></span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb200-1"><a href="rmarkdown-interaction.html#cb200-1" aria-hidden="true" tabindex="-1"></a>两个选项卡 {.tabset}</span>
+<span id="cb200-2"><a href="rmarkdown-interaction.html#cb200-2" aria-hidden="true" tabindex="-1"></a>------------------</span>
+<span id="cb200-3"><a href="rmarkdown-interaction.html#cb200-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-4"><a href="rmarkdown-interaction.html#cb200-4" aria-hidden="true" tabindex="-1"></a><span class="fu">### 选项卡 A</span></span>
+<span id="cb200-5"><a href="rmarkdown-interaction.html#cb200-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-6"><a href="rmarkdown-interaction.html#cb200-6" aria-hidden="true" tabindex="-1"></a><span class="fu">### 选项卡 B</span></span></code></pre></div>
 <p>结果如图 <a href="rmarkdown-interaction.html#fig:dashboard-tab">5.9</a> 所示：</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-tab"></span>
 <img src="images/dashboard-tab.png" alt="以制表符的形式排列。"  />
@@ -875,36 +876,36 @@ renderPlot({
 <div id="multiple-pages" class="section level4 hasAnchor" number="5.2.2.3">
 <h4><span class="header-section-number">5.2.2.3</span> 多页<a href="rmarkdown-interaction.html#multiple-pages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果 R Markdown 文档中有多个一级结构的内容时，这时仪表盘会将每个一节结构分别显示为单独页面。下面给出一个简单的例子：</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb199-1"><a href="rmarkdown-interaction.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb199-2"><a href="rmarkdown-interaction.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;多页显示&quot;</span></span>
-<span id="cb199-3"><a href="rmarkdown-interaction.html#cb199-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
-<span id="cb199-4"><a href="rmarkdown-interaction.html#cb199-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb199-5"><a href="rmarkdown-interaction.html#cb199-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-6"><a href="rmarkdown-interaction.html#cb199-6" aria-hidden="true" tabindex="-1"></a>图形 {data-icon=&quot;fa-signal&quot;}</span>
-<span id="cb199-7"><a href="rmarkdown-interaction.html#cb199-7" aria-hidden="true" tabindex="-1"></a><span class="fu">===================================== </span></span>
-<span id="cb199-8"><a href="rmarkdown-interaction.html#cb199-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb199-9"><a href="rmarkdown-interaction.html#cb199-9" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 A</span></span>
-<span id="cb199-10"><a href="rmarkdown-interaction.html#cb199-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb199-11"><a href="rmarkdown-interaction.html#cb199-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb199-12"><a href="rmarkdown-interaction.html#cb199-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb199-13"><a href="rmarkdown-interaction.html#cb199-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb199-14"><a href="rmarkdown-interaction.html#cb199-14" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 B</span></span>
-<span id="cb199-15"><a href="rmarkdown-interaction.html#cb199-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-16"><a href="rmarkdown-interaction.html#cb199-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb199-17"><a href="rmarkdown-interaction.html#cb199-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb199-18"><a href="rmarkdown-interaction.html#cb199-18" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb199-19"><a href="rmarkdown-interaction.html#cb199-19" aria-hidden="true" tabindex="-1"></a>表格 {data-icon=&quot;fa-table&quot;}</span>
-<span id="cb199-20"><a href="rmarkdown-interaction.html#cb199-20" aria-hidden="true" tabindex="-1"></a><span class="fu">=====================================     </span></span>
-<span id="cb199-21"><a href="rmarkdown-interaction.html#cb199-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-22"><a href="rmarkdown-interaction.html#cb199-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### 表 A</span></span>
-<span id="cb199-23"><a href="rmarkdown-interaction.html#cb199-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb199-24"><a href="rmarkdown-interaction.html#cb199-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb199-25"><a href="rmarkdown-interaction.html#cb199-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb199-26"><a href="rmarkdown-interaction.html#cb199-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb199-27"><a href="rmarkdown-interaction.html#cb199-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 表 B</span></span>
-<span id="cb199-28"><a href="rmarkdown-interaction.html#cb199-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-29"><a href="rmarkdown-interaction.html#cb199-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb199-30"><a href="rmarkdown-interaction.html#cb199-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb201-1"><a href="rmarkdown-interaction.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb201-2"><a href="rmarkdown-interaction.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;多页显示&quot;</span></span>
+<span id="cb201-3"><a href="rmarkdown-interaction.html#cb201-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
+<span id="cb201-4"><a href="rmarkdown-interaction.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb201-5"><a href="rmarkdown-interaction.html#cb201-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-6"><a href="rmarkdown-interaction.html#cb201-6" aria-hidden="true" tabindex="-1"></a>图形 {data-icon=&quot;fa-signal&quot;}</span>
+<span id="cb201-7"><a href="rmarkdown-interaction.html#cb201-7" aria-hidden="true" tabindex="-1"></a><span class="fu">===================================== </span></span>
+<span id="cb201-8"><a href="rmarkdown-interaction.html#cb201-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb201-9"><a href="rmarkdown-interaction.html#cb201-9" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 A</span></span>
+<span id="cb201-10"><a href="rmarkdown-interaction.html#cb201-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb201-11"><a href="rmarkdown-interaction.html#cb201-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb201-12"><a href="rmarkdown-interaction.html#cb201-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb201-13"><a href="rmarkdown-interaction.html#cb201-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb201-14"><a href="rmarkdown-interaction.html#cb201-14" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 B</span></span>
+<span id="cb201-15"><a href="rmarkdown-interaction.html#cb201-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-16"><a href="rmarkdown-interaction.html#cb201-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb201-17"><a href="rmarkdown-interaction.html#cb201-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb201-18"><a href="rmarkdown-interaction.html#cb201-18" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb201-19"><a href="rmarkdown-interaction.html#cb201-19" aria-hidden="true" tabindex="-1"></a>表格 {data-icon=&quot;fa-table&quot;}</span>
+<span id="cb201-20"><a href="rmarkdown-interaction.html#cb201-20" aria-hidden="true" tabindex="-1"></a><span class="fu">=====================================     </span></span>
+<span id="cb201-21"><a href="rmarkdown-interaction.html#cb201-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-22"><a href="rmarkdown-interaction.html#cb201-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### 表 A</span></span>
+<span id="cb201-23"><a href="rmarkdown-interaction.html#cb201-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb201-24"><a href="rmarkdown-interaction.html#cb201-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb201-25"><a href="rmarkdown-interaction.html#cb201-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb201-26"><a href="rmarkdown-interaction.html#cb201-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb201-27"><a href="rmarkdown-interaction.html#cb201-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 表 B</span></span>
+<span id="cb201-28"><a href="rmarkdown-interaction.html#cb201-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-29"><a href="rmarkdown-interaction.html#cb201-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb201-30"><a href="rmarkdown-interaction.html#cb201-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-pages"></span>
 <img src="images/dashboard-multipages.png" alt="仪表盘上的多个页面情况。"  />
 <p class="caption">
@@ -927,33 +928,33 @@ renderPlot({
 <div id="故事板" class="section level4 hasAnchor" number="5.2.2.4">
 <h4><span class="header-section-number">5.2.2.4</span> 故事板<a href="rmarkdown-interaction.html#故事板" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>除了基于列或行布局外，还可以通过故事板（storyboard）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb200-1"><a href="rmarkdown-interaction.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb200-2"><a href="rmarkdown-interaction.html#cb200-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;故事板&quot;</span></span>
-<span id="cb200-3"><a href="rmarkdown-interaction.html#cb200-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
-<span id="cb200-4"><a href="rmarkdown-interaction.html#cb200-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
-<span id="cb200-5"><a href="rmarkdown-interaction.html#cb200-5" aria-hidden="true" tabindex="-1"></a><span class="co">    storyboard: true</span></span>
-<span id="cb200-6"><a href="rmarkdown-interaction.html#cb200-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb200-7"><a href="rmarkdown-interaction.html#cb200-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-8"><a href="rmarkdown-interaction.html#cb200-8" aria-hidden="true" tabindex="-1"></a><span class="fu">### 散点图</span></span>
-<span id="cb200-9"><a href="rmarkdown-interaction.html#cb200-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-10"><a href="rmarkdown-interaction.html#cb200-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb200-11"><a href="rmarkdown-interaction.html#cb200-11" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars, pch = 20)</span></span>
-<span id="cb200-12"><a href="rmarkdown-interaction.html#cb200-12" aria-hidden="true" tabindex="-1"></a><span class="in">grid()</span></span>
-<span id="cb200-13"><a href="rmarkdown-interaction.html#cb200-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb200-14"><a href="rmarkdown-interaction.html#cb200-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-15"><a href="rmarkdown-interaction.html#cb200-15" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb200-16"><a href="rmarkdown-interaction.html#cb200-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-17"><a href="rmarkdown-interaction.html#cb200-17" aria-hidden="true" tabindex="-1"></a>可以添加一些评论。</span>
-<span id="cb200-18"><a href="rmarkdown-interaction.html#cb200-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-19"><a href="rmarkdown-interaction.html#cb200-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### 直方图</span></span>
-<span id="cb200-20"><a href="rmarkdown-interaction.html#cb200-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-21"><a href="rmarkdown-interaction.html#cb200-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb200-22"><a href="rmarkdown-interaction.html#cb200-22" aria-hidden="true" tabindex="-1"></a><span class="in">hist(faithful$eruptions, col = &#39;gray&#39;, border = &#39;white&#39;, main = &#39;&#39;)</span></span>
-<span id="cb200-23"><a href="rmarkdown-interaction.html#cb200-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb200-24"><a href="rmarkdown-interaction.html#cb200-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-25"><a href="rmarkdown-interaction.html#cb200-25" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb200-26"><a href="rmarkdown-interaction.html#cb200-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-27"><a href="rmarkdown-interaction.html#cb200-27" aria-hidden="true" tabindex="-1"></a>可以添加一些评论。</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb202-1"><a href="rmarkdown-interaction.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb202-2"><a href="rmarkdown-interaction.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;故事板&quot;</span></span>
+<span id="cb202-3"><a href="rmarkdown-interaction.html#cb202-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb202-4"><a href="rmarkdown-interaction.html#cb202-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
+<span id="cb202-5"><a href="rmarkdown-interaction.html#cb202-5" aria-hidden="true" tabindex="-1"></a><span class="co">    storyboard: true</span></span>
+<span id="cb202-6"><a href="rmarkdown-interaction.html#cb202-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb202-7"><a href="rmarkdown-interaction.html#cb202-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-8"><a href="rmarkdown-interaction.html#cb202-8" aria-hidden="true" tabindex="-1"></a><span class="fu">### 散点图</span></span>
+<span id="cb202-9"><a href="rmarkdown-interaction.html#cb202-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-10"><a href="rmarkdown-interaction.html#cb202-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb202-11"><a href="rmarkdown-interaction.html#cb202-11" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars, pch = 20)</span></span>
+<span id="cb202-12"><a href="rmarkdown-interaction.html#cb202-12" aria-hidden="true" tabindex="-1"></a><span class="in">grid()</span></span>
+<span id="cb202-13"><a href="rmarkdown-interaction.html#cb202-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb202-14"><a href="rmarkdown-interaction.html#cb202-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-15"><a href="rmarkdown-interaction.html#cb202-15" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb202-16"><a href="rmarkdown-interaction.html#cb202-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-17"><a href="rmarkdown-interaction.html#cb202-17" aria-hidden="true" tabindex="-1"></a>可以添加一些评论。</span>
+<span id="cb202-18"><a href="rmarkdown-interaction.html#cb202-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-19"><a href="rmarkdown-interaction.html#cb202-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### 直方图</span></span>
+<span id="cb202-20"><a href="rmarkdown-interaction.html#cb202-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-21"><a href="rmarkdown-interaction.html#cb202-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb202-22"><a href="rmarkdown-interaction.html#cb202-22" aria-hidden="true" tabindex="-1"></a><span class="in">hist(faithful$eruptions, col = &#39;gray&#39;, border = &#39;white&#39;, main = &#39;&#39;)</span></span>
+<span id="cb202-23"><a href="rmarkdown-interaction.html#cb202-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb202-24"><a href="rmarkdown-interaction.html#cb202-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-25"><a href="rmarkdown-interaction.html#cb202-25" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb202-26"><a href="rmarkdown-interaction.html#cb202-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-27"><a href="rmarkdown-interaction.html#cb202-27" aria-hidden="true" tabindex="-1"></a>可以添加一些评论。</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-story"></span>
 <img src="images/dashboard-story.png" alt="基于故事板布局的结果。"  />
 <p class="caption">
@@ -981,44 +982,44 @@ renderPlot({
 <div id="数值框" class="section level4 hasAnchor" number="5.2.3.1">
 <h4><span class="header-section-number">5.2.3.1</span> 数值框<a href="rmarkdown-interaction.html#数值框" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果希望在仪表盘中包含一个或多个数值，那么读者可以使用 <strong>flexdashboard</strong> 包中的 <code>valueBox()</code> 函数来实现这个需求。下面给出一个简单的例子：</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb201-1"><a href="rmarkdown-interaction.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb201-2"><a href="rmarkdown-interaction.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;数值框&quot;</span></span>
-<span id="cb201-3"><a href="rmarkdown-interaction.html#cb201-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
-<span id="cb201-4"><a href="rmarkdown-interaction.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
-<span id="cb201-5"><a href="rmarkdown-interaction.html#cb201-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orientation: rows</span></span>
-<span id="cb201-6"><a href="rmarkdown-interaction.html#cb201-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb201-7"><a href="rmarkdown-interaction.html#cb201-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-8"><a href="rmarkdown-interaction.html#cb201-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb201-9"><a href="rmarkdown-interaction.html#cb201-9" aria-hidden="true" tabindex="-1"></a><span class="in">library(flexdashboard)</span></span>
-<span id="cb201-10"><a href="rmarkdown-interaction.html#cb201-10" aria-hidden="true" tabindex="-1"></a><span class="in"># 这些计算函数只是简单的例子</span></span>
-<span id="cb201-11"><a href="rmarkdown-interaction.html#cb201-11" aria-hidden="true" tabindex="-1"></a><span class="in">computeArticles = function(...) return(45)</span></span>
-<span id="cb201-12"><a href="rmarkdown-interaction.html#cb201-12" aria-hidden="true" tabindex="-1"></a><span class="in">computeComments = function(...) return(126)</span></span>
-<span id="cb201-13"><a href="rmarkdown-interaction.html#cb201-13" aria-hidden="true" tabindex="-1"></a><span class="in">computeSpam = function(...) return(15)</span></span>
-<span id="cb201-14"><a href="rmarkdown-interaction.html#cb201-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb201-15"><a href="rmarkdown-interaction.html#cb201-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-16"><a href="rmarkdown-interaction.html#cb201-16" aria-hidden="true" tabindex="-1"></a><span class="fu">### 每日文章数</span></span>
-<span id="cb201-17"><a href="rmarkdown-interaction.html#cb201-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-18"><a href="rmarkdown-interaction.html#cb201-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb201-19"><a href="rmarkdown-interaction.html#cb201-19" aria-hidden="true" tabindex="-1"></a><span class="in">articles = computeArticles()</span></span>
-<span id="cb201-20"><a href="rmarkdown-interaction.html#cb201-20" aria-hidden="true" tabindex="-1"></a><span class="in">valueBox(articles, icon = &quot;fa-pencil&quot;)</span></span>
-<span id="cb201-21"><a href="rmarkdown-interaction.html#cb201-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb201-22"><a href="rmarkdown-interaction.html#cb201-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-23"><a href="rmarkdown-interaction.html#cb201-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### 每日评论数</span></span>
-<span id="cb201-24"><a href="rmarkdown-interaction.html#cb201-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-25"><a href="rmarkdown-interaction.html#cb201-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb201-26"><a href="rmarkdown-interaction.html#cb201-26" aria-hidden="true" tabindex="-1"></a><span class="in">comments = computeComments()</span></span>
-<span id="cb201-27"><a href="rmarkdown-interaction.html#cb201-27" aria-hidden="true" tabindex="-1"></a><span class="in">valueBox(comments, icon = &quot;fa-comments&quot;)</span></span>
-<span id="cb201-28"><a href="rmarkdown-interaction.html#cb201-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb201-29"><a href="rmarkdown-interaction.html#cb201-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-30"><a href="rmarkdown-interaction.html#cb201-30" aria-hidden="true" tabindex="-1"></a><span class="fu">### 每日垃圾邮件数</span></span>
-<span id="cb201-31"><a href="rmarkdown-interaction.html#cb201-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-32"><a href="rmarkdown-interaction.html#cb201-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb201-33"><a href="rmarkdown-interaction.html#cb201-33" aria-hidden="true" tabindex="-1"></a><span class="in">spam = computeSpam()</span></span>
-<span id="cb201-34"><a href="rmarkdown-interaction.html#cb201-34" aria-hidden="true" tabindex="-1"></a><span class="in">valueBox(</span></span>
-<span id="cb201-35"><a href="rmarkdown-interaction.html#cb201-35" aria-hidden="true" tabindex="-1"></a><span class="in">  spam, icon = &quot;fa-trash&quot;,</span></span>
-<span id="cb201-36"><a href="rmarkdown-interaction.html#cb201-36" aria-hidden="true" tabindex="-1"></a><span class="in">  color = ifelse(spam &gt; 10, &quot;warning&quot;, &quot;primary&quot;)</span></span>
-<span id="cb201-37"><a href="rmarkdown-interaction.html#cb201-37" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb201-38"><a href="rmarkdown-interaction.html#cb201-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb203-1"><a href="rmarkdown-interaction.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb203-2"><a href="rmarkdown-interaction.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;数值框&quot;</span></span>
+<span id="cb203-3"><a href="rmarkdown-interaction.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb203-4"><a href="rmarkdown-interaction.html#cb203-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
+<span id="cb203-5"><a href="rmarkdown-interaction.html#cb203-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orientation: rows</span></span>
+<span id="cb203-6"><a href="rmarkdown-interaction.html#cb203-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb203-7"><a href="rmarkdown-interaction.html#cb203-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-8"><a href="rmarkdown-interaction.html#cb203-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb203-9"><a href="rmarkdown-interaction.html#cb203-9" aria-hidden="true" tabindex="-1"></a><span class="in">library(flexdashboard)</span></span>
+<span id="cb203-10"><a href="rmarkdown-interaction.html#cb203-10" aria-hidden="true" tabindex="-1"></a><span class="in"># 这些计算函数只是简单的例子</span></span>
+<span id="cb203-11"><a href="rmarkdown-interaction.html#cb203-11" aria-hidden="true" tabindex="-1"></a><span class="in">computeArticles = function(...) return(45)</span></span>
+<span id="cb203-12"><a href="rmarkdown-interaction.html#cb203-12" aria-hidden="true" tabindex="-1"></a><span class="in">computeComments = function(...) return(126)</span></span>
+<span id="cb203-13"><a href="rmarkdown-interaction.html#cb203-13" aria-hidden="true" tabindex="-1"></a><span class="in">computeSpam = function(...) return(15)</span></span>
+<span id="cb203-14"><a href="rmarkdown-interaction.html#cb203-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb203-15"><a href="rmarkdown-interaction.html#cb203-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-16"><a href="rmarkdown-interaction.html#cb203-16" aria-hidden="true" tabindex="-1"></a><span class="fu">### 每日文章数</span></span>
+<span id="cb203-17"><a href="rmarkdown-interaction.html#cb203-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-18"><a href="rmarkdown-interaction.html#cb203-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb203-19"><a href="rmarkdown-interaction.html#cb203-19" aria-hidden="true" tabindex="-1"></a><span class="in">articles = computeArticles()</span></span>
+<span id="cb203-20"><a href="rmarkdown-interaction.html#cb203-20" aria-hidden="true" tabindex="-1"></a><span class="in">valueBox(articles, icon = &quot;fa-pencil&quot;)</span></span>
+<span id="cb203-21"><a href="rmarkdown-interaction.html#cb203-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb203-22"><a href="rmarkdown-interaction.html#cb203-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-23"><a href="rmarkdown-interaction.html#cb203-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### 每日评论数</span></span>
+<span id="cb203-24"><a href="rmarkdown-interaction.html#cb203-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-25"><a href="rmarkdown-interaction.html#cb203-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb203-26"><a href="rmarkdown-interaction.html#cb203-26" aria-hidden="true" tabindex="-1"></a><span class="in">comments = computeComments()</span></span>
+<span id="cb203-27"><a href="rmarkdown-interaction.html#cb203-27" aria-hidden="true" tabindex="-1"></a><span class="in">valueBox(comments, icon = &quot;fa-comments&quot;)</span></span>
+<span id="cb203-28"><a href="rmarkdown-interaction.html#cb203-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb203-29"><a href="rmarkdown-interaction.html#cb203-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-30"><a href="rmarkdown-interaction.html#cb203-30" aria-hidden="true" tabindex="-1"></a><span class="fu">### 每日垃圾邮件数</span></span>
+<span id="cb203-31"><a href="rmarkdown-interaction.html#cb203-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-32"><a href="rmarkdown-interaction.html#cb203-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb203-33"><a href="rmarkdown-interaction.html#cb203-33" aria-hidden="true" tabindex="-1"></a><span class="in">spam = computeSpam()</span></span>
+<span id="cb203-34"><a href="rmarkdown-interaction.html#cb203-34" aria-hidden="true" tabindex="-1"></a><span class="in">valueBox(</span></span>
+<span id="cb203-35"><a href="rmarkdown-interaction.html#cb203-35" aria-hidden="true" tabindex="-1"></a><span class="in">  spam, icon = &quot;fa-trash&quot;,</span></span>
+<span id="cb203-36"><a href="rmarkdown-interaction.html#cb203-36" aria-hidden="true" tabindex="-1"></a><span class="in">  color = ifelse(spam &gt; 10, &quot;warning&quot;, &quot;primary&quot;)</span></span>
+<span id="cb203-37"><a href="rmarkdown-interaction.html#cb203-37" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb203-38"><a href="rmarkdown-interaction.html#cb203-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-valueboxes"></span>
 <img src="images/dashboard-valueboxes.png" alt="仪表盘上并排的三个值。"  />
 <p class="caption">
@@ -1030,40 +1031,40 @@ renderPlot({
 <div id="仪表" class="section level4 hasAnchor" number="5.2.3.2">
 <h4><span class="header-section-number">5.2.3.2</span> 仪表<a href="rmarkdown-interaction.html#仪表" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在指定数值范围内显示仪表上的数值。例如，下面展示了三个仪表并排的结果（见图 <a href="rmarkdown-interaction.html#fig:dashboard-gauges">5.14</a>）。</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb202-1"><a href="rmarkdown-interaction.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb202-2"><a href="rmarkdown-interaction.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;仪表&quot;</span></span>
-<span id="cb202-3"><a href="rmarkdown-interaction.html#cb202-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
-<span id="cb202-4"><a href="rmarkdown-interaction.html#cb202-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
-<span id="cb202-5"><a href="rmarkdown-interaction.html#cb202-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orientation: rows</span></span>
-<span id="cb202-6"><a href="rmarkdown-interaction.html#cb202-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb202-7"><a href="rmarkdown-interaction.html#cb202-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-8"><a href="rmarkdown-interaction.html#cb202-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb202-9"><a href="rmarkdown-interaction.html#cb202-9" aria-hidden="true" tabindex="-1"></a><span class="in">library(flexdashboard)</span></span>
-<span id="cb202-10"><a href="rmarkdown-interaction.html#cb202-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb202-11"><a href="rmarkdown-interaction.html#cb202-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-12"><a href="rmarkdown-interaction.html#cb202-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### 接触率</span></span>
-<span id="cb202-13"><a href="rmarkdown-interaction.html#cb202-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-14"><a href="rmarkdown-interaction.html#cb202-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb202-15"><a href="rmarkdown-interaction.html#cb202-15" aria-hidden="true" tabindex="-1"></a><span class="in">gauge(91, min = 0, max = 100, symbol = &#39;%&#39;, gaugeSectors(</span></span>
-<span id="cb202-16"><a href="rmarkdown-interaction.html#cb202-16" aria-hidden="true" tabindex="-1"></a><span class="in">  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)</span></span>
-<span id="cb202-17"><a href="rmarkdown-interaction.html#cb202-17" aria-hidden="true" tabindex="-1"></a><span class="in">))</span></span>
-<span id="cb202-18"><a href="rmarkdown-interaction.html#cb202-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb202-19"><a href="rmarkdown-interaction.html#cb202-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-20"><a href="rmarkdown-interaction.html#cb202-20" aria-hidden="true" tabindex="-1"></a><span class="fu">### 平均额定值</span></span>
-<span id="cb202-21"><a href="rmarkdown-interaction.html#cb202-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-22"><a href="rmarkdown-interaction.html#cb202-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb202-23"><a href="rmarkdown-interaction.html#cb202-23" aria-hidden="true" tabindex="-1"></a><span class="in">gauge(37.4, min = 0, max = 50, gaugeSectors(</span></span>
-<span id="cb202-24"><a href="rmarkdown-interaction.html#cb202-24" aria-hidden="true" tabindex="-1"></a><span class="in">  success = c(41, 50), warning = c(21, 40), danger = c(0, 20)</span></span>
-<span id="cb202-25"><a href="rmarkdown-interaction.html#cb202-25" aria-hidden="true" tabindex="-1"></a><span class="in">))</span></span>
-<span id="cb202-26"><a href="rmarkdown-interaction.html#cb202-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb202-27"><a href="rmarkdown-interaction.html#cb202-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-28"><a href="rmarkdown-interaction.html#cb202-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### 取消数</span></span>
-<span id="cb202-29"><a href="rmarkdown-interaction.html#cb202-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-30"><a href="rmarkdown-interaction.html#cb202-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb202-31"><a href="rmarkdown-interaction.html#cb202-31" aria-hidden="true" tabindex="-1"></a><span class="in">gauge(7, min = 0, max = 10, gaugeSectors(</span></span>
-<span id="cb202-32"><a href="rmarkdown-interaction.html#cb202-32" aria-hidden="true" tabindex="-1"></a><span class="in">  success = c(0, 2), warning = c(3, 6), danger = c(7, 10)</span></span>
-<span id="cb202-33"><a href="rmarkdown-interaction.html#cb202-33" aria-hidden="true" tabindex="-1"></a><span class="in">))</span></span>
-<span id="cb202-34"><a href="rmarkdown-interaction.html#cb202-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb204-1"><a href="rmarkdown-interaction.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb204-2"><a href="rmarkdown-interaction.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;仪表&quot;</span></span>
+<span id="cb204-3"><a href="rmarkdown-interaction.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb204-4"><a href="rmarkdown-interaction.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
+<span id="cb204-5"><a href="rmarkdown-interaction.html#cb204-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orientation: rows</span></span>
+<span id="cb204-6"><a href="rmarkdown-interaction.html#cb204-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb204-7"><a href="rmarkdown-interaction.html#cb204-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-8"><a href="rmarkdown-interaction.html#cb204-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb204-9"><a href="rmarkdown-interaction.html#cb204-9" aria-hidden="true" tabindex="-1"></a><span class="in">library(flexdashboard)</span></span>
+<span id="cb204-10"><a href="rmarkdown-interaction.html#cb204-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb204-11"><a href="rmarkdown-interaction.html#cb204-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-12"><a href="rmarkdown-interaction.html#cb204-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### 接触率</span></span>
+<span id="cb204-13"><a href="rmarkdown-interaction.html#cb204-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-14"><a href="rmarkdown-interaction.html#cb204-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb204-15"><a href="rmarkdown-interaction.html#cb204-15" aria-hidden="true" tabindex="-1"></a><span class="in">gauge(91, min = 0, max = 100, symbol = &#39;%&#39;, gaugeSectors(</span></span>
+<span id="cb204-16"><a href="rmarkdown-interaction.html#cb204-16" aria-hidden="true" tabindex="-1"></a><span class="in">  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)</span></span>
+<span id="cb204-17"><a href="rmarkdown-interaction.html#cb204-17" aria-hidden="true" tabindex="-1"></a><span class="in">))</span></span>
+<span id="cb204-18"><a href="rmarkdown-interaction.html#cb204-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb204-19"><a href="rmarkdown-interaction.html#cb204-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-20"><a href="rmarkdown-interaction.html#cb204-20" aria-hidden="true" tabindex="-1"></a><span class="fu">### 平均额定值</span></span>
+<span id="cb204-21"><a href="rmarkdown-interaction.html#cb204-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-22"><a href="rmarkdown-interaction.html#cb204-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb204-23"><a href="rmarkdown-interaction.html#cb204-23" aria-hidden="true" tabindex="-1"></a><span class="in">gauge(37.4, min = 0, max = 50, gaugeSectors(</span></span>
+<span id="cb204-24"><a href="rmarkdown-interaction.html#cb204-24" aria-hidden="true" tabindex="-1"></a><span class="in">  success = c(41, 50), warning = c(21, 40), danger = c(0, 20)</span></span>
+<span id="cb204-25"><a href="rmarkdown-interaction.html#cb204-25" aria-hidden="true" tabindex="-1"></a><span class="in">))</span></span>
+<span id="cb204-26"><a href="rmarkdown-interaction.html#cb204-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb204-27"><a href="rmarkdown-interaction.html#cb204-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-28"><a href="rmarkdown-interaction.html#cb204-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### 取消数</span></span>
+<span id="cb204-29"><a href="rmarkdown-interaction.html#cb204-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-30"><a href="rmarkdown-interaction.html#cb204-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb204-31"><a href="rmarkdown-interaction.html#cb204-31" aria-hidden="true" tabindex="-1"></a><span class="in">gauge(7, min = 0, max = 10, gaugeSectors(</span></span>
+<span id="cb204-32"><a href="rmarkdown-interaction.html#cb204-32" aria-hidden="true" tabindex="-1"></a><span class="in">  success = c(0, 2), warning = c(3, 6), danger = c(7, 10)</span></span>
+<span id="cb204-33"><a href="rmarkdown-interaction.html#cb204-33" aria-hidden="true" tabindex="-1"></a><span class="in">))</span></span>
+<span id="cb204-34"><a href="rmarkdown-interaction.html#cb204-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-gauges"></span>
 <img src="images/dashboard-gauges.png" alt="三个仪表并排放在仪表盘上。"  />
 <p class="caption">
@@ -1085,42 +1086,42 @@ renderPlot({
 <li><p>定义不包含图表，而是仅包含任意内容（文本、图像和方程等）的指示板。</p></li>
 </ol>
 <p>如图 <a href="rmarkdown-interaction.html#fig:dashboard-text">5.15</a> 所示，顶部包含了一些内容说明和右下角包含了一个只有内容的指示板：</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb203-1"><a href="rmarkdown-interaction.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb203-2"><a href="rmarkdown-interaction.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;文本注释&quot;</span></span>
-<span id="cb203-3"><a href="rmarkdown-interaction.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
-<span id="cb203-4"><a href="rmarkdown-interaction.html#cb203-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
-<span id="cb203-5"><a href="rmarkdown-interaction.html#cb203-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orientation: rows</span></span>
-<span id="cb203-6"><a href="rmarkdown-interaction.html#cb203-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb203-7"><a href="rmarkdown-interaction.html#cb203-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-8"><a href="rmarkdown-interaction.html#cb203-8" aria-hidden="true" tabindex="-1"></a>英国 1974-1979 年每月死于支气管炎、肺气肿和哮喘的人数 （来源于：P. J. Diggle, 1990, Time Series: A Biostatistical Introduction. Oxford, table A.3）</span>
-<span id="cb203-9"><a href="rmarkdown-interaction.html#cb203-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-10"><a href="rmarkdown-interaction.html#cb203-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb203-11"><a href="rmarkdown-interaction.html#cb203-11" aria-hidden="true" tabindex="-1"></a><span class="in">library(dygraphs)</span></span>
-<span id="cb203-12"><a href="rmarkdown-interaction.html#cb203-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb203-13"><a href="rmarkdown-interaction.html#cb203-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-14"><a href="rmarkdown-interaction.html#cb203-14" aria-hidden="true" tabindex="-1"></a>行 {data-height=600}</span>
-<span id="cb203-15"><a href="rmarkdown-interaction.html#cb203-15" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
-<span id="cb203-16"><a href="rmarkdown-interaction.html#cb203-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-17"><a href="rmarkdown-interaction.html#cb203-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### 总肺癌死亡数</span></span>
-<span id="cb203-18"><a href="rmarkdown-interaction.html#cb203-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-19"><a href="rmarkdown-interaction.html#cb203-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb203-20"><a href="rmarkdown-interaction.html#cb203-20" aria-hidden="true" tabindex="-1"></a><span class="in">dygraph(ldeaths)</span></span>
-<span id="cb203-21"><a href="rmarkdown-interaction.html#cb203-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb203-22"><a href="rmarkdown-interaction.html#cb203-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-23"><a href="rmarkdown-interaction.html#cb203-23" aria-hidden="true" tabindex="-1"></a>行 {data-height=400}</span>
-<span id="cb203-24"><a href="rmarkdown-interaction.html#cb203-24" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
-<span id="cb203-25"><a href="rmarkdown-interaction.html#cb203-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-26"><a href="rmarkdown-interaction.html#cb203-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### 男性死亡人数</span></span>
-<span id="cb203-27"><a href="rmarkdown-interaction.html#cb203-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-28"><a href="rmarkdown-interaction.html#cb203-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb203-29"><a href="rmarkdown-interaction.html#cb203-29" aria-hidden="true" tabindex="-1"></a><span class="in">dygraph(mdeaths)</span></span>
-<span id="cb203-30"><a href="rmarkdown-interaction.html#cb203-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb203-31"><a href="rmarkdown-interaction.html#cb203-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-32"><a href="rmarkdown-interaction.html#cb203-32" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 1974-1979 年英国每月死于肺病的人数。</span></span>
-<span id="cb203-33"><a href="rmarkdown-interaction.html#cb203-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-34"><a href="rmarkdown-interaction.html#cb203-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### 备注</span></span>
-<span id="cb203-35"><a href="rmarkdown-interaction.html#cb203-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-36"><a href="rmarkdown-interaction.html#cb203-36" aria-hidden="true" tabindex="-1"></a>本例使用了 dygraphs 包。该包为绘制时间序列数据提供了丰富的工具。</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb205-1"><a href="rmarkdown-interaction.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb205-2"><a href="rmarkdown-interaction.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;文本注释&quot;</span></span>
+<span id="cb205-3"><a href="rmarkdown-interaction.html#cb205-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb205-4"><a href="rmarkdown-interaction.html#cb205-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
+<span id="cb205-5"><a href="rmarkdown-interaction.html#cb205-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orientation: rows</span></span>
+<span id="cb205-6"><a href="rmarkdown-interaction.html#cb205-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb205-7"><a href="rmarkdown-interaction.html#cb205-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-8"><a href="rmarkdown-interaction.html#cb205-8" aria-hidden="true" tabindex="-1"></a>英国 1974-1979 年每月死于支气管炎、肺气肿和哮喘的人数 （来源于：P. J. Diggle, 1990, Time Series: A Biostatistical Introduction. Oxford, table A.3）</span>
+<span id="cb205-9"><a href="rmarkdown-interaction.html#cb205-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-10"><a href="rmarkdown-interaction.html#cb205-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb205-11"><a href="rmarkdown-interaction.html#cb205-11" aria-hidden="true" tabindex="-1"></a><span class="in">library(dygraphs)</span></span>
+<span id="cb205-12"><a href="rmarkdown-interaction.html#cb205-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb205-13"><a href="rmarkdown-interaction.html#cb205-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-14"><a href="rmarkdown-interaction.html#cb205-14" aria-hidden="true" tabindex="-1"></a>行 {data-height=600}</span>
+<span id="cb205-15"><a href="rmarkdown-interaction.html#cb205-15" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb205-16"><a href="rmarkdown-interaction.html#cb205-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-17"><a href="rmarkdown-interaction.html#cb205-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### 总肺癌死亡数</span></span>
+<span id="cb205-18"><a href="rmarkdown-interaction.html#cb205-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-19"><a href="rmarkdown-interaction.html#cb205-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb205-20"><a href="rmarkdown-interaction.html#cb205-20" aria-hidden="true" tabindex="-1"></a><span class="in">dygraph(ldeaths)</span></span>
+<span id="cb205-21"><a href="rmarkdown-interaction.html#cb205-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb205-22"><a href="rmarkdown-interaction.html#cb205-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-23"><a href="rmarkdown-interaction.html#cb205-23" aria-hidden="true" tabindex="-1"></a>行 {data-height=400}</span>
+<span id="cb205-24"><a href="rmarkdown-interaction.html#cb205-24" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb205-25"><a href="rmarkdown-interaction.html#cb205-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-26"><a href="rmarkdown-interaction.html#cb205-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### 男性死亡人数</span></span>
+<span id="cb205-27"><a href="rmarkdown-interaction.html#cb205-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-28"><a href="rmarkdown-interaction.html#cb205-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb205-29"><a href="rmarkdown-interaction.html#cb205-29" aria-hidden="true" tabindex="-1"></a><span class="in">dygraph(mdeaths)</span></span>
+<span id="cb205-30"><a href="rmarkdown-interaction.html#cb205-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb205-31"><a href="rmarkdown-interaction.html#cb205-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-32"><a href="rmarkdown-interaction.html#cb205-32" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 1974-1979 年英国每月死于肺病的人数。</span></span>
+<span id="cb205-33"><a href="rmarkdown-interaction.html#cb205-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-34"><a href="rmarkdown-interaction.html#cb205-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### 备注</span></span>
+<span id="cb205-35"><a href="rmarkdown-interaction.html#cb205-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-36"><a href="rmarkdown-interaction.html#cb205-36" aria-hidden="true" tabindex="-1"></a>本例使用了 dygraphs 包。该包为绘制时间序列数据提供了丰富的工具。</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-text"></span>
 <img src="images/dashboard-text.png" alt="仪表盘上的文本注释。"  />
 <p class="caption">
@@ -1136,13 +1137,13 @@ renderPlot({
 <h4><span class="header-section-number">5.2.3.4</span> 导航栏<a href="rmarkdown-interaction.html#导航栏" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>默认情况下，仪表盘的导航栏包括：标题（<code>title</code>）、作者（<code>author</code>）和日期（<code>date</code>）。当仪表盘有多个页面时（第 <a href="rmarkdown-interaction.html#multiple-pages">5.2.2.3</a> 节），导航条左侧还包含指向各个页面的链接。当然，也在可以仪表盘上添加社交链接。</p>
 <p>除此之外，使用 <code>navbar</code> 选项可以在导航栏中添加自定义链接。例如，在导航栏中添加 “关于” 链接：</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb204-1"><a href="rmarkdown-interaction.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb204-2"><a href="rmarkdown-interaction.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;导航栏&quot;</span></span>
-<span id="cb204-3"><a href="rmarkdown-interaction.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb204-4"><a href="rmarkdown-interaction.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="at">  flexdashboard:</span><span class="fu">:flex_dashboard</span><span class="kw">:</span></span>
-<span id="cb204-5"><a href="rmarkdown-interaction.html#cb204-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb204-6"><a href="rmarkdown-interaction.html#cb204-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="kw">{</span><span class="at"> </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;关于&quot;</span><span class="kw">,</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://example.com/about&quot;</span><span class="at"> </span><span class="kw">}</span></span>
-<span id="cb204-7"><a href="rmarkdown-interaction.html#cb204-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb206-1"><a href="rmarkdown-interaction.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb206-2"><a href="rmarkdown-interaction.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;导航栏&quot;</span></span>
+<span id="cb206-3"><a href="rmarkdown-interaction.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb206-4"><a href="rmarkdown-interaction.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="at">  flexdashboard:</span><span class="fu">:flex_dashboard</span><span class="kw">:</span></span>
+<span id="cb206-5"><a href="rmarkdown-interaction.html#cb206-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb206-6"><a href="rmarkdown-interaction.html#cb206-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="kw">{</span><span class="at"> </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;关于&quot;</span><span class="kw">,</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://example.com/about&quot;</span><span class="at"> </span><span class="kw">}</span></span>
+<span id="cb206-7"><a href="rmarkdown-interaction.html#cb206-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>这时得到的界面如图 <a href="rmarkdown-interaction.html#fig:dashboard-about">5.16</a> 所示：</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-about"></span>
 <img src="images/dashboard-about.png" alt="导航栏中添加自定义链接。"  />
@@ -1178,53 +1179,53 @@ renderPlot({
 <div id="shiny-仪表盘的一个示例" class="section level4 hasAnchor" number="5.2.4.2">
 <h4><span class="header-section-number">5.2.4.2</span> Shiny 仪表盘的一个示例<a href="rmarkdown-interaction.html#shiny-仪表盘的一个示例" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>图 <a href="rmarkdown-interaction.html#fig:dashboard-shiny">5.17</a> 给出了 Shiny 仪表盘的一个示例：</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb205-1"><a href="rmarkdown-interaction.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb205-2"><a href="rmarkdown-interaction.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;间歇泉喷发&quot;</span></span>
-<span id="cb205-3"><a href="rmarkdown-interaction.html#cb205-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
-<span id="cb205-4"><a href="rmarkdown-interaction.html#cb205-4" aria-hidden="true" tabindex="-1"></a><span class="an">runtime:</span><span class="co"> shiny</span></span>
-<span id="cb205-5"><a href="rmarkdown-interaction.html#cb205-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb205-6"><a href="rmarkdown-interaction.html#cb205-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-7"><a href="rmarkdown-interaction.html#cb205-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r global, include=FALSE}</span></span>
-<span id="cb205-8"><a href="rmarkdown-interaction.html#cb205-8" aria-hidden="true" tabindex="-1"></a><span class="in"># 在全局块中加载数据，以便仪表盘的所有用户可以共享</span></span>
-<span id="cb205-9"><a href="rmarkdown-interaction.html#cb205-9" aria-hidden="true" tabindex="-1"></a><span class="in">library(datasets)</span></span>
-<span id="cb205-10"><a href="rmarkdown-interaction.html#cb205-10" aria-hidden="true" tabindex="-1"></a><span class="in">data(faithful)</span></span>
-<span id="cb205-11"><a href="rmarkdown-interaction.html#cb205-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb205-12"><a href="rmarkdown-interaction.html#cb205-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-13"><a href="rmarkdown-interaction.html#cb205-13" aria-hidden="true" tabindex="-1"></a>列 {.sidebar}</span>
-<span id="cb205-14"><a href="rmarkdown-interaction.html#cb205-14" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span>
-<span id="cb205-15"><a href="rmarkdown-interaction.html#cb205-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-16"><a href="rmarkdown-interaction.html#cb205-16" aria-hidden="true" tabindex="-1"></a>美国怀俄明州黄石国家公园的 Old Faithful  间歇泉在喷发和喷发之间的等待时间。</span>
-<span id="cb205-17"><a href="rmarkdown-interaction.html#cb205-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-18"><a href="rmarkdown-interaction.html#cb205-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb205-19"><a href="rmarkdown-interaction.html#cb205-19" aria-hidden="true" tabindex="-1"></a><span class="in">selectInput(</span></span>
-<span id="cb205-20"><a href="rmarkdown-interaction.html#cb205-20" aria-hidden="true" tabindex="-1"></a><span class="in">  &quot;n_breaks&quot;, label = &quot;条形数：&quot;,</span></span>
-<span id="cb205-21"><a href="rmarkdown-interaction.html#cb205-21" aria-hidden="true" tabindex="-1"></a><span class="in">  choices = c(10, 20, 35, 50), selected = 20</span></span>
-<span id="cb205-22"><a href="rmarkdown-interaction.html#cb205-22" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb205-23"><a href="rmarkdown-interaction.html#cb205-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-24"><a href="rmarkdown-interaction.html#cb205-24" aria-hidden="true" tabindex="-1"></a><span class="in">sliderInput(</span></span>
-<span id="cb205-25"><a href="rmarkdown-interaction.html#cb205-25" aria-hidden="true" tabindex="-1"></a><span class="in">  &quot;bw_adjust&quot;, label = &quot;带宽调整：&quot;,</span></span>
-<span id="cb205-26"><a href="rmarkdown-interaction.html#cb205-26" aria-hidden="true" tabindex="-1"></a><span class="in">  min = 0.2, max = 2, value = 1, step = 0.2</span></span>
-<span id="cb205-27"><a href="rmarkdown-interaction.html#cb205-27" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb205-28"><a href="rmarkdown-interaction.html#cb205-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb205-29"><a href="rmarkdown-interaction.html#cb205-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-30"><a href="rmarkdown-interaction.html#cb205-30" aria-hidden="true" tabindex="-1"></a>列</span>
-<span id="cb205-31"><a href="rmarkdown-interaction.html#cb205-31" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span>
-<span id="cb205-32"><a href="rmarkdown-interaction.html#cb205-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-33"><a href="rmarkdown-interaction.html#cb205-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### 间歇泉喷发持续时间</span></span>
-<span id="cb205-34"><a href="rmarkdown-interaction.html#cb205-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-35"><a href="rmarkdown-interaction.html#cb205-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb205-36"><a href="rmarkdown-interaction.html#cb205-36" aria-hidden="true" tabindex="-1"></a><span class="in">renderPlot({</span></span>
-<span id="cb205-37"><a href="rmarkdown-interaction.html#cb205-37" aria-hidden="true" tabindex="-1"></a><span class="in">  erpt = faithful$eruptions</span></span>
-<span id="cb205-38"><a href="rmarkdown-interaction.html#cb205-38" aria-hidden="true" tabindex="-1"></a><span class="in">  hist(</span></span>
-<span id="cb205-39"><a href="rmarkdown-interaction.html#cb205-39" aria-hidden="true" tabindex="-1"></a><span class="in">    erpt, probability = TRUE, breaks = as.integer(input$n_breaks),</span></span>
-<span id="cb205-40"><a href="rmarkdown-interaction.html#cb205-40" aria-hidden="true" tabindex="-1"></a><span class="in">    xlab = &quot;Duration (minutes)&quot;, main = &quot;Geyser Eruption Duration&quot;,</span></span>
-<span id="cb205-41"><a href="rmarkdown-interaction.html#cb205-41" aria-hidden="true" tabindex="-1"></a><span class="in">    col = &#39;gray&#39;, border = &#39;white&#39;</span></span>
-<span id="cb205-42"><a href="rmarkdown-interaction.html#cb205-42" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
-<span id="cb205-43"><a href="rmarkdown-interaction.html#cb205-43" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb205-44"><a href="rmarkdown-interaction.html#cb205-44" aria-hidden="true" tabindex="-1"></a><span class="in">  dens = density(erpt, adjust = input$bw_adjust)</span></span>
-<span id="cb205-45"><a href="rmarkdown-interaction.html#cb205-45" aria-hidden="true" tabindex="-1"></a><span class="in">  lines(dens, col = &quot;blue&quot;, lwd = 2)</span></span>
-<span id="cb205-46"><a href="rmarkdown-interaction.html#cb205-46" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
-<span id="cb205-47"><a href="rmarkdown-interaction.html#cb205-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb207-1"><a href="rmarkdown-interaction.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb207-2"><a href="rmarkdown-interaction.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;间歇泉喷发&quot;</span></span>
+<span id="cb207-3"><a href="rmarkdown-interaction.html#cb207-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
+<span id="cb207-4"><a href="rmarkdown-interaction.html#cb207-4" aria-hidden="true" tabindex="-1"></a><span class="an">runtime:</span><span class="co"> shiny</span></span>
+<span id="cb207-5"><a href="rmarkdown-interaction.html#cb207-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb207-6"><a href="rmarkdown-interaction.html#cb207-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-7"><a href="rmarkdown-interaction.html#cb207-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r global, include=FALSE}</span></span>
+<span id="cb207-8"><a href="rmarkdown-interaction.html#cb207-8" aria-hidden="true" tabindex="-1"></a><span class="in"># 在全局块中加载数据，以便仪表盘的所有用户可以共享</span></span>
+<span id="cb207-9"><a href="rmarkdown-interaction.html#cb207-9" aria-hidden="true" tabindex="-1"></a><span class="in">library(datasets)</span></span>
+<span id="cb207-10"><a href="rmarkdown-interaction.html#cb207-10" aria-hidden="true" tabindex="-1"></a><span class="in">data(faithful)</span></span>
+<span id="cb207-11"><a href="rmarkdown-interaction.html#cb207-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb207-12"><a href="rmarkdown-interaction.html#cb207-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-13"><a href="rmarkdown-interaction.html#cb207-13" aria-hidden="true" tabindex="-1"></a>列 {.sidebar}</span>
+<span id="cb207-14"><a href="rmarkdown-interaction.html#cb207-14" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span>
+<span id="cb207-15"><a href="rmarkdown-interaction.html#cb207-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-16"><a href="rmarkdown-interaction.html#cb207-16" aria-hidden="true" tabindex="-1"></a>美国怀俄明州黄石国家公园的 Old Faithful  间歇泉在喷发和喷发之间的等待时间。</span>
+<span id="cb207-17"><a href="rmarkdown-interaction.html#cb207-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-18"><a href="rmarkdown-interaction.html#cb207-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb207-19"><a href="rmarkdown-interaction.html#cb207-19" aria-hidden="true" tabindex="-1"></a><span class="in">selectInput(</span></span>
+<span id="cb207-20"><a href="rmarkdown-interaction.html#cb207-20" aria-hidden="true" tabindex="-1"></a><span class="in">  &quot;n_breaks&quot;, label = &quot;条形数：&quot;,</span></span>
+<span id="cb207-21"><a href="rmarkdown-interaction.html#cb207-21" aria-hidden="true" tabindex="-1"></a><span class="in">  choices = c(10, 20, 35, 50), selected = 20</span></span>
+<span id="cb207-22"><a href="rmarkdown-interaction.html#cb207-22" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb207-23"><a href="rmarkdown-interaction.html#cb207-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-24"><a href="rmarkdown-interaction.html#cb207-24" aria-hidden="true" tabindex="-1"></a><span class="in">sliderInput(</span></span>
+<span id="cb207-25"><a href="rmarkdown-interaction.html#cb207-25" aria-hidden="true" tabindex="-1"></a><span class="in">  &quot;bw_adjust&quot;, label = &quot;带宽调整：&quot;,</span></span>
+<span id="cb207-26"><a href="rmarkdown-interaction.html#cb207-26" aria-hidden="true" tabindex="-1"></a><span class="in">  min = 0.2, max = 2, value = 1, step = 0.2</span></span>
+<span id="cb207-27"><a href="rmarkdown-interaction.html#cb207-27" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb207-28"><a href="rmarkdown-interaction.html#cb207-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb207-29"><a href="rmarkdown-interaction.html#cb207-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-30"><a href="rmarkdown-interaction.html#cb207-30" aria-hidden="true" tabindex="-1"></a>列</span>
+<span id="cb207-31"><a href="rmarkdown-interaction.html#cb207-31" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------</span>
+<span id="cb207-32"><a href="rmarkdown-interaction.html#cb207-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-33"><a href="rmarkdown-interaction.html#cb207-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### 间歇泉喷发持续时间</span></span>
+<span id="cb207-34"><a href="rmarkdown-interaction.html#cb207-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-35"><a href="rmarkdown-interaction.html#cb207-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb207-36"><a href="rmarkdown-interaction.html#cb207-36" aria-hidden="true" tabindex="-1"></a><span class="in">renderPlot({</span></span>
+<span id="cb207-37"><a href="rmarkdown-interaction.html#cb207-37" aria-hidden="true" tabindex="-1"></a><span class="in">  erpt = faithful$eruptions</span></span>
+<span id="cb207-38"><a href="rmarkdown-interaction.html#cb207-38" aria-hidden="true" tabindex="-1"></a><span class="in">  hist(</span></span>
+<span id="cb207-39"><a href="rmarkdown-interaction.html#cb207-39" aria-hidden="true" tabindex="-1"></a><span class="in">    erpt, probability = TRUE, breaks = as.integer(input$n_breaks),</span></span>
+<span id="cb207-40"><a href="rmarkdown-interaction.html#cb207-40" aria-hidden="true" tabindex="-1"></a><span class="in">    xlab = &quot;Duration (minutes)&quot;, main = &quot;Geyser Eruption Duration&quot;,</span></span>
+<span id="cb207-41"><a href="rmarkdown-interaction.html#cb207-41" aria-hidden="true" tabindex="-1"></a><span class="in">    col = &#39;gray&#39;, border = &#39;white&#39;</span></span>
+<span id="cb207-42"><a href="rmarkdown-interaction.html#cb207-42" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb207-43"><a href="rmarkdown-interaction.html#cb207-43" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb207-44"><a href="rmarkdown-interaction.html#cb207-44" aria-hidden="true" tabindex="-1"></a><span class="in">  dens = density(erpt, adjust = input$bw_adjust)</span></span>
+<span id="cb207-45"><a href="rmarkdown-interaction.html#cb207-45" aria-hidden="true" tabindex="-1"></a><span class="in">  lines(dens, col = &quot;blue&quot;, lwd = 2)</span></span>
+<span id="cb207-46"><a href="rmarkdown-interaction.html#cb207-46" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb207-47"><a href="rmarkdown-interaction.html#cb207-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dashboard-shiny"></span>
 <img src="images/dashboard-shiny.png" alt="基于 Shiny 的交互式仪表盘。"  />
 <p class="caption">
@@ -1266,15 +1267,15 @@ renderPlot({
 </p>
 </div>
 <p>或者，也可以安装包 <strong>usethis</strong> <span class="citation">(<a href="#ref-R-usethis" role="doc-biblioref"><strong>R-usethis?</strong></a>)</span> 并使用其中的函数 <code>usethis::use_vignette()</code> 来创建一个长文档框架。下面是软件包长文档的 YAML 前端内容通常情况下的样子：</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb206-1"><a href="rmarkdown-interaction.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb206-2"><a href="rmarkdown-interaction.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Vignette Title&quot;</span></span>
-<span id="cb206-3"><a href="rmarkdown-interaction.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Vignette Author&quot;</span></span>
-<span id="cb206-4"><a href="rmarkdown-interaction.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> rmarkdown::html_vignette</span></span>
-<span id="cb206-5"><a href="rmarkdown-interaction.html#cb206-5" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span><span class="kw">: </span><span class="ch">&gt;</span></span>
-<span id="cb206-6"><a href="rmarkdown-interaction.html#cb206-6" aria-hidden="true" tabindex="-1"></a>  %\VignetteIndexEntry{Vignette Title}</span>
-<span id="cb206-7"><a href="rmarkdown-interaction.html#cb206-7" aria-hidden="true" tabindex="-1"></a>  %\VignetteEngine{knitr::rmarkdown}</span>
-<span id="cb206-8"><a href="rmarkdown-interaction.html#cb206-8" aria-hidden="true" tabindex="-1"></a>  %\VignetteEncoding{UTF-8}</span>
-<span id="cb206-9"><a href="rmarkdown-interaction.html#cb206-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb208-1"><a href="rmarkdown-interaction.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb208-2"><a href="rmarkdown-interaction.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Vignette Title&quot;</span></span>
+<span id="cb208-3"><a href="rmarkdown-interaction.html#cb208-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Vignette Author&quot;</span></span>
+<span id="cb208-4"><a href="rmarkdown-interaction.html#cb208-4" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> rmarkdown::html_vignette</span></span>
+<span id="cb208-5"><a href="rmarkdown-interaction.html#cb208-5" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span><span class="kw">: </span><span class="ch">&gt;</span></span>
+<span id="cb208-6"><a href="rmarkdown-interaction.html#cb208-6" aria-hidden="true" tabindex="-1"></a>  %\VignetteIndexEntry{Vignette Title}</span>
+<span id="cb208-7"><a href="rmarkdown-interaction.html#cb208-7" aria-hidden="true" tabindex="-1"></a>  %\VignetteEngine{knitr::rmarkdown}</span>
+<span id="cb208-8"><a href="rmarkdown-interaction.html#cb208-8" aria-hidden="true" tabindex="-1"></a>  %\VignetteEncoding{UTF-8}</span>
+<span id="cb208-9"><a href="rmarkdown-interaction.html#cb208-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>需要注意的是，需要在 <code>title</code> 字段和 <code>\VignetteIndexEntry{}</code> 命令中更改长文档的标题。除了长文档中的上述信息外，还需要在包的 <code>DESCRIPTION</code> 文件中做另外两件事：</p>
 <ol style="list-style-type: decimal">
 <li><p>在 <code>DESCRIPTION</code> 文件中指定 <code>VignetteBuilder: knitr</code>。</p></li>
@@ -1300,8 +1301,8 @@ renderPlot({
 <p>如果想手动设置模板，可以在 <code>inst/rmarkdown/templates</code> 目录下创建一个子目录。在这个目录中，需要保存至少两个文件：</p>
 <ol style="list-style-type: decimal">
 <li><p>一个名为 <code>template.yaml</code> 的文件，它为 RStudio IDE 提供了基本的元数据，比如模板的可读名称。这个文件至少应该有 <code>name</code> 和 <code>description</code> 字段，例如：</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb207-1"><a href="rmarkdown-interaction.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> 模板样例</span></span>
-<span id="cb207-2"><a href="rmarkdown-interaction.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> 这个模板做了什么</span></span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb209-1"><a href="rmarkdown-interaction.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> 模板样例</span></span>
+<span id="cb209-2"><a href="rmarkdown-interaction.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> 这个模板做了什么</span></span></code></pre></div>
 <p>如果想在模板被选用时创建一个新目录，可以包含 <code>create_dir: true</code>，如果模板依赖于额外的资源，这也是有用的。例如，<a href="https://github.com/rstudio/learnr/blob/master/inst/rmarkdown/templates/tutorial/template.yaml"><strong>learnr</strong> 包的模板</a> 设置了 <code>create_dir: true</code>，而 <a href="https://github.com/rstudio/flexdashboard/blob/master/inst/rmarkdown/templates/flex_dashboard/template.yaml"><strong>flexdashboard</strong> 包的模板</a>则使用默认的 <code>create_dir: false</code>。可以尝试在 RStudio 中打开这两个模板，以注意到不同的用户提示。</p></li>
 <li><p>保存在 <code>skeleton/skeleton.Rmd</code> 下 R Markdown 文档。这可能包含希望放入 R Markdown 文档中的任何内容。</p></li>
 </ol>
