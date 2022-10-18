@@ -4,11 +4,9 @@ library(reticulate)
 
 在 Python 会话中创建一个变量 `x`:
 
-
 ```{python}
 x = [1, 2, 3]
 ```
-
 
 在 R 代码块中访问 Python 变量 `x`:
 
@@ -21,7 +19,6 @@ py$x
 ```{r}
 py$y <- head(cars)
 ```
-
 
 在 Python 中输出变量 `y`：
 

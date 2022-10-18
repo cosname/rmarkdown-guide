@@ -1172,15 +1172,17 @@ knitr::opts_chunk$set(
 
 ## 与其他语言的结合 {#other-language}
 
-在 R Markdown 中，**knitr** 软件包除了支持 R 语言外，还支持许多其他语言。
+在 R Markdown 中，**knitr** 包除了支持 R 语言外，还支持许多其他语言。
 
-不同语言代码块表示方式类似，只需修改代码块中三个反引号后的花括号中的第一个单词即可。例如，```` ```{r}```` 中的小 `r` 表示该代码块为 R 代码块，而  ```` ```{python}```` 是指该代码块为 Python 代码块。本节将介绍一些读者可能不太熟悉的语言。
+不同语言代码块的表示方式类似，只需修改代码块中三个反引号后的花括号中的第一个单词即可。例如，```` ```{r}```` 中的小 `r` 表示该代码块为 R 代码块，而  ```` ```{python}```` 是指该代码块为 Python 代码块。其他语言也是使用类似的表达方式。
+<!-- 本节除了介绍如何在 R Markdown 中与 Python 语言结合外，还将介绍一些读者可能不太熟悉的语言，例如：SAS、Stata等语言。 -->
 
-在 knitr 中，每种语言都通过**语言引擎**得到支持。语言引擎本质上是一些函数，它们以源代码和块的选项作为输入，最后输出一个字符串。并通过 `knitr::knit_engines` 进行管理。可以使用以下方式检查现有引擎：
+在 knitr 中，每种语言都通过**语言引擎**得到支持。语言引擎本质上是一些函数，它们以源代码和代码块选项作为输入，最后输出一个字符串。该过程通过 `knitr::knit_engines` 进行管理。读者可以使用以下方式检查现有引擎：
 
 ```{r, eval=FALSE}
 names(knitr::knit_engines$get())
 ```
+在作者的电脑下，包含了以下引擎：
 ```{r, echo=FALSE}
 # remove engines registered by bookdown
 engs = names(knitr::knit_engines$get())
@@ -1189,23 +1191,27 @@ if (!is.na(i)) engs = head(engs, i - 1)
 engs
 ```
 
-目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录（通过 `cd` ）在其他 bash 代码块中不会一直存在。只有 R、Python 和 Julia 代码块在同一个会话中执行。并且 R 会话和 Python 会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象(参见[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节)。
+> **注意**：目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录在其他 bash 代码块中也不会一直存在。
 
-**R Markdown权威指南** ([Xie, Allaire, and Grolemund 2018](https://bookdown.org/yihui/rmarkdown-cookbook/other-languages.html#ref-rmarkdown2018)) 的[2.7节](https://bookdown.org/yihui/rmarkdown/language-engines.html) 展示了如何在 R Markdown 中使用 Python, Shell, SQL, Rcpp, Stan, JavaScript, CSS, Julia, C，和 Fortran 代码。这里就不做进一步介绍，本节主要重点介绍更多的语言引擎。读者可以在下面的库中找到更多的例子： https://github.com/yihui/knitr-examples （查找包含单词引擎的文件名）。
+<!-- 只有 R、Python 和 Julia 代码块在同一个会话中执行。并且 R 会话和 Python 会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象（参见《R markdown cookbook》[@xie2020r]  中的第[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节）。 -->
 
-首先，通过注册一个自定义语言引擎来说明语言引擎是如何工作的。
+本节重点介绍 Pyhton、Shell、SAS、Stata 以及 Asymptote 等语言引擎，如果读者其他语言引擎感兴趣，例如：SQL, Rcpp, Stan, JavaScript, Julia, C，和 Fortran 等，可参见书籍
+《R Markdown: The definitive guide》[@xie2018r] 中的第 [2.7 ](https://bookdown.org/yihui/rmarkdown/language-engines.html) 节内容，也可以在以下网站中找到更多的例子： https://github.com/yihui/knitr-examples。
+
 
 ### 注册自定义语言引擎 (\*) {#register-language}
 
-使用 `knitr::knit engines$set()` 注册一个自定义语言引擎。它接受一个函数作为输入，例如：
+首先，通过注册一个自定义语言引擎来说明**语言引擎**是如何工作的。
+
+读者可以使用 `knitr::knit_engines$set()` 注册一个自定义语言引擎。该引擎接受一个函数作为输入，例如：
 
 ```{r }
 knitr::knit_engines$set(foo = function(options) {
-  # 源代码在options$code
+  # 源代码在 options$code
 })
 ```
 
-这样就已经注册了 `foo` 引擎，现在读者可以使用以 ```` ```{foo}```` 开头的代码块了。该引擎函数中的 `options` 参数是代码块的块选项列表。可以在 `options$code` 中以字符向量的形式访问块的源代码。例如，对于代码块：
+此时，`foo` 引擎已经注册完毕，接下来就可以使用以 ```` ```{foo}```` 开头的代码块了。读者可以在 `options$code` 中以字符向量的形式访问代码块的源代码。例如，对于代码块：
 
 ````md
 ```{foo}`r ''`
@@ -1213,9 +1219,11 @@ knitr::knit_engines$set(foo = function(options) {
 2 + 2
 ```
 ````
+此时，所对应的 `options$code` 为字符向量 `c('1 + 1', '2 + 2')`。
 
+> **注意**：语言引擎实际上并不需要处理计算机语言，但可以处理代码块中的任何文本。
 
-`options` 的代码元素是一个字符向量 `c('1 + 1', '2 + 2')`。语言引擎实际上并不需要处理计算机语言，但可以处理代码块中的任何文本。首先，来展示一个简单的引擎示例，该引擎将代码块的内容转换为大写：
+首先，来展示一个简单的引擎示例，该引擎将代码块的内容转换为大写：
 
 ```{r}
 knitr::knit_engines$set(upper = function(options) {
@@ -1224,22 +1232,22 @@ knitr::knit_engines$set(upper = function(options) {
 })
 ```
 
-引擎的作用是将 `toupper` 函数应用于代码，并以单个字符串的形式返回结果（通过 `\n` 连接所有代码行）。注意 `toupper()` 仅在 chunk 选项 `eval = TRUE`\index{chunk option!eval} 时才应用，否则返回原始字符串。
+该 upper 引擎的作用是将 `toupper` 函数应用于代码，并以单个字符串的形式返回结果（通过 `\n` 连接所有代码行）。注意 `toupper()` 仅在代码块选项为 `eval = TRUE`\index{chunk option!eval} 时才会应用，否则返回原始字符串。
 
-以上已经向读者们展示了如何在引擎函数中使用 `eval` 之类的块选项。类似地，考虑在函数体中添加 `if (options$results == 'hide') return()` 来隐藏 chunk 选项时的输出 `results = 'hide'`\index{chunk option!results} 。下面是一个使用 `upper` 引擎及其输出的示例块
+以上例子展示了如何在引擎函数中使用 `eval` 之类的代码块选项。类似地，读者也可以考虑在函数体中添加 `if (options$results == 'hide') return()` 来隐藏代码块选项时的输出 `results = 'hide'`\index{chunk option!results} 。下面是一个使用 `upper` 引擎及其输出的简单示例：
 
 
-> ````md
-> ```{upper}`r ''`
-> Hello, **knitr** engines!
-> ```
-> ````
-> 
-> ```{upper}
-> Hello, **knitr** engines!
-> ```
+````md
+```{upper}`r ''`
+Hello, **knitr** engines!
+```
+````
 
-接下来，将展示一个名为 `py` 的另一种 `python` 引擎的示例^[实际上，读者应该改用内置的 python 引擎，该引擎基于 **reticulate** 软件包，并且更好地支持 Python 代码块]。这个引擎是通过 R 函数 `system2()` 调用 `python` 命令来实现的：
+```{upper}
+Hello, **knitr** engines!
+```
+
+接下来，将展示一个名为 `py` 的另一种 `python` 引擎示例^[这里只是一个简单的例子来演示如何自定义语言引擎。实际上，读者应该使用内置的 python 引擎，该引擎是基于 **reticulate** 软件包的，它能够更好地支持 Python 代码块]。这个引擎是通过 R 函数 `system2()` 调用 `python` 命令来实现的：
 
 ```{r, tidy=FALSE}
 knitr::knit_engines$set(py = function(options) {
@@ -1251,34 +1259,40 @@ knitr::knit_engines$set(py = function(options) {
 })
 ```
 
-为了充分理解以上引擎的功能，读者需要了解以下内容：
+<!-- 为了充分理解以上引擎的功能，读者需要了解以下内容： -->
+以上代码的主要思路和细节介绍如下：
 
-1. 给定 Python 代码作为字符串（上述函数中的代码），我们可以通过命令行调用 `python -c 'code'` 执行代码。 那就是 `system2()` 所做的。并通过在  `system2()` 中指定 `stdout = TRUE` 来收集（文本）输出。
+1. 将输入的 Python 代码作为字符串存储到 `code` 中
 
-1. 将块选项、源代码和文本输出传递给函数 `knitr::engine_output()`\index{knitr!engine\_output()} 以生成最终输出。这个函数处理常见的块选项，比如 `echo = FALSE` 和 `results = 'hide'`，所以读者不需要注意这些情况。
+1. 通过 `system2()` 调用 `python -c 'code'` 来执行代码。并指定 `stdout = TRUE` 来收集（文本）输出。
 
-**knitr** 中的许多语言引擎都是这样定义的(例如，使用 `system2()` 来执行与语言对应的命令)。如果读者对技术细节感兴趣，可以在这里的 R 源代码中查看大多数语言引擎的源代码
+1. 之后，将代码块选项、源代码和文本输出传递给函数 `knitr::engine_output()`\index{knitr!engine\_output()}，作为 最终输出结果。
+
+> **注意**：**knitr** 中的许多语言引擎都是这样定义的（例如，使用 `system2()` 来执行与语言对应的命令）。如果读者对技术细节感兴趣，可以在下面网站中查看大多数语言引擎的源代码
  https://github.com/yihui/knitr/blob/master/R/engine.R。
 
-现在，可以使用新的引擎 `py`，例如：
+接下来，将为读者展示 `py` 引擎是如何工作的。例如：在 R Markdown 中执行以下代码块，此时 `py` 引擎会调用自定义函数，并输出结果。
 
-> ````md
-> ```{py}`r ''`
-> print(1 + 1)
-> ```
-> ````
-> 
-> ```{py, echo=FALSE}
-> print(1 + 1)
-> ```
+````md
+```{py}`r ''`
+print(1 + 1)
+```
+````
 
-如果觉得自己的版本比现有的版本更好，读者甚至可以通过 `knitr::knit_engines$set()` 重写现有的语言引擎。但是，通常不建议读者这样做，因为这会让熟悉现有引擎的用户感到惊讶。不过无论如何都想读者意识到这种可能性。
+```{py, echo=FALSE}
+print(1 + 1)
+```
+
+如果觉得自己自定义的语言引擎版本比现有版本更好，读者甚至可以通过 `knitr::knit_engines$set()` 重写现有的语言引擎。但是，通常不建议这样做，因为这会让熟悉现有引擎的用户感到不解。不过本节主要目的是告诉读者，自定义语言引擎来替换现有引擎这种想法是可以实现的。
+
 
 
 ### 运行 Python 代码并与 Python 交互 {#python-rmd}
 
+上一节介绍了如何自定义语言引擎，最后展示了如何自定义 Python 引擎。但实际上大家很少会这么做，更多的是使用现有的语言引擎实现相应功能。本节将简单介绍如何使用 **reticulate** 包，在 R Markdown 中将 Python 和 R 进行交互。
 
-R Markdown 和 **knitr** 支持 Python\index{language engine!python}\index{Python}。要将 Python 代码块添加到 R Markdown 文档中，可以在块的头部变为```` ```{python}````，例如：
+
+R Markdown 和 **knitr** 支持 Python\index{language engine!python}\index{Python}。要将 Python 代码块添加到 R Markdown 文档中，可以在代码块头部设置为```` ```{python}````，例如：
 
 ````md
 ```{python}`r ''`
@@ -1286,43 +1300,46 @@ print("Hello Python!")
 ```
 ````
 
-读者可以像往常一样在 chunk 头中添加 chunk 选项，比如 `echo = FALSE` 或 `eval = FALSE` ，并且也支持使用 Python 中的 **matplotlib** 包绘图。
-
-R Markdown 和 **knitr** 中的 Python 支持 **reticulate** 包\index{R package!reticulate} [@R-reticulate]，这个包的一个重要特性是它允许 Python 和 R 之间的双向通信。例如，可以在 R 会话中通过 **reticulate** 包中的 py 对象访问或创建 Python 变量：
+读者可以添加代码块选项来实现相应功能，比如 `echo = FALSE` 或 `eval = FALSE`。此外，读者也可以直接使用 Python 中的第三方库完成任务，例如：使用 **matplotlib** 包进行绘图，**pandas** 包进行数据处理等。
+·
+R Markdown 和 **knitr** 中的 Python 支持 **reticulate** 包\index{R package!reticulate} [@R-reticulate]，这个包的一个重要特性是它允许 Python 和 R 之间进行交互。例如，可以在 R 会话中通过 **reticulate** 包中的 py 对象访问或创建 Python 变量：
 
 `r import_example('python.Rmd')`
 
-有关 **reticulate** 的更多信息，可以在查看它的文档
- https://rstudio.github.io/reticulate/。
+该文件运行后输出的结果为：
  
 ```{r, comment-hash, comment="", collapse=TRUE}
 ```
 
-设置 `comment = ""` 的一个理由是，使用 R 控制台（console）的用户对其更为熟悉。在 R 控制台中，用户不会在文本输出前面看到`##`。如果想模仿 R 控制台的行为，可以将 `comment = ""` 和 `prompt = TRUE`\index{chunk option!prompt} 结合在一起使用，例如：
+有关 **reticulate** 包更多的信息，可以查看对应的文档：
+ https://rstudio.github.io/reticulate/。
+ 
+ 
+<!-- 设置 `comment = ""` 的一个理由是，使用 R 控制台（console）的用户对其更为熟悉。在 R 控制台中，用户不会在文本输出前面看到`##`。如果想模仿 R 控制台的行为，可以将 `comment = ""` 和 `prompt = TRUE`\index{chunk option!prompt} 结合在一起使用，例如： -->
 
-````md
-```{r, comment="", prompt=TRUE}`r ''`
-1 + 1
-if (TRUE) {
-  2 + 2
-}
-```
-````
+<!-- ````md -->
+<!-- ```{r, comment="", prompt=TRUE}`r ''` -->
+<!-- 1 + 1 -->
+<!-- if (TRUE) { -->
+<!--   2 + 2 -->
+<!-- } -->
+<!-- ``` -->
+<!-- ```` -->
 
-对于曾经在 R 控制台中输入并运行过代码的用户，输出结果看起来应该相当熟悉，因为源代码中包含提示字符（prompt character） `>` 和延续字符（continuation character） `+`，这就是 `prompt = TRUE` 的作用：
+<!-- 对于曾经在 R 控制台中输入并运行过代码的用户，输出结果看起来应该相当熟悉，因为源代码中包含提示字符（prompt character） `>` 和延续字符（continuation character） `+`，这就是 `prompt = TRUE` 的作用： -->
 
-```{r, comment="", prompt=TRUE, collapse=TRUE}
-1 + 1
-if (TRUE) {
-  2 + 2
-}
-```
+<!-- ```{r, comment="", prompt=TRUE, collapse=TRUE} -->
+<!-- 1 + 1 -->
+<!-- if (TRUE) { -->
+<!--   2 + 2 -->
+<!-- } -->
+<!-- ``` -->
 
 
 ### 通过 `asis` 引擎有条件地执行内容 {#chunk-asis}
 
-
-正如其名，`asis` 引擎\index{language engine!asis}会按原样（as is）输出块的内容。使用此引擎的优点在于，用户可以有条件地包含一些内容，块的内容的显示由块选项 `echo` 决定。当 `echo = FALSE` 时，数据块将被隐藏。下面是一个简单的例子：
+如果读者需要按一定条件输出某个代码块的内容。此时，可以使用
+`asis` 引擎\index{language engine!asis}来实现该功能。只需将条件加入到代码块选项 `echo` 中。当 `echo = FALSE` 时，对应代码块将不会显示内容。而当 `echo = TRUE` 时，对应代码块将会显示内容。下面给出一个简单的例子：
 
 ````md
 ```{r}`r ''`
@@ -1332,11 +1349,11 @@ getRandomNumber <- function() {
 ```
 
 ```{asis, echo = getRandomNumber() == 4}`r ''`
-根据 https://xkcd.com/221/,  刚生成的是一个**真**随机数!
+根据 https://xkcd.com/221/,  生成的是一个**真**随机数!
 ```
 ````
 
-只有当条件 `getRandomNumber() == 4` （随机）为真时， `asis` 块中的文本才会显示。
+其中，第一个代码块中设定了一个函数并赋值到 `getRandomNumber` 中。第二个代码块使用了 `asis` 引擎，并将 `echo` 参数进行了设置。只有当条件 `getRandomNumber() == 4` （随机）为真时，该代码块中的文本才会显示。
 
 ### 执行 Shell 脚本 {#chunk-shell}
 
@@ -1369,20 +1386,24 @@ knitr::opts_chunk$set(engine.opts = list(bash = '-l'))
 
 还可以将其他参数作为字符向量提供给 chunk 选项`engine.opts`\index{chunk option!engine.opts}，从而传递给 `bash`。
 
-### 通过 cat 引擎将块内容写入文件 {#cat-file}
+### 通过 cat 引擎将代码块内容写入文件 {#cat-file}
 
-有时将代码块的内容写入外部文件，然后在其他代码块中使用此文件可能会很有用。当然，可以通过 `writeLines()` 等 R 函数来实现这一点，但问题是，当内容相对较长或包含特殊字符时，传递给 `writeLines()` 的字符串可能看起来很笨拙。下面是将长字符串写入文件 `my-file.txt` 的示例：
+有时读者可能需要实现以下需求：
+将代码块的内容写入到外部文件，然后在其他代码块中导入并使用该文件。
+
+对于这种需求，读者可以通过 `writeLines()` 等 R 函数来实现。例如，通过下面的示例代码，可以将长字符串写入到文件 `my-file.txt` 中。
 
 ```{r, eval=FALSE}
-writeLines("这是一个长字符串。它有多条线。记得要避免双引号 \"\", 但是‘单引号’是可以的。
-希望思考关于需要多少反斜杠时，不要失去理智。例如，到底是 '\t'、'\\t' 还是 '\\\\t'?", con = "my-file.txt")
+writeLines("关于需要多少反斜杠时，是件让疼头疼的事。例如，到底是 '\t'、'\\t' 还是 '\\\\t'?", con = "my-file.txt")
 ```
 
-自 R 4.0.0 以来，这个问题已经大大缓解了，因为 R 开始支持 `r"( )"` 中的原始字符串（参见帮助页面 `?Quotes`），而且读者不需要记住所有关于特殊字符的规则。即使使用原始字符串，在代码块中显式地将长字符串写入文件仍然会让读者分心。
+然而，这种方式可能存在以下问题：当内容相对较长或包含特殊字符时，传递给 `writeLines()` 的字符串可能看起来很笨拙。
 
-**knitr** 中的 `cat` 引擎\index{language engine!cat}为读者提供了一种在代码块中呈现文本内容或将其写入外部文件的方法，而无需考虑有关 R 字符串的所有规则（例如，当需要字面上的反斜杠时，读者需要使用双反斜杠）。
+> **注意**：自 R 4.0.0 以来，这个问题已经大大缓解了，因为 R 开始支持 `r"( )"` 中的原始字符串（参见帮助页面 `?Quotes`），而且读者不需要记住所有关于特殊字符的规则。即使使用原始字符串，在代码块中显式地将长字符串写入文件仍然会让读者分心。
 
-要将块内容写入文件，请在块选项 `engine.opts`\index{chunk option!engine.opts} 中指定文件路径，例如 `engine.opts = list(file = 'path/to/file')`。在引擎盖下，在 `engine.opts`\index{chunk option!engine.opts} 中指定的值列表将传递给该函数 `base::cat()` 并且 `file` 是 `base::cat()` 的参数之一。
+另外一种更加巧妙的方法是借助 **knitr** 中的 `cat` 引擎\index{language engine!cat}。该引擎为读者提供了一种在代码块中呈现文本内容或将其写入外部文件的方法，并且无需考虑有关 R 字符串的规则（例如，读者需要使用双反斜杠，才能输出反斜杠）。
+
+要将代码块内容写入文件，只需在代码块选项 `engine.opts`\index{chunk option!engine.opts} 中指定文件路径，例如 `engine.opts = list(file = 'path/to/file')`。此时，`engine.opts`\index{chunk option!engine.opts} 中指定的对象将传递给 `base::cat()`。
 
 接下来，将提供三个示例来说明 `cat` 引擎的用法。
 
@@ -1390,30 +1411,35 @@ writeLines("这是一个长字符串。它有多条线。记得要避免双引�
 
 <!-- \@ref(chunk-styling) -->
 
-第一种方法是在 R Markdown 文档中嵌入一个 `css` 代码块，以使用 CSS\index{CSS}\index{language engine!css} 样式化元素。另一种方法是通过一些 R Markdown 输出格式(如，`html_document`)的 CSS 选项为 Pandoc 提供一个定制的 CSS 文件。 `cat` 引擎可以用来从 Rmd 编写这个 CSS 文件。
+第一种方法是在 R Markdown 文档中嵌入一个 `css` 代码块，以使用 CSS\index{CSS}\index{language engine!css} 样式化元素。
 
-下面的例子展示了如何从文档中的块生成 `custom.css` 文件，并将文件路径传递给 `html_document` 格式的 `css` 选项。
+另一种方法是通过一些 R Markdown 输出格式（如，`html_document`）的 CSS 选项为 Pandoc 提供一个定制的 CSS 文件。 `cat` 引擎可以用来从 Rmd 编写这个 CSS 文件。
+
+下面的例子展示了如何从文档中的代码块生成 `custom.css` 文件，并将文件路径传递给 `html_document` 格式的 `css` 选项。
 
 `r import_example("cat-css.Rmd")`
 
- `css` 代码块方法与此方法之间的唯一区别是，前一种方法将 CSS 代码写在输出文档的 `<body>` 标记内的位置（即，在代码块的位置），并且将 CSS 代码写在输出文档的 `<body>` 标记内。 后一种方法将 CSS 写入输出文档的 `<body>` 区域。输出文档中不会有任何实际的视觉差异。
+<!--  `css` 代码块方法与此方法之间的唯一区别是，前一种方法将 CSS 代码写在输出文档的 `<body>` 标记内的位置（即，在代码块的位置），并且将 CSS 代码写在输出文档的 `<body>` 标记内。 后一种方法将 CSS 写入输出文档的 `<body>` 区域。 -->
+
+<!-- >**注意**：这两种方法在输出文档中不会有任何视觉差异。 -->
 
 
 
 #### 在序言中包含 LaTeX 代码 {#write-latex}
 
 <!-- \@ref(latex-preamble) -->
-在 6.1 节中，我们介绍了如何将 LaTeX 代码添加到序言中，这需要一个外部 `.tex`  文件。也可以从 Rmd 生成此文件，这是一个示例：
+如果读者希望将 LaTeX 代码添加到序言中，可以从 Rmd 中生成一个包含 LaTeX 代码的文件。例如：下面示例将 `cat` 代码块中的内容将会写入到 `preamble.tex` 文件中，并在 YAML 中，指定加载该文件。
 
 `r import_example("cat-latex.Rmd")`
 
-在上面的 `cat` 代码块中的 LaTeX 代码中，我们定义了 PDF 文档的页眉和页脚。如果我们还想在页脚中显示作者姓名，我们可以用选项`engine.opts = list(file = 'preamble.tex', append = TRUE)` 和 `code = sprintf('\\fancyfoot[LO,RE]{%s}', rmarkdown::metadata$author)`将作者信息附加到另一个 `cat` 代码块中的 `preamble.tex` 中。要理解这是如何工作的，请回忆一下我们在本节前面提到的：`engine.opts` 被传递给 `base::cat()`。(因此 `append = TRUE` 被传递给 `cat()`)，你可以通过阅读 16.2 节来理解 chunk 选项代码。
-<!-- \@ref(option-code) -->
+此时即可实现将 LaTeX 代码添加到序言中的功能。
+
+> **注意**：`cat` 代码块中的内容主要目的是定义 PDF 文档的页眉和页脚。如果读者还想在页脚中显示作者姓名，可以使用`engine.opts = list(file = 'preamble.tex', append = TRUE)` 和 `code = sprintf('\\fancyfoot[LO,RE]{%s}', rmarkdown::metadata$author)`选项将作者信息附加到另一个 `cat` 代码块中，并使用 `engine.opts` 写入到 `preamble.tex` 文件中。
 
 
-#### 将 YAML 数据写入文件并显示它 {#yaml-input}
+#### 将 YAML 数据写入文件并显示 {#yaml-input}
 
-默认情况下，`cat` 代码块的内容不会显示在输出文档中。如果还想在写出它之后显示它，则将块选项 `class.source` 设置为语言名称。语言名称用于语法高亮显示。在下面的例子中，我们指定为 `yaml` 语言：
+默认情况下，`cat` 代码块的内容不会显示在输出文档中。如果读者需要显示该 `cat` 代码块的内容，则需要将代码块选项 `class.source` 设置为某个语言名称。此时对应内容将会被高亮显示。下面给出一个例子，该例子将 `class.source` 设置为 `yaml` 语言：
 
 ````md
 ```{cat, engine.opts=list(file='demo.yml'), class.source='yaml'}`r ''`
@@ -1426,7 +1452,7 @@ b:
 ```
 ````
 
-其输出显示在下面，并且还生成了一个文件 `demo.yml`。
+此时，将会输出以下内容，并且还会生成一个 `demo.yml` 文件。
 
 ```{cat, engine.opts=list(file='demo.yml'), class.source='yaml'}
 a:
@@ -1437,7 +1463,7 @@ b:
   bb: 2
 ```
 
-为了显示文件 `demo.yml` 确实已经生成，我们可以尝试使用 **yaml** 包 [@R-yaml] 将其读入 R。
+为了检测 `demo.yml` 文件是否已经生成，读者可以使用 **yaml** 包 [@R-yaml] 将该文件读入到 R 中。运行下面代码，得到的结果为：
 
 ```{r}
 xfun::tree(yaml::read_yaml('demo.yml'))
@@ -1451,7 +1477,11 @@ unlink('demo.yml')
 
 ### 运行 SAS 代码 {#sas-rmd}
 
-你可以使用 `sas`  引擎\index{language engine!SAS}运行 SAS (https://www.sas.com) 代码。你需要确保 SAS 可执行文件在你的环境变量 `PATH` 中，或者(如果你不知道 `PATH` 是什么意思)通过 chunk 选项 `engine.path`\index{chunk option!engine.path} 来提供 SAS 可执行文件的完整路径，例如：`engine.path = "C:\\Program Files\\SASHome\\x86\\SASFoundation\\9.3\\sas.exe"`。下面是一个输出 "Hello World" 的示例：
+第 \@ref(python-rmd) 节给出了运行 Python 代码示例，本节将介绍如何使用 `sas` 引擎\index{language engine!SAS}运行 SAS (https://www.sas.com) 代码。
+
+> **注意**：读者需要确保 SAS 可执行文件在的环境变量 `PATH` 中。如果读者不知道 `PATH` 是什么意思的话，可以通过代码块选项 `engine.path`\index{chunk option!engine.path} 提供 SAS 可执行文件的完整路径，例如：`engine.path = "C:\\Program Files\\SASHome\\x86\\SASFoundation\\9.3\\sas.exe"`。
+
+下面给出一个输出 "Hello World" 的示例：
 
 ````md
 ```{sas}`r ''`
@@ -1463,20 +1493,20 @@ run;
 
 ### 运行 Stata 代码 {#stata-rmd}
 
-如果你安装了 Stata，你可以通过 `stata` 引擎\index{language engine!stata} Stata (https://www.stata.com) 来运行 Stata (https://www.stata.com) 代码。除非可以通过环境变量 `PATH` 找到 `stata` 可执行文件，否则你需要通过 chunk 选项 `engine.path`\index{chunk option!engine.path} 指定到可执行文件的完整路径，例如：`engine.path = "C:/Program Files (x86)/Stata15/StataSE-64.exe"`。下面给出一个例子：
+如果读者安装了 Stata 软件，则可以通过 `stata` 引擎\index{language engine!stata} (https://www.stata.com) 来运行 Stata  代码。
+读者可以通过代码块选项 `engine.path`\index{chunk option!engine.path} 指定到可执行文件的完整路径，例如：`engine.path = "C:/Program Files (x86)/Stata15/StataSE-64.exe"`。下面给出一个例子：
 
 ````md
-```{stata}`r ''`
+```{stata, engine.path = "C:/Program Files (x86)/Stata15/StataSE-64.exe"}`r ''`
 sysuse auto
 summarize
 ```
 ````
 
-在 **knitr** 中的 `stata` 引擎是相当有限的。Doug Hemken 已经通过 **Statamarkdown** 包 \index{R package!Statamarkdown} 中对其进行了实质性的扩展，该包可以通过Github中获得，地址为： https://github.com/Hemken/Statamarkdown。通过在线搜索 "Stata R Markdown"，你可以找到关于这个包的教程。
+在 **knitr** 中的 `stata` 引擎功能十分有限。Doug Hemken 开发了 **Statamarkdown** 包 \index{R package!Statamarkdown} 对其进行了扩展，感兴趣的读者可以通过 Github 获得该包相关信息，地址为： <https://github.com/Hemken/Statamarkdown>。当然，读者也可以通过在线搜索 "Stata R Markdown"，找到关于该包的教程。
 
 
 ### 用渐近线 Asymptote 创建图形 {#asymptote-plot}
-
 
 
 ```{r include = FALSE}
@@ -1491,9 +1521,14 @@ eval_asy <- function() {
 }
 ```
 
-渐近线 Asymptote (https://asymptote.sourceforge.io) 是矢量图形的强大语言。如果你已经安装了 Asymptote，那么可以使用 `asy` 引擎\index{Asymptote}\index{language engine!asy}在 R Markdown 中编写并运行 Asymptote 代码(有关安装的说明，请参阅其网站)。下面是从仓库 https://github.com/vectorgraphics/asymptote 中复制的示例，其输出如图  \@ref(fig:elevation) 所示：
+渐近线 Asymptote （https://asymptote.sourceforge.io） 是一款为了绘制技术图形而设计的矢量图描述软件。
+如果读者已经安装了 Asymptote，则可以使用 `asy` 引擎\index{Asymptote}\index{language engine!asy}在 R Markdown 中编写并运行 Asymptote 代码（有关安装的说明，请参阅其官方网站）。
 
-```{asy, elevation, fig.cap=' 用渐近线制作的 3D 图形。', cache=TRUE, fig.retina=1, fig.width=6,fig.align='center',eval=eval_asy()}
+下面给出一个简单的示例，该示例代码来自于 <https://github.com/vectorgraphics/asymptote>，其输出如图 \@ref(fig:elevation) 所示：
+
+
+````md
+```{asy, elevation, fig.cap=' 用渐近线制作的 3D 图形。', eval=eval_asy()}`r ''`
 import graph3;
 import grid3;
 import palette;
@@ -1501,11 +1536,29 @@ settings.prc = false;
 
 currentprojection=orthographic(0.8,1,2);
 size(500,400,IgnoreAspect);
-
 real f(pair z) {return cos(2*pi*z.x)*sin(2*pi*z.y);}
 
 surface s=surface(f,(-1/2,-1/2),(1/2,1/2),50,Spline);
+surface S=planeproject(unitsquare3)*s;
+S.colors(palette(s.map(zpart),Rainbow()));
+draw(S,nolight);
+draw(s,lightgray+opacity(0.7));
 
+grid3(XYZgrid);
+
+```
+````
+```{asy echo=FALSE, fig.align='center', fig.retina=1, fig.width=6, cache=TRUE, elevation, fig.cap=' 用渐近线制作的 3D 图形。'}
+import graph3;
+import grid3;
+import palette;
+settings.prc = false;
+
+currentprojection=orthographic(0.8,1,2);
+size(500,400,IgnoreAspect);
+real f(pair z) {return cos(2*pi*z.x)*sin(2*pi*z.y);}
+
+surface s=surface(f,(-1/2,-1/2),(1/2,1/2),50,Spline);
 surface S=planeproject(unitsquare3)*s;
 S.colors(palette(s.map(zpart),Rainbow()));
 draw(S,nolight);
@@ -1514,21 +1567,23 @@ draw(s,lightgray+opacity(0.7));
 grid3(XYZgrid);
 ```
 
-注意，对于 PDF 输出，可能需要一些额外的 LaTeX 包，否则可能会出现如下错误：
 
+
+在上面的代码块中，设定了 `settings.prc = false`。如果不进行此设置，当输出格式为 PDF 时，渐近线将生成交互式的 3D 图形。注意的是，想要进行图形交互（例如：使用鼠标来旋转图 \@ref(fig:elevation) ），需要使用 Acrobat Reader 软件查看。
+
+> **注意**: 如果读者需要输出 PDF 文件， 则可能需要安装一些额外的 LaTeX 包，否则可能会出现以下错误：
 
 ```
 ! LaTeX Error: File `ocgbase.sty' not found.
 ```
-<!-- \@ref(install-latex-pkgs) -->
-如果出现这种错误，请参见 1.3 章节了解如何安装丢失的 LaTeX 包。
 
-在上面的 `asy` 块中，我们使用了 `settings.prc = false` 的设置。如果没有此设置，当输出格式为 PDF 时，渐近线将生成交互式 3D 图形。但是，交互图形只能在 Acrobat Reader 中查看。如果使用 Acrobat Reader，则可以与图形交互。例如，你可以用鼠标旋转图 \@ref(fig:elevation) 中的 3D 表面。
+当出现这种错误时，读者可以参考书籍《R Markdown Cookbook》[@xie2020r]第 1.3 节，了解如何安装丢失的 LaTeX 包。
 
+#### 在 R 中生成数据并通过 Asymptote 读取并绘制 {#asym-r}
 
-#### 在 R 中生成数据并通过 Asymptote 读取 {#asym-r}
+本节将展示一个在 R 中生成数据并通过 Asymptote 读取的简单示例。
 
-现在我们展示一个示例，其中我们首先将在 R 中生成的数据保存到 CSV 文件中(下面是一个 R 代码块)：
+首先，将 R 中生成的数据保存到 CSV 文件中（下面是一个 R 代码块）：
 
 ```{r}
 x = seq(0, 5, l = 100)
@@ -1536,9 +1591,36 @@ y = sin(x)
 writeLines(paste(x, y, sep = ','), 'sine.csv')
 ```
 
-然后通过 Asymptote 读取，并根据图 \@ref(fig:sine-curve) 所示的数据绘制图表(下面是一个 `asy` 的代码块)：
+然后通过 Asymptote 读取该文件，并绘制出图 \@ref(fig:sine-curve)，对应的代码如下所示：
 
-```{asy, sine-curve, fig.cap='将数据从 R 传递到渐近线以绘制图形', cache=TRUE, fig.width=6,fig.align='center',fig.retina=1, eval=eval_asy()}
+````md
+```{asy, sine-curve, fig.cap='将数据从 R 传递到渐近线以绘制图形', cache=TRUE, fig.width=6,fig.align='center',fig.retina=1, eval=eval_asy()}`r ''`
+import graph;
+size(400,300,IgnoreAspect);
+settings.prc = false;
+
+// import data from csv file
+file in=input("sine.csv").line().csv();
+real[][] a=in.dimension(0,0);
+a=transpose(a);
+
+// generate a path
+path rpath = graph(a[0],a[1]);
+path lpath = (1,0)--(5,1);
+
+// find intersection
+pair pA=intersectionpoint(rpath,lpath);
+
+// draw all
+draw(rpath,red);
+draw(lpath,dashed + blue);
+dot("$\delta$",pA,NE);
+xaxis("$x$",BottomTop,LeftTicks);
+yaxis("$y$",LeftRight,RightTicks);
+```
+````
+
+```{asy sine-curve, echo=FALSE, fig.align='center', fig.retina=1, fig.width=6,fig.cap='将数据从 R 传递到渐近线以绘制图形'}
 import graph;
 size(400,300,IgnoreAspect);
 settings.prc = false;
@@ -1572,11 +1654,11 @@ unlink('sine.csv')
 ### 使用 Sass/SCSS 构建 HTML 页面 {#sass-scss}
 
 
-Sass (https://sass-lang.com) 是一种 CSS 扩展语言，它使用比普通 CSS 更灵活的方式创建 CSS 规则\index{CSS!Sass}\index{Sass}。
+Sass (https://sass-lang.com) 是一种强大的专业级 CSS 扩展语言，在创建 CSS 规则\index{CSS!Sass}\index{Sass}方式上，它比普通 CSS 语言更加灵活。
 
-**sass** [@R-sass] \index{R package!sass} (Cheng et al. 2020) 包可以用来编译 Sass 到 CSS。基于 **sass** 包，**knitr** 包含两个语言引擎： `sass`\index{language engine!sass}和 `scss`\index{language engine!scss} (分别对应于 Sass 和 SCSS 语法)，将代码块编译为 CSS。下面是一个 `scss` 代码块，头部块为```` ```{scss}````：
+**sass** [@R-sass] \index{R package!sass} 包可用于将 Sass 汇编为 CSS。基于 **sass** 包，**knitr** 包含了两个语言引擎： `sass`\index{language engine!sass}和 `scss`\index{language engine!scss} （分别对应于 Sass 和 SCSS 语法）。其功能是将代码块编译为 CSS 语言。下面给出一个由 `scss` 构成的代码块：
 
-```{scss}
+```{scss include=FALSE}
 $font-stack: "Comic Sans MS", cursive, sans-serif;
 $primary-color: #00FF00;
 
@@ -1586,7 +1668,19 @@ $primary-color: #00FF00;
 }
 ```
 
-Sass 语法与 SCSS 语法略有不同，例如:
+````md
+```{sass}`r ''`
+$font-stack: "Comic Sans MS", cursive, sans-serif;
+$primary-color: #00FF00;
+
+.book.font-family-1 {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+```
+````
+
+Sass 语法与 SCSS 语法略有不同，例如：
 
 ````md
 ```{sass}`r ''`
@@ -1599,17 +1693,17 @@ $primary-color: #00FF00
 ```
 ````
 
-由于上面这一语句的作用，在[本节的HTML版本](https://bookdown.org/yihui/rmarkdown-cookbook/eng-sass.html)中，当前页面的英文字体会被更改为 Comic Sans。
+由于上面代码的作用，在[本节的 HTML 版本](https://cosname.github.io/rmarkdown-guide/rmarkdown-operation.html#chunk-shell)中，当前页面的字体会被更改为 Comic Sans。
 
 
-`sass`/`scss` 代码块是通过`sass::sass()`函数编译而成的。目前，块选项 `engine.opts` 可以定制 CSS 代码的输出样式，例如：`engine.opts = list(style = "expanded")`。默认的样式是 "compressed"。请参阅帮助页面 `?sass::sass_options` 了解更多 `output_style` 可用的参数。
+`sass`/`scss` 代码块是通过`sass::sass()`函数编译而成的。目前，代码块选项 `engine.opts` 可以定制 CSS 代码的输出样式，例如：`engine.opts = list(style = "expanded")`。默认的样式是 "compressed"。如果读者想要了解更多 `output_style` 可用的参数，可以在 R 中输入 `?sass::sass_options` 来查看帮助页面。
 
 
 ## 输出钩子 (\*) {#output-hook}
 
-第 \@ref(chunk-output) 节介绍了如何通过使用 **knitr** 包控制代码块的每一段输出，如源代码、文本输出、图像输出以及 message 等。实际上，这一控制是通过“输出钩子”（Output Hook\index{output hooks}）实现的。
+第 \@ref(chunk-output) 节介绍了如何通过使用 **knitr** 包控制代码块的每一段输出，如源代码、文本输出以及图像输出等。实际上，这一控制是通过“输出钩子”（Output Hook\index{output hooks}）实现的。
 
-输出钩子是一系列函数，它们的输入为一段输出（通常是一个字符向量），并返回一个要写入输出文档的字符向量。为了更清楚地解释输出钩子的作用过程，下面这个小例子展示了一个简单代码块的输出是如何通过 **knitr** 的输出钩子呈现的。考虑一个由一行代码组成的代码块：
+输出钩子由一系列函数构成，它们的输入为一段输出（通常是一个字符向量），并返回一个要写入输出文档的字符向量。为了更清楚地解释输出钩子的作用过程，下面这个小例子展示了一个简单代码块的输出是如何通过 **knitr** 的输出钩子呈现的。考虑一个由一行代码组成的代码块：
 
 ````md
 ```{r}`r ''`
