@@ -2,7 +2,7 @@
 
 本节首先介绍 R Markdown 相关的软件配置，并带领读者编译第一个 R Markdown 源文档，生成 HTML 和 PDF 两种格式。随后探讨了 R Markdown 的编译机制。最后介绍了各类通用的文档元素。
 
-## RStudio 相关的配置 {#rstudio-config}
+## 安装 RStudio  {#rstudio-config}
 
 本书推荐读者使用 RStudio 编辑器作为开发环境。RStudio 编辑器是 R 社区中最流行的编辑器之一，并集成了许多便利 R Markdown 文档书写的功能，例如简单的图形化按钮，在线预览，视觉编辑器等。RStudio 编辑器的免费开源版本可从 <https://www.rstudio.com/products/rstudio/> 下载，英文名称为 RStudio Desktop Open Source Edition。
 
@@ -14,9 +14,8 @@ knitr::include_graphics("images/02-rstudio.png")
 
 RStudio 编辑器默认将工作区域分为三个面板，其中左侧为为 R 的控制台 (console)，用于交互式的代码输入和输出；中间为编辑器 (editor)。右上包括当前 R 进程的环境，历史和连接等信息，右下包括文件浏览器，图和帮助文档等。读者可以通过菜单栏中的 Tools -\> Global Options -\> Pane Layout 调整面板的排列。
 
-## R Markdown 的安装 {#rmarkdown-install}
 
-### 安装 R Markdown 包 {#install-rmarkdown}
+## 安装 rmarkdown 包 {#install-rmarkdown}
 
 R Markdown 文档的编译依赖于同名的 `rmarkdown` R 包，在控制台中输入如下命令安装：[^02-base-1]
 
@@ -41,7 +40,7 @@ knitr::include_graphics("images/02-create-rmd2.png")
 knitr::include_graphics("images/02-create-rmd3.png")
 ```
 
-`.Rmd` 文件是 R Markdown 的源文档，是撰写 R Markdown 文档的主要工作区域，一个文档的内容，格式，标题等都在这里定义，本书后续章节对文本和代码的编辑均是围绕类似这样的源文档展开的。
+`.Rmd` 文件是 R Markdown 的源文档，是撰写 R Markdown 文档的主要工作区域，一个文档的内容、格式、标题等都在这里定义，本书后续章节对文本和代码的编辑均是围绕类似这样的源文档展开的。
 
 为了验证 rmarkdown 包及 RStudio 配置成功，可以在 RStudio 中打开 `untitled.Rmd` 文件，然后点击右上角的 Knit 按钮，即可在 RStudio 中看到编译后的文档，如下图所示。
 
@@ -53,7 +52,7 @@ knitr::include_graphics("images/02-knit-button.png")
 import_example_result("first-rmd.Rmd")
 ```
 
-`untitlted.html` 文件是 `untitled.Rmd` 源文档的编译结果，称为输出文档。HTML 是 R Markdown 文档的默认输出格式，后续章节介绍了其他输出格式的使用方法。
+`untitled.html` 文件是 `untitled.Rmd` 源文档的编译结果，称为输出文档。HTML 是 R Markdown 文档的默认输出格式，后续章节介绍了其他输出格式的使用方法。
 
 除了 RStudio 中的 Knit 按钮，读者还可以在 RStudio 的控制台中输入如下命令，对 R Markdown 文档进行编译：
 
@@ -61,7 +60,7 @@ import_example_result("first-rmd.Rmd")
 rmarkdown::render("untitled.Rmd")
 ```
 
-`rmarkdown::render()` 函数是编译 R Markdown 文档的入口，也是 Knit 按钮背后调用的函数。读者可以为 `render()` 提供各类参数自定义各项输出设置，将在后续章节中介绍。
+`rmarkdown::render()` 函数是编译 R Markdown 文档的重要工具，也是 Knit 按钮背后调用的函数。读者可以为 `render()` 提供各类参数自定义各项输出设置，将在后续章节中介绍。
 
 ### 安装 Tinytex {#install-tinytex}
 
@@ -222,7 +221,7 @@ cat ./.ssh/id_rsa.pub
 
 第 \@ref(install-rmarkdown) 节中，读者创建了 `untitled.Rmd` 源文件，内容如下：
 
-````markdown
+````{verbatim}
 ---
 title: "Untitled"
 output: html_document
@@ -276,9 +275,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 ````
 
-这是一个 R 代码块，因为` ```{ ` 后是 `r`，读者还可以将其替换为 ` ```{python `， ` ```{bash ` 等以指定代码块的语言类型。语言名称的后面还可以附上代码块选项。代码块选项与代码块的关系就如同 YAML 元数据之于整个文档一样，用于指定该代码块的运行和输出设置。这里，`setup` 是代码块的标签，`include=FALSE` 指定了这一段代码不会到输出文档中显示。所以在 `untitled.html` 中看不到 `knitr::opts_chunk$set(echo = TRUE)` 这一行代码。
-
-这个代码块的内容是 `knitr::opts_chunk$set(echo = TRUE)`， 第 \@ref(code-block-and-inline) 节解释了它的含义。
+这是一个 R 代码块，因为` ```{ ` 后是 `r`，读者还可以将其替换为 ` ```{python `， ` ```{bash ` 等以指定代码块的语言类型。语言名称的后面还可以附上代码块选项。代码块选项与代码块的关系就如同 YAML 元数据之于整个文档一样，用于指定该代码块的运行和输出设置。这里，`setup` 是代码块的标签，`include=FALSE` 指定了这个代码段的内容不会显示在输出中，即隐藏 `knitr::opts_chunk$set(echo = TRUE)`，第 \@ref(code-block-and-inline) 节解释了它的含义。
 
 -   Markdown 文本：代码块之后是一段文字内容，如下所示
 
