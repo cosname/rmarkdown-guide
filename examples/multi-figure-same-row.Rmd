@@ -1,0 +1,4 @@
+```{r, fig.show = "hold", out.width = "50%"}
+plot(cars)
+plot(nhtemp)
+```
