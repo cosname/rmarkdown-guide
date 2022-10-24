@@ -1,22 +1,81 @@
 # R Markdown 的基础知识 {#rmarkdown-base}
 
-## R Studio 相关的配置 {#rstudio-config}
+本节首先介绍 R Markdown 相关的软件配置，并带领读者编译第一个 R Markdown 源文档，生成 HTML 和 PDF 两种格式。随后探讨了 R Markdown 的编译机制。最后介绍了各类通用的文档元素。
+
+## RStudio 相关的配置 {#rstudio-config}
+
+本书推荐读者使用 RStudio 编辑器作为开发环境。RStudio 编辑器是 R 社区中最流行的编辑器之一，并集成了许多便利 R Markdown 文档书写的功能，例如简单的图形化按钮，在线预览，视觉编辑器等。RStudio 编辑器的免费开源版本可从 <https://www.rstudio.com/products/rstudio/> 下载，英文名称为 RStudio Desktop Open Source Edition。
+
+安装完成后，打开 RStudio 编辑器，基本界面如下图所示。
+
+```{r, fig.cap = "RStudio 编辑器的基本界面", echo = FALSE}
+knitr::include_graphics("images/02-rstudio.png")
+```
+
+RStudio 编辑器默认将工作区域分为三个面板，其中左侧为为 R 的控制台 (console)，用于交互式的代码输入和输出；中间为编辑器 (editor)。右上包括当前 R 进程的环境，历史和连接等信息，右下包括文件浏览器，图和帮助文档等。读者可以通过菜单栏中的 Tools -\> Global Options -\> Pane Layout 调整面板的排列。
 
 ## R Markdown 的安装 {#rmarkdown-install}
 
-### 安装 R Markdown {#install-rmd}
+### 安装 R Markdown 包 {#install-rmarkdown}
 
-### 安装 Tinytex	{#install-tinytex}
+R Markdown 文档的编译依赖于同名的 `rmarkdown` R 包，在控制台中输入如下命令安装：[^02-base-1]
+
+[^02-base-1]: 如果下载速度较慢，可以在 RStudio 的 Tools -\> Global Options -\> Packages 将 Primary Cran Repository 更改为距离自己更近的镜像源。也可以在 `install.packages` 中设置 `repos` 参数。
+
+```{r, eval = FALSE}
+install.packages("rmarkdown")
+```
+
+安装完成后，在 RStudio 的菜单栏中选择 File -\> New File -\> R Markdown，点击 OK 后， 即可创建一个新的 R Markdown 文档模版，如下图所示
+
+```{r, fig.show = "hold", out.width = "45%", echo = FALSE, fig.align= "left", fig.cap = "(ref:create-rmd)"}
+knitr::include_graphics("images/02-create-rmd.png")
+knitr::include_graphics("images/02-create-rmd2.png")
+```
+
+(ref:create-rmd) 在 RStudio 中创建 R Markdown 文档
+
+随后，RStudio 创建了一个 `untitled.Rmd` 文件，展示如下：
+
+```{r, echo = FALSE, fig.cap = "RStudio 的 中 R Markdown 编辑器"}
+knitr::include_graphics("images/02-create-rmd3.png")
+```
+
+`.Rmd` 文件是 R Markdown 的源文档，是撰写 R Markdown 文档的主要工作区域，一个文档的内容，格式，标题等都在这里定义，本书后续章节对文本和代码的编辑均是围绕类似这样的源文档展开的。
+
+为了验证 rmarkdown 包及 RStudio 配置成功，可以在 RStudio 中打开 `untitled.Rmd` 文件，然后点击右上角的 Knit 按钮，即可在 RStudio 中看到编译后的文档，如下图所示。
+
+```{r knit-button, echo = FALSE, fig.cap = "源文档上方的编译按钮"}
+knitr::include_graphics("images/02-knit-button.png")
+```
+
+```{r first-rmarkdown, echo = FALSE, fig.cap = "untitled.Rmd 文件输出的 HTML 文档"}
+import_example_result("first-rmd.Rmd")
+```
+
+`untitlted.html` 文件是 `untitled.Rmd` 源文档的编译结果，称为输出文档。HTML 是 R Markdown 文档的默认输出格式，后续章节介绍了其他输出格式的使用方法。
+
+除了 RStudio 中的 Knit 按钮，读者还可以在 RStudio 的控制台中输入如下命令，对 R Markdown 文档进行编译：
+
+```{r, eval = FALSE}
+rmarkdown::render("untitled.Rmd")
+```
+
+`rmarkdown::render()` 函数是编译 R Markdown 文档的入口，也是 Knit 按钮背后调用的函数。读者可以为 `render()` 提供各类参数自定义各项输出设置，将在后续章节中介绍。
+
+### 安装 Tinytex {#install-tinytex}
 
 要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，建议 R Markdown 的用户使用 TinyTeX。
 
 TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档。通过命令行模式，它的安装要简单的多。
 
-```{r fig.cap="TinyTex 是一个瘦身版的 TeX Live"}
+```{r fig.cap="TinyTex 是一个瘦身版的 TeX Live", echo = FALSE}
 knitr::include_graphics("images/logo-tinytex.png", dpi = NA)
 ```
 
-要安装 TinyTeX，只需要在 R 语言终端输入两条命令即可[^TinyTeX-vs-tinytex]。
+要安装 TinyTeX，只需要在 R 语言终端输入两条命令即可[^02-base-2]。
+
+[^02-base-2]: TinyTeX 与 **tinytex** 并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护前者的 R 语言软件包。
 
 ```{r eval=FALSE}
 # 安装 tinytex
@@ -26,17 +85,12 @@ install.packages("tinytex")
 tinytex::install_tinytex()
 ```
 
-
-[^TinyTeX-vs-tinytex]: TinyTeX 与 **tinytex** 并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护前者的 R 语言软件包。
-
-
-如果 TinyTeX 本身的下载安装就很慢，或在 R 里面下载不完整，那么可以用浏览器或其它下载工具直接下载：https://github.com/yihui/tinytex-releases/releases 然后把下载的文件路径传给安装函数，比如：
+如果 TinyTeX 本身的下载安装就很慢，或在 R 里面下载不完整，那么可以用浏览器或其它下载工具直接下载：<https://github.com/yihui/tinytex-releases/releases> 然后把下载的文件路径传给安装函数，比如：
 
 ```{r eval=FALSE}
 # 假设下载文件所在的位置是 ~/Downloads/TinyTeX-v2021.01.zip
-tinytex:::install_prebuilt('~/Downloads/TinyTeX-v2021.01.zip')
+tinytex:::install_prebuilt("~/Downloads/TinyTeX-v2021.01.zip")
 ```
-
 
 安装完成后，在 RStudio 中打开之前保存的 R Markdown 源文档，将第三行 `output_format: html_document` 更改为 `output_format: pdf_document`。点击 Knit 后，生成如下两页 PDF 文档，说明安装成功。
 
@@ -44,21 +98,19 @@ tinytex:::install_prebuilt('~/Downloads/TinyTeX-v2021.01.zip')
 knitr::include_graphics(rep(c("images/02-first-rmd-pdf1.png", "images/02-first-rmd-pdf2.png"), 1))
 ```
 
-
 #### 安装 LaTeX 组件 {#install-latex-package}
 
 **rmarkdown** 包从版本 1.9 开始，编译 R Markdown 为 PDF 时会调用 TinyTeX。因此，对 R Markdown 用户来说，编译 PDF 是出错的头号原因可能在于缺失某些 LaTeX 包。
 
-LaTeX 包（也被称为“package”）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
+LaTeX 包（也被称为"package"）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
 
 如果知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，对于国内的用户来说，通常需要设定一下 LaTeX 软件仓库的位置。下面的例子中，使用了清华大学的 TeX Live 镜像。
 
 ```{r, install-latex-packages, eval=FALSE}
 # 安装需要的 LaTeX 组件
 tinytex::tlmgr_repo(url = "https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet")
-tinytex::tlmgr_install(c('pgf', 'preview', 'xcolor'))
+tinytex::tlmgr_install(c("pgf", "preview", "xcolor"))
 ```
-
 
 如果不知道包的名称也没有关系，**tinytex** 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 文件。如果嫌 log 太长或者找不到具体提示信息，还可以使用第二种办法。
 
@@ -67,16 +119,15 @@ tinytex::tlmgr_install(c('pgf', 'preview', 'xcolor'))
 tinytex::parse_install(text = "! LaTeX Error: File `preview.sty' not found.")
 
 
-# 假如错误 log 名为 tex.log 
+# 假如错误 log 名为 tex.log
 tinytex::parse_install(log = "tex.log")
 ```
 
+### 安装 Git (\*) {#install-git}
 
-### 安装 Git (\*)	{#install-git}
+Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^02-base-3]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
 
-Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^linus-linux]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
-
-[^linus-linux]: Linus Torvalds (1969年12月28日－) 生于芬兰赫尔辛基市，拥有美国国籍，Linux 内核的最早作者，随后发起了这个开源项目，担任 Linux 内核的首要架构师与项目协调者，是当今世界最著名的电脑程序员、黑客之一。他 2005 年发布了 Git，是 Git 的主要开发者。
+[^02-base-3]: Linus Torvalds (1969年12月28日－) 生于芬兰赫尔辛基市，拥有美国国籍，Linux 内核的最早作者，随后发起了这个开源项目，担任 Linux 内核的首要架构师与项目协调者，是当今世界最著名的电脑程序员、黑客之一。他 2005 年发布了 Git，是 Git 的主要开发者。
 
 ```{r fig.cap="使用 Git 和 GitHub 可以提高团队协作的效率", echo=FALSE}
 knitr::include_graphics("images/git-github.png", dpi = NA)
@@ -84,15 +135,15 @@ knitr::include_graphics("images/git-github.png", dpi = NA)
 
 #### 配置 Git 和 GitHub {#git-config}
 
-在 Windows 下面[^git-cli]，安装完 Git 客户端之后，鼠标右键菜单中会多出来两个命令：“Git GUI Here”和“Git Bash Here”。前者打开一个图形界面，后者打开一个终端，通过这两个命令都可以进入 Git。
+在 Windows 下面[^02-base-4]，安装完 Git 客户端之后，鼠标右键菜单中会多出来两个命令："Git GUI Here"和"Git Bash Here"。前者打开一个图形界面，后者打开一个终端，通过这两个命令都可以进入 Git。
 
-[^git-cli]: 命令行对于 Linux/Mac 用户应该并不陌生，此处和以下不再另行介绍。
+[^02-base-4]: 命令行对于 Linux/Mac 用户应该并不陌生，此处和以下不再另行介绍。
 
 首先需要配置 Git 的用户信息。
 
-```bash
+``` bash
 # 全局配置
-$ git config --global user.name "your name" 
+$ git config --global user.name "your name"
 $ git config --global user.email "xxx@xxx.xxx"
 # 本地配置
 $ git config user.name "your name"
@@ -108,79 +159,164 @@ $ git config user.name
 
 Git 常用的命令有下面几个：
 
-- `git init sample`
+-   `git init sample`
 
-  在当前目录新建一个“sample”目录，在目录中启用 Git 版本控制系统。
+    在当前目录新建一个"sample"目录，在目录中启用 Git 版本控制系统。
 
-- `git clone https://github.com/cosname/rmarkdown-guide.git`
+-   `git clone https://github.com/cosname/rmarkdown-guide.git`
 
-  从 GitHub 克隆一个软件仓库到当前目录。这将在当前目录新建一个“rmarkdown-guide”文件夹，其中包含所有文件和版本历史。
+    从 GitHub 克隆一个软件仓库到当前目录。这将在当前目录新建一个"rmarkdown-guide"文件夹，其中包含所有文件和版本历史。
 
-- `git status`
+-   `git status`
 
-  显示当前 Git 仓库的状态。如果有修改，新建，删除等操作，将会自动列举出来。
+    显示当前 Git 仓库的状态。如果有修改，新建，删除等操作，将会自动列举出来。
 
-- `git add newfile.Rmd`
+-   `git add newfile.Rmd`
 
-  `newfile.Rmd` 是一个新建的文件，其中有一些新增的代码。该命令将其加入 Git 追踪的文件清单中。
+    `newfile.Rmd` 是一个新建的文件，其中有一些新增的代码。该命令将其加入 Git 追踪的文件清单中。
 
-- `git commit` 或者 `git commit -a`
-  
-  这个命令将执行一次 Commit 操作，系统会打开默认的文本编辑器，以填写本次 Commit 操作涉及的工作内容。
-  
-- `git push`
+-   `git commit` 或者 `git commit -a`
 
-  将本地仓库的修改推送到远程仓库中去。要执行该命令，本地仓库需要关联一个远程仓库，并且用户对该远程仓库具有修改权限（使用 `git remote -v` 查看本地仓库关联的远程仓库地址）。
-  
-- `git pull`
+    这个命令将执行一次 Commit 操作，系统会打开默认的文本编辑器，以填写本次 Commit 操作涉及的工作内容。
 
-  将本地仓库的内容与远程仓库同步（这是远程仓库的文件比本地仓库的文件版本新）。
-  
+-   `git push`
+
+    将本地仓库的修改推送到远程仓库中去。要执行该命令，本地仓库需要关联一个远程仓库，并且用户对该远程仓库具有修改权限（使用 `git remote -v` 查看本地仓库关联的远程仓库地址）。
+
+-   `git pull`
+
+    将本地仓库的内容与远程仓库同步（这是远程仓库的文件比本地仓库的文件版本新）。
+
 #### 配置 Git 远程仓库的 SSH 认证 {#git-ssh}
 
-SSH 密钥是成对的，包括公钥和私钥；公钥登记到 GitHub 网站，私钥存储在本地计算机（私有）。密钥在本地生成。点击鼠标右键，选择“Git Bash Here”，输入下列命令将生成一对 SSH 密钥。 默认情况下，私钥保存在“`~/.ssh/id_rsa`”文件中，公钥保存在 “~/.ssh/id_rsa.pub”文件中 （在 Windows 系统中的 Git bash 终端下，`~` 代表用户的家目录）。
+SSH 密钥是成对的，包括公钥和私钥；公钥登记到 GitHub 网站，私钥存储在本地计算机（私有）。密钥在本地生成。点击鼠标右键，选择"Git Bash Here"，输入下列命令将生成一对 SSH 密钥。 默认情况下，私钥保存在"`~/.ssh/id_rsa`"文件中，公钥保存在"\~/.ssh/id_rsa.pub"文件中 （在 Windows 系统中的 Git bash 终端下，`~` 代表用户的家目录）。
 
-```bash
+``` bash
 ssh-keygen
 cat ./.ssh/id_rsa.pub
 ```
 
-复制这个公钥的全部内容，进入“GitHub - Setting - SSH and GPG keys”，选择“New SSH key”，将公钥粘贴进去，点击“Add SSH key”，即可完成公钥添加。
+复制这个公钥的全部内容，进入"GitHub - Setting - SSH and GPG keys"，选择"New SSH key"，将公钥粘贴进去，点击"Add SSH key"，即可完成公钥添加。
 
-这样，以后就调用 “Git Bash Here” 时，便会自动提供私钥认证，不需要输入用户名和密码了。
+这样，以后就调用 "Git Bash Here" 时，便会自动提供私钥认证，不需要输入用户名和密码了。
 
 #### 使用 GitHub {#github-usage}
 
 在 GitHub 网站中，通常主要进行下列操作：
 
-- 创建一个新的软件仓库；
+-   创建一个新的软件仓库；
 
-  点击 GitHub 右上角的“+”，选择“Create a new repository”，按照提示操作即可。这步操作其实相当于在 GitHub 服务器上新建了一个目录。目录名称是 `Repository Name`。目录的路径就是 `<username>/<repository_name>`。对应的网址（绝对路径）是 `https://github.com/<username>/<repository_name>`。对应的 Git 地址是 `git://git@github.com/<username>/<repository_name>.git`。对应的 SSH 地址是 `ssh://git@github.com/<username>/<repository_name>.git`。
+    点击 GitHub 右上角的"+"，选择"Create a new repository"，按照提示操作即可。这步操作其实相当于在 GitHub 服务器上新建了一个目录。目录名称是 `Repository Name`。目录的路径就是 `<username>/<repository_name>`。对应的网址（绝对路径）是 `https://github.com/<username>/<repository_name>`。对应的 Git 地址是 `git://git@github.com/<username>/<repository_name>.git`。对应的 SSH 地址是 `ssh://git@github.com/<username>/<repository_name>.git`。
 
-- 从其他用户的软件仓库中新建一个分支，即 Fork；
+-   从其他用户的软件仓库中新建一个分支，即 Fork；
 
-  在 GitHub 项目网页中，点击“Fork”即可。
+    在 GitHub 项目网页中，点击"Fork"即可。
 
-- 为其他用户的软件仓库中贡献代码，即 Pull Request；
+-   为其他用户的软件仓库中贡献代码，即 Pull Request；
 
-  因为自己不具备其他用户拥有的软件仓库的编辑权限，所以无法直接通过 `push` 的方法提交修改。在这种情况下，用户可以首先在 GitHub 上 Fork 其他用户的软件仓库，并在自己的 Fork 中做相应修改后，通过 Pull Request 的方法提交给其他用户，经过管理员审核后，即可合并到对方的软件仓库中去。这也是团队协作共同维护一个项目时的常规操作。
+    因为自己不具备其他用户拥有的软件仓库的编辑权限，所以无法直接通过 `push` 的方法提交修改。在这种情况下，用户可以首先在 GitHub 上 Fork 其他用户的软件仓库，并在自己的 Fork 中做相应修改后，通过 Pull Request 的方法提交给其他用户，经过管理员审核后，即可合并到对方的软件仓库中去。这也是团队协作共同维护一个项目时的常规操作。
 
 第 \@ref(github-actions) 节还将介绍使用 GitHub Actions 实现自动化完成持续性集成（**C**ontinuous **I**ntegration，CI）的功能。
 
+## R Markdown 的基本元素 {#rmarkdown-element}
 
-### 安装 RStudio 图形化编辑器	 {#install-graph}
+第 \@ref(install-rmarkdown) 节中，读者创建了 `untitled.Rmd` 源文件，内容如下：
 
-### 创建第一个 R Markdown 文档 {#create-rmd}
+````markdown
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+````
+
+
+这个文件中包含了 R Markdown 文档中的三个基本元素，从上到下包括：
+
+-   YAML 元数据: 由一对 `---` 包围成的键值对，在 `untitled.Rmd` 中为
+
+```
+---
+title: "Untitled"
+output: html_document
+---
+```
+
+
+元数据用 YAML 语法以 `key: value` 的形式指定了源文档的各类输出设置，不涉及具体的正文内容。这里 `untitled.Rmd` 的元数据做了两项设置，`title: "Untitled"` 设定了文档标题，而 `output: html_document` 设定了输出格式为 HTML。
+
+-   代码块：第二个 `---` 后进入文档的正式内容。首先是由一对三个反引号包围的代码块 这个代码块的内容是：
+
+````{verbatim}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+````
+
+这是一个 R 代码块，因为` ```{ ` 后是 `r`，读者还可以将其替换为 ` ```{python `， ` ```{bash ` 等以指定代码块的语言类型。语言名称的后面还可以附上代码块选项。代码块选项与代码块的关系就如同 YAML 元数据之于整个文档一样，用于指定该代码块的运行和输出设置。这里，`setup` 是代码块的标签，`include=FALSE` 指定了这一段代码不会到输出文档中显示。所以在 `untitled.html` 中看不到 `knitr::opts_chunk$set(echo = TRUE)` 这一行代码。
+
+这个代码块的内容是 `knitr::opts_chunk$set(echo = TRUE)`， 第 \@ref(code-block-and-inline) 节解释了它的含义。
+
+-   Markdown 文本：代码块之后是一段文字内容，如下所示
+
+```markdown
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```
+
+这段内容使用了 Markdown 语法，在第 \@ref(markdown-syntax) 节详细介绍。简而言之，为了方便作者在文档中插入各种格式的内容，Markdown 语法提供了一系列简单的标记符号，如 `#`，`*`，`-` 等，这些符号可以用来标记文本的标题、列表、引用等。R Markdown 在遇到这些符号时会将相关的文本转换成对应的格式。这里 `## R Markdown` 是一个二级标题，`**Knit**` 是一个加粗的文本，`<http://rmarkdown.rstudio.com>` 是一个链接。
+
+这段 Markdown 文本下面是另外一个 R 代码块
+
+````{verbatim}
+```{r cars}
+summary(cars)
+```
+````
+
+这个 R 代码块的标签是 `cars`，内容是 `summary(cars)`。编译过程中，R Markdown 会运行这段代码内容，并将生成的结果插入到该段代码的下方，这个结果可以是文本，也可以是图片，表格等，例如第三个代码块 `plot(pressure)` 就生成了图片。
+
+`untitle.Rmd` 的剩余内容是类似的 Markdown 文本和代码块。
 
 ## R Markdown 的编译过程 {#rmarkdown-compile}
 
-## R Markdown 的基本元素 {#rmarkdown-element}
+点击 `Knit` 按钮后，R 启动一个新的进程，从上到下地将源文档转换为输出文档。它首先根据 YAML 头部设定输出文档的各项元数据，对源文档添加适当的格式，最终生成指定格式的输出文档，这便是 R Markdown 的编译过程。 我们提到，`Knit` 是对 rmarkdown 包中 `render()` 函数的封装。因此，理解 R Markdown 的编译就是理解 `render()` 调用了什么方法和工具完成文档格式的转换。
+
+直接给出答案之前，我们不妨先观察 `first-rmd.Rmd` 和 `first-rmd.html` HTML 文件的差异 (图 \@ref(fig:first-rmarkdown))，看看 `render()` 需要为我们做怎样的转换工作。
 
 ### YAML 头部 {#yaml}
 
-### Markdown 语法 {#markdown}
+类似的键包括 `author` (作者), `date` (日期), `subtitle` (副标题), `abstract` (摘要) 等，添加这些键后，R Markdown 会将它们对应的值添加到文档中。
 
-### 代码区块和行内代码 {#block-inline}
+### Markdown 语法 {#markdown-syntax}
+
+### 代码块和行内代码 {#code-block-and-inline}
 
 ## 页面设置和布局 {#page-layout}
 
