@@ -1,0 +1,19 @@
+---
+output:
+  html_document:
+    number_sections: true
+---
+
+# 前言 {-}
+
+# 简介
+
+# 方法
+
+## 方法 1
+
+## 方法 2
+
+# 总结
+
+# 附录 {-}
