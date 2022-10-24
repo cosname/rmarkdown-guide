@@ -364,6 +364,8 @@ rmarkdown::pandoc_version()
 knitr::include_graphics("images/02-knit-process.png")
 ```
 
+## R Markdown 的组成
+
 了解完 R Markdown 的编译过程后，下面的几节深入介绍了 R Markdown 源文档中的三种元素：YAML 头部，Markdown 文本和代码块。
 
 ### YAML 头部 {#yaml}
@@ -437,7 +439,7 @@ knitr::include_graphics("images/02-yaml-test.png")
 
 ### Markdown 语法 {#markdown-syntax}
 
-Markdown 标记语言由 John Gruber 于 2004 年创建，以易读，可移植，跨平台等优势成为技术写作中最受欢迎的语言之一。借助 Markdown，作者可以在纯文本文档中用特殊的标记符号表示格式，例如用井号 `#` 表示标题，用 `*` 星号表示加粗等。这样的统一中介使作者不必逐个为特定输出格式设置排版方案。
+Markdown 标记语言由 John Gruber 于 2004 年创建，以易读，可移植，跨平台等优势成为最受欢迎的技术写作工具之一。借助 Markdown，作者可以在纯文本文档中用特殊的标记符号表示格式，例如用井号 `#` 表示标题，用 `*` 星号表示加粗等。这样的统一中介使作者不必逐个为特定输出格式设置排版方案。
 
 ### 简单段内格式
 
@@ -448,6 +450,14 @@ Markdown 提供了很多简单的段内格式化 (inline formatting) 方法，�
 - 斜体：前后各添加一个星号 `*`。如 `*斜体*` 变为 *斜体*
 
 - 代码样式: 前后各添加一个反引号 `` ` ``。如 `` `代码` `` 变为 `代码`。如果内容本身有反引号，可以在两边添加同等数量的反引号，如 ``` ``x`` ``` 变为 `` `x` ``
+
+用 `<链接地址>` 插入一个可点击的链接，如 `<https://example.com>` 显示为 <https://example.com>。带文字的超链接格式为：
+
+```
+[显示文字](网页链接)
+```
+
+例如，`[R Markdown 权威指南](https://bookdown.org/yihui/rmarkdown/)` 显示为 [R Markdown 权威指南](https://bookdown.org/yihui/rmarkdown/)。
 
 ### 换行
 
@@ -477,7 +487,52 @@ It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS.
 
 #### 标题
 
-用引号 `#` 创建不同层级的标题，引号的数量表示标题的层级。如 `# 一级标题` 创建一级标题，`## 二级标题` 创建二级标题，`### 三级标题` 创建三级标题等。注意在井号和标题文字之间要保留一个空格。
+用引号 `#` 创建不同层级的标题，引号的数量表示标题的层级。如 `# 一级标题` 创建一级标题，`## 二级标题` 创建二级标题，`### 三级标题` 创建三级标题等。注意在井号和标题文字之间要保留一个空格。如果 YAML 元数据中的 `number_sections` 选项设置为 `true`，则章节会自动编号。如果想为某些章节取消标号，可以在标题后添加 `{-}` 或 `{.unnumbered}`, 例子如下：
+
+:::::: {.cols data-latex=""}
+
+::: {.col data-latex="{0.55\textwidth}" style="width: 100%"}
+
+````{verbatim}
+---
+output:
+  html_document:
+    number_sections: true
+---
+
+# 前言 {-}
+
+# 简介
+
+# 方法
+
+## 方法 1
+
+## 方法 2
+
+# 总结
+
+# 附录 {-}
+````
+
+:::
+
+::: {.col data-latex="{0.05\textwidth}"}
+
+:::
+
+::: {.col data-latex="{0.4\textwidth}"}
+
+
+```{r, echo = FALSE}
+import_example_result("examples/markdown-headings.Rmd")
+```
+
+:::
+
+::::::
+
+
 
 #### 列表
 
@@ -531,10 +586,9 @@ It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS.
 
 > 生活是很枯燥的。我的一生就是力求不要在平庸中虚度光阴。这些小小的案件让我遂了心愿。
 
-### 代码
+### 代码块 {#markdown-code}
 
 > 注意: 这里的代码块只是有特殊格式的文字块，不同于可运行的代码，我们也无法在输出文档中得到它们的运行结果。
-
 
 在文字前后各添加三个反引号 ` ``` ` 可以创建一个代码块，如：
 
@@ -585,25 +639,9 @@ x <- list(a = 1:10,
 lapply(x, mean)
 ```
 
+### 图片 {#markdown-figure}
 
-
-### 链接
-
-用 `<链接地址>` 插入一个可点击的链接，如 `<https://example.com>` 显示为 <https://example.com>。
-
-作者还可以创建一个带显示文字的行内链接，方括号内插入描述性文字，圆括号内插入链接目的地，格式为：
-
-```
-[显示文字](网页链接)
-```
-
-例如，`[R Markdown 权威指南](https://bookdown.org/yihui/rmarkdown/)` 显示为 [R Markdown 权威指南](https://bookdown.org/yihui/rmarkdown/)。
-
-
-### 图片
-
-
-插入图片的语法与行内链接近似，只需要在前面多添加一个感叹号, 如^[Markdown 不要求添加替代文字，例如 `![](图片链接)` 也可以正常显示图片。但是替代文字可以提供许多好处，例如代替图片加载，增强可达性，帮助搜索引擎优化等。]
+插入图片的语法与超链接类似，只需要在前面多添加一个感叹号, 格式如下^[Markdown 不要求为图片添加替代文字，例如 `![](图片链接)` 也可以正常显示图片。但是替代文字可以提供许多好处，例如代替图片加载，增强可达性，帮助搜索引擎优化等。]
 
 ```
 ![替代文字](图片链接)
@@ -615,7 +653,7 @@ lapply(x, mean)
 ![R logo](https://www.r-project.org/Rlogo.png)
 :::
 
-### 表格
+### 表格 {#markdown-table}
 
 Markdown 还支持插入表格，语法如下
 
@@ -632,12 +670,6 @@ Markdown 还支持插入表格，语法如下
 | - | - |
 | 块引用 | `> some quotes` |
 | 代码块 | ``` some code  ```  |
-
-不过对于 R Markdown 用户，直接使用表格语法通常是不必要的。knitr 中的 `kable()` 函数提供了更完善的表格功能，如表 \@ref(tab:kable-example) 所示。
-
-```{r kable-example}
-knitr::kable(head(iris), caption = "用 knitr::kable() 创建表格")
-```
 
 
 ### 总结
@@ -684,7 +716,7 @@ plot(cars)
 ```
 ````
 
-有时作者只希望展示代码的运行结果，而隐藏具体实现细节，这时可以设置代码段选项 `echo = FALSE`，R Markdown 会照旧运行代码，但仅在输出文档中显示运行结果。如果文档中包含很多代码块，逐个设置选项较为繁琐。这时可以在用 knitr 包提供的 `knitr::opts_chunk$set()` 函数设置全局选项。例如，在文档中的第一个代码块中设置：
+有时作者只希望展示代码的运行结果，而隐藏具体实现细节，这时可以设置代码段选项 `echo = FALSE`，R Markdown 会照旧运行代码，但仅在输出文档中显示运行结果。如果文档中包含很多代码块，逐个设置选项较为繁琐。这时可以用 knitr 包提供的 `knitr::opts_chunk$set()` 函数为所有代码块统一设置全局选项。例如，在全文档中的第一个代码块中设置：
 
 ````{verbatim}
 ```{r setup, include=FALSE}
@@ -700,10 +732,9 @@ knitr::opts_chunk$set(
 plot(cars)
 ```
 
-```
 ````
 
-这样，`cars` 及后续的代码块就会继承这些选项。通常，全局选项被放置在整个文档的第一个代码块中，并设置该代码块的选项 `include=FALSE`，这样，这个代码块本身就不会在文档中显示出来了 ^[设置全局 knitr 选项的代码块的标签是约定俗成的 `setup`，使用 RStudio 编辑器时，带有 `setup` 标签的代码块会被第一个执行。]。 如果后续的代码块需要覆盖全局选项，也可以在代码块中重新设置选项。
+这样，`cars` 及后续的代码块就会继承 `knitr::opts_chunk$set()` 中的选项。通常，全局选项被放置在整个文档的第一个代码块中，且设置该代码块的选项为 `include=FALSE`，这样，这个代码块本身就不会在文档中显示出来了 ^[设置全局 knitr 选项的代码块的标签是约定俗成的 `setup`，使用 RStudio 编辑器时，带有 `setup` 标签的代码块会被第一个执行。]。 如果后续的代码块需要覆盖全局选项，也可以在代码块中重新设置选项。
 
 ````{verbatim}
 ```{r cars, echo=TRUE, fig.width=10}
@@ -713,18 +744,7 @@ plot(cars)
 
 现在 `cars` 代码块的选项为 `echo = TRUE`, `fig.wdith = 10`, `fig.height = 5` 和 `fig.align = "center"`。
 
-还可以用代码块生成表格，例如：
 
-````{verbatim}
-```{r cars-table, fig.cap = "cars 数据集"}
-knitr::kable(head(cars))
-```
-````
-生成：
-
-```{r cars-table, fig.cap = "cars 数据集"}
-knitr::kable(head(cars))
-```
 
 一些时候可能不需要单独成段的代码块，而是想在正常 Markdown 文本的同一段嵌入代码的运行结果，这时可以使用行内代码 (inline code)。行内代码位于一对反引号内部，以 `r`  开头，空格后面是 R 的表达式 ^[目前行内代码只支持 R 语言]，例如下面的文本
 
@@ -741,7 +761,7 @@ mtcars 数据集共有 `r nrow(mtcars)` 行。
 
 行内代码与定时任务结合使用，可以实现报告文档的自动更新。
 
-行内代码的使用不限于正文，一个常见用法是动态更新文档的编译日期。在 YAML 元数据中可以将 `date` 元数据设置为 R 表达式 `Sys.Date()`，这样每次编译时，R Markdown 都会将输出文档首页日期的值更新为当前编译的日期。
+行内代码的使用不限于正文，一个常见用法是动态更新文档的编译日期。在 YAML 元数据中可以将 `date` 设置为 R 表达式 `Sys.Date()`，这样每次编译时，R Markdown 都会将日期的值更新为当前编译的日期。
 
 ````{verbatim}
 ---
@@ -785,23 +805,104 @@ date: "`r Sys.Date()`"
 
 ### 控制输出宽度 {#output-width}
 
-### 换行符号 {#line-break}
-
 ### 分页符和分割线 {#page-break}
 
 ### 目录 {#catalog}
 
-### 章节编号 {#chapter-number}
-
-### 图表的索引 {#plottable-index}
-
 ### 参考文献 {#reference-index}
+
+### 交叉引用
+
+
 
 ## R Markdown 的文档元素 {#document-element}
 
 ### 图片 {#element-plot}
 
+默认情况下，代码块生成的图片在输出文档中被直接插入该代码块的下方。如果一个代码块可以生成多个图片，R Markdown 会把它们拆分成多个代码块，每个代码块生成一个图片，效果如下：
+
+:::::: {.cols data-latex=""}
+
+::: {.col data-latex="{0.55\textwidth}"}
+
+````{verbatim}
+如果同一个代码块生成多张图片，结果会被拆分到多个代码块中。
+
+```{r}
+plot(cars)
+plot(nhtemp)
+```
+````
+
+:::
+
+::: {.col data-latex="{0.05\textwidth}"}
+
+:::
+
+::: {.col data-latex="{0.4\textwidth}"}
+
+
+```{r, echo = FALSE}
+import_example_result("examples/multi-figure.Rmd")
+```
+
+:::
+
+::::::
+
+如果想要把多个图片放在同一个代码块中，可以使用代码块选项 `fig.show = 'hold'`，它告诉 R Markdown 不要拆分代码块，而是运行完全部代码后，把生成的图片依次附在下方。与 `out.width` 选项结合使用，可以将多个图片并排放在同一行中，效果如下：
+
+:::::: {.cols data-latex=""}
+
+::: {.col data-latex="{0.55\textwidth}"}
+
+````{verbatim}
+```{r, fig.show = "hold", out.width = "50%"}
+plot(cars)
+plot(nhtemp)
+```
+````
+
+:::
+
+::: {.col data-latex="{0.05\textwidth}"}
+
+:::
+
+::: {.col data-latex="{0.4\textwidth}"}
+
+
+```{r, echo = FALSE}
+import_example_result("examples/multi-figure-same-row.Rmd")
+```
+
+:::
+
+::::::
+
 ### 表格 {#element-table}
+
+不过对于 R Markdown 用户，直接使用 Markdown 表格语法通常是不必要的。knitr 包中的 `kable()` 函数提供了更完善的表格功能，如表 \@ref(tab:kable-example) 所示。
+
+```{r kable-example}
+knitr::kable(head(iris), caption = "用 knitr::kable() 创建表格")
+```
+
+````{verbatim}
+```{r cars-table, fig.cap = "cars 数据集"}
+knitr::kable(head(cars))
+```
+````
+生成：
+
+```{r cars-table, fig.cap = "cars 数据集"}
+knitr::kable(head(cars))
+```
+
+
+
+
 
 ### 公式 {#element-equation}
 
