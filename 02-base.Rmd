@@ -1114,7 +1114,7 @@ knitr::write_bib(c("base", "knitr"), "", width = 60)
 
 不提供第一个参数时。`write_bib` 会导出当前进程加载的全部 R 包的引用数据，作者可以在文档末尾插入如下代码段自动化生成 R 包对应的 `.bib` 文件：
 
-````
+````{verbatim}
 ---
 bibliography: [packages.bib, references.bib]
 ---
@@ -1123,7 +1123,7 @@ bibliography: [packages.bib, references.bib]
 
 最后，...
 
-```{r, include=FALSE}`r ''`
+```{r, include=FALSE}
 knitr::write_bib(file = 'packages.bib')
 ```
 
@@ -1314,7 +1314,7 @@ knitr::include_graphics("images/02-graphviz-rstudio.png")
 
 作者也可以直接使用 Graphviz 格式的字符串，如图 \@ref(fig:gv-diagram) 所示。
 
-```{r gv-diagram, fig.cap = "用 DiagrammeR 创建 Graphviz 流程图"}
+```{r gv-diagram, fig.cap = "用 DiagrammeR 创建 Graphviz 流程图", warning=FALSE}
 library(DiagrammeR)
 
 grViz("digraph {
@@ -1334,8 +1334,8 @@ grViz("digraph {
 
 作者可以在 `grViz()` 函数中用 `@@` 嵌入 R 变量，如图 \@ref(fig:gv-rvar) 所示。
 
-```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值"}
-DiagrammeR::grViz("
+```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值", warning=FALSE}
+grViz("
   digraph graph2 {
 
   graph [layout = dot, rankdir = LR]
@@ -1361,7 +1361,7 @@ DiagrammeR::grViz("
 
 除了流程图外，DiagrammeR 还可以创建网络图，如图 \@ref(fig:gr-network) 所示。
 
-```{r gr-network, fig.cap = "DiagrammeR 创作的网络可视化图", echo = FALSE}
+```{r gr-network, fig.cap = "DiagrammeR 创作的网络可视化图", echo = FALSE, warning=FALSE}
 example_graph <-
   create_graph() %>%
   add_pa_graph(

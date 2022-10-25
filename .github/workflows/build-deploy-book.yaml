@@ -1,7 +1,9 @@
 on:
   push:
+  pull_request:
     branches:
-      - feature
+      - main
+      - master
 
 name: build-deploy-book
 
@@ -27,7 +29,6 @@ jobs:
       - name: Install pandoc
         run: |
           brew install pandoc
-
       - name: Cache renv packages
         uses: actions/cache@v2
         with:
@@ -64,12 +65,12 @@ jobs:
           R -e 'if (!reticulate:::miniconda_exists()) reticulate::py_install(c("seaborn", "pandas"))'
           R -e 'webshot::install_phantomjs()'
           R -e 'tinytex::install_tinytex()'
-
       - name: Build site
         run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
 
       - name: Deploy to GitHub pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
+        if: ${{ github.ref == 'refs/heads/master' }}
         with:
           branch: gh-pages
           folder: _book

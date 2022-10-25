@@ -18,6 +18,7 @@ geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
 site: bookdown::bookdown_site
 description: "R Markdown 指南"
 github-repo: cosname/rmarkdown-guide
+always_allow_html: true
 #cover-image: images/cover.jpg
 ---
 
