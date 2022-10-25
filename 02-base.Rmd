@@ -62,7 +62,7 @@ rmarkdown::render("untitled.Rmd")
 
 `rmarkdown::render()` 函数是编译 R Markdown 文档的重要工具，也是 Knit 按钮背后调用的函数。读者可以为 `render()` 提供各类参数自定义各项输出设置，将在后续章节中介绍。
 
-### 安装 Tinytex {#install-tinytex}
+### 安装 TinyTex {#install-tinytex}
 
 要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，建议 R Markdown 的用户使用 TinyTeX。
 
@@ -109,11 +109,11 @@ knitr::include_graphics("images/02-rmd-pdf.png")
 
 #### 安装 LaTeX 组件 {#install-latex-package}
 
-**rmarkdown** 包从版本 1.9 开始，编译 R Markdown 为 PDF 时会调用 TinyTeX。因此，对 R Markdown 用户来说，编译 PDF 是出错的头号原因可能在于缺失某些 LaTeX 包。
+从 rmarkdown 1.9 版本开始，输出 PDF 文档时会调用 TinyTeX，进而使用 LaTeX 包。因此，对 R Markdown 用户来说，编译 PDF 是出错的最常见原因是缺失某些 LaTeX 包。
 
-LaTeX 包（也被称为"package"）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
+LaTeX 包（也被称为 "package"）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
 
-如果知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，对于国内的用户来说，通常需要设定一下 LaTeX 软件仓库的位置。下面的例子中，使用了清华大学的 TeX Live 镜像。
+如果知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，国内用户通常需要额外设定 LaTeX 软件仓库的位置。下面的例子使用了清华大学的 TeX Live 镜像。
 
 ```{r, install-latex-packages, eval=FALSE}
 # 安装需要的 LaTeX 组件
@@ -121,7 +121,7 @@ tinytex::tlmgr_repo(url = "https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/tex
 tinytex::tlmgr_install(c("pgf", "preview", "xcolor"))
 ```
 
-如果不知道包的名称也没有关系，**tinytex** 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 日志文件。如果 log 文件过长或者找不到具体提示信息，还可以使用第二种办法。
+如果不知道包的名称也没有关系，tinytex 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 日志文件。如果 log 文件过长或者找不到具体提示信息，还可以使用第二种办法。
 
 ```{r install-latex-package-by-errormsg, eval=FALSE}
 # 假如有相关报错信息 "! LaTeX Error: File `preview.sty' not found."
@@ -132,6 +132,8 @@ tinytex::parse_install(log = "tex.log")
 ```
 
 ### 安装 Git (\*) {#install-git}
+
+了解 Git 和 Github 的使用可以帮助 R Markdown 用户分享代码和输出结果，并且可以方便地与他人协作。
 
 Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^02-base-3]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
 
@@ -147,7 +149,7 @@ Windows 系统下 [^02-base-4]，安装完 Git 客户端之后，鼠标右键菜
 
 [^02-base-4]: 命令行对于 Linux/Mac 用户应该并不陌生，此处和以下不再另行介绍。
 
-首先需要配置 Git 的用户信息。
+首先需要配置 Git 的用户信息，下面是终端命令：
 
 ``` bash
 # 全局配置
@@ -276,7 +278,7 @@ output: html_document
 
 元数据用 YAML 语法以 `key: value` 的形式指定了源文档的各类输出设置，不涉及具体的正文内容。这里 `untitled.Rmd` 的元数据做了两项设置，`title: "Untitled"` 设定了文档标题，而 `output: html_document` 设定了输出格式为 HTML。
 
--   **代码块**：第二个 `---` 后进入文档的正式内容。首先，是由一对三个反引号 (` ``` `) 所包围的代码块 这个代码块的内容是：
+-   **代码块**：第二个 `---` 后进入文档的正式内容。首先，是由一对三个反引号 (` ``` `) 所包围的代码块 ^[反引号 ` ` ` 位于键盘上 1 的左侧。]，这个代码块的内容是：
 
 ```r
 knitr::opts_chunk$set(echo = TRUE)
@@ -365,7 +367,7 @@ rmarkdown::pandoc_version()
 
 作为总结，对于 HTML 格式，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步： tinytex 包或其他 LaTeX 发行版编译 Pandoc 生成的 `.tex` 文件，生成 PDF 文档。
 
-本节对编译过程的简介意在让读者对 knitr 和 Pandoc 工具有基础认识。实际写作中较少需要在底层与 knitr 或 Pandoc 做直接交互，但理解它们在 R Markdown 编译中的角色有利于在编译失败时更好地排错，同时为掌握更进阶的排版技巧打好基础。
+实际写作中，R Markdown 用户几乎不需要直接与 knitr 或 Pandoc 打交道，大部分配置可以通过 YAML 元数据完成，但理解它们在 R Markdown 编译中的角色有利于在编译失败时更好地排错，同时为掌握更进阶的排版技巧打好基础。
 
 图 \@ref(fig:knit-process) 概括了 R Markdown 完成以上工作的流程。
 
@@ -373,11 +375,11 @@ rmarkdown::pandoc_version()
 knitr::include_graphics("images/02-knit-process.png")
 ```
 
-了解完 R Markdown 的编译过程后，下面三节深入介绍了 R Markdown 源文档中的三种元素：YAML 头部，Markdown 文本和代码块。··
+了解完 R Markdown 的编译过程后，下面三节深入介绍了 R Markdown 源文档中的三种元素：YAML 头部，Markdown 文本和代码块。
 
 ## YAML 头部 {#yaml}
 
-YAML 元数据中的每一个域 (field) 都定义了输出的一个方面，其中最重要的一个域是 `output` 所指定的输出格式，`output` 选项的值可以是 `html_document`、`pdf_document`、`word_document` 等，这些值对应了不同的输出格式，实质上都是 rmarkdown 包中的函数，例如 `html_document` 对应的函数时 `rmarkdown::html_document()`。下面是所有 rmarkdown 包中定义的输出格式：
+YAML 元数据中的每一个域 (field) 都定义了输出的一个方面，其中最重要的一个域是 `output` 所指定的输出格式，`output` 选项的值可以是 `html_document`、`pdf_document`、`word_document` 等，这些值对应了不同的输出格式，实质上都是 rmarkdown 包中的函数，例如 `html_document` 对应的函数是 `rmarkdown::html_document()`。下面是所有 rmarkdown 包中定义的输出格式：
 
 `r knitr::combine_words(grep('^[^_]+_(document|presentation)$', ls(asNamespace('rmarkdown')), value = TRUE), sep = '\n', and = '', before = '- \x60', after = '\x60')`
 
@@ -682,9 +684,9 @@ Markdown 还支持插入表格，语法如下：
 
 ### 数学公式
 
-作者可以用一对 `$` 插入行内数学公式，例如 `$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$` 渲染为 $f(k) = {n \choose k} p^{k} (1-p)^{n-k}$。
+R Markdown 支持用一对 `$` 插入行内公式，例如 `$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$` 渲染为 $f(k) = {n \choose k} p^{k} (1-p)^{n-k}$。
 
-前后各两个 `$$` 会创建块状公式，例如：
+两个 `$$` 会创建块级公式，例如：
 
 ```
 $$
@@ -698,7 +700,7 @@ $$
 f(k) = {n \choose k} p^{k} (1-p)^{n-k}
 $$
 
-也可以使用 LaTeX 默认的数学环境，如：
+作者也可以使用 LaTeX 默认的数学环境，如：
 
 ```
 $$\begin{array}{ccc}
@@ -828,7 +830,7 @@ date: "`r Sys.Date()`"
 
 ### 代码块选项
 
-读者可以在 <https://yihui.org/knitr/options/> 查看所有 knitr 选项和它们的含义，这里列出一些常见选项：
+读者可以在 <https://yihui.org/knitr/options/> 查看所有代码块选项的用法，这里列出一些常见选项：
 
 - `eval`: 是否运行该代码块
 
@@ -848,7 +850,7 @@ date: "`r Sys.Date()`"
 
 - `collapse`: 为 `true` 时，在输出文档中将代码块和运行结果放置在同一个块级元素中
 
-- `fig.width` 和 `fig.height`: 调整代码块生成图形时图形设备 (graphical device)的大小。这是因为 kntir 首先通过图形设备将图片存储为文件 (例如 png, jpg)，随后在输出文档中引用这些文件。默认情况下 `fig.width = 7, fig.height = 5`。个类似的选项是 `out.width` 和 `out.height`, 通常取值为百分比，表示图片占据一页的比例。例如, `out.height = '80%'` 表示图片占据页面高度的 80%。
+- `fig.width` 和 `fig.height`: 调整代码块生成图形时图形设备 (graphical device) 的大小。 kntir 首先通过图形设备将图片存储为文件 (例如 png, jpg)，随后在输出文档中引用这些文件。默认情况下 `fig.width = 7, fig.height = 5`。两个类似的选项是 `out.width` 和 `out.height`, 通常取值为百分比，表示图片占据一页的比例。例如, `out.height = '80%'` 表示图片占据容器高度的 80%。
 
 - `fig.cap`: 图片的标题
 
@@ -857,7 +859,7 @@ date: "`r Sys.Date()`"
   - `"center"` 居中对齐 (本书的设置)
   - `"right"`: 靠右对齐
 
-- `cache`: 是否缓存代码块的运行结果。如果代码块涉及复杂，耗时长的计算，`cache = TRUE` 可以让 knitr 把运行结果保存为 `.rds` 文件，并在下次编译时略过计算过程，直接读取 `.rds` 节省时间。只有代码块的内容发生变化时，knitr 才会重新计算。有时 knitr 的缓存机制会让人难以预测代码是否重新运行，只推荐必要时使用。
+- `cache`: 是否缓存代码块的运行结果。如果代码块涉及复杂的计算，`cache = TRUE` 可以让 knitr 把运行结果保存为 `.rds` 文件，并在下次编译时略过计算过程，直接读取 `.rds` 节省时间。只有代码块的内容发生变化时，knitr 才会重新计算并更新 `.rds` 文件。有时 knitr 的缓存机制会让人难以预测代码是否重新运行，只推荐必要时使用。
 
 ## 文档元素 {#document-element}
 
@@ -1175,7 +1177,7 @@ output: bookdown::pdf_document2
 import_example_result("examples/cross-reference.Rmd")
 ```
 
-读者如果跟随编译了上述文档，可以点开生成的 HTML 文档，会发现标签元素的容器有对应的 `id` 属性。同理，PDF 输出的 `.tex` 文件会插入对应的 `\label{}` 指令，这也是交叉引用的跳转基础。
+有兴趣的读者可以查看上述生成的 `.html` 文件，会发现标签元素的容器有对应的 `id` 属性。同理，PDF 输出的 `.tex` 文件会插入对应的 `\label{}` 指令，这也是交叉引用的跳转基础。
 
 ### 索引 {#index}
 
@@ -1213,7 +1215,7 @@ knitr::include_graphics("images/02-index.png")
 
 ### 动画
 
-对 HTML 输出文档，作者可以用 `aniamtion.hook` 选项 (依赖 `gifski` 包) 将多个图片合并成 gif 格式的动画。
+对 HTML 输出文档，R Markdown 支持 `aniamtion.hook` 选项 (依赖 `gifski` 包) 将多个图片合并成 gif 格式的动画。
 
 ````{verbatim}
 ```{r, animation.hook="gifski"}
@@ -1229,7 +1231,7 @@ for (i in 1:2) {
 }
 ```
 
-为了在 PDF 输出中支持动画，作者首先需要安装 LaTeX 包 `animate`，并设置选项 `fig.show = "animate"`，这样创建的动画只能用 Acrobat Reader 显示。例子如下：
+为了在 PDF 输出中支持动画，首先需要安装 LaTeX 包 `animate`，并设置选项 `fig.show = "animate"`，这样创建的动画只能用 Acrobat Reader 显示。例子如下：
 
 ````{verbatim}
 ---
@@ -1275,7 +1277,7 @@ leaflet() %>%
   border="0"
   frameborder="no"
   framespacing="0"
-  style='width: "100%"; height: "500px";'
+  style='width: 100%; height: 500px;'
   allowfullscreen="true">
 </iframe>
 ```
@@ -1290,7 +1292,7 @@ leaflet() %>%
   border="0"
   frameborder="no"
   framespacing="0"
-  style='width: "100%"; height: "500px";'
+  style='width: 100%; height: 500px;'
   allowfullscreen="true">
 </iframe>
 ```
