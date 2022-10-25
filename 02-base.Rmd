@@ -109,7 +109,7 @@ knitr::include_graphics("images/02-rmd-pdf.png")
 
 #### 安装 LaTeX 组件 {#install-latex-package}
 
-从 rmarkdown 1.9 版本开始，输出 PDF 文档时会调用 TinyTeX，进而使用 LaTeX 包。因此，对 R Markdown 用户来说，编译 PDF 是出错的最常见原因是缺失某些 LaTeX 包。
+从 rmarkdown 1.9 版本开始，输出 PDF 文档时会调用 TinyTeX，进而使用 LaTeX 包。因此，对 R Markdown 用户来说，编译 PDF 时出错的最常见原因是缺失某些 LaTeX 包。
 
 LaTeX 包（也被称为 "package"）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
 
@@ -753,9 +753,8 @@ set_caption(t, "Markdown 常见语法总结")
 \- 这一行不会显示为列表
 ```
 
-乍一看，Markdown 似乎是一项额外的学习任务，带来了繁多的记忆要求。但如前文所言，Markdown 是对复杂多样格式的简单替代，可以极大地便利写作。在日常的文档书写中，用到的 Markdown 语法也是相对单一和简单的，且 R Markdown 也提供了很多工具降低记忆门槛。
 
-值得一提的是， 虽然 Markdown 本身是一种统一的标准，独立开发者们逐渐添加了不同的功能扩展，一些组织和公司在此基础上加以规范化，形成了不同的 Markdown 变体 (flavor)。 我R Markdown 中使用的是 Pandoc 式的 Markdown，即 Pandoc 支持的 Markdown 语法。一些读者可能还会接触到 ExtraMark Markdown, Github Markdown 等变体。但在大多数情况下，Pandoc Markdown 已经支持了足够多的文本元素，相同元素在不同变体中对应的标记也是一致的。
+值得一提的是，虽然 Markdown 本身是一种统一的标准，随着时间推移独立开发者们逐渐添加了不同的功能扩展，一些组织和公司在此基础上加以规范化，形成了不同的 Markdown 变体 (flavor)。R Markdown 中使用的是 Pandoc 式的 Markdown，即 Pandoc 支持的 Markdown 语法。其他平台支持的常见变体包括 ExtraMark Markdown 和 Github Markdown 等。如果某个特定语法在 R Markdown 中无法正常显示，很可能是 Pandoc Markdown 不支持这个语法。
 
 一些 Markdown 编辑器提供了即时预览功能，方便读者进行交互性的练习。图 \@ref(fig:dillinger) 是一个在线编辑器的例子。
 
@@ -765,9 +764,9 @@ knitr::include_graphics("images/02-markdown-editor.png")
 
 ## 代码块和行内代码 {#code-block-and-inline}
 
-在 R Markdown 中，有两种使用 R 代码的形式: 代码块和行内代码。
+在 R Markdown 中，R 代码有两种使用方式: 代码块和行内代码。
 
-R 代码块以 ` ```{r} ` 开始，` ``` ` 结束，作者可以在源文档中插入任意个代码块 ^[虽然 R Markdown 对代码块的长度或个数没有限制，但 最佳实践是让每个代码块自成逻辑，避免把不相关的代码放到同一代码块中。]。与 YAML 元数据控制文档的整体设置类似，可以用代码块选项 (chunk options) 来控制单个代码块的运行细节。例如生成图片时，可以用 `fig.width` 和 `fig.height` 选项来控制图片的宽度和高度。
+R 代码块以 ` ```{r} ` 开始，` ``` ` 结束，作者可以在源文档中插入任意个代码块 ^[虽然 R Markdown 对代码块的长度或个数没有限制，但最佳实践是让每个代码块自成逻辑，避免把不相关的代码放到同一代码块中。]。与 YAML 元数据控制文档的整体设置类似，可以用代码块选项 (chunk options) 来控制单个代码块的运行细节。例如生成图片时，可以用 `fig.width` 和 `fig.height` 选项来控制图片的宽度和高度。
 
 ````{verbatim}
 ```{r pressure, fig.width=7, fig.height=5}
@@ -803,9 +802,7 @@ plot(cars)
 
 现在 `cars` 代码块的选项为 `echo = TRUE`, `fig.wdith = 10`, `fig.height = 5` 和 `fig.align = "center"`。
 
-
-
-一些时候可能不需要单独成段的代码块，而是想在正常 Markdown 文本的同一段嵌入代码的运行结果，这时可以使用行内代码 (inline code)。行内代码位于一对反引号内部，以 `r`  开头，空格后面是 R 的表达式 ^[目前行内代码只支持 R 语言。]，例如下面的文本：
+一些时候可能不需要单独成段的代码块，而是想在 Markdown 文本的同一段嵌入代码的运行结果，这时可以使用行内代码 (inline code)。行内代码位于一对反引号内部，以 `r`  开头，空格后面是 R 的表达式 ^[目前行内代码只支持 R 语言。]，例如下面的文本：
 
 ````{verbatim}
 mtcars 数据集共有 `r nrow(mtcars)` 行。
@@ -1166,8 +1163,7 @@ output: bookdown::pdf_document2
 
 其中 `(\#eq:mean)` 是公式标签，引用格式为 `\@ref(eq:mean)`。
 
-
-下面的例子展示了对章节、图片、表格和公式的引用语法：
+下面的例子展示了章节、图片、表格和公式的引用语法：
 
 `r import_example("examples/cross-reference.Rmd")`
 
@@ -1262,7 +1258,7 @@ leaflet() %>%
   addPopups(lng = 174.768, lat = -36.852, popup="<b>R</b> 的诞生地")
 ```
 
-对于非 HTML 输出格式，R Markdown 会用 webshot [@R-webshot] 包将组件截取为静态图片后插入结果文档中。
+对于非 HTML 输出格式，R Markdown 会用 webshot [@R-webshot] 包将组件截取为静态图片后插入输出文档中。
 
 
 ### 音频和视频 {#element-media}
@@ -1310,7 +1306,7 @@ leaflet() %>%
 
 ### 流程图 {#element-digram}
 
-Graphviz 和 mermaid 是两个常用于创建流程和网络图的软件包。**DiagrammeR** [@R-DiagrammeR] 包支持用 R 代码生成 Graphviz 或 mermaid 图。以 Graphviz 为例，一个图文件包含对图 (graph)，节点 (node) 和边 (edge) 的定义，RStudio 提供了对 Graphviz (`.gv`) 和 mermaid (`.mmd`) 的原生支持，如图 \@ref(fig:rstudio-gv) 所示。
+Graphviz 和 mermaid 是两个常用于创建流程和网络图的软件包。**DiagrammeR** [@R-DiagrammeR] 包支持用 R 代码生成 Graphviz 或 mermaid 图。可以直接在 RStudio 中打开 Graphviz (`.gv`) 和 mermaid (`.mmd`) 文件，如图 \@ref(fig:rstudio-gv) 所示。
 
 ```{r rstudio-gv, echo = FALSE, fig.cap = "RStudio 编辑器中的 Graphviz 和 mermaid 图文件"}
 knitr::include_graphics("images/02-graphviz-rstudio.png")
@@ -1363,7 +1359,7 @@ DiagrammeR::grViz("
 )
 ```
 
-除了流程图外，DiagrammeR 还可以创建复杂的网络关系可视化，如图 \@ref(fig:gr-network) 所示。
+除了流程图外，DiagrammeR 还可以创建网络图，如图 \@ref(fig:gr-network) 所示。
 
 ```{r gr-network, fig.cap = "DiagrammeR 创作的网络可视化图", echo = FALSE}
 example_graph <-
@@ -1399,7 +1395,7 @@ example_graph <-
 render_graph(example_graph, layout = "nicely")
 ```
 
-生成网络和流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，diagram，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
+其他能生成流程图的 R 包包括：[nomnoml](https://github.com/rstudio/nomnoml)，diagram，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
 
 
 ## RStudio 图形化编辑器
