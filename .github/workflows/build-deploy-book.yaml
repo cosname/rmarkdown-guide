@@ -1,9 +1,6 @@
 on:
   push:
-  pull_request:
     branches:
-      - main
-      - master
       - feature
 
 name: build-deploy-book
@@ -73,7 +70,6 @@ jobs:
 
       - name: Deploy to GitHub pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
-        if: ${{ github.ref == 'refs/heads/master' }}
         with:
           branch: gh-pages
           folder: _book
