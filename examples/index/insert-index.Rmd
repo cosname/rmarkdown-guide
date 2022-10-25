@@ -1,0 +1,14 @@
+---
+title: "插入索引"
+documentclass: ctexart
+output:
+  pdf_document:
+    latex_engine: xelatex
+    includes:
+      in_header: preamble.tex
+---
+
+
+模型筛选指标包括 RMSE \index{AIC}, AIC \index{RMSE} 和 BIC \index{BIC} 等。
+
+\printindex
