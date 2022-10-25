@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-```{r, fig.show = "hold", out.width = "50%", fig.cap = c("图 1", "图 2"), fig.align = "left"}
-plot(cars)
-plot(nhtemp)
-```
-=======
 ```{r, fig.show = "hold", out.width = "50%"}
 plot(cars)
 plot(nhtemp)
 ```
->>>>>>> ch2

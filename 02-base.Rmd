@@ -6,9 +6,9 @@
 
 本书推荐读者使用 RStudio 编辑器作为开发环境。RStudio 编辑器是 R 社区中最流行的编辑器之一，并集成了许多便利 R Markdown 文档书写的功能，例如简单的图形化按钮，在线预览，视觉编辑器等。RStudio 编辑器的免费开源版本可从 <https://www.rstudio.com/products/rstudio/> 下载，英文名称为 RStudio Desktop Open Source Edition。
 
-安装完成后，打开 RStudio 编辑器，基本界面如下图所示。
+安装完成后，打开 RStudio 编辑器，基本界面如图 \@ref(fig:rstudio-editor) 所示。
 
-```{r, fig.cap = "RStudio 编辑器的基本界面", echo = FALSE}
+```{r rstudio-editor, fig.cap = "RStudio 编辑器的基本界面", echo = FALSE}
 knitr::include_graphics("images/02-rstudio.png")
 ```
 
@@ -25,24 +25,24 @@ R Markdown 文档的编译依赖于同名的 `rmarkdown` R 包，在控制台中
 install.packages("rmarkdown")
 ```
 
-安装完成后，在 RStudio 的菜单栏中选择 File -\> New File -\> R Markdown，点击 OK 后， 即可创建一个新的 R Markdown 文档模版，如下图所示
+安装完成后，在 RStudio 的菜单栏中选择 File -\> New File -\> R Markdown，点击 OK 后， 即可创建一个新的 R Markdown 文档模版，如图 \@ref(fig:new-rmd) 所示。
 
-```{r, fig.show = "hold", out.width = "45%", echo = FALSE, fig.align= "left", fig.cap = "(ref:create-rmd)"}
+```{r create-rmd, fig.show = "hold", out.width = "45%", echo = FALSE, fig.align= "left", fig.cap = "(ref:create-rmd)"}
 knitr::include_graphics("images/02-create-rmd.png")
 knitr::include_graphics("images/02-create-rmd2.png")
 ```
 
 (ref:create-rmd) 在 RStudio 中创建 R Markdown 文档
 
-随后，RStudio 创建了一个 `untitled.Rmd` 文件，展示如下：
+随后，RStudio 创建了一个 `untitled.Rmd` 文件，如图 \@ref(fig:rstudio-rmd) 所示。
 
-```{r, echo = FALSE, fig.cap = "RStudio 的 中 R Markdown 编辑器"}
+```{r rstudio-rmd, echo = FALSE, fig.cap = "RStudio 的 中 R Markdown 编辑器"}
 knitr::include_graphics("images/02-create-rmd3.png")
 ```
 
 `.Rmd` 文件是 R Markdown 的源文档，是撰写 R Markdown 文档的主要工作区域，一个文档的内容、格式、标题等都在这里定义，本书后续章节对文本和代码的编辑均是围绕类似这样的源文档展开的。
 
-为了验证 rmarkdown 包及 RStudio 配置成功，可以在 RStudio 中打开 `untitled.Rmd` 文件，然后点击右上角的 Knit 按钮，即可在 RStudio 中看到编译后的文档，如下图所示。
+为了验证 rmarkdown 包及 RStudio 配置成功，可以在 RStudio 中打开 `untitled.Rmd` 文件，然后点击右上角的 Knit 按钮，即可在 RStudio 中看到编译后的文档，如图 \@ref(fig:knit-button) 所示。
 
 ```{r knit-button, echo = FALSE, fig.cap = "源文档上方的编译按钮"}
 knitr::include_graphics("images/02-knit-button.png")
@@ -84,17 +84,27 @@ install.packages("tinytex")
 tinytex::install_tinytex()
 ```
 
-如果 TinyTeX 本身的下载安装就很慢，或在 R 里面下载不完整，那么可以用浏览器或其它下载工具直接下载：<https://github.com/yihui/tinytex-releases/releases> 然后把下载的文件路径传给安装函数，比如：
+如果 TinyTeX 下载速度慢，或在 R 里面下载不完整，那么可以用浏览器或其它下载工具直接下载：<https://github.com/yihui/tinytex-releases/releases> 然后把下载的文件路径传给安装函数，比如：
 
 ```{r eval=FALSE}
 # 假设下载文件所在的位置是 ~/Downloads/TinyTeX-v2021.01.zip
 tinytex:::install_prebuilt("~/Downloads/TinyTeX-v2021.01.zip")
 ```
 
-安装完成后，在 RStudio 中打开之前保存的 R Markdown 源文档，将第三行 `output_format: html_document` 更改为 `output_format: pdf_document`。点击 Knit 后，生成如下两页 PDF 文档，说明安装成功。
+运行完毕后，可以尝试编译 PDF 输出文档以验证 TinyTex 安装成功。以先前的 `untitled.Rmd` 为例，将文件的头部替换为：
 
-```{r, fig.align='default', out.width = "49%", fig.show="hold", echo = FALSE}
-knitr::include_graphics(rep(c("images/02-first-rmd-pdf1.png", "images/02-first-rmd-pdf2.png"), 1))
+```{verbatim}
+---
+title: "Untitled"
+output: pdf_document
+date: "2022-10-23"
+---
+```
+
+随后点击 Knit 按钮，生成的 PDF 输出文档如图 \@ref(rmd-pdf) 所示。
+
+```{r rmd-pdf, fig.cap = "untitled.Rmd 生成的 PDF 文档", echo = FALSE}
+knitr::include_graphics("images/02-rmd-pdf.png")
 ```
 
 #### 安装 LaTeX 组件 {#install-latex-package}
@@ -111,12 +121,11 @@ tinytex::tlmgr_repo(url = "https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/tex
 tinytex::tlmgr_install(c("pgf", "preview", "xcolor"))
 ```
 
-如果不知道包的名称也没有关系，**tinytex** 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 文件。如果嫌 log 太长或者找不到具体提示信息，还可以使用第二种办法。
+如果不知道包的名称也没有关系，**tinytex** 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 日志文件。如果 log 文件过长或者找不到具体提示信息，还可以使用第二种办法。
 
 ```{r install-latex-package-by-errormsg, eval=FALSE}
 # 假如有相关报错信息 "! LaTeX Error: File `preview.sty' not found."
 tinytex::parse_install(text = "! LaTeX Error: File `preview.sty' not found.")
-
 
 # 假如错误 log 名为 tex.log
 tinytex::parse_install(log = "tex.log")
@@ -275,7 +284,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 这是一个 R 代码块，因为` ```{ ` 后是 `r`，读者还可以将其替换为 ` ```{python `， ` ```{bash ` 等以指定代码块的语言类型。语言名称的后面还可以附上代码块选项。代码块选项与代码块的关系就如同 YAML 元数据之于整个文档一样，用于指定该代码块的运行和输出设置。这里，`setup` 是代码块的标签，`include=FALSE` 指定了这个代码块的内容不会显示在输出中，即隐藏 `knitr::opts_chunk$set(echo = TRUE)` 这一行，第 \@ref(code-block-and-inline) 节解释了它的含义。
 
--   Markdown 文本：代码块之后是一段文字内容，如下所示
+-   Markdown 文本：代码块之后是一段文字内容，内容如下：
 
 ```markdown
 ## R Markdown
@@ -660,7 +669,7 @@ lapply(x, mean)
 
 ### 表格 {#markdown-table}
 
-Markdown 还支持插入表格，语法如下
+Markdown 还支持插入表格，语法如下：
 
 ```
 | 元素 | Markdown |
@@ -694,7 +703,7 @@ $$
 f(k) = {n \choose k} p^{k} (1-p)^{n-k}
 $$
 
-我们可以使用 LaTeX 默认的数学环境，如：
+也可以使用 LaTeX 默认的数学环境，如：
 
 ```
 $$\begin{array}{ccc}
@@ -799,7 +808,7 @@ plot(cars)
 
 
 
-一些时候可能不需要单独成段的代码块，而是想在正常 Markdown 文本的同一段嵌入代码的运行结果，这时可以使用行内代码 (inline code)。行内代码位于一对反引号内部，以 `r`  开头，空格后面是 R 的表达式 ^[目前行内代码只支持 R 语言]，例如下面的文本
+一些时候可能不需要单独成段的代码块，而是想在正常 Markdown 文本的同一段嵌入代码的运行结果，这时可以使用行内代码 (inline code)。行内代码位于一对反引号内部，以 `r`  开头，空格后面是 R 的表达式 ^[目前行内代码只支持 R 语言]，例如下面的文本：
 
 ````{verbatim}
 mtcars 数据集共有 `r nrow(mtcars)` 行。
@@ -857,7 +866,7 @@ date: "`r Sys.Date()`"
 
 ### 图片 {#element-plot}
 
-默认情况下，代码块生成的图片在输出文档中被直接插入该代码块的下方。一个重要的 knitr 选项是 `fig.cap`，它可以为图片添加标题。例如下面的代码块：
+默认情况下，代码块生成的图片在输出文档中被直接插入该代码块的下方。一个重要的 knitr 选项是 `fig.cap`，它可以为图片添加标题。例子如下：
 
 ````{verbatim}
 ```{r cars-plot, fig.cap = "cars 数据集"}
@@ -865,7 +874,7 @@ plot(cars)
 ```
 ````
 
-生成的图片如下：
+生成的图片如图 \@ref(fig:cars-plot) 所示。
 
 ```{r cars-plot, fig.cap = "cars 数据集", echo = FALSE}
 plot(cars)
@@ -1005,7 +1014,7 @@ output:
 
 此时目录只会显示一级标题和二级标题，略过级别更低的标题。
 
-`html_document` 和 `bookdown::html_document2` 等输出格式支持 `toc_float` 属性，为 `true` 时，目录变为侧边栏，并固定在屏幕左侧。我们可以展开 `toc_float` 为一个字典，包括
+`html_document` 和 `bookdown::html_document2` 等输出格式支持 `toc_float` 属性，为 `true` 时，目录变为侧边栏，并固定在屏幕左侧。`toc_float` 支持更多细节选项，包括：
 
 - `collapsed` (默认为 `true`)：是否折叠二级标题以下的标题
 
@@ -1033,9 +1042,9 @@ R Markdown 支持在输出文档末尾自动生成参考文献，并提供了很
 
 1. 默认情况下，Pandoc 会使用 `[pandoc-citeproc](https://github.com/jgm/pandoc-citeproc)` 程序按照 CSL (Citation Style Language) 语言的标准和特定的 CSL 风格文件组织参考文献和引用的格式。
 
-2. 读者还可以使用 [natbib](https://ctan.org/pkg/natbib) 包 (基于 LaTeX 的 `bibtex`包) 或 [biblatex](https://ctan.org/pkg/biblatex) 包提供的格式。此时我们需要参考的数据文件符合 `bibtex` 或 `biblatex` 格式。
+2. 读者还可以使用 [natbib](https://ctan.org/pkg/natbib) 包 (基于 LaTeX 的 `bibtex`包) 或 [biblatex](https://ctan.org/pkg/biblatex) 包提供的格式。
 
-我们可以用 YAML 元数据中的 `citation_package` 选项选择 `natlib` 或 `biblatex`：
+作者可以用 YAML 元数据中的 `citation_package` 选项设置 LaTeX 中的引用包，常见的选择有 `natlib` 或 `biblatex`：
 
 ```
 ---
@@ -1047,9 +1056,9 @@ output:
 ---
 ```
 
-读者需注意，`citation_package` 仅限于 PDF 输出格式。对其他输出格式，我们只能依靠 `pandoc-citeproc`，如果需要保持 PDF 格式和其他格式的一致性，就应该始终使用 `pandoc-citeproc`。
+`citation_package` 仅限于 PDF 输出格式。其他输出格式只能依靠 `pandoc-citeproc`，如果需要保持 PDF 格式和其他格式的一致性，就应该始终使用 `pandoc-citeproc`。
 
-设置好引用格式后，我们需要知道如何把参考文献的各个条目表达为数据形式。我们在这里以 BibTeX 数据库 (BibTeX Database) 方法为例。BibTeX 数据库是一种用于存储参考文献数据的纯文本文件，后缀为 `bib`，每一个条目都至少包含名称，作者和时间等信息，格式形如：
+设置好引用格式后，还需要知道如何把参考文献的各个条目表达为数据形式。推荐读者用 BibTeX 数据库 (BibTeX Database) 管理 R Markdown 中的参考数据。BibTeX 数据库是一种纯文本文件，一般以 `bib` 为后缀，其中的每一个条目格式形如：
 
 ```
 @Manual{R-base,
@@ -1063,7 +1072,7 @@ output:
 }
 ```
 
-一个条目以 `@type{` 开始，`type` 表示该条参考的类型，可以识 `article`, `book`, `manual` 等。在类型之后的是引用标签，如 `R-base`，其他项包含参考的作者，组织，地址，日期和链接等信息。为了使用 `.bib` 文件中的条目，我们需要用 YAML 元数据中的 `bibliography` 加载一个或多个 `.bib` 文件：
+一个条目以 `@type{` 开始，`type` 表示该条参考的类型，可以识 `article`, `book`, `manual` 等。在类型之后的是引用标签，如 `R-base`，其他项包含参考的作者，组织，地址，日期和链接等信息。每一个条目都至少包含名称，作者和时间等信息，为了使用 `.bib` 文件中的条目，需要用 YAML 元数据中的 `bibliography` 加载一个或多个 `.bib` 文件：
 
 
 ```
@@ -1075,11 +1084,11 @@ link-citations: true
 ---
 ```
 
-在上面的例子中，我们引入了 `one.bib`，`another.bib`，`yet-another.bib`  三个 `.bib` 文件中的参考数据，`biblio-style: 'apalike'` 设置参考样式为美国心理学学会期刊样式 (American Psychology Association, APA)，`link-cations: true` 为引用添加指向参考文献的跳转链接。
+上面的例子引入了 `one.bib`，`another.bib`，`yet-another.bib`  三个 `.bib` 文件中的参考数据，`biblio-style: 'apalike'` 设置参考样式为美国心理学学会期刊样式 (American Psychology Association, APA)，`link-cations: true` 为引用添加指向参考文献的跳转链接。
 
-用 `bibliography` 引入 `.bib` 后，我们可以在文档中引用其中包含的任意条目，语法为 `@key` 或 `[@key]`，其中 `key` 为该参考条目类型之后的标签。如 `@R-base` 生成为 @R-base，而 `[@R-base]` 生成 [@R-base]。
+用 `bibliography` 引入 `.bib` 后，便可以在文档中引用其中包含的任意条目，语法为 `@key` 或 `[@key]`，其中 `key` 为该参考条目类型之后的标签。如 `@R-base` 生成为 @R-base，而 `[@R-base]` 生成 [@R-base]。
 
-对 PDF 输出，Pandoc 会在最后一个章节后额外生成一节放置参考文献。对其他输出格式，我们可以用行内代码自动创建一节参考文献。例如，在源文档的最后插入：
+对 PDF 输出，Pandoc 会在最后一个章节后额外生成一节放置参考文献。对其他输出格式，可以在文档的最后用行内代码自动创建一个章节存放参考文献。例如，在源文档的最后插入：
 
 ```
 `r "\x60r if (knitr::is_html_output()) '# 参考文献 {-}'\x60"`
@@ -1096,7 +1105,7 @@ nocite: '@*'
 
 ### 引用 R 包
 
-参考"文献"还可以包括文章使用的软件包。knitr 提供了 `write_bib` 函数为 R 包生成 `.bib` 格式的参考条目：
+参考"文献"还可以包括文章使用的软件包。knitr 包提供了 `write_bib` 函数为 R 包生成 `.bib` 格式的参考条目：
 
 
 ```{r}
@@ -1104,7 +1113,7 @@ nocite: '@*'
 knitr::write_bib(c("base", "knitr"), "", width = 60)
 ```
 
-不提供第一个参数时。`write_bib` 会导出当前进程加载的全部 R 包的引用数据。我们可以在文档末尾插入如下代码段自动化生成 R 包对应的 `.bib` 文件：
+不提供第一个参数时。`write_bib` 会导出当前进程加载的全部 R 包的引用数据，作者可以在文档末尾插入如下代码段自动化生成 R 包对应的 `.bib` 文件：
 
 ````
 ---
@@ -1128,7 +1137,7 @@ knitr::write_bib(file = 'packages.bib')
 
 随后，作者需要为链接跳转的锚点设置一个标签，这样引用的时候才有地放矢。R Markdown 支持交叉引用章节标题、图片、表格和公式等元素，语法略有不同。
 
-对于标题，Pandoc 会自动为章节标题设置标签。例如 `# Hello World` 对应的标签为 `hello-world`。随后我们可以用 `\@ref(hello-world)` 引用该标题，它会生成该章节对应的编号。对中文标题，Pandoc 可以用 `# 标题 {#header}` 的格式为该节添加自定义标签 `header`，随后用 `\@ref(header)` 引用该节。例如本节标题设置了 `## 交叉引用 {#cross-reference}`，`\@ref(cross-reference)` 生成为 \@ref(cross-reference)。建议总是给中文标题设置一个简洁的英文标签，仅包含字母和连词符，例如：
+对于标题，Pandoc 会自动为章节标题设置标签。例如 `# Hello World` 对应的标签为 `hello-world`。随后就可以用 `\@ref(hello-world)` 引用该标题，它会生成该章节对应的编号。对中文标题，Pandoc 可以用 `# 标题 {#header}` 的格式为该节添加自定义标签 `header`，随后用 `\@ref(header)` 引用该节。例如本节标题设置了 `## 交叉引用 {#cross-reference}`，`\@ref(cross-reference)` 生成为 \@ref(cross-reference)。建议总是给中文标题设置一个简洁的英文标签，仅包含字母和连词符，例如：
 
 ```
 ---
@@ -1143,7 +1152,12 @@ output: bookdown::pdf_document2
 ```
 
 与章节标题不同，图片和表格的标签是它们所属代码块的标签。第 \@ref(code-block-and-line) 节中谈到可以用 `  ```{r label} ` 或 `  ```{r, label = "label"}` 为代码块设置标签。当该代码块的输出包含图片或表格时，这个标签就可用于交叉引用。但仅有该标签还不够，交叉引用需要元素有自己的独立环境。这一点可以通过为图片和表格设置标题做到。图片可以用 `fig.cap`  选项，设置表格标题的方法取决于生成的函数，例如 `knitr::kable` 使用 `caption` 参数。
-随后，我们可以用 `\@ref(fig:label)` 引用图片，用 `\@ref(tab:label)` 引用表格。下面是一个例子：
+随后，可以用 `\@ref(fig:label)` 引用图片，用 `\@ref(tab:label)` 引用表格。
+
+对于数学公式
+
+
+下面的例子展示了对章节、图片、表格和公式的引用语法：
 
 `r import_example("examples/cross-reference.Rmd")`
 
@@ -1183,9 +1197,9 @@ output:
 \printindex
 ````
 
-生成的 PDF 文档如下：
+生成的 PDF 文档如图 \@ref(fig:insert-index) 所示。
 
-```{r}
+```{r insert-index, fig.cap = "在 PDF 文档中插入索引"}
 knitr::include_graphics("images/02-index.png")
 ```
 
@@ -1272,7 +1286,7 @@ grViz("digraph {
   height = 500)
 ```
 
-我们可以在 `grViz` 函数用 `@@` 插入 R 变量的的值，如图 \@ref(fig:gv-rvar) 所示。
+作者可以在 `grViz` 函数用 `@@` 插入 R 变量的的值，如图 \@ref(fig:gv-rvar) 所示。
 
 ```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值"}
 DiagrammeR::grViz("
