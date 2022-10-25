@@ -10,6 +10,5 @@
 列表, `- 一件事`, - 一件事
 链接, `[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)`,  [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
 图片, `![图片](https://bookdown.org/yihui/rmarkdown/images/cover.png)`, ![图片](https://bookdown.org/yihui/rmarkdown/images/cover.png)
-脚注,`请看脚注 ^[这是一条脚注]`, 请看脚注 ^[这是一条脚注]
 
 

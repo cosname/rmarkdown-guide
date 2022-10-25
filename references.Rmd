@@ -24,6 +24,7 @@ knitr::write_bib(c(
   "gtsummary",
   "formattable",
   "DT",
+  "webshot",
   "reactable",
   "rhandsontable",
   "pixiedust",
