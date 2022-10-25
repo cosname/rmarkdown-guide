@@ -109,11 +109,11 @@ knitr::include_graphics("images/02-rmd-pdf.png")
 
 #### 安装 LaTeX 组件 {#install-latex-package}
 
-**rmarkdown** 包从版本 1.9 开始，编译 R Markdown 为 PDF 时会调用 TinyTeX。因此，对 R Markdown 用户来说，编译 PDF 是出错的头号原因可能在于缺失某些 LaTeX 包。
+从 rmarkdown 1.9 版本开始，输出 PDF 文档时会调用 TinyTeX，进而使用 LaTeX 包。因此，对 R Markdown 用户来说，编译 PDF 是出错的最常见原因是缺失某些 LaTeX 包。
 
-LaTeX 包（也被称为"package"）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
+LaTeX 包（也被称为 "package"）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
 
-如果知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，对于国内的用户来说，通常需要设定一下 LaTeX 软件仓库的位置。下面的例子中，使用了清华大学的 TeX Live 镜像。
+如果知道包的名称，那么可以直接使用下面的命令安装。这里值得注意的是，国内用户通常需要额外设定 LaTeX 软件仓库的位置。下面的例子使用了清华大学的 TeX Live 镜像。
 
 ```{r, install-latex-packages, eval=FALSE}
 # 安装需要的 LaTeX 组件
@@ -133,6 +133,8 @@ tinytex::parse_install(log = "tex.log")
 
 ### 安装 Git (\*) {#install-git}
 
+了解 Git 和 Github 的使用可以帮助作者更好地分享 R Markdown 的代码和输出结果，并且可以方便地与他人协作。
+
 Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^02-base-3]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
 
 [^02-base-3]: Linus Torvalds (1969年12月28日－) 生于芬兰赫尔辛基市，拥有美国国籍，Linux 内核的最早作者，随后发起了这个开源项目，担任 Linux 内核的首要架构师与项目协调者，是当今世界最著名的电脑程序员、黑客之一。他 2005 年发布了 Git，是 Git 的主要开发者。
@@ -147,7 +149,7 @@ Windows 系统下 [^02-base-4]，安装完 Git 客户端之后，鼠标右键菜
 
 [^02-base-4]: 命令行对于 Linux/Mac 用户应该并不陌生，此处和以下不再另行介绍。
 
-首先需要配置 Git 的用户信息。
+首先需要配置 Git 的用户信息，以下为终端命令：
 
 ``` bash
 # 全局配置
