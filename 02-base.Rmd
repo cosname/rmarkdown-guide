@@ -273,7 +273,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-这是一个 R 代码块，因为` ```{ ` 后是 `r`，读者还可以将其替换为 ` ```{python `， ` ```{bash ` 等以指定代码块的语言类型。语言名称的后面还可以附上代码块选项。代码块选项与代码块的关系就如同 YAML 元数据之于整个文档一样，用于指定该代码块的运行和输出设置。这里，`setup` 是代码块的标签，`include=FALSE` 指定了这个代码段的内容不会显示在输出中，即隐藏 `knitr::opts_chunk$set(echo = TRUE)` 这一行，第 \@ref(code-block-and-inline) 节解释了它的含义。
+这是一个 R 代码块，因为` ```{ ` 后是 `r`，读者还可以将其替换为 ` ```{python `， ` ```{bash ` 等以指定代码块的语言类型。语言名称的后面还可以附上代码块选项。代码块选项与代码块的关系就如同 YAML 元数据之于整个文档一样，用于指定该代码块的运行和输出设置。这里，`setup` 是代码块的标签，`include=FALSE` 指定了这个代码块的内容不会显示在输出中，即隐藏 `knitr::opts_chunk$set(echo = TRUE)` 这一行，第 \@ref(code-block-and-inline) 节解释了它的含义。
 
 -   Markdown 文本：代码块之后是一段文字内容，如下所示
 
@@ -299,7 +299,7 @@ summary(cars)
 
 `untitle.Rmd` 的剩余内容是类似的 Markdown 文本和代码块。
 
-## R Markdown 的编译过程 {#rmarkdown-compile}
+## R Markdown 的编译过程和组成元素 {#rmarkdown-compile}
 
 点击 `Knit` 按钮或调用 `rmarkdown::render()` 函数后，R 会启动一个新的进程，将源文档转换为输出文档。 之前提到过，`Knit` 按钮本质上就是对 rmarkdown 包中 `render()` 函数的封装。因此，理解 R Markdown 的编译过程就是理解 `render()` 调用了什么方法和工具完成了怎样的文档转换。
 
@@ -364,11 +364,9 @@ rmarkdown::pandoc_version()
 knitr::include_graphics("images/02-knit-process.png")
 ```
 
-## R Markdown 的组成
+了解完 R Markdown 的编译过程后，下面三节深入介绍了 R Markdown 源文档中的三种元素：YAML 头部，Markdown 文本和代码块。··
 
-了解完 R Markdown 的编译过程后，下面的几节深入介绍了 R Markdown 源文档中的三种元素：YAML 头部，Markdown 文本和代码块。
-
-### YAML 头部 {#yaml}
+## YAML 头部 {#yaml}
 
 YAML 元数据中的每一个域 (field) 都定义了输出的一个方面，其中最重要的一个域是 `output` 所指定的输出格式，`output` 选项的值可以是 `html_document`、`pdf_document`、`word_document` 等，这些值对应了不同的输出格式，实质上都是 rmarkdown 包中的函数，例如 `html_document` 对应的函数时 `rmarkdown::html_document`。下面是所有 rmarkdown 包中定义的输出格式
 
@@ -437,7 +435,14 @@ knitr::include_graphics("images/02-yaml-test.png")
 ```
 
 
-### Markdown 语法 {#markdown-syntax}
+读者对 YAML 语法不熟悉时，可以安装 [ymlthis](https://github.com/r-lib/ymlthis) 包，它会提供一个在 R Markdown 中插入 YAML 数据的图形化界面，可以在 RStudio 菜单栏中的 Tools -> Addins -> Browse Addins 启动。启动后如图 \@ref(fig:ymlthis) 所示。
+
+```{r ymlthis, echo = FALSE, fig.cap = "ymlthis 包提供图形化输入 YAML 元数据的插件"}
+knitr::include_graphics("images/02-ymlthis.png")
+```
+
+
+##  Markdown 语法 {#markdown-syntax}
 
 Markdown 标记语言由 John Gruber 于 2004 年创建，以易读，可移植，跨平台等优势成为最受欢迎的技术写作工具之一。借助 Markdown，作者可以在纯文本文档中用特殊的标记符号表示格式，例如用井号 `#` 表示标题，用 `*` 星号表示加粗等。这样的统一中介使作者不必逐个为特定输出格式设置排版方案。
 
@@ -532,7 +537,7 @@ import_example_result("examples/markdown-headings.Rmd")
 
 ::::::
 
-
+读者还需注意，对没有编号的标题使用交叉引用时，只能用 Markdown 链接 `[文字](#label)`,  而不能用 `\@ref(label)`，后者是基于编号的引用。
 
 #### 列表
 
@@ -671,6 +676,54 @@ Markdown 还支持插入表格，语法如下
 | 块引用 | `> some quotes` |
 | 代码块 | ``` some code  ```  |
 
+### 数学公式
+
+作者可以用一对 `$` 插入行内数学公式，例如 `$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$` 渲染为 $f(k) = {n \choose k} p^{k} (1-p)^{n-k}$。
+
+前后各两个 `$$` 会创建块状公式，例如：
+
+```
+$$
+f(k) = {n \choose k} p^{k} (1-p)^{n-k}
+$$
+```
+
+输出为：
+
+$$
+f(k) = {n \choose k} p^{k} (1-p)^{n-k}
+$$
+
+我们可以使用 LaTeX 默认的数学环境，如：
+
+```
+$$\begin{array}{ccc}
+x_{11} & x_{12} & x_{13}\\
+x_{21} & x_{22} & x_{23}
+\end{array}$$
+```
+
+$$
+\begin{array}{ccc}
+x_{11} & x_{12} & x_{13}\\
+x_{21} & x_{22} & x_{23}
+\end{array}
+$$
+
+
+```
+$$X = \begin{bmatrix}1 & x_{1}\\
+1 & x_{2}\\
+1 & x_{3}
+\end{bmatrix}$$
+```
+
+$$
+X = \begin{bmatrix}1 & x_{1}\\
+1 & x_{2}\\
+1 & x_{3}
+\end{bmatrix}
+$$
 
 ### 总结
 
@@ -701,14 +754,14 @@ set_caption(t, "Markdown 常见语法总结")
 一些 Markdown 编辑器提供了即时预览功能，方便读者进行交互性的练习。图 \@ref(fig:dillinger) 是一个在线编辑器的例子。
 
 ```{r dillinger, echo = FALSE, fig.cap = "支持实时预览的 Markdown 编辑器 https://dillinger.io/"}
-knitr::include_graphics("images/03-markdown-editor.png")
+knitr::include_graphics("images/02-markdown-editor.png")
 ```
 
-### 代码块和行内代码 {#code-block-and-inline}
+## 代码块和行内代码 {#code-block-and-inline}
 
 在 R Markdown 中，有两种使用 R 代码的形式: 代码块和行内代码。
 
-R 代码块以 ` ```{r} ` 开始，` ``` ` 结束，作者可以在源文档中插入任意个代码块 ^[虽然 R Markdown 对代码块的长度或个数没有限制，但 最佳实践是让每个代码块自成逻辑，避免把不相关的代码放到同一代码块中。]。与 YAML 元数据控制文档的整体设置类似，可以用代码段选项 (chunk options) 来控制单个代码块的的运行细节。例如生成图片时，可以用 `fig.width` 和 `fig.height` 选项来控制图片的宽度和高度。
+R 代码块以 ` ```{r} ` 开始，` ``` ` 结束，作者可以在源文档中插入任意个代码块 ^[虽然 R Markdown 对代码块的长度或个数没有限制，但 最佳实践是让每个代码块自成逻辑，避免把不相关的代码放到同一代码块中。]。与 YAML 元数据控制文档的整体设置类似，可以用代码块选项 (chunk options) 来控制单个代码块的的运行细节。例如生成图片时，可以用 `fig.width` 和 `fig.height` 选项来控制图片的宽度和高度。
 
 ````{verbatim}
 ```{r pressure, fig.width=7, fig.height=5}
@@ -716,7 +769,7 @@ plot(cars)
 ```
 ````
 
-有时作者只希望展示代码的运行结果，而隐藏具体实现细节，这时可以设置代码段选项 `echo = FALSE`，R Markdown 会照旧运行代码，但仅在输出文档中显示运行结果。如果文档中包含很多代码块，逐个设置选项较为繁琐。这时可以用 knitr 包提供的 `knitr::opts_chunk$set()` 函数为所有代码块统一设置全局选项。例如，在全文档中的第一个代码块中设置：
+有时作者只希望展示代码的运行结果，而隐藏具体实现细节，这时可以设置代码块选项 `echo = FALSE`，R Markdown 会照旧运行代码，但仅在输出文档中显示运行结果。如果文档中包含很多代码块，逐个设置选项较为繁琐。这时可以用 knitr 包提供的 `knitr::opts_chunk$set()` 函数为所有代码块统一设置全局选项。例如，在全文档中的第一个代码块中设置：
 
 ````{verbatim}
 ```{r setup, include=FALSE}
@@ -791,35 +844,35 @@ date: "`r Sys.Date()`"
 
 - `fig.width` 和 `fig.height`: 调整代码块生成图形时图形设备 (graphical device)的大小。这是因为 kntir 首先通过图形设备将图片存储为文件 (例如 png, jpg)，随后在输出文档中引用这些文件。默认情况下 `fig.width = 7, fig.height = 5`。个类似的选项是 `out.width` 和 `out.height`, 通常取值为百分比，表示图片占据一页的比例。例如, `out.height = '80%'` 表示图片占据页面高度的 80%。
 
-- `fig.cap`: 代码块生成图片的标题
+- `fig.cap`: 图片的标题
 
-- `fig.align`: 代码块图片的对齐方式，有三种取值
+- `fig.align`: 图片的对齐方式，有三种取值
   - `"left"`: 靠左对齐
   - `"center"` 居中对齐 (本书的设置)
   - `"right"`: 靠右对齐
 
 - `cache`: 是否缓存代码块的运行结果。如果代码块涉及复杂，耗时长的计算，`cache = TRUE` 可以让 knitr 把运行结果保存为 `.rds` 文件，并在下次编译时略过计算过程，直接读取 `.rds` 节省时间。只有代码块的内容发生变化时，knitr 才会重新计算。有时 knitr 的缓存机制会让人难以预测代码是否重新运行，只推荐对确有需要的代码块设置它。
 
-
-## 页面设置和布局 {#page-layout}
-
-### 控制输出宽度 {#output-width}
-
-### 分页符和分割线 {#page-break}
-
-### 目录 {#catalog}
-
-### 参考文献 {#reference-index}
-
-### 交叉引用
-
-
-
 ## R Markdown 的文档元素 {#document-element}
 
 ### 图片 {#element-plot}
 
-默认情况下，代码块生成的图片在输出文档中被直接插入该代码块的下方。如果一个代码块可以生成多个图片，R Markdown 会把它们拆分成多个代码块，每个代码块生成一个图片，效果如下：
+默认情况下，代码块生成的图片在输出文档中被直接插入该代码块的下方。一个重要的 knitr 选项是 `fig.cap`，它可以为图片添加标题。例如下面的代码块：
+
+````{verbatim}
+```{r cars-plot, fig.cap = "cars 数据集"}
+plot(cars)
+```
+````
+
+生成的图片如下：
+
+```{r cars-plot, fig.cap = "cars 数据集", echo = FALSE}
+plot(cars)
+```
+
+
+当一个代码块生成多个图片时，R Markdown 会把它拆分成多个代码块，每个代码块生成一个图片，效果如下：
 
 :::::: {.cols data-latex=""}
 
@@ -881,42 +934,424 @@ import_example_result("examples/multi-figure-same-row.Rmd")
 
 ::::::
 
+
+
+
 ### 表格 {#element-table}
 
-不过对于 R Markdown 用户，直接使用 Markdown 表格语法通常是不必要的。knitr 包中的 `kable()` 函数提供了更完善的表格功能，如表 \@ref(tab:kable-example) 所示。
-
-```{r kable-example}
-knitr::kable(head(iris), caption = "用 knitr::kable() 创建表格")
-```
+第 \@ref(markdown-table) 节介绍了用 Markdown 语法编写表格的方法。对于 R 用户，更简单的插入表格方法是使用 knitr 包中的 `kable()` 函数，它接受一个数据框，返回对应的表格。与图片的 `fig.cap` 选项类似，作者可以用 `kable()` 函数中的 `caption` 参数控制表格的标题。例如下面的代码块：
 
 ````{verbatim}
-```{r cars-table, fig.cap = "cars 数据集"}
-knitr::kable(head(cars))
+```{r iris-table}
+knitr::kable(head(iris), caption = "iris 数据集")
 ```
 ````
-生成：
 
-```{r cars-table, fig.cap = "cars 数据集"}
-knitr::kable(head(cars))
+生成的表格如表 \@ref(tab:iris-table) 所示。
+
+```{r iris-table, tab.cap = "iris 数据集"}
+knitr::kable(head(cars), caption = "iris 数据集")
+```
+
+一个常见的用例是将表格数据存入 csv 文件中，随后在 R Markdown 中读取该文件并生成表格。例如：
+
+```r
+read.csv("some-data.csv") |>
+  knitr::kable(caption = "some data")
+```
+
+### 分页符和分割线 {#page-break}
+
+LaTeX 命令 `\newpage` 可以在文档中插入一个分页符。`\newpage` 的使用不局限于 PDF 输出格式，R Markdown 会自动将其转换为其他格式中的分页符，支持的格式包括 HTML、PDF、Word、ODT 等。例如：
+
+````{verbatim}
+---
+title: 分页符和分割线
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+  odt_document: default
+---
+
+# 第一章
+
+\newpage
+
+# 第二章
+````
+
+如果只想插入一条水平的分割线而不分页，可以插入三个减号 `---`。
+
+将 LaTeX 命令对转换是由自定义 Pandoc 中的 Lua Filters 实现的，有兴趣的读者在 R 中查询相关文档：
+
+```r
+vignette("lua-filters", package = "rmarkdown")
+```
+
+### 目录 {#toc}
+
+大部分输出格式支持在 YAML 元数据中选择 `toc: true` 以自动生成目录，`toc_depth` 控制显示深度。如：
+
+```
+---
+title: "插入目录"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+```
+
+此时目录只会显示一级标题和二级标题，略过级别更低的标题。
+
+`html_document` 和 `bookdown::html_document2` 等输出格式支持 `toc_float` 属性，为 `true` 时，目录变为侧边栏，并固定在屏幕左侧。我们可以展开 `toc_float` 为一个字典，包括
+
+- `collapsed` (默认为 `true`)：是否折叠二级标题以下的标题
+
+- `smooth_scroll` (默认为 `true`)：是否在鼠标点击目录时添加平滑滚动
+
+例子如下：
+
+```
+---
+title: "插入目录"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+```
+
+### 参考文献 {#bibliography}
+
+> TODO：这一部分以后应当结合 Zotero 和 EndNote 等常用文献管理软件做适当扩展。
+
+R Markdown 支持在输出文档末尾自动生成参考文献，并提供了很方便的引用格式。这项功能是通过 Pandoc 实现的，它有两种管理引用和参考文献的方式
+
+1. 默认情况下，Pandoc 会使用 `[pandoc-citeproc](https://github.com/jgm/pandoc-citeproc)` 程序按照 CSL (Citation Style Language) 语言的标准和特定的 CSL 风格文件组织参考文献和引用的格式。
+
+2. 读者还可以使用 [natbib](https://ctan.org/pkg/natbib) 包 (基于 LaTeX 的 `bibtex`包) 或 [biblatex](https://ctan.org/pkg/biblatex) 包提供的格式。此时我们需要参考的数据文件符合 `bibtex` 或 `biblatex` 格式。
+
+我们可以用 YAML 元数据中的 `citation_package` 选项选择 `natlib` 或 `biblatex`：
+
+```
+---
+output:
+  pdf_document:
+    citation_package: natbib
+  bookdown::pdf_book:
+    citation_package: biblatex
+---
+```
+
+读者需注意，`citation_package` 仅限于 PDF 输出格式。对其他输出格式，我们只能依靠 `pandoc-citeproc`，如果需要保持 PDF 格式和其他格式的一致性，就应该始终使用 `pandoc-citeproc`。
+
+设置好引用格式后，我们需要知道如何把参考文献的各个条目表达为数据形式。我们在这里以 BibTeX 数据库 (BibTeX Database) 方法为例。BibTeX 数据库是一种用于存储参考文献数据的纯文本文件，后缀为 `bib`，每一个条目都至少包含名称，作者和时间等信息，格式形如：
+
+```
+@Manual{R-base,
+  title = {R: A Language and Environment for Statistical
+    Computing},
+  author = {{R Core Team}},
+  organization = {R Foundation for Statistical Computing},
+  address = {Vienna, Austria},
+  year = {2016},
+  url = {https://www.R-project.org/},
+}
+```
+
+一个条目以 `@type{` 开始，`type` 表示该条参考的类型，可以识 `article`, `book`, `manual` 等。在类型之后的是引用标签，如 `R-base`，其他项包含参考的作者，组织，地址，日期和链接等信息。为了使用 `.bib` 文件中的条目，我们需要用 YAML 元数据中的 `bibliography` 加载一个或多个 `.bib` 文件：
+
+
+```
+---
+output: pdf_document
+bibliography: ["one.bib", "another.bib", "yet-another.bib"]
+biblio-style: "apalike"
+link-citations: true
+---
+```
+
+在上面的例子中，我们引入了 `one.bib`，`another.bib`，`yet-another.bib`  三个 `.bib` 文件中的参考数据，`biblio-style: 'apalike'` 设置参考样式为美国心理学学会期刊样式 (American Psychology Association, APA)，`link-cations: true` 为引用添加指向参考文献的跳转链接。
+
+用 `bibliography` 引入 `.bib` 后，我们可以在文档中引用其中包含的任意条目，语法为 `@key` 或 `[@key]`，其中 `key` 为该参考条目类型之后的标签。如 `@R-base` 生成为 @R-base，而 `[@R-base]` 生成 [@R-base]。
+
+对 PDF 输出，Pandoc 会在最后一个章节后额外生成一节放置参考文献。对其他输出格式，我们可以用行内代码自动创建一节参考文献。例如，在源文档的最后插入：
+
+```
+`r "\x60r if (knitr::is_html_output()) '# 参考文献 {-}'\x60"`
+```
+
+被 `@key` 引用的参考条目会自动出现在最后的参考文献索引中，如果想在最后添加 `.bib` 中的全部条目，不论是否引用，可以设置 YAML 中的 `notice` 属性。例如：
+
+
+```
+---
+nocite: '@*'
+---
+```
+
+### 引用 R 包
+
+参考"文献"还可以包括文章使用的软件包。knitr 提供了 `write_bib` 函数为 R 包生成 `.bib` 格式的参考条目：
+
+
+```{r}
+# 第二个参数可以是任意 .bib 文件
+knitr::write_bib(c("base", "knitr"), "", width = 60)
+```
+
+不提供第一个参数时。`write_bib` 会导出当前进程加载的全部 R 包的引用数据。我们可以在文档末尾插入如下代码段自动化生成 R 包对应的 `.bib` 文件：
+
+````
+---
+bibliography: [packages.bib, references.bib]
+---
+
+# 总结
+
+最后，...
+
+```{r, include=FALSE}`r ''`
+knitr::write_bib(file = 'packages.bib')
+```
+
+`r "\x60r if (knitr::is_html_output()) '# References {-}'\x60"`
+````
+
+### 交叉引用 {#cross-reference}
+
+交叉引用 (cross-reference) 可以为读者提供锚点链接，便于他们快速浏览文档中相关部分。rmarkdown 包提供的 `html_document`, `pdf_document` 等基础格式不支持交叉引用。作者可以转而使用 **bookdown** [@R-bookdown] 包提供的额外格式：`bookdown::html_document2` 和 `bookdown::pdf_document2` 等。
+
+随后，作者需要为链接跳转的锚点设置一个标签，这样引用的时候才有地放矢。R Markdown 支持交叉引用章节标题、图片、表格和公式等元素，语法略有不同。
+
+对于标题，Pandoc 会自动为章节标题设置标签。例如 `# Hello World` 对应的标签为 `hello-world`。随后我们可以用 `\@ref(hello-world)` 引用该标题，它会生成该章节对应的编号。对中文标题，Pandoc 可以用 `# 标题 {#header}` 的格式为该节添加自定义标签 `header`，随后用 `\@ref(header)` 引用该节。例如本节标题设置了 `## 交叉引用 {#cross-reference}`，`\@ref(cross-reference)` 生成为 \@ref(cross-reference)。建议总是给中文标题设置一个简洁的英文标签，仅包含字母和连词符，例如：
+
+```
+---
+output: bookdown::pdf_document2
+---
+
+# 简介 {#introdcution}
+
+# 方法 {#methods}
+
+我们可以分别用 \@ref(introduction) 和 \@ref(methods) 引用前两章的标题。
+```
+
+与章节标题不同，图片和表格的标签是它们所属代码块的标签。第 \@ref(code-block-and-line) 节中谈到可以用 `  ```{r label} ` 或 `  ```{r, label = "label"}` 为代码块设置标签。当该代码块的输出包含图片或表格时，这个标签就可用于交叉引用。但仅有该标签还不够，交叉引用需要元素有自己的独立环境。这一点可以通过为图片和表格设置标题做到。图片可以用 `fig.cap`  选项，设置表格标题的方法取决于生成的函数，例如 `knitr::kable` 使用 `caption` 参数。
+随后，我们可以用 `\@ref(fig:label)` 引用图片，用 `\@ref(tab:label)` 引用表格。下面是一个例子：
+
+`r import_example("examples/cross-reference.Rmd")`
+
+输出如图 \@ref(fig:cr-example) 所示。
+
+```{r cr-example, echo = FALSE, fig.cap = "交叉引用图片和表格"}
+import_example_result("examples/cross-reference.Rmd")
+```
+
+读者如果跟随编译了上述文档，可以点开生成的 HTML 文档，会发现标签元素的容器有对应的 `id` 属性。同理，PDF 输出的 `.tex` 文件会插入对应的 `\label{}` 指令，这也是交叉引用的跳转基础。
+
+### 索引 {#index}
+
+为了方便读者快速浏览，除目录之外，作者还可以在文档的末尾插入索引。索引的生成需要使用 LaTeX 包，因此只有 PDF 输出文档才支持索引。首先，创建一个 `.tex` 文件引用 LaTex 的 `makeidx` 包，然后在 R Markdown 文档中用 `includes -> before_body` 选项引入这个 `.tex` 文件。例如，在 `preamble.tex` 中写入：
+
+```tex
+\usepackage{makeidx}
+\makeindex
+```
+
+作者还需要在 R Markdown 文档的末尾插入 LaTeX 命令 `\printindex`。随后就可以使用 `\index{}` 创建一个索引条目。完整的源文档如下：
+
+````{verbatim}
+---
+title: "插入索引"
+documentclass: ctexart
+output:
+  pdf_document:
+    latex_engine: xelatex
+    includes:
+      in_header: preamble.tex
+---
+
+
+模型筛选指标包括 RMSE \index{AIC}, AIC \index{RMSE} 和 BIC \index{BIC} 等。
+
+\printindex
+````
+
+生成的 PDF 文档如下：
+
+```{r}
+knitr::include_graphics("images/02-index.png")
+```
+
+### 动画
+
+对 HTML 输出文档，作者可以用 `aniamtion.hook` 选项 (依赖 `gifski` 包) 将多个图片合并成 gif 格式的动画。
+
+````{verbatim}
+```{r, animation.hook="gifski"}
+for (i in 1:2) {
+  pie(c(i %% 2, 6), col = c("red", "yellow"), labels = NA)
+}
+```
+````
+
+```{r, animation.hook="gifski", echo = FALSE}
+for (i in 1:2) {
+  pie(c(i %% 2, 6), col = c("red", "yellow"), labels = NA)
+}
+```
+
+为了在 PDF 输出中支持动画，作者首先需要安装 LaTeX 包 `animate`，并设置选项 `fig.show = "animate"`，这样创建的动画只能用 Acrobat Reader 显示。例子如下：
+
+````{verbatim}
+---
+title: PDF 中插入动画
+output:
+  pdf_document:
+    extra_dependencies: animate
+---
+
+下面的动画职能在 Acrobat Reader 中显示
+
+```{r, fig.show='animate'}
+for (i in 1:2) {
+  pie(c(i %% 2, 6), col = c("red", "yellow"), labels = NA)
+}
+```
+````
+
+### 交互组件 {#element-widget}
+
+HTML 输出文档支持基于 JavaScript 的交互组件。**htmlwidgets** R 包 [@R-htmlwidgets] 让 R 用户可以轻松实现实现对 JavaScript 库的接口。在此框架上开发的 R 包如 **DT** [@R-DT] (表格)，**leaflet** [@R-leaflet] (地图) 和 ，**dygraphs** [@R-dygraphs] (时间序列图) 为 HTML 输出格式提供了丰富的交互组件。读者可以在 <https://www.htmlwidgets.org> 了解更多使用和开发 HTML 组件的更多细节。图 \@ref(fig:leaflet-example) 是一个使用 leaflet 包插入交互地图的例子。
+
+```{r leaflet-example, fig.cap = "用 leaflet 包插入交互地图"}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%
+  setView(174.768, -36.852, zoom = 16) %>%
+  addPopups(lng = 174.768, lat = -36.852, popup="<b>R</b> 的诞生地")
 ```
 
 
 
+### 音频和视频 {#element-media}
 
 
-### 公式 {#element-equation}
 
-### 引用 {#element-quote}
+### 流程图 {#element-digram}
 
-### 字体颜色 {#element-textcol}
+Graphviz 和 mermaid 是两个常用于创建流程和网络图的软件包。**DiagrammeR** [@R-DiagrammeR] 包支持用 R 代码生成 Graphviz 或 mermaid 图。以 Graphviz 为例，一个图文件包含对图 (graph)，节点 (node) 和边 (edge) 的定义，RStudio 提供了对 Graphviz (`.gv`) 和 mermaid (`.mmd`) 的原生支持，如图 \@ref(fig:rstudio-gv) 所示。
 
-### 动态交互元件 {#element-dynamic}
+```{r rstudio-gv, echo = FALSE, fig.cap = "RStudio 编辑器中的 Graphviz 和 mermaid 图文件"}
+knitr::include_graphics("images/02-graphviz-rstudio.png")
+```
 
-### 音频和视频 {#element-video}
+作者也可以直接使用 Graphviz 格式的字符串，如图 \@ref(fig:gv-diagram) 所示。
 
-### 流程图 {#element-flow}
+```{r gv-diagram, fig.cap = "用 DiagrammeR 创建 Graphviz 流程图"}
+library(DiagrammeR)
 
-### 甘特图 {#element-gantt}
+grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+
+  node [shape = rectangle]
+  rec1 [label = 'Step 1. 起床']
+  rec2 [label = 'Step 2. 写代码']
+  rec3 [label =  'Step 3. ???']
+  rec4 [label = 'Step 4. 暴富']
+
+  # edge definitions with the node IDs
+  rec1 -> rec2 -> rec3 -> rec4
+  }",
+  height = 500)
+```
+
+我们可以在 `grViz` 函数用 `@@` 插入 R 变量的的值，如图 \@ref(fig:gv-rvar) 所示。
+
+```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值"}
+DiagrammeR::grViz("
+  digraph graph2 {
+
+  graph [layout = dot, rankdir = LR]
+
+  # node definitions with substituted label text
+  node [shape = oval]
+  a [label = '@@1']
+  b [label = '@@2']
+  c [label = '@@3']
+  d [label = '@@4']
+
+  a -> b -> c -> d
+  }
+
+  [1]: names(iris)[1]
+  [2]: names(iris)[2]
+  [3]: names(iris)[3]
+  [4]: names(iris)[4]
+  ",
+  height = 100)
+```
+
+除了流程图外，DiagrammeR 可以创建复杂的网络关系可视化，如图 \@ref(fig:gr-network) 所示。
+
+```{r gr-network, fig.cap = "DiagrammeR 创作的网络可视化图"}
+example_graph <-
+  create_graph() %>%
+  add_pa_graph(
+    n = 50, m = 1,
+    set_seed = 23
+  ) %>%
+  add_gnp_graph(
+    n = 50, p = 1/100,
+    set_seed = 23
+  ) %>%
+  join_node_attrs(df = get_betweenness(.)) %>%
+  join_node_attrs(df = get_degree_total(.)) %>%
+  colorize_node_attrs(
+    node_attr_from = total_degree,
+    node_attr_to = fillcolor,
+    palette = "Greens",
+    alpha = 90
+  ) %>%
+  rescale_node_attrs(
+    node_attr_from = betweenness,
+    to_lower_bound = 0.5,
+    to_upper_bound = 1.0,
+    node_attr_to = height
+  ) %>%
+  select_nodes_by_id(nodes = get_articulation_points(.)) %>%
+  set_node_attrs_ws(node_attr = peripheries, value = 2) %>%
+  set_node_attrs_ws(node_attr = penwidth, value = 3) %>%
+  clear_selection() %>%
+  set_node_attr_to_display(attr = NULL)
+
+render_graph(example_graph, layout = "nicely")
+```
+
+生成网络和流程图的 R 包还有其他选择：[nomnoml](https://github.com/rstudio/nomnoml)，diagram，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
+
+```{r}
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+
+  node [shape = rectangle]
+  rec1 [label = '起床']
+  rec2 [label = 'Step 2. 写代码']
+  rec3 [label =  'Step 3. ???']
+  rec4 [label = 'Step 4. 暴富']
+
+  # edge definitions with the node IDs
+  rec1 -> rec2 -> rec3 -> rec4
+  }",
+  height = 500
+)
+```
 
 
 ## 图形化编辑器
@@ -924,17 +1359,17 @@ knitr::kable(head(cars))
 [RStudio 1.4](https://blog.rstudio.com/2021/04/06/rstudio-1-4-a-quick-tour/) 版本及以上为 R Markdown 文档添加了图形编辑模式。打开任意源文档，可以在最右侧发现类似 "A" 的按钮 (图 \@ref(fig:visual-mode-button))，点击可进入可视化编辑器，界面如图 \@ref(fig:visual-editing) 所示。
 
 ```{r visual-mode-button, echo = FALSE, fig.cap = "R Markdown 编辑模式切换按钮"}
-knitr::include_graphics("images/04-visual-mode-button.png")
+knitr::include_graphics("images/02-visual-mode-button.png")
 ```
 
 ```{r visual-editing, echo = FALSE, fig.cap = "R Markdown 图形编辑模式"}
-knitr::include_graphics("images/04-visual-editing.png")
+knitr::include_graphics("images/02-visual-editing.png")
 ```
 
 图形化编辑器提供了丰富的菜单栏选项，用于可视化地插入常见文档元素。如图 \@ref(fig:visual-editing-insert-menu) 所示。
 
 ```{r visual-editing-insert-menu, fig.cap = "图形化编辑器提供了很多菜单栏选项", echo = FALSE}
-knitr::include_graphics("images/04-visual-editing-insert-menu.png")
+knitr::include_graphics("images/02-visual-editing-insert-menu.png")
 ```
 
 读者可以在 <https://rstudio.github.io/visual-markdown-editing/> 了解更多知识。
