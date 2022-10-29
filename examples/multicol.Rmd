@@ -1,9 +1,9 @@
 ---
 documentclass: ctexart
 output:
-  html_document: 
+  html_document:
     css: columns.css
-  rticles::ctex: 
+  rticles::ctex:
     keep_tex: true
     includes:
       in_header: columns.tex
@@ -16,14 +16,14 @@ output:
 :::::: {.cols data-latex=""}
 
 ::: {.col data-latex="{0.55\textwidth}"}
-```{r, echo=FALSE, fig.width=5, fig.height=4}`r ''`
+```{r, echo=FALSE, fig.width=5, fig.height=4}
 par(mar = c(4, 4, .2, .1))
 plot(cars, pch = 19)
 ```
 :::
 
 ::: {.col data-latex="{0.05\textwidth}"}
-\ 
+\
 <!-- 空 div -->
 :::
 

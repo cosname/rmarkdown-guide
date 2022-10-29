@@ -45,7 +45,7 @@ output: html_document
 title: "文档标题"
 author: "作者"
 date: "创建时间"
-output: 
+output:
   html_document:
   toc: true
 ---
@@ -147,10 +147,11 @@ knitr::include_graphics("examples/tabset-example.png", dpi = NA)
 #### 可选的文档主题样式 {#html-theme-list}
 
 ```{r echo=FALSE}
-theme_link <- function(name = "", base_url = "https://bootswatch.com/3/"){
-  glue::glue('[{name}]({base_url}{name})', 
-  name = name, 
-  base_url = base_url)
+theme_link <- function(name = "", base_url = "https://bootswatch.com/3/") {
+  glue::glue("[{name}]({base_url}{name})",
+    name = name,
+    base_url = base_url
+  )
 }
 ```
 
@@ -204,7 +205,7 @@ output:
 (ref:figcap-html-code-highlight-example) 可选的代码高亮样式
 
 ```{r html-code-highlight-example, fig.cap="(ref:figcap-html-code-highlight-example)", fig.show="hold", out.width="70%"}
-code_highlight_examples = list.files("examples/", "code-highlight-example.*\\.png", full.names = TRUE)
+code_highlight_examples <- list.files("examples/", "code-highlight-example.*\\.png", full.names = TRUE)
 knitr::include_graphics(path = code_highlight_examples, dpi = NA)
 ```
 
@@ -268,7 +269,7 @@ knitr::include_graphics("examples/chunk-custom.png", dpi = NA)
 
 大多数时候，用户并不需要自己定义 CSS 样式，因为 HTML 内置的主题中已经包含了丰富且高级的内置样式。
 
-默认情况下，R Markdown 输出的 HTML 文档中，已经内嵌了 Bootstrap 框架\index{Bootstrap}[^about-bootstrap]，因此可以使用一系列预定义的 CSS 样式。其中，可用的背景样式就包括 `"bg-primary"`，`"bg-success"`，`"bg-info"`，`"bg-warning"` 和 `"bg-danger"` 等。 
+默认情况下，R Markdown 输出的 HTML 文档中，已经内嵌了 Bootstrap 框架\index{Bootstrap}[^about-bootstrap]，因此可以使用一系列预定义的 CSS 样式。其中，可用的背景样式就包括 `"bg-primary"`，`"bg-success"`，`"bg-info"`，`"bg-warning"` 和 `"bg-danger"` 等。
 
 [^about-bootstrap]: Bootstrap是一组用于网站和网络应用程序开发的开源前端框架，包括 HTML、CSS 及 JavaScript 的框架，提供字体排印、窗体、按钮、导航及其他各种组件及 Javascript 扩展，旨在使动态网页和 Web 应用的开发更加容易。
 
@@ -288,7 +289,7 @@ knitr::include_graphics("examples/chunk-style.png", dpi = NA)
 当 **Knitr** 的代码块参数 `echo = TRUE` 时，R 代码将会输出到最终生成的文档中。
 如果不需要显示源代码，可以直接设为 `echo = FALSE`。
 如果既想要保留代码但又让其默认不显示，
-则可以通过 `code_folding: hide` 参数来实现。 
+则可以通过 `code_folding: hide` 参数来实现。
 
 ````markdown
 ---
@@ -313,19 +314,19 @@ knitr::include_graphics("examples/fold-show.png", dpi = NA)
 
 这种操作也可以反向进行，即默认显示全部的代码区块，然后再将部分代码区块设为折叠。如下配置即可：
 
-````md
+````{verbatim}
 ---
 output:
   html_document:
     code_folding: show
 ---
 
-```{r}`r ''`
-1  # 代码默认是显示的
+```{r}
+1 # 代码默认是显示的
 ```
 
-```{r class.source = 'fold-hide'}`r ''`
-2  # 这一块代码将被折叠
+```{r class.source = 'fold-hide'}
+2 # 这一块代码将被折叠
 ```
 ````
 
@@ -344,7 +345,7 @@ output:
 
 ```{r html-scroll-example, out.width="70%", fig.align="center", fig.cap="可以滚动的代码块",echo=FALSE}
 # import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
-knitr::include_graphics('examples/html-scroll.png', dpi = NA)
+knitr::include_graphics("examples/html-scroll.png", dpi = NA)
 ```
 
 ### 图片和数据框 {#html-pic}
@@ -377,7 +378,7 @@ output:
 虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是推荐使用 `knitr::include_graphics()` 的方式来完成这一操作。例如：
 
 ```` {.md}
-```{r}`r ''`
+```{r}
 knitr::include_graphics("https://r-project.org/Rlogo.png")
 ```
 ````
@@ -405,15 +406,16 @@ knitr::include_graphics("images/Rlogo.png", dpi = NA)
 
 ```{r echo=FALSE}
 # @TODO: 截图修改完善
-template = xfun::magic_path("df-print-example.Rmd")
-outfile = xfun::with_ext(template, ".html")
-snapshots = lapply(c("default","kable","tibble","paged"), function(x){
-  rmarkdown::render(template, 
-                    rmarkdown::html_document(df_print = x),
-                    params = list(subtitle = x),
-                    envir = new.env(),
-                    quiet = TRUE)
-  html_screenshot(outfile, outfile = xfun::with_ext(template,paste0(x,".png")))
+template <- xfun::magic_path("df-print-example.Rmd")
+outfile <- xfun::with_ext(template, ".html")
+snapshots <- lapply(c("default", "kable", "tibble", "paged"), function(x) {
+  rmarkdown::render(template,
+    rmarkdown::html_document(df_print = x),
+    params = list(subtitle = x),
+    envir = new.env(),
+    quiet = TRUE
+  )
+  html_screenshot(outfile, outfile = xfun::with_ext(template, paste0(x, ".png")))
 })
 unlink(outfile)
 knitr::include_graphics(unlist(snapshots), dpi = NA)
@@ -433,13 +435,13 @@ output:
     df_print: paged
 ---
 
-`r ''````{r}
+```{r}
 mtcars
 ```
 ````
 
 ```{r paged, echo=FALSE, fig.cap='HTML文档中分页显示的数据框', out.width='100%'}
-knitr::include_graphics('images/paged.png', dpi = NA)
+knitr::include_graphics("images/paged.png", dpi = NA)
 ```
 
 表 \@ref(#tab:paged) 列出了这种情况下可以使用的附加参数。
@@ -459,7 +461,7 @@ Table: (\#tab:paged) 分页 HTML 表格的附加可用参数。
 这些参数可以在代码块中使用。
 
 ````markdown
-`r ''````{r cols.print=3, rows.print=3}
+```{r cols.print=3, rows.print=3}
 mtcars
 ```
 ````
@@ -528,7 +530,7 @@ output:
 
 HTML 文档需要 [MathJax](https://www.mathjax.org)\index{MathJax} 脚本来渲染 Latex 和 MathML 公式[^about-mathml]，调用 [MathJax](https://www.mathjax.org) 的方式则可以通过 `mathjax` 参数来调整。
 
-[^about-mathml]: MathML，中文翻译为“数学标记语言”，是一种基于 XML 的标准，用来描述数学符号和公式。它的目标是把数学公式集成到互联网和其他文档中。从 2015 年开始，MathML 成为了 HTML5 的一部分和 ISO 标准。 
+[^about-mathml]: MathML，中文翻译为“数学标记语言”，是一种基于 XML 的标准，用来描述数学符号和公式。它的目标是把数学公式集成到互联网和其他文档中。从 2015 年开始，MathML 成为了 HTML5 的一部分和 ISO 标准。
 
 - `"default"`：默认配置，会通过 HTTPS 链接从 RStudio 的 CDN 网络服务器上调用；
 
@@ -654,13 +656,13 @@ $body$
 ---
 title: "一份重要的报告"
 draft: true
-output: 
+output:
   html_document:
     template: my-template.html
 ---
 ```
 
-*说明*：**rmarkdown** 软件包默认使用自带的 HTML 模板，一些方面与 Pandoc 默认的模板存在差异。如果有 `template: null` 的话，则 Pandoc 的模板会被使用。 
+*说明*：**rmarkdown** 软件包默认使用自带的 HTML 模板，一些方面与 Pandoc 默认的模板存在差异。如果有 `template: null` 的话，则 Pandoc 的模板会被使用。
 
 
 
@@ -695,17 +697,17 @@ output:
 
 一是使用 `htmltools::includeHTML()` 方法：
 
-````md
-```{r, echo=FALSE, results='asis'}`r ''`
-htmltools::includeHTML('file.html')
+````{verbatim}
+```{r, echo=FALSE, results='asis'}
+htmltools::includeHTML("file.html")
 ```
 ````
 
 二是使用 `xfun::file_string()` 方法：
 
-````md
-```{r, echo=FALSE, results='asis'}`r ''`
-xfun::file_string('file.html')
+````{verbatim}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string("file.html")
 ```
 ````
 
@@ -719,7 +721,7 @@ xfun::file_string('file.html')
 
   <body>
   父 HTML 文件。
-  
+
   <!-- htmltools::includeHTML() 将插入下列 HTML 代码 -->
     <html>
       <head>  </head>
@@ -820,7 +822,7 @@ output:
 这一功能通过 **xfun** 软件包[@R-xfun] 实现，依赖于 `htmltools` 和 `mime` 软件包。要使用这一功能，首先确保这两个软件包可用。
 
 ```{r, eval=FALSE}
-xfun::pkg_load2(c('htmltools', 'mime'))
+xfun::pkg_load2(c("htmltools", "mime"))
 ```
 
 现在，就可以随意嵌入各种文件了。
@@ -831,10 +833,10 @@ xfun::pkg_load2(c('htmltools', 'mime'))
 
 ```{r eval=FALSE}
 # 嵌入当前目录下所有的 Rmd 和 csv 文件
-xfun::embed_files(list.files('.', '[.](Rmd|csv)$'))
+xfun::embed_files(list.files(".", "[.](Rmd|csv)$"))
 ```
 
-*说明*：当嵌入多个文件时，其工作原理是：首先将这些文件压缩成 Zip 格式，然后将 Zip 文件嵌入到 HTML 文档中。 
+*说明*：当嵌入多个文件时，其工作原理是：首先将这些文件压缩成 Zip 格式，然后将 Zip 文件嵌入到 HTML 文档中。
 
 
 
@@ -899,7 +901,7 @@ knitr::include_graphics("examples/PDF-document-in-chinese.png", dpi = NA)
 title: "五一劳动节加班三倍工资"
 author: "张三"
 date: "2021年5月1日"
-output: 
+output:
   pdf_document：
     toc: true
     toc_depth: 2
@@ -915,7 +917,7 @@ output:
 title: "五一劳动节加班三倍工资"
 author: "张三"
 date: "2021年5月1日"
-output: 
+output:
   pdf_document：
     toc: true
     toc_depth: 2
@@ -930,7 +932,7 @@ output:
 - `fig_crop` 控制 `pdfcrop` 的效果，功能是去掉图片边缘的空白（默认为 `true`）。
 
   `pdfcrop` 是一个 LaTeX 组件，默认并没有被 `tinytex` 安装。推荐用户运行 `tinytex::tlmgr_install("pdfcrop")` 来安装它。同时，`pdfcrop` 依赖于系统中的存在的 `ghostscript`，因此还需要安装 [`ghostscript`](https://www.ghostscript.com/) \index{GhostScript}才能正常使用 `pdfcrop`。
-  
+
 - `fig_caption` 控制是否为图片添加图注（默认为 `true`）。
 
 - `dev` 控制用于渲染图片的图像设备（默认为 `pdf`）。
@@ -941,7 +943,7 @@ output:
 title: "五一劳动节加班三倍工资"
 author: "张三"
 date: "2021年5月1日"
-output: 
+output:
   pdf_document：
     fig_width: 7
     fig_height: 6
@@ -969,7 +971,7 @@ Table: (\#tab:df-print-pdf) 输出 PDF 时 `df_print` 可选的值。
 title: "五一劳动节加班三倍工资"
 author: "张三"
 date: "2021年5月1日"
-output: 
+output:
   pdf_document：
     df_print: kable
 ---
@@ -984,7 +986,7 @@ output:
 title: "五一劳动节加班三倍工资"
 author: "张三"
 date: "2021年5月1日"
-output: 
+output:
   pdf_document：
     highlight: tango
 ---
@@ -1218,7 +1220,7 @@ output:
 ---
 ```
 
-<!--- 
+<!---
 如果需要缩小部分文字，则可以使用下面的方法。
 
 ```markdown
@@ -1664,8 +1666,9 @@ knitr::include_graphics("images/xaringan-scrennshot.png", dpi = NA)
 要创建“写轮眼”幻灯片，需要先安装 **xaringan** 软件包[@R-xaringan]）。
 
 ```{r install-xaringan, message=FALSE}
-if (!requireNamespace("xaringan"))
+if (!requireNamespace("xaringan")) {
   install.packages("xaringan")
+}
 ```
 
 安装完成之后，在 RStudio 中新建 R Markdown 文件，并在左侧选择 “From Template”，然后选择 “Ninja Presentation (Simplified Chinese)”。填写必要信息之后，即可创建一个新的“写轮眼”幻灯片（图 \@ref(fig:xaringan-new)）。
@@ -1674,7 +1677,7 @@ if (!requireNamespace("xaringan"))
 knitr::include_graphics("images/xaringan-new.png", dpi = NA)
 ```
 
-然后点击 Knit 按钮编译文档，或者点击 RStudio 插件 “Infinite Moon Reader” 在 RStudio 里实时预览幻灯片（每次保存文档的时候，它会自动重新编译）。 
+然后点击 Knit 按钮编译文档，或者点击 RStudio 插件 “Infinite Moon Reader” 在 RStudio 里实时预览幻灯片（每次保存文档的时候，它会自动重新编译）。
 
 > **原理：** xaringan 将 R Markdown 的查克拉注入了 remark.js。浏览器中的幻灯片是 remark.js 渲染出来的，而它的 Markdown 源文档是从 R Markdown 生成的（实际上主要是 knitr）。
 
@@ -1685,19 +1688,19 @@ knitr::include_graphics("images/xaringan-new.png", dpi = NA)
 `nature` 下面的 `autoplay` 选项可以用来自动播放幻灯片，它的取值是毫秒，例如：每 30 秒播放一张片子：
 
 ```markdown
-output:  
-  xaringan::moon_reader:  
-  nature:  
-    autoplay: 30000  
+output:
+  xaringan::moon_reader:
+  nature:
+    autoplay: 30000
 ```
 
 `nature` 下面的 `countdown` 选项可以为每一页幻灯片添加一个（倒数）计时器，取值同样为毫秒，例如每一页片子都用 60 秒倒计时：
 
 ```markdown
-output:  
-  xaringan::moon_reader:  
-    nature:  
-      countdown: 60000  
+output:
+  xaringan::moon_reader:
+    nature:
+      countdown: 60000
 ```
 
 #### Xaringan 幻灯片的快捷键 {#xaringan-shortcut}
@@ -1734,40 +1737,40 @@ Aden-Buie 写了一个叫做 **xaringanthemer** 包\index{R package-xaringanthem
 
 ```markdown
 # 通过 CRAN 安装
-install.packages("xaringanthemer")  
+install.packages("xaringanthemer")
 
 # 通过 Github 安装
-# install.packages("remotes")  
-remotes::install_github("gadenbuie/xaringanthemer") 
+# install.packages("remotes")
+remotes::install_github("gadenbuie/xaringanthemer")
 ```
 
 
 1. 创建完新文档后，将 `xaringan-themer.css` 文件添加到 xaringan 幻灯片的 YAML 中。
 
 ```markdown
-output:  
-  xaringan::moon_reader:  
-    css: xaringan-themer.css  
-```    
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+```
 
 
 2. 然后，在 chunck 中加载 **xaringanthemer** 并 [设置主题](https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html#themes) 即可。下面给出一个简单的例子（图 \@ref(fig:xaringan-themer-sample-view)）， 展示了设置主题后的界面预览。当然该包还给出了很多其他主题，下面给出一些主题模板预览。
 
 ```markdown
-library(xaringanthemer)  
-style_mono_accent(  
-  base_color = "#1c5253",  
-  header_font_google = google_font("Josefin Sans"),  
-  text_font_google   = google_font("Montserrat", "300", "300i"),  
-  code_font_google   = google_font("Fira Mono")  
-)  
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
 ```
 
 ```{r xaringan-themer-sample-view, echo=FALSE,fig.width=6,fig.align='center', fig.cap="主题设置后的界面预览"}
 knitr::include_graphics("images/xaringan-themer-sample-view.png", dpi = NA)
 ```
 
-> **注意**：在 chunck 头部中设置 `include=FALSE, warning=FALSE` 可以隐藏代码。 
+> **注意**：在 chunck 头部中设置 `include=FALSE, warning=FALSE` 可以隐藏代码。
 
 #### Xaringan 幻灯片自动匹配 ggplot 主题 {#xaringanthemer-ggplot}
 
@@ -1777,16 +1780,16 @@ knitr::include_graphics("images/xaringan-themer-sample-view.png", dpi = NA)
 另外，**xaringanthemer** 建立在 **showtext** 包 [@R-showtext] 的基础上，可以使用更多的字体（包括系统提供的字体和网上的字体）。有关更多详细信息，可以在 `?scale_xaringan` 和 `vignette(“ggplot2-themes”)`中找到（图 \@ref(fig:xaringan-themer-ggplot)）。
 
 ```markdown
-library(ggplot2)  
-ggplot(diamonds) +  
-  aes(cut, fill = cut) +  
-  geom_bar(show.legend = FALSE) +  
-  labs(  
-    x = "切割工艺质量",  
-    y = "产品数量",  
-    title = "钻石切割工艺质量与产品数量") +  
-  theme_xaringan(background_color = "#FFFFFF") +  
-  scale_xaringan_fill_discrete()  
+library(ggplot2)
+ggplot(diamonds) +
+  aes(cut, fill = cut) +
+  geom_bar(show.legend = FALSE) +
+  labs(
+    x = "切割工艺质量",
+    y = "产品数量",
+    title = "钻石切割工艺质量与产品数量") +
+  theme_xaringan(background_color = "#FFFFFF") +
+  scale_xaringan_fill_discrete()
 ```
 
 ```{r xaringan-themer-ggplot, echo=FALSE,fig.width=6,fig.align='center', fig.cap="前面例子对应的 ggplot 配色"}
@@ -1798,7 +1801,7 @@ knitr::include_graphics("images/xaringan-themer-ggplot.png", dpi = NA)
 **xaringanthemer** 包对 Tab 键十分友好，该功能可以在查找每个主题中调整模板的函数。对应的 gif 演示可见[官网教程](https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)。
 
 ```{r xaringanthemr-autocomplet, fig.cap="xaringanthemer 支持自动补全功能"}
-if (knitr::is_html_output()){
+if (knitr::is_html_output()) {
   knitr::include_graphics("https://raw.githubusercontent.com/gadenbuie/xaringanthemer/assets/example-rstudio-completion.gif", dpi = NA)
 }
 ```
@@ -1813,7 +1816,7 @@ if (knitr::is_html_output()){
 1. `style_mono_light()`
 
 ```markdown
-style_mono_light(base_color = "#23395b")  
+style_mono_light(base_color = "#23395b")
 ```
 
 ```{r xaringan-themer-demo1,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Moon Light 模板"}
@@ -1823,17 +1826,17 @@ knitr::include_graphics("images/xaringan-themer-demo1.png", dpi = NA)
 2. `style_mono_dark()`
 
 ```markdown
-style_mono_dark(base_color = "#cbf7ed")  
+style_mono_dark(base_color = "#cbf7ed")
 ```
 
 ```{r xaringan-themer-demo2, fig.width=6,fig.align='center', echo=FALSE, fig.cap="Mono Dark 模板"}
 knitr::include_graphics("images/xaringan-themer-demo2.png", dpi = NA)
 ```
 
-3. `style_mono_accent()`  
+3. `style_mono_accent()`
 
 ```markdown
-style_mono_accent(base_color = "#43418A")  
+style_mono_accent(base_color = "#43418A")
 ```
 
 ```{r xaringan-themer-demo3,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Mono Accent 模板"}
@@ -1843,17 +1846,17 @@ knitr::include_graphics("images/xaringan-themer-demo3.png", dpi = NA)
 4. `style_mono_accent_inverse()`
 
 ```markdown
-style_mono_accent(base_color = "#43418A")  
+style_mono_accent(base_color = "#43418A")
 ```
 
 ```{r xaringan-themer-demo4, fig.width=6,fig.align='center',echo=FALSE, fig.cap="Mono Accent Inverse 模板"}
 knitr::include_graphics("images/xaringan-themer-demo4.png", dpi = NA)
 ```
 
-5. `style_duo()`  
+5. `style_duo()`
 
 ```markdown
-style_duo(primary_color = "#1F4257", secondary_color = "#F97B64")  
+style_duo(primary_color = "#1F4257", secondary_color = "#F97B64")
 ```
 
 ```{r xaringan-themer-demo5,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Duo 模板"}
@@ -1863,7 +1866,7 @@ knitr::include_graphics("images/xaringan-themer-demo5.png", dpi = NA)
 6. `style_solarized_light()`
 
 ```markdown
-style_solarized_light()  
+style_solarized_light()
 ```
 
 ```{r xaringan-themer-demo6,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Solarized Light 模板"}
@@ -1883,15 +1886,15 @@ knitr::include_graphics("images/xaringan-themer-demo6.png", dpi = NA)
 
 - 通过广播向观众实时播放幻灯片
 
-- 在演示幻灯片上进行涂鸦 
+- 在演示幻灯片上进行涂鸦
 
-- 幻灯片切换时有声音提示 
+- 幻灯片切换时有声音提示
 
-- 加入幻灯片切换动画 
+- 加入幻灯片切换动画
 
-- 将选项卡面板加入幻灯片中 
+- 将选项卡面板加入幻灯片中
 
-- 给幻灯片添加全局 logo 
+- 给幻灯片添加全局 logo
 
 - 添加搜索框
 
@@ -1913,8 +1916,8 @@ knitr::include_graphics("images/xaringan-themer-demo6.png", dpi = NA)
 可以从 GitHub 安装最新版本的 `xaringanExtra`。
 
 ```markdown
-# install.packages("remotes")  
-remotes::install_github("gadenbuie/xaringanExtra")  
+# install.packages("remotes")
+remotes::install_github("gadenbuie/xaringanExtra")
 ```
 
 #### 并列方式展示 Xaringan 幻灯片 {#xaringan-tile-view}
@@ -1922,9 +1925,9 @@ remotes::install_github("gadenbuie/xaringanExtra")
 **使用方法**：将以下代码块添加到幻灯片 R Markdown 文件中，之后对该 R Markdown 文件进行重新渲染。
 
 ````markdown
-```{r xaringan-tile-view, echo=FALSE}  `r ''`
-xaringanExtra::use_tile_view()  
-```  
+```{r xaringan-tile-view, echo=FALSE}
+xaringanExtra::use_tile_view()
+```
 ````
 
 
@@ -1945,40 +1948,40 @@ knitr::include_graphics("images/xaringan-extra-1.png", dpi = NA)
 
 
 ````markdown
-```{r xaringan-editable, echo = FALSE}  `r ''`
-xaringanExtra::use_editable(expires = 1)  
-```  
+```{r xaringan-editable, echo = FALSE}
+xaringanExtra::use_editable(expires = 1)
+```
 ````
 
 使用 `.can-edit[]` 使幻灯片组件可编辑。
 
 ```markdown
-## .can-edit[可以在此修改幻灯片的标题]  
+## .can-edit[可以在此修改幻灯片的标题]
 ```
 
 每当将幻灯片重新加载到浏览器中时，`.can-edit` 类的可编辑字段将被重置。如果要存储已编辑并使它们在浏览器会话之间持久存在，请为每个可编辑字段提供一个 `.key-<NAME>` 类。例如：
 
 
 ```markdown
-## .can-edit.key-firstSlideTitle[可以在此修改幻灯片标题并将修改后的标题保存到当前会话中]  
+## .can-edit.key-firstSlideTitle[可以在此修改幻灯片标题并将修改后的标题保存到当前会话中]
 ```
 
 对于更复杂的 HTML 元素，最好仅使一部分文本可编辑，例如
 
 ```markdown
-你好 .can-edit[张三]，欢迎光临！ 
+你好 .can-edit[张三]，欢迎光临！
 ```
 
 或者使用占位符文本。
 
 
 ```markdown
-## 我所钟爱的东西 
-  
-.can-edit.key-likes[  
-- 好东西甲  
-- 好东西乙  
-]  
+## 我所钟爱的东西
+
+.can-edit.key-likes[
+- 好东西甲
+- 好东西乙
+]
 ```
 
 官方给出了 gif 的[演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/editable)。在教学的时候非常合适，可以增加与学生，观众的互动。
@@ -1987,10 +1990,10 @@ xaringanExtra::use_editable(expires = 1)
 
 **使用方法**：只需在 rmd 文件中加入下面代码，重新编译即可得到这个效果。
 
-````markdown 
-```{r xaringan-scribble, echo=FALSE}  `r ''`
-xaringanExtra::use_scribble()  
-```  
+````markdown
+```{r xaringan-scribble, echo=FALSE}
+xaringanExtra::use_scribble()
+```
 ````
 
 单击铅笔图标或按 `S` 键进行绘图。按 `S` 或启动绘图模式切换涂鸦工具箱。也可以使用橡皮擦来删除线条或单击“清除（trash）”按钮清除当前幻灯片上的所有涂鸦。
@@ -2004,9 +2007,9 @@ xaringanExtra::use_scribble()
 **使用方法**：只需在 R Markdown 文件中加入下面代码，重新编译即可得到这个效果。当然，官方也给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/slide-tone)。
 
 ````markdown
-```{r xaringan-slide-tone, echo=FALSE}    `r ''`
-xaringanExtra::use_slide_tone()  
-```  
+```{r xaringan-slide-tone, echo=FALSE}
+xaringanExtra::use_slide_tone()
+```
 ````
 
 
@@ -2015,9 +2018,9 @@ xaringanExtra::use_slide_tone()
 **使用方法**：在 R Markdown 文件中加入下面代码
 
 ````markdown
-```{r xaringan-animate-css, echo=FALSE}  `r ''` 
-xaringanExtra::use_animate_css()  
-```  
+```{r xaringan-animate-css, echo=FALSE}
+xaringanExtra::use_animate_css()
+```
 ````
 
 然后将 `animated` 类和所需动画添加到对应的幻灯片中。下面给出一个代码的例子：
@@ -2025,26 +2028,26 @@ xaringanExtra::use_animate_css()
 > 注意：退出动画只应用于退出时的幻灯片。
 
 ```markdown
----  
-class: animated slideInRight fadeOutLeft  
-  
-## 这张幻灯片将会……  
-  
-- 一开始从屏幕右侧出现  
+---
+class: animated slideInRight fadeOutLeft
+
+## 这张幻灯片将会……
+
+- 一开始从屏幕右侧出现
 - 并将会从屏幕左侧消失
 ```
 
 这时，该张幻灯片将从右边滑入。如果想使所有幻灯片使用同一个转化形式，可以使用：`use_animate_all()`，代码如下（建议加到正文前部）。除此之外，官方给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/animate-css)。
 
 ````markdown
-```{r xaringan-animate-all, echo=FALSE}  `r ''` 
-xaringanExtra::use_animate_all("slide_left")  
-```  
+```{r xaringan-animate-all, echo=FALSE}
+xaringanExtra::use_animate_all("slide_left")
+```
 ````
 
 ```{r echo=FALSE, eval=FALSE}
 # @TODO: 此处可以加入一个演示动画
-if (knitr::is_html_output()){
+if (knitr::is_html_output()) {
   knitr::include_graphics("")
 }
 ```
@@ -2055,41 +2058,43 @@ if (knitr::is_html_output()){
 **使用方法**：在 R Markdown 文件中加入下面代码
 
 ````markdown
-```{r xaringan-panelset, echo=FALSE}  `r ''`  
-xaringanExtra::use_panelset()  
-```  
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
 ````
 
 然后，创建一个包含若干个 `.panel[]` 的 `.panelset [...]`。每个 `.panel []` 应该具有 `.panel-name []` 和想写的内容，例如：
 
 ````markdown
-.panel[.panel-name[NAME]  
-在此输入你的内容 
-]  
+.panel[.panel-name[NAME]
+在此输入你的内容
+]
 ````
 
 下面是演示幻灯片中使用的例子。
 
 ````markdown
----  
-## 我是庄闪闪  
-  
-.panelset[  
-.panel[.panel-name[R Code]  
-  
-欢迎关注[庄闪闪的R语言手册]呀！  
-```{r panel-chunk,fig.align='center',out.width="60%"}  `r ''`  
-library(ggplot2)  
-(g <- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())  
-```  
-]  
-  
-.panel[.panel-name[Plot]  
-  
-<center><img src="https://octodex.github.com/images/labtocat.png" height="300" /></center>  
-  
-]  
-]  
+---
+## 我是庄闪闪
+
+.panelset[
+.panel[.panel-name[R Code]
+
+欢迎关注[庄闪闪的R语言手册]呀！
+```{r panel-chunk,fig.align='center',out.width="60%"}
+library(ggplot2)
+(g <- ggplot(mpg) +
+  aes(hwy, cty, color = class) +
+  geom_point())
+```
+]
+
+.panel[.panel-name[Plot]
+
+<center><img src="https://octodex.github.com/images/labtocat.png" height="300" /></center>
+
+]
+]
 ````
 图 \@ref(fig:xaringan-extra-2) 给出了上面代码的结果。官网给出了 gif [演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset)。
 
@@ -2101,9 +2106,9 @@ knitr::include_graphics("images/xaringan-extra-2.png", dpi = NA)
 要定制面板的外观，可以使用直接在幻灯片的 R 块中调用 `style_panelset_tabs()`。将下面代码加到前面的代码块下，这时代码块的颜色发生了变化。
 
 ````markdown
-```{r echo=FALSE}   `r ''`   
-xaringanExtra::style_panelset_tabs(foreground = "honeydew", background = "seagreen")  
-```  
+```{r echo=FALSE}
+xaringanExtra::style_panelset_tabs(foreground = "honeydew", background = "seagreen")
+```
 ````
 
 
@@ -2112,11 +2117,11 @@ xaringanExtra::style_panelset_tabs(foreground = "honeydew", background = "seagre
 **使用方法**：在 R Markdown 文件中加入下面代码
 
 ````markdown
-```{r xaringan-logo, echo=FALSE}   `r ''`   
-xaringanExtra::use_logo(  
-  image_url = "https://gitee.com/zhuang_liang_liang0825/other/raw/master/%E6%B8%A9%E5%B7%9E%E5%A4%A7%E5%AD%A6logo.png"  
-)  
-```  
+```{r xaringan-logo, echo=FALSE}
+xaringanExtra::use_logo(
+  image_url = "https://gitee.com/zhuang_liang_liang0825/other/raw/master/%E6%B8%A9%E5%B7%9E%E5%A4%A7%E5%AD%A6logo.png"
+)
+```
 ````
 
 这时，所有幻灯片右上角都加上了对应的 LOGO 啦！如果想在某几张不显示 LOGO，可以使用 `hide_logo` 隐藏特定幻灯片的徽标，具体例子如下（图 \@ref(fig:xaringan-extra-3)）：
@@ -2130,9 +2135,9 @@ knitr::include_graphics("images/xaringan-extra-3.png", dpi = NA)
 **使用方法**：在 R Markdown 文件中加入下面代码，然后重新渲染。
 
 ````markdown
-```{r xaringan-webcam, include = FALSE}   `r ''`  
-xaringanExtra::use_webcam()  
-```  
+```{r xaringan-webcam, include = FALSE}
+xaringanExtra::use_webcam()
+```
 ````
 
 之后点击 `w` 键（记得用浏览器打开哦！）就会得到以下界面（图 \@ref(fig:xaringan-extra-4)）。这里镜头的位置可以任意拖动。
@@ -2148,9 +2153,9 @@ knitr::include_graphics("images/xaringan-extra-4.png", dpi = NA)
 **使用方法**：在 R Markdown 文件中加入下面代码，然后重新渲染。
 
 ````markdown
-```{r xaringan-fit-screen, echo=FALSE}  `r ''`  
-xaringanExtra::use_fit_screen()  
-```  
+```{r xaringan-fit-screen, echo=FALSE}
+xaringanExtra::use_fit_screen()
+```
 ````
 
 使用快捷键 `Alt / Option + F` 使幻灯片适合屏幕，并忽略幻灯片比例（重新加载幻灯片以恢复正常）。官网给出了 gif 的[演示](https://pkg.garrickadenbuie.com/xaringanExtra/#/fit-to-screen)。
@@ -2158,7 +2163,7 @@ xaringanExtra::use_fit_screen()
 
 ```{r echo=FALSE, eval=FALSE}
 # @TODO: 此处可以加入一个演示动画
-if (knitr::is_html_output()){
+if (knitr::is_html_output()) {
   knitr::include_graphics("")
 }
 ```
@@ -2210,7 +2215,7 @@ output: word_document
 
 ### 自定义 Word 模板 {#word-custom-template}
 
-可以将 Word 模板\index{template!Word} 文档中定义的样式应用到从 R Markdown 生成的新 Word 文档。 这种模板文档也称为“参考样式文档”。 
+可以将 Word 模板\index{template!Word} 文档中定义的样式应用到从 R Markdown 生成的新 Word 文档。 这种模板文档也称为“参考样式文档”。
 
 > **关键之处**：必须先通过 Pandoc 创建此模板文档，再更改其中的样式定义。 然后将此模板的路径传递给 `word_document`\index{output option!reference\_docx} 的 `reference_docx` 选项，例如：
 
@@ -2226,14 +2231,14 @@ output:
 `template.docx` 文档必须从 Pandoc 生成。 可以从具有 `word_document` 输出格式的任意 R Markdown 文档创建此模板（该文档的实际内容无关紧要，但它应该包含想要设置样式的元素类型）。 然后打开`.docx` 文件，并编辑样式。
 
 ```{r, word-template-1, echo=FALSE,fig.width=6,fig.align='center', fig.cap='查找特定文档元素的样式。'}
-knitr::include_graphics('images/word-template-1.png', dpi = NA)
+knitr::include_graphics("images/word-template-1.png", dpi = NA)
 ```
 
 图 \@ref(fig:word-template-1) 说明了可以通过 Word 中的“主页”选项卡打开“样式”窗口。当将光标移动到文档中的特定元素时，样式列表中的项目将被突出显示。如果想修改任何类型元素的样式，可以单击突出显示项的下拉菜单，将看到如图 \@ref(fig:word-template-2)  的对话框。
 
 
 ```{r, word-template-2, echo=FALSE, fig.cap=' 修改 Word 文档中元素的样式。', out.width='100%'}
-knitr::include_graphics('images/word-template-2.png', dpi = NA)
+knitr::include_graphics("images/word-template-2.png", dpi = NA)
 ```
 
 修改完样式后，可以保存文档（使用一个不会被意外覆盖的文件名），并将其作为以后 Word 文档的模板。 当 Pandoc 使用该参考模板，并渲染出新的 Word 文档时，它会读取模板中的样式并将它们应用到新文档中。
@@ -2243,12 +2248,12 @@ knitr::include_graphics('images/word-template-2.png', dpi = NA)
 有时，查找元素的样式名称并不简单，可能有多种样式应用于同一个元素，并且只会在样式列表中看到其中一个突出显示。这时，可能需要通过猜测或在线搜索才能确定要修改的实际样式。例如：需要点击“管理样式”按钮 （图\@ref(fig:word-template-1) 中样式列表底部从左到右的第三个按钮）。之后找到对应的样式并进行修改，例如，添加边框 （见图 \@ref(fig:word-table)）。
 
 ```{r, word-table, echo=FALSE, fig.cap='修改 Word 文档中的表格样式。',fig.width=6,fig.align='center'}
-knitr::include_graphics('images/word-table.png', dpi = NA)
+knitr::include_graphics("images/word-table.png", dpi = NA)
 ```
 
 ### R Markdown 和 Word 之间的双向工作流程 {#word-rmd}
 
-虽然从 R Markdown\index{Word!port to and from Rmd} 生成 Word 文档很容易，但当其他人编辑 Word 文档并且必须手动将更改移植回原始 R Markdown 时，事情会变得特别痛苦。幸运的是，Noam Ross 为这个问题提供了一个非常不错的解决方案。 **redoc** 包\index{R package!redoc} (<https://github.com/noamross/redoc>) 允许生成和修改一个 Word 文档，并将修改后的 Word 文档转换回 R Markdown。 
+虽然从 R Markdown\index{Word!port to and from Rmd} 生成 Word 文档很容易，但当其他人编辑 Word 文档并且必须手动将更改移植回原始 R Markdown 时，事情会变得特别痛苦。幸运的是，Noam Ross 为这个问题提供了一个非常不错的解决方案。 **redoc** 包\index{R package!redoc} (<https://github.com/noamross/redoc>) 允许生成和修改一个 Word 文档，并将修改后的 Word 文档转换回 R Markdown。
 
 > 注意，截至撰写本文时（2020 年 6 月），**redoc** 包仍处于测试阶段，并且作者已暂停开发。如果想尝试一下，可以从 GitHub 安装这个包：
 
@@ -2277,9 +2282,9 @@ output: redoc::redoc
 
 由于 Markdown 的简单性，可以将一些全局样式应用到 Word 文档中（参见 \@ref(word-template) 部分），但是对单个元素进行样式设置并不简单，例如：更改单词的颜色、段落居中。
 
-为了在 R 中处理 Office 文档更加容易，David Gohel 于 2018 年开始开发 **officedown** 包\index{R package!officedown} [@R-officedown]，目的是在 R Markdown 中加入一些 **officer**\index{R package!officer} [@R-officer] 特性。 
+为了在 R 中处理 Office 文档更加容易，David Gohel 于 2018 年开始开发 **officedown** 包\index{R package!officedown} [@R-officedown]，目的是在 R Markdown 中加入一些 **officer**\index{R package!officer} [@R-officer] 特性。
 
-> 在撰写本文时，该软件包原始版本已在 CRAN 上发布，但仍处于测试阶段。 
+> 在撰写本文时，该软件包原始版本已在 CRAN 上发布，但仍处于测试阶段。
 
 可以从 CRAN 或 GitHub 安装它：
 
@@ -2293,8 +2298,8 @@ remotes::install_github("davidgohel/officedown")
 
 安装包后，在 R Markdown 文档中通过以下代码加载它：
 
-````md
-```{r, setup, include=FALSE}`r ''`
+````{verbatim}
+```{r, setup, include=FALSE}
 library("officedown")
 ```
 ````
@@ -2354,15 +2359,15 @@ library("officedown")
 这个函数是基于 **rmarkdown** 的内嵌函数 `html_document` 工作的。
 
 ```{r, eval=FALSE, tidy=FALSE}
-quarterly_report = function(toc = TRUE) {
+quarterly_report <- function(toc = TRUE) {
   # 查找软件包的安装位置
-  pkg_resource = function(...) {
+  pkg_resource <- function(...) {
     system.file(..., package = "mypackage")
   }
 
   # 在软件包的子目录中找到新文档格式依赖的文档模板
-  css    = pkg_resource("reports/styles.css")
-  header = pkg_resource("reports/quarterly/header.html")
+  css <- pkg_resource("reports/styles.css")
+  header <- pkg_resource("reports/quarterly/header.html")
 
   # 调用 html_document 函数并指定其参数
   rmarkdown::html_document(
@@ -2407,11 +2412,11 @@ quarterly_report = function(toc = TRUE) {
 下面是一个例子：
 
 ```{r, eval=FALSE, tidy=FALSE}
-simple_html_format = function() {
+simple_html_format <- function() {
   # 这里使用了完整的引用方式来使用 output_format、knitr_options 和
   # pandoc_options 等 3 个函数。
   rmarkdown::output_format(
-    knitr = rmarkdown::knitr_options(opts_chunk = list(dev = 'png')),
+    knitr = rmarkdown::knitr_options(opts_chunk = list(dev = "png")),
     pandoc = rmarkdown::pandoc_options(to = "html"),
     clean_supporting = FALSE
   )
