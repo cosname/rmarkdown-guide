@@ -27,7 +27,7 @@
 <meta name="author" content="杨晓龙" />
 
 
-<meta name="date" content="2022-08-26" />
+<meta name="date" content="2022-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,6 +56,37 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script>
+<link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+<script src="libs/tile-view-0.2.6/tile-view.js"></script>
+<script type="application/json" id="xaringanExtra-editable-docid">{"id":"x233bdddf46848818482f90a92ab98ff","expires":1}</script>
+<script src="libs/himalaya-1.1.0/himalaya.js"></script>
+<script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+<link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+<script src="libs/editable-0.2.6/editable.js"></script>
+<script src="libs/fabric-4.3.1/fabric.min.js"></script>
+<link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+<script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+<script src="libs/tone-13.8.34/Tone.js"></script>
+<script src="libs/slide-tone-0.2.6/slide-tone.js"></script>
+<link href="libs/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+<link href="libs/animate.css-xaringan-3.7.2/animate.slide_left.css" rel="stylesheet" />
+<link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+<script src="libs/panelset-0.2.6/panelset.js"></script>
+<script src="libs/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+<script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"200","margin":"1em"}</script>
+<script src="libs/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -193,44 +224,46 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html"><i class="fa fa-check"></i><b>2</b> R Markdown 的基础知识</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rstudio-config"><i class="fa fa-check"></i><b>2.1</b> R Studio 相关的配置</a></li>
-<li class="chapter" data-level="2.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-install"><i class="fa fa-check"></i><b>2.2</b> R Markdown 的安装</a>
+<li class="chapter" data-level="2.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rstudio-config"><i class="fa fa-check"></i><b>2.1</b> 安装 RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> 安装 rmarkdown 包</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-rmd"><i class="fa fa-check"></i><b>2.2.1</b> 安装 R Markdown</a></li>
-<li class="chapter" data-level="2.2.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-tinytex"><i class="fa fa-check"></i><b>2.2.2</b> 安装 Tinytex</a></li>
-<li class="chapter" data-level="2.2.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-git"><i class="fa fa-check"></i><b>2.2.3</b> 安装 Git (*)</a></li>
-<li class="chapter" data-level="2.2.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-graph"><i class="fa fa-check"></i><b>2.2.4</b> 安装 RStudio 图形化编辑器</a></li>
-<li class="chapter" data-level="2.2.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#create-rmd"><i class="fa fa-check"></i><b>2.2.5</b> 创建第一个 R Markdown 文档</a></li>
+<li class="chapter" data-level="2.2.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-tinytex"><i class="fa fa-check"></i><b>2.2.1</b> 安装 TinyTex</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-git"><i class="fa fa-check"></i><b>2.2.2</b> 安装 Git (*)</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-compile"><i class="fa fa-check"></i><b>2.3</b> R Markdown 的编译过程</a></li>
-<li class="chapter" data-level="2.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-element"><i class="fa fa-check"></i><b>2.4</b> R Markdown 的基本元素</a>
+<li class="chapter" data-level="2.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-element"><i class="fa fa-check"></i><b>2.3</b> R Markdown 的基本元素</a></li>
+<li class="chapter" data-level="2.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-compile"><i class="fa fa-check"></i><b>2.4</b> R Markdown 的编译过程和组成元素</a></li>
+<li class="chapter" data-level="2.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#yaml"><i class="fa fa-check"></i><b>2.5</b> YAML 头部</a></li>
+<li class="chapter" data-level="2.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown-syntax"><i class="fa fa-check"></i><b>2.6</b> Markdown 语法</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#yaml"><i class="fa fa-check"></i><b>2.4.1</b> YAML 头部</a></li>
-<li class="chapter" data-level="2.4.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown"><i class="fa fa-check"></i><b>2.4.2</b> Markdown 语法</a></li>
-<li class="chapter" data-level="2.4.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#block-inline"><i class="fa fa-check"></i><b>2.4.3</b> 代码区块和行内代码</a></li>
+<li class="chapter" data-level="2.6.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#简单段内格式"><i class="fa fa-check"></i><b>2.6.1</b> 简单段内格式</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#换行"><i class="fa fa-check"></i><b>2.6.2</b> 换行</a></li>
+<li class="chapter" data-level="2.6.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#段落格式"><i class="fa fa-check"></i><b>2.6.3</b> 段落格式</a></li>
+<li class="chapter" data-level="2.6.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown-code"><i class="fa fa-check"></i><b>2.6.4</b> 代码块</a></li>
+<li class="chapter" data-level="2.6.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown-figure"><i class="fa fa-check"></i><b>2.6.5</b> 图片</a></li>
+<li class="chapter" data-level="2.6.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown-table"><i class="fa fa-check"></i><b>2.6.6</b> 表格</a></li>
+<li class="chapter" data-level="2.6.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#数学公式"><i class="fa fa-check"></i><b>2.6.7</b> 数学公式</a></li>
+<li class="chapter" data-level="2.6.8" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#总结"><i class="fa fa-check"></i><b>2.6.8</b> 总结</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#page-layout"><i class="fa fa-check"></i><b>2.5</b> 页面设置和布局</a>
+<li class="chapter" data-level="2.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#code-block-and-inline"><i class="fa fa-check"></i><b>2.7</b> 代码块和行内代码</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#output-width"><i class="fa fa-check"></i><b>2.5.1</b> 控制输出宽度</a></li>
-<li class="chapter" data-level="2.5.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#line-break"><i class="fa fa-check"></i><b>2.5.2</b> 换行符号</a></li>
-<li class="chapter" data-level="2.5.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#page-break"><i class="fa fa-check"></i><b>2.5.3</b> 分页符和分割线</a></li>
-<li class="chapter" data-level="2.5.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#catalog"><i class="fa fa-check"></i><b>2.5.4</b> 目录</a></li>
-<li class="chapter" data-level="2.5.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#chapter-number"><i class="fa fa-check"></i><b>2.5.5</b> 章节编号</a></li>
-<li class="chapter" data-level="2.5.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#plottable-index"><i class="fa fa-check"></i><b>2.5.6</b> 图表的索引</a></li>
-<li class="chapter" data-level="2.5.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#reference-index"><i class="fa fa-check"></i><b>2.5.7</b> 参考文献</a></li>
+<li class="chapter" data-level="2.7.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#代码块选项"><i class="fa fa-check"></i><b>2.7.1</b> 代码块选项</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#document-element"><i class="fa fa-check"></i><b>2.6</b> R Markdown 的文档元素</a>
+<li class="chapter" data-level="2.8" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#document-element"><i class="fa fa-check"></i><b>2.8</b> 文档元素</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-plot"><i class="fa fa-check"></i><b>2.6.1</b> 图片</a></li>
-<li class="chapter" data-level="2.6.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-table"><i class="fa fa-check"></i><b>2.6.2</b> 表格</a></li>
-<li class="chapter" data-level="2.6.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-equation"><i class="fa fa-check"></i><b>2.6.3</b> 公式</a></li>
-<li class="chapter" data-level="2.6.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-quote"><i class="fa fa-check"></i><b>2.6.4</b> 引用</a></li>
-<li class="chapter" data-level="2.6.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-textcol"><i class="fa fa-check"></i><b>2.6.5</b> 字体颜色</a></li>
-<li class="chapter" data-level="2.6.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-dynamic"><i class="fa fa-check"></i><b>2.6.6</b> 动态交互元件</a></li>
-<li class="chapter" data-level="2.6.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-video"><i class="fa fa-check"></i><b>2.6.7</b> 音频和视频</a></li>
-<li class="chapter" data-level="2.6.8" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-flow"><i class="fa fa-check"></i><b>2.6.8</b> 流程图</a></li>
-<li class="chapter" data-level="2.6.9" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-gantt"><i class="fa fa-check"></i><b>2.6.9</b> 甘特图</a></li>
+<li class="chapter" data-level="2.8.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-figure"><i class="fa fa-check"></i><b>2.8.1</b> 图片</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-table"><i class="fa fa-check"></i><b>2.8.2</b> 表格</a></li>
+<li class="chapter" data-level="2.8.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#page-break"><i class="fa fa-check"></i><b>2.8.3</b> 分页符和分割线</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#toc"><i class="fa fa-check"></i><b>2.8.4</b> 目录</a></li>
+<li class="chapter" data-level="2.8.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#bibliography"><i class="fa fa-check"></i><b>2.8.5</b> 参考文献</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#引用-r-包"><i class="fa fa-check"></i><b>2.8.6</b> 引用 R 包</a></li>
+<li class="chapter" data-level="2.8.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#cross-reference"><i class="fa fa-check"></i><b>2.8.7</b> 交叉引用</a></li>
+<li class="chapter" data-level="2.8.8" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#index"><i class="fa fa-check"></i><b>2.8.8</b> 索引</a></li>
+<li class="chapter" data-level="2.8.9" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#动画"><i class="fa fa-check"></i><b>2.8.9</b> 动画</a></li>
+<li class="chapter" data-level="2.8.10" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-widget"><i class="fa fa-check"></i><b>2.8.10</b> 交互组件</a></li>
+<li class="chapter" data-level="2.8.11" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-media"><i class="fa fa-check"></i><b>2.8.11</b> 音频和视频</a></li>
+<li class="chapter" data-level="2.8.12" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-digram"><i class="fa fa-check"></i><b>2.8.12</b> 流程图</a></li>
 </ul></li>
+<li class="chapter" data-level="2.9" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rstudio-图形化编辑器"><i class="fa fa-check"></i><b>2.9</b> RStudio 图形化编辑器</a></li>
 </ul></li>
 <li class="part"><span><b>II 基于 R Markdown 的应用</b></span></li>
 <li class="chapter" data-level="3" data-path="rmarkdown-document.html"><a href="rmarkdown-document.html"><i class="fa fa-check"></i><b>3</b> 使用 R Markdown 创建常用文档</a>
@@ -324,7 +357,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.1.1" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#table-complex"><i class="fa fa-check"></i><b>6.1.1</b> 利用函数 <code>knitr::kable()</code> 生成复杂的表格</a></li>
 <li class="chapter" data-level="6.1.2" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#kable-extra"><i class="fa fa-check"></i><b>6.1.2</b> 利用 <strong>kableExtra</strong> 美化表格</a></li>
-<li class="chapter" data-level="6.1.3" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#else-table"><i class="fa fa-check"></i><b>6.1.3</b> 其它生成表格的包及功能介绍</a></li>
+<li class="chapter" data-level="6.1.3" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#else-table"><i class="fa fa-check"></i><b>6.1.3</b> 其它表格包</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#chunk-options"><i class="fa fa-check"></i><b>6.2</b> 块选项</a>
 <ul>
@@ -373,11 +406,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.6.1" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#reuse-chunk"><i class="fa fa-check"></i><b>6.6.1</b> 重复使用代码块</a></li>
 <li class="chapter" data-level="6.6.2" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#use-creat"><i class="fa fa-check"></i><b>6.6.2</b> 在创建对象之前使用它 (*)</a></li>
 <li class="chapter" data-level="6.6.3" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#compile-exit"><i class="fa fa-check"></i><b>6.6.3</b> 提前退出编译</a></li>
-<li class="chapter" data-level="6.6.4" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#plot-show-else"><i class="fa fa-check"></i><b>6.6.4</b> 生成一个图像并在其他地方显示</a></li>
+<li class="chapter" data-level="6.6.4" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#plot-show-else"><i class="fa fa-check"></i><b>6.6.4</b> 控制图像显示位置</a></li>
 <li class="chapter" data-level="6.6.5" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#modify-before"><i class="fa fa-check"></i><b>6.6.5</b> 修改之前代码块中的图像</a></li>
-<li class="chapter" data-level="6.6.6" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#reuse-option"><i class="fa fa-check"></i><b>6.6.6</b> 保存一组块选项并重复使用它们 (*)</a></li>
+<li class="chapter" data-level="6.6.6" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#reuse-option"><i class="fa fa-check"></i><b>6.6.6</b> 复用块选项 (*)</a></li>
 <li class="chapter" data-level="6.6.7" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#knit-expand"><i class="fa fa-check"></i><b>6.6.7</b> 使用 <code>knitr::knit_expand()</code> 来生成 Rmd 源代码</a></li>
-<li class="chapter" data-level="6.6.8" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#repeat-label"><i class="fa fa-check"></i><b>6.6.8</b> 允许代码块中的标签重复 (*)</a></li>
+<li class="chapter" data-level="6.6.8" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#repeat-label"><i class="fa fa-check"></i><b>6.6.8</b> 重复代码块标签 (*)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rmarkdown-project.html"><a href="rmarkdown-project.html"><i class="fa fa-check"></i><b>7</b> 使用 R Markdown 开展项目工作</a>

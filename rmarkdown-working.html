@@ -27,7 +27,7 @@
 <meta name="author" content="杨晓龙" />
 
 
-<meta name="date" content="2022-08-26" />
+<meta name="date" content="2022-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,6 +56,37 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script>
+<link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+<script src="libs/tile-view-0.2.6/tile-view.js"></script>
+<script type="application/json" id="xaringanExtra-editable-docid">{"id":"x233bdddf46848818482f90a92ab98ff","expires":1}</script>
+<script src="libs/himalaya-1.1.0/himalaya.js"></script>
+<script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+<link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+<script src="libs/editable-0.2.6/editable.js"></script>
+<script src="libs/fabric-4.3.1/fabric.min.js"></script>
+<link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+<script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+<script src="libs/tone-13.8.34/Tone.js"></script>
+<script src="libs/slide-tone-0.2.6/slide-tone.js"></script>
+<link href="libs/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+<link href="libs/animate.css-xaringan-3.7.2/animate.slide_left.css" rel="stylesheet" />
+<link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+<script src="libs/panelset-0.2.6/panelset.js"></script>
+<script src="libs/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+<script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"200","margin":"1em"}</script>
+<script src="libs/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -193,44 +224,46 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html"><i class="fa fa-check"></i><b>2</b> R Markdown 的基础知识</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rstudio-config"><i class="fa fa-check"></i><b>2.1</b> R Studio 相关的配置</a></li>
-<li class="chapter" data-level="2.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-install"><i class="fa fa-check"></i><b>2.2</b> R Markdown 的安装</a>
+<li class="chapter" data-level="2.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rstudio-config"><i class="fa fa-check"></i><b>2.1</b> 安装 RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> 安装 rmarkdown 包</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-rmd"><i class="fa fa-check"></i><b>2.2.1</b> 安装 R Markdown</a></li>
-<li class="chapter" data-level="2.2.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-tinytex"><i class="fa fa-check"></i><b>2.2.2</b> 安装 Tinytex</a></li>
-<li class="chapter" data-level="2.2.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-git"><i class="fa fa-check"></i><b>2.2.3</b> 安装 Git (*)</a></li>
-<li class="chapter" data-level="2.2.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-graph"><i class="fa fa-check"></i><b>2.2.4</b> 安装 RStudio 图形化编辑器</a></li>
-<li class="chapter" data-level="2.2.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#create-rmd"><i class="fa fa-check"></i><b>2.2.5</b> 创建第一个 R Markdown 文档</a></li>
+<li class="chapter" data-level="2.2.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-tinytex"><i class="fa fa-check"></i><b>2.2.1</b> 安装 TinyTex</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#install-git"><i class="fa fa-check"></i><b>2.2.2</b> 安装 Git (*)</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-compile"><i class="fa fa-check"></i><b>2.3</b> R Markdown 的编译过程</a></li>
-<li class="chapter" data-level="2.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-element"><i class="fa fa-check"></i><b>2.4</b> R Markdown 的基本元素</a>
+<li class="chapter" data-level="2.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-element"><i class="fa fa-check"></i><b>2.3</b> R Markdown 的基本元素</a></li>
+<li class="chapter" data-level="2.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rmarkdown-compile"><i class="fa fa-check"></i><b>2.4</b> R Markdown 的编译过程和组成元素</a></li>
+<li class="chapter" data-level="2.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#yaml"><i class="fa fa-check"></i><b>2.5</b> YAML 头部</a></li>
+<li class="chapter" data-level="2.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown-syntax"><i class="fa fa-check"></i><b>2.6</b> Markdown 语法</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#yaml"><i class="fa fa-check"></i><b>2.4.1</b> YAML 头部</a></li>
-<li class="chapter" data-level="2.4.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown"><i class="fa fa-check"></i><b>2.4.2</b> Markdown 语法</a></li>
-<li class="chapter" data-level="2.4.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#block-inline"><i class="fa fa-check"></i><b>2.4.3</b> 代码区块和行内代码</a></li>
+<li class="chapter" data-level="2.6.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#简单段内格式"><i class="fa fa-check"></i><b>2.6.1</b> 简单段内格式</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#换行"><i class="fa fa-check"></i><b>2.6.2</b> 换行</a></li>
+<li class="chapter" data-level="2.6.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#段落格式"><i class="fa fa-check"></i><b>2.6.3</b> 段落格式</a></li>
+<li class="chapter" data-level="2.6.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown-code"><i class="fa fa-check"></i><b>2.6.4</b> 代码块</a></li>
+<li class="chapter" data-level="2.6.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown-figure"><i class="fa fa-check"></i><b>2.6.5</b> 图片</a></li>
+<li class="chapter" data-level="2.6.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#markdown-table"><i class="fa fa-check"></i><b>2.6.6</b> 表格</a></li>
+<li class="chapter" data-level="2.6.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#数学公式"><i class="fa fa-check"></i><b>2.6.7</b> 数学公式</a></li>
+<li class="chapter" data-level="2.6.8" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#总结"><i class="fa fa-check"></i><b>2.6.8</b> 总结</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#page-layout"><i class="fa fa-check"></i><b>2.5</b> 页面设置和布局</a>
+<li class="chapter" data-level="2.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#code-block-and-inline"><i class="fa fa-check"></i><b>2.7</b> 代码块和行内代码</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#output-width"><i class="fa fa-check"></i><b>2.5.1</b> 控制输出宽度</a></li>
-<li class="chapter" data-level="2.5.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#line-break"><i class="fa fa-check"></i><b>2.5.2</b> 换行符号</a></li>
-<li class="chapter" data-level="2.5.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#page-break"><i class="fa fa-check"></i><b>2.5.3</b> 分页符和分割线</a></li>
-<li class="chapter" data-level="2.5.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#catalog"><i class="fa fa-check"></i><b>2.5.4</b> 目录</a></li>
-<li class="chapter" data-level="2.5.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#chapter-number"><i class="fa fa-check"></i><b>2.5.5</b> 章节编号</a></li>
-<li class="chapter" data-level="2.5.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#plottable-index"><i class="fa fa-check"></i><b>2.5.6</b> 图表的索引</a></li>
-<li class="chapter" data-level="2.5.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#reference-index"><i class="fa fa-check"></i><b>2.5.7</b> 参考文献</a></li>
+<li class="chapter" data-level="2.7.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#代码块选项"><i class="fa fa-check"></i><b>2.7.1</b> 代码块选项</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#document-element"><i class="fa fa-check"></i><b>2.6</b> R Markdown 的文档元素</a>
+<li class="chapter" data-level="2.8" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#document-element"><i class="fa fa-check"></i><b>2.8</b> 文档元素</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-plot"><i class="fa fa-check"></i><b>2.6.1</b> 图片</a></li>
-<li class="chapter" data-level="2.6.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-table"><i class="fa fa-check"></i><b>2.6.2</b> 表格</a></li>
-<li class="chapter" data-level="2.6.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-equation"><i class="fa fa-check"></i><b>2.6.3</b> 公式</a></li>
-<li class="chapter" data-level="2.6.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-quote"><i class="fa fa-check"></i><b>2.6.4</b> 引用</a></li>
-<li class="chapter" data-level="2.6.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-textcol"><i class="fa fa-check"></i><b>2.6.5</b> 字体颜色</a></li>
-<li class="chapter" data-level="2.6.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-dynamic"><i class="fa fa-check"></i><b>2.6.6</b> 动态交互元件</a></li>
-<li class="chapter" data-level="2.6.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-video"><i class="fa fa-check"></i><b>2.6.7</b> 音频和视频</a></li>
-<li class="chapter" data-level="2.6.8" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-flow"><i class="fa fa-check"></i><b>2.6.8</b> 流程图</a></li>
-<li class="chapter" data-level="2.6.9" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-gantt"><i class="fa fa-check"></i><b>2.6.9</b> 甘特图</a></li>
+<li class="chapter" data-level="2.8.1" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-figure"><i class="fa fa-check"></i><b>2.8.1</b> 图片</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-table"><i class="fa fa-check"></i><b>2.8.2</b> 表格</a></li>
+<li class="chapter" data-level="2.8.3" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#page-break"><i class="fa fa-check"></i><b>2.8.3</b> 分页符和分割线</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#toc"><i class="fa fa-check"></i><b>2.8.4</b> 目录</a></li>
+<li class="chapter" data-level="2.8.5" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#bibliography"><i class="fa fa-check"></i><b>2.8.5</b> 参考文献</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#引用-r-包"><i class="fa fa-check"></i><b>2.8.6</b> 引用 R 包</a></li>
+<li class="chapter" data-level="2.8.7" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#cross-reference"><i class="fa fa-check"></i><b>2.8.7</b> 交叉引用</a></li>
+<li class="chapter" data-level="2.8.8" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#index"><i class="fa fa-check"></i><b>2.8.8</b> 索引</a></li>
+<li class="chapter" data-level="2.8.9" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#动画"><i class="fa fa-check"></i><b>2.8.9</b> 动画</a></li>
+<li class="chapter" data-level="2.8.10" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-widget"><i class="fa fa-check"></i><b>2.8.10</b> 交互组件</a></li>
+<li class="chapter" data-level="2.8.11" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-media"><i class="fa fa-check"></i><b>2.8.11</b> 音频和视频</a></li>
+<li class="chapter" data-level="2.8.12" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#element-digram"><i class="fa fa-check"></i><b>2.8.12</b> 流程图</a></li>
 </ul></li>
+<li class="chapter" data-level="2.9" data-path="rmarkdown-base.html"><a href="rmarkdown-base.html#rstudio-图形化编辑器"><i class="fa fa-check"></i><b>2.9</b> RStudio 图形化编辑器</a></li>
 </ul></li>
 <li class="part"><span><b>II 基于 R Markdown 的应用</b></span></li>
 <li class="chapter" data-level="3" data-path="rmarkdown-document.html"><a href="rmarkdown-document.html"><i class="fa fa-check"></i><b>3</b> 使用 R Markdown 创建常用文档</a>
@@ -324,7 +357,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.1.1" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#table-complex"><i class="fa fa-check"></i><b>6.1.1</b> 利用函数 <code>knitr::kable()</code> 生成复杂的表格</a></li>
 <li class="chapter" data-level="6.1.2" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#kable-extra"><i class="fa fa-check"></i><b>6.1.2</b> 利用 <strong>kableExtra</strong> 美化表格</a></li>
-<li class="chapter" data-level="6.1.3" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#else-table"><i class="fa fa-check"></i><b>6.1.3</b> 其它生成表格的包及功能介绍</a></li>
+<li class="chapter" data-level="6.1.3" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#else-table"><i class="fa fa-check"></i><b>6.1.3</b> 其它表格包</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#chunk-options"><i class="fa fa-check"></i><b>6.2</b> 块选项</a>
 <ul>
@@ -373,11 +406,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.6.1" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#reuse-chunk"><i class="fa fa-check"></i><b>6.6.1</b> 重复使用代码块</a></li>
 <li class="chapter" data-level="6.6.2" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#use-creat"><i class="fa fa-check"></i><b>6.6.2</b> 在创建对象之前使用它 (*)</a></li>
 <li class="chapter" data-level="6.6.3" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#compile-exit"><i class="fa fa-check"></i><b>6.6.3</b> 提前退出编译</a></li>
-<li class="chapter" data-level="6.6.4" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#plot-show-else"><i class="fa fa-check"></i><b>6.6.4</b> 生成一个图像并在其他地方显示</a></li>
+<li class="chapter" data-level="6.6.4" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#plot-show-else"><i class="fa fa-check"></i><b>6.6.4</b> 控制图像显示位置</a></li>
 <li class="chapter" data-level="6.6.5" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#modify-before"><i class="fa fa-check"></i><b>6.6.5</b> 修改之前代码块中的图像</a></li>
-<li class="chapter" data-level="6.6.6" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#reuse-option"><i class="fa fa-check"></i><b>6.6.6</b> 保存一组块选项并重复使用它们 (*)</a></li>
+<li class="chapter" data-level="6.6.6" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#reuse-option"><i class="fa fa-check"></i><b>6.6.6</b> 复用块选项 (*)</a></li>
 <li class="chapter" data-level="6.6.7" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#knit-expand"><i class="fa fa-check"></i><b>6.6.7</b> 使用 <code>knitr::knit_expand()</code> 来生成 Rmd 源代码</a></li>
-<li class="chapter" data-level="6.6.8" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#repeat-label"><i class="fa fa-check"></i><b>6.6.8</b> 允许代码块中的标签重复 (*)</a></li>
+<li class="chapter" data-level="6.6.8" data-path="rmarkdown-operation.html"><a href="rmarkdown-operation.html#repeat-label"><i class="fa fa-check"></i><b>6.6.8</b> 重复代码块标签 (*)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rmarkdown-project.html"><a href="rmarkdown-project.html"><i class="fa fa-check"></i><b>7</b> 使用 R Markdown 开展项目工作</a>
@@ -429,30 +462,30 @@ div.csl-indent {
 <div id="rmarkdown-email" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> 发邮件：<code>blastula</code><a href="rmarkdown-working.html#rmarkdown-email" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>使用者有的时候可能需要批量发送定制版邮件，有些软件提供了相应选项，利用 R Markdown 也可以实现这一功能。具体而言，借助 <code>blastula</code> 包 <span class="citation">(<a href="#ref-R-blastula" role="doc-biblioref"><strong>R-blastula?</strong></a>)</span>，可以将 R Markdown 文档呈现在电子邮件正文并发送电子邮件。要将 R Markdown 文档呈现到电子邮件中，需要在文档中使用输出格式 <code>blastula::blastula_email</code>，例如：</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb159-1"><a href="rmarkdown-working.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb159-2"><a href="rmarkdown-working.html#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 周报</span></span>
-<span id="cb159-3"><a href="rmarkdown-working.html#cb159-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> blastula::blastula_email</span></span>
-<span id="cb159-4"><a href="rmarkdown-working.html#cb159-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span> </span>
-<span id="cb159-5"><a href="rmarkdown-working.html#cb159-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-6"><a href="rmarkdown-working.html#cb159-6" aria-hidden="true" tabindex="-1"></a>尊敬的客户，</span>
-<span id="cb159-7"><a href="rmarkdown-working.html#cb159-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-8"><a href="rmarkdown-working.html#cb159-8" aria-hidden="true" tabindex="-1"></a>以下是对 <span class="in">`iris`</span> 数据的分析：</span>
-<span id="cb159-9"><a href="rmarkdown-working.html#cb159-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-10"><a href="rmarkdown-working.html#cb159-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb159-11"><a href="rmarkdown-working.html#cb159-11" aria-hidden="true" tabindex="-1"></a><span class="in">summary(iris)</span></span>
-<span id="cb159-12"><a href="rmarkdown-working.html#cb159-12" aria-hidden="true" tabindex="-1"></a><span class="in">plot(iris[, -5])</span></span>
-<span id="cb159-13"><a href="rmarkdown-working.html#cb159-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb159-14"><a href="rmarkdown-working.html#cb159-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-15"><a href="rmarkdown-working.html#cb159-15" aria-hidden="true" tabindex="-1"></a>若感兴趣请及时回复。</span>
-<span id="cb159-16"><a href="rmarkdown-working.html#cb159-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-17"><a href="rmarkdown-working.html#cb159-17" aria-hidden="true" tabindex="-1"></a>祝好，  </span>
-<span id="cb159-18"><a href="rmarkdown-working.html#cb159-18" aria-hidden="true" tabindex="-1"></a>张三</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb225-1"><a href="rmarkdown-working.html#cb225-1" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb225-2"><a href="rmarkdown-working.html#cb225-2" aria-hidden="true" tabindex="-1"></a>title: 周报</span>
+<span id="cb225-3"><a href="rmarkdown-working.html#cb225-3" aria-hidden="true" tabindex="-1"></a>output: blastula::blastula_email</span>
+<span id="cb225-4"><a href="rmarkdown-working.html#cb225-4" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb225-5"><a href="rmarkdown-working.html#cb225-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-6"><a href="rmarkdown-working.html#cb225-6" aria-hidden="true" tabindex="-1"></a>尊敬的客户，</span>
+<span id="cb225-7"><a href="rmarkdown-working.html#cb225-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-8"><a href="rmarkdown-working.html#cb225-8" aria-hidden="true" tabindex="-1"></a>以下是对 `iris` 数据的分析：</span>
+<span id="cb225-9"><a href="rmarkdown-working.html#cb225-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-10"><a href="rmarkdown-working.html#cb225-10" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb225-11"><a href="rmarkdown-working.html#cb225-11" aria-hidden="true" tabindex="-1"></a>summary(iris)</span>
+<span id="cb225-12"><a href="rmarkdown-working.html#cb225-12" aria-hidden="true" tabindex="-1"></a>plot(iris[, -5])</span>
+<span id="cb225-13"><a href="rmarkdown-working.html#cb225-13" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb225-14"><a href="rmarkdown-working.html#cb225-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-15"><a href="rmarkdown-working.html#cb225-15" aria-hidden="true" tabindex="-1"></a>若感兴趣请及时回复。</span>
+<span id="cb225-16"><a href="rmarkdown-working.html#cb225-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-17"><a href="rmarkdown-working.html#cb225-17" aria-hidden="true" tabindex="-1"></a>祝好，</span>
+<span id="cb225-18"><a href="rmarkdown-working.html#cb225-18" aria-hidden="true" tabindex="-1"></a>张三</span></code></pre></div>
 <p>这个将 R Markdown 文档会通过函数 <code>blastula::render_email()</code> 来呈现，输出将被传递给 <code>blastula::smtp_send()</code>，它将发送电子邮件。需要注意的是，<code>smtp_send()</code> 需要一个电子邮件服务器和使用者的凭证（credentials）。</p>
 <p>如果使用 RStudio Connect，还可以 在https://solutions.rstudio.com/examples/blastula-overview/ 上找到更多的例子，包括自动的、有条件的和参数化的电子邮件。</p>
 </div>
 <div id="rmarkdown-package" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> 制作 R 包：<code>fusen</code><a href="rmarkdown-working.html#rmarkdown-package" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>R 语言的日常使用离不开 R 包，而对于很多使用者来说，亲手制作 R 包无疑是一项有趣的工作，它不仅可以封装一些自己常用的函数，大大加速日常的工作，还可以将自己的创意通过 GitHub 或者 CRAN 发布，让更多的人了解并使用，从而给自己带来极大的成就感，甚至于获得实质性的成就<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>。</p>
+<p>R 语言的日常使用离不开 R 包，而对于很多使用者来说，亲手制作 R 包无疑是一项有趣的工作，它不仅可以封装一些自己常用的函数，大大加速日常的工作，还可以将自己的创意通过 GitHub 或者 CRAN 发布，让更多的人了解并使用，从而给自己带来极大的成就感，甚至于获得实质性的成就<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a>。</p>
 <p>相信有着很多制作 R 包经验的使用者都被其繁琐的制作流程所困扰。通常情况下，制作一个 R 包需要完成如下几个内容：</p>
 <ul>
 <li>R 函数</li>
@@ -472,25 +505,24 @@ div.csl-indent {
 </ol>
 <p>下面以 <code>teaching</code> 模板为例进行详细介绍，而 <code>full</code> 模板在 <code>teaching</code> 模板的基础上添加了诸如发布到 GitHub、包含数据文件等功能，原理上是相同的，模板内部也有详细的解释可供阅读。</p>
 <p>在选择模板 <code>teaching</code> 后，会自动生成 Rmd 文件 <code>flat_teaching.Rmd</code>，其中第一个代码框为：</p>
-<p>调用 <code>testthat</code> 包 <span class="citation">(<a href="#ref-R-testthat" role="doc-biblioref">Wickham 2022</a>)</span> 可以帮助使用者更好地测试代码。</p>
+<p>调用 <code>testthat</code> 包 <span class="citation">(<a href="#ref-R-testthat" role="doc-biblioref">Hadley Wickham 2022</a>)</span> 可以帮助使用者更好地测试代码。</p>
 <p>下一个代码框可以帮助使用者对创建的包进行描述并进行授权，其中包含了标题（<code>Title</code>）、描述（<code>Description</code>）以及作者信息（<code>Authors</code>）等内容，一个简化的内容如下：</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="rmarkdown-working.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fill_description</span>(<span class="at">fields =</span> <span class="fu">list</span>(<span class="at">Title =</span> <span class="st">&quot;My Awesome Package&quot;</span>))</span>
-<span id="cb160-2"><a href="rmarkdown-working.html#cb160-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_mit_license</span>(<span class="st">&quot;Sébastien Rochette&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="rmarkdown-working.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fill_description</span>(<span class="at">fields =</span> <span class="fu">list</span>(<span class="at">Title =</span> <span class="st">&quot;My Awesome Package&quot;</span>))</span>
+<span id="cb226-2"><a href="rmarkdown-working.html#cb226-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_mit_license</span>(<span class="st">&quot;Sébastien Rochette&quot;</span>)</span></code></pre></div>
 <p>接下来需要按照模板的引导来编写函数，例如模板提供了示例函数：</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb161-1"><a href="rmarkdown-working.html#cb161-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb161-2"><a href="rmarkdown-working.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb161-3"><a href="rmarkdown-working.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Add one to any value</span></span>
-<span id="cb161-4"><a href="rmarkdown-working.html#cb161-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span></span>
-<span id="cb161-5"><a href="rmarkdown-working.html#cb161-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param value A numeric value</span></span>
-<span id="cb161-6"><a href="rmarkdown-working.html#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb161-7"><a href="rmarkdown-working.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @return Numeric. value + 1</span></span>
-<span id="cb161-8"><a href="rmarkdown-working.html#cb161-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
-<span id="cb161-9"><a href="rmarkdown-working.html#cb161-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb161-10"><a href="rmarkdown-working.html#cb161-10" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">&lt;-</span> <span class="cf">function</span>(value) {</span>
-<span id="cb161-11"><a href="rmarkdown-working.html#cb161-11" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> value <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb161-12"><a href="rmarkdown-working.html#cb161-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
-<span id="cb161-13"><a href="rmarkdown-working.html#cb161-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb161-14"><a href="rmarkdown-working.html#cb161-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb227-1"><a href="rmarkdown-working.html#cb227-1" aria-hidden="true" tabindex="-1"></a>```{r function-add_one}</span>
+<span id="cb227-2"><a href="rmarkdown-working.html#cb227-2" aria-hidden="true" tabindex="-1"></a>#&#39; Add one to any value</span>
+<span id="cb227-3"><a href="rmarkdown-working.html#cb227-3" aria-hidden="true" tabindex="-1"></a>#&#39;</span>
+<span id="cb227-4"><a href="rmarkdown-working.html#cb227-4" aria-hidden="true" tabindex="-1"></a>#&#39; @param value A numeric value</span>
+<span id="cb227-5"><a href="rmarkdown-working.html#cb227-5" aria-hidden="true" tabindex="-1"></a>#&#39;</span>
+<span id="cb227-6"><a href="rmarkdown-working.html#cb227-6" aria-hidden="true" tabindex="-1"></a>#&#39; @return Numeric. value + 1</span>
+<span id="cb227-7"><a href="rmarkdown-working.html#cb227-7" aria-hidden="true" tabindex="-1"></a>#&#39; @export</span>
+<span id="cb227-8"><a href="rmarkdown-working.html#cb227-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-9"><a href="rmarkdown-working.html#cb227-9" aria-hidden="true" tabindex="-1"></a>add_one &lt;- function(value) {</span>
+<span id="cb227-10"><a href="rmarkdown-working.html#cb227-10" aria-hidden="true" tabindex="-1"></a>  result &lt;- value + 1</span>
+<span id="cb227-11"><a href="rmarkdown-working.html#cb227-11" aria-hidden="true" tabindex="-1"></a>  return(result)</span>
+<span id="cb227-12"><a href="rmarkdown-working.html#cb227-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb227-13"><a href="rmarkdown-working.html#cb227-13" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p>其中一开始以 <code>#'</code> 开头的部分代表了这个函数的一些特征，其中包括：</p>
 <ul>
 <li><p><code>@param</code>：函数涉及的参数，书写的格式为 <code>@param 参数 参数解释</code>，每个参数对应一个 <code>@param</code>；</p></li>
@@ -504,41 +536,24 @@ div.csl-indent {
 <li><p><code>@details</code>：使用函数的细节；</p></li>
 <li><p><code>@examples</code>：函数的示例，但是使用 <code>fusen</code> 制作 R 包时可以直接在对应函数下方添加以 <code>examples</code> 为名称的代码框：</p></li>
 </ul>
-<div class="sourceCode" id="cb162"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb162-1"><a href="rmarkdown-working.html#cb162-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb162-2"><a href="rmarkdown-working.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb162-3"><a href="rmarkdown-working.html#cb162-3" aria-hidden="true" tabindex="-1"></a><span class="fu">add_one</span>(<span class="dv">12</span>)</span>
-<span id="cb162-4"><a href="rmarkdown-working.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb162-5"><a href="rmarkdown-working.html#cb162-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb162-6"><a href="rmarkdown-working.html#cb162-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb162-7"><a href="rmarkdown-working.html#cb162-7" aria-hidden="true" tabindex="-1"></a><span class="in">## [1] 13</span></span>
-<span id="cb162-8"><a href="rmarkdown-working.html#cb162-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb162-9"><a href="rmarkdown-working.html#cb162-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb162-10"><a href="rmarkdown-working.html#cb162-10" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb162-11"><a href="rmarkdown-working.html#cb162-11" aria-hidden="true" tabindex="-1"></a><span class="fu">add_one</span>(<span class="dv">56</span>)</span>
-<span id="cb162-12"><a href="rmarkdown-working.html#cb162-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb162-13"><a href="rmarkdown-working.html#cb162-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb162-14"><a href="rmarkdown-working.html#cb162-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb162-15"><a href="rmarkdown-working.html#cb162-15" aria-hidden="true" tabindex="-1"></a><span class="in">## [1] 57</span></span>
-<span id="cb162-16"><a href="rmarkdown-working.html#cb162-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb228-1"><a href="rmarkdown-working.html#cb228-1" aria-hidden="true" tabindex="-1"></a>```{r examples-add_one}</span>
+<span id="cb228-2"><a href="rmarkdown-working.html#cb228-2" aria-hidden="true" tabindex="-1"></a>add_one(12)</span>
+<span id="cb228-3"><a href="rmarkdown-working.html#cb228-3" aria-hidden="true" tabindex="-1"></a>add_one(56)</span>
+<span id="cb228-4"><a href="rmarkdown-working.html#cb228-4" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p>这样就会自动在其上方的函数描述中加入对应的示例。在示例后面还需要加入测试函数来确保函数可以正常运行，这里的 <code>test_that()</code> 函数就来自于一开始调用的 <code>testthat</code> 包：</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb163-1"><a href="rmarkdown-working.html#cb163-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-2"><a href="rmarkdown-working.html#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb163-3"><a href="rmarkdown-working.html#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;add_one works&quot;</span>, {</span>
-<span id="cb163-4"><a href="rmarkdown-working.html#cb163-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">add_one</span>(<span class="dv">12</span>), <span class="dv">13</span>)</span>
-<span id="cb163-5"><a href="rmarkdown-working.html#cb163-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">add_one</span>(<span class="dv">56</span>), <span class="dv">57</span>)</span>
-<span id="cb163-6"><a href="rmarkdown-working.html#cb163-6" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb163-7"><a href="rmarkdown-working.html#cb163-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb163-8"><a href="rmarkdown-working.html#cb163-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-9"><a href="rmarkdown-working.html#cb163-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb163-10"><a href="rmarkdown-working.html#cb163-10" aria-hidden="true" tabindex="-1"></a><span class="in">## Test passed 🎊</span></span>
-<span id="cb163-11"><a href="rmarkdown-working.html#cb163-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb229-1"><a href="rmarkdown-working.html#cb229-1" aria-hidden="true" tabindex="-1"></a>```{r tests-add_one}</span>
+<span id="cb229-2"><a href="rmarkdown-working.html#cb229-2" aria-hidden="true" tabindex="-1"></a>test_that(&quot;add_one works&quot;, {</span>
+<span id="cb229-3"><a href="rmarkdown-working.html#cb229-3" aria-hidden="true" tabindex="-1"></a>  expect_equal(add_one(12), 13)</span>
+<span id="cb229-4"><a href="rmarkdown-working.html#cb229-4" aria-hidden="true" tabindex="-1"></a>  expect_equal(add_one(56), 57)</span>
+<span id="cb229-5"><a href="rmarkdown-working.html#cb229-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb229-6"><a href="rmarkdown-working.html#cb229-6" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p>需要注意的是，如果想一个包中包含多个函数，则需要对每个函数都添加 <code>function</code>、<code>examples</code> 和 <code>tests</code> 代码框，并将其放入不同的章节中（即在模板中新添加一个以 <code>#</code> 为开头的章节，如 <code># Add two to any value</code>）。另外，由于相应功能的代码框会在名称部分加以区分，所以对于不同函数，需要在代码框名称后面添加标记，例如本节例子中的 <code>function-add_one</code>、<code>examples-add_one</code> 和 <code>tests-add_one</code>。</p>
 <p>最后，需要运行以下代码来将 Rmd 文件转化成一个完整的包。</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="rmarkdown-working.html#cb164-1" aria-hidden="true" tabindex="-1"></a>fusen<span class="sc">::</span><span class="fu">inflate</span>(</span>
-<span id="cb164-2"><a href="rmarkdown-working.html#cb164-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">flat_file =</span> <span class="st">&quot;dev/flat_teaching.Rmd&quot;</span>,</span>
-<span id="cb164-3"><a href="rmarkdown-working.html#cb164-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vignette_name =</span> <span class="st">&quot;Get started&quot;</span>,</span>
-<span id="cb164-4"><a href="rmarkdown-working.html#cb164-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">TRUE</span></span>
-<span id="cb164-5"><a href="rmarkdown-working.html#cb164-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="rmarkdown-working.html#cb230-1" aria-hidden="true" tabindex="-1"></a>fusen<span class="sc">::</span><span class="fu">inflate</span>(</span>
+<span id="cb230-2"><a href="rmarkdown-working.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">flat_file =</span> <span class="st">&quot;dev/flat_teaching.Rmd&quot;</span>,</span>
+<span id="cb230-3"><a href="rmarkdown-working.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vignette_name =</span> <span class="st">&quot;Get started&quot;</span>,</span>
+<span id="cb230-4"><a href="rmarkdown-working.html#cb230-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">TRUE</span></span>
+<span id="cb230-5"><a href="rmarkdown-working.html#cb230-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>更多关于 <code>fusen</code> 包的细节请参见 <a href="https://github.com/ThinkR-open/fusen/" class="uri">https://github.com/ThinkR-open/fusen/</a>。</p>
 </div>
 <div id="rmarkdown-cv" class="section level2 hasAnchor" number="4.3">
@@ -546,17 +561,17 @@ div.csl-indent {
 <p>无论是在找工作、申请高校，还是在制作个人网站时，简历都是必不可少的，一个形式简洁、内容丰富的简历可以让读者在短时间内了解一个人。但是在制作简历时，往往会在寻找模板、调整格式上下很多功夫，尤其是在更新简历时，往往需要进行大量的调整，甚至于从头再来。</p>
 <p>就像 R Markdown 制作的初衷是帮助使用者将注意力集中于内容上一样，<code>datadrivencv</code> 包 <span class="citation">(<a href="#ref-R-datadrivencv" role="doc-biblioref">Strayer 2022</a>)</span> 的目标也是将内容与输出分离，利用 R Markdown 的特性，可以使用相同的代码同时生成简历的交互式 HTML 以及 PDF 版本，这将大大减轻制作以及维护简历的工作量。</p>
 <p>由于 <code>datadrivencv</code> 包目前没有发布到 CRAN 上，只能通过 GitHub 来下载：</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="rmarkdown-working.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb165-2"><a href="rmarkdown-working.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 可能需要安装的依赖包：remotes::install_github(&#39;mitchelloharawild/icons@v0.1.0&#39;)</span></span>
-<span id="cb165-3"><a href="rmarkdown-working.html#cb165-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;nstrayer/datadrivencv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="rmarkdown-working.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
+<span id="cb231-2"><a href="rmarkdown-working.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 可能需要安装的依赖包：remotes::install_github(&#39;mitchelloharawild/icons@v0.1.0&#39;)</span></span>
+<span id="cb231-3"><a href="rmarkdown-working.html#cb231-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;nstrayer/datadrivencv&quot;</span>)</span></code></pre></div>
 <p>使用 <code>datadrivencv</code> 包的第一步是使用 <code>use_data_driven_cv()</code> 函数：</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="rmarkdown-working.html#cb166-1" aria-hidden="true" tabindex="-1"></a>datadrivencv<span class="sc">::</span><span class="fu">use_datadriven_cv</span>(</span>
-<span id="cb166-2"><a href="rmarkdown-working.html#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">full_name =</span> <span class="st">&quot;Nick Strayer&quot;</span>,</span>
-<span id="cb166-3"><a href="rmarkdown-working.html#cb166-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_location =</span> <span class="st">&quot;https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc&quot;</span>,</span>
-<span id="cb166-4"><a href="rmarkdown-working.html#cb166-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pdf_location =</span> <span class="st">&quot;https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf&quot;</span>,</span>
-<span id="cb166-5"><a href="rmarkdown-working.html#cb166-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">html_location =</span> <span class="st">&quot;nickstrayer.me/cv/&quot;</span>,</span>
-<span id="cb166-6"><a href="rmarkdown-working.html#cb166-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">source_location =</span> <span class="st">&quot;https://github.com/nstrayer/cv&quot;</span></span>
-<span id="cb166-7"><a href="rmarkdown-working.html#cb166-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="rmarkdown-working.html#cb232-1" aria-hidden="true" tabindex="-1"></a>datadrivencv<span class="sc">::</span><span class="fu">use_datadriven_cv</span>(</span>
+<span id="cb232-2"><a href="rmarkdown-working.html#cb232-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">full_name =</span> <span class="st">&quot;Nick Strayer&quot;</span>,</span>
+<span id="cb232-3"><a href="rmarkdown-working.html#cb232-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_location =</span> <span class="st">&quot;https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc&quot;</span>,</span>
+<span id="cb232-4"><a href="rmarkdown-working.html#cb232-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pdf_location =</span> <span class="st">&quot;https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf&quot;</span>,</span>
+<span id="cb232-5"><a href="rmarkdown-working.html#cb232-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">html_location =</span> <span class="st">&quot;nickstrayer.me/cv/&quot;</span>,</span>
+<span id="cb232-6"><a href="rmarkdown-working.html#cb232-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">source_location =</span> <span class="st">&quot;https://github.com/nstrayer/cv&quot;</span></span>
+<span id="cb232-7"><a href="rmarkdown-working.html#cb232-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>其中的参数有：</p>
 <ul>
 <li><p><code>full_name</code>：使用者的姓名；</p></li>
@@ -573,20 +588,20 @@ div.csl-indent {
 <li><p><code>cv_printing_functions.r</code>：执行将电子表格数据转换为 markdown 或 HTML 并使输出用于 PDF 打印的一系列函数。</p></li>
 </ul>
 <p>在得到上述四个文件，并且按照模板填写完毕相应的 <code>.csv</code> 文件夹后，用 RStudio 打开 <code>cv.rmd</code> 并点击 <code>Knit</code> 即可得到 HTML 格式的简历。如果想进一步生成 PDF 格式的简历，运行 <code>render_cv.r</code> 中的相应函数即可：</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="rmarkdown-working.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 编译 HTML 版本的简历</span></span>
-<span id="cb167-2"><a href="rmarkdown-working.html#cb167-2" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">&quot;cv.rmd&quot;</span>,</span>
-<span id="cb167-3"><a href="rmarkdown-working.html#cb167-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">params =</span> <span class="fu">list</span>(<span class="at">pdf_mode =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb167-4"><a href="rmarkdown-working.html#cb167-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">output_file =</span> <span class="st">&quot;cv.html&quot;</span>)</span>
-<span id="cb167-5"><a href="rmarkdown-working.html#cb167-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb167-6"><a href="rmarkdown-working.html#cb167-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 编译 PDF 版本的简历到 HTML 版本中，从而可以在 HTML 版本中下载</span></span>
-<span id="cb167-7"><a href="rmarkdown-working.html#cb167-7" aria-hidden="true" tabindex="-1"></a>tmp_html_cv_loc <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">file_temp</span>(<span class="at">ext =</span> <span class="st">&quot;.html&quot;</span>)</span>
-<span id="cb167-8"><a href="rmarkdown-working.html#cb167-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">&quot;cv.rmd&quot;</span>,</span>
-<span id="cb167-9"><a href="rmarkdown-working.html#cb167-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">params =</span> <span class="fu">list</span>(<span class="at">pdf_mode =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb167-10"><a href="rmarkdown-working.html#cb167-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">output_file =</span> tmp_html_cv_loc)</span>
-<span id="cb167-11"><a href="rmarkdown-working.html#cb167-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb167-12"><a href="rmarkdown-working.html#cb167-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 用 Pagedown 将 HTML 转换至 PDF，生成 PDF 文件</span></span>
-<span id="cb167-13"><a href="rmarkdown-working.html#cb167-13" aria-hidden="true" tabindex="-1"></a>pagedown<span class="sc">::</span><span class="fu">chrome_print</span>(<span class="at">input =</span> tmp_html_cv_loc,</span>
-<span id="cb167-14"><a href="rmarkdown-working.html#cb167-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">output =</span> <span class="st">&quot;cv.pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="rmarkdown-working.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 编译 HTML 版本的简历</span></span>
+<span id="cb233-2"><a href="rmarkdown-working.html#cb233-2" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">&quot;cv.rmd&quot;</span>,</span>
+<span id="cb233-3"><a href="rmarkdown-working.html#cb233-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">params =</span> <span class="fu">list</span>(<span class="at">pdf_mode =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb233-4"><a href="rmarkdown-working.html#cb233-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">output_file =</span> <span class="st">&quot;cv.html&quot;</span>)</span>
+<span id="cb233-5"><a href="rmarkdown-working.html#cb233-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-6"><a href="rmarkdown-working.html#cb233-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 编译 PDF 版本的简历到 HTML 版本中，从而可以在 HTML 版本中下载</span></span>
+<span id="cb233-7"><a href="rmarkdown-working.html#cb233-7" aria-hidden="true" tabindex="-1"></a>tmp_html_cv_loc <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">file_temp</span>(<span class="at">ext =</span> <span class="st">&quot;.html&quot;</span>)</span>
+<span id="cb233-8"><a href="rmarkdown-working.html#cb233-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">&quot;cv.rmd&quot;</span>,</span>
+<span id="cb233-9"><a href="rmarkdown-working.html#cb233-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">params =</span> <span class="fu">list</span>(<span class="at">pdf_mode =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb233-10"><a href="rmarkdown-working.html#cb233-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">output_file =</span> tmp_html_cv_loc)</span>
+<span id="cb233-11"><a href="rmarkdown-working.html#cb233-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-12"><a href="rmarkdown-working.html#cb233-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 用 Pagedown 将 HTML 转换至 PDF，生成 PDF 文件</span></span>
+<span id="cb233-13"><a href="rmarkdown-working.html#cb233-13" aria-hidden="true" tabindex="-1"></a>pagedown<span class="sc">::</span><span class="fu">chrome_print</span>(<span class="at">input =</span> tmp_html_cv_loc,</span>
+<span id="cb233-14"><a href="rmarkdown-working.html#cb233-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">output =</span> <span class="st">&quot;cv.pdf&quot;</span>)</span></code></pre></div>
 <p>现在这个包还存在着诸多问题，例如提供的简历模板较少、对中文的支持较差等问题，有待进一步优化，但也给了使用者更自由的空间。更多细节请参考 <a href="https://github.com/nstrayer/datadrivencv" class="uri">https://github.com/nstrayer/datadrivencv</a>。</p>
 </div>
 <div id="rmarkdown-bookdown" class="section level2 hasAnchor" number="4.4">
@@ -601,34 +616,34 @@ div.csl-indent {
 </p>
 </div>
 <p>为了演示用法，下面提供了一个最小的示例，包含同一个目录中的三个文件：</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb168-1"><a href="rmarkdown-working.html#cb168-1" aria-hidden="true" tabindex="-1"></a>directory</span>
-<span id="cb168-2"><a href="rmarkdown-working.html#cb168-2" aria-hidden="true" tabindex="-1"></a>  |- index.Rmd</span>
-<span id="cb168-3"><a href="rmarkdown-working.html#cb168-3" aria-hidden="true" tabindex="-1"></a>  |- 01-intro.Rmd</span>
-<span id="cb168-4"><a href="rmarkdown-working.html#cb168-4" aria-hidden="true" tabindex="-1"></a>  |- 02-analysis.Rmd</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb234-1"><a href="rmarkdown-working.html#cb234-1" aria-hidden="true" tabindex="-1"></a>directory</span>
+<span id="cb234-2"><a href="rmarkdown-working.html#cb234-2" aria-hidden="true" tabindex="-1"></a>  |- index.Rmd</span>
+<span id="cb234-3"><a href="rmarkdown-working.html#cb234-3" aria-hidden="true" tabindex="-1"></a>  |- 01-intro.Rmd</span>
+<span id="cb234-4"><a href="rmarkdown-working.html#cb234-4" aria-hidden="true" tabindex="-1"></a>  |- 02-analysis.Rmd</span></code></pre></div>
 <p>下面将显示每个文件的内容并解释它们的作用：</p>
 <ul>
 <li><p><strong>index.Rmd</strong>:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb169-1"><a href="rmarkdown-working.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb169-2"><a href="rmarkdown-working.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;一个最小的 bookdown 项目&quot;</span></span>
-<span id="cb169-3"><a href="rmarkdown-working.html#cb169-3" aria-hidden="true" tabindex="-1"></a><span class="an">site:</span><span class="co"> bookdown::bookdown_site</span></span>
-<span id="cb169-4"><a href="rmarkdown-working.html#cb169-4" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> bookdown::gitbook</span></span>
-<span id="cb169-5"><a href="rmarkdown-working.html#cb169-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb169-6"><a href="rmarkdown-working.html#cb169-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb169-7"><a href="rmarkdown-working.html#cb169-7" aria-hidden="true" tabindex="-1"></a><span class="fu"># 前言 {-}</span></span>
-<span id="cb169-8"><a href="rmarkdown-working.html#cb169-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb169-9"><a href="rmarkdown-working.html#cb169-9" aria-hidden="true" tabindex="-1"></a>内容</span></code></pre></div></li>
+<div class="sourceCode" id="cb235"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb235-1"><a href="rmarkdown-working.html#cb235-1" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb235-2"><a href="rmarkdown-working.html#cb235-2" aria-hidden="true" tabindex="-1"></a>title: &quot;一个最小的 bookdown 项目&quot;</span>
+<span id="cb235-3"><a href="rmarkdown-working.html#cb235-3" aria-hidden="true" tabindex="-1"></a>site: bookdown::bookdown_site</span>
+<span id="cb235-4"><a href="rmarkdown-working.html#cb235-4" aria-hidden="true" tabindex="-1"></a>output: bookdown::gitbook</span>
+<span id="cb235-5"><a href="rmarkdown-working.html#cb235-5" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb235-6"><a href="rmarkdown-working.html#cb235-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb235-7"><a href="rmarkdown-working.html#cb235-7" aria-hidden="true" tabindex="-1"></a># 前言 {-}</span>
+<span id="cb235-8"><a href="rmarkdown-working.html#cb235-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb235-9"><a href="rmarkdown-working.html#cb235-9" aria-hidden="true" tabindex="-1"></a>内容</span></code></pre></div></li>
 </ul>
 <p>第一个文件通常被称为 <code>index.Rmd</code>。它应该是提供 YAML 前端内容的唯一 R Markdown 文件，它还应该包含一个特殊的 YAML 字段 <code>site: bookdown::bookdown_site</code>，以便 <strong>rmarkdown</strong> 知道使用 <strong>bookdown</strong> 来构建所有 R Markdown 文件，而不是呈现单个 R Markdown 文件。可以使用任何 <strong>bookdown</strong>输出格式，例如 <code>bookdown::gitbook</code>、 <code>bookdown::pdf_book</code>、 <code>bookdown::word_document2</code> 以及 <code>bookdown::epub_book</code>。</p>
 <p>接下来的两个 R Markdown 文件是两个章节：</p>
 <ul>
 <li><p><strong>01-intro.Rmd:</strong></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb170-1"><a href="rmarkdown-working.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 第 1 章</span></span>
-<span id="cb170-2"><a href="rmarkdown-working.html#cb170-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-3"><a href="rmarkdown-working.html#cb170-3" aria-hidden="true" tabindex="-1"></a>这是第 1 章。</span></code></pre></div></li>
+<div class="sourceCode" id="cb236"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb236-1"><a href="rmarkdown-working.html#cb236-1" aria-hidden="true" tabindex="-1"></a># 第 1 章</span>
+<span id="cb236-2"><a href="rmarkdown-working.html#cb236-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb236-3"><a href="rmarkdown-working.html#cb236-3" aria-hidden="true" tabindex="-1"></a>这是第 1 章。</span></code></pre></div></li>
 <li><p><strong>02-analysis.Rmd</strong>:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb171-1"><a href="rmarkdown-working.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 第 2 章</span></span>
-<span id="cb171-2"><a href="rmarkdown-working.html#cb171-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb171-3"><a href="rmarkdown-working.html#cb171-3" aria-hidden="true" tabindex="-1"></a>这是第 2 章。</span></code></pre></div></li>
+<div class="sourceCode" id="cb237"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb237-1"><a href="rmarkdown-working.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 第 2 章</span></span>
+<span id="cb237-2"><a href="rmarkdown-working.html#cb237-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb237-3"><a href="rmarkdown-working.html#cb237-3" aria-hidden="true" tabindex="-1"></a>这是第 2 章。</span></code></pre></div></li>
 </ul>
 <p>要呈现这些 R Markdown 文件，应该调用 <code>bookdown::render_book('index.Rmd')</code> 而不是 <code>rmarkdown::render()</code>。在底端，<strong>bookdown</strong> 在默认情况下会将所有 R Markdown 文件合并为单个 R Markdown 并编译它。文件按字母顺序合并。这就是为什么在上面的例子中为文件名添加数字前缀的原因。</p>
 <p>事实上，可以通过很多设置来自定义一个 <strong>bookdown</strong> 项目。关于 <strong>bookdown</strong> 的更全面的概述，可以查看 <em>R Markdown Definitive Guide</em> 的第十八章 <a href="https://bookdown.org/yihui/rmarkdown/new-formats.html">“Creating New Formats”</a> <span class="citation">(<a href="#ref-rmarkdown2018" role="doc-biblioref">Xie, Allaire, and Grolemund 2018</a>)</span>。完整文档请参见书籍 <a href="https://bookdown.org/yihui/bookdown/"><strong>bookdown</strong></a> <span class="citation">(<a href="#ref-bookdown2016" role="doc-biblioref">Xie 2016</a>)</span>。</p>
@@ -648,19 +663,19 @@ div.csl-indent {
 <h4><span class="header-section-number">4.5.2.1</span> 安装 blogdown<a href="rmarkdown-working.html#steps-install" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在开始之前，用户需要确认个人主机已经安装最新版本的 R 和 RStudio。</p>
 <p>首先，通过以下一行命令从 CRAN 安装 blogdown 包：</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="rmarkdown-working.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 安装 blogdown</span></span>
-<span id="cb172-2"><a href="rmarkdown-working.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;blogdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="rmarkdown-working.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 安装 blogdown</span></span>
+<span id="cb238-2"><a href="rmarkdown-working.html#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;blogdown&quot;</span>)</span></code></pre></div>
 </div>
 <div id="steps-project" class="section level4 hasAnchor" number="4.5.2.2">
 <h4><span class="header-section-number">4.5.2.2</span> 创建项目<a href="rmarkdown-working.html#steps-project" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>一个网站可被视为一个 R 项目。想要创建一个新的网站项目，只需要按照下图提示，在 RStudio 菜单栏依次选择文件，新项目，新目录 （<code>File -&gt; New Project  -&gt; New Directory</code>）。完成后，选择用 blogdown 建设网站 （<code>Website using blogdown</code>），即可看到一个网站项目的具体设置界面。</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-36"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-81"></span>
 <img src="images/blog1.png" alt="在 RStudio 中创建一个新网页项目"  />
 <p class="caption">
 图 4.2: 在 RStudio 中创建一个新网页项目
 </p>
 </div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-82"></span>
 <img src="images/blog2.png" alt="基于 blogdown 创建一个新网页项目"  />
 <p class="caption">
 图 4.3: 基于 blogdown 创建一个新网页项目
@@ -671,20 +686,20 @@ div.csl-indent {
 <div id="steps-serve" class="section level4 hasAnchor" number="4.5.2.3">
 <h4><span class="header-section-number">4.5.2.3</span> 网站铺设<a href="rmarkdown-working.html#steps-serve" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>用户可以便捷的通过 RStudio 的基础功能在本地浏览自己的网页项目。用户既可以直接在控制台 （Console） 键入 <code>blogdown::serve_site()</code>，或在 RStudio 上方的插件 （<code>Addins</code>） 选项选择铺设网站 （<code>Serve Site</code>）。</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-38"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-83"></span>
 <img src="images/blog3.png" alt="通过控制台在本地浏览你的网站"  />
 <p class="caption">
 图 4.4: 通过控制台在本地浏览你的网站
 </p>
 </div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-39"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-84"></span>
 <img src="images/blog4.png" alt="通过插件的铺设选项在本地浏览你的网站"  />
 <p class="caption">
 图 4.5: 通过插件的铺设选项在本地浏览你的网站
 </p>
 </div>
 <p>然后 RStudio 应会显示与下图相似的页面。</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-40"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-85"></span>
 <img src="images/blog5.png" alt="在本地铺设网站"  />
 <p class="caption">
 图 4.6: 在本地铺设网站
@@ -696,8 +711,8 @@ div.csl-indent {
 <h4><span class="header-section-number">4.5.2.4</span> 内容编辑<a href="rmarkdown-working.html#steps-edit" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>位于 RStudio 的右下角，用户可以通过进入内容 <code>content</code> 文件夹来查看并编辑当下网站项目的所有内容页。作为一个初始例子，这里首先打开 2020 年 12 月 01 日的一个文件 <code>content/post/2020-12-01-r-rmarkdown/index.Rmd</code>。 可以注意到，打开的 <code>Rmarkdown/Rmd</code> 文件的最上方是含有标题 <code>title</code>，作者 <code>author</code> 等字眼的代码部分，而这个部分被称为 YAML 代码区 （用于设定网页形态）。 当编辑具体网页内容时，用户只需要在 YAML 代码区下方的空白部分进行编写即可。</p>
 <p>接下来，这里展示如何在网页中添加代码。如下图所示，只需添加一个 R 代码块，然后输入以下内容，代码就会自动展示在网页上。</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="rmarkdown-working.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb173-2"><a href="rmarkdown-working.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Orange)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="rmarkdown-working.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb239-2"><a href="rmarkdown-working.html#cb239-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Orange)</span></code></pre></div>
 <pre><code>##  Tree       age         circumference  
 ##  3:7   Min.   : 118.0   Min.   : 30.0  
 ##  1:7   1st Qu.: 484.0   1st Qu.: 65.5  
@@ -705,15 +720,15 @@ div.csl-indent {
 ##  2:7   Mean   : 922.1   Mean   :115.9  
 ##  4:7   3rd Qu.:1372.0   3rd Qu.:161.5  
 ##        Max.   :1582.0   Max.   :214.0</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="rmarkdown-working.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Orange, <span class="fu">aes</span>(<span class="at">x =</span> age, </span>
-<span id="cb175-2"><a href="rmarkdown-working.html#cb175-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> circumference, </span>
-<span id="cb175-3"><a href="rmarkdown-working.html#cb175-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> Tree)) <span class="sc">+</span></span>
-<span id="cb175-4"><a href="rmarkdown-working.html#cb175-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb175-5"><a href="rmarkdown-working.html#cb175-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb175-6"><a href="rmarkdown-working.html#cb175-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb175-7"><a href="rmarkdown-working.html#cb175-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="rmarkdown-working.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Orange, <span class="fu">aes</span>(<span class="at">x =</span> age,</span>
+<span id="cb241-2"><a href="rmarkdown-working.html#cb241-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> circumference,</span>
+<span id="cb241-3"><a href="rmarkdown-working.html#cb241-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> Tree)) <span class="sc">+</span></span>
+<span id="cb241-4"><a href="rmarkdown-working.html#cb241-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb241-5"><a href="rmarkdown-working.html#cb241-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb241-6"><a href="rmarkdown-working.html#cb241-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb241-7"><a href="rmarkdown-working.html#cb241-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p>此时，如果编辑中的网站项目已经在本地浏览器中打开，用户只需要点击左上角的保存，几秒后即可在浏览器内看到如下图的内容。如果此时用户并没有在本地浏览网页，点击编译 <code>knit</code>，网站便会在本地的 RStudio 自动生成。</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-42"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-87"></span>
 <img src="images/blog6.png" alt="给 Rmd 文件添加 R 代码"  />
 <p class="caption">
 图 4.7: 给 Rmd 文件添加 R 代码
@@ -724,25 +739,25 @@ div.csl-indent {
 <h4><span class="header-section-number">4.5.2.5</span> 网站配置<a href="rmarkdown-working.html#steps-configure" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>除了通过编辑 <code>Rmd</code> 文件来实现网站内容的编辑外，用户还可以通过修改 <code>config.yaml</code> 文件内的设定来自定义自己的网站。</p>
 <p>例如，打开 <code>config.yaml</code> 文件后，用户可能会看到如下内容：</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="rmarkdown-working.html#cb176-1" aria-hidden="true" tabindex="-1"></a>baseurl<span class="sc">:</span> <span class="er">/</span></span>
-<span id="cb176-2"><a href="rmarkdown-working.html#cb176-2" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> A Hugo website</span>
-<span id="cb176-3"><a href="rmarkdown-working.html#cb176-3" aria-hidden="true" tabindex="-1"></a>theme<span class="sc">:</span> hugo<span class="sc">-</span>lithium</span>
-<span id="cb176-4"><a href="rmarkdown-working.html#cb176-4" aria-hidden="true" tabindex="-1"></a>ignoreFiles<span class="sc">:</span></span>
-<span id="cb176-5"><a href="rmarkdown-working.html#cb176-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \.Rmd<span class="sc">$</span></span>
-<span id="cb176-6"><a href="rmarkdown-working.html#cb176-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \.Rmarkdown<span class="sc">$</span></span>
-<span id="cb176-7"><a href="rmarkdown-working.html#cb176-7" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> _cache<span class="sc">$</span></span>
-<span id="cb176-8"><a href="rmarkdown-working.html#cb176-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \.knit\.md<span class="sc">$</span></span>
-<span id="cb176-9"><a href="rmarkdown-working.html#cb176-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \.utf8\.md<span class="sc">$</span></span>
-<span id="cb176-10"><a href="rmarkdown-working.html#cb176-10" aria-hidden="true" tabindex="-1"></a>permalinks<span class="sc">:</span></span>
-<span id="cb176-11"><a href="rmarkdown-working.html#cb176-11" aria-hidden="true" tabindex="-1"></a>  post<span class="sc">:</span> <span class="er">/:</span>year<span class="sc">/</span><span class="er">:</span>month<span class="sc">/</span><span class="er">:</span>day<span class="sc">/</span><span class="er">:</span>slug<span class="sc">/</span></span>
-<span id="cb176-12"><a href="rmarkdown-working.html#cb176-12" aria-hidden="true" tabindex="-1"></a>menu<span class="sc">:</span></span>
-<span id="cb176-13"><a href="rmarkdown-working.html#cb176-13" aria-hidden="true" tabindex="-1"></a>  main<span class="sc">:</span></span>
-<span id="cb176-14"><a href="rmarkdown-working.html#cb176-14" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> name<span class="sc">:</span> About</span>
-<span id="cb176-15"><a href="rmarkdown-working.html#cb176-15" aria-hidden="true" tabindex="-1"></a>      url<span class="sc">:</span> <span class="er">/</span>about<span class="sc">/</span></span>
-<span id="cb176-16"><a href="rmarkdown-working.html#cb176-16" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> name<span class="sc">:</span> GitHub</span>
-<span id="cb176-17"><a href="rmarkdown-working.html#cb176-17" aria-hidden="true" tabindex="-1"></a>      url<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>rstudio<span class="sc">/</span>blogdown</span>
-<span id="cb176-18"><a href="rmarkdown-working.html#cb176-18" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> name<span class="sc">:</span> Twitter</span>
-<span id="cb176-19"><a href="rmarkdown-working.html#cb176-19" aria-hidden="true" tabindex="-1"></a>      url<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>twitter.com<span class="sc">/</span>rstudio</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="rmarkdown-working.html#cb242-1" aria-hidden="true" tabindex="-1"></a>baseurl<span class="sc">:</span> <span class="er">/</span></span>
+<span id="cb242-2"><a href="rmarkdown-working.html#cb242-2" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> A Hugo website</span>
+<span id="cb242-3"><a href="rmarkdown-working.html#cb242-3" aria-hidden="true" tabindex="-1"></a>theme<span class="sc">:</span> hugo<span class="sc">-</span>lithium</span>
+<span id="cb242-4"><a href="rmarkdown-working.html#cb242-4" aria-hidden="true" tabindex="-1"></a>ignoreFiles<span class="sc">:</span></span>
+<span id="cb242-5"><a href="rmarkdown-working.html#cb242-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \.Rmd<span class="sc">$</span></span>
+<span id="cb242-6"><a href="rmarkdown-working.html#cb242-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \.Rmarkdown<span class="sc">$</span></span>
+<span id="cb242-7"><a href="rmarkdown-working.html#cb242-7" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> _cache<span class="sc">$</span></span>
+<span id="cb242-8"><a href="rmarkdown-working.html#cb242-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \.knit\.md<span class="sc">$</span></span>
+<span id="cb242-9"><a href="rmarkdown-working.html#cb242-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \.utf8\.md<span class="sc">$</span></span>
+<span id="cb242-10"><a href="rmarkdown-working.html#cb242-10" aria-hidden="true" tabindex="-1"></a>permalinks<span class="sc">:</span></span>
+<span id="cb242-11"><a href="rmarkdown-working.html#cb242-11" aria-hidden="true" tabindex="-1"></a>  post<span class="sc">:</span> <span class="er">/:</span>year<span class="sc">/</span><span class="er">:</span>month<span class="sc">/</span><span class="er">:</span>day<span class="sc">/</span><span class="er">:</span>slug<span class="sc">/</span></span>
+<span id="cb242-12"><a href="rmarkdown-working.html#cb242-12" aria-hidden="true" tabindex="-1"></a>menu<span class="sc">:</span></span>
+<span id="cb242-13"><a href="rmarkdown-working.html#cb242-13" aria-hidden="true" tabindex="-1"></a>  main<span class="sc">:</span></span>
+<span id="cb242-14"><a href="rmarkdown-working.html#cb242-14" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> name<span class="sc">:</span> About</span>
+<span id="cb242-15"><a href="rmarkdown-working.html#cb242-15" aria-hidden="true" tabindex="-1"></a>      url<span class="sc">:</span> <span class="er">/</span>about<span class="sc">/</span></span>
+<span id="cb242-16"><a href="rmarkdown-working.html#cb242-16" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> name<span class="sc">:</span> GitHub</span>
+<span id="cb242-17"><a href="rmarkdown-working.html#cb242-17" aria-hidden="true" tabindex="-1"></a>      url<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>rstudio<span class="sc">/</span>blogdown</span>
+<span id="cb242-18"><a href="rmarkdown-working.html#cb242-18" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> name<span class="sc">:</span> Twitter</span>
+<span id="cb242-19"><a href="rmarkdown-working.html#cb242-19" aria-hidden="true" tabindex="-1"></a>      url<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>twitter.com<span class="sc">/</span>rstudio</span></code></pre></div>
 <p>只需在相应的部分进行编辑，用户就可以根据个人的需求自定义自己的网站，如：</p>
 <ul>
 <li><code>title: 我的网站</code> ：将网站标题修改为“我的网站”</li>
@@ -766,13 +781,13 @@ div.csl-indent {
 <div id="steps-netlify" class="section level4 hasAnchor" number="4.5.2.8">
 <h4><span class="header-section-number">4.5.2.8</span> Netlify<a href="rmarkdown-working.html#steps-netlify" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Netlify 提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 GitHub 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 <code>Public/</code> 的文件夹拖入 Netlify 部署页面即可。</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-44"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-89"></span>
 <img src="images/blog7.png" alt="在网站项目文件夹中找到名为Public的文件夹"  />
 <p class="caption">
 图 4.8: 在网站项目文件夹中找到名为Public的文件夹
 </p>
 </div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-90"></span>
 <img src="images/blog8.png" alt="将此文件夹拖拽入部署页面的部署区域即可完成部署"  />
 <p class="caption">
 图 4.9: 将此文件夹拖拽入部署页面的部署区域即可完成部署
@@ -780,7 +795,7 @@ div.csl-indent {
 </div>
 <p>一般只需几秒钟，网站就会被成功部署在 Netlify 的服务器上，并可以通过一个格式为 <code>random-word-12345.netlify.com</code> 的域名访问。此域名是 Netlify 自动生成的一个子域名，并支持通过设置修改至自己偏好的字眼。Netlify 提供的一体化部署服务省去了用户在其他服务器上实现自定义设置时往往需要面对的许多麻烦。</p>
 <p>不过需要注意的是，每次在本地的 RStudio 编辑完个人网站后，用户需要在控制台输入以下代码来更新你的公共文件夹 <code>Public/</code>。只有在更新完成后，才可以通过在 Netlify 上次最新版本的 <code>Public/</code> 文件夹来部署你改动过后的网站。</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="rmarkdown-working.html#cb177-1" aria-hidden="true" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">build_site</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="rmarkdown-working.html#cb243-1" aria-hidden="true" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">build_site</span>()</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -798,34 +813,34 @@ div.csl-indent {
 |- README.md：使用 Markdown 语法的 README 文件，用于说明项目相关信息；
 |- analysis.Rmd：使用 R Markdown 语法的分析文件（可以有多个）。</code></pre>
 <p><code>analysis.Rmd</code> 是支撑材料中的核心文件。它是一个常规的 R Markdown 文档。举例来说，下面的头文件中分别指定了 3 种不同的输出样式。</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb179-1"><a href="rmarkdown-working.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb179-2"><a href="rmarkdown-working.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Your Title</span></span>
-<span id="cb179-3"><a href="rmarkdown-working.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;your@email.com&quot;</span></span>
-<span id="cb179-4"><a href="rmarkdown-working.html#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2022-5-15&quot;</span></span>
-<span id="cb179-5"><a href="rmarkdown-working.html#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb179-6"><a href="rmarkdown-working.html#cb179-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
-<span id="cb179-7"><a href="rmarkdown-working.html#cb179-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb179-8"><a href="rmarkdown-working.html#cb179-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb179-9"><a href="rmarkdown-working.html#cb179-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_float</span><span class="kw">:</span></span>
-<span id="cb179-10"><a href="rmarkdown-working.html#cb179-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">collapsed</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span>
-<span id="cb179-11"><a href="rmarkdown-working.html#cb179-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">smooth_scroll</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span>
-<span id="cb179-12"><a href="rmarkdown-working.html#cb179-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">md_document</span><span class="kw">:</span></span>
-<span id="cb179-13"><a href="rmarkdown-working.html#cb179-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">variant</span><span class="kw">:</span><span class="at"> markdown_github</span></span>
-<span id="cb179-14"><a href="rmarkdown-working.html#cb179-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf_document</span><span class="kw">:</span></span>
-<span id="cb179-15"><a href="rmarkdown-working.html#cb179-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb179-16"><a href="rmarkdown-working.html#cb179-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;3&#39;</span></span>
-<span id="cb179-17"><a href="rmarkdown-working.html#cb179-17" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb245-1"><a href="rmarkdown-working.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb245-2"><a href="rmarkdown-working.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Your Title</span></span>
+<span id="cb245-3"><a href="rmarkdown-working.html#cb245-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;your@email.com&quot;</span></span>
+<span id="cb245-4"><a href="rmarkdown-working.html#cb245-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2022-5-15&quot;</span></span>
+<span id="cb245-5"><a href="rmarkdown-working.html#cb245-5" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb245-6"><a href="rmarkdown-working.html#cb245-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb245-7"><a href="rmarkdown-working.html#cb245-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb245-8"><a href="rmarkdown-working.html#cb245-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb245-9"><a href="rmarkdown-working.html#cb245-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_float</span><span class="kw">:</span></span>
+<span id="cb245-10"><a href="rmarkdown-working.html#cb245-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">collapsed</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span>
+<span id="cb245-11"><a href="rmarkdown-working.html#cb245-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">smooth_scroll</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span>
+<span id="cb245-12"><a href="rmarkdown-working.html#cb245-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">md_document</span><span class="kw">:</span></span>
+<span id="cb245-13"><a href="rmarkdown-working.html#cb245-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">variant</span><span class="kw">:</span><span class="at"> markdown_github</span></span>
+<span id="cb245-14"><a href="rmarkdown-working.html#cb245-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf_document</span><span class="kw">:</span></span>
+<span id="cb245-15"><a href="rmarkdown-working.html#cb245-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb245-16"><a href="rmarkdown-working.html#cb245-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;3&#39;</span></span>
+<span id="cb245-17"><a href="rmarkdown-working.html#cb245-17" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>为了让生成的图片能够妥善的存放到 <code>figures</code> 文件夹，需要在头文件后面添加一些设置。</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="rmarkdown-working.html#cb180-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-2"><a href="rmarkdown-working.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">r</span></span>
-<span id="cb180-3"><a href="rmarkdown-working.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="at">knitr::opts_chunk$set(</span></span>
-<span id="cb180-4"><a href="rmarkdown-working.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="at">  fig.width = 8,</span></span>
-<span id="cb180-5"><a href="rmarkdown-working.html#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="at">  fig.asp=0.618,</span></span>
-<span id="cb180-6"><a href="rmarkdown-working.html#cb180-6" aria-hidden="true" tabindex="-1"></a><span class="at">  dpi = 300,</span></span>
-<span id="cb180-7"><a href="rmarkdown-working.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="at">  warning = FALSE,</span></span>
-<span id="cb180-8"><a href="rmarkdown-working.html#cb180-8" aria-hidden="true" tabindex="-1"></a><span class="at">  fig.path = &quot;figures/Figure-&quot;</span></span>
-<span id="cb180-9"><a href="rmarkdown-working.html#cb180-9" aria-hidden="true" tabindex="-1"></a><span class="at">)</span></span>
-<span id="cb180-10"><a href="rmarkdown-working.html#cb180-10" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="rmarkdown-working.html#cb246-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb246-2"><a href="rmarkdown-working.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">r</span></span>
+<span id="cb246-3"><a href="rmarkdown-working.html#cb246-3" aria-hidden="true" tabindex="-1"></a><span class="at">knitr::opts_chunk$set(</span></span>
+<span id="cb246-4"><a href="rmarkdown-working.html#cb246-4" aria-hidden="true" tabindex="-1"></a><span class="at">  fig.width = 8,</span></span>
+<span id="cb246-5"><a href="rmarkdown-working.html#cb246-5" aria-hidden="true" tabindex="-1"></a><span class="at">  fig.asp=0.618,</span></span>
+<span id="cb246-6"><a href="rmarkdown-working.html#cb246-6" aria-hidden="true" tabindex="-1"></a><span class="at">  dpi = 300,</span></span>
+<span id="cb246-7"><a href="rmarkdown-working.html#cb246-7" aria-hidden="true" tabindex="-1"></a><span class="at">  warning = FALSE,</span></span>
+<span id="cb246-8"><a href="rmarkdown-working.html#cb246-8" aria-hidden="true" tabindex="-1"></a><span class="at">  fig.path = &quot;figures/Figure-&quot;</span></span>
+<span id="cb246-9"><a href="rmarkdown-working.html#cb246-9" aria-hidden="true" tabindex="-1"></a><span class="at">)</span></span>
+<span id="cb246-10"><a href="rmarkdown-working.html#cb246-10" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>这里将图片的默认宽度和比例分别设置为 8 英寸和 0.618（黄金分割比例），并设置图片分辨率为 300 dpi；与此同时，不显示 R 运行过程中的警告信息；此外，还将图片输出的路径指定到 <code>figures</code> 文件夹中。</p>
 </div>
 <div id="分析报告的正文" class="section level3 hasAnchor" number="4.6.2">
@@ -846,8 +861,8 @@ div.csl-indent {
 <li>在头文件中加入 <code>output: github_document</code>；</li>
 <li>使用下面的命令将 Rmd 文件编译为 Markdown 文件。注意这里指定了 GitHub Flavored Markdown（gfm）作为输出格式。</li>
 </ul>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="rmarkdown-working.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmarkdown)</span>
-<span id="cb182-2"><a href="rmarkdown-working.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(<span class="st">&quot;analysis.Rmd&quot;</span>,<span class="fu">md_document</span>(<span class="at">variant =</span> <span class="st">&quot;gfm&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="rmarkdown-working.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmarkdown)</span>
+<span id="cb248-2"><a href="rmarkdown-working.html#cb248-2" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(<span class="st">&quot;analysis.Rmd&quot;</span>,<span class="fu">md_document</span>(<span class="at">variant =</span> <span class="st">&quot;gfm&quot;</span>))</span></code></pre></div>
 
 </div>
 </div>
@@ -875,8 +890,8 @@ Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Defi
 </div>
 <div class="footnotes">
 <hr />
-<ol start="19">
-<li id="fn19"><p>2019 年 7 月 31 日，在国际统计学年会（JSM）上，统计学会会长委员会（COPSS）将当年的考普斯会长奖（COPSS Presidents’ Award）颁发给了 RStudio 公司的首席科学家、R 语言软件包开发者 Hadley Wickham，以表彰他在统计应用领域做出的卓越贡献。考普斯会长奖是统计学领域的最高奖项，由美国统计协会（ASA）、加拿大统计学会（SSC）、国际数理统计学会（IMS）、国际生物统计学会北美东部地区（ENAR）、国际生物统计学会北美西部地区（WNAR）发起，被誉为“统计学界的诺贝尔奖”，每年颁发一次，授予一位在统计学领域作出杰出贡献的青年学者。考普斯会长奖此前几乎都颁发给统计学界的基础研究、应用研究学者，而 Hadley Wickham 是第一位 作为软件开发者的获奖者。Hadley 在 R 语言圈是个如雷贯耳的名字，他创建并发布了很多流行的 R 包，包括著名图形可视化软件包 <code>ggplot2</code> ，以及其他著名的软件包 <code>dplyr</code>、<code>tidyverse</code>等。<a href="rmarkdown-working.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<ol start="26">
+<li id="fn26"><p>2019 年 7 月 31 日，在国际统计学年会（JSM）上，统计学会会长委员会（COPSS）将当年的考普斯会长奖（COPSS Presidents’ Award）颁发给了 RStudio 公司的首席科学家、R 语言软件包开发者 Hadley Wickham，以表彰他在统计应用领域做出的卓越贡献。考普斯会长奖是统计学领域的最高奖项，由美国统计协会（ASA）、加拿大统计学会（SSC）、国际数理统计学会（IMS）、国际生物统计学会北美东部地区（ENAR）、国际生物统计学会北美西部地区（WNAR）发起，被誉为“统计学界的诺贝尔奖”，每年颁发一次，授予一位在统计学领域作出杰出贡献的青年学者。考普斯会长奖此前几乎都颁发给统计学界的基础研究、应用研究学者，而 Hadley Wickham 是第一位 作为软件开发者的获奖者。Hadley 在 R 语言圈是个如雷贯耳的名字，他创建并发布了很多流行的 R 包，包括著名图形可视化软件包 <code>ggplot2</code> ，以及其他著名的软件包 <code>dplyr</code>、<code>tidyverse</code>等。<a href="rmarkdown-working.html#fnref26" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>

@@ -22,8 +22,13 @@ blockquote > p:first-child {
   text-align: inherit;
 }
 
-.no-h-scroll  pre > code > span {
+.no-h-scroll pre > code > span {
   display: block;
   line-height: 1.25;
   white-space: normal;
+}
+
+.cols {
+  display: flex;
+  gap: 5px;
 }
