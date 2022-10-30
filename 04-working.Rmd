@@ -4,24 +4,24 @@
 
 使用者有的时候可能需要批量发送定制版邮件，有些软件提供了相应选项，利用 R Markdown 也可以实现这一功能。具体而言，借助 `blastula` 包\index{R package!blastula}\index{email} [@R-blastula]，可以将 R Markdown 文档呈现在电子邮件正文并发送电子邮件。要将 R Markdown 文档呈现到电子邮件中，需要在文档中使用输出格式 `blastula::blastula_email`，例如：
 
-````md
+````{verbatim}
 ---
 title: 周报
 output: blastula::blastula_email
---- 
+---
 
 尊敬的客户，
 
 以下是对 `iris` 数据的分析：
 
-```{r}`r ''`
+```{r}
 summary(iris)
 plot(iris[, -5])
 ```
 
 若感兴趣请及时回复。
 
-祝好，  
+祝好，
 张三
 ````
 
@@ -76,10 +76,10 @@ usethis::use_mit_license("Sébastien Rochette")
 
 接下来需要按照模板的引导来编写函数，例如模板提供了示例函数：
 
-````md
+````{verbatim}
 ```{r function-add_one}
 #' Add one to any value
-#' 
+#'
 #' @param value A numeric value
 #'
 #' @return Numeric. value + 1
@@ -111,7 +111,7 @@ add_one <- function(value) {
 
 - `@examples`：函数的示例，但是使用 `fusen` 制作 R 包时可以直接在对应函数下方添加以 `examples` 为名称的代码框：
 
-````md
+````{verbatim}
 ```{r examples-add_one}
 add_one(12)
 add_one(56)
@@ -120,7 +120,7 @@ add_one(56)
 
 这样就会自动在其上方的函数描述中加入对应的示例。在示例后面还需要加入测试函数来确保函数可以正常运行，这里的 `test_that()` 函数就来自于一开始调用的 `testthat` 包：
 
-````md
+````{verbatim}
 ```{r tests-add_one}
 test_that("add_one works", {
   expect_equal(add_one(12), 13)
@@ -237,15 +237,15 @@ directory
 
 - **index.Rmd**:
 
-  ````md
+  ````{verbatim}
   ---
   title: "一个最小的 bookdown 项目"
   site: bookdown::bookdown_site
   output: bookdown::gitbook
   ---
-  
+
   # 前言 {-}
-  
+
   内容
   ````
 
@@ -255,9 +255,9 @@ directory
 
 - **01-intro.Rmd:**
 
-  ````md
+  ````{verbatim}
   # 第 1 章
-  
+
   这是第 1 章。
   ````
 
@@ -265,7 +265,7 @@ directory
 
   ```md
   # 第 2 章
-  
+
   这是第 2 章。
   ```
 
@@ -342,12 +342,12 @@ knitr::include_graphics("images/blog5.png", dpi = NA)
 library(ggplot2)
 summary(Orange)
 
-ggplot(Orange, aes(x = age, 
-                   y = circumference, 
+ggplot(Orange, aes(x = age,
+                   y = circumference,
                    color = Tree)) +
   geom_point() +
   geom_line() +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_bw()
 ```
 

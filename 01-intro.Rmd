@@ -21,7 +21,7 @@
 在谈到开发经验时，他谈到：
 
 > 不用看远方，就看你自身能感受到的非常痛苦的问题。如果你能解决自己的一个非常痛而且频繁出现的痛点，那么有相当大的概率你也会造福别人，从而产生重大影响。
-> 
+>
 > 解决的问题越基础越好，比如大家常用工作流程中必经的一步，这一步也许已经有现成解决方案了，但每个月总有那么三十来天让你对这个解决方案感到不满。越基础的问题，影响的人群就越广。
 >   —— 谢益辉（2018）
 
@@ -67,7 +67,7 @@
 R Markdown 支持 HTML, PDF, Word, EPUB 等多种输出格式，以及与各种输出格式配套且开箱即用的主题系统。用户可以将工作重心放在内容创作上，即在写作完成后只需一键输出，让 R Markdown 的自动化的编译机制代劳形式上的调整。例如，只需要几行代码，同一个 R Markdown 文档就可以生成图 \@ref(fig:three-output-demo) 中 HTML，PDF 和 Word 三种格式的文档。
 
 ```{r three-output-demo, fig.show = "hold", fig.align='default', out.width = "33%", echo = FALSE, fig.cap = "同一个 R Markdown 文档可以生成多种格式的输出"}
-knitr::include_graphics(paste0("examples/", c("three-output-html.png", "three-output-pdf.png", "three-output-word.jpg")))
+knitr::include_graphics(paste0("examples/", c("three-output-html.png", "three-output-pdf.png", "three-output-word.png")))
 ```
 
 除了多样的输出格式外，R Markdown 驱动的数据分析报告还解决了很多数据分析报告写作中的痛点：
@@ -125,7 +125,7 @@ knitr::include_graphics("images/01-notebook-preview.png")
 如图 \@ref(fig:notebook-preview) 所示，R Markdown 笔记本支持插入代码，保存代码块的运行结果，添加格式化文本和批注等功能。R Markdown 的交互特性让学习记录变得十分自然：用户通常添加一段代码，运行后得到预料之中/之外的可视化结果，随后在下面的多个代码块中反复调整某个参数，直至得到想要的结果。在此过程中用户常常会发现更多相关的包或代码，写下对不同代码的总结，并链接网络上他人的用例，甚至开始撰写自动化脚本。最后，用户可以一键生成包含了这一系列思考和学习过程的 HTML 或 PDF 精美文档。图 \@ref(fig:notebook-preview) 是一个 PDF 笔记文档示例。
 
 ```{r notebook-preview2, echo = FALSE, fig.cap = "用 R Markdown 生成 PDF 学习笔记"}
-knitr::include_graphics("images/01-notebook-preview2.jpg")
+knitr::include_graphics("images/01-notebook-preview2.png")
 ```
 
 即便用户的工作不涉及数据分析或代码运行，使用 R Markdown 作为笔记软件也有许多好处。用户可以流畅的使用版本控制工具，管理笔记依赖的数据，图片的资源等。用户可以将长篇笔记拆分为多个源文档，用纯文本文件管理输出设置，形成清晰的项目结构。[RPubs](https://rpubs.com/) 和 [bookdown](https://bookdown.org/) 等平台提供了免费的 R Markdown 文档发布服务，以此来发布自己的笔记与心得，便利他人和未来的自己。
@@ -195,7 +195,7 @@ knitr::include_graphics("images/01-flexdashboard.png")
 
 
 ```{r dynamic-document, fig.cap = "根据 Shiny 输入动态生成 R Markdown 文档", echo = FALSE}
-knitr::include_graphics("images/01-dynamic-document.jpg")
+knitr::include_graphics("images/01-dynamic-document.png")
 ```
 
 图 \@ref(fig:dynamic-document) 是一个结合 Shiny 包动态生成 R Markdown 输出文档的例子。R Markdown 允许用户上传某个数据集，挑选需要数据清理的维度，随后把清理结果动态地传递给 `rmarkdonw::render()`，从而生成右侧截图所示的输出文档。

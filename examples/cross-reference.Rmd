@@ -1,10 +1,11 @@
 ---
 title: '交叉引用图片和表格'
-output: 
-  bookdown::html_document2: default 
+output:
+  bookdown::html_document2: default
 ---
 
-# 引用图片
+# 引用图片 {#ref-figure}
+
 
 ```{r cars-plot, fig.cap = "一张散点图"}
 plot(cars)
@@ -18,11 +19,20 @@ plot(cars)
 plot(iris)
 ```
 
-## 引用表格
+## 引用表格 {#ref-table}
 
 引用表格与图片类似，如表 \@ref(tab:iris-table) 所示。
- 
+
 ```{r iris-table}
 knitr::kable(head(iris), caption = "一个表格")
 ```
 
+## 引用公式 {#ref-equation}
+
+第 \@ref(ref-figure) 节和第 \@ref(ref-table) 展示了图片和表格的交叉引用，下面是对公式的引用。
+
+见公式 \@ref(eq:mean)。
+
+\begin{equation}
+\bar{X} = \frac{\sum_{i=1}^n X_i}{n} (\#eq:mean)
+\end{equation}
