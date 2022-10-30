@@ -30,4 +30,5 @@ blockquote > p:first-child {
 
 .cols {
   display: flex;
+  gap: 5px;
 }

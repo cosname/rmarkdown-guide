@@ -2,7 +2,7 @@
 
 ## 使用 R Markdown 在工作中管理项目 {#project-manage}
 
-在工作当中，在处理比较大的项目或报告时，将所有的文本和代码都放在一个 R Markdown 文档中可能会导致单个文档过大，不便于查找或者阅读。更好的方式是把它们组织成更小的单元。本节将介绍一些方法，来帮助使用者更好地组织与 R Markdown 相关的多个文件。
+处理比较大的项目或报告时，将所有的文本和代码都放在一个 R Markdown 文档中可能会导致单个文档过大，不便于查找或者阅读。更好的方式是把它们组织成更小的单元。本节将介绍一些方法，来帮助使用者更好地组织与 R Markdown 相关的多个文件。
 
 ### 来自外部的 R 脚本 {#external-r}
 
@@ -15,9 +15,9 @@ source("your-script.R", local = knitr::knit_global())
 ```
 ````
 
-最好显式地使用 `source()` 中的 `local` 或 `sys.source()` 中的 `envir` 来确保代码在正确的环境中被运行，即 `knitr::knit_global()`\index{knitr!knit\_global()}。否则的话，它们的默认值可能并不能提供合适的环境：可能最终会在错误的环境中创建变量，并且发现在后面的代码块中找不到某些对象。
+这里 `source()` 设置 `local` 参数为 knitr 的编译环境，即 `knitr::knit_global()`\index{knitr!knit\_global()}。这可以确保脚本中定义的对象能被所有代码块正确引用。
 
-接下来，在 R Markdown 文档中，可以使用这些脚本中创建的对象（例如，数据对象或函数）。这种方法不仅可以让 R Markdown 文档更简洁，而且可以更方便地开发 R 代码（例如，使用纯 R 脚本调试 R 代码通常比使用 R Markdown 更容易）。
+接下来，R Markdown 文档的任意代码块都可以使用这些脚本中创建的对象（例如，数据对象或函数）。这种方法不仅可以让 R Markdown 文档更简洁，而且可以更方便地开发和调试 R 代码。
 
 需要注意的是，上面的例子中使用了 `include = FALSE`\index{chunk option!include}，从而只执行脚本而不显示任何输出。如果想要输出，则可以删除这个块选项，或者使用第 \@ref(hide-one) 节中的块选项来有选择地隐藏或显示不同类型的输出。
 
@@ -131,6 +131,7 @@ BOSS_MODE <- FALSE
 
 ```{r, child=if (!BOSS_MODE) 'appendix.Rmd'}
 ```
+
 ````
 
 或者如果正在写一篇关于一场尚未发生的足球比赛的新闻报道（例如德国和巴西之间的比赛），则可以根据结果包含不同的子文档，例如，`child = if (winner == 'brazil') 'brazil.Rmd' else 'germany.Rmd'`。然后，一旦比赛结束，就可以立即发表报告。
@@ -146,13 +147,13 @@ cat(res, sep = '\n')
 
 函数 `knit_child()` 返回已编译输出的字符向量，可以使用 `cat()` 和块选项 `results = 'asis'`\index{chunk option!results} 来将其写回主文档。
 
-甚至可以使用子文档作为模板，并使用不同的参数重复调用 `knit_child()`。下面的例子使用 `mpg` 作为响应变量，而 `mtcars` 数据中的其他变量作为解释变量进行回归：
+子文档也可以作为模板，并使用不同的参数重复调用 `knit_child()`。下面的例子使用 `mpg` 作为响应变量，而 `mtcars` 数据中的其他变量作为解释变量进行回归：
 
 ````{verbatim}
 ```{r, echo=FALSE, results='asis'}
 res <- lapply(setdiff(names(mtcars), 'mpg'), function(x) {
   knitr::knit_child(text = c(
-    '## 对 "`r knitr::inline_expr('x')`" 跑回归 ',
+    '## 对 `r knitr::inline_expr("x")` 跑回归',
     '',
     '```{r}',
     'lm(mpg ~ ., data = mtcars[, c("mpg", x)])',
@@ -167,7 +168,7 @@ cat(unlist(res), sep = '\n')
 为了使上面的示例自成一体，上例使用 `knit_child()` 的 `text` 参数而不是文件输入来传递要编译的 R Markdown 内容。当然可以将内容写入一个文件，并将路径传递给 `knit_child()`。例如，可以将下面的内容保存到一个名为 `template.Rmd` 的文件中：
 
 ````{verbatim}
-## 对 "`r knitr::inline_expr('x')`" 跑回归
+## 对 `r knitr::inline_expr('x')` 跑回归
 
 ```{r}
 lm(mpg ~ ., data = mtcars[, c("mpg", x)])
