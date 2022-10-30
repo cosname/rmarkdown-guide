@@ -1306,6 +1306,12 @@
       "Hash": "714cfbdbc0775404c8df7894dfed0165",
       "Requirements": []
     },
+    "xaringanExtra": {
+      "Package": "xaringanExtra",
+      "Version": "0.7.0",
+      "Source": "Repository",
+      "Requirements": []
+    },
     "xfun": {
       "Package": "xfun",
       "Version": "0.31",
