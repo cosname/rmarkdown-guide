@@ -827,7 +827,7 @@ date: "`r Sys.Date()`"
 
 ### 代码块选项
 
-读者可以在 <https://yihui.org/knitr/options/> 查看所有代码块选项的用法，这里列出一些常见选项：
+读者可以在 <https://yihui.org/knitr/options/> 查看所有代码块选项的用法，这里列出一些常见选项和它们的取值类型。第 \@ref(#chunk-options) 节详细展示了更多例子。
 
 - `eval`: 是否运行该代码块
 
@@ -961,7 +961,7 @@ knitr::kable(head(iris), caption = "iris 数据集")
 
 生成的表格如表 \@ref(tab:iris-table) 所示。
 
-```{r iris-table, tab.cap = "iris 数据集"}
+```{r iris-table, tab.cap = "iris 数据集", echo = FALSE}
 knitr::kable(head(cars), caption = "iris 数据集")
 ```
 
@@ -1205,7 +1205,7 @@ output:
 
 生成的 PDF 文档如图 \@ref(fig:insert-index) 所示。
 
-```{r insert-index, fig.cap = "在 PDF 文档中插入索引"}
+```{r insert-index, fig.cap = "在 PDF 文档中插入索引", echo = FALSE}
 knitr::include_graphics("images/02-index.png")
 ```
 
@@ -1395,7 +1395,7 @@ example_graph <-
 render_graph(example_graph, layout = "nicely")
 ```
 
-其他能生成流程图的 R 包包括：[nomnoml](https://github.com/rstudio/nomnoml)，diagram，[dagitty](https://github.com/jtextor/dagitty)，[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
+其他能生成流程图的 R 包包括：[nomnoml](https://github.com/rstudio/nomnoml)、diagram、[dagitty](https://github.com/jtextor/dagitty)、[ggdadg](https://github.com/malcolmbarrett/ggdag) 和 [plantuml](https://github.com/rkrug/plantuml) 等。
 
 
 ## RStudio 图形化编辑器
@@ -1416,5 +1416,5 @@ knitr::include_graphics("images/02-visual-editing.png")
 knitr::include_graphics("images/02-visual-editing-insert-menu.png")
 ```
 
-读者可以在 <https://rstudio.github.io/visual-markdown-editing/> 了解更多知识。
+读者可以在 <https://rstudio.github.io/visual-markdown-editing/> 了解更多图形化编辑器的知识。
 
