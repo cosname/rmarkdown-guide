@@ -1257,7 +1257,7 @@ knitr::knit_engines$set(upper = function(options) {
 })
 ```
 
-`upper` 迎庆首先用 `\n` 合成一个完整的字符串，并用 `toupper()` 函数把所有字符转换为大写。注意 `toupper()` 仅在 chunk 选项 `eval = TRUE`\index{chunk option!eval} 时才应用，否则返回原始字符串。
+`upper` 引擎首先将代码向量合成一个完整的字符串，并用 `toupper()` 函数把所有字符转换为大写。注意 `toupper()` 仅在 chunk 选项 `eval = TRUE`\index{chunk option!eval} 时才应用，否则返回原始字符串。
 
 以上已经向读者们展示了如何在引擎函数中使用 `eval` 之类的块选项。类似地，考虑在函数体中添加 `if (options$results == 'hide') return()` 来隐藏 chunk 选项时的输出 `results = 'hide'`\index{chunk option!results} 。下面是一个使用 `upper` 引擎的例子：
 
