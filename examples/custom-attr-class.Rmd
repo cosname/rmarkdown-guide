@@ -1,0 +1,32 @@
+---
+output: html_document
+---
+
+定义 myClass 类：
+
+```{css, echo = FALSE}
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
+
+.myClass {
+    background-color: #f1f3f5;
+    padding: 0.4rem;
+    border-radius: 0.25rem;
+    border-left: 3px solid #31bae9;
+    border-bottom: none;
+    box-shadow: 0px 8px 5px -8px rgba(0,0,0,0.75);
+}
+
+.myClass code {
+    font-family: 'Fira Code', monospace;
+}
+```
+
+应用 myClass 类：
+
+```{r, class.source = "myClass", eval = FALSE}
+state.x77 |>
+    as.data.frame() |>
+    tibble::rownames_to_column("State") |>
+    dplyr::group_by(State) |>
+    dplyr::summarise(avg_murder_rate = mean(Murder))
+```

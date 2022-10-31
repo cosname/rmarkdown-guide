@@ -2,20 +2,20 @@
 title: 以编程的方式生成内容
 ---
 
-通过代码块选项 `results = 'asis'`，可以将文本作为原始的 Markdown 内容写出来，
+通过代码块选项 `results = 'asis'`，可以将文本输出为 Markdown。
 
 同时也可以与图片混合。
 
 ```{r, mtcars-plots, results='asis'}
 for (i in names(mtcars)) {
-  cat('\n\n# 变量 `', i, '` 的概要\n\n')
+  cat("\n\n# 变量 `", i, "` 的概要\n\n")
   x <- mtcars[, i]
   if (length(unique(x)) <= 6) {
-    cat('`', i, '` 是一个分类变量。\n\n')
-    plot(table(x), xlab = i, ylab = '频率', lwd = 10)
+    cat("`", i, "` 是一个分类变量。\n\n")
+    plot(table(x), xlab = i, ylab = "频率", lwd = 10)
   } else {
-    cat('连续变量 `', i, '` 的直方图。\n\n')
-    hist(x, xlab = i, main = '')
+    cat("连续变量 `", i, "` 的直方图。\n\n")
+    hist(x, xlab = i, main = "")
   }
 }
 ```

@@ -148,7 +148,7 @@ knitr::include_graphics("images/01-resume.png")
 原生的 R Markdown 包内置了生成简单静态网站的功能。简单来说，用户在一个 `.yml` 文件中自由定义网站的标题，导航栏，页面结构等元数据，而后创建数个 R Markdown 文档并在其中填充内容。最后，内置的站点生成器将每个 R Markdown 文档渲染为一个 HTML 页面输出。
 
 ```{r, echo = FALSE, fig.cap = "用 R Markdown 创建网站"}
-knitr::include_graphics("images/01-rmarkdown-wbesite.jpg")
+knitr::include_graphics("images/01-rmarkdown-wbesite.png")
 ```
 
 为满足创建更加复杂且精美的网站的需求，**blogdown** 包使用了第三方的开源静态网站生成器：Hugo。Hugo 是目前速度最快，最受欢迎的静态网站生成器之一。一般用户通常需要用命令行的方式与之交互。不过作为幸福的 R 用户，读者可以在 R Markdown 文档中直接进行写作，随后调用 blogdown 中封装好的函数操作 Hugo 的编译功能，最后生成网站。
