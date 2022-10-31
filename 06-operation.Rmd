@@ -1352,8 +1352,9 @@ print("Hello Python!")
 ````
 
 Python 代码块支持部分 knitr 选项，比如 `echo = FALSE` 或 `eval = FALSE` 等。
-·
+
 **reticulate** 包的一个重要特性是它允许在 Python 和 R 运行环境中传递对象。例如，可以在 R 会话中通过 **reticulate** 包中的 py 对象访问或创建 Python 变量。例如：
+
 
 ```{r, echo = FALSE}
 import_example("examples/python.Rmd")
@@ -1436,7 +1437,7 @@ knitr::opts_chunk$set(engine.opts = list(bash = '-l'))
 有时读者可能需要将代码块的内容写入文件。并在后续的代码块中引用该文件。一个简单的实现办法是使用 `writeLines()` 函数。例如：
 
 ```{r, eval=FALSE}
-writeLines("关于需要多少反斜杠时，是件让疼头疼的事。例如，到底是 '\t'、'\\t' 还是 '\\\\t'?", con = "my-file.txt")
+writeLines("添加反斜杠是件头疼的事，到底是 '\t'、'\\t' 还是 '\\\\t'?", con = "my-file.txt")
 ```
 
 随后，需要使用 `my-file.txt` 文件中的内容时，可以用 `readLines()` 重新读取该文件。
@@ -1606,14 +1607,11 @@ grid3(XYZgrid);
 ! LaTeX Error: File `ocgbase.sty' not found.
 ```
 
-当出现这种错误时，读者可以参考书籍《R Markdown Cookbook》[@xie2020r]第 1.3 节，了解如何安装丢失的 LaTeX 包。
-
-#### 在 R 中生成数据并通过 Asymptote 读取并绘制 {#asym-r}
+这个错误是缺失了 LaTeX 包导致的，第 \@ref(install-latex-package) 节介绍了解决办法。
 
 #### Asymptote 读取 R 数据 {#asym-r}
 
-下面是一个 Asymptote 与 R 交互的例子，首先 R 中的数据保存到 CSV 文件中：
-
+下面是一个 Asymptote 使用 R 中数据的例子，首先将 R 中的数据保存到 CSV 文件中：
 
 ```{r}
 x = seq(0, 5, l = 100)
@@ -1621,7 +1619,7 @@ y = sin(x)
 writeLines(paste(x, y, sep = ','), 'sine.csv')
 ```
 
-然后通过 Asymptote 读取该文件，并绘制出图 \@ref(fig:sine-curve)，对应的代码如下所示：
+然后用 Asymptote 读取该文件，并绘制出图 \@ref(fig:sine-curve)，对应的代码如下所示：
 
 ````md
 ```{asy, sine-curve, fig.cap='将数据从 R 传递到渐近线以绘制图形', cache=TRUE, fig.width=6,fig.align='center',fig.retina=1, eval=eval_asy()}`r ''`
@@ -2319,9 +2317,7 @@ F2C <- function(x) {
 }
 ```
 
-
 这是唐纳德·克努特（Donald Knuth）提出的[文学编程](https://en.wikipedia.org/wiki/Literate_programming)中的主要思想之一。这种技术的优点在于，使用者可以将（复杂的）代码分割成更小的部分，将每个部分写入单独的代码块中，并使用文字叙述来解释它们。所有的部分都可以被放入要执行的主代码块中。
-
 
 一个代码块中可以嵌入任意数量的其他代码块，并且嵌入也可以是递归的。例如，可以将块 A 嵌入到块 B 中，将块 B 嵌入到块 C 中，这样块 C 将借由块 B 包含块 A 中的代码。
 
