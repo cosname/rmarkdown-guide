@@ -39,14 +39,14 @@ knitr::kable(grade, align='cccc', caption = '考试成绩')
 ```{r code=formatR::usage(knitr::kable, output=FALSE), tidy=TRUE, tidy.opts=list(width.cutoff=45), eval=FALSE}
 ```
 
-#### 表格样式 {#kable-formats}
+#### 目前已支持的表的格式 {#kable-formats}
 
 在大多数情况下，如果只需要制作一个简单表格，`knitr::kable(x)` 就足够了。其中 `format` 参数会根据 **knitr** 源文档自动设置。它可能的取值是 `pipe` （列与列之间由短的竖线分隔的表），`simple` （仅包含横向分割线的简单表格），`latex` （LaTex 表格），`html` （HTML 表格），和 `rst` （reStructuredText 表格）。为了展示各个取值的不同，这里直接给出了各个取值在不同编程语言中的原始代码。
 
 对于 R Markdown 文档，`kable()` 默认使用 `pipe` 格式的表格，输出结果如下所示：
 
 ```{r, echo=FALSE}
-# 以文本而非实际表格的形式打印 kable() 结果
+# 以文本而非实际表格的形式打印 kable() 结果 
 kat = function(x, ...) {
   if (length(x) > 0) x[1] = gsub('^\n+', '', x[1])
   x = gsub('\n\n+', '\n', x)
@@ -92,14 +92,14 @@ options(knitr.table.format = function() {
 })
 ```
 
-#### 修改列名
+#### 修改表的列名
 
 <!-- https://stackoverflow.com/questions/51432502/replace-column-names-in-kable-r-markdown/51444998#51444998 -->
 
 在一些情况下，在数据框（data frame）中定义的列的名称可能与想要显示给读者的内容不同，需要进行修改。在使用英文时，数据的列名通常不使用空格来分隔单词，而是使用点、下划线以及大小写来进行分隔。而在制作表格时，这样的变量名会显得有些不自然。在中文环境下，虽然空格的问题较少，但也存在变量名过长的情况，在 R 中也往往使用简化的名词或对应的英文简写来代替。在这种情况下，可以使用 `col.names` 参数将列名替换为一个包含新名称的向量，即 `col.names = c(...)`。例如，可以在上文成绩表的列名中提供更多信息：
 
 ```{r}
-knitr::kable(grade,
+knitr::kable(grade, 
              col.names = c(paste0('第1组', colnames(grade))))
 ```
 
@@ -132,7 +132,7 @@ knitr::kable(grade, align = 'c')
 knitr::kable(grade, caption = '考试成绩')
 ```
 
-正如本书 \@ref(cross-reference) 节所提到的那样，当一个表格有标题并且以 **bookdown** 来输出格式时，它可以被交叉引用，而在基础的 `html_document` 和 `pdf_document` 中则不行。
+正如本书 \@ref(element-quote) 节所提到的那样，当一个表格有标题并且以 **bookdown** 来输出格式时，它可以被交叉引用，而在基础的 `html_document` 和 `pdf_document` 中则不行。
 
 #### 调整数字格式
 
@@ -151,8 +151,8 @@ format(10000.123, big.mark = ',')
 可以将数字四舍五入并格式化成表格：
 
 ```{r, R.options=list(digits = 7)}
-d = cbind(X1 = runif(3),
-          X2 = 10^c(3, 5, 7),
+d = cbind(X1 = runif(3), 
+          X2 = 10^c(3, 5, 7), 
           X3 = rnorm(3, 0, 1000))
 
 # 保留最多四位小数
@@ -162,12 +162,12 @@ knitr::kable(d, digits = 4)
 knitr::kable(d, digits = c(5, 0, 2))
 
 # 不使用科学计数法
-knitr::kable(d, digits = 3,
+knitr::kable(d, digits = 3, 
              format.args = list(scientific = FALSE))
 
 # 给 big numbers 添加逗号
-knitr::kable(d, digits = 3,
-             format.args = list(big.mark = ',',
+knitr::kable(d, digits = 3, 
+             format.args = list(big.mark = ',', 
                                 scientific = FALSE))
 ```
 
@@ -196,7 +196,7 @@ knitr::kable(grade2)
 options(opts)  # 恢复全局 R 选项
 ```
 
-#### 转义特殊字符
+#### 特殊字符的转义
 
 HTML 或者 LaTeX 对应的编程语言之中包含了一些特殊的字符，例如在 LaTeX 中输入公式可能需要的 `$` 等。为了使结果能够正常输出，`kable()` 将默认通过参数 `escape = TRUE` 来“转义”这些特殊字符，即令这些特殊字符失去其特殊含义，使得所有的字符可以逐字生成，而不会生成特殊符号（如 `\beta` 将不会自动显示为 $\beta$）。例如对于 HTML 格式的表格，`>` 将被替换为 `&gt;`；而对于 LaTeX 格式的表格，`_` 将被转义为 `\_` [^escape]。
 
@@ -262,8 +262,8 @@ knitr::kables(
   list(
     # 第一个 kable()：修改列名
     knitr::kable(
-      grade,
-      col.names = c('Name', 'Chinese', 'Math', 'English'),
+      grade, 
+      col.names = c('Name', 'Chinese', 'Math', 'English'), 
       valign = 't'
     ),
     # 第二个 kable()：设置 digits 选项
@@ -273,36 +273,33 @@ knitr::kables(
 )
 ```
 
-#### 利用 `for` 循环生成多个表 (\*)
+#### 利用`for`循环生成多个表 (\*)
 
-结合 `for` 循环与 `kable()` 生成多张表时，有一点需要额外注意。必须在迭代中用 `print()` 显示打印 `kable()` 的结果，并应用块选项 `results = 'asis'`\index{chunk option!results}，例如：
+对于 `kable()`，有一个常见的错误认识是它不能在 `for` 循环中工作。这个问题并不特定于 `kable()`，同时也存在于许多其他的 R 包中。其背后原因较为复杂,对技术细节感兴趣的读者可以参考博文 ["The Ghost Printer behind Top-level R Expressions."](https://yihui.org/en/2017/06/top-level-r-expressions/)。
 
+例如，直观上下面的代码块可能可以生成三个表，但事实上它并不会：
 
-````{verbatim}
-```{r, results='asis'}
-for (i in 1:3) {
-  print(knitr::kable(grade))
-}
-```
-````
-
-而下面的代码块只会在文档中输出最后一张表：
-
-````{verbatim}
-```{r}
+````md
+```{r}`r ''`
 for (i in 1:3) {
   knitr::kable(grade)
 }
 ```
 ````
 
-这个问题并不特定于 `kable()`，同时也存在于许多其他的 R 包中。其背后原因较为复杂,对技术细节感兴趣的读者可以参考博文 ["The Ghost Printer behind Top-level R Expressions."](https://yihui.org/en/2017/06/top-level-r-expressions/)
+若想要实现生成多个表的目的，则必须显式打印 `kable()` 结果，并应用块选项 `results = 'asis'`\index{chunk option!results}，例如：
 
+````md
+```{r, results='asis'}`r ''`
+for (i in 1:3) {
+  print(knitr::kable(grade))
+}
+```
+````
+通常情况下，在利用 `for` 循环输出结果时，最好添加一些换行符（`\n`）或 HTML 注释（`<!-- -->`），从而清晰地分隔所有输出的元素，例如：
 
-需要生成多个表格时，最好添加一些换行符（`\n`）或 HTML 注释（`<!-- -->`），从而清晰地分隔所有输出的元素，例如：
-
-````{verbatim}
-```{r, results='asis'}
+````md
+```{r, results='asis'}`r ''`
 for (i in 1:3) {
   print(knitr::kable(grade, caption = '标题'))
   cat('\n\n<!-- -->\n\n')
@@ -310,7 +307,7 @@ for (i in 1:3) {
 ```
 ````
 
-如果没有这些分隔符，Pandoc 可能无法检测到某些元素。例如，当一个图片之后面紧跟着一个表格时，这个表格并不会被识别到：
+如果没有这些分隔符，Pandoc 可能无法检测到单个元素。例如，当一个图片之后面紧跟着一个表格时，这个表格并不会被识别到：
 
 ```md
 ![](logo.png)
@@ -321,7 +318,7 @@ for (i in 1:3) {
 王五      85     91     97
 ```
 
-解决办法是用空行或注释分隔图片和表格，例如：
+但如果像这样有一个清晰的分隔（注意，在图像下面添加了一个空行），它将变成：
 
 
 ```md
@@ -356,15 +353,14 @@ for (i in 1:3) {
 knitr::kable(grade, format = 'latex', booktabs = TRUE)
 ```
 
-带标题的表格（见本书 \@ref(kable-caption) 节）会被放入 `table` 环境中，即：
+当给一个表格分配一个标题时（见本书 \@ref(kable-caption) 节）， `kable()` 将使用 `table` 环境来纳入这个表，即：
 
 ```latex
 \begin{table}
 % 表格 (通常为 tabular 环境)
 \end{table}
 ```
-
-不同的环境有不同的默认排版方式，例如 LaTeX 会对 `table` 及 `figure` 等环境采用浮动布局。可以通过 `table.envir` 参数来对环境进行调整：
+不同的环境具有不同的性质，例如熟悉 LaTeX 的读者可能了解浮动体，即某些环境下图表的位置会在页面的底部或顶部“浮动”，如 `table` 及 `figure` 等环境。可以通过 `table.envir` 参数来对环境进行调整：
 
 ```{r, render=kat, comment='', class.output='tex'}
 knitr::kable(grade, format = 'latex', table.envir = 'Table')
@@ -386,7 +382,7 @@ knitr::kable(grade, caption = '一个很长很长的标题！',
 
 短标题将会进入 LaTeX 中 `\caption[]{}` 命令的方括号中，经常在 PDF 输出文档的表格目录中使用（如果不提供短标题，那里则会显示完整的标题）。
 
-`booktabs = TRUE` 可以使用 LaTeX 包 [**booktabs**](https://ctan.org/pkg/booktabs){LaTeX package!booktabs} 进行表格排版。
+如果熟悉用于生成可供发布（即高质量）表格的 LaTeX 包 [**booktabs**](https://ctan.org/pkg/booktabs){LaTeX package!booktabs}，则可以设置`booktabs = TRUE`。
 
 ```{r, render=kat, comment='', class.output='tex'}
 knitr::kable(grade, format = 'latex', booktabs = TRUE)
@@ -396,53 +392,19 @@ knitr::kable(grade, format = 'latex', booktabs = TRUE)
 
 <!--**【！！！现有目录需要补充】**-->
 
-<!-- pdf content -->
+参数 `booktabs` 取 `FALSE` （默认值）或 `TRUE`  时，表的外观是不同的，见表 \@ref(tab:booktabs-false) 和表 \@ref(tab:booktabs-true) 。
 
-```{asis, echo=knitr::is_latex_output()}
-`booktabs = TRUE` 的表格实现了基于 LaTeX 包 `booktabs` 的表格外观。见表 \@ref(tab:booktabs-false) 和表 \@ref(tab:booktabs-true) 。
-```
-
-```{r booktabs-false, include=knitr::is_latex_output()}
-knitr::kable(grade, format = 'latex',
-             booktabs = FALSE,
+```{r booktabs-false}
+knitr::kable(grade, format = 'latex', 
+             booktabs = FALSE, 
              caption = 'booktabs = FALSE 时的表格')
 ```
 
-```{r booktabs-true, include=knitr::is_latex_output()}
-knitr::kable(grade, format = 'latex',
-             booktabs = TRUE,
+```{r booktabs-true}
+knitr::kable(grade, format = 'latex', 
+             booktabs = TRUE, 
              caption = 'booktabs = TRUE 时的表格')
 ```
-
-:::::: {.cols}
-
-::: {.col}
-
-````{verbatim}
-```{r booktabs-false, include=knitr::is_latex_output()}
-knitr::kable(grade, format = 'latex',
-             booktabs = FALSE,
-             caption = 'booktabs = FALSE 时的表格')
-```
-
-```{r booktabs-true, include=knitr::is_latex_output()}
-knitr::kable(grade, format = 'latex',
-             booktabs = TRUE,
-             caption = 'booktabs = TRUE 时的表格')
-```
-````
-:::
-
-
-::: {.col }
-
-```{r, echo = FALSE, fig.cap = "booktabs 表格样式", out.width = "150%"}
-knitr::include_graphics("images/06-booktabs.png")
-```
-
-:::
-
-::::::
 
 对于 `booktabs = FALSE`：
 
@@ -457,9 +419,9 @@ knitr::include_graphics("images/06-booktabs.png")
 - 表格只有标题和底部行有水平线。默认参数值是 `toprule = "\\toprule"`、`midrule = "\\midrule"` 以及 `bottomrule = "\\bottomrule"`。默认情况下，每 5 行加一个行间距（`\addlinespace`），这是由参数 `linesep` 控制的，默认值为 `c("", "", "", "", "\\addlinespace")`。如果想每 1 行加一个 `\addlinespace`，则可以这样做：
 
 ```{r, render=kat, comment='', class.output='tex'}
-knitr::kable(grade, format = 'latex',
-              linesep = c('\\addlinespace'),
-              booktabs = TRUE)
+  knitr::kable(grade, format = 'latex', 
+               linesep = c('\\addlinespace'), 
+               booktabs = TRUE)
 ```
 
 如果想删除所有的行间距，可以使用`linesep = ''`。
@@ -536,7 +498,7 @@ kable(grade, caption = "条纹表") %>%
 有的时候，在展示一些表格时，需要设定字体的尺寸，如放大或缩小某些特定问题。**kableExtra**\index{kableExtra!kable\_styling()} 包中的 `kable_styling()` 函数可以帮助用户对整个表进行样式化。例如，可以指定页面上表格的对齐方式、表格的宽度和字体大小。表 \@ref(tab:little-size) 展示了一个使用小字体的例子：
 
 ```{r, little-size, tidy=FALSE}
-kable(grade, booktabs = TRUE,
+kable(grade, booktabs = TRUE, 
       caption = "字体较小的表格") %>%
   kable_styling(font_size = 8)
 ```
@@ -548,8 +510,8 @@ kable(grade, booktabs = TRUE,
 ```{r, style-col-row, tidy=FALSE}
 kable(grade, align = 'c', booktabs = TRUE,
       caption = "更改特定行或列的样式") %>%
-  row_spec(1, bold = TRUE, italic = TRUE) %>%
-  row_spec(2, color = 'white',
+  row_spec(1, bold = TRUE, italic = TRUE) %>% 
+  row_spec(2, color = 'white', 
            background = 'black', angle = 45) %>%
   row_spec(3, underline = TRUE, monospace = TRUE) %>%
   column_spec(4, strikeout = TRUE)
@@ -571,9 +533,9 @@ grade3 <- data.frame(姓名 = c("张三","李四","王五"),
                      地理 = c(99,89,95),
                      计算机 = c(92,95,97),
                      体育 = c(85,99,95))
-kable(grade3, booktabs = TRUE,
+kable(grade3, booktabs = TRUE, 
       caption = "对标题列进行分组") %>%
-  add_header_above(c(" " = 1, "理科" = 3,
+  add_header_above(c(" " = 1, "理科" = 3, 
                      "文科" = 3, "其它" = 2))
 ```
 
@@ -582,26 +544,26 @@ kable(grade3, booktabs = TRUE,
 表 \@ref(tab:pack-rows) 提供了 `pack_rows()` 的示例，其中 `index` 参数的含义类似于之前解释过的 `add_header_above()` 参数：
 
 ```{r, pack-rows, tidy=FALSE}
-kable(grade3, booktabs = TRUE,
-      caption = "对行进行折叠") %>%
+kable(grade3, booktabs = TRUE, 
+      caption = "对行进行折叠") %>% 
   pack_rows(
   index = c("一班" = 1, "二班" = 2)
 )
 ```
 
-#### 按比例缩小 LaTeX 中的表格
+#### 按比例缩小LaTex中的表格
 
 有一些特性是 HTML 或 LaTeX 输出格式特有的。例如，横向打印格式只在 LaTeX 中有意义，所以 **kableExtra** 中的 `landscape()` 函数\index{kableExtra!landscape()}只对 LaTeX 格式的输出有效。对于一个比较宽的表格（表 \@ref(tab:no-scale-down)），（表 \@ref(tab:scale-down)）展现了如何将表格按比例缩小以适应页面的宽度（否则该表格会太宽）：
 
 ```{r, no-scale-down, tidy=FALSE}
 grade4 <- merge(grade, grade3, by = "姓名")
-kable(grade4,
+kable(grade4, 
       booktabs = TRUE,
       caption = "原始表格（太宽）")
 ```
 
 ```{r scale-down, tidy=FALSE}
-kable(grade4,
+kable(grade4, 
       booktabs = TRUE,
       caption = "缩小后的表格") %>%
   kable_styling(latex_options = "scale_down")
@@ -609,7 +571,7 @@ kable(grade4,
 
 注意如果在浏览 HTML 版本的话，表 \@ref(tab:no-scale-down) 和表 \@ref(tab:scale-down) 表格是没有差异的。
 
-### 其它表格包 {#else-table}
+### 其它生成表格的包及功能介绍 {#else-table}
 
 还有很多其他的 R 包可以用来生成表格\index{R package!table packages}。本节引入 `kable()` （见第 \@ref(table-complex) 节）和 **kableExtra**  （见第 \@ref(kable-extra) 节）的主要原因不是它们比其他包更好，而是因为作者们只熟悉它们，而且它们的功能可以涵盖大部分的日常使用需求。接下来本节将列出一些已知的其它软件包，感兴趣的读者可以去尝试并决定哪一个最适合自己。
 
@@ -636,11 +598,19 @@ kable(grade4,
 
 ## 块选项 {#chunk-options}
 
-本节和接下来的第 \@ref(output-hook)、\@ref(other-trick) 两节进一步展示一些与 **knitr** 代码块选项相关的编程技巧。
+在之前的章节中，R 包 **knitr** 展现了其在 R Markdown 中起到的关键作用。在本节和接下来的第 \@ref(output-hook)、\@ref(other-trick) 两节中，将进一步展示一些与 **knitr** 相关的编程技巧，从而更有效地辅助工作的开展。
 
-R Markdown 支持超过 50 个块选项\index{chunk option} 用于调整 **knitr** 处理代码块的方式，完整列表可参阅在线文档<https://yihui.org/knitr/options/>`r if (knitr::is_latex_output()) '，或本书附录\\@ref(full-options)'`。
+事实上，在 R Markdown 的代码块中，有超过 50 个块选项\index{chunk option}可以用来微调 **knitr** 处理代码块的方式，选项的完整列表可参阅在线文档<https://yihui.org/knitr/options/>`r if (knitr::is_latex_output()) '，或本书附录\\@ref(full-options)'`。
 
-下面的几节展示了在单个代码块中使用块选项的例子，希望为全部代码块统一设置块选项的读者可以参考第 \@ref(#code-block-and-inline) 节。
+需要注意的是，接下来的几节只展示了将块选项应用到单个代码块的例子，但实际上，任何块选项都可以进行全局设置，应用于整个文档，而不必在每个代码块中重复。如果要设置全局的块选项，需要在代码块（通常为文档中的第一个代码块）中调用 `knitr::opts_chunk$set()`\index{chunk option!set globally}。例如若需要对整个文档调整文本输出中的前导符号（`comment = "#>"`，见第 \@ref(chunk-leading) 节）、隐藏源代码（`echo = FALSE`，见第 \@ref(chunk-output) 节）并控制图片大小（`fig.width = 6`，见第 \@ref(element-plot) 节），可以进行如下设置：
+
+````md
+```{r, include=FALSE}`r ''`
+knitr::opts_chunk$set(
+  comment = "#>", echo = FALSE, fig.width = 6
+)
+```
+````
 
 ### 在块选项中使用变量 {#chunk-variable}
 
@@ -648,12 +618,12 @@ R Markdown 支持超过 50 个块选项\index{chunk option} 用于调整 **knitr
 
 实际上，块选项可以使用任意的 R 表达式，无论简单或复杂。一种特殊的情况是将变量\index{chunk option!variable values}传递给一个块选项（注意变量本身也可被视为一个 R 表达式）。例如，为了满足图像大小变化的需求，可以在文档的一个代码块中定义关于图像宽度的变量，然后在其他代码块中使用它：
 
-````{verbatim}
-```{r}
+````md
+```{r}`r ''`
 my_width <- 7
 ```
 
-```{r, fig.width=my_width}
+```{r, fig.width=my_width}`r ''`
 plot(cars)
 ```
 ````
@@ -661,22 +631,22 @@ plot(cars)
 另外，块选项中也可以使用更为复杂的函数，例如可以使用 `if-else` 语句\index{chunk option!with if else logic}来调整图片大小：
 
 
-````{verbatim}
-```{r}
+````md
+```{r}`r ''`
 fig_small <- FALSE  # 输出更大的图片需要改为 TRUE
 width_small <- 4
 width_large <- 8
 ```
 
-```{r, fig.width=if (fig_small) width_small else width_large}
+```{r, fig.width=if (fig_small) width_small else width_large}`r ''`
 plot(cars)
 ```
 ````
 
 不仅如此，还可以只在所需要的包可使用时才运行一个代码块（`eval=FALSE` 意味着不运行该代码）：
 
-````{verbatim}
-```{r, eval=require('leaflet')}
+````md
+```{r, eval=require('leaflet')}`r ''`
 library(leaflet)
 leaflet() %>% addTiles()
 ```
@@ -688,8 +658,8 @@ leaflet() %>% addTiles()
 
 在默认情况下，R Markdown 文档中代码块运行产生的错误将使程序终止。但瑕疵掩不住美玉，一次报错不妨碍整体的质量；失败是成功之母，一次报错更是珍贵的学习机会。出于种种原因，用户希望在代码块报错的时候显示错误并继续运行，可以使用块选项 `error = TRUE`\index{chunk option!error}，例如：
 
-````{verbatim}
-```{r, error=TRUE}
+````md
+```{r, error=TRUE}`r ''`
 1 + "a"
 ```
 ````
@@ -715,8 +685,8 @@ leaflet() %>% addTiles()
 
 另外，还可以通过索引来有选择地显示或隐藏这些元素。下面的示例只输出了源代码的第四个和第五个表达式（注意，一个注释会被算作一个表达式）、前两个 message 以及第二个和第三个 warning：
 
-````{verbatim}
-```{r, echo=c(4, 5), message=c(1, 2), warning=2:3}
+````md
+```{r, echo=c(4, 5), message=c(1, 2), warning=2:3}`r ''`
 # 一种生成服从N(0,1)分布的随机数的方法
 x <- qnorm(runif(10))
 
@@ -740,8 +710,8 @@ for (i in 1:5) warning('这是 warning ', i)
 
 有的时候，可能想要执行一个代码块而根本不显示任何输出。与使用第 \@ref(hide-one) 节中提到的单独选项不同，可以使用一个选项 `include = FALSE`\index{chunk option!include} 来隐藏代码块所有的输出，例如：
 
-````{verbatim}
-```{r, include=FALSE}
+````md
+```{r, include=FALSE}`r ''`
 # 任意的R代码
 ```
 ````
@@ -768,7 +738,7 @@ for (i in 1:5) warning('这是 warning ', i)
 默认情况下，代码块的文本输出将逐字输出，并添加两个前导符号 `##`（见第 \@ref(chunk-leading) 节）。由于 **knitr** 将文本放在单独的代码块中，所以文本是逐字的。例如，对于代码 `1:5`，**knitr** 的原始输出为：
 
 
-````{verbatim}
+````md
 ```
 ## [1] 1 2 3 4 5
 ```
@@ -777,7 +747,7 @@ for (i in 1:5) warning('这是 warning ', i)
 有的时候，比如在批量生成报告时，用户可能不希望逐字输出文本，而是将文本输出视为 Markdown 的内容。例如，如果想写一个类似 `cat('# 这是一个标题')` 的节标题，但原始的输出是：
 
 
-````{verbatim}
+````md
 ```
 ## # 这是一个标题
 ```
@@ -785,7 +755,7 @@ for (i in 1:5) warning('这是 warning ', i)
 
 用户往往不希望文本位于单独的代码块（或开头的`##`）中，而希望原始输出与传递给`cat()`的字符串完全一致，即：
 
-````{verbatim}
+````md
 # 这是一个标题
 ````
 
@@ -843,7 +813,7 @@ cat(paste0('- `', names(iris), '`'), sep = '\n')
 ```{r, child='examples/tidy-opts.Rmd', results='hide'}
 ```
 
-块选项 `out.width` 可以控制输出的宽度。如果想进一步控制源代码的宽度，则可以在设置 `tidy = TRUE` 时使用 `width.cutoff` 参数，例如：
+第 \@ref(output-width) 节介绍了如何控制输出的宽度。如果想进一步控制源代码的宽度，则可以在设置 `tidy = TRUE` 时使用 `width.cutoff` 参数，例如：
 
 `r import_example('tidy-width.Rmd')`
 
@@ -856,8 +826,8 @@ cat(paste0('- `', names(iris), '`'), sep = '\n')
 
 另外，还可以通过设定块选项 `tidy = 'styler'` 来使用 **styler**\index{R package!styler} 包[@R-styler]重新格式化 R 代码，其中的格式化函数为 `styler::style_text()`。**styler** 包比 **formatR** 具有更丰富的特性。例如，它可以对齐函数参数并使用管道操作符 `%>%`。块选项 `tidy.opts`\index{chunk option!tidy.opts} 同样可以用于将附加参数传递给 `styler::style_text()`，例如：
 
-````{verbatim}
-```{r, tidy='styler', tidy.opts=list(strict=FALSE)}
+````md
+```{r, tidy='styler', tidy.opts=list(strict=FALSE)}`r ''`
 # 对齐赋值操作符
 a   <- 1 # 一个变量
 abc <- 2 # 另一个变量
@@ -870,8 +840,8 @@ abc <- 2 # 另一个变量
 
 默认情况下，R Markdown 会在文本输出的前面插入两个符号 `##`，那么这个符号能不能更改或者干脆删除呢？第 \@ref(results-asis) 节介绍了通过在添加 `results = 'asis'` 选项来生成 Markdown 形式输出的方法。但如果只是想调整前导符号，而仍然想将文本放在单独的块中，则可以通过块选项 `comment`\index{chunk option!comment}  来实现。如果要删除 `##`，可以使用空字符串，例如：
 
-````{verbatim}
-```{r, comment=""}
+````md
+```{r, comment=""}`r ''`
 1:100
 ```
 ````
@@ -891,7 +861,7 @@ abc <- 2 # 另一个变量
 
 通常情况下，文本输出块本质上是一个单独的代码块，它的 Markdown 源代码如下所示：
 
-````{verbatim}
+````md
 ```{.className}
 输出行
 ```
@@ -909,7 +879,7 @@ abc <- 2 # 另一个变量
 
 事实上，这个类只是 HTML 中 `<pre>` 元素可能的属性之一。一个 HTML 元素可以有许多其他属性，比如宽度、高度和样式等。块选项 `attr.*`，包括 `attr.source`\index{chunk option!attr.source}、`attr.output`\index{chunk option!attr.output}、`attr.message`\index{chunk option!attr.message}、`attr.warning`\index{chunk option!attr.warning} 以及 `attr.error`\index{chunk option!attr.error}，允许用户向文本输出块添加任意属性。例如，使用 `attr.source = 'style="background: pink;"'`，可以将源代码块的背景颜色更改为粉红色，相应的代码块将是：
 
-````{verbatim}
+````md
 ```{style="background: pink;"}
 ...
 ```
@@ -935,8 +905,8 @@ abc <- 2 # 另一个变量
 
 图像格式由块选项 `dev`\index{chunk option!dev}\index{figure!graphical device} 控制，即渲染图像的图像设备，这个选项的取值可以为设备名（即输出格式）的向量，例如：
 
-````{verbatim}
-```{r, dev=c('png', 'pdf', 'svg', 'tiff')}
+````md
+```{r, dev=c('png', 'pdf', 'svg', 'tiff')}`r ''`
 plot(cars)
 ```
 ````
@@ -957,19 +927,19 @@ install.packages("magick")
 add_logo = function(path, options) {
   # 代码块中创建的图像
   img = magick::image_read(path)
-
+  
   # R logo
   logo = file.path(R.home("doc"), "html", "logo.jpg")
   logo = magick::image_read(logo)
-
+  
   # 默认的重力方向为西北，用户可以通过代码块来改变它
   # option magick.gravity
   if (is.null(g <- options$magick.gravity)) g = 'northwest'
-
+  
   # 在图像中添加 logo
   img = magick::image_composite(img, logo, gravity = g)
-
-  # 写入新的图像中
+  
+  # 写入新的图像中 
   magick::image_write(img, path)
   path
 }
@@ -1088,22 +1058,18 @@ output:
 事实上，还可以通过块选项 `render` 来完全代替打印函数 `knit_print()`，`render` 可以使用任何函数来打印对象。例如，如果想使用 **pander**\index{R package!pander} 包来打印对象，可以设置块选项 `render` 为函数 `pander::pander()`：
 
 
-````{verbatim}
-```{r, render=pander::pander}
+````md
+```{r, render=pander::pander}`r ''`
 head(iris)
 ```
 ````
 
-最终得到的结果见表 \@ref(tab:print-render)。
-
+最终得到的结果见表 \@ref(tab:print-render)
 ```{r, echo=FALSE}
 if (system.file(package = "pander") == ''){
   install.packages("pander")
 }
 ```
-
-
-<!-- 这里 pander 没有 caption，引用失效 -->
 
 ```{r, print-render,echo=FALSE, render=pander::pander}
 head(iris)
@@ -1126,16 +1092,16 @@ knitr::opts_hooks$set(fig.width = function(options) {
 
 因为 `fig.width` 永远不会是 `NULL`，所以这个钩子函数总是在代码块之前执行，以更新它的块选项。对于下面的代码块，如果设置了上述的选项钩子，则 `fig.width` 的实际值将是 6 而不是最初定义的 5：
 
-````{verbatim}
-```{r fig.width = 5, fig.height = 6}
+````md
+```{r fig.width = 5, fig.height = 6}`r ''`
 plot(1:10)
 ```
 ````
 
 另外，第 \@ref(chunk-leading) 节的最后一个例子介绍了如何将输出格式调整成类似于 R 控制台（console）的格式，这一功能也可以用选项钩子实现，从而可以使用一个单独的块选项 `console = TRUE` 来代替 `comment = ""` 和 `prompt = TRUE`。需要注意的是，`console` 不是一个内置的 **knitr** 块选项，而是一个自定义的任意的选项名，它的默认值是 `NULL`。下面是一个完整的例子：
 
-````{verbatim}
-```{r, include=FALSE}
+````md
+```{r, include=FALSE}`r ''`
 knitr::opts_hooks$set(console = function(options) {
   if (isTRUE(options$console)) {
     options$comment <- ''; options$prompt <- TRUE
@@ -1146,7 +1112,7 @@ knitr::opts_hooks$set(console = function(options) {
 
 默认输出为：
 
-```{r}
+```{r}`r ''`
 1 + 1
 if (TRUE) {
   2 + 2
@@ -1155,7 +1121,7 @@ if (TRUE) {
 
 设置 `console = TRUE` 时的输出为：
 
-```{r, console=TRUE}
+```{r, console=TRUE}`r ''`
 1 + 1
 if (TRUE) {
   2 + 2
@@ -1188,8 +1154,8 @@ knitr::opts_chunk$set(
 除了使用选项钩子外，还可以直接设置块选项 `、attr.source = '.numberLines'` 来实现目的。本节介绍的选项钩子的优点是，它们只在块选项中附加属性 `.numberLines`，这意味着它们不会覆盖现有的块选项值，例如，下面代码块中的源代码块将被编号（使用上面的设置），并且编号会从第二行开始：
 
 
-````{verbatim}
-```{r, attr.source='startFrom="2"'}
+````md
+```{r, attr.source='startFrom="2"'}`r ''`
 # 这行注释不会被编号
 1 + 1
 ```
@@ -1197,8 +1163,8 @@ knitr::opts_chunk$set(
 
 这等价于：
 
-````{verbatim}
-```{r, attr.source=c('startFrom="2"', '.numberLines'}
+````md
+```{r, attr.source=c('startFrom="2"', '.numberLines'}`r ''`
 # 这行注释不会被编号
 1 + 1
 ```
@@ -1209,7 +1175,6 @@ knitr::opts_chunk$set(
 在 R Markdown 中，**knitr** 包除了支持 R 语言外，还支持许多其他语言。
 
 不同语言代码块的表示方式类似，只需修改代码块中三个反引号后的花括号中的第一个单词即可。例如，```` ```{r}```` 中的小 `r` 表示该代码块为 R 代码块，而  ```` ```{python}```` 是指该代码块为 Python 代码块。其他语言也是使用类似的表达方式。
-<!-- 本节除了介绍如何在 R Markdown 中与 Python 语言结合外，还将介绍一些读者可能不太熟悉的语言，例如：SAS、Stata等语言。 -->
 
 在 knitr 中，每种语言都通过**语言引擎**得到支持。语言引擎本质上是一些函数，它们以源代码和代码块选项作为输入，最后输出一个字符串。该过程通过 `knitr::knit_engines` 进行管理。读者可以使用以下方式检查现有引擎：
 
@@ -1227,11 +1192,9 @@ engs
 
 > **注意**：目前，大多数非 R 语言的代码块都是独立执行的。例如，同一文档中的所有 `bash` 代码块都在各自的会话中单独执行，因此后面的 `bash` 代码块不能使用在先前 `bash` 代码块中创建的变量，更改后的工作目录在其他 bash 代码块中也不会一直存在。
 
-<!-- 只有 R、Python 和 Julia 代码块在同一个会话中执行。并且 R 会话和 Python 会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象（参见《R markdown cookbook》[@xie2020r]  中的第[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节）。 -->
 
 本节重点介绍 Pyhton、Shell、SAS、Stata 以及 Asymptote 等语言引擎，如果读者其他语言引擎感兴趣，例如：SQL, Rcpp, Stan, JavaScript, Julia, C，和 Fortran 等，可参见书籍
 《R Markdown: The definitive guide》[@xie2018r] 中的第 [2.7 ](https://bookdown.org/yihui/rmarkdown/language-engines.html) 节内容，也可以在以下网站中找到更多的例子： https://github.com/yihui/knitr-examples。
-
 
 
 ### 注册自定义语言引擎 (\*) {#register-language}
@@ -1239,7 +1202,6 @@ engs
 首先，通过注册一个自定义语言引擎来说明**语言引擎**是如何工作的。
 
 读者可以使用 `knitr::knit_engines$set()` 注册一个自定义语言引擎。该引擎接受一个函数作为输入，例如：
-
 
 ```{r }
 knitr::knit_engines$set(foo = function(options) {
@@ -1249,19 +1211,17 @@ knitr::knit_engines$set(foo = function(options) {
 
 此时，`foo` 引擎已经注册完毕，接下来就可以使用以 ```` ```{foo}```` 开头的代码块了。读者可以在 `options$code` 中以字符向量的形式访问代码块的源代码。例如，对于代码块：
 
-````{verbatim}
-```{foo}
+````md
+```{foo}`r ''`
 1 + 1
 2 + 2
 ```
 ````
 此时，所对应的 `options$code` 为字符向量 `c('1 + 1', '2 + 2')`。
 
-
-> **注意**：语言引擎不一定要负责执行代码，更多时候它负责将代码文本传递给其他程序。
+> **注意**：语言引擎实际上并不需要处理计算机语言，但可以处理代码块中的任何文本。
 
 首先，来展示一个简单的引擎示例，该引擎将代码块的内容转换为大写：
-
 
 ```{r}
 knitr::knit_engines$set(upper = function(options) {
@@ -1285,13 +1245,13 @@ Hello, **knitr** engines!
 Hello, **knitr** engines!
 ```
 
-下面的例子实现了一个基础的 Python 引擎，名为 `py`。^[实际工作中读者应使用 R Markdown 内置的 Python 引擎]。首先获得代码块中完整的 Python 代码，随后使用 `system2()` 函数在命令行调用 Python 解释器，最后格式化输出。
+接下来，将展示一个名为 `py` 的另一种 `python` 引擎示例^[这里只是一个简单的例子来演示如何自定义语言引擎。实际上，读者应该使用内置的 Python 引擎，该引擎是基于 **reticulate** 软件包的，它能够更好地支持 Python 代码块]。这个引擎是通过 R 函数 `system2()` 调用 `python` 命令来实现的：
 
 ```{r, tidy=FALSE}
 knitr::knit_engines$set(py = function(options) {
   code <- paste(options$code, collapse = '\n')
   out  <- system2(
-    'python3', c('-c', shQuote(code)), stdout = TRUE
+    'python', c('-c', shQuote(code)), stdout = TRUE
   )
   knitr::engine_output(options, code, out)
 })
@@ -1302,17 +1262,17 @@ knitr::knit_engines$set(py = function(options) {
 
 1. 将输入的 Python 代码作为字符串存储到 `code` 中
 
-2. `system2()` 调用 Python 解释器 `python -c 'code'` 执行代码，其中 `-c 'code'` 表示代码以字符串形式传入。并指定 `stdout = TRUE` 来收集（文本）输出。
+1. 通过 `system2()` 调用 `python -c 'code'` 来执行代码。并指定 `stdout = TRUE` 来收集（文本）输出。
 
-3. 之后，将代码块选项、源代码和文本输出传递给函数 `knitr::engine_output()`\index{knitr!engine\_output()}，作为最终输出结果。`knitr::engine_output()` 常用于返回运行结果，它会自动响应如 `echo = FALSE` 和 `results = 'hide'` 等块选项，所以这里不需要额外的 `if` 语句。
+1. 之后，将代码块选项、源代码和文本输出传递给函数 `knitr::engine_output()`\index{knitr!engine\_output()}，作为最终输出结果。
 
 > **注意**：**knitr** 中的许多语言引擎都是这样定义的（例如，使用 `system2()` 来执行与语言对应的命令）。如果读者对技术细节感兴趣，可以在下面网站中查看大多数语言引擎的源代码
  https://github.com/yihui/knitr/blob/master/R/engine.R。
 
-现在，可以使用新的引擎 `py` 运行 Python 代码，例如：
+接下来，将为读者展示 `py` 引擎是如何工作的。例如：在 R Markdown 中执行以下代码块，此时 `py` 引擎会调用自定义函数，并输出结果。
 
-````{verbatim}
-```{py}
+````md
+```{py}`r ''`
 print(1 + 1)
 ```
 ````
@@ -1323,7 +1283,6 @@ print(1 + 1)
 
 如果觉得自己自定义的语言引擎版本比现有版本更好，读者甚至可以通过 `knitr::knit_engines$set()` 重写现有的语言引擎。但是，通常不建议这样做，因为这会让熟悉现有引擎的用户感到不解。不过本节主要目的是告诉读者，自定义语言引擎来替换现有引擎这种想法是可以实现的。
 
-**knitr** 中许多语言的引擎使用了类似的实现方法。读者可以在 <https://github.com/yihui/knitr/blob/master/R/engine.R> 查看内置语言引擎的源代码。
 
 
 ### 运行 Python 代码并与 Python 交互 {#python-rmd}
@@ -1333,39 +1292,26 @@ print(1 + 1)
 
 R Markdown 和 **knitr** 支持 Python\index{language engine!python}\index{Python}。要将 Python 代码块添加到 R Markdown 文档中，可以在代码块头部设置为```` ```{python}````，例如：
 
-````{verbatim}
-```{python}
+````md
+```{python}`r ''`
 print("Hello Python!")
 ```
 ````
 
 读者可以添加代码块选项来实现相应功能，比如 `echo = FALSE` 或 `eval = FALSE`。此外，读者也可以直接使用 Python 中的第三方库完成任务，例如：使用 **matplotlib** 包进行绘图，**pandas** 包进行数据处理等。
-·
+
 R Markdown 和 **knitr** 中的 Python 支持 **reticulate** 包\index{R package!reticulate} [@R-reticulate]，这个包的一个重要特性是它允许 Python 和 R 之间进行交互。例如，可以在 R 会话中通过 **reticulate** 包中的 py 对象访问或创建 Python 变量：
 
 `r import_example('python.Rmd')`
 
 该文件运行后输出的结果为：
  
-
 ```{r, comment-hash, comment="", collapse=TRUE}
 ```
 
 有关 **reticulate** 包更多的信息，可以查看对应的文档：
  https://rstudio.github.io/reticulate/。
  
- 
-`comment` 和 `prompt` 可以让 Python 的输出格式模仿 R 控制台。在 R 控制台中，用户不会在文本输出前面看到`##`。如果想模仿 R 控制台的行为， 可以使用 `comment = ""` 和 `prompt = TRUE`\index{chunk option!prompt}，例如： -->
-
-
-````{verbatim}
-```{r, comment="", prompt=TRUE}
-1 + 1
-if (TRUE) {
-  2 + 2
-}
-```
-````
 
 
 ### 通过 `asis` 引擎有条件地执行内容 {#chunk-asis}
@@ -1373,14 +1319,14 @@ if (TRUE) {
 如果读者需要按一定条件输出某个代码块的内容。此时，可以使用
 `asis` 引擎\index{language engine!asis}来实现该功能。只需将条件加入到代码块选项 `echo` 中。当 `echo = FALSE` 时，对应代码块将不会显示内容。而当 `echo = TRUE` 时，对应代码块将会显示内容。下面给出一个简单的例子：
 
-````{verbatim}
-```{r}
+````md
+```{r}`r ''`
 getRandomNumber <- function() {
   sample(1:6, 1)
 }
 ```
 
-```{asis, echo = getRandomNumber() == 4}
+```{asis, echo = getRandomNumber() == 4}`r ''`
 根据 https://xkcd.com/221/,  生成的是一个**真**随机数!
 ```
 ````
@@ -1404,8 +1350,8 @@ head(list.files(pattern = "*.Rmd"), n=5)
 
 注意，bash是用 R 函数 `system2()` 调用的。它将忽略配置文件，例如 `~/.bash_profile` 和 `~/.bash_login`，其中可能定义了命令别名或修改过的环境变量(如 `PATH` 变量)。如果想要这些配置文件像你使用终端时一样被执行，可以通过引擎将参数 `-l` 传递给 `bash`。例如：
 
-````{verbatim}
-```{bash, engine.opts='-l'}
+````md
+```{bash, engine.opts='-l'}`r ''`
 echo $PATH
 ```
 ````
@@ -1426,7 +1372,7 @@ knitr::opts_chunk$set(engine.opts = list(bash = '-l'))
 对于这种需求，读者可以通过 `writeLines()` 等 R 函数来实现。例如，通过下面的示例代码，可以将长字符串写入到文件 `my-file.txt` 中。
 
 ```{r, eval=FALSE}
-writeLines("关于需要多少反斜杠时，是件让疼头疼的事。例如，到底是 '\t'、'\\t' 还是 '\\\\t'?", con = "my-file.txt")
+writeLines("R markdown 需要使用反斜杠来转译一些符号，但是确定反斜杠数量是比较困难的。例如，到底是使用'\t'、'\\t' 还是 '\\\\t' 来表示输出一个空格呢？", con = "my-file.txt")
 ```
 
 然而，这种方式可能存在以下问题：当内容相对较长或包含特殊字符时，传递给 `writeLines()` 的字符串可能看起来很笨拙。
@@ -1441,7 +1387,6 @@ writeLines("关于需要多少反斜杠时，是件让疼头疼的事。例如�
 
 #### 写入 CSS 文件 {#write-css}
 
-<!-- \@ref(chunk-styling) -->
 
 第一种方法是在 R Markdown 文档中嵌入一个 `css` 代码块，以使用 CSS\index{CSS}\index{language engine!css} 样式化元素。
 
@@ -1451,16 +1396,11 @@ writeLines("关于需要多少反斜杠时，是件让疼头疼的事。例如�
 
 `r import_example("cat-css.Rmd")`
 
-<!--  `css` 代码块方法与此方法之间的唯一区别是，前一种方法将 CSS 代码写在输出文档的 `<body>` 标记内的位置（即，在代码块的位置），并且将 CSS 代码写在输出文档的 `<body>` 标记内。 后一种方法将 CSS 写入输出文档的 `<body>` 区域。 -->
-
-<!-- >**注意**：这两种方法在输出文档中不会有任何视觉差异。 -->
-
 
 
 #### 在序言中包含 LaTeX 代码 {#write-latex}
 
-<!-- \@ref(latex-preamble) -->
-如果读者希望将 LaTeX 代码添加到序言中，可以从 Rmd 中生成一个包含 LaTeX 代码的文件。例如：下面示例将 `cat` 代码块中的内容将会写入到 `preamble.tex` 文件中，并在 YAML 中，指定加载该文件。
+第 \@ref(pdf-latex) 节介绍了如何使用外部 .tex 文件将 LaTeX 代码添加到序言（`preamble`）中，并给出了具体的例子。本节将介绍另外一种方式来实现这样的需求。读者可以通过在 `cat` 代码块，将其中的内容写入到 `preamble.tex` 文件中，并在 YAML 中指定加载该文件。下面给出一个例子作为演示：
 
 `r import_example("cat-latex.Rmd")`
 
@@ -1473,8 +1413,8 @@ writeLines("关于需要多少反斜杠时，是件让疼头疼的事。例如�
 
 默认情况下，`cat` 代码块的内容不会显示在输出文档中。如果读者需要显示该 `cat` 代码块的内容，则需要将代码块选项 `class.source` 设置为某个语言名称。此时对应内容将会被高亮显示。下面给出一个例子，该例子将 `class.source` 设置为 `yaml` 语言：
 
-````{verbatim}
-```{cat, engine.opts=list(file='demo.yml'), class.source='yaml'}
+````md
+```{cat, engine.opts=list(file='demo.yml'), class.source='yaml'}`r ''`
 a:
   aa: "something"
   bb: 1
@@ -1509,11 +1449,14 @@ unlink('demo.yml')
 
 ### 运行 SAS 代码 {#sas-rmd}
 
-R Markdown 内置了 `sas` 引擎\index{language engine!SAS}运行 SAS (https://www.sas.com) 代码。用户需要确保 SAS 可执行文件位于环境变量 `PATH` 中，或者也可以通过块选项 `engine.path`\index{chunk option!engine.path} 指定 SAS 可执行文件的路径，例如：`engine.path = "C:\\Program Files\\SASHome\\x86\\SASFoundation\\9.3\\sas.exe"`。下面是一个输出 "Hello World" 的示例：
+第 \@ref(python-rmd) 节给出了运行 Python 代码示例，本节将介绍如何使用 `sas` 引擎\index{language engine!SAS}运行 SAS (https://www.sas.com) 代码。
 
+> **注意**：读者需要确保 SAS 可执行文件在的环境变量 `PATH` 中。如果读者不知道 `PATH` 是什么意思的话，可以通过代码块选项 `engine.path`\index{chunk option!engine.path} 提供 SAS 可执行文件的完整路径，例如：`engine.path = "C:\\Program Files\\SASHome\\x86\\SASFoundation\\9.3\\sas.exe"`。
 
-````{verbatim}
-```{sas}
+下面给出一个输出 "Hello World" 的示例：
+
+````md
+```{sas}`r ''`
 data _null_;
 put 'Hello, world!';
 run;
@@ -1522,20 +1465,21 @@ run;
 
 ### 运行 Stata 代码 {#stata-rmd}
 
+如果读者安装了 Stata 软件，则可以通过 `stata` 引擎\index{language engine!stata} (https://www.stata.com) 来运行 Stata  代码。
+读者可以通过代码块选项 `engine.path`\index{chunk option!engine.path} 指定到可执行文件的完整路径，例如：`engine.path = "C:/Program Files (x86)/Stata15/StataSE-64.exe"`。下面给出一个例子：
 
-`stata` 引擎\index{language engine!stata} 可运行 Stata (https://www.stata.com) 代码。与 SAS 类似，R Markdown 会调用环境变量或 `engine.path` 指定的 Stata 可执行文件，例如：`engine.path = "C:/Program Files (x86)/Stata15/StataSE-64.exe"`。
-
-````{verbatim}
-```{stata}
+````md
+```{stata, engine.path = "C:/Program Files (x86)/Stata15/StataSE-64.exe"}`r ''`
 sysuse auto
 summarize
 ```
 ````
 
+在 **knitr** 中的 `stata` 引擎功能十分有限。Doug Hemken 开发了 **Statamarkdown** 包 \index{R package!Statamarkdown} 对其进行了扩展，感兴趣的读者可以通过 Github 获得该包相关信息，地址为： <https://github.com/Hemken/Statamarkdown>。当然，读者也可以通过在线搜索 "Stata R Markdown"，找到关于该包的教程。
 
-**knitr** 内置的 `stata` 引擎功能有限。Doug Hemken 开发的 **Statamarkdown** 包 \index{R package!Statamarkdown} 扩展了该引擎，Github 主页见 https://github.com/Hemken/Statamarkdown。
 
 ### 用渐近线 Asymptote 创建图形 {#asymptote-plot}
+
 
 ```{r include = FALSE}
 eval_asy <- function() {
@@ -1543,7 +1487,7 @@ eval_asy <- function() {
 	check_has_asymptote <- nzchar(Sys.which("asy"))
 	check_not_ci <- is.na(Sys.getenv('CI', NA))
 	eval_asy <- check_not_windows & check_has_asymptote & check_not_ci
-	if (!eval_asy)
+	if (!eval_asy) 
 		warning("System set-up not compatible with Asymptote, so chunks with asy engine will be skipped.")
 	eval_asy
 }
@@ -1605,14 +1549,13 @@ grid3(XYZgrid);
 ! LaTeX Error: File `ocgbase.sty' not found.
 ```
 
-当出现这种错误时，读者可以参考书籍《R Markdown Cookbook》[@xie2020r]第 1.3 节，了解如何安装丢失的 LaTeX 包。
+当出现这种错误时，读者可以参考 第 \@ref(install-latex-package) 节了解如何安装丢失的 LaTeX 包。
 
 #### 在 R 中生成数据并通过 Asymptote 读取并绘制 {#asym-r}
 
-#### Asymptote 读取 R 数据 {#asym-r}
+本节将展示一个在 R 中生成数据并通过 Asymptote 读取的简单示例。
 
-下面是一个 Asymptote 与 R 交互的例子，首先 R 中的数据保存到 CSV 文件中：
-
+首先，将 R 中生成的数据保存到 CSV 文件中（下面是一个 R 代码块）：
 
 ```{r}
 x = seq(0, 5, l = 100)
@@ -1679,69 +1622,79 @@ unlink('sine.csv')
 ```
 
 
+
 ### 使用 Sass/SCSS 构建 HTML 页面 {#sass-scss}
 
-Sass (https://sass-lang.com) 是一种 CSS 扩展语言，它使用比普通 CSS 更灵活的方式创建 CSS 规则\index{CSS!Sass}\index{Sass}。Sass 在 CSS 的基础上引入了变量，规则，继承等更多编程特性，在语法上使用缩进而不是括号 `{` 分隔块，使用换行符替代分号 `;` 分隔语句。下面是一个 `scss` 代码块：
+
+Sass (https://sass-lang.com) 是一种强大的专业级 CSS 扩展语言，在创建 CSS 规则\index{CSS!Sass}\index{Sass}方式上，它比普通 CSS 语言更加灵活。
 
 **sass** [@R-sass] \index{R package!sass} 包可用于将 Sass 汇编为 CSS。基于 **sass** 包，**knitr** 包含了两个语言引擎： `sass`\index{language engine!sass}和 `scss`\index{language engine!scss} （分别对应于 Sass 和 SCSS 语法）。其功能是将代码块编译为 CSS 语言。下面给出一个由 `scss` 构成的代码块：
 
-````{verbatim}
-```{sass}
-$font-stack: "Comic Sans MS", cursive, sans-serif
-$primary-color: #0020FF
+```{scss include=FALSE}
+$font-stack: "Comic Sans MS", cursive, sans-serif;
+$primary-color: #00FF00;
 
-.font-demo
+.book.font-family-1 {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+```
+
+````md
+```{sass}`r ''`
+$font-stack: "Comic Sans MS", cursive, sans-serif;
+$primary-color: #00FF00;
+
+.book.font-family-1 {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+```
+````
+
+Sass 语法与 SCSS 语法略有不同，例如：
+
+````md
+```{sass}`r ''`
+$font-stack: "Comic Sans MS", cursive, sans-serif
+$primary-color: #00FF00
+
+.book.font-family-1
   font: 100% $font-stack
   color: $primary-color
 ```
 ````
 
-上面的 Scss 代码定义了两个可以复用的变量 `$font-stack` 和 `$primary-color`，并且在 `.font-demo` CSS 类中引用这些变量设置了字体和颜色。效果如下：
+由于上面代码的作用，在[本节的 HTML 版本](https://cosname.github.io/rmarkdown-guide/rmarkdown-operation.html#chunk-shell)中，当前页面的字体会被更改为 Comic Sans。
 
-```{sass, echo = FALSE}
-$font-stack: "Comic Sans MS", cursive, sans-serif
-$primary-color: #0020FF
 
-.font-demo
-  font: 100% $font-stack
-  color: $primary-color
-```
-
-::: {.font-demo}
-
-在过去的十多年间，R 语言发展的十分迅猛，这其中就包括了 R Markdown。这段往事可能要追溯到 2007 年。那时候，还在中国人民大学上学的谢益辉开始使用 Sweave，并沉迷于此无法自拔。不仅自己在写作业的时候尽可能的使用 Sweave，还持之以恒地向同学们兜售。Sweave 的命名是 S + weave，前者指的是 S 语言，这是 R 语言的前身，后者含义即“编织”。Sweave 之所以受到谢同学的追捧，正是因为它可以将某些东西编织起来——代码和代码执行后的结果。直到今天，Sweave 仍然是 RStudio 中从 Rnw 文档生成 PDF 的重要工具之一。
-
-:::
-
-块选项 `engine.opts` 可以定制 CSS 代码的输出样式，例如：`engine.opts = list(style = "expanded")`。默认的样式是 "compressed"。请参阅帮助页面 `?sass::sass_options` 了解更多 `output_style` 可用的参数。
+`sass`/`scss` 代码块是通过`sass::sass()`函数编译而成的。目前，代码块选项 `engine.opts` 可以定制 CSS 代码的输出样式，例如：`engine.opts = list(style = "expanded")`。默认的样式是 "compressed"。如果读者想要了解更多 `output_style` 可用的参数，可以在 R 中输入 `?sass::sass_options` 来查看帮助页面。
 
 
 ## 输出钩子 (\*) {#output-hook}
 
+第 \@ref(chunk-output) 节介绍了如何通过使用 **knitr** 包控制代码块的每一段输出，如源代码、文本输出以及图像输出等。实际上，这一控制是通过“输出钩子”（Output Hook\index{output hooks}）实现的。
 
-第 \@ref(chunk-output) 节介绍了如何通过使用 **knitr** 包控制代码块的每一段输出，如源代码、文本输出、图像输出以及 message 等。实际上，这一控制是通过“输出钩子”（Output Hook\index{output hooks}）实现的。大部分用户不需要了解钩子函数的底层细节。有兴趣的读者可以在 <https://github.com/yihui/knitr/tree/master/R> 找到内置钩子函数的源代码，它们的文件名格式为 `hooks-*.R`，例如，`hooks-md.R` 包含 R Markdown 中的钩子函数）。
+输出钩子由一系列函数构成，它们的输入为一段输出（通常是一个字符向量），并返回一个要写入输出文档的字符向量。为了更清楚地解释输出钩子的作用过程，下面这个小例子展示了一个简单代码块的输出是如何通过 **knitr** 的输出钩子呈现的。考虑一个由一行代码组成的代码块：
 
-在 R Markdown 中，输出钩子负责将代码块的输出转换为最终文档里的视觉元素。**knitr** 运行完代码块后将结果存储为字符向量，钩子函数将这个字符向量加工为新的字符向量并返回到文档中，这就是用户最终看到的结果。考虑下面的代码块：
-
-````{verbatim}
-```{r}
+````md
+```{r}`r ''`
 1 + 1
 ```
 ````
 
-**knitr** 运行该段代码后，得到两个字符串：源代码 `"1 + 1"` 和文本输出 `"[1] 2"`。现在需要两个输出钩子把它们转换为输出元素，一个负责源代码，一个负责文本输出。对于源代码，R Markdown 默认调用 **knitr** 中 `source` 钩子，它的简化版如下：
+在 **knitr** 对代码块进行处理后，它会得到两个输出元素，它们都存储为字符串：源代码 `"1 + 1"` 和文本输出 `"[1] 2"`。这些字符串将由块挂钩（chunk hooks）进一步处理，以获得所需的输出格式。例如，对于Markdown文档，**knitr** 将把源代码包装在带有编程语言名称的代码块中。这是通过 `source` 钩子完成的，它看起来像这个函数：
 
-```{.r}
+
+```{r, eval=FALSE}
 # 对于上面的例子， `x` 为字符串 "1 + 1"
 function(x, options) {
   # 小写的 "r" 在这里表示编程语言的名称
-  paste(c("```r", x, "```"), collapse = "\n")
+  paste(c('```r', x, '```'), collapse = '\n')
 }
 ```
 
-上面的输出钩子函数将源代码转换为 Markdown 代码块，即以 ` ``` ` 开头和结尾，并添加语言标记。
-
-类似的，处理文本输出的 `output` 钩子简化版如下：
+类似的，由输出钩子处理的文本输出类似于下面这个函数；
 
 ```{r, eval=FALSE}
 function(x, options) {
@@ -1749,9 +1702,9 @@ function(x, options) {
 }
 ```
 
-经过两个输出钩子的处理后，上述代码块的最终输出为：
+所以上述代码块的最终输出为：
 
-````{verbatim}
+````md
 ```r
 1 + 1
 ```
@@ -1761,17 +1714,18 @@ function(x, options) {
 ```
 ````
 
-`source` 和 `output` 的实际代码更为复杂，但背后的思想是一样的。读者可以通过在 `knit_hooks`\index{knitr!knit\_hooks} 中查看钩子函数的源代码，例如：
+实际的钩子比上面的两个函数更复杂，但背后的思想是一样的。可以通过 `get()` 函数从 `knit_hooks`\index{knitr!knit\_hooks} 中获得实际的钩子，例如：
 
 ```{r, eval=FALSE}
-# 为了得到有意义的输出，以下代码应在一个 knitr 文档的代码块内部执行
+# 为了得到有意义的输出，以下代码应在一个 knitr 文档的代码块内部执行 
 knitr::knit_hooks$get('source')
 knitr::knit_hooks$get('output')
 # 或者 knitr::knit_hooks$get(c('source', 'output'))
 ```
 
+本书不建议读者阅读这些内置钩子的源代码，除非真的有兴趣为 **knitr** 包做贡献。如果感兴趣的话，可以在 https://github.com/yihui/knitr/tree/master/R 里以 `hooks-*.R` 形式命名的脚本中找到这些代码（例如，`hooks-md.R` 包含 R Markdown 文档的钩子）。作为 **knitr** 用户，如果知道如何利用内置钩子创建自定义输出钩子，通常就足够了。本节余下的内容将展示使用输出钩子的基本思想。
 
-用户可以用 `knit_hooks` 中的 `set()` 函数覆盖 R Markdown 内置的钩子，从而定制文本输出。由于该方法将覆盖现有的默认钩子，所以最好先保存默认钩子的副本，以自己的方式处理输出元素，并将结果传递给默认钩子。常见的模式为：
+一个自定义的输出钩子是通过 `knit_hooks` 的 `set()` 方法注册的。由于该方法将覆盖现有的默认钩子，所以最好先保存默认钩子的副本，以自己的方式处理输出元素，并将结果传递给默认钩子。常见的语法为：
 
 ```{r, eval=FALSE}
 # 在这里使用 local() 是可选的，设置的原因只是想避免创建不必要的全局变量，如 `hook_old`）
@@ -1784,7 +1738,7 @@ local({
 })
 ```
 
-这里，`NAME` 是钩子的名称，它可以是以下值之一：
+这里，`NAME`是钩子的名称，它可以是以下值之一：
 
 - `source`：处理源代码；
 
@@ -1804,13 +1758,13 @@ local({
 
 - `document`：处理整个文档的输出。
 
-钩子的 `options` 参数接受一个列表，表示当前代码块的块选项。例如，如果在一个块上设置 `foo = TRUE`，可以通过钩子中的 `options$foo` 获取它的值。但需要注意的是，参数 `options` 对 `inline` 和 `document` 钩子不可用。
+钩子函数中的参数 `x` 的含义在上面的列表中解释。对于钩子的 `options` 参数，它表示当前代码块的块选项（以列表形式给出）。例如，如果在一个块上设置 `foo = TRUE`，可以通过钩子中的 `options$foo` 获取它的值。但需要注意的是，参数 `options` 对 `inline` 和 `document`  钩子不可用。
 
-输出钩子可以让使用者能够最终控制块和文档输出的每个单独部分。与块选项（第 \@ref(chunk-options) 节，通常具有预定义的用途）相比，输出钩子可能要强大得多，因为它们是用户自定义的函数，而且可以在函数中做任何想做的事情。
+输出钩子可以让使用者能够最终控制块和文档输出的每个单独部分。与块选项（第 \@ref(chunk-options) 节，通常具有预定义的用途）相比，输出钩子可能要强大得多，因为它们是用户自定义的函数，而且可以在函数中做任何你想做的事情。
 
 ### 编辑源代码 {#edit-source}
 
-有时用户可能希望隐藏部分源代码。例如，在连接数据库时隐藏密码。第 \@ref(hide-one) 节谈到可以使用块选项 `echo` 隐藏或显示某一行（例如，通过 `echo = 2` 可以显示第二个表达式）。本节提供了一种更加灵活的方法，它不需要指定表达式的位置或索引。
+有的时候，使用者可能不希望在报告中完全展示自己的源代码。例如，可能在某一行代码中需要写一个密码（如爬虫代码等）。在第 \@ref(hide-one) 节中提到，可以使用块选项 `echo` 来选择显示哪个表达式（例如，通过 `echo = 2` 可以显示第二个表达式）。本节提供了一种更加灵活的方法，它不需要指定表达式的位置或索引。
 
 它的基本思想是在代码中添加一个特殊的注释（例如，`# SECRET!!`）。当在代码中检测到该注释时，将自动忽略该行。下面是使用 `source` 钩子的完整示例:
 
@@ -1831,7 +1785,7 @@ if (TRUE) { # SECRET!!
 }
 ```
 
-在 `source` 钩子中，`x` 的值为：
+在 `source` 钩子中，`x`的值为：
 
 ```{r, eval=FALSE}
 c("1 + 1", "if (TRUE) { # SECRET!!\n  1:10\n}")
@@ -1846,14 +1800,14 @@ x <- paste(x, collapse = '\n')  # 组合成单个字符串
 hook_source(x, options)
 ```
 
-第 \@ref(source-index) 节介绍了 `grepl()` 函数之外更多操作操作字符串的选择。
+这个示例展示了如何操作源代码字符串，而`grepl()`当然不是字符串操作的唯一选择。第 \@ref(source-index)节将展示其它可能的选择。
 
 ### 向源代码中添加行号 {#source-index}
 
 有的时候，为了方便读者阅读或讨论代码，需要给源代码添加行号。本节将展示一个定义 `source` 钩子的例子，该钩子会将行号作为注释添加到源代码中。例如，对于下面这个代码块：
 
-````{verbatim}
-```{r}
+````md
+```{r}`r ''`
 if (TRUE) {
   x <- 1:10
   x + 1
@@ -1886,15 +1840,15 @@ knitr:::v_spaces(c(1, 3, 6, 0))
 
 在通过 HTML 进行展示的时候，当代码块或者文本输出过长时，可以对其高度进行压缩，并设置成可滚动的形式。第 \@ref(html-code-scroll)节展示了如何通过 CSS 来实现上述功能。实际上，有一个更简单的方法，可以使用块选项的 `attr.source` 和 `attr.output` 来将 `style` 属性添加 Markdown 输出中的分离代码块中（有关这些选项的更多信息，请参阅第 \@ref(chunk-property) 节）。例如，对于这个带有 `attr.output` 选项的代码块：
 
-````{verbatim}
-```{r, attr.output='style="max-height: 100px;"'}
+````md
+```{r, attr.output='style="max-height: 100px;"'}`r ''`
 1:300
 ```
 ````
 
-它的 Markdown 输出为：
+它的Markdown输出为：
 
-````{verbatim}
+````md
 ```r
 1:300
 ```
@@ -1916,7 +1870,7 @@ knitr:::v_spaces(c(1, 3, 6, 0))
 </pre>
 ```
 
-更多有关 Pandoc 中分离代码块的信息，可参阅其阅读手册：<https://pandoc.org/MANUAL.html#fenced-code-blocks>。
+更多有关 Pandoc 中分离代码块的信息，可参阅其阅读手册：https://pandoc.org/MANUAL.html#fenced-code-blocks.
 
 `attr.source` 和 `attr.output` 选项让使用者能够指定每个代码块的最大高度，但是对应的语法有点笨拙，需要更好地理解 CSS 和 Pandoc 的 Markdown 语法。下面的例子展示如何使用自定义块选项 `max.height` 来自定义输出钩子，这样只需要设置块选项，如 `max.height = "100px"` 而非 `attr.output = 'style="max-height: 100px;"'`。本例只操作 `options` 参数，而不操作 `x` 参数：
 
@@ -2031,8 +1985,8 @@ knitr::include_graphics("images/hook-html5.png", dpi = NA)
 
 正如前文提到的，缓存依赖于代码或块选项。如果改变了任何块选项（除了 `include` 选项），缓存将会失效。此特性可用于解决一个常见的问题，即当代码需要读取外部数据文件时，应在更新数据文件时使缓存失效，那仅仅像下面这样简单地使用 `cache = TRUE` 是不够的：
 
-````{verbatim}
-```{r import-data, cache=TRUE}
+````md
+```{r import-data, cache=TRUE}`r ''`
 d <- read.csv('数据.csv')
 ```
 ````
@@ -2062,8 +2016,8 @@ if (file.exists('结果.rds')) {
 
 当代码块没有任何副产物（如图像）时，对所有输出格式使用相同的缓存数据库是安全的，还可以节省时间。例如，当读取一个大型数据对象或运行一个比较耗时的模型时，若结果不依赖于输出格式，就可以使用相同的缓存数据库。可以通过块选项 `cache.path` ，例如：
 
-````{verbatim}
-```{r important-computing, cache=TRUE, cache.path="cache/"}
+````md
+```{r important-computing, cache=TRUE, cache.path="cache/"}`r ''`
 ```
 ````
 
@@ -2073,14 +2027,14 @@ if (file.exists('结果.rds')) {
 
 当设定块选项 `cache = TRUE`\index{caching} 时，缓存的对象将被延迟加载到 R 中，这意味着对象将不会从缓存数据库中读取，直到它在代码中被实际使用。当不是所有对象都在文档中稍后被使用时，这一操作可以节省一些内存。例如，如果读取了一个大型的数据对象，但在后续的分析中只使用了其中的一个子集，那么原始的数据对象将不会从缓存数据库中加载：
 
-````{verbatim}
-```{r, read-data, cache=TRUE}
+````md
+```{r, read-data, cache=TRUE}`r ''`
 full <- read.csv("大型数据集.csv")
 rows <- subset(full, price > 100)
 # 之后只使用 `rows` 数据集
 ```
 
-```{r}
+```{r}`r ''`
 plot(rows)
 ```
 ````
@@ -2088,7 +2042,7 @@ plot(rows)
 然而，当一个对象太大时，可能会遇到这样的报错：
 
 ```r
-Error in lazyLoadDBinsertVariable(vars[i], ...
+Error in lazyLoadDBinsertVariable(vars[i], ... 
   long vectors not supported yet: ...
 Execution halted
 ```
@@ -2110,8 +2064,8 @@ xfun::cache_rds({
 当 `xfun::cache_rds()` 在 **knitr** 源文档的一个代码块中被调用时，`.rds` 文件的路径由块选项 `cache.path`\index{chunk option!cache.path} 和块标签决定。例如，对于在 Rmd 文档 `input.Rmd` 中带有块标签 `foo` 的代码块：
 
 
-````{verbatim}
-```{r, foo}
+````md
+```{r, foo}`r ''`
 res <- xfun::cache_rds({
   Sys.sleep(3)
   1:10
@@ -2251,8 +2205,8 @@ xfun::cache_rds({
 
 相比之下，对于设定选项为 `cache = TRUE` 的代码块，所有的内容都将被缓存：
 
-````{verbatim}
-```{r, cache=TRUE}
+````md
+```{r, cache=TRUE}`r ''`
 print("Hello world!")
 plot(cars)
 1:10
@@ -2263,8 +2217,8 @@ plot(cars)
 
 [^2]: 这是默认的行为，也可以进行调整。如果想了解如何使缓存更精细，而非所有块选项都会影响缓存，请参阅：https://yihui.org/knitr/demo/cache/。
 
-````{verbatim}
-```{r, cache=TRUE, fig.width=6}
+````md
+```{r, cache=TRUE, fig.width=6}`r ''`
 # 这个块没有生成图像
 x <- rnorm(1000)
 mean(x)
@@ -2283,46 +2237,46 @@ mean(x)
 
 有的时候，使用者需要在源文档中重复使用某些代码块，例如在详细讲解某一段代码、重复生成一些数据或者需要在附录中呈现所有代码时。这当然可以通过复制粘贴实现，但通常会很麻烦，甚至会在改一段代码时忘记修改对应的另一段代码。实际上，还有更简便的方法实现重复使用代码块的功能，这其中的关键点在于标记代码块，从而在其它地方用标签的形式引用它们。本节将介绍三种重复使用代码块的方法。
 
-#### 嵌入代码块 (\*) {#embed-chunk}
+#### 将一个块嵌入到另一个块中 (\*) {#embed-chunk}
 
-R Markdown 支持在 R 函数中使用 `<< label >>` 作为占位符，随后以 `label` 为标签的代码块中的内容会被嵌入该函数中。例如，可以这样创建一个 R 函数：
+将代码块的标签用 `<<>>` 括起来，则可以将该代码块嵌入到另一个代码块中。之后 **knitr** 将自动将其在实际代码中扩展为 `<<label>>`。例如，可以这样创建一个 R 函数：
 
-```r
+
+````md
+这里定义了一个函数，可以将华氏度转为摄氏度。
+
+```{r, f2c}`r ''`
 F2C <- function(x) {
   <<check-arg>>
   <<convert>>
 }
 ```
 
-随后，分别用两个标签为 `check-arg` 和 `convert` 的代码块实现 `F2C` 函数的功能：
-
-````{verbatim}
 首先，检查输入值是否为数字：
 
-
-```{r, check-arg, eval=FALSE}
+```{r, check-arg, eval=FALSE}`r ''`
   if (!is.numeric(x)) stop("The input must be numeric!")
 ```
 
 然后进行转换：
 
-```{r, convert, eval=FALSE}
+```{r, convert, eval=FALSE}`r ''`
   (x - 32) * 5/ 9
 ```
 ````
 
-编译时，**knitr** 将自动将 `<<check-arg>>` 和 `<<convert>>` 扩展为 `check-arg` 和 `convert` 两个代码块的内容，生成：
+这是基于唐纳德·克努特（Donald Knuth）提出的[文学编程](https://en.wikipedia.org/wiki/Literate_programming)的主要思想之一。这种技术的优点在于，使用者可以将（复杂的）代码分割成更小的部分，将每个部分写入单独的代码块中，并使用文字叙述来解释它们。所有的部分都可以被放入要执行的主代码块中。
 
-```r
+在上面的例子中，第一个代码块（标签为 `f2c`）将变成：
+
+````md
+```{r, f2c}`r ''`
 F2C <- function(x) {
   if (!is.numeric(x)) stop("The input must be numeric!")
   (x - 32) * 5/ 9
 }
 ```
-
-
-这是唐纳德·克努特（Donald Knuth）提出的[文学编程](https://en.wikipedia.org/wiki/Literate_programming)中的主要思想之一。这种技术的优点在于，使用者可以将（复杂的）代码分割成更小的部分，将每个部分写入单独的代码块中，并使用文字叙述来解释它们。所有的部分都可以被放入要执行的主代码块中。
-
+````
 
 一个代码块中可以嵌入任意数量的其他代码块，并且嵌入也可以是递归的。例如，可以将块 A 嵌入到块 B 中，将块 B 嵌入到块 C 中，这样块 C 将借由块 B 包含块 A 中的代码。
 
@@ -2332,18 +2286,18 @@ F2C <- function(x) {
 
 如果想要重复多次使用完全相同的代码块，则可以用一个标签来定义块，并使用相同的标签创建更多的代码块，但需要保留块的内容为空，例如：
 
-````{verbatim}
+````md
 
 下面是一个没有被运行的代码块：
 
-```{r, chunk-one, eval=FALSE}
+```{r, chunk-one, eval=FALSE}`r ''`
 1 + 1
 2 + 2
 ```
 
 现在运行该代码块：
 
-```{r, chunk-one, eval=TRUE}
+```{r, chunk-one, eval=TRUE}`r ''`
 ```
 ````
 
@@ -2351,29 +2305,29 @@ F2C <- function(x) {
 
 但是最好不要多次（多于一次）使用此方法多次运行代码块来生成图像或其他文件，因为从后面的块创建的图像文件可能会覆盖前一个块创建的文件。如果只有一个块使用块选项 `eval = TRUE`，而所有其他块使用 `eval = FALSE` 的话是可以的。
 
-#### 引用代码块标签 (\*) {#ref-label}
+#### 使用引用标签 (\*) {#ref-label}
 
 除了块之间的嵌入以及使用块标签外，还可以通过引用标签的方法来重复使用代码块。该方法的核心在于块选项 `ref.label`\index{chunk option!ref.label}，该选项利用一个由块标签组成的向量来检索这些块的内容。例如在下例中，标签为 `chunk-a` 的代码块是 `chunk-c` 和 `chunk-b` 的组合：
 
-````{verbatim}
-```{r chunk-a, ref.label=c('chunk-c', 'chunk-b')}
+````md
+```{r chunk-a, ref.label=c('chunk-c', 'chunk-b')}`r ''`
 ```
 
-```{r chunk-b}
+```{r chunk-b}`r ''`
 # 这是块 b
 1 + 1
 ```
 
-```{r chunk-c}
+```{r chunk-c}`r ''`
 # 这是块 c
 2 + 2
 ```
 ````
 
-`chunk-a` 的内容在编译时被替换为：
+换句话说，`chunk-a` 实际上是这样的：
 
-````{verbatim}
-```{r chunk-a}
+````md
+```{r chunk-a}`r ''`
 # 这是块 c
 2 + 2
 # 这是块 b
@@ -2381,13 +2335,13 @@ F2C <- function(x) {
 ```
 ````
 
-`ref.label` 提供了一种在文档中灵活组织代码块的方法，而无需复制粘贴。需要注意的是，被引用的代码块在使用 `ref.label` 的代码块之前还是之后并不重要，文档中出现在前的代码块同样引用后面的代码块。
+块选项 `ref.label` 提供了一种非常灵活的方式，可以在文档中重新组织代码块，而无需采用复制粘贴的方式。需要注意的是，被引用的代码块在使用 `ref.label` 的代码块之前还是之后并不重要，前面的代码块可以引用后面的代码块。
 
 ### 在创建对象之前使用它 (\*) {#use-creat}
 
 一个 **knitr** 文档中的所有代码，包括代码块和行内 R 表达式中的代码，从开始到结束都是按先后顺序执行的。从理论上讲，在给变量赋值之前不能使用它。但是，在某些情况下，使用者可能需要在文档前面提到一个变量的值。例如，通常在文章的摘要中需要显示结果，但结果实际上是在文档的后面计算的。下面的例子说明了这个想法，但无法编译：
 
-````{verbatim}
+````md
 ---
 题目：一个重要的报告
 摘要： >
@@ -2396,7 +2350,7 @@ F2C <- function(x) {
 
 在下面的块中创建对象 `mx`：
 
-```{r}
+```{r}`r ''`
 x <- 1:100
 mx <- mean(x)
 ```
@@ -2405,8 +2359,8 @@ mx <- mean(x)
 要解决这个问题，对象的值必须先保存在某个地方，并在下一次编译文档时加载。需要注意的是，这一操作意味着文档至少需要被编译两次。下面的例子介绍了一种可能的解决方案，即使用 `saveRDS()` 函数：
 
 
-````{verbatim}
-```{r, include=FALSE}
+````md
+```{r, include=FALSE}`r ''`
 mx <- if (file.exists('mean.rds')) {
   readRDS('mean.rds')
 } else {
@@ -2423,7 +2377,7 @@ mx <- if (file.exists('mean.rds')) {
 
 在下面的块中创建对象 `mx`：
 
-```{r}
+```{r}`r ''`
 x <- 1:100
 mx <- mean(x)
 saveRDS(mx, 'mean.rds')
@@ -2434,7 +2388,7 @@ saveRDS(mx, 'mean.rds')
 
 函数 `knitr::load_cache()`\index{knitr!load\_cache()} 是一个替代的解决方案，它允许在特定的代码块已经被缓存了之后从该代码块加载对象的值。这个想法与上面的例子类似，但它将减少手动保存和加载对象的工作，因为对象会自动保存到缓存数据库，只需要通过 `load_cache()` 加载它即可，例如：
 
-````{verbatim}
+````md
 ---
 题目：一个重要的报告
 摘要： >
@@ -2444,7 +2398,7 @@ saveRDS(mx, 'mean.rds')
 
 在下面的块中创建对象 `mx`：
 
-```{r mean-x, cache=TRUE}
+```{r mean-x, cache=TRUE}`r ''`
 x <- 1:100
 mx <- mean(x)
 ```
@@ -2467,29 +2421,29 @@ mx  # 对象 `mx`
 
 下面的例子先给出了一个非常简单的块，并紧跟着有一个更耗时的块：
 
-````{verbatim}
-```{r}
+````md
+```{r}`r ''`
 1 + 1
 knitr::knit_exit()
 ```
 
 在输出中将只会看到上面的内容。
 
-```{r}
+```{r}`r ''`
 Sys.sleep(100)
 ```
 ````
 
 一般情况下，需要等待 100 秒来编译整个文档，但由于调用了 `knit_exit()`，文档的剩余部分将不会被编译。
 
-### 控制图像显示位置 {#plot-show-else}
+### 生成一个图像并在其他地方显示 {#plot-show-else}
 
-通常情况下，由代码块中生成的图像会显示在代码块下面，但也可以让它显示在任意位置，例如：
+通常情况下，由代码块中生成的图像会显示在代码块下面，但其实可以选择在其他地方显示它们，还可以在代码块中隐藏它们，例如：
 
-````{verbatim}
+````md
 在这个代码块中生成了一个图像，但是没有显示出来：
 
-```{r cars-plot, dev='png', fig.show='hide'}
+```{r cars-plot, dev='png', fig.show='hide'}`r ''`
 plot(cars)
 ```
 
@@ -2498,9 +2452,9 @@ plot(cars)
 ![一张好看的图](`r knitr::inline_expr("knitr::fig_chunk('cars-plot', 'png')")`)
 ````
 
-上述代码块中使用了块选项 `fig.show='hide'`\index{chunk option!fig.show} 来把图像暂时隐藏起来。然后在另一段中，通过函数 `knitr::fig_chunk()`\index{knitr!fig\_chunk()} 来检索得到绘图文件的路径，例如 `test_files/figure-html/cars-plot-1.png`。使用者需要将块标签和图像设备名称传递给 `fig_chunk()`，以便它更好地得到图像文件路径。
+上述代码块中使用了块选项 `fig.show='hide'`\index{chunk option!fig.show} 来把图像暂时隐藏起来。然后在另一段中，通过调用函数 `knitr::fig_chunk()`\index{knitr!fig\_chunk()} 来检索得到绘图文件的路径，例如 `test_files/figure-html/cars-plot-1.png`。使用者需要将块标签和图像设备名称传递给 `fig_chunk()`，以便它更好地得到图像文件路径。
 
-<https://stackoverflow.com/a/46305297/559676> 介绍了 `fig_chunk()` 在 **blogdown** 网站中的应用。这个函数适用于任何 R Markdown 的输出格式，并且它对于在幻灯片上显示图像特别有用，因为幻灯片页上的屏幕空间通常是有限的，可以在一张幻灯片上展示代码，然后在另一张幻灯片上展示图像。
+在https://stackoverflow.com/a/46305297/559676上可以看到 `fig_chunk()` 在一个 **blogdown** 网站的应用。这个函数适用于任何 R Markdown 的输出格式，并且它对于在幻灯片上显示图像特别有用，因为幻灯片页上的屏幕空间通常是有限的，可以在一张幻灯片上展示代码，然后在另一张幻灯片上展示图像。
 
 ### 修改之前代码块中的图像 {#modify-before}
 
@@ -2512,23 +2466,23 @@ plot(cars)
 knitr::opts_knit$set(global.device = TRUE)
 ```
 
-需要注意的是，这里使用的是 `opts_knit` 而非更常用的 `opts_chunk`。相关例子可参见 <https://stackoverflow.com/q/17502050>。下面是一个完整的例子：
+需要注意的是，这里使用的是 `opts_knit` 而非更常用的 `opts_chunk`。相关例子可参见 Stack Overflow 的帖子 https://stackoverflow.com/q/17502050。而当不再需要这个全局的图像设备时，可以将该选项设置为 `FALSE`。下面是一个完整的例子：
 
 `r import_example('global-device.Rmd')`
 
-### 复用块选项 (\*) {#reuse-option}
+### 保存一组块选项并重复使用它们 (\*) {#reuse-option}
 
 使用者有时需要经常使用一些块选项，例如对一些图像的设置、对一些结果输出方式的设置。这当然可以通过复制粘贴实现，但不妨把它们保存为一个组，然后只使用组的名称来重复使用它们。这可以通过 `knitr::opts_template$set(name = list(options))`\index{knitr!opts\_template} 来实现，之后可以使用 `opts.label`\index{chunk option!opts.label} 来引用组名，从而实现重复使用。例如：
 
-````{verbatim}
-```{r, setup, include=FALSE}
+````md
+```{r, setup, include=FALSE}`r ''`
 knitr::opts_template$set(fullwidth = list(
   fig.width = 10, fig.height = 6,
   fig.retina = 2, out.width = '100%'
 ))
 ```
 
-```{r, opts.label='fullwidth'}
+```{r, opts.label='fullwidth'}`r ''`
 plot(cars)
 ```
 ````
@@ -2537,8 +2491,8 @@ plot(cars)
 
 另外，还可以覆盖从 `opts.label` 中读取的选项，例如，如果在下面的块中设置 `fig.height = 7`，则实际的 `fig.height` 将变为 `7` 而非 `6`，从而可以对单个块进行调整：
 
-````{verbatim}
-```{r, opts.label='fullwidth', fig.height=7}
+````md
+```{r, opts.label='fullwidth', fig.height=7}`r ''`
 plot(cars)
 ```
 ````
@@ -2559,18 +2513,18 @@ knitr::knit_expand(
 
 这意味着，如果有一个 R Markdown 文档，其中包含了 `{{ }}` 中的一些动态部分，那么可以在该文档上应用 `knit_expand()`，然后调用 `knit()` 来编译它。例如，下面是一个名为 `template.Rmd` 的模板文档：
 
-````{verbatim}
+````md
 # 在 {{i}} 上进行回归
 
-```{r lm-{{i}}}
+```{r lm-{{i}}}`r ''`
 lm(mpg ~ {{i}}, data = mtcars)
 ```
 ````
 
 可以用 `mpg` 来对 `mtcars` 数据集中的所有其他变量逐个建立线性回归模型：
 
-````{verbatim}
-```{r, echo=FALSE, results='asis'}
+````md
+```{r, echo=FALSE, results='asis'}`r ''`
 src = lapply(setdiff(names(mtcars), 'mpg'), function(i) {
   knitr::knit_expand('template.Rmd')
 })
@@ -2581,7 +2535,7 @@ cat(res, sep = '\n')
 
 如果理解这个例子有难度，可参阅第 \@ref(results-asis) 节，以了解块选项 `results = 'asis'`\index{chunk option!results}，以及第 \@ref(child-document) 节来了解 `knitr::knit_child()`\index{knitr!knit\_child()} 的用法。
 
-### 重复代码块标签 (\*) {#repeat-label}
+### 允许代码块中的标签重复 (\*) {#repeat-label}
 
 默认情况下，**knitr** 不允许在文档中重复代码块标签。在编译文档时，重复的标签将导致错误。这种情况常见于在文档中复制和粘贴代码块的时候，会产生这样的错误信息：
 
@@ -2620,14 +2574,14 @@ options(knitr.duplicate.label = 'allow')
 
 设置此选项时需要很谨慎，与大多数的报错一样，它们的存在是有原因的。允许重复的块可能会在图像和交叉引用方面产生静默问题（silent problem）。例如，理论上，如果两个代码块具有相同的标签，并且两个代码块都生成图像，那么它们的图像文件将互相覆盖（并不会产生错误或警告消息），因为图像的文件名是由块标签决定的。使用选项 `knitr.duplicate.label = "allow"` 时， **knitr** 将通过添加数字后缀来静默地改变重复标签。例如，对于两个代码块：
 
-````{verbatim}
-```{r, test}
+````md
+```{r, test}`r ''`
 plot(1:10)
 ```
 
-```{r, test}
+```{r, test}`r ''`
 plot(10:1)
 ```
 ````
 
-第二个标签将被静默地更改为 `test-1`，这将避免覆盖由标签 `test` 的块产生的图像，但这也使得块标签不可被预知，所以在交叉引用图像时可能会产生困难（参见 \@ref(cross-reference) 节），因为交叉引用也是基于块标签的。
+第二个标签将被静默地更改为 `test-1`，这将避免覆盖由标签 `test` 的块产生的图像，但这也使得块标签不可被预知，所以在交叉引用图像时可能会产生困难（参见 \@ref(element-quote)节），因为交叉引用也是基于块标签的。
