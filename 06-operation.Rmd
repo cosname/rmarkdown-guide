@@ -1467,19 +1467,18 @@ writeLines("关于需要多少反斜杠时，是件让疼头疼的事。例如�
 
 <!-- >**注意**：这两种方法在输出文档中不会有任何视觉差异。 -->
 
-#### 在序言中包含 LaTeX 代码 {#write-latex}
+#### 写入 LaTeX 文件 {#write-latex}
 
-<!-- \@ref(latex-preamble) -->
-如果读者希望将 LaTeX 代码添加到序言中，可以从 Rmd 中生成一个包含 LaTeX 代码的文件。例如：下面示例将 `cat` 代码块中的内容将会写入到 `preamble.tex` 文件中，并在 YAML 中，指定加载该文件。
+<!-- \@ref(pdf-includes) -->
+
+第 \@ref(pdf-includes) 节介绍了 LaTeX 文档的通用结构。其中序言 (preamble) 部分常用于加载包和定制选项。R Markdown 支持在序言中插入任意 LaTeX 代码，可以用 `cat` 引擎将 LaTeX 代码插入 `preamble.tex` 文件中，并在 YAML 元数据中加载该文件。
 
 `r import_example("cat-latex.Rmd")`
-
-此时即可实现将 LaTeX 代码添加到序言中的功能。
 
 > **注意**：`cat` 代码块中的内容主要目的是定义 PDF 文档的页眉和页脚。如果读者还想在页脚中显示作者姓名，可以使用`engine.opts = list(file = 'preamble.tex', append = TRUE)` 和 `code = sprintf('\\fancyfoot[LO,RE]{%s}', rmarkdown::metadata$author)`选项将作者信息附加到另一个 `cat` 代码块中，并使用 `engine.opts` 写入到 `preamble.tex` 文件中。
 
 
-#### 将 YAML 数据写入文件并显示 {#yaml-input}
+#### 写入 YAML 文件 {#yaml-input}
 
 默认情况下，`cat` 代码块的内容不会显示在输出文档中。如果读者需要显示该 `cat` 代码块的内容，则需要将代码块选项 `class.source` 设置为某个语言名称。此时对应内容将会被高亮显示。下面给出一个例子，该例子将 `class.source` 设置为 `yaml` 语言：
 
@@ -1494,7 +1493,7 @@ b:
 ```
 ````
 
-此时，将会输出以下内容，并且还会生成一个 `demo.yml` 文件。
+此时，将会输出以下内容，并生成 `demo.yml` 文件。
 
 ```{cat, engine.opts=list(file='demo.yml'), class.source='yaml'}
 a:
@@ -1503,12 +1502,6 @@ a:
 b:
   aa: "something else"
   bb: 2
-```
-
-为了检测 `demo.yml` 文件是否已经生成，读者可以使用 **yaml** 包 [@R-yaml] 将该文件读入到 R 中。运行下面代码，得到的结果为：
-
-```{r}
-xfun::tree(yaml::read_yaml('demo.yml'))
 ```
 
 ```{r, include=FALSE}
