@@ -29,6 +29,11 @@ jobs:
       - name: Install pandoc
         run: |
           brew install pandoc
+
+      - name: Install Asymptote
+        run: |
+          brew install Asymptote
+
       - name: Cache renv packages
         uses: actions/cache@v2
         with:

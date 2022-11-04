@@ -1177,7 +1177,7 @@ import_example_result("examples/cross-reference.Rmd")
 
 ### 索引 {#index}
 
-为了方便读者快速浏览，除目录之外，作者还可以在文档的末尾插入索引。索引的生成需要使用 LaTeX 包，因此只有 PDF 输出文档才支持索引。首先，创建一个 `.tex` 文件引用 LaTex 的 `makeidx` 包，然后在 R Markdown 文档中用 `includes -> before_body` 选项引入这个 `.tex` 文件。例如，在 `preamble.tex` 中写入：
+为了方便读者快速浏览，除目录之外，作者还可以在文档的末尾插入索引。索引的生成需要使用 LaTeX 包，因此只有 PDF 输出文档才支持索引。首先，创建一个 `.tex` 文件引用 LaTeX 的 `makeidx` 包，然后在 R Markdown 文档中用 `includes -> before_body` 选项引入这个 `.tex` 文件。例如，在 `preamble.tex` 中写入：
 
 ```tex
 \usepackage{makeidx}

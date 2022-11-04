@@ -999,8 +999,7 @@ output:
 
 #### 通用文档部件 {#pdf-includes}
 
-一个 LaTeX 文档的结构大概是这样子：
-
+一个 LaTeX 文档的结构如下：
 
 ```tex
 \documentclass{article}
