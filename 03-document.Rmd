@@ -205,7 +205,7 @@ output:
 
 (ref:figcap-html-code-highlight-example) 可选的代码高亮样式
 
-```{r html-code-highlight-example, fig.cap="(ref:figcap-html-code-highlight-example)", fig.show="hold", out.width="70%"}
+```{r html-code-highlight-example, fig.cap="(ref:figcap-html-code-highlight-example)", fig.show="hold", out.width="70%", echo=FALSE, echo=FALSE}
 code_highlight_examples <- list.files("examples/", "code-highlight-example.*\\.png", full.names = TRUE)
 knitr::include_graphics(path = code_highlight_examples, dpi = NA)
 ```
@@ -973,7 +973,7 @@ output:
 
 #### 代码高亮 {#pdf-code-highlight}
 
-与 HTML 文档相同，这里可用 `highlight` 参数配置代码高亮的样式（参见 \@ref(appearance-and-style) 部分内容）。例如：
+与 HTML 文档相同，这里可用 `highlight` 参数配置代码高亮的样式（见第 \@ref(html-theme) 节）。例如：
 
 ``` yaml
 ---

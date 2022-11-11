@@ -26,7 +26,7 @@ runtime: shiny
 
 当然，也可以通过 RStudio 构建一个新的 Shiny 文档。步骤如下：File -> new File -> R Markdown 并选择 Shiny，具体见图 \@ref(fig:shiny-new-document)。
 
-```{r shiny-new-document, echo=FALSE, fig.width=6,fig.align='center',fig.cap=' 在 RStudio 中创建一个新的 Shiny 文档。'}
+```{r shiny-new-document, echo=FALSE, fig.width=6, fig.align='center', fig.cap=' 在 RStudio 中创建一个新的 Shiny 文档。'}
 knitr::include_graphics('images/shiny-new-document.png', dpi = NA)
 ```
 
@@ -48,7 +48,7 @@ knitr::include_graphics('images/shiny-table.png', dpi = NA)
 
 在上面的示例中，输出代码包含在 `renderTable()` 中。 Shiny 中还有许多其他渲染功能，可用于图片、结果输出等。 下面使用 `renderPlot()` 输出可交互柱状图：
 
-````markdown
+````{verbatim}
 ```{r, echo=FALSE, eval = FALSE}
 sliderInput("bins", "Number of bins:", 30, min = 1, max = 50)
 
@@ -269,7 +269,7 @@ rmarkdown::render_delayed({
 
 <!-- 要将选项从 `renderXXX()` 传递到 `xxxOutput()`，可以使用 `outputArgs` 参数。 例如：要绘制一张宽度为 200px，高度为 100px 的图形时。 可以设定为如下形式： -->
 
-<!-- ````markdown -->
+<!-- ````{verbatim} -->
 <!-- ```{r, echo = FALSE}  -->
 <!-- renderPlot({ -->
 <!--   plot(yourData) -->
@@ -287,7 +287,7 @@ rmarkdown::render_delayed({
 
 <!-- 读者如果想查看运行中的 `outputArgs`，请运行下面的 R Markdown 文档或访问在线版 <https://gallery.shinyapps.io/output-args/>。 -->
 
-<!-- ````markdown -->
+<!-- ````{verbatim} -->
 <!-- `r xfun::file_string('examples/shiny-output-args.Rmd')` -->
 <!-- ```` -->
 
@@ -369,7 +369,7 @@ rmarkdown::draft(
 下面给出一个简单的例子：
 
 
-````markdown
+````{verbatim}
 `r xfun::file_string('examples/dashboard/01-start.Rmd')`
 ````
 
@@ -475,7 +475,7 @@ knitr::include_graphics('images/dashboard-icon.png', dpi = NA)
 
 除了基于列或行布局外，还可以通过故事板（storyboard）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：
 
-````markdown
+````{verbatim}
 `r xfun::file_string('examples/dashboard/03-storyboard.Rmd')`
 ````
 
@@ -510,7 +510,7 @@ knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 如果希望在仪表盘中包含一个或多个数值，那么读者可以使用 **flexdashboard** 包中的 `valueBox()` 函数来实现这个需求。下面给出一个简单的例子：
 
 
-````markdown
+````{verbatim}
 `r xfun::file_string('examples/dashboard/04-valueboxes.Rmd')`
 ````
 
@@ -524,7 +524,7 @@ knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 
 在指定数值范围内显示仪表上的数值。例如，下面展示了三个仪表并排的结果（见图 \@ref(fig:dashboard-gauges)）。
 
-````markdown
+````{verbatim}
 `r xfun::file_string('examples/dashboard/05-gauges.Rmd')`
 ````
 
@@ -551,7 +551,7 @@ knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 
 如图 \@ref(fig:dashboard-text) 所示，顶部包含了一些内容说明和右下角包含了一个只有内容的指示板：
 
-````markdown
+````{verbatim}
 `r xfun::file_string('examples/dashboard/06-text.Rmd')`
 ````
 
@@ -616,7 +616,7 @@ knitr::include_graphics('images/dashboard-about.png', dpi = NA)
 
 图 \@ref(fig:dashboard-shiny) 给出了 Shiny 仪表盘的一个示例：
 
-````markdown
+````{verbatim}
 `r xfun::file_string('examples/dashboard/07-shiny.Rmd')`
 ````
 

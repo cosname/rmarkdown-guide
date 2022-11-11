@@ -15,7 +15,7 @@ source("your-script.R", local = knitr::knit_global())
 ```
 ````
 
-这里 `source()` 设置 `local` 参数为 knitr 的编译环境，即 `knitr::knit_global()`\index{knitr!knit\_global()}。这可以确保脚本中定义的对象能被所有代码块正确引用。
+`your-script.R` 中可以包含任意的 R 代码。这里 `source()` 设置 `local` 参数为 knitr 的编译环境，即 `knitr::knit_global()`\index{knitr!knit\_global()}。这可以确保脚本中定义的对象能被所有代码块正确引用。
 
 接下来，R Markdown 文档的任意代码块都可以使用这些脚本中创建的对象（例如，数据对象或函数）。这种方法不仅可以让 R Markdown 文档更简洁，而且可以更方便地开发和调试 R 代码。
 
@@ -23,52 +23,60 @@ source("your-script.R", local = knitr::knit_global())
 
 ### 将外部脚本读取到一个块中 {#external-read}
 
-事实上，第 \@ref(external-r) 节中的 `source()` 方法有一个缺点：默认情况下将无法看到源代码。为了解决这个问题，可以使用 `source(..., echo = TRUE)`，但源代码将不会正确地突出显示语法。此外，如第 \@ref(external-r) 节中提到的那样，需要小心 `source()` 的 `local` 参数。本节将介绍一种没有上述问题的替代方法。
+第 \@ref(external-r) 节中用 `source()` 引入外部脚本的方法有一个缺点：默认情况下将无法看到脚本中的源代码。`source(..., echo = TRUE)` 可以在加载代码的同时将它输出到代码块里，但这样引入的代码不会有语法高亮等样式。此外，如第 \@ref(external-r) 节中提到的那样，还要记得设置 `source()` 的 `local` 参数。本节将介绍一种没有上述问题的替代方法。
 
-基本上，当有一个或多个外部脚本时，可以读取它们并将内容传递给 `code` 选项\index\index{chunk option!code}。`code` 选项可以接受一个字符向量，并将其作为代码块的内容。下面展示了几个例子。
+代码块提供了选项 `code`\index{chunk option!code} 用于执行字符形式的代码。例如：
 
-- `code` 选项可以接受源代码形式的字符向量。例如：
+````{verbatim}
+```{r, code=c('1 + 1', 'if (TRUE) plot(cars)')}
+```
+````
+上面的代码块等同于：
 
-    ````{verbatim}
-    ```{r, code=c('1 + 1', 'if (TRUE) plot(cars)')}
-    ```
-    ````
+````{verbatim}
+```{r}
+1 + 1
+if (TRUE) plot(cars)
+```
+````
 
-- 也可以读取外部文件：
+利用这样的机制，用户就可以为 `code` 提供任意脚本的内容，例如：
 
-    ````{verbatim}
-    ```{r, code=xfun::read_utf8('your-script.R')}
-    ```
-    ````
+````{verbatim}
+```{r, code=xfun::read_utf8('your-script.R')}
+```
+````
 
-- 可以读取任意数量的脚本：
+读取多个脚本：
 
-    ````{verbatim}
-    ```{r, include=FALSE}
-    read_files <- function(files) {
-      unlist(lapply(files, xfun::read_utf8))
-    }
-    ```
+````{verbatim}
+```{r, include=FALSE}
+read_files <- function(files) {
+  unlist(lapply(files, xfun::read_utf8))
+}
+```
 
-    ```{r, code=read_files(c('one.R', 'two.R'))}
-    ```
-    ````
+```{r, code=read_files(c('one.R', 'two.R'))}
+```
+````
 
-也可以读取其他语言的脚本。在 R Markdown 中如何使用其他语言，请参阅 第 \@ref(other-language) 节。下面是关于非 R 代码的一些示例。
+一些其他语言的代码块也支持 `code` 选项，下面是一些示例。
 
-- 读取Python脚本：
+- 读取 Python 脚本：
 
     ````{verbatim}
     ```{python, code=xfun::read_utf8('script.py')}
     ```
     ````
 
-- 读取C++文件：
+- 读取 C++ 文件：
 
     ````{verbatim}
     ```{Rcpp, code=xfun::read_utf8('file.cpp')}
     ```
     ````
+
+更多使用其他语言的知识可参阅 第 \@ref(other-language) 节。
 
 借助 `code` 选项，可以在任何编辑器中开发复杂的代码，并将其读到一个 R Markdown 文档的代码块中。
 
@@ -242,7 +250,7 @@ knitr::include_graphics('images/rmd-wd.png', dpi = NA)
 
 在 RStudio 中，也可以编译一个带有特定工作目录的独立 R Markdown 文档，如图 \@ref(fig:knit-wd) 所示。在改变 `Knit Directory` 并点击 `Knit` 按钮后，**knitr** 将使用新的工作目录来编译代码块。所有这些设置都可以归结为前面提到的 `knitr::opts_knit$set(root.dir = ...)`，所以如果不满意上述更改工作目录方式的任何一个，也可以自己用 `knitr::opts_knit$set()` 指定一个目录。
 
-```{r, knit-wd, echo=FALSE, fig.cap='在 R Studio 中用其它可能的工作目录编译一个 Rmd 文档。', fig.align='center'}
+```{r, knit-wd, echo=FALSE, fig.cap='在 RStudio 中设置当前 R Markdown 文档的工作目录。', fig.align='center'}
 knitr::include_graphics('images/knit-wd.png', dpi = NA)
 ```
 
@@ -270,7 +278,7 @@ knitr::include_graphics('images/rmd-relative.png', dpi = NA)
 
 ## 使用 R Markdown 实现工作流 {#work-flow}
 
-本节将介绍一些处理 R Markdown 文档以及运行 R Markdown 项目的技巧。在学习完本节后，可以对上述工作有初步的了解，想要更详细地了解也可以查看 _R for Data Science_ 的第三十章 [“R Markdown workflow”](https://r4ds.had.co.nz/r-markdown-workflow.html)[@wickham2016]，该书简要介绍了一些使用分析笔记本的技巧（包括 R Markdown 文档）。Nicholas Tierney在书[_R Markdown for Scientists_](https://rmd4sci.njtierney.com/workflow.html) 中也讨论了工作流。
+本节将介绍一些处理 R Markdown 文档以及运行 R Markdown 项目的技巧。在学习完本节后，可以对上述工作有初步的了解，想要更详细地了解也可以查看 _R for Data Science_ 的第三十章 [“R Markdown workflow”](https://r4ds.had.co.nz/r-markdown-workflow.html)[@wickham2016]，该书简要介绍了一些使用分析笔记本的技巧（包括 R Markdown 文档）。Nicholas Tierney 在书[_R Markdown for Scientists_](https://rmd4sci.njtierney.com/workflow.html) 中也讨论了工作流。
 
 ### 使用 RStudio 键盘快捷键 {#rstudio-shortcut}
 
@@ -523,7 +531,7 @@ Markdown 文档的初始版本，并通过 `upload_rmd()` 函数将其上传到 
 
 ### 用 `workflowr` 将 R Markdown 项目组织到一个研究网站上 {#workflowr-web}
 
-为了更好地完成 R Markdown 项目，有的时候使用者会想将其组织到一个网站上。**workflowr** 包\index{R package!workflowr} [@R-workflowr; @workflowr2019]可以帮助使用者用项目模板和版本控制工具 Git 组织一个（数据分析）的项目。每次对项目做出更改时，可以记录更改，**workflowr** 可以建立一个与项目的特定版本相对应的网站。这意味着将能够查看分析结果的完整历史记录。尽管这个包使用 Git 作为版本控制的后端，但其实并不需要真正熟悉 Git。这个包提供了 R 函数，这些函数在底层执行 Git 操作，所以只需要调用这些 R 函数即可。此外，**workflowr** 自动化了可重复性代码的最优方法。每次 R Markdown 文档被呈现时，**workflowr** 会自动使用 `set.seed()` 设置一个种子，使用 `sessionInfo()` 记录会话信息，并扫描绝对文件路径等。请参阅[**workflowr** 包的文档](https://jdblischak.github.io/workflowr/)来了解如何开始并获取更多信息。
+为了更好地完成 R Markdown 项目，有的时候使用者会想将其组织到一个网站上。**workflowr** 包\index{R package!workflowr} [@R-workflowr; @workflowr2019]可以帮助使用者用项目模板和版本控制工具 Git 组织一个（数据分析）的项目。每次对项目做出更改时，可以记录更改，**workflowr** 可以建立一个与项目的特定版本相对应的网站。这意味着将能够查看分析结果的完整历史记录。尽管这个包使用 Git 作为版本控制的后端，但其实并不需要真正熟悉 Git。这个包提供了 R 函数，这些函数在底层执行 Git 操作，所以只需要调用这些 R 函数即可。此外，**workflowr** 自动化了可重复性代码的最优方法。每次 R Markdown 文档被呈现时，**workflowr** 会自动使用 `set.seed()` 设置一个种子，使用 `sessionInfo()` 记录会话信息，并扫描绝对文件路径等。请参阅 [**workflowr** 包的文档](https://jdblischak.github.io/workflowr/)来了解如何开始并获取更多信息。
 
 **workflowr** 的主要作者 John Blischak 也整理了一个与 R 项目工作流相关的 R 包和指南的非详尽列表，可见 GitHub 仓库： https://github.com/jdblischak/r-project-workflows。
 
