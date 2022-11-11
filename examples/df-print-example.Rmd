@@ -13,5 +13,5 @@ params:
 ## `r params$subtitle`
 
 ```{r cars}
-cars
+head(cars)
 ```
