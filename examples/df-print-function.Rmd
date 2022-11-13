@@ -1,0 +1,29 @@
+---
+output: html_document
+---
+
+
+
+```{r setup, include=FALSE}
+library(kableExtra)
+library(knitr)
+
+print.me <- function(x, ...) {
+    x |>
+        kbl(digits = 2, align = "l", booktabs = T) |>
+        kable_styling(fixed_thead = T, position = "float_right") |>
+        kable_paper("striped",
+            full_width = T, fixed_thead = T,
+            html_font = "Helvetica", font_size = 11
+        ) |>
+        row_spec(0, color = "yellow", background = "#5b705f", font_size = 12) %>%
+        scroll_box(width = "700px", height = "300px") %>%
+        asis_output()
+}
+
+registerS3method("knit_print", "data.frame", print.me)
+```
+
+```{r}
+head(cars)
+```

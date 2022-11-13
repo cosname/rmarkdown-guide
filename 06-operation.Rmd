@@ -1545,8 +1545,7 @@ summarize
 eval_asy <- function() {
 	check_not_windows <- Sys.info()['sysname'] != 'Windows'
 	check_has_asymptote <- nzchar(Sys.which("asy"))
-	check_not_ci <- is.na(Sys.getenv('CI', NA))
-	eval_asy <- check_not_windows & check_has_asymptote & check_not_ci
+	eval_asy <- check_not_windows & check_has_asymptote
 	if (!eval_asy)
 		warning("System set-up not compatible with Asymptote, so chunks with asy engine will be skipped.")
 	eval_asy
@@ -1558,8 +1557,8 @@ eval_asy <- function() {
 
 下面给出一个简单的示例，该示例代码来自于 <https://github.com/vectorgraphics/asymptote>，其输出如图 \@ref(fig:elevation) 所示：
 
-````md
-```{asy, elevation, fig.cap=' 用渐近线制作的 3D 图形。', eval=eval_asy()}`r ''`
+````{verbatim}
+```{asy, elevation, fig.cap=' 用渐近线制作的 3D 图形。', eval=eval_asy()}
 import graph3;
 import grid3;
 import palette;
@@ -2086,7 +2085,7 @@ plot(rows)
 
 然而，当一个对象太大时，可能会遇到这样的报错：
 
-```r
+```
 Error in lazyLoadDBinsertVariable(vars[i], ...
   long vectors not supported yet: ...
 Execution halted

@@ -15,8 +15,8 @@ output:
 ```{r}
 day <- as.integer(format(Sys.Date(), "%d"))
 sales_dat <- data.frame(
-    region = rep(LETTERS, each = 10), 
-    sales = rpois(26 * 10, day)
+  region = rep(LETTERS, each = 10),
+  sales = rpois(26 * 10, day)
 )
 
 knitr::kable(head(sales_dat, 20))
@@ -32,15 +32,15 @@ sales_sum <- aggregate(sales ~ region, data = sales_dat, sum)
 top_10_regions <- head(sales_sum[order(-sales_sum$sales), ], 10)
 
 barplot(sales ~ region, data = top_10_regions)
-``` 
+```
 
 
 ## 线性模型
 
-用简单线性模型探究地区对销售量对影响，公式为: 
+用简单线性模型探究地区对销售量对影响，公式为:
 
 $$
-销售量 = \beta_o + \beta_1地区A + \beta_1地区B + \cdots + \beta_1地区Z
+\text{销售量} = \beta_0 + \beta_1\text{地区 A} + \beta_2\text{地区 B} + \cdots + \beta_{26}\text{地区 Z}
 $$
 
 ```{r}
@@ -50,4 +50,4 @@ region_coefs <- mod$coefficients[-1]
 max_idx <- which.max(region_coefs)
 ```
 
-所有 `r length(unique(sales_dat$region))` 个地区中，回归系数绝对值最大的是 `r LETTERS[max_idx]`，为 `r  region_coefs[max_idx]` 
+所有 `r length(unique(sales_dat$region))` 个地区中，回归系数绝对值最大的是 `r LETTERS[max_idx]`，为 `r  region_coefs[max_idx]`
