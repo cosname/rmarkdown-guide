@@ -73,7 +73,6 @@ knitr::write_bib(c(
   "pagedown",
   "bslib",
   "formatR",
-  "cairoDevice",
   "rmdrive",
   "xaringanExtra",
   "fusen",

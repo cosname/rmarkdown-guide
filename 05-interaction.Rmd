@@ -722,4 +722,3 @@ vignette: >
 
 建立自定义 R Markdown 模板的更多细节，请参阅 [RStudio 扩展](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)的网站，以及 _R Markdown Definitive Guide_ 的第十七章 [“Document Templates” ](https://bookdown.org/yihui/rmarkdown/document-templates.html)[@rmarkdown2018]。
 
-### 定义一个自动化报告函数 {#rmd-auto}
