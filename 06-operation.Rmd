@@ -1403,7 +1403,7 @@ getRandomNumber <- function() {
 
 ### 执行 Shell 脚本 {#chunk-shell}
 
-读者有时需要执行 Shell 脚本来批量运行一些代码，在 R Markdown 中，读者可以根据自己的喜好，使用 `bash`、 `sh` 或 `zsh` 之间的任何一种引擎\index{language engine!bash}\index{language engine!sh}\index{language engine!zsh}来运行 Shell 脚本。下面是一个通过注明代码块标题 ```` ```{bash}```` 来使用 `bash` 引擎的示例：
+读者有时需要执行 Shell 脚本来批量运行一些代码，在 R Markdown 中，读者可以根据自己的喜好，使用 `bash`、 `sh` 或 `zsh` 之间的任何一种引擎\index{language engine!bash}\index{language engine!sh}\index{language engine!zsh}来运行 Shell 脚本。下面是一个使用 `bash` 引擎的示例：
 
 ```{bash eval=FALSE}
 ls *.Rmd | head -n 5
@@ -1415,7 +1415,7 @@ head(list.files(pattern = "*.Rmd"), n=5)
 ```
 
 
-需要注意的是，`bash` 是通过用 R 函数 `system2()` 调用的，该函数将忽略配置文件，例如 `~/.bash_profile` 和 `~/.bash_login`等，这些文件中可能定义了一些命令的别名或修改过的环境变量（如 `PATH` 变量）等。如果想要像使用终端（terminal）那样执行这些配置文件，可以通过引擎将参数 `-l` 传递给 `bash`。例如：
+需要注意的是，`bash` 是通过用 R 函数 `system2()` 调用的，该函数将忽略配置文件，例如 `~/.bash_profile` 和 `~/.bash_login`等，这些文件中可能定义了一些命令的别名或修改过的环境变量（如 `PATH` 变量）等。如果想要复现终端（terminal）的运行结果，可以设置引擎参数 engine.opts = '-l' 显式加载配置文件。例如：
 
 ````{verbatim}
 ```{bash, engine.opts='-l'}
