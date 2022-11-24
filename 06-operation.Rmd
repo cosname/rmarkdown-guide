@@ -401,9 +401,7 @@ knitr::kable(grade, caption = '一个很长很长的标题！',
 knitr::kable(grade, format = 'latex', booktabs = TRUE)
 ```
 
-需要注意的是，当在 R Markdown 文档中需要额外的 LaTeX 包时（如 **booktabs**），必须在 YAML 中声明这些包（请参阅第 \@ref(pdf-latex) 节了解如何声明）。
-
-<!--**【！！！现有目录需要补充】**-->
+需要注意的是，当在 R Markdown 文档中需要额外的 LaTeX 包时（如 **booktabs**），必须在 YAML 中声明这些包（请参阅第 \@ref(pdf-latex) 节了解如何声明）：
 
 <!-- pdf content -->
 
@@ -1036,7 +1034,9 @@ pdf2png = function(path) {
 
 不同格式的图像往往在输出质量上有差异。**rmarkdown** 包为不同的输出格式设置了合理的默认图像设备。例如，对 HTML 输出格式使用 `png()` 设备，所以 **knitr** 将生成 png 绘图文件；而对 PDF 输出格式则使用 `pdf()` 设备。如果对默认图像设备的输出质量不满意，可以通过块选项 `dev`\index{chunk option!dev} 来更改它们。**knitr** 支持的设备为：`r knitr::combine_words(names(knitr:::auto_exts), before = '\x60"', after = '"\x60', sep = "，", and = "以及")`。
 
-通常情况下，图像设备名也是函数名。更多关于图像设备\index{figure!device}的信息可以参阅 R 的帮助页面。例如，可以在 R 的控制台中输入 `?svg` 来了解关于 `svg` 设备的细节，它包含在 R 的基础包中，所以不需要额外安装。需要注意的是，`quartz_XXX` 设备是基于 `quartz()` 函数的，并且它们仅在 macOS 上可用；`CairoXXX` 设备来自的 R 包 **cairoDevice**[@R-cairoDevice]；`svglite` 设备来自 **svglite** 包 [@R-svglite]；`tikz` 设备则在 **tikzDevice** 包 [@R-tikzDevice]中。如果需要使用这些包中的图像设备，必须先安装这些包\index{R package!graphics devices}。
+通常情况下，图像设备名也是函数名。更多关于图像设备\index{figure!device}的信息可以参阅 R 的帮助页面。例如，可以在 R 的控制台中输入 `?svg` 来了解关于 `svg` 设备的细节，它包含在 R 的基础包中，所以不需要额外安装。需要注意的是，`quartz_XXX` 设备是基于 `quartz()` 函数的，并且它们仅在 macOS 上可用；`CairoXXX` 设备来自的 R 包 **cairoDevice**[^cairo]；`svglite` 设备来自 **svglite** 包 [@R-svglite]；`tikz` 设备则在 **tikzDevice** 包 [@R-tikzDevice]中。如果需要使用这些包中的图像设备，必须先安装这些包\index{R package!graphics devices}。
+
+[^cairo]: 该包已停止更新，需在官网自行下载，地址：https://cran.microsoft.com/snapshot/2020-04-20/web/packages/cairoDevice/index.html。
 
 通常，矢量图比位图质量更高，并且可以在不损失质量的情况下缩放矢量图。对于 HTML 输出，可以使用 `dev = "svg"` 或 `dev = "svglite"` 来绘制 SVG（可缩放矢量图，Scalable Vector Graphics）。需要注意的是，默认情况下 `png` 设备生成的图像为位图。
 
@@ -1118,7 +1118,7 @@ output:
 
 有关输出格式的更多细节可参阅输出格式的帮助页（如 `?rmarkdown::html_document`），可以了解 `df_print` 选项支持哪些输出格式，以及对应的值是什么。
 
-读者还可以通过块选项 `render` 来完全代替打印函数 `knit_print()`，`render` 可以使用任何函数来打印对象。例如，如果想使用 **pander**\index{R package!pander} 包来打印对象，可以设置块选项 `render` 为函数 `pander::pander()`：
+读者还可以通过块选项 `render` 来完全代替打印函数 `knit_print()`，`render` 可以使用任何函数来打印对象。例如，如果想使用 **pander**\index{R package!pander} 包来打印对象，可以设置块选项 `render` 为函数 `pander::pander`：
 
 
 ````{verbatim}
@@ -1127,7 +1127,7 @@ head(iris)
 ```
 ````
 
-最终得到的结果见表 \@ref(tab:print-render)。
+最终得到的结果为：
 
 ```{r, echo=FALSE}
 if (system.file(package = "pander") == ''){
@@ -1384,8 +1384,8 @@ if (TRUE) {
 
 ### 通过 `asis` 引擎有条件地执行内容 {#chunk-asis}
 
-如果读者需要按一定条件输出某个代码块的内容。此时，可以使用
-`asis` 引擎\index{language engine!asis}来实现该功能。只需将条件加入到代码块选项 `echo` 中。当 `echo = FALSE` 时，对应代码块将不会显示内容。而当 `echo = TRUE` 时，对应代码块将会显示内容。下面给出一个简单的例子：
+如果读者需要按一定条件输出某个代码块的内容，可以使用
+`asis` 引擎\index{language engine!asis}来实现该功能。只需将条件加入到代码块选项 `echo` 中，当 `echo = FALSE` 时，对应代码块将不会显示内容，而当 `echo = TRUE` 时，对应代码块将会显示内容。下面给出一个简单的例子：
 
 ````{verbatim}
 ```{r}
@@ -1395,7 +1395,7 @@ getRandomNumber <- function() {
 ```
 
 ```{asis, echo = getRandomNumber() == 4}
-根据 https://xkcd.com/221/,  生成的是一个**真**随机数!
+根据 https://xkcd.com/221/,  这里生成的是一个**真**随机数!
 ```
 ````
 
@@ -1403,8 +1403,7 @@ getRandomNumber <- function() {
 
 ### 执行 Shell 脚本 {#chunk-shell}
 
-【之后再修改】
-使用者可以根据自己的喜好，使用 `bash`、 `sh` 或 `zsh` 任何一种引擎\index{language engine!bash}\index{language engine!sh}\index{language engine!zsh}运行 Shell 脚本。下面是一个带有 chunk 头 ```` ```{bash}```` 的 bash 示例：
+读者有时需要执行 Shell 脚本来批量运行一些代码，在 R Markdown 中，读者可以根据自己的喜好，使用 `bash`、 `sh` 或 `zsh` 之间的任何一种引擎\index{language engine!bash}\index{language engine!sh}\index{language engine!zsh}来运行 Shell 脚本。下面是一个使用 `bash` 引擎的示例：
 
 ```{bash eval=FALSE}
 ls *.Rmd | head -n 5
@@ -1416,7 +1415,7 @@ head(list.files(pattern = "*.Rmd"), n=5)
 ```
 
 
-注意，bash 是用 R 函数 `system2()` 调用的。它将忽略配置文件，例如 `~/.bash_profile` 和 `~/.bash_login`，其中可能定义了命令别名或修改过的环境变量(如 `PATH` 变量)。如果想要这些配置文件像你使用终端时一样被执行，可以通过引擎将参数 `-l` 传递给 `bash`。例如：
+需要注意的是，`bash` 是通过用 R 函数 `system2()` 调用的，该函数将忽略配置文件，例如 `~/.bash_profile` 和 `~/.bash_login`等，这些文件中可能定义了一些命令的别名或修改过的环境变量（如 `PATH` 变量）等。如果想要复现终端（terminal）的运行结果，可以设置引擎参数 engine.opts = '-l' 显式加载配置文件。例如：
 
 ````{verbatim}
 ```{bash, engine.opts='-l'}
@@ -1424,13 +1423,13 @@ echo $PATH
 ```
 ````
 
-如果想对所有 `bash` 块全局启用 `-l` 参数，可以在文档开头的 global chunk 选项中设置为：
+如果想对所有 `bash` 块全局启用 `-l` 参数，可以在文档开头的全局代码块（global chunk）中设置：
 
 ```{r, eval=FALSE}
 knitr::opts_chunk$set(engine.opts = list(bash = '-l'))
 ```
 
-还可以将其他参数作为字符向量提供给 chunk 选项 `engine.opts`\index{chunk option!engine.opts}，从而传递给 `bash`。
+另外，还可以将其他参数作为字符向量提供给块选项 `engine.opts`\index{chunk option!engine.opts}，从而将其传递给 `bash`。
 
 ### 通过 cat 引擎将代码块内容写入文件 {#cat-file}
 
