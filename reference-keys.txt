@@ -42,11 +42,9 @@ fig:fold-show
 fig:html-scroll-example
 fig:include-graphics-example
 tab:df-print
-tab:unnamed-chunk-49
+fig:unnamed-chunk-51
 fig:paged
 tab:paged
-tab:unnamed-chunk-50
-tab:df-print-pdf
 tab:latex-vars
 fig:rmd-presentation-popup
 fig:ioslides-presentation-screenshot
@@ -78,14 +76,14 @@ fig:word-template-1
 fig:word-template-2
 fig:word-table
 fig:bookdown-project
-fig:unnamed-chunk-81
-fig:unnamed-chunk-82
-fig:unnamed-chunk-83
-fig:unnamed-chunk-84
-fig:unnamed-chunk-85
-fig:unnamed-chunk-87
-fig:unnamed-chunk-89
-fig:unnamed-chunk-90
+fig:unnamed-chunk-98
+fig:unnamed-chunk-99
+fig:unnamed-chunk-100
+fig:unnamed-chunk-101
+fig:unnamed-chunk-102
+fig:unnamed-chunk-104
+fig:unnamed-chunk-106
+fig:unnamed-chunk-107
 fig:shiny-new-document
 fig:shiny-table
 fig:shiny-plot
@@ -110,7 +108,7 @@ tab:latex-math-escape
 tab:latex-math
 tab:two-tables
 tab:kables
-fig:unnamed-chunk-131
+fig:unnamed-chunk-154
 fig:striped-table
 tab:striped-table-extra
 tab:little-size
@@ -123,6 +121,9 @@ fig:magick-logo
 fig:dev-tikz
 fig:low-plots-1
 fig:low-plots-2
+fig:reticulate-intro
+fig:elevation
+fig:sine-curve
 fig:hook-scroll
 fig:hook-html5
 fig:rmd-wd
@@ -130,7 +131,7 @@ fig:knit-wd
 fig:rmd-relative
 tab:shortcuts
 fig:params-shiny
-fig:unnamed-chunk-271
+fig:unnamed-chunk-294
 为什么要写这样一本书
 本书是怎么写出来的
 本书的创作理念是什么
@@ -147,7 +148,6 @@ example-resume
 example-ppt
 example-forms
 example-dynamic
-r-markdown-的渊源与发展
 rmarkdown-base
 rstudio-config
 install-rmarkdown
@@ -208,7 +208,7 @@ html-pic
 html-pic-setting
 html-include-graphics
 html-df-print
-分页打印数据框时的附加参数-html-df-print-paged
+html-df-print-paged
 html-module
 html-dependency
 html-mathjax
@@ -348,7 +348,6 @@ rmd-vignettes
 package-template
 模板使用样例
 模版设置
-rmd-auto
 rmarkdown-operation
 table-advanced
 table-complex
@@ -359,7 +358,7 @@ kable-caption
 调整数字格式
 显示缺失值
 转义特殊字符
-多张表格并排
+并排多张表格
 利用-for-循环生成多个表
 自定义-latex-表格
 自定义-html-表格
@@ -379,7 +378,7 @@ opts-collapse
 results-asis
 chunk-reformat
 chunk-leading
-chunk-property
+chunk-attr
 chunk-multiplot
 chunk-process
 chunk-highquality
@@ -411,8 +410,7 @@ chunk-cache
 cache-path
 cache-lazy
 cache-rds
-通过更改表达式中的代码使缓存失效
-通过更改全局变量使缓存失效
+使缓存失效
 保留缓存的多个副本
 与-knitr-的缓存比较
 other-trick
