@@ -296,7 +296,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 ```
 
-这段内容使用了 Markdown 语法，在第 \@ref(markdown-syntax) 节详细介绍。简而言之，为了方便作者在文档中插入各种格式的内容，Markdown 语法提供了一系列简单的标记符号，如 `#`，`*`，`-` 等，这些符号可以用来标记文本的标题、列表、引用等。R Markdown 在遇到这些符号时会将相关的文本转换成对应的格式。这里 `## R Markdown` 是一个二级标题，`**Knit**` 是一个加粗的文本，`<http://rmarkdown.rstudio.com>` 是一个链接。
+这段内容使用了 Markdown 语法。Markdown 语法提供了一系列简单的标记符号，如 `#`，`*`，`-` 等，它们可以在输出文档中生成标题、列表、图片和脚注等常见元素，满足简单的样式需求。使用 Markdown 既可以让作者免于复杂的排版之苦，也提供了一种格式标记的统一中介。本书的第 \@ref(markdown-syntax) 节详细介绍了 Markdown 语法。简而言之，R Markdown 在遇到这些符号时会将相关的文本转换成对应的格式。这里 `## R Markdown` 是一个二级标题，`**Knit**` 是一个加粗的文本，`<http://rmarkdown.rstudio.com>` 是一个链接。
 
 这段 Markdown 文本下面是另外一个 R 代码块：
 
@@ -351,9 +351,9 @@ summary(cars)
 
 ## Including Plots
 
-You can also embed plots, for example:
+You can also embed plots, for example:。
 
-![](Untitled_files/figure-html/pressure-1.png)<!-- -->
+![](Untitled_files/figure-html/pressure-1.png)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 ````
@@ -733,26 +733,66 @@ $$
 
 ### 总结
 
-表 \@ref(tab:markdown-summary) 总结了常见的 Markdown 语法以及显示效果。
+最后总结一下 Markdown 中几种常见元素的语法，源文档如下：
 
-```{r, echo = FALSE}
-library(huxtable)
-t <- read.csv("data/markdown.csv", encoding = "UTF-8")
-t <- as_huxtable(t)
+````{verbatim}
+# 一级标题
+
+**粗体** 和 *斜体*
+
+`>` 开启一段块引用
+
+> We study statistics with the main aim of solving problems in other disciplines.
+
+添加空行分隔段落
+
+床前明月光，
+
+疑是地上霜
+
+## 二级标题
+
+反引号插入行内代码和代码块: `rnorm(10)`
+
+```r
+print("hello world")
 ```
 
-```{r markdown-summary, echo = FALSE}
-t <- set_markdown(t, everywhere, everywhere)
-set_caption(t, "Markdown 常见语法总结")
+表格
+
+|  表头   | 表头  |
+|  ----  | ----  |
+| 单元格  | 单元格 |
+| 单元格  | 单元格 |
+
+
+数学公式
+
+$$
+x^2 + y^2 = z^2
+$$
+
+
+### 三级标题
+
+插入链接: [统计之都论坛](https://d.cosx.org/)
+
+插入图片
+
+![](../images/cos-logo.png)
+````
+
+图 \@ref(fig:markdown-summary) 展示了渲染为 PDF 后的效果。
+
+```{r markdown-summary, echo = FALSE, fig.cap = "Markdown 常见元素的显示效果"}
+import_example_result("examples/markdown-summary.Rmd")
 ```
 
-
-要显示 Markdown 中的特殊字符时 (#, *, -, ` 等)，可以在前面使用转义符 ``\``。
+Markdown 中的特殊字符包括 `#`, `*`, `-`, ``` ` ``` 等，通常它们代表了特定的排版格式，当需要按字面意输出这些特殊字符时，可以在前面使用转义符 ``\``。
 
 ```
 \- 这一行不会显示为列表
 ```
-
 
 值得一提的是，虽然 Markdown 本身是一种统一的标准，随着时间推移独立开发者们逐渐添加了不同的功能扩展，一些组织和公司在此基础上加以规范化，形成了不同的 Markdown 变体 (flavor)。R Markdown 中使用的是 Pandoc 式的 Markdown，即 Pandoc 支持的 Markdown 语法。其他平台支持的常见变体包括 ExtraMark Markdown 和 Github Markdown 等。如果某个特定语法在 R Markdown 中无法正常显示，很可能是 Pandoc Markdown 不支持这个语法。
 
@@ -827,7 +867,7 @@ date: "`r Sys.Date()`"
 
 ### 代码块选项
 
-读者可以在 <https://yihui.org/knitr/options/> 查看所有代码块选项的用法，这里列出一些常见选项和它们的取值类型。第 \@ref(#chunk-options) 节详细展示了更多例子。
+读者可以在 <https://yihui.org/knitr/options/> 查看所有代码块选项，这里列出一些重要选项和它们的取值类型。第 \@ref(#chunk-options) 节展示了更多例子。
 
 - `eval`: 是否运行该代码块
 
@@ -1283,7 +1323,7 @@ leaflet() %>%
 
 ```{=html}
 <iframe
-  src="https://player.bilibili.com/player.html?aid=629420179&bvid=BV1ib4y1X7r9&cid=304825282&page=1"
+  src="https://player.bilibili.com/player.html?aid=860310206&bvid=BV1NG4y1Z79u&cid=897781877&page=1"
   scrolling="no"
   border="0"
   frameborder="no"

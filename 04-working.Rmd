@@ -51,9 +51,9 @@ R 语言的日常使用离不开 R 包，而对于很多使用者来说，亲手
 
 使用 `fusen` 制作 R 包需要以下几个步骤：
 
-1. 通过 R Studio 选项 `File > New Project > New directory > Package using {fusen}` 来创建项目；
+1. 通过 RStudio 选项 `File > New Project > New directory > Package using {fusen}` 来创建项目；
 
-2. 选择模板：对于第一次使用的人，可以选择模板 `teaching`，或者直接使用函数 `create_fusen("path/to/new/project", template = "teaching")`；对于多次使用的人，可以选择模板 `full`。
+2. 选择模板：首次使用可以选择模板 `teaching`，或者直接使用函数 `create_fusen("path/to/new/project", template = "teaching")`；希望更多自定义功能的用户可以选择模板 `full`。
 
 3. 编写并运行模板内的对应内容。
 
@@ -93,7 +93,7 @@ add_one <- function(value) {
 
 ````
 
-其中一开始以 `#'` 开头的部分代表了这个函数的一些特征，其中包括：
+`add_one()` 函数的注释使用了 [roxygen](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html) 语法，以 `#'` 开头的每一行代表了这个函数的一个特征，其中包括：
 
 - `@param`：函数涉及的参数，书写的格式为 `@param 参数 参数解释`，每个参数对应一个 `@param`；
 

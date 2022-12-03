@@ -653,7 +653,7 @@ R Markdown 支持超过 50 个块选项\index{chunk option} 用于调整 **knitr
 
 通常情况下，块选项中会使用常数（如：`fig.width = 6`），但有些时候仅使用常数无法满足需求，例如应展现的图像大小可能来源于其它代码块的结果，而非一成不变，每次根据结果来手动调整就会费时又费力。
 
-实际上，块选项可以使用任意的 R 表达式，无论简单或复杂。一种特殊的情况是将变量\index{chunk option!variable values}传递给一个块选项（注意变量本身也可被视为一个 R 表达式）。例如，为了满足图像大小变化的需求，可以在文档的一个代码块中定义关于图像宽度的变量，然后在其他代码块中使用它：
+块选项支持任意或简单或复杂的 R 表达式。一种特殊的情况是将代码块中定义的表达式\index{chunk option!variable values}传递给一个块选项。例如，为了满足图像大小变化的需求，可以在文档的一个代码块中定义关于图像宽度的变量，然后在其他代码块中使用它：
 
 ````{verbatim}
 ```{r}
@@ -1992,7 +1992,7 @@ knitr::knit_hooks$set(output = hook_output)
 
 默认情况下，R Markdown 的 HTML 输出中的图包含在标签 `<p>` 或 `<div>` 下的 `<img src="..." />` 中，但很多时候使用者可能想输出以 HTML5[^html5] 格式来输出图像。
 
-[^html5]: HTML5 是 HTML 更新版本，为原始 HTML 增加了很多功能，极大地提升了用户的使用体验。如果想更多地了解二者的差异，可以参见 https://www.hostinger.com/tutorials/difference-between-html-and-html5#HTML_vs_HTML5_-_Comparison。
+[^html5]: HTML5 是 HTML 的最新标准，为原始 HTML 增加了很多功能，极大地提升了用户的使用体验。如果想更多地了解二者的差异，可以参见 https://www.hostinger.com/tutorials/difference-between-html-and-html5#HTML_vs_HTML5_-_Comparison。
 
 下面的例子展示了如何使用 HTML5 的标签 `<figure>`\index{HTML!figure tag}\index{figure!HTML tag} 来显示图像。
 
@@ -2254,7 +2254,7 @@ plot(cars)
 ```
 ````
 
-但 **knitr** 的缓存最大的缺点（同时也是用户最常抱怨的）是缓存可能会在不经意间失效，因为缓存由太多的因素所决定。例如，任何块选项的改变都会使缓存失效[^2]，但有些块选项可能与计算无关。例如在下面的代码块中，改变块选项 `fig.width = 6` 到 `fig.width = 10` 会导致缓存失效，但实际上却不需要重新运行一次代码：
+但 **knitr** 的缓存最大的缺点是缓存可能会在不经意间失效，因为影响 knitr 判断是否应该重新计算的因素很多。例如，任何代码块块选项的改变都会使缓存失效[^2]，但有些块选项可能与计算无关。例如在下面的代码块中，改变块选项 `fig.width = 6` 到 `fig.width = 10` 不会影响结果，因为该代码块并不涉及生成图片，但在 knitr 眼中这个代码块的缓存已经过期了，需要重新运行。
 
 [^2]: 这是默认的行为，也可以进行调整。如果想了解如何使缓存更精细，而非所有块选项都会影响缓存，请参阅：https://yihui.org/knitr/demo/cache/。
 
@@ -2266,9 +2266,7 @@ mean(x)
 ```
 ````
 
-实际上，**knitr** 的缓存非常强大且灵活，它的行为可以通过多种方式进行调整。它的作者也经常怀疑是否值得介绍这些不太为人所知的特性，因为可能会导致用户花更多的时间来学习和理解缓存如何工作，而非运行实际的代码。
-
-在不清楚用哪个的情况下，`xfun::cache_rds()` 是缓存计算结果的通用方法，它可以在任何地方使用，而 **knitr** 的缓存只能在 **knitr** 文档中使用。
+另外一个对比是，`xfun::cache_rds()` 是缓存计算结果的通用方法，它可以在任何地方使用，而 **knitr** 的缓存只能在 **knitr** 文档中使用。
 
 ## 其它使用 knitr 的小技巧 (\*) {#other-trick}
 
@@ -2296,13 +2294,13 @@ F2C <- function(x) {
 
 
 ```{r, check-arg, eval=FALSE}
-  if (!is.numeric(x)) stop("The input must be numeric!")
+if (!is.numeric(x)) stop("The input must be numeric!")
 ```
 
 然后进行转换：
 
 ```{r, convert, eval=FALSE}
-  (x - 32) * 5/ 9
+(x - 32) * 5/ 9
 ```
 ````
 
@@ -2326,7 +2324,6 @@ F2C <- function(x) {
 如果想要重复多次使用完全相同的代码块，则可以用一个标签来定义块，并使用相同的标签创建更多的代码块，但需要保留块的内容为空，例如：
 
 ````{verbatim}
-
 下面是一个没有被运行的代码块：
 
 ```{r, chunk-one, eval=FALSE}
@@ -2486,20 +2483,18 @@ Sys.sleep(100)
 plot(cars)
 ```
 
-在另一段之后介绍了该图像：
+随后，作者可以在文档的任意后续部分引用该图像：
 
 ![一张好看的图](`r knitr::inline_expr("knitr::fig_chunk('cars-plot', 'png')")`)
 ````
 
-上述代码块中使用了块选项 `fig.show='hide'`\index{chunk option!fig.show} 来把图像暂时隐藏起来。然后在另一段中，通过函数 `knitr::fig_chunk()`\index{knitr!fig\_chunk()} 来检索得到绘图文件的路径，例如 `test_files/figure-html/cars-plot-1.png`。使用者需要将块标签和图像设备名称传递给 `fig_chunk()`，以便它更好地得到图像文件路径。
+上述代码块使用了块选项 `fig.show='hide'`\index{chunk option!fig.show} 来把图像暂时隐藏起来。然后在另一段中，通过函数 `knitr::fig_chunk()`\index{knitr!fig\_chunk()} 得到该文件的路径，例如 `test_files/figure-html/cars-plot-1.png`。使用者需要将块标签和图像设备名称传递给 `fig_chunk()`，以便它更好地得到图像文件路径。
 
 <https://stackoverflow.com/a/46305297/559676> 介绍了 `fig_chunk()` 在 **blogdown** 网站中的应用。这个函数适用于任何 R Markdown 的输出格式，并且它对于在幻灯片上显示图像特别有用，因为幻灯片页上的屏幕空间通常是有限的，可以在一张幻灯片上展示代码，然后在另一张幻灯片上展示图像。
 
 ### 修改之前代码块中的图像 {#modify-before}
 
-在默认情况的下，**knitr** 会打开一个新的图像设备来记录每个新代码块产生的图像。这就带来了一个问题：不能轻易地修改之前代码块产生的图像，因为之前的图像设备已经关闭了。这对于基础的 R 图形通常是有问题的（但不会影响从 **ggplot2** [@R-ggplot2] 创建的网格图像，因为其可以被保存为 R 对象）。例如，如果在一个代码块中绘制一个图，并在后面的代码块中添加一条线，R 将发出一个错误信号，表示还没有创建这个图，因此不能添加线。
-
-如果想让图像设备对所有代码块均保持打开的状态，可以在文档的开头设置一个 **knitr** 包的选项 \index{knitr!opts\_knit}\index{knitr!global.device}\index{figure!global}：
+默认设置下，对每个代码块生成的图像，**knitr** 都会启用一个新的图像设备。这就带来了一个问题：不能轻易地修改之前代码块产生的图像，因为之前的图像设备已经关闭了。这个问题对于 base R 生成的图形最为显著，但一般不会影响从基于 `grid` 网格系统生成的图像 (例如 ggplot2)，因为其可以被保存为 R 对象。例如，base R 作图常涉及先创建一个基础图形，随后用 `points()` 和 `lines()` 等函数在基础图形上叠加图形元素。但是这些函数在 **knitr** 中无法访问到先前已经被关闭的图像设备。一个解决办法是让 **knitr** 保持打开同一个图像设备，可以在设置 knitr 选项 `global.device` `\index{knitr!opts\_knit}\index{knitr!global.device}\index{figure!global}：
 
 ```{r, eval=FALSE}
 knitr::opts_knit$set(global.device = TRUE)

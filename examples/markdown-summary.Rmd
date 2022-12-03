@@ -1,0 +1,55 @@
+---
+title: "Markdown 常见元素总结"
+geometry: "left=3cm,right=3cm,top=1cm,bottom=2cm"
+output:
+  rticles::ctex:
+    number_sections: true
+latex_engine: xelatex
+documentclass: ctexart
+colorlinks: yes
+---
+
+# 一级标题
+
+**粗体** 和 *斜体*
+
+`>` 开启一段块引用
+
+> We study statistics with the main aim of solving problems in other disciplines.
+
+添加空行分隔段落
+
+床前明月光，
+
+疑是地上霜
+
+## 二级标题
+
+反引号插入行内代码和代码块: `rnorm(10)`
+
+```r
+print("hello world")
+```
+
+表格
+
+|  表头   | 表头  |
+|  ----  | ----  |
+| 单元格  | 单元格 |
+| 单元格  | 单元格 |
+
+
+数学公式
+
+$$
+x^2 + y^2 = z^2
+$$
+
+
+### 三级标题
+
+插入链接: [统计之都论坛](https://d.cosx.org/)
+
+插入图片
+
+![](../images/cos-logo.png)
