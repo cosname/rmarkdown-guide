@@ -151,7 +151,7 @@ knitr::include_graphics("images/01-resume.png")
 knitr::include_graphics("images/01-rmarkdown-wbesite.png")
 ```
 
-**rmarkdown** 包内置的网站功能较为简单。**blogdown** 包 [@R-blogdown] 提供了更复杂的网站功能，它使用了开源的网站工具：Hugo。Hugo 是目前速度最快，最受欢迎的静态网站生成器之一。一般用户通常需要在命令行调用 Hugo，不过作为幸福的 R 用户，读者可以照常写作 R Markdown 文档，随后调用 **blogdown** 包中的函数间接使用 Hugo，最后生成网站。
+**rmarkdown** 包内置的网站功能较为简单。**blogdown** 包 [@R-blogdown] 提供了更复杂的网站功能，它使用了开源的网站工具：Hugo。Hugo 是目前速度最快，最受欢迎的静态网站生成器之一。一般用户通常需要在命令行调用 Hugo，不过作为幸福的 R 用户，读者可以照常写作 R Markdown 文档，随后调用 **blogdown** 包中封装好的函数间接地使用 Hugo，最后生成网站。
 
 ```{r hugo-themes, fig.cap = "blogdown 包可以使用 Hugo 主题", echo = FALSE}
 knitr::include_graphics("images/01-hugo-themes.png")
