@@ -11,6 +11,7 @@ knitr::write_bib(c(
   "knitr",
   "rmarkdown",
   "reticulate",
+  "tinytex", 
   "r2d3",
   "yaml",
   "sass",
