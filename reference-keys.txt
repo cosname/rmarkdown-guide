@@ -19,7 +19,7 @@ fig:unnamed-chunk-13
 fig:knit-process
 fig:yaml-review
 fig:ymlthis
-tab:markdown-summary
+fig:markdown-summary
 fig:dillinger
 fig:cars-plot
 tab:iris-table
@@ -42,7 +42,7 @@ fig:fold-show
 fig:html-scroll-example
 fig:include-graphics-example
 tab:df-print
-fig:unnamed-chunk-51
+fig:unnamed-chunk-54
 fig:paged
 tab:paged
 tab:latex-vars
@@ -76,14 +76,14 @@ fig:word-template-1
 fig:word-template-2
 fig:word-table
 fig:bookdown-project
-fig:unnamed-chunk-98
-fig:unnamed-chunk-99
-fig:unnamed-chunk-100
 fig:unnamed-chunk-101
 fig:unnamed-chunk-102
+fig:unnamed-chunk-103
 fig:unnamed-chunk-104
-fig:unnamed-chunk-106
+fig:unnamed-chunk-105
 fig:unnamed-chunk-107
+fig:unnamed-chunk-109
+fig:unnamed-chunk-110
 fig:shiny-new-document
 fig:shiny-table
 fig:shiny-plot
@@ -108,7 +108,7 @@ tab:latex-math-escape
 tab:latex-math
 tab:two-tables
 tab:kables
-fig:unnamed-chunk-154
+fig:unnamed-chunk-151
 fig:striped-table
 tab:striped-table-extra
 tab:little-size
@@ -131,7 +131,7 @@ fig:knit-wd
 fig:rmd-relative
 tab:shortcuts
 fig:params-shiny
-fig:unnamed-chunk-294
+fig:unnamed-chunk-291
 为什么要写这样一本书
 本书是怎么写出来的
 本书的创作理念是什么

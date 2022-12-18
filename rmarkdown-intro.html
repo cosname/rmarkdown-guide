@@ -27,7 +27,7 @@
 <meta name="author" content="杨晓龙" />
 
 
-<meta name="date" content="2022-11-24" />
+<meta name="date" content="2022-12-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -440,10 +440,10 @@ div.csl-indent {
 <div id="rmarkdown-source" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> R Markdown 的渊源<a href="rmarkdown-intro.html#rmarkdown-source" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>在过去的十多年间，R 语言发展的十分迅猛，这其中就包括了 R Markdown。这段往事可能要追溯到 2007 年。那时候，还在中国人民大学上学的谢益辉开始使用 Sweave，并沉迷于此无法自拔。不仅自己在写作业的时候尽可能的使用 Sweave，还持之以恒地向同学们兜售。Sweave 的命名是 S + weave，前者指的是 S 语言，这是 R 语言的前身，后者含义即“编织”。Sweave 之所以受到谢同学的追捧，正是因为它可以将某些东西编织起来——代码和代码执行后的结果。直到今天，Sweave 仍然是 RStudio 中从 Rnw 文档生成 PDF 的重要工具之一。</p>
-<p>不过，因为 Sweave 中存在某些非常不好用的特性，所以对 Sweave 的痴迷也让谢益辉“深受其害”。这种痛苦和挣扎成为促使他开发 knitr <span class="citation">(<a href="#ref-R-knitr" role="doc-biblioref">Xie 2022c</a>)</span> 的源动力<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。显而易见，knitr 的编写从一开始就受 Sweave 影响，甚至命名的逻辑都是一样的。knitr 是 knit + R，前者的意思仍然是“编织”，后者则是 R 语言。而且 knitr 的读音听起来就跟另一个单词“neater”是一样的，给人一种更加灵巧的感觉！</p>
-<p>时至今日，knitr 是 CRAN 中依赖最多的包之一（<a href="https://blog.csdn.net/qq_18055167/article/details/104374971" class="uri">https://blog.csdn.net/qq_18055167/article/details/104374971</a>），与另外的 4600 多个包存在依赖、被依赖、建议安装等关系。rmarkdown 排第四，与 CRAN 中的其它软件包有超过 3600 种各类联系。</p>
-<p>虽然 knitr 的编写受到 Sweave 影响，但模块化程度更高，扩展方便，支持文档类型也更多（Sweave 主要用于 LaTeX 文档）。与此同时，Sweave 中的一些优良特性也被 knitr 继承了下来，例如行内代码。从这个意义上说，Sweave 是 knitr 的“爸爸”。而 knitr 也其它一些包的“爸爸”，其中的一个就是 rmarkdown <span class="citation">(<a href="#ref-R-rmarkdown" role="doc-biblioref">Allaire, Xie, McPherson, et al. 2022</a>)</span>。knitr 包和 rmarkdown 包，以及其它一些扩展 R Markdown 功能的软件包，都是实现 R Markdown 功能的基础设施。最终，这些包一起成就了 R Markdown 的庞大生态系统。</p>
-<p>回过头来看，当年谢益辉写 knitr 包只是为了更方便地完成自己的作业，而 knitr 可以写作业，也可以用来写数据分析报告，碰巧做数据分析的人都要写报告。在 knitr 之前有 Sweave，他用了好几年，刚开始觉得很兴奋，用着用着就到了四处碰壁的状态，觉得<strong>一个绝妙的想法</strong>不幸得到了一个蹩脚的实现。直到后来决定推倒重写算了。</p>
+<p>不过，因为 Sweave 中存在某些非常不好用的特性，所以对 Sweave 的痴迷也让谢益辉“深受其害”。这种痛苦和挣扎成为促使他开发 <strong>knitr</strong> <span class="citation">(<a href="#ref-R-knitr" role="doc-biblioref">Xie 2022c</a>)</span> 的源动力<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。显而易见，<strong>knitr</strong> 的编写从一开始就受 Sweave 影响，甚至命名的逻辑都是一样的。knitr 是 knit + R，前者的意思仍然是“编织”，后者则是 R 语言。而且 knitr 的读音听起来就跟另一个单词“neater”是一样的，给人一种更加灵巧的感觉！</p>
+<p>时至今日，<strong>knitr</strong> 是 CRAN 中依赖最多的包之一（<a href="https://blog.csdn.net/qq_18055167/article/details/104374971" class="uri">https://blog.csdn.net/qq_18055167/article/details/104374971</a>），与另外的 4600 多个包存在依赖、被依赖、建议安装等关系。<strong>rmarkdown</strong> 排第四，与 CRAN 中的其它软件包有超过 3600 种各类联系。</p>
+<p>虽然 <strong>knitr</strong> 的编写受到 Sweave 影响，但模块化程度更高，扩展方便，支持文档类型也更多（Sweave 主要用于 LaTeX 文档）。与此同时，Sweave 中的一些优良特性也被 <strong>knitr</strong> 继承了下来，例如行内代码。从这个意义上说，Sweave 是 <strong>knitr</strong> 的“爸爸”。而 knitr 也其它一些包的“爸爸”，其中的一个就是 <strong>rmarkdown</strong> <span class="citation">(<a href="#ref-R-rmarkdown" role="doc-biblioref">Allaire, Xie, McPherson, et al. 2022</a>)</span>。<strong>knitr</strong> 包和 <strong>rmarkdown</strong> 包，以及其它一些扩展 R Markdown 功能的软件包，都是实现 R Markdown 功能的基础设施。最终，这些包一起成就了 R Markdown 的庞大生态系统。</p>
+<p>回过头来看，当年谢益辉写 <strong>knitr</strong> 包只是为了更方便地完成自己的作业，而 <strong>knitr</strong> 可以写作业，也可以用来写数据分析报告，碰巧做数据分析的人都要写报告。在 <strong>knitr</strong> 之前有 Sweave，他用了好几年，刚开始觉得很兴奋，用着用着就到了四处碰壁的状态，觉得<strong>一个绝妙的想法</strong>不幸得到了一个蹩脚的实现。直到后来决定推倒重写算了。</p>
 <p>在谈到开发经验时，他谈到：</p>
 <blockquote>
 <p>不用看远方，就看你自身能感受到的非常痛苦的问题。如果你能解决自己的一个非常痛而且频繁出现的痛点，那么有相当大的概率你也会造福别人，从而产生重大影响。</p>
@@ -453,7 +453,7 @@ div.csl-indent {
 <p>2021 年，在巴西举行的 R-Day 会议上，谢益辉曾经官方解释过这段历史，感兴趣的读者不妨去看一下“Knitr 亲述历史”：<a href="https://slides.yihui.org/2021-Brazilian-R-Day.html" class="uri">https://slides.yihui.org/2021-Brazilian-R-Day.html</a>。</p>
 <div id="r-markdown-literate-programming" class="section level3 hasAnchor" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> R Markdown 与文学化编程<a href="rmarkdown-intro.html#r-markdown-literate-programming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>初学者可能会认为 rmarkdown 软件包就是 R Markdown，但是事实并非如此。R Markdown 是文学化编程的一种实现方式，她包含了一系列的工具和软件包，而本书只能介绍其中有限的几个。文学化编程就是前面刚刚提及的<strong>一个绝妙的想法</strong>，那就是高德纳（Knuth, Donald E.）在 1984 年提出的编程方法，旨在取代结构化编程范型。文学编程范型让程序员用自己思维内在的逻辑和流程所要求的顺序开发程序，而且用人类日常使用的语言写出来，就好像一篇文章一样。</p>
+<p>初学者可能会认为 <strong>rmarkdown</strong> 软件包就是 R Markdown 的全部，但是事实并非如此。R Markdown 是文学化编程的一种实现方式，她包含了一系列目的各异又相互联系的工具和软件包，而本书只能介绍其中有限的几个。文学化编程就是前面刚刚提及的<strong>一个绝妙的想法</strong>，那就是高德纳（Knuth, Donald E.）在 1984 年提出的编程方法，旨在取代结构化编程范型。文学编程范型让程序员用自己思维内在的逻辑和流程所要求的顺序开发程序，而且用人类日常使用的语言写出来，就好像一篇文章一样。</p>
 <p>文学化编程本来是为了编程和写文档两个目的而生的，想法看起来很好，但同时完成这两件事情绝非易事。编程通常就是代码加注释，大家都熟悉这个套路，没有人在代码之间长篇大论写文档来解释这里的代码在干什么；文档通常也是相对独立于代码的。嵌入了代码的文档或嵌入了文档的代码对于一般读者来说都不易读。这么看来，文学化编程并非一个很好的点子。</p>
 <p>然而，文学化编程范式却无意间影响了可重复的科学研究。它不适合单纯写代码，但非常适合写数据分析报告。虽然数据分析的过程往往是一团糟，但结果经常是图文并茂，这也就是文学化编程可以充分发挥实力的地方。代码嵌入文档中的目的并非为了单纯的编译，而是更好的展示分析结果（合理使用文字与图表等）。代码和文档结合之后，也便于动态的调整输出结果<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>。</p>
 </div>
@@ -503,37 +503,37 @@ div.csl-indent {
 <span id="cb2-8"><a href="rmarkdown-intro.html#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="rmarkdown-intro.html#cb2-9" aria-hidden="true" tabindex="-1"></a>sns.barplot(x <span class="op">=</span> <span class="st">&quot;Murder&quot;</span>, y <span class="op">=</span> <span class="st">&quot;State&quot;</span>,  data <span class="op">=</span> top_states)</span></code></pre></div>
 <p>本书第 <a href="rmarkdown-operation.html#other-language">6.3</a> 节详细讨论了如何在 R Markdown 中结合其他编程语言。</p>
-<p>当需要创作更大篇幅的文档甚至书籍时，有可能创作者不希望仅使用一篇 R Markdown 文档组织全部内容。<strong>bookdown</strong> 包 <span class="citation">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2022a</a>)</span> 可以让用户将内容分散到多个 R Markdown 文档中，在编译时自动合成各文档的内容，并提供更适于书籍和在线文档的输出格式。此外，bookdown 对 R Markdown 的扩展还包括支持交叉引用，定理和公式环境，文献引用等。bookdown 的输出结果非常适合用于制作在线教材与讲义，例如北京大学李东风老师的<a href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html">《R 语言教程》</a>，本书的在线版本也是用 bookdown 生成的。<a href="https://bookdown.org/home/">bookdown.org</a> 列出了更多 bookdown 制作的在线书籍。</p>
+<p>创作更大篇幅的文档或书籍时，仅用一个 R Markdown 文件组织全部内容难以维护。<strong>bookdown</strong> 包提供了更适于长篇文档和书籍的输出格式，用户可以用多个 R Markdown 文档创作一本书的不同章节。此外，<strong>bookdown</strong> 包还提供了交叉引用，定理和公式环境，文献引用等扩展功能。<strong>bookdown</strong> 的输出结果非常适合用于制作在线教材与讲义，例如北京大学李东风老师的<a href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html">《R 语言教程》</a>，本书的在线版本也是用 <strong>bookdown</strong> 生成的。<a href="https://bookdown.org/home/">bookdown.org</a> 汇集了更多 <strong>bookdown</strong> 制作的在线书籍。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bookdown-chinese-demo"></span>
 <img src="images/01-bookdown-chinese.png" alt="使用 bookdown 制作的中文图书范例, 一个章节对应一个 R Markdown 文档" width="960" />
 <p class="caption">
 图 1.2: 使用 bookdown 制作的中文图书范例, 一个章节对应一个 R Markdown 文档
 </p>
 </div>
-<p>在学术报告或论文的撰写中，用户可能对格式有更细致的要求。越来越多的包提供了易用的 R Markdown 模板，为用户免去了繁杂的手动格式调整，编译后即可直接投稿。<strong>rticles</strong> 包 <span class="citation">(<a href="#ref-R-rticles" role="doc-biblioref">Allaire, Xie, Dervieux, et al. 2022</a>)</span> 提供了很多期刊和出版商的模板文档，例如 R Journals 和 Journals of Statistical Software。中文用户可能较常用 rticles 提供的 CTeX 输出格式，它让 R Markdown 输出的 PDF 可以正常显示中文字符。</p>
+<p>在学术报告或论文的撰写中，用户可能对格式有更细致的要求。越来越多的包提供了易用的 R Markdown 模板，为用户免去了繁杂的手动格式调整，编译后即可直接投稿。<strong>rticles</strong> 包 <span class="citation">(<a href="#ref-R-rticles" role="doc-biblioref">Allaire, Xie, Dervieux, et al. 2022</a>)</span> 提供了很多期刊和出版商的模板文档，例如 R Journals 和 Journals of Statistical Software。中文用户可能较常用 <strong>rticles</strong> 包提供的 CTeX 输出格式，它让 R Markdown 输出的 PDF 可以正常显示中文字符。</p>
 </div>
 <div id="example-note" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> 交互笔记本<a href="rmarkdown-intro.html#example-note" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>使用 R Markdown 及 bookdown 创作的文档支持运行代码，创作格式化长篇文本，插入 LaTeX 数学公式，且支持交叉引用和参考文献。因此统计，数据科学，计算机科学乃至社会科学等领域的学生，研究人员和爱好者们时常使用 R Markdown 为首选的笔记本格式。</p>
+<p><strong>rmarkdown</strong> 和 <strong>bookdown</strong> 等包支持运行代码，插入图片，公式，交叉引用和参考文献等常见元素，还可以组合长篇文档。因此、统计，数据科学、计算机科学乃至社会科学等领域的学生，研究人员和爱好者们时常使用 R Markdown 为首选的笔记本格式。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:notebook-preview"></span>
 <img src="images/01-notebook-preview.png" alt="RStudio 支持实时预览 R Markdown 笔记本格式" width="510" />
 <p class="caption">
 图 1.3: RStudio 支持实时预览 R Markdown 笔记本格式
 </p>
 </div>
-<p>如图 <a href="rmarkdown-intro.html#fig:notebook-preview">1.3</a> 所示，R Markdown 笔记本支持插入代码，保存代码块的运行结果，添加格式化文本和批注等功能。R Markdown 的交互特性让学习记录变得十分自然：用户通常添加一段代码，运行后得到预料之中/之外的可视化结果，随后在下面的多个代码块中反复调整某个参数，直至得到想要的结果。在此过程中用户常常会发现更多相关的包或代码，写下对不同代码的总结，并链接网络上他人的用例，甚至开始撰写自动化脚本。最后，用户可以一键生成包含了这一系列思考和学习过程的 HTML 或 PDF 精美文档。图 <a href="rmarkdown-intro.html#fig:notebook-preview">1.3</a> 是一个 PDF 笔记文档示例。</p>
+<p>如图 <a href="rmarkdown-intro.html#fig:notebook-preview">1.3</a> 所示，R Markdown 笔记本支持运行代码，插入运行结果，添加文本样式和批注等功能。R Markdown 的交互特性让学习记录变得十分自然：用户通常添加一段代码，运行后得到预料之中/之外的可视化结果，随后在下面的多个代码块中反复调整某个参数，直至得到想要的结果。在此过程中用户常常会发现更多相关的包或代码，写下对不同代码的总结，并链接网络上他人的用例，甚至开始撰写自动化脚本。最后，用户可以一键生成包含了这一系列思考和学习过程的 HTML 或 PDF 精美文档。图 <a href="rmarkdown-intro.html#fig:notebook-preview">1.3</a> 是一个 PDF 笔记文档示例。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:notebook-preview2"></span>
 <img src="images/01-notebook-preview2.png" alt="用 R Markdown 生成 PDF 学习笔记" width="366" />
 <p class="caption">
 图 1.4: 用 R Markdown 生成 PDF 学习笔记
 </p>
 </div>
-<p>即便用户的工作不涉及数据分析或代码运行，使用 R Markdown 作为笔记软件也有许多好处。用户可以流畅的使用版本控制工具，管理笔记依赖的数据，图片的资源等。用户可以将长篇笔记拆分为多个源文档，用纯文本文件管理输出设置，形成清晰的项目结构。<a href="https://rpubs.com/">RPubs</a> 和 <a href="https://bookdown.org/">bookdown</a> 等平台提供了免费的 R Markdown 文档发布服务，以此来发布自己的笔记与心得，便利他人和未来的自己。</p>
+<p>即便用户的工作不涉及数据分析或代码运行，使用 R Markdown 作为笔记软件也有许多好处。用户可以流畅地使用版本控制工具，管理笔记依赖的数据，图片的资源等。用户可以将长篇笔记拆分为多个源文档，用纯文本文件管理输出设置，形成清晰的项目结构。<a href="https://rpubs.com/">RPubs</a> 和 <a href="https://bookdown.org/">bookdown</a> 等平台提供了免费的 R Markdown 文档发布服务，以此来发布自己的笔记与心得，便利他人和未来的自己。</p>
 </div>
 <div id="example-cv" class="section level3 hasAnchor" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> 个人简历<a href="rmarkdown-intro.html#example-cv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>一些 R Markdown 扩展包提供了适用于个人简历（resume, CV）的输出格式。例如基于 <strong>pagedown</strong> 包 <span class="citation">(<a href="#ref-R-pagedown" role="doc-biblioref"><strong>R-pagedown?</strong></a>)</span> 的<a href="https://pagedown.rbind.io/html-resume">简历模板</a>，和 <a href="https://pkg.mitchelloharawild.com/vitae/">vitae</a> 提供的 CV 模板。</p>
-<p>除了提供模板外， R Markdown 还能使简历变得更加以“数据驱动 (Data driven)”。<a href="http://nickstrayer.me/datadrivencv/">datadrivencv</a> 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，用户仅需维护这张数据表，并由 R Markdown 来负责简历的格式。用户还可以插入 R 代码生成的交互图表，使简历可以“动”起来。图 <a href="rmarkdown-intro.html#fig:ns-cv">1.5</a> 是 datadrivencv 包的作者 Nick Strayer 结合 <strong>pagedown</strong> 包制作的个人简历。</p>
+<p>除了提供模板外， R Markdown 还能使简历变得更加以“数据驱动 (Data driven)”。<a href="http://nickstrayer.me/datadrivencv/"><strong>datadrivencv</strong></a> 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，用户仅需维护这张数据表，并由 R Markdown 来负责简历的格式。用户还可以插入 R 代码生成的交互图表，使简历可以“动”起来。图 <a href="rmarkdown-intro.html#fig:ns-cv">1.5</a> 是 <strong>datadrivencv</strong> 包的作者 Nick Strayer 结合 <strong>pagedown</strong> 包制作的个人简历。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ns-cv"></span>
 <img src="images/01-resume.png" alt="Nick Strayer用 datadrivencv 和 pagedown 包制作的 CV 示意" width="408" />
 <p class="caption">
@@ -544,30 +544,30 @@ div.csl-indent {
 </div>
 <div id="example-resume" class="section level3 hasAnchor" number="1.2.4">
 <h3><span class="header-section-number">1.2.4</span> 网站<a href="rmarkdown-intro.html#example-resume" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>原生的 R Markdown 包内置了生成简单静态网站的功能。简单来说，用户在一个 <code>.yml</code> 文件中自由定义网站的标题，导航栏，页面结构等元数据，而后创建数个 R Markdown 文档并在其中填充内容。最后，内置的站点生成器将每个 R Markdown 文档渲染为一个 HTML 页面输出。</p>
+<p><strong>rmarkdown</strong> 包支持生成简单的静态网页。用户通过 YAML 配置文件定义网站的标题，导航栏，页面结构等元数据，而后创建数个 R Markdown 文档组成网站的不同 HTML 页面。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
 <img src="images/01-rmarkdown-wbesite.png" alt="用 R Markdown 创建网站" width="960" />
 <p class="caption">
 图 1.6: 用 R Markdown 创建网站
 </p>
 </div>
-<p>为满足创建更加复杂且精美的网站的需求，<strong>blogdown</strong> 包使用了第三方的开源静态网站生成器：Hugo。Hugo 是目前速度最快，最受欢迎的静态网站生成器之一。一般用户通常需要用命令行的方式与之交互。不过作为幸福的 R 用户，读者可以在 R Markdown 文档中直接进行写作，随后调用 blogdown 中封装好的函数操作 Hugo 的编译功能，最后生成网站。</p>
+<p><strong>rmarkdown</strong> 包内置的网站功能较为简单。<strong>blogdown</strong> 包 <span class="citation">(<a href="#ref-R-blogdown" role="doc-biblioref"><strong>R-blogdown?</strong></a>)</span> 提供了更复杂的网站功能，它使用了开源的网站工具：Hugo。Hugo 是目前速度最快，最受欢迎的静态网站生成器之一。一般用户通常需要在命令行调用 Hugo，不过作为幸福的 R 用户，读者可以照常写作 R Markdown 文档，随后调用 <strong>blogdown</strong> 包中封装好的函数间接地使用 Hugo，最后生成网站。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:hugo-themes"></span>
 <img src="images/01-hugo-themes.png" alt="blogdown 包可以使用 Hugo 主题" width="960" />
 <p class="caption">
 图 1.7: blogdown 包可以使用 Hugo 主题
 </p>
 </div>
-<p>包如其名，对个人用户来说，blogdown 特别适合制作博客类的个人网站。读者可以展示个人项目，存放简历，归档学习笔记和心得，求职时为自己添加一份切实的筹码。<a href="https://support.rbind.io/about/">rbind</a> 还提供了免费的域名服务。除此之外，用户还可以用 blogdown 制作其他类型的网站，例如软件文档，课程主页等。Hugo 的<a href="https://themes.gohugo.io/">主题列表</a> 列出了丰富的网站模板，其中大部分可以在 blogdown 中一键生成。最后，本书提供几个不同主题的 blogdown 网站样例以供读者参考：</p>
+<p>包如其名，对个人用户来说，<strong>blogdown</strong> 特别适合制作博客类的个人网站。读者可以展示个人项目，存放简历，归档学习笔记和心得，求职时为自己添加一份切实的筹码。<a href="https://support.rbind.io/about/">rbind</a> 还提供了免费的域名服务。除此之外，用户还可以用 blogdown 制作其他类型的网站，例如软件文档，课程主页等。Hugo 的<a href="https://themes.gohugo.io/">主题列表</a> 列出了丰富的网站模板，其中大部分可以在 blogdown 中一键生成。最后，本书提供几个不同主题的 blogdown 网站样例以供读者参考：</p>
 <ul>
 <li><p>Rob J Hyndman 的<a href="https://robjhyndman.com/">个人网站</a></p></li>
 <li><p>Alison Hill 的<a href="https://alison.rbind.io/">个人网站</a></p></li>
+<li><p>《现代统计图形》的<a href="https://msg2020.pzhao.org/">图书主页</a></p></li>
 </ul>
-<p>-《现代统计图形》的<a href="https://msg2020.pzhao.org/">图书主页</a></p>
 </div>
 <div id="example-ppt" class="section level3 hasAnchor" number="1.2.5">
 <h3><span class="header-section-number">1.2.5</span> 幻灯片<a href="rmarkdown-intro.html#example-ppt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>R Markdown 和扩展包支持输出多种常见的幻灯片格式，例如 PowerPoint，Beamer，isoslides 和 Slidy 等。除此之外，本书还特别推荐 <strong>xaringan</strong> <span class="citation">(<a href="#ref-R-xaringan" role="doc-biblioref">Xie 2022d</a>)</span> 包。此包基于 JavaScript 中的 remark.js 库设计了灵活的输出方案。对 CSS 和 JavaScript 语法有一定了解的读者还可以基于默认模板自定义出复杂的演示文档。<strong>xaringanExtra</strong> 包为 xaringan 幻灯片提供了更多有趣的增强插件。读者可以在 <a href="https://slides.yihui.org/xaringan/#1" class="uri">https://slides.yihui.org/xaringan/#1</a> 和 <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/" class="uri">https://pkg.garrickadenbuie.com/xaringanExtra/#/</a> 看到更多示例。</p>
+<p>R Markdown 和扩展包支持输出多种常见的幻灯片格式，例如 PowerPoint，Beamer，isoslides 和 Slidy 等。除此之外，本书还特别推荐 <strong>xaringan</strong> <span class="citation">(<a href="#ref-R-xaringan" role="doc-biblioref">Xie 2022e</a>)</span> 包。<strong>xaringan</strong> 基于 JavaScript 中的 remark.js 库设计了灵活的输出方案。对 CSS 和 JavaScript 语法有一定了解的读者还可以基于默认模板自定义出复杂的演示文档。<strong>xaringanExtra</strong> 包为 <strong>xaringan</strong> 幻灯片提供了更多有趣的增强插件。读者可以在 <a href="https://slides.yihui.org/xaringan/#1" class="uri">https://slides.yihui.org/xaringan/#1</a> 和 <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/" class="uri">https://pkg.garrickadenbuie.com/xaringanExtra/#/</a> 看到更多示例。</p>
 <div class="figure"><span style="display:block;" id="fig:xaringan"></span>
 <img src="images/01-xaringan1.png" alt="xaringan 提供的幻灯片模板示意" width="49%" /><img src="images/01-xaringan2.png" alt="xaringan 提供的幻灯片模板示意" width="49%" />
 <p class="caption">
@@ -588,7 +588,7 @@ div.csl-indent {
 </div>
 <div id="example-dynamic" class="section level3 hasAnchor" number="1.2.7">
 <h3><span class="header-section-number">1.2.7</span> 动态文档<a href="rmarkdown-intro.html#example-dynamic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>除了直接的界面写作外，用户还可以通过调用输出 API <code>rmarkdown::render()</code> 来生成结果文档，并可以控制 R Markdown 输出时使用的数据源。这让 R Markdown 的自动化批量生产成为可能。一个典型场景是：数据库每日更新全国销售数据，而数据分析师用自动化脚本控制 R Markdown 来根据不同地区与职务来生成多个更有针对性的报表。这样的动态文档是通过参数实现的，也就是说用户在源文档中使用参数的名字，而不是具体的数据来进行定义。随后在脚本中通过 <code>rmarkdown::render()</code> 动态来传入当日的数据。</p>
+<p>除了直接使用编辑器写作外，用户还可以调用编程 API <code>rmarkdown::render()</code> 生成文档，并动态地设置文档使用的各项参数。这让用户可以自动化、参数化地批量生成文档。一个典型场景是：数据库每日更新全国销售数据，而数据分析师用自动化脚本控制 R Markdown 来根据不同地区与职务来生成多个更有针对性的报表。这样的动态文档是通过参数实现的，也就是说用户在源文档中使用参数的名字，而不是具体的数据来进行定义。随后在脚本中通过 <code>rmarkdown::render()</code> 动态来传入当日的数据。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dynamic-document"></span>
 <img src="images/01-dynamic-document.png" alt="根据 Shiny 输入动态生成 R Markdown 文档" width="934" />
 <p class="caption">
@@ -614,14 +614,11 @@ Iannone, Richard, JJ Allaire, and Barbara Borges. 2020. <em>Flexdashboard: R Mar
 <div id="ref-R-reticulate" class="csl-entry">
 Ushey, Kevin, JJ Allaire, and Yuan Tang. 2022. <em>Reticulate: Interface to Python</em>. <a href="https://CRAN.R-project.org/package=reticulate">https://CRAN.R-project.org/package=reticulate</a>.
 </div>
-<div id="ref-R-bookdown" class="csl-entry">
-———. 2022a. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
-</div>
 <div id="ref-R-knitr" class="csl-entry">
 ———. 2022c. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
 </div>
 <div id="ref-R-xaringan" class="csl-entry">
-———. 2022d. <em>Xaringan: Presentation Ninja</em>. <a href="https://github.com/yihui/xaringan">https://github.com/yihui/xaringan</a>.
+———. 2022e. <em>Xaringan: Presentation Ninja</em>. <a href="https://github.com/yihui/xaringan">https://github.com/yihui/xaringan</a>.
 </div>
 </div>
 <div class="footnotes">
@@ -629,7 +626,7 @@ Ushey, Kevin, JJ Allaire, and Yuan Tang. 2022. <em>Reticulate: Interface to Pyth
 <ol start="1">
 <li id="fn1"><p>谢益辉曾经说过自己“受过几年 Sweave 折磨，最后才揭竿而起。”<a href="rmarkdown-intro.html#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>上述两段文字摘自谢益辉博客 2014 年 1 月 3 日的一篇文章，有删改。原文见：<a href="https://yihui.org/cn/2014/01/literate-programming/" class="uri">https://yihui.org/cn/2014/01/literate-programming/</a>。<a href="rmarkdown-intro.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>用户在安装好 reticulate 包后需使用 <code>py_install("package")</code> 样式的代码来安装需要使用的 Python 程序包。如 <code>py_install("pandas")</code> 代码会安装 pandas 程序包。在文中的例子中，用户需要提前安装 pandas 和 seaborn 两个 Python 程序包，否则 R 会报错。<a href="rmarkdown-intro.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>用户在安装好 <strong>reticulate</strong> 包后需使用 <code>py_install("package")</code> 样式的代码来安装需要使用的 Python 程序包。如 <code>py_install("pandas")</code> 代码会安装 pandas 程序包。本章的例子还额外使用了 <strong>pandas</strong> 和 <strong>seaborn</strong> 两个 Python 的第三方包，可以通过 <code>pip</code> 或者 <code>conda</code> 等工具安装。<a href="rmarkdown-intro.html#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
