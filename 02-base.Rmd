@@ -17,7 +17,7 @@ RStudio 编辑器默认将工作区域分为三个面板，其中左侧为为 R 
 
 ## 安装 rmarkdown 包 {#install-rmarkdown}
 
-R Markdown 文档的编译依赖于同名的 `rmarkdown` R 包，在控制台中输入如下命令安装：[^02-base-1]
+R Markdown 文档的编译依赖于同名的 **rmarkdown** R 包，在控制台中输入如下命令安装：[^02-base-1]
 
 [^02-base-1]: 如果下载速度较慢，可以在 RStudio 的 Tools -\> Global Options -\> Packages 将 Primary Cran Repository 更改为距离自己更近的镜像源。也可以在 `install.packages` 中设置 `repos` 参数。
 
@@ -64,9 +64,7 @@ rmarkdown::render("untitled.Rmd")
 
 ### 安装 TinyTex {#install-tinytex}
 
-要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，建议 R Markdown 的用户使用 TinyTeX。
-
-TinyTeX 是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档。通过命令行模式，它的安装要简单的多。
+要想使用 R Markdown 输出 PDF 格式的文档，必须事先安装 LaTeX。LaTeX 有很多发行版，如 MiKTex，MacTeX， TeX Live 等，建议 R Markdown 的用户使用 TinyTeX。它是一个瘦身版的 TeX Live，去掉了 TeX Live 中对普通用户毫无用处的源代码和文档，可以通过 **tinytex** [@R-tinytex] R 包安装。
 
 ```{r fig.cap="TinyTex 是一个瘦身版的 TeX Live", echo = FALSE}
 knitr::include_graphics("images/logo-tinytex.png", dpi = NA)
@@ -74,7 +72,7 @@ knitr::include_graphics("images/logo-tinytex.png", dpi = NA)
 
 要安装 TinyTeX，只需要在 R 语言终端输入两条命令即可[^02-base-2]。
 
-[^02-base-2]: TinyTeX 与 **tinytex** 并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护前者的 R 语言软件包。
+[^02-base-2]: TinyTeX 与 **tinytex** 包并不是一个东西。前者是一个 LaTeX 发行版，后者是一个用来安装和维护前者的 R 语言软件包。
 
 ```{r eval=FALSE}
 # 安装 tinytex
@@ -109,7 +107,7 @@ knitr::include_graphics("images/02-rmd-pdf.png")
 
 #### 安装 LaTeX 组件 {#install-latex-package}
 
-从 rmarkdown 1.9 版本开始，输出 PDF 文档时会调用 TinyTeX，进而使用 LaTeX 包。因此，对 R Markdown 用户来说，编译 PDF 时出错的最常见原因是缺失某些 LaTeX 包。
+从 **rmarkdown** 1.9 版本开始，输出 PDF 文档时会调用 TinyTeX，进而使用 LaTeX 包。因此，对 R Markdown 用户来说，编译 PDF 时出错的最常见原因是缺失某些 LaTeX 包。
 
 LaTeX 包（也被称为 "package"）是 LaTeX 的组件，数目非常多，可以用来扩展 LaTeX 的功能。`tinytex::install_tinytex()` 默认只安装了必须的一些组件，在实际使用过程中经常会出现缺少组件的错误。
 
@@ -121,7 +119,7 @@ tinytex::tlmgr_repo(url = "https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/tex
 tinytex::tlmgr_install(c("pgf", "preview", "xcolor"))
 ```
 
-如果不知道包的名称也没有关系，tinytex 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 日志文件。如果 log 文件过长或者找不到具体提示信息，还可以使用第二种办法。
+如果不知道包的名称也没有关系，**tinytex** 也提供了相应的函数来帮助用户从报错信息中找到解决方法。`tinytex::parse_install()` 提供两种方法，第一种是通过准确的错误提示，第二种是通过分析 log 日志文件。如果 log 文件过长或者找不到具体提示信息，还可以使用第二种办法。
 
 ```{r install-latex-package-by-errormsg, eval=FALSE}
 # 假如有相关报错信息 "! LaTeX Error: File `preview.sty' not found."
@@ -216,7 +214,7 @@ cat ./.ssh/id_rsa.pub
 
 -   创建一个新的软件仓库；
 
-    点击 GitHub 右上角的"+"，选择"Create a new repository"，按照提示操作即可。这步操作其实相当于在 GitHub 服务器上新建了一个目录。目录名称是 `Repository Name`。目录的路径就是 `<username>/<repository_name>`。对应的网址（绝对路径）是 `https://github.com/<username>/<repository_name>`。对应的 Git 地址是 `git://git@github.com/<username>/<repository_name>.git`。对应的 SSH 地址是 `ssh://git@github.com/<username>/<repository_name>.git`。
+    点击 GitHub 右上角的 "+"，选择 "Create a new repository"，按照提示操作即可。这步操作其实相当于在 GitHub 服务器上新建了一个目录。目录名称是 `Repository Name`。目录的路径就是 `<username>/<repository_name>`。对应的网址（绝对路径）是 `https://github.com/<username>/<repository_name>`。对应的 Git 地址是 `git://git@github.com/<username>/<repository_name>.git`。对应的 SSH 地址是 `ssh://git@github.com/<username>/<repository_name>.git`。
 
 -   从其他用户的软件仓库中新建一个分支，即 Fork；
 
@@ -230,7 +228,7 @@ cat ./.ssh/id_rsa.pub
 
 ## R Markdown 的基本元素 {#rmarkdown-element}
 
-第 \@ref(install-rmarkdown) 节中，读者创建了 `untitled.Rmd` 源文件，内容如下：
+第 \@ref(install-rmarkdown) 节中，读者创建了 `untitled.Rmd` 源文件，这是 **rmarkdown** 自带的一个文档模版，目前读者不需要修改其中的内容，`untitled.Rmd` 原内容如下：
 
 ````{verbatim}
 ---
@@ -296,7 +294,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 ```
 
-这段内容使用了 Markdown 语法，在第 \@ref(markdown-syntax) 节详细介绍。简而言之，为了方便作者在文档中插入各种格式的内容，Markdown 语法提供了一系列简单的标记符号，如 `#`，`*`，`-` 等，这些符号可以用来标记文本的标题、列表、引用等。R Markdown 在遇到这些符号时会将相关的文本转换成对应的格式。这里 `## R Markdown` 是一个二级标题，`**Knit**` 是一个加粗的文本，`<http://rmarkdown.rstudio.com>` 是一个链接。
+这段内容使用了 Markdown 语法。Markdown 语法提供了一系列简单的标记符号，如 `#`，`*`，`-` 等，它们可以在输出文档中生成标题、列表、图片和脚注等常见元素，满足简单的样式需求。使用 Markdown 既可以让作者免于复杂的排版之苦，也提供了一种格式标记的统一中介。本书的第 \@ref(markdown-syntax) 节详细介绍了 Markdown 语法。简而言之，R Markdown 在遇到这些符号时会将相关的文本转换成对应的格式。这里 `## R Markdown` 是一个二级标题，`**Knit**` 是一个加粗的文本，`<http://rmarkdown.rstudio.com>` 是一个链接。
 
 这段 Markdown 文本下面是另外一个 R 代码块：
 
@@ -312,11 +310,11 @@ summary(cars)
 
 ## R Markdown 的编译过程和组成元素 {#rmarkdown-compile}
 
-点击 `Knit` 按钮或调用 `rmarkdown::render()` 函数后，R 会启动一个新的进程，将源文档转换为输出文档。 之前提到过，`Knit` 按钮本质上就是对 rmarkdown 包中 `render()` 函数的封装。因此，理解 R Markdown 的编译过程就是理解 `render()` 调用了什么方法和工具完成了怎样的文档转换。
+点击 `Knit` 按钮或调用 `rmarkdown::render()` 函数后，R 会启动一个新的进程，将源文档转换为输出文档。 之前提到过，`Knit` 按钮本质上就是对 **rmarkdown** 包中 `render()` 函数的封装。因此，理解 R Markdown 的编译过程就是理解 `render()` 调用了什么方法和工具完成了怎样的文档转换。
 
 首先，`render()` 函数会读取 YAML 元数据，并根据它们设置的选项来调整输出文档的配置。
 
-YAML 元数据读取完毕后，进入文档的正文部分。R Markdown 首先提取正文中的所有代码块，按顺序运行其中的代码，将运行结果插入到代码块的下方。代码的执行过程在底层由 **knitr** [@R-knitr] 包控制，它将代码的运行结果置于合适的位置。之前笼统说的 "R Markdown 运行代码" 实质上就是 knitr 的工作。这一步结束后，knitr 生成了临时性的 `.md` 文件。包含了 Markdown 文本和代码运行结果。例如，`untitled.Rmd` 被转换为 `untitled.md`，内容为：
+YAML 元数据读取完毕后，进入文档的正文部分。R Markdown 首先提取正文中的所有代码块，按顺序运行其中的代码，将运行结果插入到代码块的下方。代码的执行过程在底层由 **knitr** [@R-knitr] 包控制，它将代码的运行结果置于合适的位置。之前笼统说的 "R Markdown 运行代码" 实质上就是 **knitr** 的工作。这一步结束后，knitr 生成了临时性的 `.md` 文件。包含了 Markdown 文本和代码运行结果。例如，`untitled.Rmd` 被转换为 `untitled.md`，内容为：
 
 ````{verbatim}
 ---
@@ -353,7 +351,7 @@ summary(cars)
 
 You can also embed plots, for example:
 
-![](Untitled_files/figure-html/pressure-1.png)<!-- -->
+![](Untitled_files/figure-html/pressure-1.png)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 ````
@@ -367,7 +365,7 @@ rmarkdown::pandoc_version()
 
 作为总结，对于 HTML 格式，`rmarkdown::render` = `knitr + Pandoc`。 PDF 输出格式还有额外的一步： tinytex 包或其他 LaTeX 发行版编译 Pandoc 生成的 `.tex` 文件，生成 PDF 文档。
 
-实际写作中，R Markdown 用户几乎不需要直接与 knitr 或 Pandoc 打交道，大部分配置可以通过 YAML 元数据完成，但理解它们在 R Markdown 编译中的角色有利于在编译失败时更好地排错，同时为掌握更进阶的排版技巧打好基础。
+实际写作中，R Markdown 用户几乎不需要直接与 **knitr** 或 Pandoc 打交道，大部分配置可以通过 YAML 元数据完成，但理解它们在 R Markdown 编译中的角色有利于在编译失败时更好地排错，同时为掌握更进阶的排版技巧打好基础。
 
 图 \@ref(fig:knit-process) 概括了 R Markdown 完成以上工作的流程。
 
@@ -379,7 +377,7 @@ knitr::include_graphics("images/02-knit-process.png")
 
 ## YAML 头部 {#yaml}
 
-YAML 元数据中的每一个域 (field) 都定义了输出的一个方面，其中最重要的一个域是 `output` 所指定的输出格式，`output` 选项的值可以是 `html_document`、`pdf_document`、`word_document` 等，这些值对应了不同的输出格式，实质上都是 rmarkdown 包中的函数，例如 `html_document` 对应的函数是 `rmarkdown::html_document()`。下面是所有 rmarkdown 包中定义的输出格式：
+YAML 元数据中的每一个域 (field) 都定义了输出的一个方面，其中最重要的一个域是 `output` 所指定的输出格式，`output` 选项的值可以是 `html_document`、`pdf_document`、`word_document` 等，这些值对应了不同的输出格式，实质上都是 **rmarkdown** 包中的函数，例如 `html_document` 对应的函数是 `rmarkdown::html_document()`。下面是所有 **rmarkdown** 包中定义的输出格式：
 
 `r knitr::combine_words(grep('^[^_]+_(document|presentation)$', ls(asNamespace('rmarkdown')), value = TRUE), sep = '\n', and = '', before = '- \x60', after = '\x60')`
 
@@ -419,7 +417,7 @@ output:
 
 `pdf_document` 格式同样设置了生成目录，`number_sections: true` 自动生成章节编号，`keep_tex: true` 保留 Pandoc 生成的 `.tex` 文件。`latex_engine: xelatex` 设置编译引擎为 XeLaTeX (默认为 pdflatex), 引擎设置对正确显示中文字体非常重要。
 
-`tufte::tufte_handout` 是 rmarkdown 包之外的一个扩展输出格式：用户可以根据自己的需求定制输出格式，不限于 rmarkdown 提供的选择。`tufte::tufte_handout` 是 `tufte` 包中的一个函数，模仿了统计学家 Edward Tufte 以及物理学家费曼的教科书的风格。举一反三，如果需要使用 `foo` 包中的输出格式 `bar`，它定义在 `bar_document` 中，那么 `output` 应该设置为 `output: foo::bar_document`，这里的 `default` 关键字表示使用默认的二级设置。使用多个输出格式时，没有二级选项的输出格式需要使用 `default`。下面的 YAML 元数据是不合法的：
+`tufte::tufte_handout` 是 rmarkdown 包之外的一个扩展输出格式：用户可以根据自己的需求定制输出格式，不限于 **rmarkdown** 包内置的格式。`tufte::tufte_handout` 是 `tufte` 包中的一个函数，模仿了统计学家 Edward Tufte 以及物理学家费曼的教科书的风格。举一反三，如果需要使用 `foo` 包中的输出格式 `bar`，它定义在 `bar_document` 中，那么 `output` 应该设置为 `output: foo::bar_document`，这里的 `default` 关键字表示使用默认的二级设置。使用多个输出格式时，没有二级选项的输出格式需要使用 `default`。下面的 YAML 元数据是不合法的：
 
 ```yaml
 output:
@@ -627,7 +625,6 @@ lapply(x, mean)
 
 可以在反引号后注明代码块的语言，在输出文档中提供更好的代码高亮支持，以相同的代码块为例：
 
-
 ````
 ```r
 x <- list(a = 1:10,
@@ -733,26 +730,66 @@ $$
 
 ### 总结
 
-表 \@ref(tab:markdown-summary) 总结了常见的 Markdown 语法以及显示效果。
+最后总结一下 Markdown 中几种常见元素的语法，源文档如下：
 
-```{r, echo = FALSE}
-library(huxtable)
-t <- read.csv("data/markdown.csv", encoding = "UTF-8")
-t <- as_huxtable(t)
+````{verbatim}
+# 一级标题
+
+**粗体** 和 *斜体*
+
+`>` 开启一段块引用
+
+> We study statistics with the main aim of solving problems in other disciplines.
+
+添加空行分隔段落
+
+床前明月光，
+
+疑是地上霜
+
+## 二级标题
+
+反引号插入行内代码和代码块: `rnorm(10)`
+
+```r
+print("hello world")
 ```
 
-```{r markdown-summary, echo = FALSE}
-t <- set_markdown(t, everywhere, everywhere)
-set_caption(t, "Markdown 常见语法总结")
+表格
+
+|  表头   | 表头  |
+|  ----  | ----  |
+| 单元格  | 单元格 |
+| 单元格  | 单元格 |
+
+
+数学公式
+
+$$
+x^2 + y^2 = z^2
+$$
+
+
+### 三级标题
+
+插入链接: [统计之都论坛](https://d.cosx.org/)
+
+插入图片
+
+![](../images/cos-logo.png)
+````
+
+图 \@ref(fig:markdown-summary) 展示了渲染为 PDF 后的效果。
+
+```{r markdown-summary, echo = FALSE, fig.cap = "Markdown 常见元素的显示效果"}
+import_example_result("examples/markdown-summary.Rmd")
 ```
 
-
-要显示 Markdown 中的特殊字符时 (#, *, -, ` 等)，可以在前面使用转义符 ``\``。
+Markdown 中的特殊字符包括 `#`, `*`, `-`, ``` ` ``` 等，通常它们代表了特定的排版格式，当需要按字面意输出这些特殊字符时，可以在前面使用转义符 ``\``。
 
 ```
 \- 这一行不会显示为列表
 ```
-
 
 值得一提的是，虽然 Markdown 本身是一种统一的标准，随着时间推移独立开发者们逐渐添加了不同的功能扩展，一些组织和公司在此基础上加以规范化，形成了不同的 Markdown 变体 (flavor)。R Markdown 中使用的是 Pandoc 式的 Markdown，即 Pandoc 支持的 Markdown 语法。其他平台支持的常见变体包括 ExtraMark Markdown 和 Github Markdown 等。如果某个特定语法在 R Markdown 中无法正常显示，很可能是 Pandoc Markdown 不支持这个语法。
 
@@ -827,7 +864,7 @@ date: "`r Sys.Date()`"
 
 ### 代码块选项
 
-读者可以在 <https://yihui.org/knitr/options/> 查看所有代码块选项的用法，这里列出一些常见选项和它们的取值类型。第 \@ref(#chunk-options) 节详细展示了更多例子。
+读者可以在 <https://yihui.org/knitr/options/> 查看所有代码块选项，这里列出一些重要选项和它们的取值类型。第 \@ref(#chunk-options) 节展示了更多例子。
 
 - `eval`: 是否运行该代码块
 
@@ -857,6 +894,36 @@ date: "`r Sys.Date()`"
   - `"right"`: 靠右对齐
 
 - `cache`: 是否缓存代码块的运行结果。如果代码块涉及复杂的计算，`cache = TRUE` 可以让 knitr 把运行结果保存为 `.rds` 文件，并在下次编译时略过计算过程，直接读取 `.rds` 节省时间。只有代码块的内容发生变化时，knitr 才会重新计算并更新 `.rds` 文件。有时 knitr 的缓存机制会让人难以预测代码是否重新运行，只推荐必要时使用。
+
+[knitr 1.35](https://github.com/yihui/knitr/blob/master/NEWS.md#changes-in-knitr-version-135) 及以后版本支持在代码块内部用 `#|` 符号 设置代码块选项，例如：
+
+````{verbatim}
+```{r}
+#| echo = FALSE, fig.width = 10,
+#| fig.cap = "这是一个很长很长很长的标题"
+
+plot(cars)
+```
+````
+
+一些读者可能更喜欢 YAML 语法而不是用逗号分隔各选项，`#|` 实现了这一点：
+
+````{verbatim}
+```
+#| echo: false
+#| fig.width: 10
+
+plot(cars)
+```
+````
+
+需要注意的是，代码块内的选项优先级比常规选项更高，例如下面的代码段最终的选项为 `echo = FALSE` 和 `collapse = FALSE`
+
+````{verbatim}
+```{r, echo = FALSE, collapse = TRUE}
+#| collapse = FALSE
+```
+````
 
 ## 文档元素 {#document-element}
 
@@ -939,7 +1006,7 @@ import_example_result("examples/multi-figure-same-row.Rmd")
 
 ::::::
 
-对于非代码生成的外部图片，可以使用 Markdown 的图片语法 `![图片描述](图片路径)` 或 knitr 包中的函数 `knitr::include_graphics()` 插入图片。例子如下：
+对于非代码生成的外部图片，可以使用 Markdown 的图片语法 `![图片描述](图片路径)` 或 **knitr** 包中的函数 `knitr::include_graphics()` 插入图片。例子如下：
 
 ````{verbatim}
 ```{r, out.width = "90%", fig.cap = "用 knitr::include_graphics() 插入图片"}
@@ -951,7 +1018,7 @@ knitr::include_graphics("images/some-image.png")
 
 ### 表格 {#element-table}
 
-第 \@ref(markdown-table) 节介绍了用 Markdown 语法编写表格的方法。对于 R 用户，更简单的插入表格方法是使用 knitr 包中的 `kable()` 函数，它接受一个数据框，返回对应的表格。与图片的 `fig.cap` 选项类似，作者可以用 `kable()` 函数中的 `caption` 参数控制表格的标题。例如下面的代码块：
+第 \@ref(markdown-table) 节介绍了用 Markdown 语法编写表格的方法。对于 R 用户，更简单的插入表格方法是使用 **knitr** 包中的 `kable()` 函数，它接受一个数据框，返回对应的表格。与图片的 `fig.cap` 选项类似，作者可以用 `kable()` 函数中的 `caption` 参数控制表格的标题。例如下面的代码块：
 
 ````{verbatim}
 ```{r iris-table}
@@ -1132,7 +1199,7 @@ knitr::write_bib(file = 'packages.bib')
 
 ### 交叉引用 {#cross-reference}
 
-交叉引用 (cross-reference) 可以为读者提供锚点链接，便于他们快速浏览文档中相关部分。rmarkdown 包提供的 `html_document`, `pdf_document` 等基础格式不支持交叉引用。作者可以转而使用 **bookdown** [@R-bookdown] 包提供的额外格式：`bookdown::html_document2` 和 `bookdown::pdf_document2` 等。
+交叉引用 (cross-reference) 可以为读者提供锚点链接，便于他们快速浏览文档中相关部分。**rmarkdown** 包提供的 `html_document`, `pdf_document` 等基础格式不支持交叉引用。作者可以转而使用 **bookdown** [@R-bookdown] 包提供的额外格式：`bookdown::html_document2` 和 `bookdown::pdf_document2` 等。
 
 随后，作者需要为链接跳转的锚点设置一个标签，这样引用的时候才有地放矢。R Markdown 支持交叉引用章节标题、图片、表格和公式等元素，语法略有不同。
 
@@ -1283,7 +1350,7 @@ leaflet() %>%
 
 ```{=html}
 <iframe
-  src="https://player.bilibili.com/player.html?aid=629420179&bvid=BV1ib4y1X7r9&cid=304825282&page=1"
+  src="https://player.bilibili.com/player.html?aid=860310206&bvid=BV1NG4y1Z79u&cid=897781877&page=1"
   scrolling="no"
   border="0"
   frameborder="no"
@@ -1306,7 +1373,7 @@ leaflet() %>%
 
 ### 流程图 {#element-digram}
 
-Graphviz 和 mermaid 是两个常用于创建流程和网络图的软件包。**DiagrammeR** [@R-DiagrammeR] 包支持用 R 代码生成 Graphviz 或 mermaid 图。可以直接在 RStudio 中打开 Graphviz (`.gv`) 和 mermaid (`.mmd`) 文件，如图 \@ref(fig:rstudio-gv) 所示。
+Graphviz 和 mermaid 是两个创建流程和网络图的通用软件。**DiagrammeR** [@R-DiagrammeR] 包支持用 R 代码生成 Graphviz 或 mermaid 图。可以直接在 RStudio 中打开 Graphviz (`.gv`) 和 mermaid (`.mmd`) 文件，如图 \@ref(fig:rstudio-gv) 所示。
 
 ```{r rstudio-gv, echo = FALSE, fig.cap = "RStudio 编辑器中的 Graphviz 和 mermaid 图文件"}
 knitr::include_graphics("images/02-graphviz-rstudio.png")
@@ -1359,7 +1426,7 @@ grViz("
 )
 ```
 
-除了流程图外，DiagrammeR 还可以创建网络图，如图 \@ref(fig:gr-network) 所示。
+除了流程图外，**DiagrammeR** 还可以创建网络图，如图 \@ref(fig:gr-network) 所示。
 
 ```{r gr-network, fig.cap = "DiagrammeR 创作的网络可视化图", echo = FALSE, warning=FALSE}
 example_graph <-

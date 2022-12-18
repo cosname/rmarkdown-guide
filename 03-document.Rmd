@@ -11,7 +11,21 @@ source("utils.R")
 1. R Markdown --> Markdown，由 **knitr** [@R-knitr] 完成；
 2. Markdown  --> 不同格式文档，由 Pandoc 完成。
 
-Markdown 在发明之初的主要目的就是简化 HTML 内容的书写方式。例如要表示一个无序列表中的项，用 HTML 来写是 `<ul><li>text</li></ul>`，而用 Markdown 来写则只需要 `- text`；又如要表示一段引用文字，用 HTML 来写是 `<blockquote>text</blockquote>`，用 Markdown 来写则只需要 `> text`。
+Markdown 在发明之初的主要目的就是简化 HTML 内容的书写方式。例如要创建一个列表项，用 HTML 来写是
+
+```html
+<ul>
+    <li>列表项</li>
+</ul>
+```
+
+而用 Markdown 来写则只需要
+
+```markdown
+- 列表项
+```
+
+又如要表示一段引用，用 HTML 来写是 `<blockquote>text</blockquote>`，用 Markdown 来写则只需要 `> text`。
 
 Pandoc 大大扩展了 Markdown 的语法。更重要的是，Pandoc 使得将 Markdown 文档转换为多种输出格式成为可能。尽管这些文档大体可以按照背后的实现方式，分为 HTML、PDF 和 Microsoft Office 等三大类型，但是根据应用场景的差异，会有多种多样的具体样式。
 
@@ -850,16 +864,14 @@ xfun::pkg_load2(c("htmltools", "mime"))
 
 `r import_example("embed-file.Rmd")`
 
-不仅如此，还可以编程技巧嵌入所需的文件。
+不仅如此，还可以用正则表达式批量嵌入文件。
 
 ```{r eval=FALSE}
 # 嵌入当前目录下所有的 Rmd 和 csv 文件
 xfun::embed_files(list.files(".", "[.](Rmd|csv)$"))
 ```
 
-*说明*：当嵌入多个文件时，其工作原理是：首先将这些文件压缩成 Zip 格式，然后将 Zip 文件嵌入到 HTML 文档中。
-
-
+当嵌入多个文件时，R Markdown 首先将这些文件压缩成 Zip 格式，然后将 Zip 文件嵌入到 HTML 文档中。
 
 ## PDF 文档 {#rmarkdown-pdf}
 
@@ -989,7 +1001,7 @@ output:
 
 ### LaTeX 选项 {#pdf-latex}
 
-很多 LaTeX 的配置，可以通过头部 YAML 的设定传递给 PDF 文档。
+很多 LaTeX 选项都可以通过 YAML 头部传递给 PDF 编译工具。
 
 #### 通用文档部件 {#pdf-includes}
 
@@ -1078,7 +1090,6 @@ geometry: margin=1in
 ---
 ```
 
-
 ### 使用 LaTeX 包处理参考文献 {#pdf-latex-citation}
 
 默认情况，文档中的引用使用 `pandoc-citeproc` 来处理，这种方法不限制输出文档的类型，适用性最广。
@@ -1123,7 +1134,6 @@ output:
     keep_tex: true
 ---
 ```
-
 
 ## PPT 幻灯片 {#rmarkdown-ppt}
 
@@ -1263,7 +1273,6 @@ output:
 ```markdown
 ## 添加背景图像 {data-background=foo.png data-background-size=cover}
 ```
-
 
 这些配置来自于 CSS 中图片的属性，`background`，`background-size`，`background-position`，
 以及 `background-repeat` 等。用户可能需要对 CSS 有所了解，才能准确把握这些属性的用途。
@@ -1439,7 +1448,6 @@ Slidy 幻灯片的内容设置基本与 ioslides 幻灯片相似，不过其默�
 knitr::include_graphics("examples/slidy-presentation-screenshot.png", dpi = NA)
 ```
 
-
 #### 使用快捷键控制显示模式 {#slidy-shortcut}
 
 Slidy 中也可以通过快捷键控制显示模式，不过其按键定义与 ioslides 不同。
@@ -1604,19 +1612,16 @@ output:
 ---
 ```
 
-
 #### 其它功能 {#powerpoint-other-features}
 
 PowerPoint 幻灯片从 HTML 文档中继承了目录内容、图片属性、样式、数据框打印、组件、
 模板、Pandoc 参数和分享等功能（参加 \@ref(rmarkdown-html)）。
 目前并不支持播放列表项目时候的动画效果。
 
-
 ### Xaringan 幻灯片 {#ppt-xaringan}
 
 虽然 R Markdown 提供的基础幻灯片已经能够实现了基本的幻灯片功能，而且没有额外的学习成本，
 但是，善于制作精良幻灯片的“忍者”通常使用一个额外的包来创建幻灯片，这个包的名字叫做 `xaringan`。
-
 
 `xaringan` 这个名字来源于火影忍者中的写轮眼 "Sharingan" （图 \@ref(fig:sharingan-icon)）[^name-of-xaringan]。写轮眼有两大能力：
 
@@ -1724,7 +1729,6 @@ install.packages("xaringanthemer")
 remotes::install_github("gadenbuie/xaringanthemer")
 ```
 
-
 1. 创建完新文档后，将 `xaringan-themer.css` 文件添加到 xaringan 幻灯片的 YAML 中。
 
 ```markdown
@@ -1732,7 +1736,6 @@ output:
   xaringan::moon_reader:
     css: xaringan-themer.css
 ```
-
 
 2. 然后，在 chunck 中加载 **xaringanthemer** 并 [设置主题](https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html#themes) 即可。下面给出一个简单的例子（图 \@ref(fig:xaringan-themer-sample-view)）， 展示了设置主题后的界面预览。当然该包还给出了很多其他主题，下面给出一些主题模板预览。
 

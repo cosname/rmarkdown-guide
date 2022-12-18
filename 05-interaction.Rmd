@@ -95,7 +95,7 @@ install.packages("rsconnect")
 rsconnect::deployApp()
 ```
 
-如果使用的是 RStudio，在运行 Shiny 文档时，也可以使用窗口右上角的 `Publish` 按钮(图 \@ref(fig:shiny-deploy))。
+RStudio 用户也可以在运行 Shiny 应用后，点击窗口右上角的 `Publish` 按钮(图 \@ref(fig:shiny-deploy))。
 
 ```{r shiny-deploy, echo=FALSE, fig.width=6,fig.align='center',fig.cap='部署 Shiny 文档到 ShinyApps.io. 上'}
 knitr::include_graphics('images/shiny-deploy.png', dpi = NA)
@@ -368,10 +368,7 @@ rmarkdown::draft(
 
 下面给出一个简单的例子：
 
-
-````{verbatim}
-`r xfun::file_string('examples/dashboard/01-start.Rmd')`
-````
+`r import_example('examples/dashboard/01-start.Rmd')`
 
 注意，第一行文本（第一列）下的一系列破折号是二级标题的另一种 Markdown 语法形式，即：
 
@@ -475,9 +472,9 @@ knitr::include_graphics('images/dashboard-icon.png', dpi = NA)
 
 除了基于列或行布局外，还可以通过故事板（storyboard）进行布局，呈现一些可视化图形或其他说明。下面给出一个简单的例子：
 
-````{verbatim}
-`r xfun::file_string('examples/dashboard/03-storyboard.Rmd')`
-````
+
+`r import_example('examples/dashboard/03-storyboard.Rmd')`
+
 
 ```{r dashboard-story, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于故事板布局的结果。'}
 knitr::include_graphics('images/dashboard-story.png', dpi = NA)
@@ -510,9 +507,8 @@ knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 如果希望在仪表盘中包含一个或多个数值，那么读者可以使用 **flexdashboard** 包中的 `valueBox()` 函数来实现这个需求。下面给出一个简单的例子：
 
 
-````{verbatim}
-`r xfun::file_string('examples/dashboard/04-valueboxes.Rmd')`
-````
+`r import_example('examples/dashboard/04-valueboxes.Rmd')`
+
 
 ```{r dashboard-valueboxes, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上并排的三个值。'}
 knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
@@ -524,9 +520,7 @@ knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 
 在指定数值范围内显示仪表上的数值。例如，下面展示了三个仪表并排的结果（见图 \@ref(fig:dashboard-gauges)）。
 
-````{verbatim}
-`r xfun::file_string('examples/dashboard/05-gauges.Rmd')`
-````
+`r import_example('examples/dashboard/05-gauges.Rmd')`
 
 ```{r dashboard-gauges, echo=FALSE,fig.width=6,fig.align='center', fig.cap='三个仪表并排放在仪表盘上。'}
 knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
@@ -551,9 +545,7 @@ knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 
 如图 \@ref(fig:dashboard-text) 所示，顶部包含了一些内容说明和右下角包含了一个只有内容的指示板：
 
-````{verbatim}
-`r xfun::file_string('examples/dashboard/06-text.Rmd')`
-````
+`r import_example('examples/dashboard/06-text.Rmd')`
 
 ```{r dashboard-text, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的文本注释。'}
 knitr::include_graphics('images/dashboard-text.png', dpi = NA)
@@ -568,7 +560,6 @@ knitr::include_graphics('images/dashboard-text.png', dpi = NA)
 默认情况下，仪表盘的导航栏包括：标题（`title`）、作者（`author`）和日期（`date`）。当仪表盘有多个页面时（第 \@ref(multiple-pages) 节），导航条左侧还包含指向各个页面的链接。当然，也在可以仪表盘上添加社交链接。
 
 除此之外，使用 `navbar` 选项可以在导航栏中添加自定义链接。例如，在导航栏中添加 “关于” 链接：
-
 
 ```yaml
 ---
@@ -616,9 +607,7 @@ knitr::include_graphics('images/dashboard-about.png', dpi = NA)
 
 图 \@ref(fig:dashboard-shiny) 给出了 Shiny 仪表盘的一个示例：
 
-````{verbatim}
-`r xfun::file_string('examples/dashboard/07-shiny.Rmd')`
-````
+`r import_example('examples/dashboard/07-shiny.Rmd')`
 
 ```{r dashboard-shiny, echo=FALSE, fig.width=6,fig.align='center',fig.cap='基于 Shiny 的交互式仪表盘。'}
 knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
@@ -641,17 +630,15 @@ knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 
 1.  Shiny 官方网站( http://shiny.rstudio.com) ：包含大量的文章、教程和示例。
 
+2. Shiny 网站上的文章“[Introduction to Interactive Documents](http://shiny.rstudio.com/articles/interactive-docs.html)”，这是一个很好的入门指南。
 
-1. Shiny 网站上的文章“[Introduction to Interactive Documents](http://shiny.rstudio.com/articles/interactive-docs.html)”，这是一个很好的入门指南。
-
-
-1. 关于部署交互式文档，读者可以使用 Shiny Server 或 RStudio Connect：https://www.rstudio.com/products/shiny/shiny-server/。
+3. 关于部署交互式文档，读者可以使用 Shiny Server 或 RStudio Connect：https://www.rstudio.com/products/shiny/shiny-server/。
 
 ## 在 R package 中使用 R Markdown {#package-rmd}
 
 ### 写软件包的文档 {#rmd-vignettes}
 
-如果有开发R包的经验，或者项目中编写的自定义函数需要清晰的文档和严格的测试，那么可以考虑将项目制作成一个 R 包。如果不知道如何创建一个 R 包，则可以很容易地在 RStudio IDE 中通过点击菜单 `File -> New Project` 开始，选择项目类型为 `R Package`\index{R package!vignette}\index{vignette}。此外，第 \@ref(rmarkdown-package) 节还介绍了如何使用 R Markdown 开发 R 包，可以大大加速 R 包开发过程。
+如果有开发 R 包的经验，或者项目中编写的自定义函数需要清晰的文档和严格的测试，那么可以考虑将项目制作成一个 R 包。如果不知道如何创建一个 R 包，则可以很容易地在 RStudio IDE 中通过点击菜单 `File -> New Project` 开始，选择项目类型为 `R Package`\index{R package!vignette}\index{vignette}。此外，第 \@ref(rmarkdown-package) 节还介绍了如何使用 R Markdown 开发 R 包，可以大大加速 R 包开发过程。
 
 使用 R 包来管理项目有很多好处。例如，可以将数据集放在 `data/` 文件夹中，在 `R/` 下写 R 代码，生成文档到 `man/`（例如，使用 **roxygen2** 包[@R-roxygen2]\index{R package!roxygen2}），并将单元测试添加到 `test/` 中。当涉及到 R Markdown 报告时，可以将它们作为 `vignettes/` 下的软件包长文档来编写。在这些长文档中，可以加载数据集并调用包中的函数。当构建包时（通过 `R CMD build` 或 RStudio 命令），长文档将被自动编译。
 
@@ -691,7 +678,7 @@ vignette: >
 
 #### 模板使用样例
 
-模板是共享自定义结构、样式和内容的有效的方法，有很多优秀的例子都体现了这一特点。
+模板是共享自定义结构、样式和内容的有效的方法，很多 R 包都使用了模版文档都方式提高代码的复用率。
 
 许多模板通过预填充 YAML 元数据来添加结构和样式，例如 **rmarkdown** 包的 Package Vignette （HTML）模板。类似地，**rmdformats** 包[@R-rmdformats]提供了许多模板，这些模板将不同的自定义的样式函数传递给 `output` 选项。
 
@@ -703,7 +690,7 @@ vignette: >
 
 #### 模版设置
 
-**usethis** 包[@R-usethis]有一个创建模板的功能。运行 `usethis::use_rmarkdown_template("Template Name")`\index{usethis!use\_rmarkdown\_template()} 将自动创建所需的目录结构和文件（模板名应自己提供）。
+**usethis** 包[@R-usethis]可以创建 R Markdown 模版。运行 `usethis::use_rmarkdown_template("Template Name")`\index{usethis!use\_rmarkdown\_template()} 将自动创建所需的目录结构和文件（模板名应自己提供）。
 
 如果想手动设置模板，可以在 `inst/rmarkdown/templates` 目录下创建一个子目录。在这个目录中，需要保存至少两个文件：
 
@@ -720,5 +707,5 @@ vignette: >
 
 可供选择的是，`skeleton` 文件夹可能还包括其他资源，如模板使用的样式表或图像。这些文件将与模板一起被加载到用户的计算机中。
 
-建立自定义 R Markdown 模板的更多细节，请参阅 [RStudio 扩展](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)的网站，以及 _R Markdown Definitive Guide_ 的第十七章 [“Document Templates” ](https://bookdown.org/yihui/rmarkdown/document-templates.html)[@rmarkdown2018]。
+建立自定义 R Markdown 模板的更多细节，请参阅 [RStudio 扩展](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html) 的网站，以及 _R Markdown Definitive Guide_ 的第十七章 [“Document Templates” ](https://bookdown.org/yihui/rmarkdown/document-templates.html)[@rmarkdown2018]。
 
