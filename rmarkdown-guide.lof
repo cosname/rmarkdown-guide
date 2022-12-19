@@ -1,0 +1,117 @@
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces 同一个 R Markdown 文档可以生成多种格式的输出}}{7}{figure.1.1}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces 使用 bookdown 制作的中文图书范例, 一个章节对应一个 R Markdown 文档}}{9}{figure.1.2}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces RStudio 支持实时预览 R Markdown 笔记本格式}}{10}{figure.1.3}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces 用 R Markdown 生成 PDF 学习笔记}}{12}{figure.1.4}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Nick Strayer 用 datadrivencv 和 pagedown 包制作的 CV 示意。}}{13}{figure.1.5}%
+\contentsline {figure}{\numberline {1.6}{\ignorespaces 用 R Markdown 创建网站}}{15}{figure.1.6}%
+\contentsline {figure}{\numberline {1.7}{\ignorespaces blogdown 包可以使用 Hugo 主题}}{16}{figure.1.7}%
+\contentsline {figure}{\numberline {1.8}{\ignorespaces xaringan 提供的幻灯片模板示意}}{17}{figure.1.8}%
+\contentsline {figure}{\numberline {1.9}{\ignorespaces 用 flexdashboard 包制作的仪表板}}{18}{figure.1.9}%
+\contentsline {figure}{\numberline {1.10}{\ignorespaces 根据 Shiny 输入动态生成 R Markdown 文档}}{20}{figure.1.10}%
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces RStudio 编辑器的基本界面}}{22}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces 在 RStudio 中创建 R Markdown 文档}}{23}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces RStudio 中的 R Markdown 编辑器}}{24}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces 源文档上方的编译按钮}}{25}{figure.2.4}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces untitled.Rmd 文件输出的 HTML 文档}}{26}{figure.2.5}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces TinyTex 是一个瘦身版的 TeX Live}}{27}{figure.2.6}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces untitled.Rmd 生成的 PDF 文档}}{29}{figure.2.7}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces 使用 Git 和 GitHub 可以提高团队协作的效率}}{30}{figure.2.8}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces R Markdown 的编译过程 https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-process.html}}{39}{figure.2.9}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces YAML 元数据对应的 PDF 输出}}{44}{figure.2.10}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces ymlthis 包提供图形化输入 YAML 元数据的插件}}{45}{figure.2.11}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Rlogo}}{52}{figure.2.12}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Markdown 常见元素的显示效果}}{55}{figure.2.13}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces 支持实时预览的 Markdown 编辑器 https://dillinger.io/}}{57}{figure.2.14}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces cars 数据集}}{62}{figure.2.15}%
+\contentsline {figure}{\numberline {2.16}{\ignorespaces 交叉引用图片和表格}}{75}{figure.2.16}%
+\contentsline {figure}{\numberline {2.17}{\ignorespaces 在 PDF 文档中插入索引}}{77}{figure.2.17}%
+\contentsline {figure}{\numberline {2.18}{\ignorespaces RStudio 编辑器中的 Graphviz 和 mermaid 图文件}}{81}{figure.2.18}%
+\contentsline {figure}{\numberline {2.19}{\ignorespaces R Markdown 编辑模式切换按钮}}{83}{figure.2.19}%
+\contentsline {figure}{\numberline {2.20}{\ignorespaces R Markdown 图形编辑模式}}{84}{figure.2.20}%
+\contentsline {figure}{\numberline {2.21}{\ignorespaces 图形化编辑器提供了很多菜单栏选项}}{85}{figure.2.21}%
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 标签的默认样式及 `.tabset-pills` 样式}}{94}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 应用 darkly 主题后的文档样式。}}{95}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 可选的代码高亮样式}}{96}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 一个具有浅红色背景和深红色边框的代码块}}{99}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 在代码块上应用内置 CSS 样式}}{100}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 代码块的折叠和显示。图中每个代码区块旁边都有一个按钮，可以控制相应代码区块的显示方式；文档的右上角也有一个按钮，可以控制文档中全部代码区块的显示方式。}}{102}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces 可以滚动的代码块}}{104}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces 插入外源图片的推荐方式}}{106}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces 用自定义函数控制数据框的打印格式}}{116}{figure.3.9}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces HTML文档中分页显示的数据框}}{117}{figure.3.10}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces 新建 R Markdown 时可选的幻灯片格式}}{139}{figure.3.11}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces 新建文件编译后生成的 ioslides 幻灯片}}{142}{figure.3.12}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Slidy 幻灯片}}{153}{figure.3.13}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Beamer 幻灯片示例}}{156}{figure.3.14}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces 应用主题后的 Beamer 幻灯片}}{158}{figure.3.15}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces PowerPoint 幻灯片}}{160}{figure.3.16}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces 幻灯忍者：写轮眼}}{162}{figure.3.17}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces `xaringan` 幻灯片的实例}}{163}{figure.3.18}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces 创建一个新文档}}{165}{figure.3.19}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces 展示所有快捷键}}{167}{figure.3.20}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces 进入演讲者模式}}{168}{figure.3.21}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces 复制幻灯片到新窗口}}{169}{figure.3.22}%
+\contentsline {figure}{\numberline {3.23}{\ignorespaces xaringanthemer 包提供的主题示例}}{170}{figure.3.23}%
+\contentsline {figure}{\numberline {3.24}{\ignorespaces xaringanthemer 包提供的 ggplot2 色板}}{171}{figure.3.24}%
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Moon Light 模板}}{173}{figure.3.25}%
+\contentsline {figure}{\numberline {3.26}{\ignorespaces Mono Dark 模板}}{174}{figure.3.26}%
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Mono Accent 模板}}{175}{figure.3.27}%
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Mono Accent Inverse 模板}}{176}{figure.3.28}%
+\contentsline {figure}{\numberline {3.29}{\ignorespaces Duo 模板}}{177}{figure.3.29}%
+\contentsline {figure}{\numberline {3.30}{\ignorespaces Solarized Light 模板}}{178}{figure.3.30}%
+\contentsline {figure}{\numberline {3.31}{\ignorespaces 并列方式展示演示文稿}}{180}{figure.3.31}%
+\contentsline {figure}{\numberline {3.32}{\ignorespaces 将选项卡面板加入幻灯片中}}{185}{figure.3.32}%
+\contentsline {figure}{\numberline {3.33}{\ignorespaces 给幻灯片添加全局 logo}}{186}{figure.3.33}%
+\contentsline {figure}{\numberline {3.34}{\ignorespaces 添加网络摄像头进行实时视频}}{187}{figure.3.34}%
+\contentsline {figure}{\numberline {3.35}{\ignorespaces 新建 R Markdown 时可选的 word 格式}}{190}{figure.3.35}%
+\contentsline {figure}{\numberline {3.36}{\ignorespaces 查找特定文档元素的样式。}}{192}{figure.3.36}%
+\contentsline {figure}{\numberline {3.37}{\ignorespaces 修改 Word 文档中元素的样式。}}{193}{figure.3.37}%
+\contentsline {figure}{\numberline {3.38}{\ignorespaces 修改 Word 文档中的表格样式。}}{194}{figure.3.38}%
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 在 RStudio 中创建一个 bookdown 项目。}}{209}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 在 RStudio 中创建一个新网页项目}}{212}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 基于 blogdown 创建一个新网页项目}}{213}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 通过控制台在本地浏览你的网站}}{213}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 通过插件的铺设选项在本地浏览你的网站}}{213}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 在本地铺设网站}}{214}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 给 Rmd 文件添加 R 代码}}{215}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 在网站项目文件夹中找到名为Public的文件夹}}{218}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces 将此文件夹拖拽入部署页面的部署区域即可完成部署}}{218}{figure.4.9}%
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 在 RStudio 中创建一个新的 Shiny 文档。}}{227}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 增加 Shiny 文档中表中的行数}}{228}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Shiny 文档输出可交互的直方图}}{229}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 部署 Shiny 文档到 ShinyApps.io. 上}}{231}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 在数据集上应用 k-Means 聚类的 Shiny 小部件。}}{235}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 创建新的 dashboard 文件。}}{239}{figure.5.6}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces 简单仪表盘布局示例。}}{242}{figure.5.7}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces 基于行布局的结果。}}{244}{figure.5.8}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces 以制表符的形式排列。}}{245}{figure.5.9}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces 仪表盘上的多个页面情况。}}{247}{figure.5.10}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces 网站中部分可用图标。}}{248}{figure.5.11}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces 基于故事板布局的结果。}}{250}{figure.5.12}%
+\contentsline {figure}{\numberline {5.13}{\ignorespaces 仪表盘上并排的三个值。}}{253}{figure.5.13}%
+\contentsline {figure}{\numberline {5.14}{\ignorespaces 三个仪表并排放在仪表盘上。}}{255}{figure.5.14}%
+\contentsline {figure}{\numberline {5.15}{\ignorespaces 仪表盘上的文本注释。}}{258}{figure.5.15}%
+\contentsline {figure}{\numberline {5.16}{\ignorespaces 导航栏中添加自定义链接。}}{259}{figure.5.16}%
+\contentsline {figure}{\numberline {5.17}{\ignorespaces 基于 Shiny 的交互式仪表盘。}}{262}{figure.5.17}%
+\contentsline {figure}{\numberline {5.18}{\ignorespaces 在 RStudio 中创建一个包的长文档。}}{265}{figure.5.18}%
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces booktabs 表格样式}}{290}{figure.6.1}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces 利用 HTML 和 CSS 创建的条纹表}}{293}{figure.6.2}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces 通过块选项 fig.process 来给一幅图添加 R logo。}}{315}{figure.6.3}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces 通过 tikz 设备呈现的图像。}}{318}{figure.6.4}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces cars 数据的点图}}{320}{figure.6.5}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces 在现有的点图中添加一条回归线}}{321}{figure.6.6}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces R 与 Python 代码块的交互}}{332}{figure.6.7}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces 一个可滚动文本输出的例子，其高度通过块选项`max.height`来给定}}{350}{figure.6.8}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces 一个在HTML5 `figure` 标签中的图像}}{355}{figure.6.9}%
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {7.1}{\ignorespaces 在 RStudio 中改变所有 R Markdown 文档的默认工作目录。}}{388}{figure.7.1}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces 在 RStudio 中设置当前 R Markdown 文档的工作目录。}}{389}{figure.7.2}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces 在 RStudio 中自动填充 Rmd 文档中的文件路径。}}{390}{figure.7.3}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces 使用者可以从 GUI 输入的参数编译一个 R Markdown 文档。}}{396}{figure.7.4}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces 为仓库启用 Github Pages，生成地址见 https://qiushiyan.github.io/rmd-ci/}}{407}{figure.7.5}%

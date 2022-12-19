@@ -135,13 +135,12 @@ knitr::include_graphics("images/01-notebook-preview2.png")
 
 一些 R Markdown 扩展包提供了适用于个人简历（resume, CV）的输出格式。例如基于 **pagedown** 包 [@R-pagedown] 的[简历模板](https://pagedown.rbind.io/html-resume)，和 [vitae](https://pkg.mitchelloharawild.com/vitae/) 提供的 CV 模板。
 
-除了提供模板外， R Markdown 还能使简历变得更加以“数据驱动 (Data driven)”。[**datadrivencv**](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，用户仅需维护这张数据表，并由 R Markdown 来负责简历的格式。用户还可以插入 R 代码生成的交互图表，使简历可以“动”起来。图 \@ref(fig:ns-cv) 是 **datadrivencv** 包的作者 Nick Strayer 结合 **pagedown** 包制作的个人简历。
+除了提供模板外， R Markdown 还能使简历变得更加以“数据驱动 (Data driven)”。[**datadrivencv**](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，用户仅需维护这张数据表，并由 R Markdown 来负责简历的格式。用户还可以插入 R 代码生成的交互图表，使简历可以“动”起来。图 \@ref(fig:ns-cv) 是 **datadrivencv** 包的作者 [Nick Strayer] (http://nickstrayer.me/) 结合 **pagedown** 包制作的个人简历。
 
-```{r ns-cv, echo = FALSE, fig.cap = "(ref:ns-cv)"}
+```{r ns-cv, echo = FALSE, fig.cap = "Nick Strayer 用 datadrivencv 和 pagedown 包制作的 CV 示意。"}
 knitr::include_graphics("images/01-resume.png")
 ```
 
-(ref:ns-cv) [Nick Strayer](http://nickstrayer.me/)用 datadrivencv 和 pagedown 包制作的 CV 示意
 
 ### 网站 {#example-resume}
 

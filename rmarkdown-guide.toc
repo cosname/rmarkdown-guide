@@ -1,0 +1,311 @@
+\contentsline {section}{\numberline {0.1}为什么要写这样一本书？}{xv}{section.0.1}%
+\contentsline {section}{\numberline {0.2}本书是怎么写出来的？}{xvi}{section.0.2}%
+\contentsline {section}{\numberline {0.3}本书的创作理念是什么？}{xvii}{section.0.3}%
+\contentsline {section}{\numberline {0.4}本书主要有哪些内容？}{xvii}{section.0.4}%
+\contentsline {section}{\numberline {0.5}阅读本书时的注意事项}{xix}{section.0.5}%
+\contentsline {part}{第一部分\hspace {1em}初识 R Markdown}{1}{part.1}%
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}R Markdown概述}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}R Markdown 的渊源}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}R Markdown 与文学化编程}{4}{subsection.1.1.1}%
+\contentsline {section}{\numberline {1.2}以案例形式初识 R Markdown}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}数据分析报告}{6}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}交互笔记本}{8}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}个人简历}{11}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}网站}{14}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}幻灯片}{14}{subsection.1.2.5}%
+\contentsline {subsection}{\numberline {1.2.6}交互报表}{17}{subsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.2.7}动态文档}{17}{subsection.1.2.7}%
+\contentsline {chapter}{\numberline {第二章\hspace {.3em}}R Markdown 的基础知识}{21}{chapter.2}%
+\contentsline {section}{\numberline {2.1}安装 RStudio}{21}{section.2.1}%
+\contentsline {section}{\numberline {2.2}安装 rmarkdown 包}{23}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}安装 TinyTex}{25}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}安装 LaTeX 组件}{28}{subsubsection.2.2.1.1}%
+\contentsline {subsection}{\numberline {2.2.2}安装 Git (*)}{30}{subsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}配置 Git 和 GitHub}{31}{subsubsection.2.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2.2}使用 Git}{31}{subsubsection.2.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.3}配置 Git 远程仓库的 SSH 认证}{32}{subsubsection.2.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.2.4}使用 GitHub}{33}{subsubsection.2.2.2.4}%
+\contentsline {section}{\numberline {2.3}R Markdown 的基本元素}{33}{section.2.3}%
+\contentsline {section}{\numberline {2.4}R Markdown 的编译过程和组成元素}{36}{section.2.4}%
+\contentsline {section}{\numberline {2.5}YAML 头部}{40}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Markdown 语法}{43}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}简单段内格式}{46}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}换行}{46}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}段落格式}{47}{subsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.3.1}标题}{47}{subsubsection.2.6.3.1}%
+\contentsline {subsubsection}{\numberline {2.6.3.2}列表}{48}{subsubsection.2.6.3.2}%
+\contentsline {subsubsection}{\numberline {2.6.3.3}块引用}{49}{subsubsection.2.6.3.3}%
+\contentsline {subsection}{\numberline {2.6.4}代码块}{50}{subsection.2.6.4}%
+\contentsline {subsection}{\numberline {2.6.5}图片}{51}{subsection.2.6.5}%
+\contentsline {subsection}{\numberline {2.6.6}表格}{51}{subsection.2.6.6}%
+\contentsline {subsection}{\numberline {2.6.7}数学公式}{52}{subsection.2.6.7}%
+\contentsline {subsection}{\numberline {2.6.8}总结}{53}{subsection.2.6.8}%
+\contentsline {section}{\numberline {2.7}代码块和行内代码}{56}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}代码块选项}{59}{subsection.2.7.1}%
+\contentsline {section}{\numberline {2.8}文档元素}{61}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}图片}{61}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}表格}{65}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}分页符和分割线}{66}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}目录}{67}{subsection.2.8.4}%
+\contentsline {subsection}{\numberline {2.8.5}参考文献}{68}{subsection.2.8.5}%
+\contentsline {subsection}{\numberline {2.8.6}引用 R 包}{70}{subsection.2.8.6}%
+\contentsline {subsection}{\numberline {2.8.7}交叉引用}{72}{subsection.2.8.7}%
+\contentsline {subsection}{\numberline {2.8.8}索引}{74}{subsection.2.8.8}%
+\contentsline {subsection}{\numberline {2.8.9}动画}{76}{subsection.2.8.9}%
+\contentsline {subsection}{\numberline {2.8.10}交互组件}{78}{subsection.2.8.10}%
+\contentsline {subsection}{\numberline {2.8.11}音频和视频}{79}{subsection.2.8.11}%
+\contentsline {subsection}{\numberline {2.8.12}流程图}{80}{subsection.2.8.12}%
+\contentsline {section}{\numberline {2.9}RStudio 图形化编辑器}{83}{section.2.9}%
+\contentsline {part}{第二部分\hspace {1em}基于 R Markdown 的应用}{87}{part.2}%
+\contentsline {chapter}{\numberline {第三章\hspace {.3em}}使用 R Markdown 创建常用文档}{89}{chapter.3}%
+\contentsline {section}{\numberline {3.1}HTML 文档}{90}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}目录和标题}{91}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}显示目录}{91}{subsubsection.3.1.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.2}悬停目录}{92}{subsubsection.3.1.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.1.3}显示标题编号}{93}{subsubsection.3.1.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.1.4}使用标签页展示小标题的内容}{93}{subsubsection.3.1.1.4}%
+\contentsline {subsection}{\numberline {3.1.2}主题和样式}{94}{subsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.1}可选的文档主题样式}{94}{subsubsection.3.1.2.1}%
+\contentsline {subsubsection}{\numberline {3.1.2.2}可选的代码高亮样式}{96}{subsubsection.3.1.2.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.3}自定义样式表}{97}{subsubsection.3.1.2.3}%
+\contentsline {subsubsection}{\numberline {3.1.2.4}通过 CSS 代码块定义样式}{98}{subsubsection.3.1.2.4}%
+\contentsline {subsubsection}{\numberline {3.1.2.5}使用丰富多样的内置 CSS 样式}{99}{subsubsection.3.1.2.5}%
+\contentsline {subsubsection}{\numberline {3.1.2.6}代码折叠}{100}{subsubsection.3.1.2.6}%
+\contentsline {subsubsection}{\numberline {3.1.2.7}设置代码块内容可滚动}{102}{subsubsection.3.1.2.7}%
+\contentsline {subsection}{\numberline {3.1.3}图片和数据框}{105}{subsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.3.1}设置图片的属性}{105}{subsubsection.3.1.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.3.2}插入外源图片}{105}{subsubsection.3.1.3.2}%
+\contentsline {subsubsection}{\numberline {3.1.3.3}输出数据框}{106}{subsubsection.3.1.3.3}%
+\contentsline {subsubsection}{\numberline {3.1.3.4}分页打印数据框时的附加参数}{115}{subsubsection.3.1.3.4}%
+\contentsline {subsection}{\numberline {3.1.4}组件和内容}{117}{subsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.4.1}理解 HTML 文档的依赖关系}{117}{subsubsection.3.1.4.1}%
+\contentsline {subsubsection}{\numberline {3.1.4.2}MathJax 库的配置}{119}{subsubsection.3.1.4.2}%
+\contentsline {subsubsection}{\numberline {3.1.4.3}是否保留 Markdown}{121}{subsubsection.3.1.4.3}%
+\contentsline {subsubsection}{\numberline {3.1.4.4}使用自定义的 HTML 模板}{121}{subsubsection.3.1.4.4}%
+\contentsline {subsubsection}{\numberline {3.1.4.5}包含其它文件}{123}{subsubsection.3.1.4.5}%
+\contentsline {subsubsection}{\numberline {3.1.4.6}生成 HTML 片段}{125}{subsubsection.3.1.4.6}%
+\contentsline {subsubsection}{\numberline {3.1.4.7}使用自定义的浏览器图标}{126}{subsubsection.3.1.4.7}%
+\contentsline {subsubsection}{\numberline {3.1.4.8}共用 YAML 配置文件}{127}{subsubsection.3.1.4.8}%
+\contentsline {subsubsection}{\numberline {3.1.4.9}允许下载源文件}{127}{subsubsection.3.1.4.9}%
+\contentsline {subsubsection}{\numberline {3.1.4.10}嵌入数据或其它文件}{128}{subsubsection.3.1.4.10}%
+\contentsline {section}{\numberline {3.2}PDF 文档}{129}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}从 R Markdown 到 PDF 文档}{129}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}在 PDF 文档中使用中文的注意事项}{130}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}与 HTML 文档相通的设置}{132}{subsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.3.1}显示目录}{132}{subsubsection.3.2.3.1}%
+\contentsline {subsubsection}{\numberline {3.2.3.2}图片相关的配置}{133}{subsubsection.3.2.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.3.3}打印数据框}{134}{subsubsection.3.2.3.3}%
+\contentsline {subsubsection}{\numberline {3.2.3.4}代码高亮}{134}{subsubsection.3.2.3.4}%
+\contentsline {subsection}{\numberline {3.2.4}LaTeX 选项}{134}{subsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.4.1}通用文档部件}{134}{subsubsection.3.2.4.1}%
+\contentsline {subsubsection}{\numberline {3.2.4.2}选择 LaTeX 模板}{136}{subsubsection.3.2.4.2}%
+\contentsline {subsubsection}{\numberline {3.2.4.3}配置 LaTeX 模板的参数}{136}{subsubsection.3.2.4.3}%
+\contentsline {subsection}{\numberline {3.2.5}使用 LaTeX 包处理参考文献}{137}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.6}LaTeX 的渲染引擎}{137}{subsection.3.2.6}%
+\contentsline {subsection}{\numberline {3.2.7}保留生成的 TeX 中间文件}{138}{subsection.3.2.7}%
+\contentsline {section}{\numberline {3.3}PPT 幻灯片}{138}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}ioslides 幻灯片}{140}{subsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.1.1}使用快捷键控制显示模式}{141}{subsubsection.3.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.3.1.2}依次显示列表中的项目}{143}{subsubsection.3.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.3.1.3}幻灯片适配宽屏幕显示器}{145}{subsubsection.3.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.3.1.4}幻灯片播放速度}{145}{subsubsection.3.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.3.1.5}依次显示幻灯片元素}{146}{subsubsection.3.3.1.5}%
+\contentsline {subsubsection}{\numberline {3.3.1.6}设置幻灯片的背景图像}{146}{subsubsection.3.3.1.6}%
+\contentsline {subsubsection}{\numberline {3.3.1.7}使用自定义 CSS}{147}{subsubsection.3.3.1.7}%
+\contentsline {subsubsection}{\numberline {3.3.1.8}突出显示部分代码}{148}{subsubsection.3.3.1.8}%
+\contentsline {subsubsection}{\numberline {3.3.1.9}添加 LOGO}{148}{subsubsection.3.3.1.9}%
+\contentsline {subsubsection}{\numberline {3.3.1.10}幻灯片的布局}{149}{subsubsection.3.3.1.10}%
+\contentsline {subsubsection}{\numberline {3.3.1.11}文字颜色}{150}{subsubsection.3.3.1.11}%
+\contentsline {subsubsection}{\numberline {3.3.1.12}打印幻灯片}{150}{subsubsection.3.3.1.12}%
+\contentsline {subsubsection}{\numberline {3.3.1.13}其它功能}{151}{subsubsection.3.3.1.13}%
+\contentsline {subsection}{\numberline {3.3.2}Slidy 幻灯片}{151}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}使用快捷键控制显示模式}{152}{subsubsection.3.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.3.2.2}设置页脚内容}{154}{subsubsection.3.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.3}其它功能}{154}{subsubsection.3.3.2.3}%
+\contentsline {subsection}{\numberline {3.3.3}Beamer 幻灯片}{154}{subsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.1}Beamer 幻灯片的中文支持}{157}{subsubsection.3.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.3.2}Beamer 幻灯片的主题}{157}{subsubsection.3.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3.3}Beamer 幻灯片的边界}{157}{subsubsection.3.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.4}Beamer 幻灯片的其它功能}{158}{subsubsection.3.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.4}PowerPoint 幻灯片}{158}{subsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.4.1}两栏布局}{161}{subsubsection.3.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.3.4.2}自定义模板}{161}{subsubsection.3.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.3.4.3}其它功能}{162}{subsubsection.3.3.4.3}%
+\contentsline {subsection}{\numberline {3.3.5}Xaringan 幻灯片}{162}{subsection.3.3.5}%
+\contentsline {subsubsection}{\numberline {3.3.5.1}Xaringan 的安装和入门}{164}{subsubsection.3.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.3.5.2}Xaringan 幻灯片的自动播放}{164}{subsubsection.3.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.3.5.3}Xaringan 幻灯片的快捷键}{166}{subsubsection.3.3.5.3}%
+\contentsline {subsection}{\numberline {3.3.6}Xaringan 幻灯片的扩展包}{166}{subsection.3.3.6}%
+\contentsline {subsubsection}{\numberline {3.3.6.1}配置 Xaringan 幻灯片的主题}{166}{subsubsection.3.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.3.6.2}Xaringan 幻灯片自动匹配 ggplot 主题}{170}{subsubsection.3.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.3.6.3}Xaringanthemer 的自动补全功能}{171}{subsubsection.3.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.3.6.4}Xaringanthemer 提供的可选主题}{171}{subsubsection.3.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.3.6.5}扩展 xaringan 幻灯片的功能}{172}{subsubsection.3.3.6.5}%
+\contentsline {subsubsection}{\numberline {3.3.6.6}并列方式展示 Xaringan 幻灯片}{179}{subsubsection.3.3.6.6}%
+\contentsline {subsubsection}{\numberline {3.3.6.7}在线编辑 Xaringan 幻灯片}{181}{subsubsection.3.3.6.7}%
+\contentsline {subsubsection}{\numberline {3.3.6.8}在 Xaringan 幻灯片上涂鸦}{182}{subsubsection.3.3.6.8}%
+\contentsline {subsubsection}{\numberline {3.3.6.9}切换时 Xaringan 幻灯片时播放声音提示}{182}{subsubsection.3.3.6.9}%
+\contentsline {subsubsection}{\numberline {3.3.6.10}Xaringan 幻灯片加入动画}{183}{subsubsection.3.3.6.10}%
+\contentsline {subsubsection}{\numberline {3.3.6.11}在 Xaringan 幻灯片使用选项卡}{183}{subsubsection.3.3.6.11}%
+\contentsline {subsubsection}{\numberline {3.3.6.12}给 Xaringan 幻灯片添加 LOGO}{185}{subsubsection.3.3.6.12}%
+\contentsline {subsubsection}{\numberline {3.3.6.13}播放 Xaringan 幻灯片时使用摄像头}{186}{subsubsection.3.3.6.13}%
+\contentsline {subsubsection}{\numberline {3.3.6.14}调整 Xaringan 幻灯片的大小}{188}{subsubsection.3.3.6.14}%
+\contentsline {section}{\numberline {3.4}Word 文档}{188}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}创建 word 模板}{189}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}自定义 Word 模板}{189}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}R Markdown 和 Word 之间的双向工作流程}{191}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}个人风格元素}{195}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}创建新的文档格式}{197}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}从现有文档格式衍生新格式}{198}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}自定义输出格式}{199}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}使用新的文档输出格式}{200}{subsection.3.5.3}%
+\contentsline {chapter}{\numberline {第四章\hspace {.3em}}基于 R Markdown 工作与学习}{201}{chapter.4}%
+\contentsline {section}{\numberline {4.1}发邮件：\texttt {blastula}}{201}{section.4.1}%
+\contentsline {section}{\numberline {4.2}制作 R 包：\texttt {fusen}}{202}{section.4.2}%
+\contentsline {section}{\numberline {4.3}制作简历：\texttt {datadrivencv}}{206}{section.4.3}%
+\contentsline {section}{\numberline {4.4}写书和记学习笔记：\texttt {bookdown}}{208}{section.4.4}%
+\contentsline {section}{\numberline {4.5}制作网站：\texttt {blogdown}}{211}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}blogdown 简介}{211}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}具体操作}{212}{subsection.4.5.2}%
+\contentsline {subsubsection}{\numberline {4.5.2.1}安装 blogdown}{212}{subsubsection.4.5.2.1}%
+\contentsline {subsubsection}{\numberline {4.5.2.2}创建项目}{212}{subsubsection.4.5.2.2}%
+\contentsline {subsubsection}{\numberline {4.5.2.3}网站铺设}{213}{subsubsection.4.5.2.3}%
+\contentsline {subsubsection}{\numberline {4.5.2.4}内容编辑}{214}{subsubsection.4.5.2.4}%
+\contentsline {subsubsection}{\numberline {4.5.2.5}网站配置}{216}{subsubsection.4.5.2.5}%
+\contentsline {subsubsection}{\numberline {4.5.2.6}小结}{217}{subsubsection.4.5.2.6}%
+\contentsline {subsubsection}{\numberline {4.5.2.7}部署}{217}{subsubsection.4.5.2.7}%
+\contentsline {subsubsection}{\numberline {4.5.2.8}Netlify}{217}{subsubsection.4.5.2.8}%
+\contentsline {section}{\numberline {4.6}制作科技论文的支撑材料}{218}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}建议文件结构}{219}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}分析报告的正文}{220}{subsection.4.6.2}%
+\contentsline {part}{第三部分\hspace {1em}R Markdown 进阶操作}{223}{part.3}%
+\contentsline {chapter}{\numberline {第五章\hspace {.3em}}使用 R Markdown 创建动态交互文档}{225}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Web 交互界面：Shiny 小程序}{225}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}入门指南}{225}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Shiny 部署}{230}{subsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.2.1}ShinyApps.io}{230}{subsubsection.5.1.2.1}%
+\contentsline {subsubsection}{\numberline {5.1.2.2}Shiny Server / RStudio Connect}{231}{subsubsection.5.1.2.2}%
+\contentsline {subsection}{\numberline {5.1.3}嵌入 Shiny 应用程序}{232}{subsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.3.1}内部定义应用程序}{232}{subsubsection.5.1.3.1}%
+\contentsline {subsubsection}{\numberline {5.1.3.2}外联应用程序}{233}{subsubsection.5.1.3.2}%
+\contentsline {subsection}{\numberline {5.1.4}Shiny 小部件}{233}{subsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.4.1}\texttt {shinyApp()} 函数}{233}{subsubsection.5.1.4.1}%
+\contentsline {subsubsection}{\numberline {5.1.4.2}例子：k-means 聚类}{233}{subsubsection.5.1.4.2}%
+\contentsline {subsubsection}{\numberline {5.1.4.3}小部件的大小和布局}{236}{subsubsection.5.1.4.3}%
+\contentsline {subsection}{\numberline {5.1.5}Shiny 文档间的链接}{236}{subsection.5.1.5}%
+\contentsline {subsection}{\numberline {5.1.6}Shiny 文档的渲染}{237}{subsection.5.1.6}%
+\contentsline {subsubsection}{\numberline {5.1.6.1}延迟渲染}{237}{subsubsection.5.1.6.1}%
+\contentsline {section}{\numberline {5.2}交互式仪表盘：Dashboards}{237}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Dashboards 入门}{238}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Dashboards 排版}{240}{subsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.1}基于行的布局}{243}{subsubsection.5.2.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2.2}节属性}{243}{subsubsection.5.2.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.3}多页}{245}{subsubsection.5.2.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.2.4}故事板}{246}{subsubsection.5.2.2.4}%
+\contentsline {subsection}{\numberline {5.2.3}Dashboards 组件}{249}{subsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.3.1}数值框}{251}{subsubsection.5.2.3.1}%
+\contentsline {subsubsection}{\numberline {5.2.3.2}仪表}{253}{subsubsection.5.2.3.2}%
+\contentsline {subsubsection}{\numberline {5.2.3.3}文本注释}{254}{subsubsection.5.2.3.3}%
+\contentsline {subsubsection}{\numberline {5.2.3.4}导航栏}{257}{subsubsection.5.2.3.4}%
+\contentsline {subsection}{\numberline {5.2.4}Dashboards 与 Shiny}{259}{subsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.4.1}入门指南}{259}{subsubsection.5.2.4.1}%
+\contentsline {subsubsection}{\numberline {5.2.4.2}Shiny 仪表盘的一个示例}{260}{subsubsection.5.2.4.2}%
+\contentsline {subsubsection}{\numberline {5.2.4.3}输入栏}{261}{subsubsection.5.2.4.3}%
+\contentsline {subsubsection}{\numberline {5.2.4.4}拓展}{263}{subsubsection.5.2.4.4}%
+\contentsline {section}{\numberline {5.3}在 R package 中使用 R Markdown}{263}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}写软件包的文档}{263}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}R 包中的 R Markdown 模板}{266}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.1}模板使用样例}{266}{subsubsection.5.3.2.1}%
+\contentsline {subsubsection}{\numberline {5.3.2.2}模版设置}{267}{subsubsection.5.3.2.2}%
+\contentsline {chapter}{\numberline {第六章\hspace {.3em}}R Markdown 的操作技巧}{269}{chapter.6}%
+\contentsline {section}{\numberline {6.1}表格操作进阶}{269}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}利用函数 \texttt {knitr::kable()} 生成复杂的表格}{270}{subsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.1}表格样式}{271}{subsubsection.6.1.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.2}修改列名}{274}{subsubsection.6.1.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.1.3}指定列的对齐方式}{275}{subsubsection.6.1.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.1.4}添加表格标题}{276}{subsubsection.6.1.1.4}%
+\contentsline {subsubsection}{\numberline {6.1.1.5}调整数字格式}{276}{subsubsection.6.1.1.5}%
+\contentsline {subsubsection}{\numberline {6.1.1.6}显示缺失值}{278}{subsubsection.6.1.1.6}%
+\contentsline {subsubsection}{\numberline {6.1.1.7}转义特殊字符}{279}{subsubsection.6.1.1.7}%
+\contentsline {subsubsection}{\numberline {6.1.1.8}并排多张表格}{282}{subsubsection.6.1.1.8}%
+\contentsline {subsubsection}{\numberline {6.1.1.9}利用 \texttt {for} 循环生成多个表 (*)}{283}{subsubsection.6.1.1.9}%
+\contentsline {subsubsection}{\numberline {6.1.1.10}自定义 LaTeX 表格 (*)}{285}{subsubsection.6.1.1.10}%
+\contentsline {subsubsection}{\numberline {6.1.1.11}自定义 HTML 表格 (*)}{291}{subsubsection.6.1.1.11}%
+\contentsline {subsection}{\numberline {6.1.2}利用 \textbf {kableExtra} 美化表格}{293}{subsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.2.1}设定字体尺寸}{295}{subsubsection.6.1.2.1}%
+\contentsline {subsubsection}{\numberline {6.1.2.2}特定的行或列的样式}{295}{subsubsection.6.1.2.2}%
+\contentsline {subsubsection}{\numberline {6.1.2.3}给行或列分组}{296}{subsubsection.6.1.2.3}%
+\contentsline {subsubsection}{\numberline {6.1.2.4}按比例缩小 LaTeX 中的表格}{297}{subsubsection.6.1.2.4}%
+\contentsline {subsection}{\numberline {6.1.3}其它表格包}{299}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}块选项}{300}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}在块选项中使用变量}{301}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}允许错误}{302}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}控制输出}{302}{subsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.3.1}隐藏源代码、提示信息、警告、文本输出或图像输出}{303}{subsubsection.6.2.3.1}%
+\contentsline {subsubsection}{\numberline {6.2.3.2}隐藏代码块的所有输出}{305}{subsubsection.6.2.3.2}%
+\contentsline {subsubsection}{\numberline {6.2.3.3}将文本输出压缩到源代码块中}{305}{subsubsection.6.2.3.3}%
+\contentsline {subsubsection}{\numberline {6.2.3.4}原样输出文本为 Markdown (*)}{305}{subsubsection.6.2.3.4}%
+\contentsline {subsection}{\numberline {6.2.4}自动格式化源代码}{308}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}调整文本输出中的前导符号}{310}{subsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.2.6}为代码块添加属性 (*)}{310}{subsection.6.2.6}%
+\contentsline {subsection}{\numberline {6.2.7}同一张图的多种图像输出格式}{313}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}图像的后期加工 (*)}{313}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.9}输出高质量的图像 (*)}{316}{subsection.6.2.9}%
+\contentsline {subsection}{\numberline {6.2.10}带有低级绘图功能的逐步绘图 (*)}{319}{subsection.6.2.10}%
+\contentsline {subsection}{\numberline {6.2.11}在代码块中自定义对象的打印格式 (*)}{319}{subsection.6.2.11}%
+\contentsline {subsection}{\numberline {6.2.12}选项钩子 (*)}{323}{subsection.6.2.12}%
+\contentsline {section}{\numberline {6.3}结合其他语言}{326}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}注册自定义语言引擎 (*)}{327}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}运行 Python 代码并与 Python 交互}{330}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}通过 \texttt {asis} 引擎有条件地执行内容}{333}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}执行 Shell 脚本}{333}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}通过 cat 引擎将代码块内容写入文件}{334}{subsection.6.3.5}%
+\contentsline {subsubsection}{\numberline {6.3.5.1}写入 CSS 文件}{335}{subsubsection.6.3.5.1}%
+\contentsline {subsubsection}{\numberline {6.3.5.2}写入 LaTeX 文件}{336}{subsubsection.6.3.5.2}%
+\contentsline {subsubsection}{\numberline {6.3.5.3}写入 YAML 文件}{337}{subsubsection.6.3.5.3}%
+\contentsline {subsection}{\numberline {6.3.6}运行 SAS 代码}{338}{subsection.6.3.6}%
+\contentsline {subsection}{\numberline {6.3.7}运行 Stata 代码}{338}{subsection.6.3.7}%
+\contentsline {subsection}{\numberline {6.3.8}使用 Sass/SCSS 构建 HTML 页面}{339}{subsection.6.3.8}%
+\contentsline {section}{\numberline {6.4}输出钩子 (*)}{340}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}编辑源代码}{343}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}向源代码中添加行号}{345}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}为长文本添加滚动条}{347}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}截断文本输出}{349}{subsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.4.5}以 HTML5 格式输出图像}{352}{subsection.6.4.5}%
+\contentsline {section}{\numberline {6.5}缓存 (*)}{356}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}缓存耗时的代码块}{356}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}为多种输出格式缓存代码块}{357}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}缓存大型的对象}{358}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}基于 \texttt {cache\_rds()} 的缓存}{359}{subsection.6.5.4}%
+\contentsline {subsubsection}{\numberline {6.5.4.1}使缓存失效}{360}{subsubsection.6.5.4.1}%
+\contentsline {subsubsection}{\numberline {6.5.4.2}保留缓存的多个副本}{363}{subsubsection.6.5.4.2}%
+\contentsline {subsubsection}{\numberline {6.5.4.3}与 \textbf {knitr} 的缓存比较}{364}{subsubsection.6.5.4.3}%
+\contentsline {section}{\numberline {6.6}其它使用 knitr 的小技巧 (*)}{365}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}重复使用代码块}{365}{subsection.6.6.1}%
+\contentsline {subsubsection}{\numberline {6.6.1.1}嵌入代码块 (*)}{366}{subsubsection.6.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.6.1.2}在另一个块中使用相同的块标签}{367}{subsubsection.6.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.6.1.3}引用代码块标签 (*)}{368}{subsubsection.6.6.1.3}%
+\contentsline {subsection}{\numberline {6.6.2}在创建对象之前使用它 (*)}{369}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}提前退出编译}{371}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}控制图像显示位置}{372}{subsection.6.6.4}%
+\contentsline {subsection}{\numberline {6.6.5}修改之前代码块中的图像}{372}{subsection.6.6.5}%
+\contentsline {subsection}{\numberline {6.6.6}复用块选项 (*)}{374}{subsection.6.6.6}%
+\contentsline {subsection}{\numberline {6.6.7}使用 \texttt {knitr::knit\_expand()} 来生成 Rmd 源代码}{375}{subsection.6.6.7}%
+\contentsline {subsection}{\numberline {6.6.8}重复代码块标签 (*)}{376}{subsection.6.6.8}%
+\contentsline {chapter}{\numberline {第七章\hspace {.3em}}使用 R Markdown 开展项目工作}{379}{chapter.7}%
+\contentsline {section}{\numberline {7.1}使用 R Markdown 在工作中管理项目}{379}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}来自外部的 R 脚本}{379}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}将外部脚本读取到一个块中}{380}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}从外部脚本读取多个代码块 (*)}{381}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}子文档 (*)}{383}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}保留图像文件}{385}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}R 代码块的工作目录}{386}{subsection.7.1.6}%
+\contentsline {section}{\numberline {7.2}使用 R Markdown 实现工作流}{390}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}使用 RStudio 键盘快捷键}{391}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}R Markdown 的拼写检查}{391}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}用 \texttt {rmarkdown::render()} 呈现 R Markdown}{392}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}参数化的报告}{394}{subsection.7.2.4}%
+\contentsline {subsection}{\numberline {7.2.5}自定义 \texttt {Knit} 按钮 (*)}{397}{subsection.7.2.5}%
+\contentsline {subsection}{\numberline {7.2.6}通过 Google Drive 对 Rmd 文档进行协作}{399}{subsection.7.2.6}%
+\contentsline {subsection}{\numberline {7.2.7}用 \texttt {workflowr} 将 R Markdown 项目组织到一个研究网站上}{400}{subsection.7.2.7}%
+\contentsline {subsection}{\numberline {7.2.8}使用 GitHub Actions 实现自动化部署}{400}{subsection.7.2.8}%

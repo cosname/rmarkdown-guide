@@ -526,9 +526,6 @@ output:
 
 :::
 
-::: {.col data-latex="{0.05\textwidth}"}
-
-:::
 
 ::: {.col data-latex="{0.4\textwidth}"}
 
@@ -657,27 +654,27 @@ lapply(x, mean)
 
 例如, 用 `![R logo](https://www.r-project.org/Rlogo.png)` 插入以下图片：
 
-::: {.center-container}
-![R logo](https://www.r-project.org/Rlogo.png)
-:::
+```{r echo = FALSE, fig.cap="Rlogo"}
+knitr::include_graphics("images/Rlogo.png", dpi = NA)
+```
 
 ### 表格 {#markdown-table}
 
-Markdown 还支持插入表格，语法如下：
+R Markdown 还支持插入表格，语法如下：
 
 ```
-| 元素 | Markdown |
-| - | - |
-| 块引用 | `> some quotes` |
-| 代码块 | ``` some code  ```  |
+| 元素   | Markdown语法  |
+|--------|-----------------|
+| 一级标题 | # 一级标题 |
+| 二级标题 | ## 一级标题 |
 ```
 
 渲染为
 
-| 元素 | Markdown |
-| - | - |
-| 块引用 | `> some quotes` |
-| 代码块 | ``` some code  ```  |
+```{r echo=FALSE}
+knitr::kable(data.frame(元素 = c("一级标题", "二级标题"),
+                        Markdown语法 = c("# 一级标题", "## 一级标题")),  escape = TRUE)
+```
 
 ### 数学公式
 
@@ -961,9 +958,6 @@ plot(nhtemp)
 
 :::
 
-::: {.col data-latex="{0.05\textwidth}"}
-
-:::
 
 ::: {.col data-latex="{0.4\textwidth}"}
 
@@ -991,9 +985,6 @@ plot(nhtemp)
 
 :::
 
-::: {.col data-latex="{0.05\textwidth}"}
-
-:::
 
 ::: {.col data-latex="{0.4\textwidth}"}
 
@@ -1289,8 +1280,10 @@ for (i in 1:2) {
 ````
 
 ```{r, animation.hook="gifski", echo = FALSE}
-for (i in 1:2) {
-  pie(c(i %% 2, 6), col = c("red", "yellow"), labels = NA)
+if (knitr::is_html_output()){
+  for (i in 1:2) {
+    pie(c(i %% 2, 6), col = c("red", "yellow"), labels = NA)
+  }
 }
 ```
 
@@ -1304,7 +1297,7 @@ output:
     extra_dependencies: animate
 ---
 
-下面的动画职能在 Acrobat Reader 中显示
+下面的动画只能在 Acrobat Reader 中显示
 
 ```{r, fig.show='animate'}
 for (i in 1:2) {

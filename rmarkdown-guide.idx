@@ -1,0 +1,188 @@
+\indexentry{Bootswatch|hyperpage}{94}
+\indexentry{Bootstrap|hyperpage}{99}
+\indexentry{MathJax|hyperpage}{119}
+\indexentry{Pandoc template|hyperpage}{122}
+\indexentry{GhostScript|hyperpage}{133}
+\indexentry{R package-xaringanthemer|hyperpage}{166}
+\indexentry{template!Word|hyperpage}{189}
+\indexentry{output option!reference\_docx|hyperpage}{189}
+\indexentry{Word!port to and from Rmd|hyperpage}{191}
+\indexentry{R package!redoc|hyperpage}{191}
+\indexentry{CriticMarkup|hyperpage}{193}
+\indexentry{R package!officedown|hyperpage}{195}
+\indexentry{R package!officer|hyperpage}{195}
+\indexentry{Word!import external|hyperpage}{197}
+\indexentry{R package!blastula|hyperpage}{201}
+\indexentry{email|hyperpage}{201}
+\indexentry{R package!fusen|hyperpage}{203}
+\indexentry{Rpackage|hyperpage}{203}
+\indexentry{R package!testthat|hyperpage}{203}
+\indexentry{testthat|hyperpage}{203}
+\indexentry{R package!datadrivencv|hyperpage}{206}
+\indexentry{datadrivencv|hyperpage}{206}
+\indexentry{R package!bookdown|hyperpage}{208}
+\indexentry{RStudio!bookdown project|hyperpage}{208}
+\indexentry{Shiny widget|hyperpage}{233}
+\indexentry{dashboard|hyperpage}{237}
+\indexentry{Shiny|hyperpage}{259}
+\indexentry{R package!vignette|hyperpage}{263}
+\indexentry{vignette|hyperpage}{263}
+\indexentry{R package!roxygen2|hyperpage}{263}
+\indexentry{RStudio!vignette template|hyperpage}{264}
+\indexentry{R package!usethis|hyperpage}{264}
+\indexentry{usethis!use\_vignette()|hyperpage}{264}
+\indexentry{YAML!vignette frontmatter|hyperpage}{264}
+\indexentry{R package!R Markdown template|hyperpage}{266}
+\indexentry{template!R Markdown|hyperpage}{266}
+\indexentry{rmarkdown!draft|hyperpage}{266}
+\indexentry{usethis!use\_rmarkdown\_template()|hyperpage}{267}
+\indexentry{knitr!kable()|hyperpage}{270}
+\indexentry{knitr!escape\_latex()|hyperpage}{281}
+\indexentry{knitr!escape\_html()|hyperpage}{281}
+\indexentry{knitr!kables()|hyperpage}{282}
+\indexentry{chunk option!results|hyperpage}{283}
+\indexentry{CSS!striped table|hyperpage}{292}
+\indexentry{R package!kableExtra|hyperpage}{293}
+\indexentry{kableExtra!kable\_styling()|hyperpage}{295}
+\indexentry{kableExtra!row\_spec()|hyperpage}{295}
+\indexentry{kableExtra!column\_spec()|hyperpage}{295}
+\indexentry{kableExtra!cell\_spec()|hyperpage}{296}
+\indexentry{kableExtra!pack\_rows()|hyperpage}{296}
+\indexentry{kableExtra!add\_header\_above()|hyperpage}{296}
+\indexentry{kableExtra!collapse\_rows()|hyperpage}{296}
+\indexentry{kableExtra!landscape()|hyperpage}{297}
+\indexentry{R package!table packages|hyperpage}{299}
+\indexentry{chunk option|hyperpage}{300}
+\indexentry{chunk option!variable values|hyperpage}{301}
+\indexentry{chunk option!with if else logic|hyperpage}{301}
+\indexentry{chunk option!error|hyperpage}{302}
+\indexentry{chunk option!echo|hyperpage}{304}
+\indexentry{chunk option!fig.keep|hyperpage}{304}
+\indexentry{chunk option!include|hyperpage}{305}
+\indexentry{chunk option!collapse|hyperpage}{305}
+\indexentry{chunk option!results|hyperpage}{305}
+\indexentry{chunk option!tidy|hyperpage}{308}
+\indexentry{R package!formatR|hyperpage}{308}
+\indexentry{chunk option!tidy.opts|hyperpage}{308}
+\indexentry{R package!styler|hyperpage}{309}
+\indexentry{chunk option!tidy.opts|hyperpage}{309}
+\indexentry{chunk option!comment|hyperpage}{310}
+\indexentry{chunk option!class.source|hyperpage}{310}
+\indexentry{chunk option!class.output|hyperpage}{310}
+\indexentry{chunk option!class.message|hyperpage}{310}
+\indexentry{chunk option!class.warning|hyperpage}{310}
+\indexentry{chunk option!class.error|hyperpage}{310}
+\indexentry{chunk option!attr.source|hyperpage}{311}
+\indexentry{chunk option!attr.output|hyperpage}{311}
+\indexentry{chunk option!attr.message|hyperpage}{311}
+\indexentry{chunk option!attr.warning|hyperpage}{311}
+\indexentry{chunk option!attr.error|hyperpage}{311}
+\indexentry{chunk option!dev|hyperpage}{313}
+\indexentry{figure!graphical device|hyperpage}{313}
+\indexentry{chunk option!fig.process|hyperpage}{313}
+\indexentry{figure!post-processing|hyperpage}{313}
+\indexentry{R package!magick|hyperpage}{313}
+\indexentry{chunk option!dev|hyperpage}{316}
+\indexentry{figure!device|hyperpage}{316}
+\indexentry{R package!graphics devices|hyperpage}{316}
+\indexentry{chunk option!fig.process|hyperpage}{317}
+\indexentry{figure!intermediate plots|hyperpage}{319}
+\indexentry{chunk option!fig.keep|hyperpage}{319}
+\indexentry{chunk option!fig.cap|hyperpage}{319}
+\indexentry{knitr!knit\_print()|hyperpage}{319}
+\indexentry{R package!knitr|hyperpage}{322}
+\indexentry{R package!printr|hyperpage}{322}
+\indexentry{R package!pander|hyperpage}{322}
+\indexentry{chunk option!eval|hyperpage}{328}
+\indexentry{chunk option!results|hyperpage}{328}
+\indexentry{knitr!engine\_output()|hyperpage}{329}
+\indexentry{language engine!python|hyperpage}{330}
+\indexentry{Python|hyperpage}{330}
+\indexentry{chunk option!prompt|hyperpage}{331}
+\indexentry{language engine!asis|hyperpage}{333}
+\indexentry{language engine!bash|hyperpage}{333}
+\indexentry{language engine!sh|hyperpage}{333}
+\indexentry{language engine!zsh|hyperpage}{333}
+\indexentry{chunk option!engine.opts|hyperpage}{334}
+\indexentry{language engine!cat|hyperpage}{335}
+\indexentry{chunk option!engine.opts|hyperpage}{335}
+\indexentry{chunk option!engine.opts|hyperpage}{335}
+\indexentry{CSS|hyperpage}{335}
+\indexentry{language engine!css|hyperpage}{335}
+\indexentry{language engine!SAS|hyperpage}{338}
+\indexentry{chunk option!engine.path|hyperpage}{338}
+\indexentry{language engine!stata|hyperpage}{338}
+\indexentry{R package!Statamarkdown|hyperpage}{339}
+\indexentry{CSS!Sass|hyperpage}{339}
+\indexentry{Sass|hyperpage}{339}
+\indexentry{R package!sass|hyperpage}{339}
+\indexentry{language engine!sass|hyperpage}{339}
+\indexentry{language engine!scss|hyperpage}{339}
+\indexentry{output hooks|hyperpage}{340}
+\indexentry{knitr!knit\_hooks|hyperpage}{341}
+\indexentry{xfun!split\_lines()|hyperpage}{344}
+\indexentry{knitr!v\_spaces()|hyperpage}{346}
+\indexentry{chunk option!out.lines|hyperpage}{351}
+\indexentry{knitr!knit\_hooks|hyperpage}{351}
+\indexentry{chunk option!out.lines|hyperpage}{351}
+\indexentry{HTML!figure tag|hyperpage}{352}
+\indexentry{figure!HTML tag|hyperpage}{352}
+\indexentry{output hook!plot|hyperpage}{354}
+\indexentry{chunk option!cache|hyperpage}{356}
+\indexentry{caching|hyperpage}{356}
+\indexentry{chunk option!cache.extra|hyperpage}{356}
+\indexentry{xfun!cache\_rds()|hyperpage}{357}
+\indexentry{chunk option!cache|hyperpage}{357}
+\indexentry{caching|hyperpage}{357}
+\indexentry{chunk option!cache.path|hyperpage}{357}
+\indexentry{caching|hyperpage}{358}
+\indexentry{chunk option!cache.lazy|hyperpage}{359}
+\indexentry{xfun!cache\_rds()|hyperpage}{359}
+\indexentry{caching|hyperpage}{359}
+\indexentry{chunk option!cache.path|hyperpage}{359}
+\indexentry{caching!clean|hyperpage}{363}
+\indexentry{knitr|hyperpage}{365}
+\indexentry{chunk option!ref.label|hyperpage}{368}
+\indexentry{knitr!load\_cache()|hyperpage}{370}
+\indexentry{chunk option!cache|hyperpage}{371}
+\indexentry{knitr!knit\_exit()|hyperpage}{371}
+\indexentry{chunk option!fig.show|hyperpage}{372}
+\indexentry{knitr!fig\_chunk()|hyperpage}{372}
+\indexentry{knitr!opts\_knit|hyperpage}{373}
+\indexentry{knitr!global.device|hyperpage}{373}
+\indexentry{figure!global|hyperpage}{373}
+\indexentry{knitr!opts\_template|hyperpage}{374}
+\indexentry{chunk option!opts.label|hyperpage}{374}
+\indexentry{knitr!knit\_expand()|hyperpage}{375}
+\indexentry{chunk option!results|hyperpage}{376}
+\indexentry{knitr!knit\_child()|hyperpage}{376}
+\indexentry{source()|hyperpage}{379}
+\indexentry{sys.source()|hyperpage}{379}
+\indexentry{knitr!knit\_global()|hyperpage}{379}
+\indexentry{chunk option!include|hyperpage}{380}
+\indexentry{chunk option!code|hyperpage}{380}
+\indexentry{knitr!read\_chunk()|hyperpage}{381}
+\indexentry{chunk option!child|hyperpage}{383}
+\indexentry{child documents|hyperpage}{383}
+\indexentry{knitr!knit\_child()|hyperpage}{383}
+\indexentry{chunk option!results|hyperpage}{384}
+\indexentry{output option!self\_contained|hyperpage}{385}
+\indexentry{output option!keep\_md|hyperpage}{386}
+\indexentry{working directory|hyperpage}{386}
+\indexentry{knitr!root.dir|hyperpage}{386}
+\indexentry{knitr!opts\_knit|hyperpage}{386}
+\indexentry{R package!ezknitr|hyperpage}{389}
+\indexentry{R package!here|hyperpage}{390}
+\indexentry{RStudio!keyboard shortcuts|hyperpage}{391}
+\indexentry{RStudio!spellcheck|hyperpage}{391}
+\indexentry{R package!spelling|hyperpage}{391}
+\indexentry{rmarkdown!render()|hyperpage}{392}
+\indexentry{RStudio!Knit button|hyperpage}{393}
+\indexentry{rmarkdown!render()|hyperpage}{394}
+\indexentry{YAML!params|hyperpage}{394}
+\indexentry{RStudio!Knit with Parameters|hyperpage}{396}
+\indexentry{RStudio!Knit button|hyperpage}{397}
+\indexentry{YAML!knit|hyperpage}{397}
+\indexentry{R package!googledrive|hyperpage}{399}
+\indexentry{R package!rmdrive|hyperpage}{399}
+\indexentry{R package!workflowr|hyperpage}{400}

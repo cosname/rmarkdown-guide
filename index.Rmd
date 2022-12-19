@@ -53,7 +53,7 @@ options(bookdown.post.latex = function(x) {
   x[i] = '\\begin{table}'
   x[x == '\\end{longtable}'] = '\\end{tabular}\n\\end{table}'
   x[x == '\\endhead'] = ''
-  x = x[-unlist(mapply(seq, i1, i2, SIMPLIFY = FALSE))]
+  # x = x[-unlist(mapply(seq, i1, i2, SIMPLIFY = FALSE))]
   x
 })
 

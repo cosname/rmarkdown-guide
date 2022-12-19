@@ -147,7 +147,7 @@ fusen::inflate(
 
 无论是在找工作、申请高校，还是在制作个人网站时，简历都是必不可少的，一个形式简洁、内容丰富的简历可以让读者在短时间内了解一个人。但是在制作简历时，往往会在寻找模板、调整格式上下很多功夫，尤其是在更新简历时，往往需要进行大量的调整，甚至于从头再来。
 
-就像 R Markdown 制作的初衷是帮助使用者将注意力集中于内容上一样，`datadrivencv` 包\index{R package!datadrivencv}\index{datadrivencv} [@R-datadrivencv] 的目标也是将内容与输出分离，利用 R Markdown 的特性，可以使用相同的代码同时生成简历的交互式 HTML 以及 PDF 版本，这将大大减轻制作以及维护简历的工作量。
+就像 R Markdown 制作的初衷是帮助使用者将注意力集中于内容上一样，`datadrivencv` 包\index{R package!datadrivencv}\index{datadrivencv} 的目标也是将内容与输出分离，利用 R Markdown 的特性，可以使用相同的代码同时生成简历的交互式 HTML 以及 PDF 版本，这将大大减轻制作以及维护简历的工作量。
 
 由于 `datadrivencv` 包目前没有发布到 CRAN 上，只能通过 GitHub 来下载：
 

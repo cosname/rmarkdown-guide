@@ -182,11 +182,10 @@ output:
 ---
 ```
 
-`darkly` 主题样式的效果如图 \@ref(fig:first-rmd-theme-darkly) 所示，感兴趣的读者可以自行尝试其它样式。
+应用 `r theme_link("darkly")`主题样式的效果如图 \@ref(fig:first-rmd-theme-darkly) 所示，感兴趣的读者可以自行尝试其它样式。
 
-(ref:figcap-first-rmd-theme-darkly) 应用 `r theme_link("darkly")` 主题后的文档样式
 
-```{r first-rmd-theme-darkly, fig.cap="(ref:figcap-first-rmd-theme-darkly)", echo = FALSE}
+```{r first-rmd-theme-darkly, fig.cap="应用 darkly 主题后的文档样式。", echo = FALSE}
 knitr::include_graphics("examples/first-rmd-theme-darkly.png", dpi = NA)
 ```
 
@@ -358,7 +357,7 @@ output:
 
 因为代码块是位于 `<pre class="sourcecode">` 标签内的，所以 `pre[class]` 操作符将限制代码块的高度为不超过 100 像素。 而将 `class.output ` 设为 `scroll-100` 则限制输出部分的高度为不超过 100 像素。最终效果如图 \@ref(fig:html-scroll-example) 所示。
 
-```{r html-scroll-example, out.width="70%", fig.align="center", fig.cap="可以滚动的代码块",echo=FALSE}
+```{r html-scroll-example, out.width="70%", fig.align="center", fig.cap="可以滚动的代码块", echo=FALSE}
 # import_example_result('html-scroll.Rmd', vheight = 600, vwidth = 800)
 knitr::include_graphics("examples/html-scroll.png", dpi = NA)
 ```
@@ -392,7 +391,7 @@ output:
 
 虽然在 R Markdown 中可以使用 Markdown 语法和 HTML 语法插入图片，但是推荐使用 `knitr::include_graphics()` 的方式来完成这一操作。例如：
 
-```` {.md}
+````{verbatim}
 ```{r}
 knitr::include_graphics("https://r-project.org/Rlogo.png")
 ```
@@ -400,24 +399,19 @@ knitr::include_graphics("https://r-project.org/Rlogo.png")
 
 使用这种方法插入外源图片，可以方便地添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性（图 \@ref(fig:include-graphics-example)）。
 
-```{r include-graphics-example, echo = FALSE, fig.cap="插入外源图片的推荐方式"}
+```{r, include-graphics-example, echo = FALSE, fig.cap="插入外源图片的推荐方式"}
 knitr::include_graphics("images/Rlogo.png", dpi = NA)
 ```
-
-
 
 #### 输出数据框 {#html-df-print}
 
 数据框是常见的数据结构，通过设置 `df_print` 参数，可以调整数据框的输出格式。可用的参数如表 \@ref(tab:df-print) 所示。
 
-表：(\#tab:df-print) `html_document` 可以被设置的 `df_print` 参数及其对应的含义。
-
-| 取值     | 说明         |
-|-------  |--------------|
-| default | 使用 `print.data.frame` 函数|
-| kable   | 使用 `knitr::kable` 函数          |
-| tibble  | 使用 `tibble::print.tbl_df` 函数 |
-| paged   | 使用 `rmarkdown::paged_table` 来创建一个分页的表格|
+```{r, df-print, echo=FALSE}
+knitr::kable(data.frame(取值 = c("default", "kable", "tibble", "paged"),
+                        说明 = c("使用 print.data.frame 函数", "使用 knitr::kable 函数", "使用 tibble::print.tbl_df 函数", "使用 rmarkdown::paged_table 来创建一个分页的表格")),
+             caption = '参数及其对应的含义')
+```
 
 ```{r echo=FALSE}
 # @TODO: 截图修改完善
@@ -478,19 +472,14 @@ mtcars
 knitr::include_graphics("images/paged.png", dpi = NA)
 ```
 
-表 \@ref(#tab:paged) 列出了这种情况下可以使用的附加参数。
+表 \@ref(tab:paged-additional) 列出了这种情况下可以使用的附加参数。
 
-Table: (\#tab:paged) 分页 HTML 表格的附加可用参数。
+```{r paged-additional, echo=FALSE}
+knitr::kable(data.frame(参数名 = c("max.print", "rows.print", "cols.print", "cols.min.print", "pages.print", "paged.print","rownames.print"),
+                        说明 = c("显示的总行数", "一页显示的行数", "一页显示的列数", "最少显示几列", "下方显示页面导航链接的数目", "设为 FALSE 则不输出分页的表格","设为 FALSE 时不显示行的名称 ")), 
+                        caption='分页 HTML 表格的附加可用参数')
+```
 
-| 参数名          | 说明                                           |
-|-----------------|-------------------------------------------------------|
-| max.print       | 显示的总行数                          |
-| rows.print      | 一页显示的行数                        |
-| cols.print      | 一页显示的列数                     |
-| cols.min.print  | 最少显示几列             |
-| pages.print     | 下方显示页面导航链接的数目 |
-| paged.print     | 设为 `FALSE` 则不输出分页的表格          |
-| rownames.print  | 设为 `FALSE` 时不显示行的名称              |
 
 这些参数可以在代码块中使用。
 
@@ -1066,17 +1055,13 @@ output:
 每个 LaTeX 模板会有很多参数，用来指定文档的语言、字体、文字大小、页边距等内容。
 表 \@ref(tab:latex-vars) 列示了常见的一些参数，完整的参数则可以在 [Pandoc 手册](https://pandoc.org/MANUAL.html#variables-for-latex) 中查看。
 
-Table: (\#tab:latex-vars) 在 YAML 配置中可用的 LaTeX 变量
 
-| 变量名称      |     说明                                                        |
-|-------------  |-----------------------------------------------------------------|
-|  lang         | 文档的语言代码                                               |
-| fontsize      | 文字大小 （如 `10pt`，`11pt`，`12pt`）                       |
-| documentclass | LaTeX 文档类型 （如 `article`）                              |
-| classoption   |文档类型的选项（如 `oneside`）                                |
-| geometry      |页边距（如 `margin=1in`）                                     |
-| mainfont, sansfont, monofont, mathfont |文档的字体（仅在使用 `xelatex` 和 `lualatex` 时可用）|
-| linkcolor, urlcolor, citecolor         |内部链接、外部链接和引文链接的颜色                   |
+```{r latex-vars, echo=FALSE}
+knitr::kable(data.frame(变量名称 = c("lang", "fontsize", "documentclass", "classoption", "geometry", "mainfont, sansfont, monofont, mathfont","linkcolor, urlcolor, citecolor"),
+                        说明 = c("文档的语言代码", "文字大小 （如 10pt，11pt，12pt）", "LaTeX 文档类型 （如 article）", "文档类型的选项（如 oneside）", "页边距（如 margin=1in）","文档的字体（仅在使用 xelatex 和 lualatex 时可用）","内部链接、外部链接和引文链接的颜色")), 
+                        caption='在 YAML 配置中可用的 LaTeX 变量')
+```
+
 
 
 使用这些参数的时候，需要将其写在 YAML 头信息的最顶层，例如：
@@ -1530,7 +1515,9 @@ knitr::include_graphics("examples/beamer-presentation-theme.png", dpi = NA)
 
 Beamer 支持数十个主题和颜色样式，在 [这里](https://hartwork.org/beamer-theme-matrix/) 可以查看可用的选项。
 
+```{r echo=FALSE, eval=FALSE}
 @TODO: (此部分可以扩展)
+```
 
 #### Beamer 幻灯片的边界 {#beamer-boundary}
 
