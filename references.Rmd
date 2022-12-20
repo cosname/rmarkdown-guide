@@ -32,7 +32,6 @@ pkgs <- c(
   "xtable",
   "tables",
   "pander",
-  "tangram",
   "ztable",
   "condformat",
   "magick",
