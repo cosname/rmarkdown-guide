@@ -638,7 +638,7 @@ kable(grade4,
 
 - **xtable** [@R-xtable]；这个包可能是最早的创建表格的包，其第一次发布是在 2000 年。它同时支持LaTeX和HTML格式。该软件包可在 CRAN 上访问：https://cran.r-project.org/package=xtable/。
 
-还有一些其它生成表格的包，这里不再进一步介绍，只是在这里列出它们，以供感兴趣者参考：**tables** [@R-tables]、**pander** [@R-pander]、**tangram** [@R-tangram]、**ztable** [@R-ztable] 以及 **condformat** [@R-condformat]。
+还有一些其它生成表格的包，这里不再进一步介绍，只是在这里列出它们，以供感兴趣者参考：**tables** [@R-tables]、**pander** [@R-pander]、**ztable** [@R-ztable] 以及 **condformat** [@R-condformat]。
 
 
 ## 块选项 {#chunk-options}
