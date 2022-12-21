@@ -399,7 +399,7 @@ knitr::include_graphics("https://r-project.org/Rlogo.png")
 
 使用这种方法插入外源图片，可以方便地添加图注（使用 `fig.cap` 参数），以及设置图片的宽高等属性（图 \@ref(fig:include-graphics-example)）。
 
-```{r, include-graphics-example, echo = FALSE, fig.cap="插入外源图片的推荐方式"}
+```{r, include-graphics-example, echo = FALSE, fig.cap="插入外源图片的推荐方式", out.height = "30%"}
 knitr::include_graphics("images/Rlogo.png", dpi = NA)
 ```
 
@@ -408,12 +408,16 @@ knitr::include_graphics("images/Rlogo.png", dpi = NA)
 数据框是常见的数据结构，通过设置 `df_print` 参数，可以调整数据框的输出格式。可用的参数如表 \@ref(tab:df-print) 所示。
 
 ```{r, df-print, echo=FALSE}
-knitr::kable(data.frame(取值 = c("default", "kable", "tibble", "paged"),
-                        说明 = c("使用 print.data.frame 函数", "使用 knitr::kable 函数", "使用 tibble::print.tbl_df 函数", "使用 rmarkdown::paged_table 来创建一个分页的表格")),
-             caption = '参数及其对应的含义')
+knitr::kable(
+  data.frame(
+    取值 = c("default", "kable", "tibble", "paged"),
+    说明 = c("使用 print.data.frame 函数", "使用 knitr::kable 函数", "使用 tibble::print.tbl_df 函数", "使用 rmarkdown::paged_table 来创建一个分页的表格")
+  ),
+  caption = "参数及其对应的含义"
+)
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, out.height = "40%"}
 # @TODO: 截图修改完善
 template <- xfun::magic_path("df-print-example.Rmd")
 outfile <- xfun::with_ext(template, ".html")
@@ -447,7 +451,7 @@ output:
 
 `r import_example("examples/df-print-function.Rmd")`
 
-```{r, echo = FALSE, fig.cap = "用自定义函数控制数据框的打印格式"}
+```{r, echo = FALSE, fig.cap = "用自定义函数控制数据框的打印格式", out.width = "90%"}
 import_example_result("examples/df-print-function.Rmd")
 ```
 
@@ -475,9 +479,13 @@ knitr::include_graphics("images/paged.png", dpi = NA)
 表 \@ref(tab:paged-additional) 列出了这种情况下可以使用的附加参数。
 
 ```{r paged-additional, echo=FALSE}
-knitr::kable(data.frame(参数名 = c("max.print", "rows.print", "cols.print", "cols.min.print", "pages.print", "paged.print","rownames.print"),
-                        说明 = c("显示的总行数", "一页显示的行数", "一页显示的列数", "最少显示几列", "下方显示页面导航链接的数目", "设为 FALSE 则不输出分页的表格","设为 FALSE 时不显示行的名称 ")), 
-                        caption='分页 HTML 表格的附加可用参数')
+knitr::kable(
+  data.frame(
+    参数名 = c("max.print", "rows.print", "cols.print", "cols.min.print", "pages.print", "paged.print", "rownames.print"),
+    说明 = c("显示的总行数", "一页显示的行数", "一页显示的列数", "最少显示几列", "下方显示页面导航链接的数目", "设为 FALSE 则不输出分页的表格", "设为 FALSE 时不显示行的名称 ")
+  ),
+  caption = "分页 HTML 表格的附加可用参数"
+)
 ```
 
 
@@ -900,7 +908,7 @@ import_example("examples/PDF-document-in-chinese.Rmd")
 
 将这份 R Markdown 编译后，将会生成一份 PDF 文档。
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width = "90%"}
 knitr::include_graphics("examples/PDF-document-in-chinese.png", dpi = NA)
 ```
 
@@ -1057,9 +1065,13 @@ output:
 
 
 ```{r latex-vars, echo=FALSE}
-knitr::kable(data.frame(变量名称 = c("lang", "fontsize", "documentclass", "classoption", "geometry", "mainfont, sansfont, monofont, mathfont","linkcolor, urlcolor, citecolor"),
-                        说明 = c("文档的语言代码", "文字大小 （如 10pt，11pt，12pt）", "LaTeX 文档类型 （如 article）", "文档类型的选项（如 oneside）", "页边距（如 margin=1in）","文档的字体（仅在使用 xelatex 和 lualatex 时可用）","内部链接、外部链接和引文链接的颜色")), 
-                        caption='在 YAML 配置中可用的 LaTeX 变量')
+knitr::kable(
+  data.frame(
+    变量名称 = c("lang", "fontsize", "documentclass", "classoption", "geometry", "mainfont, sansfont, monofont, mathfont", "linkcolor, urlcolor, citecolor"),
+    说明 = c("文档的语言代码", "文字大小 （如 10pt，11pt，12pt）", "LaTeX 文档类型 （如 article）", "文档类型的选项（如 oneside）", "页边距（如 margin=1in）", "文档的字体（仅在使用 xelatex 和 lualatex 时可用）", "内部链接、外部链接和引文链接的颜色")
+  ),
+  caption = "在 YAML 配置中可用的 LaTeX 变量"
+)
 ```
 
 
@@ -1133,7 +1145,7 @@ R Markdown 支持 4 种不同样式的幻灯片，分别是 **ioslides**，**Sli
 
 以上介绍的 5 种幻灯片格式中（含 **xaringan**），**ioslides**、**Slidy** 和 **xaringan** 都是基于 HTML 技术实现的（文档扩展名为 `.html`），**Beamer** 是基于 LaTeX 实现的（文档扩展名为 `.pdf`），PowerPoint 则是基于微软 Office 的文档格式实现的（文档扩展名为 `.pptx`）。
 
-```{r rmd-presentation-popup, fig.width=6, echo=FALSE, fig.cap="新建 R Markdown 时可选的幻灯片格式",fig.align='center'}
+```{r rmd-presentation-popup, echo=FALSE, fig.cap="新建 R Markdown 时可选的幻灯片格式",fig.align='center', out.width = "90%"}
 knitr::include_graphics("images/rmd-presentation-popup.png", dpi = NA)
 ```
 
@@ -1152,7 +1164,7 @@ import_example("examples/ioslides-presentation.Rmd")
 `##` 后面的内容是这一张幻灯片中的内容。R Markdown 会自动将命令和输出的内容添加到幻灯片中。
 
 
-```{r ioslides-presentation-screenshot, echo=FALSE, fig.cap="新建文件编译后生成的 ioslides 幻灯片",fig.align='center'}
+```{r ioslides-presentation-screenshot, echo=FALSE, fig.cap="新建文件编译后生成的 ioslides 幻灯片",fig.align='center', out.width = "90%"}
 knitr::include_graphics("examples/ioslides-presentation-screenshot.png", dpi = NA)
 ```
 
@@ -1429,7 +1441,7 @@ import_example("examples/slidy-presentation.Rmd")
 Slidy 幻灯片的内容设置基本与 ioslides 幻灯片相似，不过其默认样式与之有异。
 一份 Slidy 幻灯片大体是这样的（图 \@ref(fig:slidy-presentation-screen-shot)）。
 
-```{r slidy-presentation-screen-shot, echo=FALSE, fig.width=6,  fig.cap="Slidy 幻灯片", fig.align='center'}
+```{r slidy-presentation-screen-shot, echo=FALSE, fig.width=6,  fig.cap="Slidy 幻灯片", fig.align='center', out.width = "90%"}
 knitr::include_graphics("examples/slidy-presentation-screenshot.png", dpi = NA)
 ```
 
@@ -1484,7 +1496,7 @@ import_example("examples/beamer-presentation.Rmd")
 
 Beamer 幻灯片编译后的文件是一个 PDF 文档，图 \@ref(fig:beamer-presentation-screenshot)）。
 
-```{r beamer-presentation-screenshot, echo=FALSE,fig.cap="Beamer 幻灯片示例",fig.align='center'}
+```{r beamer-presentation-screenshot, echo=FALSE,fig.cap="Beamer 幻灯片示例",fig.align='center', out.width = "90%"}
 knitr::include_graphics("examples/beamer-presentation-screenshot.png", dpi = NA)
 ```
 
@@ -1509,7 +1521,7 @@ output:
 
 这个主题为标题幻灯片添加了页眉和页脚，显示作者、主题、日期和页码等信息，如图 \@ref(fig:beamer-presentation-theme) 所示。
 
-```{r beamer-presentation-theme,  echo=FALSE,fig.align='center',  fig.cap="应用主题后的 Beamer 幻灯片"}
+```{r beamer-presentation-theme, echo=FALSE, fig.align='center', fig.cap="应用主题后的 Beamer 幻灯片", out.width = "90%"}
 knitr::include_graphics("examples/beamer-presentation-theme.png", dpi = NA)
 ```
 
@@ -1555,7 +1567,7 @@ import_example("examples/powerpoint-presentation.Rmd")
 
 R Markdown 生成的 PowerPoint 幻灯片如图 \@ref(fig:powerpoint-presentation-screenshot)）所示。
 
-```{r powerpoint-presentation-screenshot, fig.align='center', echo=FALSE, fig.cap="PowerPoint 幻灯片"}
+```{r powerpoint-presentation-screenshot, fig.align='center', echo=FALSE, fig.cap="PowerPoint 幻灯片", out.width = "90%"}
 knitr::include_graphics("examples/powerpoint-presentation-screenshot.png", dpi = NA)
 ```
 
@@ -1622,13 +1634,13 @@ PowerPoint 幻灯片从 HTML 文档中继承了目录内容、图片属性、样
 
 [^audience-sleep]: 糟糕的演讲也可以催眠听众，但显然这两种催眠完全不同。
 
-```{r sharingan-icon, fig.cap="幻灯忍者：写轮眼", echo=FALSE, fig.width=2, fig.height=2,fig.align='center'}
+```{r sharingan-icon, fig.cap="幻灯忍者：写轮眼", echo=FALSE, fig.width=2, fig.height=2,fig.align='center', out.height = "30%"}
 knitr::include_graphics("images/xaringan-hex.png", dpi = NA)
 ```
 
 与其它工具相比，`xaringan` 创建的幻灯片样式更加精美，功能更加丰富，且具有高度的可定制性（图 \@ref(fig:xaringan-screenshot)）。
 
-```{r xaringan-screenshot, fig.cap="`xaringan` 幻灯片的实例",fig.width=6,fig.align='center', echo=FALSE}
+```{r xaringan-screenshot, fig.cap="`xaringan` 幻灯片的实例",fig.width=6,fig.align='center', echo=FALSE, out.width = "90%"}
 knitr::include_graphics("images/xaringan-scrennshot.png", dpi = NA)
 ```
 
@@ -1646,7 +1658,7 @@ if (!requireNamespace("xaringan")) {
 
 安装完成之后，在 RStudio 中新建 R Markdown 文件，并在左侧选择 “From Template”，然后选择 “Ninja Presentation (Simplified Chinese)”。填写必要信息之后，即可创建一个新的“写轮眼”幻灯片（图 \@ref(fig:xaringan-new)）。
 
-```{r xaringan-new, echo=FALSE,fig.width=6,fig.align='center', fig.cap="创建一个新文档"}
+```{r xaringan-new, echo=FALSE, fig.align='center', fig.cap="创建一个新文档", out.width = "90%"}
 knitr::include_graphics("images/xaringan-new.png", dpi = NA)
 ```
 
@@ -1680,20 +1692,20 @@ output:
 
 - 点击按键 `h` 或者 `?` 之后可以看到所有快捷键示意图（图 \@ref(fig:xaringan-help)）
 
-```{r xaringan-help, fig.width=6,fig.align='center',fig.cap="展示所有快捷键"}
+```{r xaringan-help, fig.width=6,fig.align='center', fig.cap="展示所有快捷键", out.width = "90%"}
 knitr::include_graphics("images/xaringan-help.png", dpi = NA)
 ```
 
 - `p` 进入演讲者模式（可以看见自己写的注释，比如：提醒自己要讲的笑话，图 \@ref(fig:xaringan-review)）。
 
 
-```{r xaringan-review, echo=FALSE,fig.width=6,fig.align='center', fig.cap="进入演讲者模式"}
+```{r xaringan-review, echo=FALSE,fig.width=6,fig.align='center', fig.cap="进入演讲者模式", out.width = "90%"}
 knitr::include_graphics("images/xaringan-review.png", dpi = NA)
 ```
 
 - 点击按键 `c` 可以复制幻灯片到新窗口。演讲时可以在自己面前的屏幕上显示演讲者模式，把新窗口中正常的幻灯片拖到大屏幕投影上给观众看（见图 \@ref(fig:xaringan-new-screan)）。
 
-```{r xaringan-new-screan, fig.width=6,fig.align='center', echo=FALSE,fig.cap="复制幻灯片到新窗口"}
+```{r xaringan-new-screan, fig.width=6,fig.align='center', echo=FALSE,fig.cap="复制幻灯片到新窗口", out.width = "90%"}
 knitr::include_graphics("images/xaringan-new-screan.png", dpi = NA)
 ```
 
@@ -1736,7 +1748,7 @@ style_mono_accent(
 )
 ```
 
-```{r xaringan-themer-sample-view, echo=FALSE,fig.width=6,fig.align='center', fig.cap="xaringanthemer 包提供的主题示例"}
+```{r xaringan-themer-sample-view, echo=FALSE,fig.width=6,fig.align='center', fig.cap="xaringanthemer 包提供的主题示例", out.width = "90%"}
 knitr::include_graphics("images/xaringan-themer-sample-view.png", dpi = NA)
 ```
 
@@ -1760,7 +1772,7 @@ ggplot(diamonds) +
   scale_xaringan_fill_discrete()
 ```
 
-```{r xaringan-themer-ggplot, echo=FALSE, fig.width=6, fig.align='center', fig.cap="xaringanthemer 包提供的 ggplot2 色板"}
+```{r xaringan-themer-ggplot, echo=FALSE, fig.width=6, fig.align='center', fig.cap="xaringanthemer 包提供的 ggplot2 色板", out.width = "90%"}
 knitr::include_graphics("images/xaringan-themer-ggplot.png", dpi = NA)
 ```
 
@@ -1787,7 +1799,7 @@ if (knitr::is_html_output()) {
 style_mono_light(base_color = "#23395b")
 ```
 
-```{r xaringan-themer-demo1, fig.width=6, fig.align='center', echo=FALSE, fig.cap="Moon Light 模板"}
+```{r xaringan-themer-demo1, fig.width=6, fig.align='center', echo=FALSE, fig.cap="Moon Light 模板", out.width = "90%"}
 knitr::include_graphics("images/xaringan-themer-demo1.png", dpi = NA)
 ```
 
@@ -1797,7 +1809,7 @@ knitr::include_graphics("images/xaringan-themer-demo1.png", dpi = NA)
 style_mono_dark(base_color = "#cbf7ed")
 ```
 
-```{r xaringan-themer-demo2, fig.width=6,fig.align='center', echo=FALSE, fig.cap="Mono Dark 模板"}
+```{r xaringan-themer-demo2, fig.width=6,fig.align='center', echo=FALSE, fig.cap="Mono Dark 模板", out.width = "90%"}
 knitr::include_graphics("images/xaringan-themer-demo2.png", dpi = NA)
 ```
 
@@ -1807,7 +1819,7 @@ knitr::include_graphics("images/xaringan-themer-demo2.png", dpi = NA)
 style_mono_accent(base_color = "#43418A")
 ```
 
-```{r xaringan-themer-demo3,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Mono Accent 模板"}
+```{r xaringan-themer-demo3,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Mono Accent 模板", out.width = "90%"}
 knitr::include_graphics("images/xaringan-themer-demo3.png", dpi = NA)
 ```
 
@@ -1817,7 +1829,7 @@ knitr::include_graphics("images/xaringan-themer-demo3.png", dpi = NA)
 style_mono_accent(base_color = "#43418A")
 ```
 
-```{r xaringan-themer-demo4, fig.width=6,fig.align='center',echo=FALSE, fig.cap="Mono Accent Inverse 模板"}
+```{r xaringan-themer-demo4, fig.width=6,fig.align='center',echo=FALSE, fig.cap="Mono Accent Inverse 模板", out.width = "90%"}
 knitr::include_graphics("images/xaringan-themer-demo4.png", dpi = NA)
 ```
 
@@ -1827,7 +1839,7 @@ knitr::include_graphics("images/xaringan-themer-demo4.png", dpi = NA)
 style_duo(primary_color = "#1F4257", secondary_color = "#F97B64")
 ```
 
-```{r xaringan-themer-demo5,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Duo 模板"}
+```{r xaringan-themer-demo5,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Duo 模板", out.width = "90%"}
 knitr::include_graphics("images/xaringan-themer-demo5.png", dpi = NA)
 ```
 
@@ -1837,7 +1849,7 @@ knitr::include_graphics("images/xaringan-themer-demo5.png", dpi = NA)
 style_solarized_light()
 ```
 
-```{r xaringan-themer-demo6,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Solarized Light 模板"}
+```{r xaringan-themer-demo6,fig.width=6,fig.align='center', echo=FALSE, fig.cap="Solarized Light 模板", out.width = "90%"}
 knitr::include_graphics("images/xaringan-themer-demo6.png", dpi = NA)
 ```
 
@@ -2091,7 +2103,7 @@ xaringanExtra::use_logo(
 
 这时，所有幻灯片右上角都加上了对应的 LOGO 啦！如果想在某几张不显示 LOGO，可以使用 `hide_logo` 隐藏特定幻灯片的徽标，具体例子如下（图 \@ref(fig:xaringan-extra-3)）：
 
-```{r xaringan-extra-3, echo=FALSE,fig.width=6,fig.align='center', fig.cap="给幻灯片添加全局 logo"}
+```{r xaringan-extra-3, echo=FALSE,fig.width=6,fig.align='center', fig.cap="给幻灯片添加全局 logo", out.width = "90%"}
 knitr::include_graphics("images/xaringan-extra-3.png", dpi = NA)
 ```
 
@@ -2107,7 +2119,7 @@ xaringanExtra::use_webcam()
 
 之后点击 `w` 键（记得用浏览器打开哦！）就会得到以下界面（图 \@ref(fig:xaringan-extra-4)）。这里镜头的位置可以任意拖动。
 
-```{r xaringan-extra-4, echo=FALSE,fig.width=6,fig.align='center', fig.cap="添加网络摄像头进行实时视频"}
+```{r xaringan-extra-4, echo=FALSE,fig.width=6,fig.align='center', fig.cap="添加网络摄像头进行实时视频", out.width = "90%"}
 knitr::include_graphics("images/xaringan-extra-4.png", dpi = NA)
 ```
 
@@ -2195,13 +2207,13 @@ output:
 
 `template.docx` 文档必须从 Pandoc 生成。 可以从具有 `word_document` 输出格式的任意 R Markdown 文档创建此模板（该文档的实际内容无关紧要，但它应该包含想要设置样式的元素类型）。 然后打开`.docx` 文件，并编辑样式。
 
-```{r, word-template-1, echo=FALSE,fig.width=6,fig.align='center', fig.cap='查找特定文档元素的样式。'}
+```{r, word-template-1, echo=FALSE,fig.width=6,fig.align='center', fig.cap='查找特定文档元素的样式。', out.width = "90%"}
 knitr::include_graphics("images/word-template-1.png", dpi = NA)
 ```
 
 图 \@ref(fig:word-template-1) 说明了可以通过 Word 中的“主页”选项卡打开“样式”窗口。当将光标移动到文档中的特定元素时，样式列表中的项目将被突出显示。如果想修改任何类型元素的样式，可以单击突出显示项的下拉菜单，将看到如图 \@ref(fig:word-template-2)  的对话框。
 
-```{r, word-template-2, echo=FALSE, fig.cap=' 修改 Word 文档中元素的样式。', out.width='100%'}
+```{r, word-template-2, echo=FALSE, fig.cap=' 修改 Word 文档中元素的样式。', out.width='90%'}
 knitr::include_graphics("images/word-template-2.png", dpi = NA)
 ```
 
@@ -2211,7 +2223,7 @@ knitr::include_graphics("images/word-template-2.png", dpi = NA)
 
 有时，查找元素的样式名称并不简单，可能有多种样式应用于同一个元素，并且只会在样式列表中看到其中一个突出显示。这时，可能需要通过猜测或在线搜索才能确定要修改的实际样式。例如：需要点击“管理样式”按钮 （图\@ref(fig:word-template-1) 中样式列表底部从左到右的第三个按钮）。之后找到对应的样式并进行修改，例如，添加边框 （见图 \@ref(fig:word-table)）。
 
-```{r, word-table, echo=FALSE, fig.cap='修改 Word 文档中的表格样式。',fig.width=6,fig.align='center'}
+```{r, word-table, echo=FALSE, fig.cap='修改 Word 文档中的表格样式。',fig.width=6,fig.align='center', out.width = "90%"}
 knitr::include_graphics("images/word-table.png", dpi = NA)
 ```
 

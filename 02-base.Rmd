@@ -8,7 +8,7 @@
 
 安装完成后，打开 RStudio 编辑器，基本界面如图 \@ref(fig:rstudio-editor) 所示。
 
-```{r rstudio-editor, fig.cap = "RStudio 编辑器的基本界面", echo = FALSE}
+```{r rstudio-editor, fig.cap = "RStudio 编辑器的基本界面", echo = FALSE, out.width = "90%"}
 knitr::include_graphics("images/02-rstudio.png")
 ```
 
@@ -34,9 +34,9 @@ knitr::include_graphics("images/02-create-rmd2.png")
 
 (ref:create-rmd) 在 RStudio 中创建 R Markdown 文档
 
-随后，RStudio 创建了一个 `untitled.Rmd` 文件，如图 \@ref(fig:rstudio-rmd) 所示。
+随后，RStudio 创建了一个 `untitled.Rmd` 文件，这是 **rmarkdown** 包自带的一个模版，展示了 R Markdown 文档中的几种常见元素，如图 \@ref(fig:rstudio-rmd) 所示。
 
-```{r rstudio-rmd, echo = FALSE, fig.cap = "RStudio 中的 R Markdown 编辑器"}
+```{r rstudio-rmd, echo = FALSE, fig.cap = "RStudio 中的 R Markdown 编辑器", out.width = "90%"}
 knitr::include_graphics("images/02-create-rmd3.png")
 ```
 
@@ -44,11 +44,11 @@ knitr::include_graphics("images/02-create-rmd3.png")
 
 为了验证 rmarkdown 包及 RStudio 配置成功，可以在 RStudio 中打开 `untitled.Rmd` 文件，然后点击右上角的 Knit 按钮，即可在 RStudio 中看到编译后的文档，如图 \@ref(fig:knit-button) 所示。
 
-```{r knit-button, echo = FALSE, fig.cap = "源文档上方的编译按钮"}
+```{r knit-button, echo = FALSE, fig.cap = "源文档上方的编译按钮", out.width = "90%"}
 knitr::include_graphics("images/02-knit-button.png")
 ```
 
-```{r first-rmarkdown, echo = FALSE, fig.cap = "untitled.Rmd 文件输出的 HTML 文档"}
+```{r first-rmarkdown, echo = FALSE, fig.cap = "untitled.Rmd 文件输出的 HTML 文档", out.width = "90%"}
 import_example_result("first-rmd.Rmd")
 ```
 
@@ -101,7 +101,7 @@ date: "2022-10-23"
 
 随后点击 Knit 按钮，生成的 PDF 输出文档如图 \@ref(fig:rmd-pdf) 所示。
 
-```{r rmd-pdf, fig.cap = "untitled.Rmd 生成的 PDF 文档", echo = FALSE}
+```{r rmd-pdf, fig.cap = "untitled.Rmd 生成的 PDF 文档", echo = FALSE, out.width = "90%"}
 knitr::include_graphics("images/02-rmd-pdf.png")
 ```
 
@@ -135,9 +135,9 @@ tinytex::parse_install(log = "tex.log")
 
 Git 是一个分布式版本控制软件，最初由 Linus Torvalds 开发[^02-base-3]，于 2005 年以 GPL 协议发布。Git 软件可以在其官方网站下载（<https://git-scm.com/downloads>）。为了与 Git 配合使用，通常还需要注册一个支持 Git 软件仓库托管的配套网站，比较流行网站服务包括 GitHub（<https://github.com>），Gitee（<https://gitee.com/>）等。在这里以 GitHub 为例进行说明。
 
-[^02-base-3]: Linus Torvalds (1969年12月28日－) 生于芬兰赫尔辛基市，拥有美国国籍，Linux 内核的最早作者，随后发起了这个开源项目，担任 Linux 内核的首要架构师与项目协调者，是当今世界最著名的电脑程序员、黑客之一。他 2005 年发布了 Git，是 Git 的主要开发者。
+[^02-base-3]: Linus Torvalds (1969 年 12 月 28 日 －) 生于芬兰赫尔辛基市，拥有美国国籍，Linux 内核的最早作者，随后发起了这个开源项目，担任 Linux 内核的首要架构师与项目协调者，是当今世界最著名的电脑程序员、黑客之一。他 2005 年发布了 Git，是 Git 的主要开发者。
 
-```{r fig.cap="使用 Git 和 GitHub 可以提高团队协作的效率", echo=FALSE}
+```{r fig.cap="使用 Git 和 GitHub 可以提高团队协作的效率", echo=FALSE, out.width = "90%"}
 knitr::include_graphics("images/git-github.png", dpi = NA)
 ```
 
@@ -369,7 +369,7 @@ rmarkdown::pandoc_version()
 
 图 \@ref(fig:knit-process) 概括了 R Markdown 完成以上工作的流程。
 
-```{r knit-process, echo = FALSE, fig.cap = "R Markdown 的编译过程 https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-process.html"}
+```{r knit-process, echo = FALSE, fig.cap = "[R Markdown 的编译过程](https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-process.html)", out.width = "90%"}
 knitr::include_graphics("images/02-knit-process.png")
 ```
 
@@ -434,14 +434,14 @@ output:
 
 输出结果如 \@ref(fig:yaml-review) 所示。
 
-```{r yaml-review, echo = FALSE, fig.cap = "YAML 元数据对应的 PDF 输出"}
+```{r yaml-review, echo = FALSE, fig.cap = "YAML 元数据对应的 PDF 输出", out.width = "90%"}
 knitr::include_graphics("images/02-yaml-test.png")
 ```
 
 
 [ymlthis](https://github.com/r-lib/ymlthis) 包提供了一个在 R Markdown 中插入 YAML 数据的图形化界面，可以在 RStudio 菜单栏的 Tools -> Addins -> Browse Addins 中启动，如图 \@ref(fig:ymlthis) 所示。
 
-```{r ymlthis, echo = FALSE, fig.cap = "ymlthis 包提供图形化输入 YAML 元数据的插件"}
+```{r ymlthis, echo = FALSE, fig.cap = "ymlthis 包提供图形化输入 YAML 元数据的插件", out.width = "90%"}
 knitr::include_graphics("images/02-ymlthis.png")
 ```
 
@@ -530,7 +530,7 @@ output:
 ::: {.col data-latex="{0.4\textwidth}"}
 
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, out.width = "110%"}
 import_example_result("examples/markdown-headings.Rmd")
 ```
 
@@ -654,7 +654,7 @@ lapply(x, mean)
 
 例如, 用 `![R logo](https://www.r-project.org/Rlogo.png)` 插入以下图片：
 
-```{r echo = FALSE, fig.cap="Rlogo"}
+```{r echo = FALSE, fig.cap="Rlogo", out.height = "30%"}
 knitr::include_graphics("images/Rlogo.png", dpi = NA)
 ```
 
@@ -682,7 +682,7 @@ R Markdown 支持用一对 `$` 插入行内公式，例如 `$f(k) = {n \choose k
 
 两个 `$$` 会创建块级公式，例如：
 
-```
+```{.latex}
 $$
 f(k) = {n \choose k} p^{k} (1-p)^{n-k}
 $$
@@ -696,11 +696,13 @@ $$
 
 作者也可以使用 LaTeX 默认的数学环境，如：
 
-```
-$$\begin{array}{ccc}
+```{.latex}
+$$
+\begin{array}{ccc}
 x_{11} & x_{12} & x_{13}\\
 x_{21} & x_{22} & x_{23}
-\end{array}$$
+\end{array}
+$$
 ```
 
 $$
@@ -711,11 +713,13 @@ x_{21} & x_{22} & x_{23}
 $$
 
 
-```
-$$X = \begin{bmatrix}1 & x_{1}\\
+```{.latex}
+$$
+X = \begin{bmatrix}1 & x_{1}\\
 1 & x_{2}\\
 1 & x_{3}
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 ```
 
 $$
@@ -778,7 +782,7 @@ $$
 
 图 \@ref(fig:markdown-summary) 展示了渲染为 PDF 后的效果。
 
-```{r markdown-summary, echo = FALSE, fig.cap = "Markdown 常见元素的显示效果"}
+```{r markdown-summary, echo = FALSE, fig.cap = "Markdown 常见元素的显示效果", out.height = "95%"}
 import_example_result("examples/markdown-summary.Rmd")
 ```
 
@@ -792,7 +796,7 @@ Markdown 中的特殊字符包括 `#`, `*`, `-`, ``` ` ``` 等，通常它们代
 
 一些 Markdown 编辑器提供了即时预览功能，方便读者进行交互性的练习。图 \@ref(fig:dillinger) 是一个在线编辑器的例子。
 
-```{r dillinger, echo = FALSE, fig.cap = "支持实时预览的 Markdown 编辑器 https://dillinger.io/"}
+```{r dillinger, echo = FALSE, fig.cap = "支持实时预览的 Markdown 编辑器 https://dillinger.io/", out.width = "90%"}
 knitr::include_graphics("images/02-markdown-editor.png")
 ```
 
@@ -808,7 +812,7 @@ plot(cars)
 ```
 ````
 
-有时作者只希望展示代码的运行结果，而隐藏具体实现细节，这时可以设置代码块选项 `echo = FALSE`，R Markdown 会照旧运行代码，但仅在输出文档中显示运行结果。如果文档中包含很多代码块，逐个设置选项较为繁琐。这时可以用 knitr 包提供的 `knitr::opts_chunk$set()` 函数为所有代码块统一设置全局选项。例如，在全文档中的第一个代码块中设置：
+有时作者只希望展示代码的运行结果，而隐藏具体实现细节，这时可以设置代码块选项 `echo = FALSE`，R Markdown 会照旧运行代码，但仅在输出文档中显示运行结果。如果文档中包含很多代码块，逐个设置选项较为繁琐。这时可以用 **knitr** 包提供的 `knitr::opts_chunk$set()` 函数为所有代码块统一设置全局选项。例如，在全文档中的第一个代码块中设置：
 
 ````{verbatim}
 ```{r setup, include=FALSE}
@@ -929,14 +933,14 @@ plot(cars)
 默认情况下，代码块生成的图片在输出文档中被直接插入该代码块的下方。一个重要的 knitr 选项是 `fig.cap`，它可以为图片添加标题。例子如下：
 
 ````{verbatim}
-```{r cars-plot, fig.cap = "cars 数据集"}
+```{r cars-plot, fig.cap = "cars 数据集", fig.width = 5}
 plot(cars)
 ```
 ````
 
 生成的图片如图 \@ref(fig:cars-plot) 所示。
 
-```{r cars-plot, fig.cap = "cars 数据集", echo = FALSE}
+```{r cars-plot, fig.cap = "cars 数据集", echo = FALSE, fig.width = 5}
 plot(cars)
 ```
 
@@ -962,7 +966,7 @@ plot(nhtemp)
 ::: {.col data-latex="{0.4\textwidth}"}
 
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, out.width="90%"}
 import_example_result("examples/multi-figure.Rmd")
 ```
 
@@ -977,7 +981,7 @@ import_example_result("examples/multi-figure.Rmd")
 ::: {.col data-latex="{0.55\textwidth}"}
 
 ````{verbatim}
-```{r, fig.show = "hold", out.width = "50%"}
+```{r, fig.show = "hold"}
 plot(cars)
 plot(nhtemp)
 ```
@@ -989,7 +993,7 @@ plot(nhtemp)
 ::: {.col data-latex="{0.4\textwidth}"}
 
 
-```{r, echo = FALSE}
+```{r multi-figure-same-row, echo = FALSE, out.width = "90%"}
 import_example_result("examples/multi-figure-same-row.Rmd")
 ```
 
@@ -1227,7 +1231,7 @@ output: bookdown::pdf_document2
 
 输出如图 \@ref(fig:cr-example) 所示。
 
-```{r cr-example, echo = FALSE, fig.cap = "交叉引用图片和表格"}
+```{r cr-example, echo = FALSE, fig.cap = "交叉引用图片和表格", out.height = "90%"}
 import_example_result("examples/cross-reference.Rmd")
 ```
 
@@ -1263,7 +1267,7 @@ output:
 
 生成的 PDF 文档如图 \@ref(fig:insert-index) 所示。
 
-```{r insert-index, fig.cap = "在 PDF 文档中插入索引", echo = FALSE}
+```{r insert-index, fig.cap = "在 PDF 文档中插入索引", echo = FALSE, out.width = "90%"}
 knitr::include_graphics("images/02-index.png")
 ```
 
@@ -1368,13 +1372,13 @@ leaflet() %>%
 
 Graphviz 和 mermaid 是两个创建流程和网络图的通用软件。**DiagrammeR** [@R-DiagrammeR] 包支持用 R 代码生成 Graphviz 或 mermaid 图。可以直接在 RStudio 中打开 Graphviz (`.gv`) 和 mermaid (`.mmd`) 文件，如图 \@ref(fig:rstudio-gv) 所示。
 
-```{r rstudio-gv, echo = FALSE, fig.cap = "RStudio 编辑器中的 Graphviz 和 mermaid 图文件"}
+```{r rstudio-gv, echo = FALSE, fig.cap = "RStudio 编辑器中的 Graphviz 和 mermaid 图文件", out.width = "90%"}
 knitr::include_graphics("images/02-graphviz-rstudio.png")
 ```
 
 作者也可以直接使用 Graphviz 格式的字符串，如图 \@ref(fig:gv-diagram) 所示。
 
-```{r gv-diagram, fig.cap = "用 DiagrammeR 创建 Graphviz 流程图", warning=FALSE}
+```{r gv-diagram, fig.cap = "用 DiagrammeR 创建 Graphviz 流程图", warning=FALSE, fig.width = 4}
 library(DiagrammeR)
 
 grViz("digraph {
@@ -1388,17 +1392,17 @@ grViz("digraph {
 
   # edge definitions with the node IDs
   rec1 -> rec2 -> rec3 -> rec4
-  }",
-  height = 500)
+  }"
+)
 ```
 
 作者可以在 `grViz()` 函数中用 `@@` 嵌入 R 变量，如图 \@ref(fig:gv-rvar) 所示。
 
-```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值", warning=FALSE}
+```{r gv-rvar, fig.cap = "在 DiagrammeR::grviz 中使用 R 变量的值", warning=FALSE, fig.width = 4}
 grViz("
   digraph graph2 {
 
-  graph [layout = dot, rankdir = LR]
+  graph [layout = dot, rankdir = TB]
 
   # node definitions with substituted label text
   node [shape = oval]
@@ -1414,14 +1418,13 @@ grViz("
   [2]: names(iris)[2]
   [3]: names(iris)[3]
   [4]: names(iris)[4]
-  ",
-  height = 100
+  "
 )
 ```
 
 除了流程图外，**DiagrammeR** 还可以创建网络图，如图 \@ref(fig:gr-network) 所示。
 
-```{r gr-network, fig.cap = "DiagrammeR 创作的网络可视化图", echo = FALSE, warning=FALSE}
+```{r gr-network, fig.cap = "DiagrammeR 创作的网络图", echo = FALSE, warning=FALSE, fig.width = 5}
 example_graph <-
   create_graph() %>%
   add_pa_graph(
@@ -1462,17 +1465,17 @@ render_graph(example_graph, layout = "nicely")
 
 [RStudio Desktop 1.4](https://blog.rstudio.com/2021/04/06/rstudio-1-4-a-quick-tour/) 及以后版本为 R Markdown 文档添加了图形编辑模式。在 RStudio 中打开任意 `.Rmd` 文件，点击右上方类似 "A" 的按钮 (图 \@ref(fig:visual-mode-button))，可进入可视化编辑器，界面如图 \@ref(fig:visual-editing) 所示。
 
-```{r visual-mode-button, echo = FALSE, fig.cap = "R Markdown 编辑模式切换按钮"}
+```{r visual-mode-button, echo = FALSE, fig.cap = "R Markdown 编辑模式切换按钮", out.width = "90%"}
 knitr::include_graphics("images/02-visual-mode-button.png")
 ```
 
-```{r visual-editing, echo = FALSE, fig.cap = "R Markdown 图形编辑模式"}
+```{r visual-editing, echo = FALSE, fig.cap = "R Markdown 图形编辑模式", out.width = "90%"}
 knitr::include_graphics("images/02-visual-editing.png")
 ```
 
 图形化编辑器提供了丰富的菜单栏选项，用于可视化地插入常见文档元素。如图 \@ref(fig:visual-editing-insert-menu) 所示。
 
-```{r visual-editing-insert-menu, fig.cap = "图形化编辑器提供了很多菜单栏选项", echo = FALSE}
+```{r visual-editing-insert-menu, fig.cap = "图形化编辑器提供了很多菜单栏选项", echo = FALSE, out.width = "90%"}
 knitr::include_graphics("images/02-visual-editing-insert-menu.png")
 ```
 
