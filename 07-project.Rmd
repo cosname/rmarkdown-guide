@@ -244,13 +244,13 @@ knitr::opts_knit$set(root.dir = '/tmp')
 
 如果使用 RStudio 来编译 R Markdown，也可以从菜单 `Tools -> Global Options -> R Markdown` 中选择工作目录（见图 \@ref(fig:rmd-wd)）。默认工作目录的是 R Markdown 的目录文件，并且还有另外两个可能的选择：可以使用 R 控制台的当前工作目录（选项 `Current`），或者使用包含这个 R Markdown 文件的项目的根目录（选项 `Project`）作为工作目录。
 
-```{r, rmd-wd, echo=FALSE, fig.cap='在 RStudio 中改变所有 R Markdown 文档的默认工作目录。', fig.align='center'}
+```{r, rmd-wd, echo=FALSE, fig.cap='在 RStudio 中改变所有 R Markdown 文档的默认工作目录。', out.width = "90%"}
 knitr::include_graphics('images/rmd-wd.png', dpi = NA)
 ```
 
 在 RStudio 中，也可以编译一个带有特定工作目录的独立 R Markdown 文档，如图 \@ref(fig:knit-wd) 所示。在改变 `Knit Directory` 并点击 `Knit` 按钮后，**knitr** 将使用新的工作目录来编译代码块。所有这些设置都可以归结为前面提到的 `knitr::opts_knit$set(root.dir = ...)`，所以如果不满意上述更改工作目录方式的任何一个，也可以自己用 `knitr::opts_knit$set()` 指定一个目录。
 
-```{r, knit-wd, echo=FALSE, fig.cap='在 RStudio 中设置当前 R Markdown 文档的工作目录。', fig.align='center'}
+```{r, knit-wd, echo=FALSE, fig.cap='在 RStudio 中设置当前 R Markdown 文档的工作目录。', out.width = "90%"}
 knitr::include_graphics('images/knit-wd.png', dpi = NA)
 ```
 
@@ -272,7 +272,7 @@ knitr::include_graphics('images/knit-wd.png', dpi = NA)
 
 工作目录之苦主要来自于处理相对路径时的这个问题： _相对于什么？_正如之前提到的，不同的人有不同的偏好，没有绝对正确的答案。
 
-```{r, rmd-relative, echo=FALSE, fig.cap='在 RStudio 中自动填充 Rmd 文档中的文件路径。', fig.align='center'}
+```{r, rmd-relative, echo=FALSE, fig.cap='在 RStudio 中自动填充 Rmd 文档中的文件路径。', out.width = "90%"}
 knitr::include_graphics('images/rmd-relative.png', dpi = NA)
 ```
 
@@ -450,7 +450,7 @@ rmarkdown::render('input.Rmd', params = 'ask')
 
 如果使用 RStudio，则可以点击 `Knit` 按钮后面的菜单 `Knit with Parameters`\index{RStudio!Knit with Parameters}。图 \@ref(fig:params-shiny) 展示了一个参数的 GUI 示例。
 
-```{r, params-shiny, echo=FALSE, fig.cap='使用者可以从 GUI 输入的参数编译一个 R Markdown 文档。'}
+```{r, params-shiny, echo=FALSE, fig.cap='使用者可以从 GUI 输入的参数编译一个 R Markdown 文档。', out.width = "90%"}
 knitr::include_graphics('images/params-shiny.png', dpi = NA)
 ```
 
@@ -664,7 +664,7 @@ on:
 
 案例的最后一步是启动 Github Pages 服务，该服务将自动识别仓库内的 `index.html` 文件，基于个人 Github 账号生成公开的网页地址。启动方法为点击仓库的 `settings -> pages` 并选择 Source 为 main 分支下的 root 目录。
 
-```{r, echo = FALSE, fig.cap = "为仓库启用 Github Pages，生成地址见 https://qiushiyan.github.io/rmd-ci/"}
+```{r, echo = FALSE, fig.cap = "为仓库启用 [Github Pages](https://qiushiyan.github.io/rmd-ci/)", out.width = "40%"}
 knitr::include_graphics("images/rmd-ci-github-pages.png")
 ```
 

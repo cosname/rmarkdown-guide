@@ -5,8 +5,7 @@
 
 ```{r include=FALSE}
 # 自动生成 R 包的参考文献
-knitr::write_bib(c(
-  .packages(),
+pkgs <- c(
   "bookdown",
   "knitr",
   "rmarkdown",
@@ -33,7 +32,6 @@ knitr::write_bib(c(
   "xtable",
   "tables",
   "pander",
-  "tangram",
   "ztable",
   "condformat",
   "magick",
@@ -74,16 +72,15 @@ knitr::write_bib(c(
   "pagedown",
   "bslib",
   "formatR",
-  "rmdrive",
   "xaringanExtra",
   "fusen",
-  "testthat",
-  "datadrivencv"
-), "packages.bib")
-
-# lapply(pkgs, function(pkg) {
-#     if (system.file(package = pkg) != '') return()
-#     renv::install(pkg, repos = "https://cloud.r-project.org/")
-#     }
-# )
+  "testthat"
+)
+lapply(pkgs, function(pkg) {
+    if (system.file(package = pkg) != '') return()
+    renv::install(pkg, repos = "https://cloud.r-project.org/")
+    }
+)
+knitr::write_bib(c(
+  .packages(), pkgs), "packages.bib")
 ```

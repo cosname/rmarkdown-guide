@@ -2,7 +2,7 @@
 
 ## 发邮件：`blastula` {#rmarkdown-email}
 
-使用者有的时候可能需要批量发送定制版邮件，有些软件提供了相应选项，利用 R Markdown 也可以实现这一功能。具体而言，借助 `blastula` 包\index{R package!blastula}\index{email} [@R-blastula]，可以将 R Markdown 文档呈现在电子邮件正文并发送电子邮件。要将 R Markdown 文档呈现到电子邮件中，需要在文档中使用输出格式 `blastula::blastula_email`，例如：
+使用者有的时候可能需要批量发送定制版邮件，有些软件提供了相应选项，利用 R Markdown 也可以实现这一功能。具体而言，借助 **blastula** 包\index{R package!blastula}\index{email} [@R-blastula]，可以将 R Markdown 文档呈现在电子邮件正文并发送电子邮件。要将 R Markdown 文档呈现到电子邮件中，需要在文档中使用输出格式 `blastula::blastula_email`，例如：
 
 ````{verbatim}
 ---
@@ -45,9 +45,9 @@ R 语言的日常使用离不开 R 包，而对于很多使用者来说，亲手
 - NAMESPACE 文件
 - vignette 文档（可选）
 
-很多高级开发人员厌倦了在 R 文件、测试文件、vignette 文件之间频繁切换，特别是在更改函数参数的时候，开发者需要更改示例，并在多个地方进行单元测试，很容易漏了某一个地方。而使用 `fusen`\index{R package!fusen}\index{Rpackage} [@R-fusen] 制作 R 包则减少了这些困扰，使用者只需要在同一个文件中完成 R 包，与一个函数相关的所有内容都在一个地方，减少了遗漏的风险。
+很多高级开发人员厌倦了在 R 文件、测试文件、vignette 文件之间频繁切换，特别是在更改函数参数的时候，开发者需要更改示例，并在多个地方进行单元测试，很容易漏了某一个地方。而使用 **fusen**\index{R package!fusen}\index{Rpackage} [@R-fusen] 制作 R 包则减少了这些困扰，使用者只需要在同一个文件中完成 R 包，与一个函数相关的所有内容都在一个地方，减少了遗漏的风险。
 
-而对于更多未曾接触过 R 包制作的人来说，制作 R 包这个任务初听起来似乎较为复杂，会“劝退”很多人。`fusen` 则为那些以前从未写过 R 包但知道如何使用 R Markdown 的使用者提供了亲手创建 R 包的机会，这个包可以帮助他们迈出第一步。
+而对于更多未曾接触过 R 包制作的人来说，制作 R 包这个任务初听起来似乎较为复杂，会“劝退”很多人。**fusen** 则为那些以前从未写过 R 包但知道如何使用 R Markdown 的使用者提供了亲手创建 R 包的机会，这个包可以帮助他们迈出第一步。
 
 使用 `fusen` 制作 R 包需要以下几个步骤：
 
@@ -65,7 +65,7 @@ R 语言的日常使用离不开 R 包，而对于很多使用者来说，亲手
 library(testthat)
 ```
 
-调用 `testthat` 包\index{R package!testthat}\index{testthat} [@R-testthat] 可以帮助使用者更好地测试代码。
+调用 **testthat** 包\index{R package!testthat}\index{testthat} [@R-testthat] 可以帮助使用者更好地测试代码。
 
 下一个代码框可以帮助使用者对创建的包进行描述并进行授权，其中包含了标题（`Title`）、描述（`Description`）以及作者信息（`Authors`）等内容，一个简化的内容如下：
 
@@ -141,13 +141,13 @@ fusen::inflate(
 )
 ```
 
-更多关于 `fusen` 包的细节请参见 https://github.com/ThinkR-open/fusen/。
+更多关于 **fusen** 包的细节请参见 https://github.com/ThinkR-open/fusen/。
 
 ## 制作简历：`datadrivencv` {#rmarkdown-cv}
 
 无论是在找工作、申请高校，还是在制作个人网站时，简历都是必不可少的，一个形式简洁、内容丰富的简历可以让读者在短时间内了解一个人。但是在制作简历时，往往会在寻找模板、调整格式上下很多功夫，尤其是在更新简历时，往往需要进行大量的调整，甚至于从头再来。
 
-就像 R Markdown 制作的初衷是帮助使用者将注意力集中于内容上一样，`datadrivencv` 包\index{R package!datadrivencv}\index{datadrivencv} [@R-datadrivencv] 的目标也是将内容与输出分离，利用 R Markdown 的特性，可以使用相同的代码同时生成简历的交互式 HTML 以及 PDF 版本，这将大大减轻制作以及维护简历的工作量。
+就像 R Markdown 制作的初衷是帮助使用者将注意力集中于内容上一样，**datadrivencv** 包\index{R package!datadrivencv}\index{datadrivencv} 的目标也是将内容与输出分离，利用 R Markdown 的特性，可以使用相同的代码同时生成简历的交互式 HTML 以及 PDF 版本，这将大大减轻制作以及维护简历的工作量。
 
 由于 `datadrivencv` 包目前没有发布到 CRAN 上，只能通过 GitHub 来下载：
 
@@ -157,7 +157,7 @@ fusen::inflate(
 devtools::install_github("nstrayer/datadrivencv")
 ```
 
-使用 `datadrivencv` 包的第一步是使用 `use_data_driven_cv()` 函数：
+使用 **datadrivencv** 包的第一步是使用 `use_data_driven_cv()` 函数：
 
 ```{r eval=FALSE}
 datadrivencv::use_datadriven_cv(
@@ -196,18 +196,22 @@ datadrivencv::use_datadriven_cv(
 ```{r eval=FALSE}
 # 编译 HTML 版本的简历
 rmarkdown::render("cv.rmd",
-                  params = list(pdf_mode = FALSE),
-                  output_file = "cv.html")
+  params = list(pdf_mode = FALSE),
+  output_file = "cv.html"
+)
 
 # 编译 PDF 版本的简历到 HTML 版本中，从而可以在 HTML 版本中下载
 tmp_html_cv_loc <- fs::file_temp(ext = ".html")
 rmarkdown::render("cv.rmd",
-                  params = list(pdf_mode = TRUE),
-                  output_file = tmp_html_cv_loc)
+  params = list(pdf_mode = TRUE),
+  output_file = tmp_html_cv_loc
+)
 
 # 用 Pagedown 将 HTML 转换至 PDF，生成 PDF 文件
-pagedown::chrome_print(input = tmp_html_cv_loc,
-                       output = "cv.pdf")
+pagedown::chrome_print(
+  input = tmp_html_cv_loc,
+  output = "cv.pdf"
+)
 ```
 
 现在这个包还存在着诸多问题，例如提供的简历模板较少、对中文的支持较差等问题，有待进一步优化，但也给了使用者更自由的空间。更多细节请参考 https://github.com/nstrayer/datadrivencv。
@@ -220,8 +224,8 @@ pagedown::chrome_print(input = tmp_html_cv_loc,
 
 如果不使用 RStudio 或者喜欢在控制台工作，也可以通过调用函数 `bookdown:::bookdown_skeleton('your-book-dir')` 产生相同的结果。
 
-```{r, bookdown-project, echo=FALSE, fig.cap='在 RStudio 中创建一个 bookdown 项目。'}
-knitr::include_graphics('images/bookdown-project.png', dpi = NA)
+```{r, bookdown-project, echo=FALSE, fig.cap='在 RStudio 中创建一个 bookdown 项目。', out.width = "90%"}
+knitr::include_graphics("images/bookdown-project.png", dpi = NA)
 ```
 
 为了演示用法，下面提供了一个最小的示例，包含同一个目录中的三个文件：
@@ -279,11 +283,11 @@ directory
 
 ### blogdown 简介 {#blogdown-intro}
 
-在当今的互联网时代世界，无论从事什么职业，个人网站几乎成为了一张人手必备的的“电子名片”。谢益辉开发的 blogdown 包提供了一种功能全面，且设置简单快速的个人网站架设途径。
+在当今的互联网时代世界，无论从事什么职业，个人网站几乎成为了一张人手必备的的“电子名片”。谢益辉开发的 **blogdown** 包提供了一种功能全面，且设置简单快速的个人网站架设途径。
 
-基于 R Markdown 的 blogdown 包为个人用户提供一种轻便快速的建立个人静态网站的方案。不同于市面上多数的网站建立方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，blogdown 依赖 R Markdown 文件为基础来生成网站。而 R Markdown  文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对 $LaTeX$ 的支持），数据分析，交互性插件（如交互性图表）等。
+基于 R Markdown 的 **blogdown** 包为个人用户提供一种轻便快速的建立个人静态网站的方案。不同于市面上多数的网站建立方案，静态网站有着众多好处，如文件体型小，铺设速度快，所以更换服务器时更加省时省力。与此同时，**blogdown** 依赖 R Markdown 文件为基础来生成网站。而 R Markdown  文件本身支持众多强大功能，包括文本的书写，编辑与排版（包括对 $LaTeX$ 的支持），数据分析，交互性插件（如交互性图表）等。
 
-本书的这个小节将通过一个对新手十分友好的案例来手把手的展示如何快速建立一个可满足日常基本需求的网站，以便用户可快速上手 R 的 blogdown 包。
+本书的这个小节将通过一个对新手十分友好的案例来手把手的展示如何快速建立一个可满足日常基本需求的网站，以便用户可快速上手 R 的 **blogdown** 包。
 
 ### 具体操作 {#blogdown-steps}
 
@@ -299,34 +303,29 @@ install.packages("blogdown")
 
 #### 创建项目 {#steps-project}
 
-一个网站可被视为一个 R 项目。想要创建一个新的网站项目，只需要按照下图提示，在 RStudio 菜单栏依次选择文件，新项目，新目录 （`File -> New Project  -> New Directory`）。完成后，选择用 blogdown 建设网站 （`Website using blogdown`），即可看到一个网站项目的具体设置界面。
+一个网站可被视为一个 R 项目。想要创建一个新的网站项目，只需要按照下图提示，在 RStudio 菜单栏依次选择文件，新项目，新目录 （`File -> New Project  -> New Directory`）。完成后，选择用 **blogdown** 建设网站 （`Website using blogdown`），即可看到一个网站项目的具体设置界面。
 
-```{r fig.cap="在 RStudio 中创建一个新网页项目", out.width="60%", echo = FALSE}
+```{r, fig.cap="在 RStudio 中创建一个新网页项目", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog1.png", dpi = NA)
 ```
 
-
-```{r fig.cap="基于 blogdown 创建一个新网页项目", out.width="60%", echo = FALSE}
+```{r, fig.cap="基于 blogdown 创建一个新网页项目", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog2.png", dpi = NA)
 ```
 
-设置好目录名，只需点击创建项目（`Create Project`），RStudio 即会通过 blogdown 包来自动生成一个网站项目。
+设置好目录名，只需点击创建项目（`Create Project`），RStudio 即会通过 **blogdown** 包来自动生成一个网站项目。
 
-#### 网站铺设 {#steps-serve}
+#### 网站预览 {#steps-serve}
 
-用户可以便捷的通过 RStudio 的基础功能在本地浏览自己的网页项目。用户既可以直接在控制台 （Console） 键入 `blogdown::serve_site()`，或在 RStudio 上方的插件 （`Addins`） 选项选择铺设网站 （`Serve Site`）。
+用户可以便捷的通过 RStudio 的基础功能在本地预览自己的网页项目。用户既可以在终端输入命令 `blogdown::serve_site()`，也可以在 RStudio 上方的插件 （`Addins`） 选项选择预览网站 （`Serve Site`）,如图 \@ref(fig:serve-blogdown) 所示。
 
-```{r fig.cap="通过控制台在本地浏览你的网站", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog3.png", dpi = NA)
+```{r serve-blogdown, fig.cap = "用 blogdown 函数或 RStudio 插件预览网站", out.width = "49%", echo = FALSE, fig.show = "hold", fig.align = "left"}
+knitr::include_graphics(c("images/blog3.png", "images/blog4.png"), dpi = NA)
 ```
 
-```{r fig.cap="通过插件的铺设选项在本地浏览你的网站", out.width="60%", echo = FALSE}
-knitr::include_graphics("images/blog4.png", dpi = NA)
-```
+相关命令运行完成后，RStudio 会在 Viewer 面板实时预览网站页面，如图 \@ref(fig:rstudio-serve-blogdown) 所示。
 
-然后 RStudio 应会显示与下图相似的页面。
-
-```{r fig.cap="在本地铺设网站", out.width="60%", echo = FALSE}
+```{r rstudio-serve-blogdown, fig.cap="RStudio Viewer 面板中的网站预览页面", out.width="90%", echo = FALSE}
 knitr::include_graphics("images/blog5.png", dpi = NA)
 ```
 
@@ -342,9 +341,11 @@ knitr::include_graphics("images/blog5.png", dpi = NA)
 library(ggplot2)
 summary(Orange)
 
-ggplot(Orange, aes(x = age,
-                   y = circumference,
-                   color = Tree)) +
+ggplot(Orange, aes(
+  x = age,
+  y = circumference,
+  color = Tree
+)) +
   geom_point() +
   geom_line() +
   guides(color = "none") +
@@ -364,7 +365,7 @@ knitr::include_graphics("images/blog6.png", dpi = NA)
 
 例如，打开 `config.yaml` 文件后，用户可能会看到如下内容：
 
-```{r, eval = FALSE}
+```{.yaml}
 baseurl: /
 title: A Hugo website
 theme: hugo-lithium
@@ -393,7 +394,7 @@ menu:
 
 #### 小结 {#steps-summary}
 
-目前为止，此节已经展示了如何创建并编辑一个个人化 blogdown 网站的三条基本知识：
+目前为止，此节已经展示了如何创建并编辑一个个人化 **blogdown** 网站的三条基本知识：
 
 1. 通过 RStudio 的铺设 `Serve Site` 功能 或在控制台内键入 `blogdown::serve_site()` 来在本地浏览自己的网站。
 2. 通过编辑 `config.yaml` 文件来自定义自己的网站（标题，菜单栏，主题等）。
@@ -407,7 +408,7 @@ menu:
 
 #### Netlify {#steps-netlify}
 
-Netlify 提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 GitHub 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 blogdown 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
+Netlify 提供的免费服务功能多元，足够满足大多数用户的需求，且部署也十分简单。就算用户之前没有部署网站的经验，也只需创建一个 GitHub 账户，并使用此账户注册并登陆属于用户个人的 Netlify 账户。登陆成功后，只需将网站项目目录中由 **blogdown** 生成的名为公共 `Public/` 的文件夹拖入 Netlify 部署页面即可。
 
 ```{r fig.cap="在网站项目文件夹中找到名为Public的文件夹", out.width="60%", echo = FALSE}
 knitr::include_graphics("images/blog7.png", dpi = NA)
@@ -470,7 +471,7 @@ output:
 ```{r setup_fig}
 knitr::opts_chunk$set(
   fig.width = 8,
-  fig.asp=0.618,
+  fig.asp = 0.618,
   dpi = 300,
   warning = FALSE,
   fig.path = "figures/Figure-"
@@ -506,6 +507,6 @@ knitr::opts_chunk$set(
 
 ```{r eval=FALSE}
 library(rmarkdown)
-render("analysis.Rmd",md_document(variant = "gfm"))
+render("analysis.Rmd", md_document(variant = "gfm"))
 ```
 

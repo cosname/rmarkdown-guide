@@ -93,7 +93,8 @@ arrests$State <- rownames(arrests)
 
 
 ```{python, eval = FALSE}
-# Python 部分，导入 R 数据，提取谋杀率最高的 10 个州，并用 seaborn 包作柱形图
+# Python 部分: 导入 R 数据，提取谋杀率最高的 10 个州
+# 并用 seaborn 包作柱形图
 import pandas as pd
 import seaborn as sns
 
@@ -108,7 +109,7 @@ sns.barplot(x = "Murder", y = "State",  data = top_states)
 
 创作更大篇幅的文档或书籍时，仅用一个 R Markdown 文件组织全部内容难以维护。**bookdown** 包提供了更适于长篇文档和书籍的输出格式，用户可以用多个 R Markdown 文档创作一本书的不同章节。此外，**bookdown** 包还提供了交叉引用，定理和公式环境，文献引用等扩展功能。**bookdown** 的输出结果非常适合用于制作在线教材与讲义，例如北京大学李东风老师的[《R 语言教程》](https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html)，本书的在线版本也是用 **bookdown** 生成的。[bookdown.org](https://bookdown.org/home/) 汇集了更多 **bookdown** 制作的在线书籍。
 
-```{r bookdown-chinese-demo, fig.cap = "使用 bookdown 制作的中文图书范例, 一个章节对应一个 R Markdown 文档", echo = FALSE}
+```{r bookdown-chinese-demo, fig.cap = "使用 bookdown 制作的中文图书范例, 一个章节对应一个 R Markdown 文档", echo = FALSE, out.width = "90%"}
 knitr::include_graphics("images/01-bookdown-chinese.png")
 ```
 
@@ -119,13 +120,13 @@ knitr::include_graphics("images/01-bookdown-chinese.png")
 
 **rmarkdown** 和 **bookdown** 等包支持运行代码，插入图片，公式，交叉引用和参考文献等常见元素，还可以组合长篇文档。因此、统计，数据科学、计算机科学乃至社会科学等领域的学生，研究人员和爱好者们时常使用 R Markdown 为首选的笔记本格式。
 
-```{r notebook-preview, echo = FALSE, fig.cap = "RStudio 支持实时预览 R Markdown 笔记本格式"}
+```{r notebook-preview, echo = FALSE, fig.cap = "RStudio 支持实时预览 R Markdown 笔记本格式", out.width = "90%"}
 knitr::include_graphics("images/01-notebook-preview.png")
 ```
 
 如图 \@ref(fig:notebook-preview) 所示，R Markdown 笔记本支持运行代码，插入运行结果，添加文本样式和批注等功能。R Markdown 的交互特性让学习记录变得十分自然：用户通常添加一段代码，运行后得到预料之中/之外的可视化结果，随后在下面的多个代码块中反复调整某个参数，直至得到想要的结果。在此过程中用户常常会发现更多相关的包或代码，写下对不同代码的总结，并链接网络上他人的用例，甚至开始撰写自动化脚本。最后，用户可以一键生成包含了这一系列思考和学习过程的 HTML 或 PDF 精美文档。图 \@ref(fig:notebook-preview) 是一个 PDF 笔记文档示例。
 
-```{r notebook-preview2, echo = FALSE, fig.cap = "用 R Markdown 生成 PDF 学习笔记"}
+```{r notebook-preview2, echo = FALSE, fig.cap = "用 R Markdown 生成 PDF 学习笔记", out.width = "90%"}
 knitr::include_graphics("images/01-notebook-preview2.png")
 ```
 
@@ -135,25 +136,24 @@ knitr::include_graphics("images/01-notebook-preview2.png")
 
 一些 R Markdown 扩展包提供了适用于个人简历（resume, CV）的输出格式。例如基于 **pagedown** 包 [@R-pagedown] 的[简历模板](https://pagedown.rbind.io/html-resume)，和 [vitae](https://pkg.mitchelloharawild.com/vitae/) 提供的 CV 模板。
 
-除了提供模板外， R Markdown 还能使简历变得更加以“数据驱动 (Data driven)”。[**datadrivencv**](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，用户仅需维护这张数据表，并由 R Markdown 来负责简历的格式。用户还可以插入 R 代码生成的交互图表，使简历可以“动”起来。图 \@ref(fig:ns-cv) 是 **datadrivencv** 包的作者 Nick Strayer 结合 **pagedown** 包制作的个人简历。
+除了提供模板外， R Markdown 还能使简历变得更加以“数据驱动 (Data driven)”。[**datadrivencv**](http://nickstrayer.me/datadrivencv/) 包把简历中的各项教育背景，工作经历和项目经验等视作电子表格中的一条记录，用户仅需维护这张数据表，并由 R Markdown 来负责简历的格式。用户还可以插入 R 代码生成的交互图表，使简历可以“动”起来。图 \@ref(fig:ns-cv) 是 **datadrivencv** 包的作者 [Nick Strayer] (http://nickstrayer.me/) 结合 **pagedown** 包制作的个人简历。
 
-```{r ns-cv, echo = FALSE, fig.cap = "(ref:ns-cv)"}
+```{r ns-cv, echo = FALSE, fig.cap = "Nick Strayer 用 datadrivencv 和 pagedown 包制作的 CV 示意", out.width = "90%"}
 knitr::include_graphics("images/01-resume.png")
 ```
 
-(ref:ns-cv) [Nick Strayer](http://nickstrayer.me/)用 datadrivencv 和 pagedown 包制作的 CV 示意
 
 ### 网站 {#example-resume}
 
 **rmarkdown** 包支持生成简单的静态网页。用户通过 YAML 配置文件定义网站的标题，导航栏，页面结构等元数据，而后创建数个 R Markdown 文档组成网站的不同 HTML 页面。
 
-```{r, echo = FALSE, fig.cap = "用 R Markdown 创建网站"}
+```{r, echo = FALSE, fig.cap = "用 R Markdown 创建网站", out.width = "90%"}
 knitr::include_graphics("images/01-rmarkdown-wbesite.png")
 ```
 
 **rmarkdown** 包内置的网站功能较为简单。**blogdown** 包 [@R-blogdown] 提供了更复杂的网站功能，它使用了开源的网站工具：Hugo。Hugo 是目前速度最快，最受欢迎的静态网站生成器之一。一般用户通常需要在命令行调用 Hugo，不过作为幸福的 R 用户，读者可以照常写作 R Markdown 文档，随后调用 **blogdown** 包中封装好的函数间接地使用 Hugo，最后生成网站。
 
-```{r hugo-themes, fig.cap = "blogdown 包可以使用 Hugo 主题", echo = FALSE}
+```{r hugo-themes, fig.cap = "blogdown 包可以使用 Hugo 主题", echo = FALSE, out.width = "90%"}
 knitr::include_graphics("images/01-hugo-themes.png")
 ```
 
@@ -177,7 +177,7 @@ knitr::include_graphics(c("images/01-xaringan1.png", "images/01-xaringan2.png"))
 
 报表是一种常见的商业报告形式，用 R Markdown 开发报表不仅可以将数据分析过程与商业结论结合地在一起，还能帮助用户充分发挥 R 语言强大的可视化功能。基于 HTML 格式的 **flexdashboard**[@R-flexdashboard] 包提供了这类报表的模板，还内置了一些常用报表元素的 HTML 组件， 例如指标盒，增长仪表，导航栏等。
 
-```{r flexdashboard, echo = FALSE, fig.cap = "用 flexdashboard 包制作的仪表板"}
+```{r flexdashboard, echo = FALSE, fig.cap = "用 flexdashboard 包制作的仪表板", out.width="90%"}
 knitr::include_graphics("images/01-flexdashboard.png")
 ```
 
@@ -189,7 +189,7 @@ knitr::include_graphics("images/01-flexdashboard.png")
 除了直接使用编辑器写作外，用户还可以调用编程 API `rmarkdown::render()` 生成文档，并动态地设置文档使用的各项参数。这让用户可以自动化、参数化地批量生成文档。一个典型场景是：数据库每日更新全国销售数据，而数据分析师用自动化脚本控制 R Markdown 来根据不同地区与职务来生成多个更有针对性的报表。这样的动态文档是通过参数实现的，也就是说用户在源文档中使用参数的名字，而不是具体的数据来进行定义。随后在脚本中通过 `rmarkdown::render()` 动态来传入当日的数据。
 
 
-```{r dynamic-document, fig.cap = "根据 Shiny 输入动态生成 R Markdown 文档", echo = FALSE}
+```{r dynamic-document, fig.cap = "根据 Shiny 输入动态生成 R Markdown 文档", echo = FALSE, out.width = "90%"}
 knitr::include_graphics("images/01-dynamic-document.png")
 ```
 

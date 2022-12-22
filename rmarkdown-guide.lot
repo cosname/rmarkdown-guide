@@ -1,0 +1,27 @@
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\contentsline {table}{\numberline {2.1}{\ignorespaces iris 数据集}}{65}{table.2.1}%
+\addvspace {10.0pt}
+\contentsline {table}{\numberline {3.1}{\ignorespaces 参数及其对应的含义}}{106}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces 分页 HTML 表格的附加可用参数}}{117}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces 在 YAML 配置中可用的 LaTeX 变量}}{136}{table.3.3}%
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\contentsline {table}{\numberline {6.1}{\ignorespaces 考试成绩}}{270}{table.6.1}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces 考试成绩}}{276}{table.6.2}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces escape = TRUE 生成的表}}{280}{table.6.3}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces escape = FALSE 生成的表}}{281}{table.6.4}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces 两张表并排放置}}{282}{table.6.5}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces 由 knitr::kables() 生成的两张表}}{283}{table.6.6}%
+\contentsline {table}{\numberline {6.7}{\ignorespaces booktabs = FALSE 时的表格}}{288}{table.6.7}%
+\contentsline {table}{\numberline {6.8}{\ignorespaces booktabs = TRUE 时的表格}}{288}{table.6.8}%
+\contentsline {table}{\numberline {6.9}{\ignorespaces 条纹表}}{294}{table.6.9}%
+\contentsline {table}{\numberline {6.10}{\ignorespaces 字体较小的表格}}{295}{table.6.10}%
+\contentsline {table}{\numberline {6.11}{\ignorespaces 更改特定行或列的样式}}{296}{table.6.11}%
+\contentsline {table}{\numberline {6.12}{\ignorespaces 对标题列进行分组}}{297}{table.6.12}%
+\contentsline {table}{\numberline {6.13}{\ignorespaces 对行进行折叠}}{297}{table.6.13}%
+\contentsline {table}{\numberline {6.14}{\ignorespaces 原始表格（太宽）}}{298}{table.6.14}%
+\contentsline {table}{\numberline {6.15}{\ignorespaces 缩小后的表格}}{298}{table.6.15}%
+\addvspace {10.0pt}
+\contentsline {table}{\numberline {7.1}{\ignorespaces 与R Markdown相关的RStudio键盘快捷键。}}{392}{table.7.1}%

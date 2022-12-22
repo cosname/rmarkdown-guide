@@ -38,7 +38,7 @@ knitr::kable(grade, align='cccc', caption = '考试成绩')
 
 #### 表格样式 {#kable-formats}
 
-在大多数情况下，如果只需要制作一个简单表格，`knitr::kable(x)` 就足够了。其中第二个参数 `format` 会根据输出格式自动设置。它可能的取值是 `pipe`（列与列之间由短的竖线分隔的表），`simple` （仅包含横向分割线的简单表格），`latex` （LaTex 表格），`html` （HTML 表格），和 `rst` （reStructuredText 表格）。为了展示各个取值的不同，这里直接给出了各个取值在不同编程语言中的原始代码。
+在大多数情况下，如果只需要制作一个简单表格，`knitr::kable(x)` 就足够了。其中第二个参数 `format` 会根据输出格式自动设置。它可能的取值是 `pipe`（列与列之间由短的竖线分隔的表），`simple` （仅包含横向分割线的简单表格），`latex` （LaTeX 表格），`html` （HTML 表格），和 `rst` （reStructuredText 表格）。为了展示各个取值的不同，这里直接给出了各个取值在不同编程语言中的原始代码。
 
 对于 R Markdown 文档，`kable()` 默认使用 `pipe` 格式的表格，输出结果如下所示：
 
@@ -52,10 +52,10 @@ kat = function(x, ...) {
 ```
 
 ```{r}
-knitr::kable(grade, 'pipe')
+knitr::kable(grade)
 ```
 
-`knitr::kable()` 也可以生成一个（基于 Pandoc 的）简单的表格，或 HMTL、LaTex 以及 reStructuredText 格式的表格：
+`knitr::kable()` 也可以生成一个（基于 Pandoc 的）简单的表格，或 HMTL、LaTeX 以及 reStructuredText 格式的表格：
 
 ```{r comment='', render=kat, class.output='md'}
 knitr::kable(grade, 'simple')
@@ -443,7 +443,7 @@ knitr::kable(grade, format = 'latex',
 
 ::: {.col }
 
-```{r, echo = FALSE, fig.cap = "booktabs 表格样式", out.width = "150%"}
+```{r, echo = FALSE, fig.cap = "booktabs 表格样式", out.width = "90%"}
 knitr::include_graphics("images/06-booktabs.png")
 ```
 
@@ -638,7 +638,7 @@ kable(grade4,
 
 - **xtable** [@R-xtable]；这个包可能是最早的创建表格的包，其第一次发布是在 2000 年。它同时支持LaTeX和HTML格式。该软件包可在 CRAN 上访问：https://cran.r-project.org/package=xtable/。
 
-还有一些其它生成表格的包，这里不再进一步介绍，只是在这里列出它们，以供感兴趣者参考：**tables** [@R-tables]、**pander** [@R-pander]、**tangram** [@R-tangram]、**ztable** [@R-ztable] 以及 **condformat** [@R-condformat]。
+还有一些其它生成表格的包，这里不再进一步介绍，只是在这里列出它们，以供感兴趣者参考：**tables** [@R-tables]、**pander** [@R-pander]、**ztable** [@R-ztable] 以及 **condformat** [@R-condformat]。
 
 
 ## 块选项 {#chunk-options}
@@ -873,9 +873,6 @@ if (TRUE) {
 
 :::
 
-::: {.col data-latex="{0.05\textwidth}"}
-
-:::
 
 ::: {.col data-latex="{0.45\textwidth}" style="width: 100%;"}
 
@@ -944,9 +941,6 @@ if (TRUE) {
 
 :::
 
-::: {.col data-latex="{0.05\textwidth}"}
-
-:::
 
 ::: {.col data-latex="{0.45\textwidth}" style="width: 100%;"}
 
@@ -1012,7 +1006,7 @@ add_logo = function(path, options) {
 
 下一步就是将处理函数 `add_logo()` 应用到代码块中，并使用块选项 `fig.process = add_logo` 和 `magick.gravity = "northeast"`，所以 logo 会被添加到右上角。实际输出见图 \@ref(fig:magick-logo)。
 
-```{r, magick-logo, dev='png', fig.retina=1, fig.process=add_logo, magick.gravity = 'northeast', fig.cap='通过块选项 fig.process 来给一幅图添加 R logo。'}
+```{r, magick-logo, dev='png', fig.retina=1, fig.process=add_logo, magick.gravity = 'northeast', fig.cap='通过块选项 fig.process 来给一幅图添加 R logo。', out.width = "90%"}
 par(mar = c(4, 4, .1, .1))
 hist(faithful$eruptions, breaks = 30, main = '', col = 'gray', border = 'white')
 ```
@@ -1050,7 +1044,7 @@ text(-1, .2, cex = 3, col = 'blue',
   '$\\phi(x)=\\frac{1}{\\sqrt{2\\pi}}e^{\\frac{-x^2}{2}}$')
 ```
 
-```{r, dev-tikz, echo=FALSE, tidy=FALSE, fig.cap='通过 tikz  设备呈现的图像。', fig.align='center', cache=TRUE}
+```{r, dev-tikz, echo=FALSE, tidy=FALSE, fig.cap='通过 tikz  设备呈现的图像。', fig.align='center', cache=TRUE, out.width = "90%"}
 knitr::include_graphics('images/tikz-latex.png', dpi = NA)
 ```
 
@@ -1081,7 +1075,7 @@ tinytex::tlmgr_install(c('pgf', 'preview', 'xcolor'))
 然而有的时候，尤其是在教学过程中，展示中间的图像是很有用的。为此，可以设置块选项 `fig.keep = 'low'`\index{chunk option!fig.keep} 来保留各低级函数更改后的图。例如，图 \@ref(fig:low-plots-1) 和图 \@ref(fig:low-plots-2) 来自一个带有块选项 `fig.keep = 'low'` 的单个代码块，尽管它们很像两个代码块的输出结果。不仅如此，本节还通过块选项 `fig.cap=c('cars ...', '在现有的...')`\index{chunk option!fig.cap} 给它们分配了不同的标题。
 
 
-```{r, low-plots, fig.cap=c('cars 数据的点图', '在现有的点图中添加一条回归线'), fig.keep='low'}
+```{r, low-plots, fig.cap=c('cars 数据的点图', '在现有的点图中添加一条回归线'), fig.keep='low', fig.show = "hold", fig.align = "left", out.width = "49%"}
 par(mar = c(4, 4, .1, .1))
 plot(cars)
 fit = lm(dist ~ speed, data = cars)
@@ -1138,7 +1132,7 @@ if (system.file(package = "pander") == ''){
 <!-- 这里 pander 没有 caption，引用失效 -->
 
 ```{r, print-render, echo=FALSE, render=pander::pander}
-head(iris)
+knitr::kable(head(iris))
 ```
 
 `render` 选项让用户可以充分定制任意对象的打印效果。
@@ -1254,7 +1248,7 @@ engs
 
 <!-- 只有 R、Python 和 Julia 代码块在同一个会话中执行。并且 R 会话和 Python 会话是两个不同的会话，但是可以从另一个会话访问或操作一个会话的对象（参见《R markdown cookbook》[@xie2020r]  中的第[15.2](https://bookdown.org/yihui/rmarkdown-cookbook/eng-python.html#eng-python)节）。 -->
 
-本节重点介绍 Pyhton、Shell、SAS、Stata 以及 Asymptote 等语言引擎，如果读者其他语言引擎感兴趣，例如：SQL, Rcpp, Stan, JavaScript, Julia, C，和 Fortran 等，可参见书籍
+本节重点介绍 Pyhton、Shell、SAS 以及 Stata 等语言引擎，如果读者其他语言引擎感兴趣，例如：SQL, Rcpp, Stan, JavaScript, Julia, C，和 Fortran 等，可参见书籍
 《R Markdown: The definitive guide》[@xie2018r] 中的第 [2.7 ](https://bookdown.org/yihui/rmarkdown/language-engines.html) 节内容，也可以在以下网站中找到更多的例子： https://github.com/yihui/knitr-examples。
 
 ### 注册自定义语言引擎 (\*) {#register-language}
@@ -1362,7 +1356,7 @@ import_example("examples/python.Rmd")
 
 输出如图 \@ref(fig:reticulate-intro) 所示。
 
-```{r reticulate-intro, echo = FALSE, fig.cap = "R 与 Python 代码块的交互"}
+```{r reticulate-intro, echo = FALSE, fig.cap = "R 与 Python 代码块的交互", out.width = "90%"}
 import_example_result("examples/python.Rmd")
 ```
 
@@ -1535,145 +1529,8 @@ summarize
 ```
 ````
 
-
 **knitr** 内置的 `stata` 引擎功能有限。Doug Hemken 开发的 **Statamarkdown** 包 \index{R package!Statamarkdown} 扩展了该引擎，Github 主页见 https://github.com/Hemken/Statamarkdown。
 
-### 用渐近线 Asymptote 创建图形 {#asymptote-plot}
-
-```{r include = FALSE}
-eval_asy <- function() {
-	check_not_windows <- Sys.info()['sysname'] != 'Windows'
-	check_has_asymptote <- nzchar(Sys.which("asy"))
-	eval_asy <- check_not_windows & check_has_asymptote
-	if (!eval_asy)
-		warning("System set-up not compatible with Asymptote, so chunks with asy engine will be skipped.")
-	eval_asy
-}
-```
-
-渐近线 Asymptote （https://asymptote.sourceforge.io） 是一款为了绘制技术图形而设计的矢量图描述软件。
-如果读者已经安装了 Asymptote，则可以使用 `asy` 引擎\index{Asymptote}\index{language engine!asy}在 R Markdown 中编写并运行 Asymptote 代码。Asymptote 的安装可以参考官网 <https://asymptote.sourceforge.io/>。
-
-下面给出一个简单的示例，该示例代码来自于 <https://github.com/vectorgraphics/asymptote>，其输出如图 \@ref(fig:elevation) 所示：
-
-````{verbatim}
-```{asy, elevation, fig.cap=' 用渐近线制作的 3D 图形。', eval=eval_asy()}
-import graph3;
-import grid3;
-import palette;
-settings.prc = false;
-
-currentprojection=orthographic(0.8,1,2);
-size(500,400,IgnoreAspect);
-real f(pair z) {return cos(2*pi*z.x)*sin(2*pi*z.y);}
-
-surface s=surface(f,(-1/2,-1/2),(1/2,1/2),50,Spline);
-surface S=planeproject(unitsquare3)*s;
-S.colors(palette(s.map(zpart),Rainbow()));
-draw(S,nolight);
-draw(s,lightgray+opacity(0.7));
-
-grid3(XYZgrid);
-```
-````
-
-```{asy echo=FALSE, fig.align='center', fig.retina=1, fig.width=6, cache=TRUE, elevation, fig.cap=' 用渐近线制作的 3D 图形。'}
-import graph3;
-import grid3;
-import palette;
-settings.prc = false;
-
-currentprojection=orthographic(0.8,1,2);
-size(500,400,IgnoreAspect);
-real f(pair z) {return cos(2*pi*z.x)*sin(2*pi*z.y);}
-
-surface s=surface(f,(-1/2,-1/2),(1/2,1/2),50,Spline);
-surface S=planeproject(unitsquare3)*s;
-S.colors(palette(s.map(zpart),Rainbow()));
-draw(S,nolight);
-draw(s,lightgray+opacity(0.7));
-
-grid3(XYZgrid);
-```
-
-
-上面代码块应用了选项 `settings.prc = false`。如果不进行此设置，当输出格式为 PDF 时，渐近线将生成交互式的 3D 图形。注意的是，想要进行图形交互（例如：使用鼠标来旋转图 \@ref(fig:elevation) ），需要使用 Acrobat Reader 软件查看。
-
-> **注意**: 如果读者需要输出 PDF 文件， 则可能需要安装一些额外的 LaTeX 包，否则可能会出现以下错误：
-
-```
-! LaTeX Error: File `ocgbase.sty' not found.
-```
-
-这个错误是缺失了 LaTeX 包导致的，第 \@ref(install-latex-package) 节介绍了解决办法。
-
-#### Asymptote 读取 R 数据 {#asym-r}
-
-下面是一个 Asymptote 使用 R 中数据的例子，首先将 R 中的数据保存到 CSV 文件中：
-
-```{r}
-x = seq(0, 5, l = 100)
-y = sin(x)
-writeLines(paste(x, y, sep = ','), 'sine.csv')
-```
-
-然后用 Asymptote 读取该文件，并绘制出图 \@ref(fig:sine-curve)，对应的代码如下所示：
-
-````md
-```{asy, sine-curve, fig.cap='将数据从 R 传递到渐近线以绘制图形', cache=TRUE, fig.width=6,fig.align='center',fig.retina=1, eval=eval_asy()}`r ''`
-import graph;
-size(400,300,IgnoreAspect);
-settings.prc = false;
-
-// import data from csv file
-file in=input("sine.csv").line().csv();
-real[][] a=in.dimension(0,0);
-a=transpose(a);
-
-// generate a path
-path rpath = graph(a[0],a[1]);
-path lpath = (1,0)--(5,1);
-
-// find intersection
-pair pA=intersectionpoint(rpath,lpath);
-
-// draw all
-draw(rpath,red);
-draw(lpath,dashed + blue);
-dot("$\delta$",pA,NE);
-xaxis("$x$",BottomTop,LeftTicks);
-yaxis("$y$",LeftRight,RightTicks);
-```
-````
-
-```{asy sine-curve, echo=FALSE, fig.align='center', fig.retina=1, fig.width=6,fig.cap='将数据从 R 传递到渐近线以绘制图形'}
-import graph;
-size(400,300,IgnoreAspect);
-settings.prc = false;
-
-// import data from csv file
-file in=input("sine.csv").line().csv();
-real[][] a=in.dimension(0,0);
-a=transpose(a);
-
-// generate a path
-path rpath = graph(a[0],a[1]);
-path lpath = (1,0)--(5,1);
-
-// find intersection
-pair pA=intersectionpoint(rpath,lpath);
-
-// draw all
-draw(rpath,red);
-draw(lpath,dashed + blue);
-dot("$\delta$",pA,NE);
-xaxis("$x$",BottomTop,LeftTicks);
-yaxis("$y$",LeftRight,RightTicks);
-```
-
-```{r, include=FALSE}
-unlink('sine.csv')
-```
 
 
 ### 使用 Sass/SCSS 构建 HTML 页面 {#sass-scss}
@@ -1728,7 +1585,7 @@ $primary-color: #0020FF
 
 **knitr** 运行该段代码后，得到两个字符串：源代码 `"1 + 1"` 和文本输出 `"[1] 2"`。现在需要两个输出钩子把它们转换为输出元素，一个负责源代码，一个负责文本输出。对于源代码，R Markdown 默认调用 **knitr** 中 `source` 钩子，它的简化版如下：
 
-```{.r}
+```{r}
 # 对于上面的例子， `x` 为字符串 "1 + 1"
 function(x, options) {
   # 小写的 "r" 在这里表示编程语言的名称
@@ -1928,7 +1785,7 @@ options$attr.output <- c(
 )
 ```
 
-```{r, hook-scroll, echo=FALSE, fig.cap='一个可滚动文本输出的例子，其高度通过块选项`max.height`来给定'}
+```{r, hook-scroll, echo=FALSE, fig.cap='一个可滚动文本输出的例子，其高度通过块选项`max.height`来给定', out.width = "90%"}
 knitr::include_graphics('images/hook-scroll.png', dpi = NA)
 ```
 
@@ -2000,7 +1857,7 @@ knitr::knit_hooks$set(output = hook_output)
 
 图像的输出如图 \@ref(fig:hook-html5) 所示。注意，这个例子实际上覆盖了默认的 `plot` 钩子，而本节的大多数其他例子都是在默认钩子的基础上构建自定义钩子。只有当确定要忽略默认钩子的一些内置特性时，才应该完全覆盖默认钩子。例如，在本例中，`plot` 钩子函数没有考虑像 `out.width = '100%'` 或 `fig.show = 'animate'` 这样的块选项。
 
-```{r hook-html5, echo=FALSE, fig.cap="一个在HTML5 `figure` 标签中的图像"}
+```{r hook-html5, echo=FALSE, fig.cap="一个在HTML5 `figure` 标签中的图像", out.width = "90%"}
 knitr::include_graphics("images/hook-html5.png", dpi = NA)
 ```
 

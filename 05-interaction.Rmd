@@ -26,7 +26,7 @@ runtime: shiny
 
 当然，也可以通过 RStudio 构建一个新的 Shiny 文档。步骤如下：File -> new File -> R Markdown 并选择 Shiny，具体见图 \@ref(fig:shiny-new-document)。
 
-```{r shiny-new-document, echo=FALSE, fig.width=6, fig.align='center', fig.cap=' 在 RStudio 中创建一个新的 Shiny 文档。'}
+```{r shiny-new-document, echo=FALSE, fig.width=6, fig.align='center', fig.cap=' 在 RStudio 中创建一个新的 Shiny 文档。', out.width = "90%"}
 knitr::include_graphics('images/shiny-new-document.png', dpi = NA)
 ```
 
@@ -42,7 +42,7 @@ renderTable({
 })
 ```
 
-```{r shiny-table, echo=FALSE, fig.width=6,fig.align='center',fig.cap='增加 Shiny 文档中表中的行数'}
+```{r shiny-table, echo=FALSE, fig.width=6,fig.align='center',fig.cap='增加 Shiny 文档中表中的行数', out.width = "90%"}
 knitr::include_graphics('images/shiny-table.png', dpi = NA)
 ```
 
@@ -62,7 +62,7 @@ renderPlot({
 ```
 ````
 
-```{r shiny-plot, echo=FALSE,fig.width=6,fig.align='center', fig.cap ='Shiny 文档输出可交互的直方图'}
+```{r shiny-plot, echo=FALSE, fig.cap ='Shiny 文档输出可交互的直方图', out.width = "90%"}
 knitr::include_graphics('images/shiny-plot.png', dpi = NA)
 ```
 
@@ -97,7 +97,7 @@ rsconnect::deployApp()
 
 RStudio 用户也可以在运行 Shiny 应用后，点击窗口右上角的 `Publish` 按钮(图 \@ref(fig:shiny-deploy))。
 
-```{r shiny-deploy, echo=FALSE, fig.width=6,fig.align='center',fig.cap='部署 Shiny 文档到 ShinyApps.io. 上'}
+```{r shiny-deploy, echo=FALSE, fig.cap='部署 Shiny 文档到 ShinyApps.io. 上', out.width = "90%"}
 knitr::include_graphics('images/shiny-deploy.png', dpi = NA)
 ```
 
@@ -185,7 +185,7 @@ kmeans_cluster(iris)
 图 \@ref(fig:shiny-widget-kmeans)  展示了在运行文档时小部件的样子。
 
 
-```{r shiny-widget-kmeans, echo=FALSE,fig.width=6,fig.align='center', fig.cap=' 在数据集上应用 k-Means 聚类的 Shiny 小部件。'}
+```{r shiny-widget-kmeans, echo=FALSE, fig.cap=' 在数据集上应用 k-Means 聚类的 Shiny 小部件。', out.width = "90%"}
 knitr::include_graphics('images/shiny-widget-kmeans.png', dpi = NA)
 ```
 
@@ -335,7 +335,7 @@ install.packages("flexdashboard")
 
 其次，通过点击  `File -> New File -> R Markdown` 对话框在 RStudio 中创建文档，并选择 "Flex Dashboard" 模板。操作界面如图 \@ref(fig:dashboard-new) 所示：
 
-```{r dashboard-new, echo=FALSE,fig.width=6,fig.align='center', fig.cap='创建新的 dashboard 文件。'}
+```{r dashboard-new, echo=FALSE,, fig.cap='创建新的 dashboard 文件。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-new.png', dpi = NA)
 ```
 
@@ -395,7 +395,7 @@ rmarkdown::draft(
 
 > **注**：本例中，作者并没有在代码块中加入任何 R 代码，因此框内都是空的。在实际使用中，读者可以编写任意的 R 代码来生成 R 图、HTML 小部件或其他组件，并将其加入到框中。
 
-```{r dashboard-start, echo=FALSE,fig.width=6,fig.align='center', fig.cap='简单仪表盘布局示例。'}
+```{r dashboard-start, echo=FALSE, fig.cap='简单仪表盘布局示例。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-start.png', dpi = NA)
 ```
 
@@ -411,7 +411,7 @@ output:
 
 此时，二级结构将会按照行进行排列，三级结构会按照行中的列进行排放。将上述例子修改后，输出结果如图 \@ref(fig:dashboard-rows) 所示：
 
-```{r dashboard-rows, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于行布局的结果。'}
+```{r dashboard-rows, echo=FALSE, fig.cap='基于行布局的结果。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-rows.png', dpi = NA)
 ```
 
@@ -438,7 +438,7 @@ knitr::include_graphics('images/dashboard-rows.png', dpi = NA)
 
 结果如图 \@ref(fig:dashboard-tab) 所示：
 
-```{r dashboard-tab, echo=FALSE,fig.width=6,fig.align='center', fig.cap='以制表符的形式排列。', out.width='100%'}
+```{r dashboard-tab, echo=FALSE, fig.cap='以制表符的形式排列。', out.width='90%'}
 knitr::include_graphics('images/dashboard-tab.png', dpi = NA)
 ```
 
@@ -453,7 +453,7 @@ import_example('examples/dashboard/02-pages.Rmd')
 
 
 
-```{r dashboard-pages, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的多个页面情况。'}
+```{r dashboard-pages, echo=FALSE, fig.cap='仪表盘上的多个页面情况。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-multipages.png', dpi = NA)
 ```
 
@@ -464,7 +464,7 @@ knitr::include_graphics('images/dashboard-multipages.png', dpi = NA)
 
 本例中，还做了一个小拓展，通过 `data-icon` 属性将图标应用于页面标题中。当然也可以从该网址 https://fontawesome.com 找到其他可用图标。例如，图 \@ref(fig:dashboard-icon) 给出部分可用图标。
 
-```{r dashboard-icon, echo=FALSE,fig.width=6,fig.align='center', fig.cap='网站中部分可用图标。'}
+```{r dashboard-icon, echo=FALSE,fig.cap='网站中部分可用图标。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-icon.png', dpi = NA)
 ```
 
@@ -476,7 +476,7 @@ knitr::include_graphics('images/dashboard-icon.png', dpi = NA)
 `r import_example('examples/dashboard/03-storyboard.Rmd')`
 
 
-```{r dashboard-story, echo=FALSE,fig.width=6,fig.align='center', fig.cap='基于故事板布局的结果。'}
+```{r dashboard-story, echo=FALSE, fig.cap='故事板布局。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 ```
 
@@ -510,7 +510,7 @@ knitr::include_graphics('images/dashboard-story.png', dpi = NA)
 `r import_example('examples/dashboard/04-valueboxes.Rmd')`
 
 
-```{r dashboard-valueboxes, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上并排的三个值。'}
+```{r dashboard-valueboxes, echo=FALSE, fig.cap='仪表盘上并排的三个值。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 ```
 
@@ -522,7 +522,7 @@ knitr::include_graphics('images/dashboard-valueboxes.png', dpi = NA)
 
 `r import_example('examples/dashboard/05-gauges.Rmd')`
 
-```{r dashboard-gauges, echo=FALSE,fig.width=6,fig.align='center', fig.cap='三个仪表并排放在仪表盘上。'}
+```{r dashboard-gauges, echo=FALSE, fig.cap='并排仪表', out.width = "90%"}
 knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 ```
 
@@ -547,7 +547,7 @@ knitr::include_graphics('images/dashboard-gauges.png', dpi = NA)
 
 `r import_example('examples/dashboard/06-text.Rmd')`
 
-```{r dashboard-text, echo=FALSE,fig.width=6,fig.align='center', fig.cap='仪表盘上的文本注释。'}
+```{r dashboard-text, echo=FALSE, fig.cap='仪表盘上的文本注释。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-text.png', dpi = NA)
 ```
 
@@ -573,7 +573,7 @@ output:
 
 这时得到的界面如图 \@ref(fig:dashboard-about) 所示：
 
-```{r dashboard-about, echo=FALSE,fig.width=6,fig.align='center', fig.cap='导航栏中添加自定义链接。'}
+```{r dashboard-about, echo=FALSE, fig.cap='导航栏中添加自定义链接。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-about.png', dpi = NA)
 ```
 
@@ -609,7 +609,7 @@ knitr::include_graphics('images/dashboard-about.png', dpi = NA)
 
 `r import_example('examples/dashboard/07-shiny.Rmd')`
 
-```{r dashboard-shiny, echo=FALSE, fig.width=6,fig.align='center',fig.cap='基于 Shiny 的交互式仪表盘。'}
+```{r dashboard-shiny, echo=FALSE, fig.cap='基于 Shiny 的交互式仪表盘。', out.width = "90%"}
 knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 ```
 
@@ -644,7 +644,7 @@ knitr::include_graphics('images/dashboard-shiny.png', dpi = NA)
 
 要在 R Markdown 中创建一个包的长文档，最简单的方法是通过 RStudio 菜单 `File -> New File -> R Markdown -> From Template`\index{RStudio!vignette template}（见图\@ref(fig:package-vignette)）。然后从 **rmarkdown** 包中选择 `Package Vignette`，将得到一个长文档的模板。在更改模板的标题、作者和其他元数据之后，就可以开始编写报告的内容了。
 
-```{r, package-vignette, echo=FALSE, fig.cap='在 RStudio 中创建一个包的长文档。'}
+```{r, package-vignette, echo=FALSE, fig.cap='在 RStudio 中创建一个包的长文档。', out.width = "90%"}
 knitr::include_graphics('images/package-vignette.png', dpi = NA)
 ```
 
